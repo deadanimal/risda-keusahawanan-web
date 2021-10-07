@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\UsahawanController;
-use App\Http\Controllers\SyarikatController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,5 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/usahawan', UsahawanController::class);
-Route::resource('/syarikat', SyarikatController::class);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
