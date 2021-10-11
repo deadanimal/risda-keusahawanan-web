@@ -91,11 +91,12 @@ class PerniagaanController extends Controller
      * @param  \App\Models\Perniagaan  $perniagaan
      * @return \Illuminate\Http\Response
      */
-    public function show(Perniagaan $perniagaan)
+    public function show($id)
     {
         // return view('perniagaan.show', [
         //     'perniagaan' => $perniagaan
         // ]);
+        $perniagaan = Perniagaan::where('usahawanid', $id)->get()->first();
         return response()->json($perniagaan);
     }
 

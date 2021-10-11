@@ -80,11 +80,12 @@ class SyarikatController extends Controller
      * @param  \App\Models\Syarikat  $syarikat
      * @return \Illuminate\Http\Response
      */
-    public function show(Syarikat $syarikat)
+    public function show($id)
     {
         // return view('syarikat.show', [
         //     'syarikat' => $syarikat
         // ]);
+        $syarikat = Syarikat::where('usahawanid', $id)->get()->first();
         return response()->json($syarikat);
     }
 

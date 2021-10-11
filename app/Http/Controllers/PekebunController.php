@@ -68,12 +68,13 @@ class PekebunController extends Controller
      * @param  \App\Models\Pekebun  $pekebun
      * @return \Illuminate\Http\Response
      */
-    public function show(Pekebun $pekebun)
+    public function show($id)
     {
         // $pekebun = Pekebun::all();
         // return view('pekebun.show', [
         //     'pekebun' => $pekebun
         // ]);
+        $pekebun = Pekebun::where('usahawanid', $id)->get()->first();
         return response()->json($pekebun);
     }
 
