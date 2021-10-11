@@ -15,9 +15,10 @@ class SyarikatController extends Controller
     public function index()
     {
         $syarikat = Syarikat::all();
-        return view('syarikat.index', [
-            'syarikat' => $syarikat
-        ]);
+        // return view('syarikat.index', [
+        //     'syarikat' => $syarikat
+        // ]);
+        return response()->json($syarikat);
     }
 
     /**
@@ -69,7 +70,8 @@ class SyarikatController extends Controller
 
         $syarikat->save();
 
-        return redirect('/syarikat');
+        // return redirect('/syarikat');
+        return response()->json($syarikat);
     }
 
     /**
@@ -80,9 +82,10 @@ class SyarikatController extends Controller
      */
     public function show(Syarikat $syarikat)
     {
-        return view('syarikat.show', [
-            'syarikat' => $syarikat
-        ]);
+        // return view('syarikat.show', [
+        //     'syarikat' => $syarikat
+        // ]);
+        return response()->json($syarikat);
     }
 
     /**
@@ -135,7 +138,8 @@ class SyarikatController extends Controller
 
         $syarikat->save();
 
-        return redirect('/syarikat');
+        // return redirect('/syarikat');
+        return response()->json($syarikat);
     }
 
     /**

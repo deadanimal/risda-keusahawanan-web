@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\UsahawanController;
+use App\Http\Controllers\SyarikatController;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,3 +27,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::resource('/usahawan', UsahawanController::class);
+Route::resource('/syarikat', SyarikatController::class);
+
+Route::resource('/lol', LolController::class);

@@ -15,9 +15,10 @@ class PekebunController extends Controller
     public function index()
     {
         $pekebun = Pekebun::all();
-        return view('pekebun.index', [
-            'pekebun' => $pekebun
-        ]);
+        // return view('pekebun.index', [
+        //     'pekebun' => $pekebun
+        // ]);
+        return response()->json($pekebun);
     }
 
     /**
@@ -58,7 +59,7 @@ class PekebunController extends Controller
 
         $pekebun->save();
 
-        return redirect('/pekebun');
+        return response()->json($pekebun);
     }
 
     /**
@@ -70,9 +71,10 @@ class PekebunController extends Controller
     public function show(Pekebun $pekebun)
     {
         // $pekebun = Pekebun::all();
-        return view('pekebun.show', [
-            'pekebun' => $pekebun
-        ]);
+        // return view('pekebun.show', [
+        //     'pekebun' => $pekebun
+        // ]);
+        return response()->json($pekebun);
     }
 
     /**
@@ -116,7 +118,8 @@ class PekebunController extends Controller
 
         $pekebun->save();
 
-        return redirect('/pekebun');
+        // return redirect('/pekebun');
+        return response()->json($pekebun);
     }
 
     /**

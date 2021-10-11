@@ -15,6 +15,9 @@ class CreateKategoriUsahawansTable extends Migration
     {
         Schema::create('kategori_usahawans', function (Blueprint $table) {
             $table->id();
+
+            $table->string('nama_kategori_usahawan', 50);
+            $table->string('status_kategori_usahawan', 50);
             $table->timestamps();
         });
     }
