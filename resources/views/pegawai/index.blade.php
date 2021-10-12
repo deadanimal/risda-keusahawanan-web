@@ -1,68 +1,154 @@
-Pegawai list
+@extends('dashboard')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+<script src="../../../js/jquery-3.6.0.min.js"> </script>
+@section('content')
+<div class="card">
+    <div class="card-body overflow-hidden p-lg-6">
+        <div class="row align-items-center">
+            <div id="displaysatu" >
+                <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
+                @foreach ($users as $user)
+                <div class="form-check form-switch">
+                    <input style="display: none;" type="text" name="user" value="{{$user->id}}"/>
+                    <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox" onclick="aktifkanpengguna({{$user->id}},{{$user->status_pengguna}})"/>
+                    <label class="form-check-label" for="flexSwitchCheckDefault" style="padding-right:20vh;">{{$user->name}} ( {{$user->no_kp}} )</label>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                        <option selected="">Mukim</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    {{-- 
+                    1 - super admin
+                    2 - BPU
+                    3 - PUN
+                    4 - PPP
+                    5 - PUD
+                    6 - KPUN
+                    7 - KPUD 
+                    --}}
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                        <option value="">Peranan</option>
+                        <option value="1">Super Admin</option>
+                        <option value="2">BPU</option>
+                        <option value="3">PUN</option>
+                        <option value="4">PPP</option>
+                        <option value="5">PUD</option>
+                        <option value="6">KPUN</option>
+                        <option value="7">KPUD</option>
+                    </select>
+                    {{-- <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" style="float: right;" onclick="tetapanpengguna('satu')">
+                        <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Tetapan Profil
+                    </button> --}}
+                </div>
+                @endforeach
+            </div>
+            <div id="displaydua" style="display: none">
+                <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" onclick="tetapanpengguna('dua')"> 
+                    <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Back</a>
+                <div class="card-header" style="padding-top:2vh;">
+                    <h3 class="text" style="padding-bottom:20px;color:#00A651;">Kemaskini Pegawai</h3>
+                  </div>
+                  <div class="card-body bg-light">
+                      <form class="row g-3">
+                        <div class="col-lg-6">
+                          <label class="form-label" for="first-name">Nama Usahawan</label>
+                          <input class="form-control" id="first-name" type="text" value="Anthony" />
+                        </div>
+                        <div class="col-lg-6">
+                          <label class="form-label" for="last-name">No Kad Pengenalan</label>
+                          <input class="form-control" id="last-name" type="text" value="Hopkins" />
+                        </div>
+                        <div class="col-lg-6">
+                          <label class="form-label" for="email1">Email</label>
+                          <input class="form-control" id="email1" type="text" value="anthony@gmail.com" />
+                        </div>
+                        <div class="col-lg-6">
+                          <label class="form-label" for="email2">Phone</label>
+                          <input class="form-control" id="email2" type="text" value="+44098098304" />
+                        </div>
+                        <div class="col-lg-12">
+                          <label class="form-label" for="email3">Heading</label>
+                          <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        </div>
+                        <div class="col-lg-12">
+                          <label class="form-label" for="intro">Intro</label>
+                          <textarea class="form-control" id="intro" name="intro" cols="30" rows="13">Dedicated, passionate, and accomplished Full Stack Developer with 9+ years of progressive experience working as an Independent Contractor for Google and developing and growing my educational social network that helps others learn programming, web design, game development, networking. I’ve acquired a wide depth of knowledge and expertise in using my technical skills in programming, computer science, software development, and mobile app development to developing solutions to help organizations increase productivity, and accelerate business performance. It’s great that we live in an age where we can share so much with technology but I’m but I’m ready for the next phase of my career, with a healthy balance between the virtual world and a workplace where I help others face-to-face. There’s always something new to learn, especially in IT-related fields. People like working with me because I can explain technology to everyone, from staff to executives who need me to tie together the details and the big picture. I can also implement the technologies that successful projects need.</textarea>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                          <button class="btn btn-primary" type="submit">Update </button>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+            </div>
+            
+            {{-- <div class="form-check form-switch">
+                <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" checked="" />
+                <label class="form-check-label" for="flexSwitchCheckChecked">Pengguna 2</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" id="flexSwitchCheckDisabled" type="checkbox" disabled="" />
+                <label class="form-check-label" for="flexSwitchCheckDisabled">Pengguna 3</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" id="flexSwitchCheckCheckedDisabled" type="checkbox" checked="" disabled="" />
+                <label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Pengguna 3</label>
+            </div> --}}
+        </div>
+    </div>
+</div>
+@endsection
+@section('script')
+<script type="text/javascript">
 
+$( document ).ready(function() {
+    $('#penggunatbl').DataTable();
+    GetPengguna();
+});
 
-<br><br><br>
+function GetPengguna(){
+    var user = <?php echo $users; ?>;
+    //var user = document.getElementsByName("user");
+    for (var i=0; i < user.length; i++) {
+        //console.log(users);
+        //console.log("flexSwitchCheckDefault"+user[i].value);
+        if(user[i].status_pengguna == 1){
+            $("#flexSwitchCheckDefault"+user[i].id).attr("checked","");
+        }else{
+            //$("#flexSwitchCheckDefault"+user[i].value).attr("checked","");
+        }
+    }
+}
 
-<table>
-    <tr>
-       <td>nokp</td>
-       <td>nama</td>
-       <td>nopekerja</td>
-       <td>GelaranJwtn</td>
-       <td>NamaPT</td>
-       <td>NamaPA</td>
-       <td>NamaUnit</td>
-       <td>Jawatan</td>
-       <td>StesenBertugas</td>
-       <td>email</td>
-       <td>notel</td>
-       <td>mukim</td>
-       <td>peranan_pegawai</td>
-    </tr>
+function aktifkanpengguna(id,status){
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/pegawai/"+id,
+        type:"PUT",
+        data: {     
+            id:id,
+            status:status
+        },
+        success: function(data) {
+            location.reload();
+        }
+    });
+}
 
-    @foreach ($pegawai as $pegawai)
-
-        <tr>
-            <td>{{ $pegawai->nokp }}</td>
-            <td>{{ $pegawai->nama }}</td>
-            <td>{{ $pegawai->nopekerja }}</td>
-            <td>{{ $pegawai->GelaranJwtn }}</td>
-            <td>{{ $pegawai->NamaPT }}</td>
-            <td>{{ $pegawai->NamaPA }}</td>
-            <td>{{ $pegawai->NamaUnit }}</td>
-            <td>{{ $pegawai->Jawatan }}</td>
-            <td>{{ $pegawai->StesenBertugas }}</td>
-            <td>{{ $pegawai->email }}</td>
-            <td>{{ $pegawai->notel }}</td>
-            <td>{{ $pegawai->mukim }}</td>
-            <td>{{ $pegawai->peranan_pegawai }}</td>
+function tetapanpengguna(page){
+    if(page == 'satu'){
+        $("#displaysatu").hide();
+        $("#displaydua").show();
+    }else if(page == 'dua'){
+        $("#displaysatu").show();
+        $("#displaydua").hide();
+    }
     
-        </tr>
+    //window.location.href = "/usahawan/"+id;
+}
 
-    @endforeach
-</table>
-
-
-<br><br><br>
-
-<form method="POST" action="/pegawai">
-    @csrf
-
-    nokp <input type="text" name="nokp"> <br>
-    nama<input type="text" name="nama"> <br>
-    nopekerja <input type="text" name="nopekerja"> <br>
-    GelaranJwtn<input type="text" name="GelaranJwtn"> <br>
-    NamaPT<input type="text" name="NamaPT"> <br>
-    NamaPA<input type="text" name="NamaPA"> <br>
-    NamaUnit<input type="text" name="NamaUnit"> <br>
-    Jawatan<input type="text" name="Jawatan"> <br>
-    StesenBertugas<input type="text" name="StesenBertugas"> <br>
-    email<input type="text" name="email"> <br>
-    notel<input type="text" name="notel"> <br>
-    mukim<input type="text" name="mukim"> <br>
-    peranan_pegawai<input type="text" name="peranan_pegawai"> <br>
-
-    <input type="submit">
-</form>
-
-
+</script>
+@endsection

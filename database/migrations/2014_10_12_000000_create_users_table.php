@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->boolean('status_pengguna');
             $table->string('no_kp');
 
-
-
+            $table->string('role');
+            $table->boolean('profil_status');
 
 
             $table->rememberToken();

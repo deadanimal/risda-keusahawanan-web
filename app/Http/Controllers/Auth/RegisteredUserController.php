@@ -39,16 +39,33 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        /*role
+        1 - super admin
+        2 - BPU
+        3 - PUN
+        4 - PPP
+        5 - PUD
+        6 - KPUN
+        7 - KPUD
+        */
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'status_pengguna' => 0,
+            'no_kp' => 971006045595,
+            'role' => 1,
+            'usahawanid' => 1,
+            'idpegawai' => 1,
+            'profil_status' => 0
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/pengguna');
+        //return redirect(RouteServiceProvider::HOME);
     }
 }
