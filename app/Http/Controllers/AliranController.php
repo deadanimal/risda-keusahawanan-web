@@ -15,9 +15,8 @@ class AliranController extends Controller
     public function index()
     {
         $aliran = Aliran::all();
-        return view('aliran.index', [
-            'aliran' => $aliran
-        ]);
+        
+        return response()->json($aliran);
     }
 
     /**

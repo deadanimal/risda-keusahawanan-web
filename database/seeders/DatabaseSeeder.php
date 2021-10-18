@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             PerniagaanSeeder::class,
             SyarikatSeeder::class,
             PekebunSeeder::class,
+            KategoriAliranSeeder::class
         ]);
     }
 }

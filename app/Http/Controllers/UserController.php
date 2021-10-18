@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use League\Config\Exception\ValidationException;
 
 class UserController extends Controller
 {
@@ -40,6 +42,15 @@ class UserController extends Controller
         $user = User::where('no_kp', $request->no_kp)->get()->first();
 
         return response()->json($user);
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            // throw ValidationException::withMessages([
+            //     'no_kp' => ['The provided credentials are incorrect.'],
+            // ]);
+        }
+
+        $token = $request->user()->createToken($request->token_name);
+
+        return ['token' => $token->plainTextToken];
     }
 
     /**

@@ -19,7 +19,7 @@ class CreateKategoriAliransTable extends Migration
             $table->string('jenis_aliran', 50);
             $table->string('nama_kategori_aliran', 50);
             $table->string('status_kategori_aliran', 12);
-
+            
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateKategoriAliransTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori__alirans');
+        Schema::dropIfExists('kategori_alirans');
     }
 }
