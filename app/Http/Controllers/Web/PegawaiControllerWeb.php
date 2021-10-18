@@ -7,7 +7,7 @@ use App\Models\Pegawai;
 use App\Models\Peranan;
 use App\Models\User;
 
-class PegawaiController extends Controller
+class PegawaiControllerWeb extends Controller
 {
     public function index()
     {

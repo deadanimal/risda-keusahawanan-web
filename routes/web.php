@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\LolController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Web\PegawaiController;
-use App\Http\Controllers\Web\UsahawanController;
-use App\Http\Controllers\Web\InsentifController;
-use App\Http\Controllers\Web\AuditTrailController;
-use App\Http\Controllers\Web\KomponenDashController;
-use App\Http\Controllers\Web\LandingController;
+use App\Http\Controllers\Web\PegawaiControllerWeb;
+use App\Http\Controllers\Web\UsahawanControllerWeb;
+use App\Http\Controllers\Web\InsentifControllerWeb;
+use App\Http\Controllers\Web\AuditTrailControllerWeb;
+use App\Http\Controllers\Web\KomponenDashControllerWeb;
+use App\Http\Controllers\Web\LandingControllerWeb;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,20 +27,20 @@ Route::get('/', function () {
     return view('landing.index');
 })->middleware(['auth'])->name('landing');
 
-Route::resource('/pegawai', PegawaiController::class);
-Route::put('pegawaiPost', [PegawaiController::class, 'pegawaiPost'])->name('pegawai.post');
+Route::resource('/pegawai', PegawaiControllerWeb::class);
+Route::put('pegawaiPost', [PegawaiControllerWeb::class, 'pegawaiPost'])->name('pegawai.post');
 
-Route::resource('/usahawan', UsahawanController::class);
-
-
-Route::resource('/audittrail', AuditTrailController::class);
-Route::resource('/insentif', InsentifController::class);
-Route::resource('/komponendash', KomponenDashController::class);
+Route::resource('/usahawan', UsahawanControllerWeb::class);
 
 
+Route::resource('/audittrail', AuditTrailControllerWeb::class);
+Route::resource('/insentif', InsentifControllerWeb::class);
+Route::resource('/komponendash', KomponenDashControllerWeb::class);
 
 
-Route::resource('/landing', LandingController::class);
+
+
+Route::resource('/landing', LandingControllerWeb::class);
 require __DIR__.'/auth.php';
 
 Route::resource('/usahawan', UsahawanController::class);

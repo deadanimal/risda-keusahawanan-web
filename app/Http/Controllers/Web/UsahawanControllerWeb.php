@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Usahawan;
 
-class UsahawanController extends Controller
+class UsahawanControllerWeb extends Controller
 {
     public function index()
     {
