@@ -1,68 +1,146 @@
-Pegawai list
+@extends('dashboard')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+<script src="../../../js/jquery-3.6.0.min.js"> </script>
+@section('content')
+<div class="card">
+    <div class="card-body overflow-hidden p-lg-6">
+        <div class="row align-items-center">
+            <div id="displaysatu" >
+                <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
+                <table id="pegawaitbl">
+                    <colgroup>
+                        <col span="1" style="width: 30%;">
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 10%;">
+                        <col span="1" style="width: 10%;">
+                     </colgroup>
+                    <style>
+                        .dataTable-dropdown{
+                            display: inline;
+                            padding-right:10vh;
+                        }
+                        .dataTable-search{
+                            display: inline;
+                        }
+                        ul {
+                            list-style-type: none;
+                        }
+                        .dataTable-pagination-list{
+                            display: inline-flex;
+                        }
+                        .active{
+                            padding-right: 5px;
+                        }
+                    </style>
+                    <thead>
+                        <tr class="align-middle">
+                            <th scope="col">Nama</th>
+                            <th scope="col">Mukim</th>
+                            <th scope="col">Peranan</th>
+                            <th scope="col">Aktifkan Pengguna</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pegawai as $user)
+                        <tr class="align-middle">
+                            <td class="text-nowrap"><label class="form-check-label">{{$user->nama}}</label></td>
+                            <td class="text-nowrap"><select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                                <option selected="">Mukim</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select></td>
+                            <td>
+                                <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                                    <option value="">Peranan</option>
+                                    @foreach ($ddPeranan as $items)
+                                        <option value="{{ $items->peranan_id }}" {{ ( $items->peranan_id == $user->peranan_pegawai) ? 'selected' : '' }}> 
+                                            {{ $items->kod_peranan }} 
+                                        </option>
+                                    @endforeach   
+                                    {{-- <option value="1">Super Admin</option>
+                                    <option value="2">BPU</option>
+                                    <option value="3">PUN</option>
+                                    <option value="4">PPP</option>
+                                    <option value="5">PUD</option>
+                                    <option value="6">KPUN</option>
+                                    <option value="7">KPUD</option> --}}
+                                </select>
+                            </td>
+                            <td class="align-middle text-nowrap" >
+                                <div class="form-check form-switch" style="margin-left:10px;">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault{{$user->id}}"></label>
+                                    <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox"/>
+                            </td>
+                            <td class="align-middle text-nowrap">
+                                <button class="btn btn-primary" type="submit" onclick="simpanpengguna({{$user}})" >Simpan </button>
+                            </td>
+                            <td></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+@section('script')
+<script type="text/javascript">
 
+$( document ).ready(function() {
+    const dataTableBasic = new simpleDatatables.DataTable("#pegawaitbl", {
+        searchable: true,
+        fixedHeight: true,
+        sortable: false
+    });
+    //$('#pegawaitbl').DataTable();
+    GetPengguna();
+});
 
-<br><br><br>
+function GetPengguna(){
+    var user = <?php echo $pegawai; ?>;
+    for (var i=0; i < user.length; i++) {
+        //console.log(user);
+        //console.log("flexSwitchCheckDefault"+user[i].value);
+        if(user[i].status_pengguna == 1){
+            $("#flexSwitchCheckDefault"+user[i].id).attr("checked","");
+        }else{
+            //$("#flexSwitchCheckDefault"+user[i].value).attr("checked","");
+        }
+    }
+}
 
-<table>
-    <tr>
-       <td>nokp</td>
-       <td>nama</td>
-       <td>nopekerja</td>
-       <td>GelaranJwtn</td>
-       <td>NamaPT</td>
-       <td>NamaPA</td>
-       <td>NamaUnit</td>
-       <td>Jawatan</td>
-       <td>StesenBertugas</td>
-       <td>email</td>
-       <td>notel</td>
-       <td>mukim</td>
-       <td>peranan_pegawai</td>
-    </tr>
+function simpanpengguna(user){
+    var id = user.id;
+    var status = "";
+    if ($("#flexSwitchCheckDefault"+id).is(":checked")){
+        status = 1;
+    }else{
+        status = 0;
+    }
+    var peranan = $("#ddperanan"+id).find(":selected").val();
+    //console.log(peranan);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('pegawai.post') }}",
+        type:"PUT",
+        data: {     
+            id:id,
+            status:status,
+            peranan:peranan
+        },
+        success: function(data) {
+            //swal("Congrats!", ", Your account is created!", "success");
+            alert("Akaun Pegawai Kemaskini Berjaya");
+            //location.reload();
+        }
+    });
+}
 
-    @foreach ($pegawai as $pegawai)
-
-        <tr>
-            <td>{{ $pegawai->nokp }}</td>
-            <td>{{ $pegawai->nama }}</td>
-            <td>{{ $pegawai->nopekerja }}</td>
-            <td>{{ $pegawai->GelaranJwtn }}</td>
-            <td>{{ $pegawai->NamaPT }}</td>
-            <td>{{ $pegawai->NamaPA }}</td>
-            <td>{{ $pegawai->NamaUnit }}</td>
-            <td>{{ $pegawai->Jawatan }}</td>
-            <td>{{ $pegawai->StesenBertugas }}</td>
-            <td>{{ $pegawai->email }}</td>
-            <td>{{ $pegawai->notel }}</td>
-            <td>{{ $pegawai->mukim }}</td>
-            <td>{{ $pegawai->peranan_pegawai }}</td>
-    
-        </tr>
-
-    @endforeach
-</table>
-
-
-<br><br><br>
-
-<form method="POST" action="/pegawai">
-    @csrf
-
-    nokp <input type="text" name="nokp"> <br>
-    nama<input type="text" name="nama"> <br>
-    nopekerja <input type="text" name="nopekerja"> <br>
-    GelaranJwtn<input type="text" name="GelaranJwtn"> <br>
-    NamaPT<input type="text" name="NamaPT"> <br>
-    NamaPA<input type="text" name="NamaPA"> <br>
-    NamaUnit<input type="text" name="NamaUnit"> <br>
-    Jawatan<input type="text" name="Jawatan"> <br>
-    StesenBertugas<input type="text" name="StesenBertugas"> <br>
-    email<input type="text" name="email"> <br>
-    notel<input type="text" name="notel"> <br>
-    mukim<input type="text" name="mukim"> <br>
-    peranan_pegawai<input type="text" name="peranan_pegawai"> <br>
-
-    <input type="submit">
-</form>
-
-
+</script>
+@endsection

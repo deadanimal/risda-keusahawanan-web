@@ -2,7 +2,12 @@
 
 use App\Http\Controllers\LolController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Web\PegawaiController;
+use App\Http\Controllers\Web\UsahawanController;
+use App\Http\Controllers\Web\InsentifController;
+use App\Http\Controllers\Web\AuditTrailController;
+use App\Http\Controllers\Web\KomponenDashController;
+use App\Http\Controllers\Web\LandingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,13 +24,23 @@ use App\Http\Controllers\SyarikatController;
 
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('landing.index');
+})->middleware(['auth'])->name('landing');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::resource('/pegawai', PegawaiController::class);
+Route::put('pegawaiPost', [PegawaiController::class, 'pegawaiPost'])->name('pegawai.post');
 
+Route::resource('/usahawan', UsahawanController::class);
+
+
+Route::resource('/audittrail', AuditTrailController::class);
+Route::resource('/insentif', InsentifController::class);
+Route::resource('/komponendash', KomponenDashController::class);
+
+
+
+
+Route::resource('/landing', LandingController::class);
 require __DIR__.'/auth.php';
 
 Route::resource('/usahawan', UsahawanController::class);
