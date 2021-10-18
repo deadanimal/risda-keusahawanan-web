@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class KomponenDashController extends Controller
+class LandingControllerWeb extends Controller
 {
     public function index()
     {
-        return view('komponendash.index'
+        return view('landing.index'
         // ,[
         //     'users'=>$users
         // ]
