@@ -9,7 +9,7 @@
                     <colgroup>
                         <col span="1" style="width: 40%;">
                         <col span="1" style="width: 20%;">
-                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 15%;">
                         <col span="1" style="width: 20%;">
                      </colgroup>
                     <style>
@@ -20,28 +20,37 @@
                         .dataTable-search{
                             display: inline;
                         }
+                        ul {
+                            list-style-type: none;
+                        }
+                        .dataTable-pagination-list{
+                            display: inline-flex;
+                        }
+                        .active{
+                            padding-right: 5px;
+                        }
                     </style>
                     <thead>
                         <tr class="align-middle">
                             <th scope="col">Nama</th>
                             <th scope="col">No. KP</th>
                             <th scope="col">Aktifkan Pengguna</th>
-                            <th scope="col">Tatapan Profil</th>
+                            <th scope="col">Tetapan Profil</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
                         <input style="display: none;" type="text" name="user" value="{{$user->id}}"/>
                         <tr class="align-middle">
-                            <td class="text-nowrap"><label class="form-check-label">{{$user->name}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$user->no_kp}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$user->nokadpengenalan}}</label></td>
                             <td class="align-middle text-nowrap">
-                                <div class="form-check form-switch" >
+                                <div class="form-check form-switch" style="margin-left:10px;">
                                 <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                                <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox" onclick="aktifkanpengguna({{$user->id}},{{$user->status_pengguna}})"/>
+                                <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox" onclick="aktifkanpengguna({{$user}})"/>
                                 </div>
                             </td>
-                            <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="tetapanpengguna('satu')">
+                            <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="tetapanpengguna('satu',{{$user}})">
                                 <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Tetapan Profil
                             </button></td>
                         </tr>
@@ -63,97 +72,122 @@
                 <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" onclick="tetapanpengguna('dua')"> 
                     <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Back</a>
                 <div class="card-header" style="padding-top:2vh;">
-                    <h3 class="text" style="padding-bottom:20px;color:#00A651;">Kemaskini Usahawan</h3>
+                <style>
+                    .card-header{
+                        margin-top: -1.0rem;
+                    }
+                </style>
+                    <div class="row">
+                        <div class="col-12">
+                          <div class="card mb-3 btn-reveal-trigger">
+                            <div class="card-header position-relative min-vh-25 mb-8">
+                              <div class="cover-image">
+                                <div class="bg-holder rounded-3 rounded-bottom-0">
+                                    <h3 class="text" style="padding-bottom:20px;color:#00A651;padding:10px 0px 0px 20px;margin-top:2rem">Kemaskini Usahawan</h3>
+                                </div>
+                              </div>
+                              <div class="avatar avatar-5xl avatar-profile shadow-sm img-thumbnail rounded-circle">
+                                <div class="h-100 w-100 rounded-circle overflow-hidden position-relative"> <img src="../../assets/img/team/2.jpg" width="200" alt="" data-dz-thumbnail="data-dz-thumbnail" />
+                                  <input class="d-none" id="profile-image" type="file" name="gambarusahawan"/>
+                                  <label class="mb-0 overlay-icon d-flex flex-center" for="profile-image"><span class="bg-holder overlay overlay-0"></span><span class="z-index-1 text-white dark__text-white text-center fs--1"><span class="fas fa-camera"></span><span class="d-block">Update</span></span></label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                   <div class="card-body bg-light">
-                      <form class="row g-3">
+                      <form class="row g-3" id="datausahawan" method="POST" action="/usahawan" enctype="multipart/form-data">
+                        @csrf
+                        @method("PUT")
                         <div class="col-lg-12">
-                          <label class="form-label" for="first-name">Nama Usahawan</label>
-                          <input class="form-control" id="first-name" type="text" value="Anthony" />
+                          <label class="form-label">Nama Usahawan</label>
+                          <input class="form-control" name="namausahawan" type="text"/>
                         </div>
                         <div class="col-lg-6">
-                          <label class="form-label" for="last-name">No Kad Pengenalan</label>
-                          <input class="form-control" id="last-name" type="text" value="Hopkins" />
+                          <label class="form-label" >No Kad Pengenalan</label>
+                          <input class="form-control" name="nokadpengenalan" type="text"/>
                         </div>
                         <div class="col-lg-6">
-                          <label class="form-label" for="email1">Tarikh Lahir</label>
-                          <input class="form-control" id="email1" type="text" value="anthony@gmail.com" />
+                          <label class="form-label" for="tarikhlahir">Tarikh Lahir</label>
+                          <input class="form-control" name="tarikhlahir" type="text"/>
                         </div>
                         <div class="col-lg-6">
-                          <label class="form-label" for="email2">Jantina</label>
-                          <input class="form-control" id="email2" type="text" value="+44098098304" />
+                          <label class="form-label" >Jantina</label>
+                          <input class="form-control" name="U_Jantina_ID" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                          <label class="form-label" >Bangsa</label>
+                          <input class="form-control" name="U_Bangsa_ID" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                          <label class="form-label">Status Perkahwinan</label>
+                          <input class="form-control" name="statusperkahwinan" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label" >Pendidikan</label>
+                            <input class="form-control" name="U_Pendidikan_ID" type="text"  />
                         </div>
                         <div class="col-lg-12">
-                          <label class="form-label" for="email3">Bangsa</label>
-                          <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                            <label class="form-label">Alamat</label>
+                            <input class="form-control" name="alamat1" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                          <label class="form-label" for="intro">Status Perkahwinan</label>
-                          <textarea class="form-control" id="intro" name="intro" cols="30" rows="13">Dedicated, passionate, and accomplished Full Stack Developer with 9+ years of progressive experience working as an Independent Contractor for Google and developing and growing my educational social network that helps others learn programming, web design, game development, networking. I’ve acquired a wide depth of knowledge and expertise in using my technical skills in programming, computer science, software development, and mobile app development to developing solutions to help organizations increase productivity, and accelerate business performance. It’s great that we live in an age where we can share so much with technology but I’m but I’m ready for the next phase of my career, with a healthy balance between the virtual world and a workplace where I help others face-to-face. There’s always something new to learn, especially in IT-related fields. People like working with me because I can explain technology to everyone, from staff to executives who need me to tie together the details and the big picture. I can also implement the technologies that successful projects need.</textarea>
+                        <div class="col-lg-6">
+                            <label class="form-label">Bandar</label>
+                            <input class="form-control" name="bandar" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Pendidikan</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Poskod</label>
+                            <input class="form-control" name="poskod" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Alamat</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Negeri</label>
+                            <input class="form-control" name="U_Negeri_ID" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Bandar</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Daerah</label>
+                            <input class="form-control" name="U_Daerah_ID" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Poskod</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Mukim</label>
+                            <input class="form-control" name="U_Mukim_ID" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Negeri</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Parlimen</label>
+                            <input class="form-control" name="U_Parlimen_ID" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Daerah</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Dun</label>
+                            <input class="form-control" name="U_Dun_ID" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Mukim</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Kampung</label>
+                            <input class="form-control" name="U_Kampung_ID" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Parlimen</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Seksyen</label>
+                            <input class="form-control" name="U_Seksyen_ID" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Dun</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Kategori</label>
+                            <input class="form-control" name="id_kategori_usahawan" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Kampung</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Gambar</label>
+                            <input class="form-control" name="gambar_url" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Seksyen</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">notelefon</label>
+                            <input class="form-control" name="notelefon" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Kategori</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">No Hp</label>
+                            <input class="form-control" name="nohp" type="text"  />
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Gambar</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">notelefon</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">No Hp</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="email3">Email</label>
-                            <input class="form-control" id="email3" type="text" value="Software Engineer" />
+                        <div class="col-lg-6">
+                            <label class="form-label">Email</label>
+                            <input class="form-control" name="email" type="text"  />
                         </div>
                         <div class="col-12 d-flex justify-content-end">
                           <button class="btn btn-primary" type="submit">Update </button>
@@ -162,7 +196,7 @@
                     </div>
                 </div>
             </div>
-             
+            {{-- <textarea class="form-control" name="statusperkahwinan" cols="30" rows="13"></textarea> --}}
             {{-- <div class="form-check form-switch">
                 <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" checked="" />
                 <label class="form-check-label" for="flexSwitchCheckChecked">Pengguna 2</label>
@@ -188,7 +222,7 @@ $( document ).ready(function() {
           fixedHeight: true,
           sortable: false
       });
-    //$('#penggunatbl').DataTable();
+    //$('#penggunatbl').DataTable(); 
     GetPengguna();
 });
 
@@ -196,7 +230,6 @@ function GetPengguna(){
     var user = <?php echo $users; ?>;
     //var user = document.getElementsByName("user");
     for (var i=0; i < user.length; i++) {
-        //console.log(users);
         //console.log("flexSwitchCheckDefault"+user[i].value);
         if(user[i].status_pengguna == 1){
             $("#flexSwitchCheckDefault"+user[i].id).attr("checked","");
@@ -204,10 +237,17 @@ function GetPengguna(){
             //$("#flexSwitchCheckDefault"+user[i].value).attr("checked","");
         }
     }
+    console.log(user);
 }
 
-function aktifkanpengguna(id,status){
-    
+function aktifkanpengguna(user){
+    var id = user.id;
+    var status = "";
+    if ($("#flexSwitchCheckDefault"+id).is(":checked")){
+        status = 1;
+    }else{
+        status = 0;
+    }
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -219,21 +259,49 @@ function aktifkanpengguna(id,status){
             status:status
         },
         success: function(data) {
-            location.reload();
+            if(status == 1){
+                alert("Akaun Usahawan Berjaya Diaktifkan");
+            }else{
+                alert("Akaun Usahawan Berjaya Dinyahaktifkan");
+            }
+            
         }
     });
 }
 
-function tetapanpengguna(page){
+function tetapanpengguna(page,data){
     if(page == 'satu'){
         $("#displaysatu").hide();
         $("#displaydua").show();
+        console.log(data);
+        $("#displaydua input[name=namausahawan]").val(data.namausahawan);
+        $("#displaydua input[name=nokadpengenalan]").val(data.nokadpengenalan);
+        $("#displaydua input[name=tarikhlahir]").val(data.tarikhlahir);
+        $("#displaydua input[name=U_Jantina_ID]").val(data.U_Jantina_ID);
+        $("#displaydua input[name=U_Bangsa_ID]").val(data.U_Bangsa_ID);
+        $("#displaydua input[name=statusperkahwinan]").val(data.statusperkahwinan);
+        $("#displaydua input[name=U_Pendidikan_ID]").val(data.U_Pendidikan_ID);
+        $("#displaydua input[name=alamat1]").val(data.alamat1);
+        $("#displaydua input[name=bandar]").val(data.bandar);
+        $("#displaydua input[name=poskod]").val(data.poskod);
+        $("#displaydua input[name=U_Negeri_ID]").val(data.U_Negeri_ID);
+        $("#displaydua input[name=U_Daerah_ID]").val(data.U_Daerah_ID);
+        $("#displaydua input[name=U_Mukim_ID]").val(data.U_Mukim_ID);
+        $("#displaydua input[name=U_Parlimen_ID]").val(data.U_Parlimen_ID);
+        $("#displaydua input[name=U_Dun_ID]").val(data.U_Dun_ID);
+        $("#displaydua input[name=U_Kampung_ID]").val(data.U_Kampung_ID);
+        $("#displaydua input[name=U_Seksyen_ID]").val(data.U_Seksyen_ID);
+        $("#displaydua input[name=id_kategori_usahawan]").val(data.id_kategori_usahawan);
+        $("#displaydua input[name=gambar_url]").val(data.gambar_url);
+        $("#displaydua input[name=notelefon]").val(data.notelefon);
+        $("#displaydua input[name=nohp]").val(data.nohp);
+        $("#displaydua input[name=email]").val(data.email);
+        $("#datausahawan").attr("action", "/usahawan/"+data.id);
+        
     }else if(page == 'dua'){
         $("#displaysatu").show();
         $("#displaydua").hide();
     }
-    
-    //window.location.href = "/usahawan/"+id;
 }
 
 </script>

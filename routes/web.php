@@ -22,12 +22,18 @@ Route::get('/', function () {
     return view('landing.index');
 })->middleware(['auth'])->name('landing');
 
+Route::resource('/pegawai', PegawaiController::class);
+Route::put('pegawaiPost', [PegawaiController::class, 'pegawaiPost'])->name('pegawai.post');
+
+Route::resource('/usahawan', UsahawanController::class);
+
+
 Route::resource('/audittrail', AuditTrailController::class);
 Route::resource('/insentif', InsentifController::class);
 Route::resource('/komponendash', KomponenDashController::class);
-Route::resource('/usahawan', UsahawanController::class);
-Route::resource('/pegawai', PegawaiController::class);
+
+
+
+
 Route::resource('/landing', LandingController::class);
-
-
 require __DIR__.'/auth.php';
