@@ -15,9 +15,10 @@ class SyarikatController extends Controller
     public function index()
     {
         $syarikat = Syarikat::all();
-        return view('syarikat.index', [
-            'syarikat' => $syarikat
-        ]);
+        // return view('syarikat.index', [
+        //     'syarikat' => $syarikat
+        // ]);
+        return response()->json($syarikat);
     }
 
     /**
@@ -69,7 +70,8 @@ class SyarikatController extends Controller
 
         $syarikat->save();
 
-        return redirect('/syarikat');
+        // return redirect('/syarikat');
+        return response()->json($syarikat);
     }
 
     /**
@@ -78,11 +80,13 @@ class SyarikatController extends Controller
      * @param  \App\Models\Syarikat  $syarikat
      * @return \Illuminate\Http\Response
      */
-    public function show(Syarikat $syarikat)
+    public function show($id)
     {
-        return view('syarikat.show', [
-            'syarikat' => $syarikat
-        ]);
+        // return view('syarikat.show', [
+        //     'syarikat' => $syarikat
+        // ]);
+        $syarikat = Syarikat::where('usahawanid', $id)->get()->first();
+        return response()->json($syarikat);
     }
 
     /**
@@ -135,7 +139,8 @@ class SyarikatController extends Controller
 
         $syarikat->save();
 
-        return redirect('/syarikat');
+        // return redirect('/syarikat');
+        return response()->json($syarikat);
     }
 
     /**

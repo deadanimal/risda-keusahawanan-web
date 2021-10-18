@@ -20,13 +20,14 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
-            $table->foreignId('usahawanid');
-            $table->foreignId('idpegawai');
+            $table->foreignId('usahawanid')->nullable();
+            $table->foreignId('idpegawai')->nullable();
             $table->boolean('status_pengguna');
             $table->string('no_kp');
 
-            $table->string('role');
-            $table->boolean('profil_status');
+
+            $table->string('role')->nullable();
+            $table->boolean('profile_status')->nullable()->default(false);
 
 
             $table->rememberToken();

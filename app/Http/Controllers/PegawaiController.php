@@ -15,9 +15,7 @@ class PegawaiController extends Controller
     public function index()
     {
         $pegawai = Pegawai::all();
-        return view('pegawai.index', [
-            'pegawai' => $pegawai
-        ]);
+        return $pegawai;
     }
 
     /**
