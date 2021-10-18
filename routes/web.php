@@ -29,21 +29,9 @@ Route::get('/', function () {
 
 Route::resource('/pegawai', PegawaiControllerWeb::class);
 Route::put('pegawaiPost', [PegawaiControllerWeb::class, 'pegawaiPost'])->name('pegawai.post');
-
 Route::resource('/usahawan', UsahawanControllerWeb::class);
-
-
 Route::resource('/audittrail', AuditTrailControllerWeb::class);
 Route::resource('/insentif', InsentifControllerWeb::class);
 Route::resource('/komponendash', KomponenDashControllerWeb::class);
-
-
-
-
 Route::resource('/landing', LandingControllerWeb::class);
 require __DIR__.'/auth.php';
-
-Route::resource('/usahawan', UsahawanController::class);
-Route::resource('/syarikat', SyarikatController::class);
-
-Route::resource('/lol', LolController::class);
