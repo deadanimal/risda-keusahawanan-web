@@ -15,9 +15,10 @@ class PekebunController extends Controller
     public function index()
     {
         $pekebun = Pekebun::all();
-        return view('pekebun.index', [
-            'pekebun' => $pekebun
-        ]);
+        // return view('pekebun.index', [
+        //     'pekebun' => $pekebun
+        // ]);
+        return response()->json($pekebun);
     }
 
     /**
@@ -58,7 +59,7 @@ class PekebunController extends Controller
 
         $pekebun->save();
 
-        return redirect('/pekebun');
+        return response()->json($pekebun);
     }
 
     /**
@@ -67,12 +68,14 @@ class PekebunController extends Controller
      * @param  \App\Models\Pekebun  $pekebun
      * @return \Illuminate\Http\Response
      */
-    public function show(Pekebun $pekebun)
+    public function show($id)
     {
         // $pekebun = Pekebun::all();
-        return view('pekebun.show', [
-            'pekebun' => $pekebun
-        ]);
+        // return view('pekebun.show', [
+        //     'pekebun' => $pekebun
+        // ]);
+        $pekebun = Pekebun::where('usahawanid', $id)->get()->first();
+        return response()->json($pekebun);
     }
 
     /**
@@ -116,7 +119,8 @@ class PekebunController extends Controller
 
         $pekebun->save();
 
-        return redirect('/pekebun');
+        // return redirect('/pekebun');
+        return response()->json($pekebun);
     }
 
     /**

@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\LolController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Web\PegawaiControllerWeb;
+use App\Http\Controllers\Web\UsahawanControllerWeb;
+use App\Http\Controllers\Web\InsentifControllerWeb;
+use App\Http\Controllers\Web\AuditTrailControllerWeb;
+use App\Http\Controllers\Web\KomponenDashControllerWeb;
+use App\Http\Controllers\Web\LandingControllerWeb;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,12 +19,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\UsahawanController;
+use App\Http\Controllers\SyarikatController;
+
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('landing.index');
+})->middleware(['auth'])->name('landing');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
+Route::resource('/pegawai', PegawaiControllerWeb::class);
+Route::put('pegawaiPost', [PegawaiControllerWeb::class, 'pegawaiPost'])->name('pegawai.post');
+Route::resource('/usahawan', UsahawanControllerWeb::class);
+Route::resource('/audittrail', AuditTrailControllerWeb::class);
+Route::resource('/insentif', InsentifControllerWeb::class);
+Route::resource('/komponendash', KomponenDashControllerWeb::class);
+Route::resource('/landing', LandingControllerWeb::class);
 require __DIR__.'/auth.php';
