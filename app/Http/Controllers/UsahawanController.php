@@ -15,9 +15,8 @@ class UsahawanController extends Controller
     public function index()
     {
         $usahawan = Usahawan::all();
-        return view('usahawan.index', [
-            'usahawan' => $usahawan
-        ]);
+        // dd($usahawan);
+        return response()->json($usahawan);
     }
 
     /**
@@ -72,7 +71,8 @@ class UsahawanController extends Controller
 
         $usahawan->save();
 
-        return redirect("/usahawan");
+        // return redirect("/usahawan");
+        return response()->json($usahawan);
     }
 
     /**
@@ -86,9 +86,10 @@ class UsahawanController extends Controller
         // $usahawan = Usahawan::where('usahawanid', $id)->first();
 
         // dd($usahawan);
-        return view('usahawan.show', [
-            'usahawan' => $usahawan
-        ]);
+        // return view('usahawan.show', [
+        //     'usahawan' => $usahawan
+        // ]);
+        return response()->json($usahawan);
     }
 
     /**
@@ -149,7 +150,8 @@ class UsahawanController extends Controller
 
         $usahawan->save();
 
-        return redirect("/usahawan");
+        // return redirect("/usahawan");
+        return response()->json($usahawan);
     }
 
     /**

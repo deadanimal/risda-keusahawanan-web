@@ -15,9 +15,10 @@ class PerniagaanController extends Controller
     public function index()
     {
         $perniagaan = Perniagaan::all();
-        return view('perniagaan.index', [
-            'perniagaan' => $perniagaan
-        ]);
+        // return view('perniagaan.index', [
+        //     'perniagaan' => $perniagaan
+        // ]);
+        return response()->json($perniagaan);
     }
 
     /**
@@ -80,7 +81,8 @@ class PerniagaanController extends Controller
 
         $perniagaan->save();
 
-        return redirect('/perniagaan');
+        // return redirect('/perniagaan');
+        return response()->json($perniagaan);
     }
 
     /**
@@ -89,11 +91,13 @@ class PerniagaanController extends Controller
      * @param  \App\Models\Perniagaan  $perniagaan
      * @return \Illuminate\Http\Response
      */
-    public function show(Perniagaan $perniagaan)
+    public function show($id)
     {
-        return view('perniagaan.show', [
-            'perniagaan' => $perniagaan
-        ]);
+        // return view('perniagaan.show', [
+        //     'perniagaan' => $perniagaan
+        // ]);
+        $perniagaan = Perniagaan::where('usahawanid', $id)->get()->first();
+        return response()->json($perniagaan);
     }
 
     /**
@@ -158,7 +162,8 @@ class PerniagaanController extends Controller
 
         $perniagaan->save();
 
-        return redirect('/perniagaan');
+        // return redirect('/perniagaan');
+        return response()->json($perniagaan);
     }
 
     /**
