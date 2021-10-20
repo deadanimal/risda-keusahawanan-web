@@ -3,38 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aliran;
+use App\Models\KategoriAliran;
 use Illuminate\Http\Request;
 
 class AliranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
         $aliran = Aliran::all();
+        // $user = $request->user();
+
+        // $aliran = Aliran::where('id_pengguna', $request->id)->get();
         
         return response()->json($aliran);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $aliran = new Aliran();
@@ -44,25 +28,37 @@ class AliranController extends Controller
         $aliran->tarikh_aliran = $request->tarikh_aliran;
         $aliran->keterangan_aliran = $request->keterangan_aliran;
         $aliran->jumlah_aliran = $request->jumlah_aliran;
-        $aliran->kategori_aliran = $request->kategori_aliran;
-        $aliran->dokumen_lampiran = $request->dokumen_lampiran;
-        $aliran->modified_by = $request->modified_by;
+
+        $kategoriAliran = KategoriAliran::find($request->id_kategori_aliran);
+
+        $aliran->kategori_aliran = $kategoriAliran->nama_kategori_aliran;
+
+        if ($request->hasFile('dokumen_lampiran')) {
+            $dokumen = $request->file('dokumen_lampiran')->store('dokumen_aliran');
+            $aliran->dokumen_lampiran = $dokumen;
+        }
+        
+        $aliran->modified_by = $request->id_pengguna;
         $aliran->save();
 
-        return redirect('/aliran');
+        return response()->json($aliran);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Aliran  $aliran
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Aliran $aliran)
+   
+    public function show($id)
     {
-        return view('aliran.show', [
-            'aliran' => $aliran
-        ]);
+        $aliran = Aliran::where('id_pengguna', $id)->get();
+
+        // $test = $aliran->kategori_aliran()->jenis_aliran ;
+        // kategori_aliran();
+
+        $test = Aliran::whereHas("kategori_aliran", function ($q) use ($id) {
+            $q->where("jenis_aliran", "tunai_masuk")->where('id_pengguna', $id);
+        })->get();
+
+        dd($test);
+
+        return response()->json($aliran);
     }
 
     /**

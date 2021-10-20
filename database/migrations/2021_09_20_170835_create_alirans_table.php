@@ -16,14 +16,14 @@ class CreateAliransTable extends Migration
         Schema::create('alirans', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('id_pengguna');
-            $table->integer('id_kategori_aliran');
-            $table->date('tarikh_aliran');
-            $table->string('keterangan_aliran', 100);
-            $table->double('jumlah_aliran',30,2);
-            $table->string('kategori_aliran',50);
+            $table->integer('id_pengguna')->nullable();
+            $table->integer('id_kategori_aliran')->nullable();
+            $table->date('tarikh_aliran')->nullable();
+            $table->string('keterangan_aliran', 100)->nullable();
+            $table->double('jumlah_aliran',30,2)->nullable();
+            $table->string('kategori_aliran',50)->nullable();
             $table->string('dokumen_lampiran',150)->nullable();
-            $table->string('modified_by');
+            $table->string('modified_by')->nullable();
 
 
             $table->timestamps();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AliranController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KategoriAliranController;
 use App\Http\Controllers\PekebunController;
@@ -36,7 +37,7 @@ Route::apiResource('pekebun', PekebunController::class);
 Route::apiResource('syarikat', SyarikatController::class);
 Route::apiResource('perniagaan', PerniagaanController::class);
 Route::apiResource('kategori_aliran', KategoriAliranController::class);
-
+Route::apiResource('aliran', AliranController::class);
 
 // Route::('checkUser', [UserController::class, 'checkUser']);
 Route::post('/sanctum/token', function (Request $request) {
