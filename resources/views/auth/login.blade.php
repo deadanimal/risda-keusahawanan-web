@@ -30,7 +30,7 @@
                     @csrf
                       <div class="mb-3">
                         <label class="form-label" for="split-login-email" :value="old('email')">Alamat E-mel</label>
-                        <input class="form-control" id="split-login-email" type="email" name="email" required/>
+                        <input class="form-control" id="split-login-email" type="text" name="email" required/>
                       </div>
                       <div class="mb-3">
                         <div class="d-flex justify-content-between">

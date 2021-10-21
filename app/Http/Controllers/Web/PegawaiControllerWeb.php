@@ -16,7 +16,9 @@ class PegawaiControllerWeb extends Controller
         foreach ($pegawai as $pegawai_L) {
             if($pegawai_L->id != null){
                 $status = User::where('idpegawai', $pegawai_L->id)->first();
-                $temp = $status['status_pengguna'];
+                $temp = isset($status->status_pengguna) ? count($status->status_pengguna) : 0;
+                //$temp = $status['status_pengguna'];
+                $temp = $status->status_pengguna;
                 $pegawai_L->status_pengguna = $temp;
             }
         }
