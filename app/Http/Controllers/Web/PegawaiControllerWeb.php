@@ -15,9 +15,9 @@ class PegawaiControllerWeb extends Controller
         $ddPeranan = Peranan::All();
         foreach ($pegawai as $pegawai_L) {
             $status = User::where('idpegawai', $pegawai_L->id)->first();
-            //dd($pegawai_L);
-            //$temp = $status->status_pengguna;
-            $temp = $status['status_pengguna'];
+            dd($status->status_pengguna);
+            $temp = $status->status_pengguna;
+            //$temp = $status['status_pengguna'];
             $pegawai_L->status_pengguna = $temp;
         }
         //$status = User::select('profil_status')->where('idpegawai', $pegawai->id)->first();
