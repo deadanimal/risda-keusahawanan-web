@@ -1,4 +1,6 @@
 @extends('dashboard')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+<script src="../../../js/jquery-3.6.0.min.js"> </script>
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
@@ -7,7 +9,8 @@
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Usahawan</h3>
                 <table id="penggunatbl">
                     <colgroup>
-                        <col span="1" style="width: 40%;">
+                        <col span="1" style="width: 30%;">
+                        <col span="1" style="width: 15%;">
                         <col span="1" style="width: 20%;">
                         <col span="1" style="width: 15%;">
                         <col span="1" style="width: 20%;">
@@ -34,6 +37,7 @@
                         <tr class="align-middle">
                             <th scope="col">Nama</th>
                             <th scope="col">No. KP</th>
+                            <th scope="col">Kawasan Usahawan</th>
                             <th scope="col">Aktifkan Pengguna</th>
                             <th scope="col">Tetapan Profil</th>
                         </tr>
@@ -44,6 +48,12 @@
                         <tr class="align-middle">
                             <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$user->nokadpengenalan}}</label></td>
+                            <td class="text-nowrap"><select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                                <option selected="">Kawasan</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select></td>
                             <td class="align-middle text-nowrap">
                                 <div class="form-check form-switch" style="margin-left:10px;">
                                 <label class="form-check-label" for="flexSwitchCheckDefault"></label>
@@ -57,7 +67,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{-- @foreach ($users as $user)
+                {{-- @foreach ($users as $user) 
                 <div class="form-check form-switch">
                     <input style="display: none;" type="text" name="user" value="{{$user->id}}"/>
                     <label class="form-check-label" for="flexSwitchCheckDefault">{{$user->name}} ( {{$user->no_kp}} )</label>
@@ -89,7 +99,7 @@
                               <div class="avatar avatar-5xl avatar-profile shadow-sm img-thumbnail rounded-circle">
                                 <div class="h-100 w-100 rounded-circle overflow-hidden position-relative"> <img src="../../assets/img/team/2.jpg" width="200" alt="" data-dz-thumbnail="data-dz-thumbnail" />
                                   <input class="d-none" id="profile-image" type="file" name="gambarusahawan"/>
-                                  <label class="mb-0 overlay-icon d-flex flex-center" for="profile-image"><span class="bg-holder overlay overlay-0"></span><span class="z-index-1 text-white dark__text-white text-center fs--1"><span class="fas fa-camera"></span><span class="d-block">Update</span></span></label>
+                                  {{-- <label class="mb-0 overlay-icon d-flex flex-center" for="profile-image"><span class="bg-holder overlay overlay-0"></span><span class="z-index-1 text-white dark__text-white text-center fs--1"><span class="fas fa-camera"></span><span class="d-block">Update</span></span></label> --}}
                                 </div>
                               </div>
                             </div>
@@ -98,7 +108,7 @@
                       </div>
                   </div>
                   <div class="card-body bg-light">
-                      <form class="row g-3" id="datausahawan" method="POST" action="/usahawan" enctype="multipart/form-data">
+                      <form class="row g-3" id="datausahawan" method="POST" action="/usahawanWeb" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
                         <div class="col-lg-12">
@@ -252,7 +262,7 @@ function aktifkanpengguna(user){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "/usahawan/"+id,
+        url: "{{ route('usahawan.post') }}",
         type:"PUT",
         data: {     
             id:id,
@@ -296,7 +306,7 @@ function tetapanpengguna(page,data){
         $("#displaydua input[name=notelefon]").val(data.notelefon);
         $("#displaydua input[name=nohp]").val(data.nohp);
         $("#displaydua input[name=email]").val(data.email);
-        $("#datausahawan").attr("action", "/usahawan/"+data.id);
+        $("#datausahawan").attr("action", "/usahawanWeb/"+data.id);
         
     }else if(page == 'dua'){
         $("#displaysatu").show();

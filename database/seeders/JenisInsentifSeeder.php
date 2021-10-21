@@ -13,6 +13,10 @@ class JenisInsentifSeeder extends Seeder
      */
     public function run()
     {
-        //
+        JenisInsentif::create([
+            'jenis_insentif' => 'JI01',
+            'nama_insentif' => 'AET (INSENTIF START-UP INDIVIDU)',
+            'status_insentif' => 'aktif'
+        ]);
     }
 }
