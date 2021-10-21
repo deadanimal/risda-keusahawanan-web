@@ -79,7 +79,7 @@ class UserSeeder extends Seeder
             'name'=> 'MAHANUM BT MAT RIPING',
             'email'=> 'mahanum@risda.gov.my',
             'password'=> Hash::make('password'),
-            'idpegawai'=>'5',
+            'idpegawai'=>'4',
             'no_kp'=>'700510000000',
             'status_pengguna'=>'1'
         ]);
