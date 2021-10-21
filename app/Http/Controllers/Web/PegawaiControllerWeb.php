@@ -47,7 +47,7 @@ class PegawaiControllerWeb extends Controller
         $pegawai = Pegawai::where('id', $request->id)->first();
         $pegawai->peranan_pegawai = $request->peranan;
         $pegawai->save();
-        header('Location: pegawai');
+        header('Location:pegawai');
         //return redirect('/pegawai');
     }
 
