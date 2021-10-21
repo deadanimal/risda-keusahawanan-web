@@ -32,12 +32,15 @@
                         .active{
                             padding-right: 5px;
                         }
+                        .dataTable-bottom{
+                            padding-top: 3vh;
+                        }
                     </style>
                     <thead>
                         <tr class="align-middle">
                             <th scope="col">Nama</th>
                             <th scope="col">No. KP</th>
-                            <th scope="col">Kawasan Usahawan</th>
+                            <th scope="col">Pusat Tanggungjawab</th>
                             <th scope="col">Aktifkan Pengguna</th>
                             <th scope="col">Kemaskini Profil</th>
                         </tr>
@@ -80,7 +83,7 @@
             </div>
             <div id="displaydua" style="display: none">
                 <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" onclick="tetapanpengguna('dua')"> 
-                    <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Back</a>
+                    <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
                 <div class="card-header" style="padding-top:2vh;">
                 <style>
                     .card-header{
@@ -200,7 +203,7 @@
                             <input class="form-control" name="email" type="text"  />
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                          <button class="btn btn-primary" type="submit">Update </button>
+                          <button class="btn btn-primary" type="submit">Kemas Kini</button>
                         </div>
                       </form>
                     </div>

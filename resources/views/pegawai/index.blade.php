@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
-                <table id="pegawaitbl">
+                <table id="pegawaitbl" style="padding-bottom:2vh;">
                     <colgroup>
                         <col span="1" style="width: 30%;">
                         <col span="1" style="width: 20%;">
@@ -31,6 +31,9 @@
                         }
                         .active{
                             padding-right: 5px;
+                        }
+                        .dataTable-bottom{
+                            padding-top: 3vh;
                         }
                     </style>
                     <thead>

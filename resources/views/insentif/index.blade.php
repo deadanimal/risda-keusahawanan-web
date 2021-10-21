@@ -28,6 +28,9 @@
                       .active{
                           padding-right: 5px;
                       }
+                      .dataTable-bottom{
+                          padding-top: 3vh;
+                      }
                   </style>
                   <thead>
                       <tr class="align-middle">

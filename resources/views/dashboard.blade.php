@@ -147,7 +147,7 @@
                     </div>
                   </a>
                   <!-- parent pages--><a class="nav-link {{  request()->routeIs('komponendash.*') ? 'active' : '' }}" href="/komponendash" role="button">
-                  <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tetapan Komponen Dashboard</span>
+                  <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tetapan Komponen</span>
                     </div>
                   </a>
                   <!-- parent pages--><a class="nav-link {{  request()->routeIs('audittrail.*') ? 'active' : '' }}" href="/audittrail" role="button">
@@ -168,10 +168,7 @@
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Pelaporan</span>
                     </div>
                   </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('audittrail.*') ? 'active' : '' }}" href="/audittrail" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Audit Trail</span>
-                    </div>
-                  </a>
+                  
                   <ul class="nav collapse false" id="forms">
                     <li class="nav-item"><a class="nav-link dropdown-indicator" href="#basic" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Basic</span>
