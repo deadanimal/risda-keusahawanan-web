@@ -17,7 +17,7 @@ class CreateInsentifsTable extends Migration
             $table->id();
 
             $table->integer('id_pengguna');
-            $table->integer('id_jenis_insentif');
+            $table->string('id_jenis_insentif');
 
             $table->string('tahun_terima_insentif',4);
             $table->double('nilai_insentif',30,2);

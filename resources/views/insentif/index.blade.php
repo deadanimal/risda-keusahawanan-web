@@ -8,7 +8,7 @@
               <table id="insentiftbl">
                   <colgroup>
                       <col span="1" style="width: 50%;">
-                      <col span="1" style="width: 30%;">
+                      <col span="1" style="width: 35%;">
                       <col span="1" style="width: 20%;">
                    </colgroup>
                   <style>
@@ -33,7 +33,7 @@
                       <tr class="align-middle">
                           <th scope="col">Nama</th>
                           <th scope="col">No. KP</th>
-                          <th scope="col">Tetapan Insentif</th>
+                          <th scope="col">Kemaskini Insentif</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -42,7 +42,7 @@
                           <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
                           <td class="text-nowrap"><label class="form-check-label">{{$user->nokadpengenalan}}</label></td>
                           <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="window.location.href='/insentifdetail/{{$user->id}}'">
-                              <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Tambah Insentif
+                              <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Kemaskini
                           </button></td>
                       </tr>
                       @endforeach

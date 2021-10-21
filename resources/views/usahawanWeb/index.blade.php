@@ -39,7 +39,7 @@
                             <th scope="col">No. KP</th>
                             <th scope="col">Kawasan Usahawan</th>
                             <th scope="col">Aktifkan Pengguna</th>
-                            <th scope="col">Tetapan Profil</th>
+                            <th scope="col">Kemaskini Profil</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,7 +61,7 @@
                                 </div>
                             </td>
                             <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="tetapanpengguna('satu',{{$user}})">
-                                <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Tetapan Profil
+                                <span class="me-1" data-fa-transform="shrink-3"></span>Kemaskini
                             </button></td>
                         </tr>
                         @endforeach
@@ -183,10 +183,10 @@
                             <label class="form-label">Kategori</label>
                             <input class="form-control" name="id_kategori_usahawan" type="text"  />
                         </div>
-                        <div class="col-lg-6">
+                        {{-- <div class="col-lg-6">
                             <label class="form-label">Gambar</label>
                             <input class="form-control" name="gambar_url" type="text"  />
-                        </div>
+                        </div> --}}
                         <div class="col-lg-6">
                             <label class="form-label">notelefon</label>
                             <input class="form-control" name="notelefon" type="text"  />

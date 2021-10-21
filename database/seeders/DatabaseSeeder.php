@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
             PerniagaanSeeder::class,
             SyarikatSeeder::class,
             PekebunSeeder::class,
-            KategoriAliranSeeder::class
+            KategoriAliranSeeder::class,
+            PegawaiSeeder::class,
+            JenisInsentifSeeder::class
         ]);
     }
 }

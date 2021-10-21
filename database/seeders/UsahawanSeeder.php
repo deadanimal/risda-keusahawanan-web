@@ -45,5 +45,37 @@ class UsahawanSeeder extends Seeder
             'modifiedby_id'=>'1',
             'modifiedby_kod_PT'=>'2',
         ]);
+
+        Usahawan::create([
+            'Kod_PT'=>'1',
+            'namausahawan'=>'A.RAHMAN BIN ADAM',
+            'nokadpengenalan'=>'600606015813',
+            'tarikhlahir'=>'06-06-20',
+            'U_Jantina_ID'=>'1',
+            'U_Bangsa_ID'=>'2',
+            'statusperkahwinan'=>'BERKAHWIN',
+            'U_Pendidikan_ID'=>'3',
+            'alamat1'=>'KPS 23, PTD 2172',
+            'alamat2'=>'KG.SG.KUALI, SERKAT',
+            'alamat3'=>'',
+            'bandar'=>'PONTIAN',
+            'poskod'=>'82300',
+            'U_Negeri_ID'=>'JOHOR',
+            'U_Daerah_ID'=>'PONTIAN',
+            'U_Mukim_ID'=>'7',
+            'U_Parlimen_ID'=>'8',
+            'U_Dun_ID'=>'9',
+            'U_Kampung_ID'=>'3',
+            'U_Seksyen_ID'=>'6',
+            'id_kategori_usahawan'=>'6',
+            // 'gambar_url'=>'user1',
+            'notelefon'=>'0987654321',
+            'nohp'=>'1234567890',
+            'email'=>'a.rahmanadam@yahoo.com',
+            'createdby_id'=>'1',
+            'createdby_kod_PT'=>'2',
+            'modifiedby_id'=>'1',
+            'modifiedby_kod_PT'=>'2',
+        ]);
     }
 }

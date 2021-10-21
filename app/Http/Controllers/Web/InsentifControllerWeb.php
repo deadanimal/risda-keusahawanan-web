@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Usahawan;
 use App\Models\Insentif;
+use App\Models\JenisInsentif;
 
 class InsentifControllerWeb extends Controller
 {
@@ -21,11 +22,14 @@ class InsentifControllerWeb extends Controller
     public function show($id)
     {
         $insentifs = Insentif::where('id_pengguna', $id)->get();
+        $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
+            //where('status_insentif', 'aktif')->get();
         //dd($insentifs);
         return view('insentif.insentifdetail'
         ,[
             'insentifs'=>$insentifs,
-            'id_pengguna'=>$id
+            'id_pengguna'=>$id,
+            'ddInsentif'=>$ddInsentif
         ]
         );
     }

@@ -59,14 +59,7 @@
                                         <option value="{{ $items->peranan_id }}" {{ ( $items->peranan_id == $user->peranan_pegawai) ? 'selected' : '' }}> 
                                             {{ $items->kod_peranan }} 
                                         </option>
-                                    @endforeach   
-                                    {{-- <option value="1">Super Admin</option>
-                                    <option value="2">BPU</option>
-                                    <option value="3">PUN</option>
-                                    <option value="4">PPP</option>
-                                    <option value="5">PUD</option>
-                                    <option value="6">KPUN</option>
-                                    <option value="7">KPUD</option> --}}
+                                    @endforeach
                                 </select>
                             </td>
                             <td class="align-middle text-nowrap" >

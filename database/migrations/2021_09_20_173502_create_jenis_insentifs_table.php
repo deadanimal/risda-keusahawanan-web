@@ -15,8 +15,8 @@ class CreateJenisInsentifsTable extends Migration
     {
         Schema::create('jenis_insentifs', function (Blueprint $table) {
             $table->id();
-
-            $table->string('nama_insentif',50);
+            $table->string('id_jenis_insentif',12);
+            $table->string('nama_insentif',100);
             $table->string('status',12);
 
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateJenisInsentifsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis__insentifs');
+        Schema::dropIfExists('jenis_insentifs');
     }
 }

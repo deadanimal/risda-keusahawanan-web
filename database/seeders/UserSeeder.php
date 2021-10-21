@@ -28,21 +28,11 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name'=> 'user2',
-            'email'=> 'user2@gmail.com',
+            'name'=> 'A.RAHMAN BIN ADAM',
+            'email'=> 'a.rahmanadam@yahoo.com',
             'password'=> Hash::make('password'),
-            'idpegawai'=>'2',
-            'no_kp'=>'123456789013',
-            'status_pengguna'=>'1'
-            
-        ]);
-
-        User::create([
-            'name'=> 'user3',
-            'email'=> 'user3@gmail.com',
-            'password'=> Hash::make('password'),
-            'idpegawai'=>'4',
-            'no_kp'=>'123456789014',
+            'usahawanid'=>'2',
+            'no_kp'=>'600606015813',
             'status_pengguna'=>'1'
             
         ]);
@@ -55,6 +45,43 @@ class UserSeeder extends Seeder
             'no_kp'=>'123456789015',
             'status_pengguna'=>'1'
             
+        ]);
+
+        User::create([
+            'name'=> 'RUZLAN BIN ABDUL RAHMAN',
+            'email'=> 'ruzlan@risda.gov.my',
+            'password'=> Hash::make('password'),
+            'idpegawai'=>'1',
+            'no_kp'=>'123456789015',
+            'status_pengguna'=>'1'
+        ]);
+
+        User::create([
+            'name'=> 'ABD ZAHID BIN HAJI AHMAD',
+            'email'=> 'abdzahid@risda.gov.my',
+            'password'=> Hash::make('password'),
+            'idpegawai'=>'2',
+            'no_kp'=>'670210000000',
+            'status_pengguna'=>'1'
+        ]);
+
+        User::create([
+            'name'=> 'ABDUL HALIM BIN ABU HASSAN',
+            'email'=> 'a.halim@risda.gov.my',
+            'password'=> Hash::make('password'),
+            'idpegawai'=>'3',
+            'no_kp'=>'700510000000',
+            'status_pengguna'=>'1'
+        ]);
+
+
+        User::create([
+            'name'=> 'MAHANUM BT MAT RIPING',
+            'email'=> 'mahanum@risda.gov.my',
+            'password'=> Hash::make('password'),
+            'idpegawai'=>'5',
+            'no_kp'=>'700510000000',
+            'status_pengguna'=>'1'
         ]);
     }
 }

@@ -26,8 +26,17 @@
                     <input name="id_pengguna" style="display: none;" type="text" value="{{$id_pengguna}}"/>
                     <div class="row gx-2">
                       <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="field-type">Jenis Insentif</label>
-                        <select class="form-select form-select-sm" name="id_jenis_insentif" id="field-type" value="{{$insentif->id_jenis_insentif}}">
+                        <label class="form-label" for="field-type">Jenis Insentif</label> 
+                        <select class="form-select form-select-sm" name="id_jenis_insentif" placeholder="Jenis Insentif">
+                          <option value="">Jenis Insentif</option>
+                          @foreach ($ddInsentif as $items)
+                              <option value="{{ $items->id_jenis_insentif }}" {{ ( $items->id_jenis_insentif == $insentif->id_jenis_insentif) ? 'selected' : '' }}> 
+                                  {{ $items->nama_insentif }} 
+                              </option>
+                          @endforeach
+                        </select>
+
+                        {{-- <select class="form-select form-select-sm" name="id_jenis_insentif" id="field-type" value="{{$insentif->id_jenis_insentif}}">
                           <option value="1">Select a type</option>
                           <option value="2">Text</option>
                           <option value="3">Checkboxes</option>
@@ -36,7 +45,7 @@
                           <option value="6">Date</option>
                           <option value="7">Dropdowns</option>
                           <option value="8">File</option>
-                        </select>
+                        </select> --}}
                       </div>
                       <div class="col-sm-6 mb-3">
                         <label class="form-label" for="field-name">Nilai Insentif</label>
@@ -64,7 +73,15 @@
                   <div class="row gx-2">
                     <div class="col-sm-6 mb-3">
                       <label class="form-label" for="field-type">Jenis Insentif</label>
-                      <select class="form-select form-select-sm" name="id_jenis_insentif" id="field-type">
+                      <select class="form-select form-select-sm" name="id_jenis_insentif" placeholder="Jenis Insentif">
+                        <option value="">Jenis Insentif</option>
+                        @foreach ($ddInsentif as $items)
+                            <option value="{{ $items->id_jenis_insentif }}"> 
+                                {{ $items->nama_insentif }} 
+                            </option>
+                        @endforeach
+                      </select>
+                      {{-- <select class="form-select form-select-sm" name="id_jenis_insentif" id="field-type">
                         <option value="1">Select a type</option>
                         <option value="2">Text</option>
                         <option value="3">Checkboxes</option>
@@ -73,7 +90,7 @@
                         <option value="6">Date</option>
                         <option value="7">Dropdowns</option>
                         <option value="8">File</option>
-                      </select>
+                      </select> --}}
                     </div>
                     <div class="col-sm-6 mb-3">
                       <label class="form-label" for="field-name">Nilai Insentif (RM)</label>

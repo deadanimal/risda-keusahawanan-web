@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jenis_Insentif extends Model
+class JenisInsentif extends Model
 {
     use HasFactory;
 }
