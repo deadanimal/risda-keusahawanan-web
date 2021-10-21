@@ -19,21 +19,25 @@ class KategoriAliranSeeder extends Seeder
             'nama_kategori_aliran' => 'JUALAN/PEROLEHAN',
             'status_kategori_aliran' => 'aktif'
         ]);
+
         KategoriAliran::create([
             'jenis_aliran' => 'tunai_masuk',
             'nama_kategori_aliran' => 'DEPOSIT JUALAN',
             'status_kategori_aliran' => 'aktif'
         ]);
+
         KategoriAliran::create([
             'jenis_aliran' => 'tunai_masuk',
             'nama_kategori_aliran' => 'PULANGAN BELIAN',
             'status_kategori_aliran' => 'aktif'
         ]);
+
         KategoriAliran::create([
             'jenis_aliran' => 'tunai_masuk',
             'nama_kategori_aliran' => 'STOK AKHIR',
             'status_kategori_aliran' => 'aktif'
         ]);
+        
         KategoriAliran::create([
             'jenis_aliran' => 'tunai_masuk',
             'nama_kategori_aliran' => 'HASIL SEWAAN',
@@ -112,7 +116,7 @@ class KategoriAliranSeeder extends Seeder
 
         KategoriAliran::create([
             'jenis_aliran' => 'tunai_keluar',
-            'nama_kategori_aliran' => 'KWASP/SOCSO',
+            'nama_kategori_aliran' => 'KWSP/SOCSO',
             'status_kategori_aliran' => 'aktif'
         ]);
 
@@ -154,8 +158,16 @@ class KategoriAliranSeeder extends Seeder
 
         KategoriAliran::create([
             'jenis_aliran' => 'tunai_keluar',
+            'nama_kategori_aliran' => 'PEMBAYARAN PINJAMAN',
+            'status_kategori_aliran' => 'aktif'
+        ]);
+
+        KategoriAliran::create([
+            'jenis_aliran' => 'tunai_keluar',
             'nama_kategori_aliran' => 'BAYARAN LAIN',
             'status_kategori_aliran' => 'aktif'
         ]);
+
+        
     }
 }

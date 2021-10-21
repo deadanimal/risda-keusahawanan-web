@@ -10,7 +10,7 @@ class AliranController extends Controller
 {
     public function index(Request $request)
     {
-        $aliran = Aliran::all();
+        $aliran = Aliran::orderBy('created_at', 'desc')->get();
         // $user = $request->user();
 
         // $aliran = Aliran::where('id_pengguna', $request->id)->get();
