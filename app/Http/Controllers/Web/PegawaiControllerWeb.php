@@ -18,7 +18,7 @@ class PegawaiControllerWeb extends Controller
                 $status = User::where('idpegawai', $pegawai_L->id)->first();
                 $temp = isset($status->status_pengguna);
                 //$temp = $status['status_pengguna'];
-                $temp = $status->status_pengguna;
+                //$temp = $status->status_pengguna;
                 $pegawai_L->status_pengguna = $temp;
             }
         }
