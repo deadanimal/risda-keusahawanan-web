@@ -14,11 +14,11 @@ class PegawaiControllerWeb extends Controller
         $pegawai = Pegawai::All();
         $ddPeranan = Peranan::All();
         foreach ($pegawai as $pegawai_L) {
-            $status = User::where('idpegawai', $pegawai_L->id)->first();
-            //dd($status->status_pengguna);
-            $temp = $status->status_pengguna;
-            //$temp = $status['status_pengguna'];
-            $pegawai_L->status_pengguna = $temp;
+            if($pegawai_L->id != null){
+                $status = User::where('idpegawai', $pegawai_L->id)->first();
+                $temp = $status['status_pengguna'];
+                $pegawai_L->status_pengguna = $temp;
+            }
         }
         //$status = User::select('profil_status')->where('idpegawai', $pegawai->id)->first();
         //$ddPeranan = Peranan::select('peranan_id', 'kod_peranan')->get();
