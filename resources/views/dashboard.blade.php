@@ -29,7 +29,7 @@
     <script src="../../../assets/is/is.min.js"></script>
     <script src="../../../assets/fontawesome/all.min.js"></script>
     <script src="../../../assets/lodash/lodash.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    {{-- <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script> --}}
     <script src="../../../assets/list.js/list.min.js"></script>
     <script src="../../../js/theme.js"></script>
     <script src="../../../js/jquery-3.6.0.min.js"></script> 
@@ -134,26 +134,54 @@
                       <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                   </div>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('pegawai.*') ? 'active' : '' }}" href="/pegawai" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Pegawai</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('usahawanWeb.*') ? 'active' : '' }}" href="/usahawanWeb" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Usahawan</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('insentif.*') ? 'active' : '' }}" href="/insentif" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tambah Insentif</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('komponendash.*') ? 'active' : '' }}" href="/komponendash" role="button">
-                  <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tetapan Komponen</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('audittrail.*') ? 'active' : '' }}" href="/audittrail" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Audit Trail</span>
-                    </div>
-                  </a>
+                  @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4)
+                    <a class="nav-link {{  request()->routeIs('pegawai.*') ? 'active' : '' }}" href="/pegawai" role="button">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Pegawai</span>
+                      </div>
+                    </a>
+                    <a class="nav-link {{  request()->routeIs('usahawanWeb.*') ? 'active' : '' }}" href="/usahawanWeb" role="button">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Usahawan</span>
+                      </div>
+                    </a>
+                  @endif
+                  @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5 || Auth::user()->role == 6)
+                    <a class="nav-link {{  request()->routeIs('insentif.*') ? 'active' : '' }}" href="/insentif" role="button">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tambah Insentif</span>
+                      </div>
+                    </a>
+                  @endif
+                  @if (Auth::user()->role == 1)
+                    <a class="nav-link dropdown-indicator" href="#komponen" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('kategorialiran.*') || request()->routeIs('tindakanlawatan.*') || request()->routeIs('jenisinsentif.*')
+                    || request()->routeIs('kategoriusahawan.*') ? 'true' : 'false' }}" aria-controls="komponen">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Tetapan Komponen</span>
+                      </div>
+                    </a>
+                    <ul class="nav collapse {{ request()->routeIs('kategorialiran.*') || request()->routeIs('tindakanlawatan.*') || request()->routeIs('jenisinsentif.*')
+                      || request()->routeIs('kategoriusahawan.*') ? 'show' : 'collapse' }}" id="komponen">
+                        {{-- show --}}
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('kategorialiran.*') ? 'active' : '' }}" href="/kategorialiran">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori Aliran</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('tindakanlawatan.*') ? 'active' : '' }}" href="/tindakanlawatan">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Tindakan Lawatan</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('jenisinsentif.*') ? 'active' : '' }}" href="/jenisinsentif">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jenis Insentif</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('kategoriusahawan.*') ? 'active' : '' }}" href="/kategoriusahawan">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori Usahawan</span>
+                          </div></a>
+                        </li>
+                      </ul>
+                      <a class="nav-link {{  request()->routeIs('audittrail.*') ? 'active' : '' }}" href="/audittrail" role="button">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Audit Trail</span>
+                        </div>
+                      </a>
+                  @endif 
+                  
                 </li>
                 <li class="nav-item">
                   <!-- label-->
@@ -298,13 +326,13 @@
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
-              {{-- <li class="nav-item">
+              <li class="nav-item">
                 <div class="theme-control-toggle fa-icon-wait px-2">
                   <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle" type="checkbox" data-theme-control="theme" value="dark" />
                   <label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to light theme"><span class="fas fa-sun fs-0"></span></label>
                   <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to dark theme"><span class="fas fa-moon fs-0"></span></label>
                 </div>
-              </li> --}}
+              </li>
               
               <li class="nav-item dropdown">
                 <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait" id="navbarDropdownNotification" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-bell" data-fa-transform="shrink-6" style="font-size: 33px;"></span></a>
@@ -325,7 +353,7 @@
                           <a class="notification notification-flush notification-unread" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-2xl me-3">
-                                <img class="rounded-circle" src="../assets/img/team/1-thumb.png" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -357,7 +385,7 @@
                           <a class="notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-2xl me-3">
-                                <img class="rounded-circle" src="../assets/img/icons/weather-sm.jpg" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -373,7 +401,7 @@
                           <a class="border-bottom-0 notification-unread  notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-xl me-3">
-                                <img class="rounded-circle" src="../assets/img/logos/oxford.png" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -389,7 +417,7 @@
                           <a class="border-bottom-0 notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-xl me-3">
-                                <img class="rounded-circle" src="../assets/img/team/10.jpg" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>

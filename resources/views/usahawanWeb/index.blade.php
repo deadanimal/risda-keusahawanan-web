@@ -116,75 +116,75 @@
                         @method("PUT")
                         <div class="col-lg-12">
                           <label class="form-label">Nama Usahawan</label>
-                          <input class="form-control" name="namausahawan" type="text"/>
+                          <input class="form-control usahawanfield" name="namausahawan"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" >No Kad Pengenalan</label>
-                          <input class="form-control" name="nokadpengenalan" type="text"/>
+                          <input class="form-control usahawanfield" name="nokadpengenalan"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" for="tarikhlahir">Tarikh Lahir</label>
-                          <input class="form-control" name="tarikhlahir" type="text"/>
+                          <input class="form-control usahawanfield" name="tarikhlahir"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" >Jantina</label>
-                          <input class="form-control" name="U_Jantina_ID" type="text"/>
+                          <input class="form-control usahawanfield" name="U_Jantina_ID"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" >Bangsa</label>
-                          <input class="form-control" name="U_Bangsa_ID" type="text"/>
+                          <input class="form-control usahawanfield" name="U_Bangsa_ID"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label">Status Perkahwinan</label>
-                          <input class="form-control" name="statusperkahwinan" type="text"/>
+                          <input class="form-control usahawanfield" name="statusperkahwinan"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label" >Pendidikan</label>
-                            <input class="form-control" name="U_Pendidikan_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Pendidikan_ID"   type="text"  />
                         </div>
                         <div class="col-lg-12">
                             <label class="form-label">Alamat</label>
-                            <input class="form-control" name="alamat1" type="text"  />
+                            <input class="form-control usahawanfield" name="alamat1"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Bandar</label>
-                            <input class="form-control" name="bandar" type="text"  />
+                            <input class="form-control usahawanfield" name="bandar"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Poskod</label>
-                            <input class="form-control" name="poskod" type="text"  />
+                            <input class="form-control usahawanfield" name="poskod"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Negeri</label>
-                            <input class="form-control" name="U_Negeri_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Negeri_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Daerah</label>
-                            <input class="form-control" name="U_Daerah_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Daerah_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Mukim</label>
-                            <input class="form-control" name="U_Mukim_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Mukim_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Parlimen</label>
-                            <input class="form-control" name="U_Parlimen_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Parlimen_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Dun</label>
-                            <input class="form-control" name="U_Dun_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Dun_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Kampung</label>
-                            <input class="form-control" name="U_Kampung_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Kampung_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Seksyen</label>
-                            <input class="form-control" name="U_Seksyen_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Seksyen_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Kategori</label>
-                            <input class="form-control" name="id_kategori_usahawan" type="text"  />
+                            <input class="form-control usahawanfield" name="id_kategori_usahawan"   type="text"  />
                         </div>
                         {{-- <div class="col-lg-6">
                             <label class="form-label">Gambar</label>
@@ -192,15 +192,15 @@
                         </div> --}}
                         <div class="col-lg-6">
                             <label class="form-label">notelefon</label>
-                            <input class="form-control" name="notelefon" type="text"  />
+                            <input class="form-control usahawanfield" name="notelefon" id="" type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">No Hp</label>
-                            <input class="form-control" name="nohp" type="text"  />
+                            <input class="form-control usahawanfield" name="nohp"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Email</label>
-                            <input class="form-control" name="email" type="text"  />
+                            <input class="form-control usahawanfield" name="email"   type="text"  />
                         </div>
                         <div class="col-12 d-flex justify-content-end">
                           <button class="btn btn-primary" type="submit">Kemas Kini</button>
@@ -233,7 +233,7 @@ $( document ).ready(function() {
     const dataTableBasic = new simpleDatatables.DataTable("#penggunatbl", {
           searchable: true,
           fixedHeight: true,
-          sortable: false
+          sortable: true
       });
     //$('#penggunatbl').DataTable(); 
     GetPengguna();
@@ -286,8 +286,10 @@ function tetapanpengguna(page,data){
     if(page == 'satu'){
         $("#displaysatu").hide();
         $("#displaydua").show();
-        console.log(data);
-        $("#displaydua input[name=namausahawan]").val(data.namausahawan);
+
+        var role = <?php echo Auth::user()->role ?>;
+
+        $("#displaydua input[name=namausahawan]").prop('disabled', true);
         $("#displaydua input[name=nokadpengenalan]").val(data.nokadpengenalan);
         $("#displaydua input[name=tarikhlahir]").val(data.tarikhlahir);
         $("#displaydua input[name=U_Jantina_ID]").val(data.U_Jantina_ID);
@@ -310,6 +312,17 @@ function tetapanpengguna(page,data){
         $("#displaydua input[name=nohp]").val(data.nohp);
         $("#displaydua input[name=email]").val(data.email);
         $("#datausahawan").attr("action", "/usahawanWeb/"+data.id);
+
+        var x = document.getElementsByClassName("usahawanfield");       
+        if (role == 1 || role == 7){
+            for (var i = 0; i < x.length; i++) {
+                x[i].disabled = false;
+            }        
+        }else{
+            for (var i = 0; i < x.length; i++) {
+                x[i].disabled = true;
+            }
+        }
         
     }else if(page == 'dua'){
         $("#displaysatu").show();

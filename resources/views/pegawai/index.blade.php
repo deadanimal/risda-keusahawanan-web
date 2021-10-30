@@ -3,7 +3,7 @@
 <script src="../../../js/jquery-3.6.0.min.js"> </script>
 @section('content')
 <div class="card">
-    <div class="card-body overflow-hidden p-lg-6">
+    <div class="card-body overflow-hidden p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
         <div class="row align-items-center">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
@@ -39,6 +39,8 @@
                     <thead>
                         <tr class="align-middle">
                             <th scope="col">Nama</th>
+                            {{-- <th scope="col">Negeri</th>
+                            <th scope="col">Daerah</th> --}}
                             <th scope="col">Mukim</th>
                             <th scope="col">Peranan</th>
                             <th scope="col">Aktifkan Pengguna</th>
@@ -90,7 +92,7 @@ $( document ).ready(function() {
     const dataTableBasic = new simpleDatatables.DataTable("#pegawaitbl", {
         searchable: true,
         fixedHeight: true,
-        sortable: false
+        sortable: true
     });
     //$('#pegawaitbl').DataTable();
     GetPengguna();

@@ -8,6 +8,10 @@ use App\Http\Controllers\Web\InsentifControllerWeb;
 use App\Http\Controllers\Web\AuditTrailControllerWeb;
 use App\Http\Controllers\Web\KomponenDashControllerWeb;
 use App\Http\Controllers\Web\LandingControllerWeb;
+use App\Http\Controllers\Web\KategoriAliranControllerWeb;
+use App\Http\Controllers\Web\TindakanLawatanControllerWeb;
+use App\Http\Controllers\Web\JenisInsentifControllerWeb;
+use App\Http\Controllers\Web\KategoriUsahawanControllerWeb;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,11 +32,18 @@ Route::resource('/pegawai', PegawaiControllerWeb::class);
 
 Route::resource('/usahawanWeb', UsahawanControllerWeb::class);
 Route::put('usahawanPost', [UsahawanControllerWeb::class, 'usahawanPost'])->name('usahawan.post');
-Route::resource('/audittrail', AuditTrailControllerWeb::class);
+
 Route::resource('/insentif', InsentifControllerWeb::class);
-//Route::put('insentifdetailPost', [InsentifControllerWeb::class, 'insentifdetailPost'])->name('insentifdetail.post');
 Route::resource('/insentifdetail', InsentifControllerWeb::class);
 
 Route::resource('/komponendash', KomponenDashControllerWeb::class);
+Route::resource('/kategorialiran', KategoriAliranControllerWeb::class);
+Route::resource('/tindakanlawatan', TindakanLawatanControllerWeb::class);
+Route::put('tindakanlawatanPost', [TindakanLawatanControllerWeb::class, 'tindakanlawatanPost'])->name('tindakanlawatan.post');
+
+Route::resource('/jenisinsentif', JenisInsentifControllerWeb::class);
+Route::resource('/kategoriusahawan', KategoriUsahawanControllerWeb::class);
+
+Route::resource('/audittrail', AuditTrailControllerWeb::class);
 Route::resource('/landing', LandingControllerWeb::class);
 require __DIR__.'/auth.php';

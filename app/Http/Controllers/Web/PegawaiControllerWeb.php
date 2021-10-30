@@ -42,6 +42,7 @@ class PegawaiControllerWeb extends Controller
         //dd($request->status);
         $user = User::where('idpegawai', $request->id)->first();
         $user->status_pengguna = $request->status;
+        $user->role = $request->peranan;
         $user->save();
 
         $pegawai = Pegawai::where('id', $request->id)->first();

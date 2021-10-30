@@ -131,54 +131,54 @@ class JenisInsentifSeeder extends Seeder
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI20',
             'nama_insentif' => 'PROGRAM PEMASARAN ONLINE',
-            'status' => 'aktif'
+            'status' => 'tak aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI20A',
-            'nama_insentif' => 'SHOPPEB41',
+            'nama_insentif' => 'PROGRAM PEMASARAN ONLINE - SHOPPE',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI20B',
-            'nama_insentif' => 'LAZADAB42',
+            'nama_insentif' => 'PROGRAM PEMASARAN ONLINE - LAZADA',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI20C',
-            'nama_insentif' => 'LAIN-LAIN',
+            'nama_insentif' => 'PROGRAM PEMASARAN ONLINE - LAIN-LAIN',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI21',
             'nama_insentif' => 'PROGRAM PEMASARAN DOMESTIK',
-            'status' => 'aktif'
+            'status' => 'tak aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI21A',
-            'nama_insentif' => 'PETRONASB46',
+            'nama_insentif' => 'PROGRAM PEMASARAN DOMESTIK - PETRONAS',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI21B',
-            'nama_insentif' => 'PETRONB47',
+            'nama_insentif' => 'PROGRAM PEMASARAN DOMESTIK - PETRON',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI21C',
-            'nama_insentif' => 'HYPERMARKETB48',
+            'nama_insentif' => 'PROGRAM PEMASARAN DOMESTIK - HYPERMARKET',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI21D',
-            'nama_insentif' => 'LAIN-LAIN',
+            'nama_insentif' => 'PROGRAM PEMASARAN DOMESTIK - LAIN-LAIN',
             'status' => 'aktif'
         ]);
 
@@ -191,42 +191,42 @@ class JenisInsentifSeeder extends Seeder
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI23',
             'nama_insentif' => 'PROGRAM KPLB',
-            'status' => 'aktif'
+            'status' => 'tak aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI23A',
-            'nama_insentif' => 'PPP',
+            'nama_insentif' => 'PROGRAM KPLB - PPP',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI23B',
-            'nama_insentif' => 'SPKLBB',
+            'nama_insentif' => 'PROGRAM KPLB - SPKLBB',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI23C',
-            'nama_insentif' => 'RMEB',
+            'nama_insentif' => 'PROGRAM KPLB - RMEB',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI23D',
-            'nama_insentif' => 'START RIGHT',
+            'nama_insentif' => 'PROGRAM KPLB - START RIGHT',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI23E',
-            'nama_insentif' => 'RBO',
+            'nama_insentif' => 'PROGRAM KPLB - RBO',
             'status' => 'aktif'
         ]);
 
         JenisInsentif::create([
             'id_jenis_insentif' => 'JI23F',
-            'nama_insentif' => 'DESAMALL',
+            'nama_insentif' => 'PROGRAM KPLB - DESAMALL',
             'status' => 'aktif'
         ]);
     }
