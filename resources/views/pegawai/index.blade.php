@@ -3,15 +3,17 @@
 <script src="../../../js/jquery-3.6.0.min.js"> </script>
 @section('content')
 <div class="card">
-    <div class="card-body overflow-hidden p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
+    <div class="card-body p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
         <div class="row align-items-center">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
                 <table id="pegawaitbl" style="padding-bottom:2vh;">
                     <colgroup>
-                        <col span="1" style="width: 30%;">
-                        <col span="1" style="width: 20%;">
-                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 21%;">
+                        <col span="1" style="width: 15%;">
+                        <col span="1" style="width: 14%;">
+                        <col span="1" style="width: 15%;">
+                        <col span="1" style="width: 15%;">
                         <col span="1" style="width: 10%;">
                         <col span="1" style="width: 10%;">
                      </colgroup>
@@ -39,8 +41,8 @@
                     <thead>
                         <tr class="align-middle">
                             <th scope="col">Nama</th>
-                            {{-- <th scope="col">Negeri</th>
-                            <th scope="col">Daerah</th> --}}
+                            <th scope="col">Negeri</th>
+                            <th scope="col">Daerah</th>
                             <th scope="col">Mukim</th>
                             <th scope="col">Peranan</th>
                             <th scope="col">Aktifkan Pengguna</th>
@@ -51,14 +53,16 @@
                         @foreach ($pegawai as $user)
                         <tr class="align-middle">
                             <td class="text-nowrap"><label class="form-check-label">{{$user->nama}}</label></td>
-                            <td class="text-nowrap"><select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                            <td class="text-nowrap"><label class="form-check-label">{{$user->nopekerja}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$user->nopekerja}}</label></td>
+                            <td class="text-nowrap"><select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:8rem;">
                                 <option selected="">Mukim</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select></td>
                             <td>
-                                <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                                <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:8rem;">
                                     <option value="">Peranan</option>
                                     @foreach ($ddPeranan as $items)
                                         <option value="{{ $items->peranan_id }}" {{ ( $items->peranan_id == $user->peranan_pegawai) ? 'selected' : '' }}> 

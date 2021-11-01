@@ -64,7 +64,9 @@ class UsahawanControllerWeb extends Controller
         $usahawan->email = $request->email;
         
         $usahawan->save();
-
+        echo '<script language="javascript">';
+        echo 'alert("Profil Usahawan Berjaya Di Kemaskini")';
+        echo '</script>';
         return redirect('/usahawanWeb');
     }
 

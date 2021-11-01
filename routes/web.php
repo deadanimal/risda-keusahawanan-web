@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\KategoriAliranControllerWeb;
 use App\Http\Controllers\Web\TindakanLawatanControllerWeb;
 use App\Http\Controllers\Web\JenisInsentifControllerWeb;
 use App\Http\Controllers\Web\KategoriUsahawanControllerWeb;
+use App\Http\Controllers\Web\TemuLawatanControllerWeb;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,4 +47,6 @@ Route::resource('/kategoriusahawan', KategoriUsahawanControllerWeb::class);
 
 Route::resource('/audittrail', AuditTrailControllerWeb::class);
 Route::resource('/landing', LandingControllerWeb::class);
+
+Route::resource('/temulawatan', TemuLawatanControllerWeb::class);
 require __DIR__.'/auth.php';

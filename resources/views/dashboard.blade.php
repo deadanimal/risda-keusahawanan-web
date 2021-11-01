@@ -20,8 +20,6 @@
     <link href="../../../css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="../../../css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="../../../css/user.min.css" rel="stylesheet" id="user-style-default">
-    
-    
 
     <script src="../../../assets/popper/popper.min.js"></script>
     <script src="../../../assets/bootstrap/bootstrap.min.js"></script>
@@ -29,11 +27,15 @@
     <script src="../../../assets/is/is.min.js"></script>
     <script src="../../../assets/fontawesome/all.min.js"></script>
     <script src="../../../assets/lodash/lodash.min.js"></script>
-    {{-- <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script> --}}
     <script src="../../../assets/list.js/list.min.js"></script>
     <script src="../../../js/theme.js"></script>
-    <script src="../../../js/jquery-3.6.0.min.js"></script> 
-<script src="./../../js/datatables.js"type="text/javascript"></script>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+    <script src="./../../js/datatables.js"type="text/javascript"></script>
 </head>
 <script>
       var isRTL = JSON.parse(localStorage.getItem('isRTL'));
@@ -82,49 +84,36 @@
             <div class="navbar-vertical-content scrollbar">
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                 <li class="nav-item">
-                  <!-- parent pages--><a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="dashboard">
+                  <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('temulawatan.*') ? 'true' : 'false' }}" aria-controls="dashboard">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span>
                     </div>
                   </a>
-                  <ul class="nav collapse false" id="dashboard">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span>
+                  <ul class="nav collapse {{ request()->routeIs('temulawatan.*') ? 'show' : 'collapse' }}" id="dashboard">
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('temulawatan.*') ? 'active' : '' }}" href="/temulawatan">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Temujanji Lawatan</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/analytics.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Analytics</span>
+                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#statistik" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Statistik</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/crm.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/e-commerce.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">E commerce</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/project-management.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Management</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/saas.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">SaaS</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
+                      <ul class="nav collapse false" id="statistik">
+                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/form-control.html">
+                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jantina</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/input-group.html">
+                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori Usahawan</span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </li>
+                
                 <li class="nav-item">
                   <!-- label-->
                   <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
@@ -196,114 +185,32 @@
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Pelaporan</span>
                     </div>
                   </a>
-                  
                   <ul class="nav collapse false" id="forms">
-                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#basic" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Basic</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                      <ul class="nav collapse false" id="basic">
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/form-control.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Form control</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/input-group.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Input group</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/select.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Select</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/checks.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Checks</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/range.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Range</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/layout.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Layout</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#advance" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Advance</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                      <ul class="nav collapse false" id="advance">
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/advance-select.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Advance select</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/date-picker.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Date picker</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/editor.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Editor</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/emoji-button.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Emoji button</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/file-uploader.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">File uploader</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/rating.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Rating</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                      </ul>
-                    </li>
                     <li class="nav-item"><a class="nav-link" href="../modules/forms/floating-labels.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Floating labels</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Profil</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../modules/forms/wizard.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Wizard</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pendapatan Bulanan</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Validation</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pemantauan Lawatan</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Insentif</span>
+                        </div>
+                      </a>
+                    </li>
+                  <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
+                      <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Aliran Tunai</span>
+                      </div>
+                    </a>
+                  </li>
                   </ul>
                 </li>
                 

@@ -32,7 +32,11 @@
                         <td><input class="form-control form-control-sm" name="nama_kategori_usahawan" id="field-name" type="text" value=""/></td>
                         <td><input class="form-control form-control-sm" name="jualan_usahawan_min" id="field-name" type="number" value=""/></td>
                         <td><input class="form-control form-control-sm" name="jualan_usahawan_max" id="field-name" type="number" value=""/></td>
-                        <td><input class="form-control form-control-sm" name="status_kategori_usahawan" id="field-name" type="text" value=""/></td>
+                        <td><select class="form-select form-select-sm" name="status_kategori_usahawan" aria-label=".form-select-sm example" style="display:inline-block;">
+                            <option selected=""></option>
+                            <option value="aktif">aktif</option>
+                            <option value="tak aktif">tak aktif</option>
+                        </select></td>
                         <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="submit" onclick="simpanaliran();" >Simpan </button></td>
                         </form>
                     </tr>
