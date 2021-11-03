@@ -3,9 +3,9 @@
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
       <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/insentif"> 
-        <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Back</a>
+        <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
         <div class="row align-items-center">
-            <h3 class="text" style="padding-bottom:20px;color:#00A651;">Insentif Usahawan</h3>
+            <h3 class="text" style="padding-bottom:20px;color:#00A651;padding-top:3vh;">Insentif Usahawan</h3>
             
               @foreach ($insentifs as $insentif)
               <div class="card-body bg-light">

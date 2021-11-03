@@ -23,7 +23,7 @@ class CreatePeranansTable extends Migration
             array(
                 [
                     'peranan_id' => '1',
-                    'kod_peranan' => 'SA',
+                    'kod_peranan' => 'Super Admin',
                     'nama_peranan' => 'Super Admin',
                 ],
                 [

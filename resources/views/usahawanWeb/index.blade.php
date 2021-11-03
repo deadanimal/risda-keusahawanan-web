@@ -1,9 +1,10 @@
 @extends('dashboard')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script src="../../../js/jquery-3.6.0.min.js"> </script>
+
 @section('content')
 <div class="card">
-    <div class="card-body overflow-hidden p-lg-6">
+    <div class="card-body overflow-hidden p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
         <div class="row align-items-center">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Usahawan</h3>
@@ -39,7 +40,7 @@
                     <thead>
                         <tr class="align-middle">
                             <th scope="col">Nama</th>
-                            <th scope="col">No. KP</th>
+                            <th scope="col">Negeri</th>
                             <th scope="col">Pusat Tanggungjawab</th>
                             <th scope="col">Aktifkan Pengguna</th>
                             <th scope="col">Kemaskini Profil</th>
@@ -50,7 +51,7 @@
                         <input style="display: none;" type="text" name="user" value="{{$user->id}}"/>
                         <tr class="align-middle">
                             <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$user->nokadpengenalan}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$user->U_Negeri_ID}}</label></td>
                             <td class="text-nowrap"><select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
                                 <option selected="">Kawasan</option>
                                 <option value="1">One</option>
@@ -84,7 +85,7 @@
             <div id="displaydua" style="display: none">
                 <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" onclick="tetapanpengguna('dua')"> 
                     <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
-                <div class="card-header" style="padding-top:2vh;">
+                <div class="card-header" style="padding-top:4vh;">
                 <style>
                     .card-header{
                         margin-top: -1.0rem;
@@ -99,7 +100,7 @@
                                     <h3 class="text" style="padding-bottom:20px;color:#00A651;padding:10px 0px 0px 20px;margin-top:2rem">Kemaskini Usahawan</h3>
                                 </div>
                               </div>
-                              <div class="avatar avatar-5xl avatar-profile shadow-sm img-thumbnail rounded-circle">
+                              <div class="avatar avatar-5xl avatar-profile shadow-sm img-thumbnail rounded-circle" style="position: relative !important;">
                                 <div class="h-100 w-100 rounded-circle overflow-hidden position-relative"> <img src="../../assets/img/team/2.jpg" width="200" alt="" data-dz-thumbnail="data-dz-thumbnail" />
                                   <input class="d-none" id="profile-image" type="file" name="gambarusahawan"/>
                                   {{-- <label class="mb-0 overlay-icon d-flex flex-center" for="profile-image"><span class="bg-holder overlay overlay-0"></span><span class="z-index-1 text-white dark__text-white text-center fs--1"><span class="fas fa-camera"></span><span class="d-block">Update</span></span></label> --}}
@@ -116,94 +117,108 @@
                         @method("PUT")
                         <div class="col-lg-12">
                           <label class="form-label">Nama Usahawan</label>
-                          <input class="form-control" name="namausahawan" type="text"/>
+                          <input class="form-control usahawanfield" name="namausahawan"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" >No Kad Pengenalan</label>
-                          <input class="form-control" name="nokadpengenalan" type="text"/>
+                          <input class="form-control usahawanfield" name="nokadpengenalan"   type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label" >No. Usahawan</label>
+                            <input class="form-control usahawanfield" name="U_Pendidikan_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" for="tarikhlahir">Tarikh Lahir</label>
-                          <input class="form-control" name="tarikhlahir" type="text"/>
+                          <input class="form-control usahawanfield" name="tarikhlahir" id="tarikhlahirid" type="text"/>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" >Jantina</label>
-                          <input class="form-control" name="U_Jantina_ID" type="text"/>
+                          <input class="form-control usahawanfield" name="U_Jantina_ID"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" >Bangsa</label>
-                          <input class="form-control" name="U_Bangsa_ID" type="text"/>
+                          <input class="form-control usahawanfield" name="U_Bangsa_ID"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label">Status Perkahwinan</label>
-                          <input class="form-control" name="statusperkahwinan" type="text"/>
+                          <input class="form-control usahawanfield" name="statusperkahwinan"   type="text"/>
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label" >Pendidikan</label>
-                            <input class="form-control" name="U_Pendidikan_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Pendidikan_ID"   type="text"  />
                         </div>
+                        <div class="col-lg-6">
+                            <label class="form-label" >Negeri Premis Perniagaan</label>
+                            <input class="form-control usahawanfield" name="U_Pendidikan_ID"   type="text"  />
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label" >Pusat Tanggungjawab</label>
+                            <input class="form-control usahawanfield" name="U_Pendidikan_ID"   type="text"  />
+                        </div>
+                        
+                        
                         <div class="col-lg-12">
                             <label class="form-label">Alamat</label>
-                            <input class="form-control" name="alamat1" type="text"  />
+                            <input class="form-control usahawanfield" name="alamat1"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Bandar</label>
-                            <input class="form-control" name="bandar" type="text"  />
+                            <input class="form-control usahawanfield" name="bandar"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Poskod</label>
-                            <input class="form-control" name="poskod" type="text"  />
+                            <input class="form-control usahawanfield" name="poskod"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Negeri</label>
-                            <input class="form-control" name="U_Negeri_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Negeri_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Daerah</label>
-                            <input class="form-control" name="U_Daerah_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Daerah_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Mukim</label>
-                            <input class="form-control" name="U_Mukim_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Mukim_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Parlimen</label>
-                            <input class="form-control" name="U_Parlimen_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Parlimen_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Dun</label>
-                            <input class="form-control" name="U_Dun_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Dun_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Kampung</label>
-                            <input class="form-control" name="U_Kampung_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Kampung_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Seksyen</label>
-                            <input class="form-control" name="U_Seksyen_ID" type="text"  />
+                            <input class="form-control usahawanfield" name="U_Seksyen_ID"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Kategori</label>
-                            <input class="form-control" name="id_kategori_usahawan" type="text"  />
+                            <input class="form-control usahawanfield" name="id_kategori_usahawan"   type="text"  />
                         </div>
                         {{-- <div class="col-lg-6">
                             <label class="form-label">Gambar</label>
                             <input class="form-control" name="gambar_url" type="text"  />
                         </div> --}}
                         <div class="col-lg-6">
-                            <label class="form-label">notelefon</label>
-                            <input class="form-control" name="notelefon" type="text"  />
+                            <label class="form-label">No. Telefon (R)</label>
+                            <input class="form-control usahawanfield" name="notelefon" id="" type="text"  />
                         </div>
                         <div class="col-lg-6">
-                            <label class="form-label">No Hp</label>
-                            <input class="form-control" name="nohp" type="text"  />
+                            <label class="form-label">No. Telefon (HP)</label>
+                            <input class="form-control usahawanfield" name="nohp"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Email</label>
-                            <input class="form-control" name="email" type="text"  />
+                            <input class="form-control usahawanfield" name="email"   type="text"  />
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                          <button class="btn btn-primary" type="submit">Kemas Kini</button>
+                          <button class="btn btn-primary" type="submit" onclick="SubmitUsahawan()">Kemas Kini</button>
                         </div>
                       </form>
                     </div>
@@ -233,9 +248,10 @@ $( document ).ready(function() {
     const dataTableBasic = new simpleDatatables.DataTable("#penggunatbl", {
           searchable: true,
           fixedHeight: true,
-          sortable: false
+          sortable: true
       });
-    //$('#penggunatbl').DataTable(); 
+    $('#penggunatbl').DataTable(); 
+    $( "#tarikhlahirid" ).datepicker();
     GetPengguna();
 });
 
@@ -286,7 +302,9 @@ function tetapanpengguna(page,data){
     if(page == 'satu'){
         $("#displaysatu").hide();
         $("#displaydua").show();
-        console.log(data);
+
+        var role = <?php echo Auth::user()->role ?>;
+
         $("#displaydua input[name=namausahawan]").val(data.namausahawan);
         $("#displaydua input[name=nokadpengenalan]").val(data.nokadpengenalan);
         $("#displaydua input[name=tarikhlahir]").val(data.tarikhlahir);
@@ -310,11 +328,31 @@ function tetapanpengguna(page,data){
         $("#displaydua input[name=nohp]").val(data.nohp);
         $("#displaydua input[name=email]").val(data.email);
         $("#datausahawan").attr("action", "/usahawanWeb/"+data.id);
+
+        var x = document.getElementsByClassName("usahawanfield");       
+        if (role == 1 || role == 7){
+            for (var i = 0; i < x.length; i++) {
+                x[i].disabled = false;
+            }        
+        }else{
+            for (var i = 0; i < x.length; i++) {
+                x[i].disabled = true;
+            }
+        }
         
     }else if(page == 'dua'){
         $("#displaysatu").show();
         $("#displaydua").hide();
     }
+}
+
+function SubmitUsahawan(){
+    if (confirm('Anda pasti ingin simpan data usahawan?')) {
+        $('#datausahawan').submit();
+    } else {
+        
+    }
+    
 }
 
 </script>

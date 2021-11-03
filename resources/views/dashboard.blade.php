@@ -20,8 +20,6 @@
     <link href="../../../css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="../../../css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="../../../css/user.min.css" rel="stylesheet" id="user-style-default">
-    
-    
 
     <script src="../../../assets/popper/popper.min.js"></script>
     <script src="../../../assets/bootstrap/bootstrap.min.js"></script>
@@ -29,11 +27,15 @@
     <script src="../../../assets/is/is.min.js"></script>
     <script src="../../../assets/fontawesome/all.min.js"></script>
     <script src="../../../assets/lodash/lodash.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="../../../assets/list.js/list.min.js"></script>
     <script src="../../../js/theme.js"></script>
-    <script src="../../../js/jquery-3.6.0.min.js"></script> 
-<script src="./../../js/datatables.js"type="text/javascript"></script>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+    <script src="./../../js/datatables.js"type="text/javascript"></script>
 </head>
 <script>
       var isRTL = JSON.parse(localStorage.getItem('isRTL'));
@@ -82,49 +84,36 @@
             <div class="navbar-vertical-content scrollbar">
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                 <li class="nav-item">
-                  <!-- parent pages--><a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="dashboard">
+                  <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('temulawatan.*') ? 'true' : 'false' }}" aria-controls="dashboard">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span>
                     </div>
                   </a>
-                  <ul class="nav collapse false" id="dashboard">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span>
+                  <ul class="nav collapse {{ request()->routeIs('temulawatan.*') ? 'show' : 'collapse' }}" id="dashboard">
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('temulawatan.*') ? 'active' : '' }}" href="/temulawatan">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Temujanji Lawatan</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/analytics.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Analytics</span>
+                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#statistik" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Statistik</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/crm.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/e-commerce.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">E commerce</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/project-management.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Management</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/saas.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">SaaS</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
+                      <ul class="nav collapse false" id="statistik">
+                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/form-control.html">
+                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jantina</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/input-group.html">
+                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori Usahawan</span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </li>
+                
                 <li class="nav-item">
                   <!-- label-->
                   <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
@@ -134,26 +123,54 @@
                       <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                   </div>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('pegawai.*') ? 'active' : '' }}" href="/pegawai" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Pegawai</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('usahawanWeb.*') ? 'active' : '' }}" href="/usahawanWeb" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Usahawan</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('insentif.*') ? 'active' : '' }}" href="/insentif" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tambah Insentif</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('komponendash.*') ? 'active' : '' }}" href="/komponendash" role="button">
-                  <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tetapan Komponen</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('audittrail.*') ? 'active' : '' }}" href="/audittrail" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Audit Trail</span>
-                    </div>
-                  </a>
+                  @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4)
+                    <a class="nav-link {{  request()->routeIs('pegawai.*') ? 'active' : '' }}" href="/pegawai" role="button">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Pegawai</span>
+                      </div>
+                    </a>
+                    <a class="nav-link {{  request()->routeIs('usahawanWeb.*') ? 'active' : '' }}" href="/usahawanWeb" role="button">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Usahawan</span>
+                      </div>
+                    </a>
+                  @endif
+                  @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5 || Auth::user()->role == 6)
+                    <a class="nav-link {{  request()->routeIs('insentif.*') ? 'active' : '' }}" href="/insentif" role="button">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tambah Insentif</span>
+                      </div>
+                    </a>
+                  @endif
+                  @if (Auth::user()->role == 1)
+                    <a class="nav-link dropdown-indicator" href="#komponen" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('kategorialiran.*') || request()->routeIs('tindakanlawatan.*') || request()->routeIs('jenisinsentif.*')
+                    || request()->routeIs('kategoriusahawan.*') ? 'true' : 'false' }}" aria-controls="komponen">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Tetapan Komponen</span>
+                      </div>
+                    </a>
+                    <ul class="nav collapse {{ request()->routeIs('kategorialiran.*') || request()->routeIs('tindakanlawatan.*') || request()->routeIs('jenisinsentif.*')
+                      || request()->routeIs('kategoriusahawan.*') ? 'show' : 'collapse' }}" id="komponen">
+                        {{-- show --}}
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('kategorialiran.*') ? 'active' : '' }}" href="/kategorialiran">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori Aliran</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('tindakanlawatan.*') ? 'active' : '' }}" href="/tindakanlawatan">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Tindakan Lawatan</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('jenisinsentif.*') ? 'active' : '' }}" href="/jenisinsentif">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jenis Insentif</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('kategoriusahawan.*') ? 'active' : '' }}" href="/kategoriusahawan">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori Usahawan</span>
+                          </div></a>
+                        </li>
+                      </ul>
+                      <a class="nav-link {{  request()->routeIs('audittrail.*') ? 'active' : '' }}" href="/audittrail" role="button">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Audit Trail</span>
+                        </div>
+                      </a>
+                  @endif 
+                  
                 </li>
                 <li class="nav-item">
                   <!-- label-->
@@ -168,114 +185,32 @@
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Pelaporan</span>
                     </div>
                   </a>
-                  
                   <ul class="nav collapse false" id="forms">
-                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#basic" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Basic</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                      <ul class="nav collapse false" id="basic">
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/form-control.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Form control</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/input-group.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Input group</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/select.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Select</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/checks.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Checks</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/range.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Range</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/layout.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Layout</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#advance" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Advance</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                      <ul class="nav collapse false" id="advance">
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/advance-select.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Advance select</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/date-picker.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Date picker</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/editor.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Editor</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/emoji-button.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Emoji button</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/file-uploader.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">File uploader</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/rating.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Rating</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                      </ul>
-                    </li>
                     <li class="nav-item"><a class="nav-link" href="../modules/forms/floating-labels.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Floating labels</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Profil</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../modules/forms/wizard.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Wizard</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pendapatan Bulanan</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Validation</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pemantauan Lawatan</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Insentif</span>
+                        </div>
+                      </a>
+                    </li>
+                  <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
+                      <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Aliran Tunai</span>
+                      </div>
+                    </a>
+                  </li>
                   </ul>
                 </li>
                 
@@ -298,13 +233,13 @@
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
-              {{-- <li class="nav-item">
+              <li class="nav-item">
                 <div class="theme-control-toggle fa-icon-wait px-2">
                   <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle" type="checkbox" data-theme-control="theme" value="dark" />
                   <label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to light theme"><span class="fas fa-sun fs-0"></span></label>
                   <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to dark theme"><span class="fas fa-moon fs-0"></span></label>
                 </div>
-              </li> --}}
+              </li>
               
               <li class="nav-item dropdown">
                 <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait" id="navbarDropdownNotification" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-bell" data-fa-transform="shrink-6" style="font-size: 33px;"></span></a>
@@ -325,7 +260,7 @@
                           <a class="notification notification-flush notification-unread" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-2xl me-3">
-                                <img class="rounded-circle" src="../assets/img/team/1-thumb.png" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -357,7 +292,7 @@
                           <a class="notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-2xl me-3">
-                                <img class="rounded-circle" src="../assets/img/icons/weather-sm.jpg" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -373,7 +308,7 @@
                           <a class="border-bottom-0 notification-unread  notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-xl me-3">
-                                <img class="rounded-circle" src="../assets/img/logos/oxford.png" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -389,7 +324,7 @@
                           <a class="border-bottom-0 notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-xl me-3">
-                                <img class="rounded-circle" src="../assets/img/team/10.jpg" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>

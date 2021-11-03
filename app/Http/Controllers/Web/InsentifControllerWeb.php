@@ -67,7 +67,7 @@ class InsentifControllerWeb extends Controller
 
         echo '<script language="javascript">';
         echo 'alert("Insentif Berjaya Di Ubah")';
-        echo '</script>';
+        echo '</script>'; 
         return redirect('/insentifdetail/'.$request->id_pengguna);
     }
 
