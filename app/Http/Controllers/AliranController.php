@@ -34,9 +34,13 @@ class AliranController extends Controller
         $aliran->kategori_aliran = $kategoriAliran->nama_kategori_aliran;
 
         if ($request->hasFile('dokumen_lampiran')) {
-            $dokumen = $request->file('dokumen_lampiran')->store('dokumen_aliran');
-            $aliran->dokumen_lampiran = $dokumen;
+            $dokumen_lampiran = $request->file('dokumen_lampiran')->store('dokumen_lampiran');
+            $aliran->dokumen_lampiran =  $dokumen_lampiran;
         }
+        // if(isset($_FILES['dokumen_lampiran']) && (file_exists($_FILES['dokumen_lampiran']['tmp_name']))){
+        //     $dokumen_lampiran = $request->file('dokumen_lampiran')->store('dokumen_lampiran');
+        //     $aliran->dokumen_lampiran = $dokumen_lampiran;
+        // }
         
         $aliran->modified_by = $request->id_pengguna;
         $aliran->save();

@@ -109,9 +109,10 @@ class SyarikatController extends Controller
      * @param  \App\Models\Syarikat  $syarikat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Syarikat $syarikat)
+    public function update(Request $request, $id)
     {
-        $syarikat->usahawanid = $request->usahawanid;
+        $syarikat = Syarikat::where('usahawanid', $id)->get()->first();
+        // $syarikat->usahawanid = $request->usahawanid;
         $syarikat->namasyarikat = $request->namasyarikat;
         $syarikat->jenismilikanperniagaan = $request->jenismilikanperniagaan;
         $syarikat->nodaftarssm = $request->nodaftarssm;
@@ -130,16 +131,15 @@ class SyarikatController extends Controller
         $syarikat->notelefon = $request->notelefon;
         $syarikat->no_hp = $request->no_hp;
         $syarikat->email = $request->email;
-        $syarikat->logo_syarikat = $request->logo_syarikat;
+        // $syarikat->logo_syarikat = $request->logo_syarikat;
         $syarikat->prefix_id = $request->prefix_id;
-        $syarikat->createdby_id = $request->createdby_id;
-        $syarikat->createdby_kod_PT = $request->createdby_kod_PT;
-        $syarikat->modifiedby_id = $request->modifiedby_id;
-        $syarikat->modifiedby_kod_PT = $request->modifiedby_kod_PT;
+        // $syarikat->createdby_id = $request->createdby_id;
+        // $syarikat->createdby_kod_PT = $request->createdby_kod_PT;
+        // $syarikat->modifiedby_id = $request->modifiedby_id;
+        // $syarikat->modifiedby_kod_PT = $request->modifiedby_kod_PT;
 
         $syarikat->save();
 
-        // return redirect('/syarikat');
         return response()->json($syarikat);
     }
 

@@ -49,10 +49,10 @@ class CreatePerniagaansTable extends Migration
             $table->double('peratus_kenaikan',12,2)->nullable();
             $table->double('hasil_jualan_tahunan',12,2)->nullable();
             $table->string('gambar_url',150)->nullable();
-            $table->string('createdby_id',50);
-            $table->string('createdby_kod_PT',50);
-            $table->string('modifiedby_id',50);
-            $table->string('modifiedby_kod_PT',50);
+            $table->string('createdby_id',50)->nullable();
+            $table->string('createdby_kod_PT',50)->nullable();
+            $table->string('modifiedby_id',50)->nullable();
+            $table->string('modifiedby_kod_PT',50)->nullable();
             
             $table->timestamps();
         });
