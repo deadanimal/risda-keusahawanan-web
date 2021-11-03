@@ -120,9 +120,11 @@ class PerniagaanController extends Controller
      * @param  \App\Models\Perniagaan  $perniagaan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Perniagaan $perniagaan)
+    public function update(Request $request, $id)
     {
-        $perniagaan->usahawanid = $request->usahawanid;;
+        $perniagaan = Perniagaan::where('usahawanid', $id)->get()->first();
+
+        // $perniagaan->usahawanid = $request->usahawanid;;
         $perniagaan->jenisperniagaan = $request->jenisperniagaan;;
         $perniagaan->klusterperniagaan = $request->klusterperniagaan;;
         $perniagaan->subkluster = $request->subkluster;;
@@ -152,13 +154,13 @@ class PerniagaanController extends Controller
         $perniagaan->luarnegara = $request->luarnegara;;
         $perniagaan->pasaranonline = $request->pasaranonline;;
         $perniagaan->purata_jualan_bulanan = $request->purata_jualan_bulanan;;
-        $perniagaan->peratus_kenaikan = $request->peratus_kenaikan;;
+        // $perniagaan->peratus_kenaikan = $request->peratus_kenaikan;;
         $perniagaan->hasil_jualan_tahunan = $request->hasil_jualan_tahunan;;
-        $perniagaan->gambar_url = $request->gambar_url;;
-        $perniagaan->createdby_id = $request->createdby_id;;
-        $perniagaan->createdby_kod_PT = $request->createdby_kod_PT;;
-        $perniagaan->modifiedby_id = $request->modifiedby_id;;
-        $perniagaan->modifiedby_kod_PT = $request->modifiedby_kod_PT;;
+        // $perniagaan->gambar_url = $request->gambar_url;;
+        // $perniagaan->createdby_id = $request->createdby_id;;
+        // $perniagaan->createdby_kod_PT = $request->createdby_kod_PT;;
+        // $perniagaan->modifiedby_id = $request->modifiedby_id;;
+        // $perniagaan->modifiedby_kod_PT = $request->modifiedby_kod_PT;;
 
         $perniagaan->save();
 

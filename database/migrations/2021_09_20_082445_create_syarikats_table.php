@@ -40,12 +40,12 @@ class CreateSyarikatsTable extends Migration
             $table->string('notelefon',15);
             $table->string('no_hp',15);
             $table->string('email',100);
-            $table->string('logo_syarikat',150);
+            $table->string('logo_syarikat',150)->nullable();
             $table->string('prefix_id',50);
-            $table->string('createdby_id',50);
-            $table->string('createdby_kod_PT',50);
-            $table->string('modifiedby_id',50);
-            $table->string('modifiedby_kod_PT',50);
+            $table->string('createdby_id',50)->nullable();
+            $table->string('createdby_kod_PT',50)->nullable();
+            $table->string('modifiedby_id',50)->nullable();
+            $table->string('modifiedby_kod_PT',50)->nullable();
 
             $table->timestamps();
         });

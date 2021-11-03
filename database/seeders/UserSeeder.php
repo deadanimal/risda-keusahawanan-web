@@ -23,8 +23,8 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('password'),
             'usahawanid'=>'1',
             'no_kp'=>'123456789012',
-            'status_pengguna'=>'1'
-            
+            'status_pengguna'=>'1',
+            'role'=>'2'
         ]);
 
         User::create([
@@ -33,7 +33,8 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('password'),
             'usahawanid'=>'2',
             'no_kp'=>'600606015813',
-            'status_pengguna'=>'1'
+            'status_pengguna'=>'1',
+            'role'=>'2'
             
         ]);
 
@@ -71,7 +72,8 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('password'),
             'idpegawai'=>'3',
             'no_kp'=>'700510000000',
-            'status_pengguna'=>'1'
+            'status_pengguna'=>'1',
+            'role'=>'2'
         ]);
 
 
@@ -81,7 +83,8 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('password'),
             'idpegawai'=>'4',
             'no_kp'=>'700510000000',
-            'status_pengguna'=>'1'
+            'status_pengguna'=>'1',
+            'role'=>'1'
         ]);
     }
 }
