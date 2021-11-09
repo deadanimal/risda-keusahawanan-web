@@ -13,6 +13,15 @@ class PendapatanBulananControllerWeb extends Controller
     public function index()
     {
         $pendbulanan = Insentif::All();
+        foreach ($pendbulanan as $pendbulanan_L) {
+            $User = User::where('id', $pendbulanan_L->id_pengguna)->first();
+            if(isset($User->usahawanid) == true){
+                $Usahawan = Usahawan::where('id', $User->usahawanid)->first();
+                if(isset($Usahawan->U_Negeri_ID) == true){
+                    $pendbulanan_L->negeri = $Usahawan->U_Negeri_ID;
+                }
+            }
+        }
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
         return view('pendapatanbulanan.index'
         ,[
@@ -37,6 +46,7 @@ class PendapatanBulananControllerWeb extends Controller
         }
         
         $result = "";
+        $num=1;
         foreach ($pendbulanan as $pendbulanan_L) {
             $User = User::where('id', $pendbulanan_L->id_pengguna)->first();
             if(isset($User->usahawanid) == true){
@@ -45,10 +55,12 @@ class PendapatanBulananControllerWeb extends Controller
                     $pendbulanan_L->negeri = $Usahawan->U_Negeri_ID;
                 }
             }
+            
             $result .= 
             '<tr class="align-middle">
-                <td class="text-nowrap">'.$pendbulanan_L->tahun_terima_insentif.'</td>
-                <td class="text-nowrap">'.$request->tahun.'</td>
+                <td class="text-nowrap">'.$num++.'</td>
+                <td class="text-nowrap">'.$pendbulanan_L->negeri.'</td>
+                <td class="text-nowrap">'.$pendbulanan_L->id_jenis_insentif.'</td>
             </tr>';
         }
 

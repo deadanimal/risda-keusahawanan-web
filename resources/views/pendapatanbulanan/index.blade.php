@@ -98,9 +98,10 @@
                     </tr>
                 </thead>
                 <tbody id="tblname">
+                  <?php $num=1; ?>
                   @foreach ($pendbulanans as $pendbulanan)
                   <tr class="align-middle">
-                    <td class="text-nowrap">1</td>
+                    <td class="text-nowrap"><?php echo $num++;?></td>
                     <td class="text-nowrap"><label class="form-check-label">{{$pendbulanan->negeri}}</label></td>
                     <td class="text-nowrap"><label class="form-check-label">{{$pendbulanan->id_jenis_insentif}}</label></td>
                     <td class="text-nowrap"><label class="form-check-label">{{$pendbulanan->tahun_terima_insentif}}</label></td>
