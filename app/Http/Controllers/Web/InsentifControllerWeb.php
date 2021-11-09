@@ -23,13 +23,15 @@ class InsentifControllerWeb extends Controller
     {
         $insentifs = Insentif::where('id_pengguna', $id)->get();
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
+        $negeri = Usahawan::where('id', $id)->first();
             //where('status_insentif', 'aktif')->get();
         //dd($insentifs);
         return view('insentif.insentifdetail'
         ,[
             'insentifs'=>$insentifs,
             'id_pengguna'=>$id,
-            'ddInsentif'=>$ddInsentif
+            'ddInsentif'=>$ddInsentif,
+            'negeri'=>$negeri->U_Negeri_ID
         ]
         );
     }
@@ -43,6 +45,7 @@ class InsentifControllerWeb extends Controller
         $insentif->id_jenis_insentif = $request->id_jenis_insentif;
         $insentif->tahun_terima_insentif = $request->tahun_terima_insentif;
         $insentif->nilai_insentif = $request->nilai_insentif;
+        $insentif->negeri = $request->negeri;
         $insentif->created_by = $userId;
         $insentif->modified_by = $userId;
         $insentif->save();
@@ -62,6 +65,7 @@ class InsentifControllerWeb extends Controller
         $insentif->id_jenis_insentif = $request->id_jenis_insentif;
         $insentif->tahun_terima_insentif = $request->tahun_terima_insentif;
         $insentif->nilai_insentif = $request->nilai_insentif;
+        $insentif->negeri = $request->negeri;
         $insentif->modified_by = $userId;
         $insentif->save();
 
