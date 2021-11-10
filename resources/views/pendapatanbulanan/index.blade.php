@@ -52,7 +52,8 @@
                   </div>
                 </div>
               </div>
-            <table id="pendapatanbultbl">
+            <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <table id="pendapatanbultbl" class="table table-sm table-bordered table-hover">
                 <colgroup>
                     <col span="1" style="width: 5%;">
                     <col span="1" style="width: 20%;">
@@ -85,28 +86,34 @@
                     }
                 </style>
                 <thead>
-                    <tr class="align-middle">
-                        <th scope="col">Bil</th>
+                    <tr class="align-middle" style="text-align: center;">
+                        <th scope="col" style="padding-right:2vh;">Bil</th>
                         <th scope="col">Negeri</th>
                         <th scope="col">Jenis Insentif</th>
                         <th scope="col">Tahun</th>
-                        <th scope="col">Bil Penerima Insentif</th>
-                        <th scope="col">Jumlah Insentif</th>
-                        <th scope="col">Jumlah Jualan</th>
-                        <th scope="col">Purata Jualan</th>
-                        <th scope="col">Tahun</th>
+                        <th scope="col">Bil Penerima Insentif (BIL)</th>
+                        <th scope="col">Jumlah Insentif (RM)</th>
+                        <th scope="col">Jumlah Jualan (RM)</th>
+                        <th scope="col">Purata Jualan (RM)</th>
                     </tr>
                 </thead>
                 <tbody id="tblname">
                   <?php $num=1; ?>
-                  @foreach ($pendbulanans as $pendbulanan)
-                  <tr class="align-middle">
-                    <td class="text-nowrap"><?php echo $num++;?></td>
-                    <td class="text-nowrap"><label class="form-check-label">{{$pendbulanan->negeri}}</label></td>
-                    <td class="text-nowrap"><label class="form-check-label">{{$pendbulanan->id_jenis_insentif}}</label></td>
-                    <td class="text-nowrap"><label class="form-check-label">{{$pendbulanan->tahun_terima_insentif}}</label></td>
+                  @foreach ($reports as $report)
+                  <tr class="align-middle" style="text-align: center;">
+                    <td class="text-nowrap" style="padding-right:2vh;"><?php echo $num++;?></td>
+                    <td class="text-nowrap"><label class="form-check-label">{{$report->negeri}}</label></td>
+                    <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">{{$report->jenis}}</label></td>
+                    <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
+                    <td class="text-nowrap"><label class="form-check-label">{{$report->tab4}}</label></td>
+                    <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
                   </tr>
                   @endforeach
+                  <tr class="align-middle" style="text-align: center;">
+                    <td colspan="4"></td>
+                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_penerima}}</label></td>
+                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_insentif}}</label></td>
+                  </tr>
                     {{-- @foreach ($users as $user)
                     <tr class="align-middle">
                         <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
@@ -118,7 +125,7 @@
                     @endforeach --}}
                 </tbody>
             </table>
-            
+            </div>
         </div>
     </div>
 </div>
@@ -133,6 +140,8 @@
       sortable: true,
       paging: false
     });
+
+
   });
 
   function gettabledata(type,val){

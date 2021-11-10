@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Kategori_Aliran;
+use App\Models\Negeri;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class KategoriAliranFactory extends Factory
+class NegeriFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Kategori_Aliran::class;
+    protected $model = Negeri::class;
 
     /**
      * Define the model's default state.

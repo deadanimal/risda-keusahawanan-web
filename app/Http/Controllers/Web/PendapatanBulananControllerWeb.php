@@ -3,66 +3,95 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Insentif;
-use App\Models\User;
-use App\Models\Usahawan;
+
 use App\Models\JenisInsentif;
+use App\Models\Report;
+use App\Models\Negeri;
 
 class PendapatanBulananControllerWeb extends Controller
 {
     public function index()
     {
-        $pendbulanan = Insentif::All();
-        foreach ($pendbulanan as $pendbulanan_L) {
-            $User = User::where('id', $pendbulanan_L->id_pengguna)->first();
-            if(isset($User->usahawanid) == true){
-                $Usahawan = Usahawan::where('id', $User->usahawanid)->first();
-                if(isset($Usahawan->U_Negeri_ID) == true){
-                    $pendbulanan_L->negeri = $Usahawan->U_Negeri_ID;
-                }
-            }
+        $reports = Report::where('type', 1)
+        ->orderBy('tab3', 'ASC')
+        ->orderBy('tab2', 'ASC')
+        ->orderBy('tab1', 'ASC')
+        ->get();
+        
+        $c_penerima = 0;
+        $c_insentif = 0;
+        foreach ($reports as $report) {
+            $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
+            $report->negeri = $negeri->Negeri;
+            $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
+            $report->jenis = $jenisinsentif->nama_insentif;
+            $c_penerima = $c_penerima + $report->tab4;
+            $c_insentif = $c_insentif + $report->tab5;
         }
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
+        
         return view('pendapatanbulanan.index'
         ,[
-            'pendbulanans'=>$pendbulanan,
-            'ddInsentif'=>$ddInsentif
+            'reports'=>$reports,
+            'ddInsentif'=>$ddInsentif,
+            'c_penerima'=>$c_penerima,
+            'c_insentif'=>$c_insentif
         ]
         );
     }
 
     public function show(Request $request, $tahun)
     {
-        if($request->tahun == ""){
-            $pendbulanan = Insentif::where('id_jenis_insentif', $request->id_jenis_insentif)
-            ->get();
-        }else if($request->id_jenis_insentif == ""){
-            $pendbulanan = Insentif::where('tahun_terima_insentif', $request->tahun)
-            ->get();
-        }else{
-            $pendbulanan = Insentif::where('tahun_terima_insentif', $request->tahun)
-            ->where('id_jenis_insentif', $request->id_jenis_insentif)
-            ->get();
+        if($request->tahun == null){
+            $reports = Report::where('type', 1)
+            ->where('tab2', $request->id_jenis_insentif)
+            ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
+        }
+        if($request->id_jenis_insentif == null){
+            $reports = Report::where('type', 1)
+            ->where('tab3', $request->tahun)
+            ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
+        }
+        if($request->id_jenis_insentif != null && $request->tahun != null){
+            $reports = Report::where('type', 1)
+            ->where('tab2', $request->id_jenis_insentif)
+            ->where('tab3', $request->tahun)
+            ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
+        }
+        if($request->id_jenis_insentif == null && $request->tahun == null){
+            $reports = Report::where('type', 1)
+            ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
         
         $result = "";
         $num=1;
-        foreach ($pendbulanan as $pendbulanan_L) {
-            $User = User::where('id', $pendbulanan_L->id_pengguna)->first();
-            if(isset($User->usahawanid) == true){
-                $Usahawan = Usahawan::where('id', $User->usahawanid)->first();
-                if(isset($Usahawan->U_Negeri_ID) == true){
-                    $pendbulanan_L->negeri = $Usahawan->U_Negeri_ID;
-                }
-            }
-            
+        $c_penerima = 0;
+        $c_insentif = 0;
+        foreach ($reports as $report) {
+            $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
+            $report->negeri = $negeri->Negeri;
+            $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
+            $report->jenis = $jenisinsentif->nama_insentif;
+            $c_penerima = $c_penerima + $report->tab4;
+            $c_insentif = $c_insentif + $report->tab5;
+
             $result .= 
-            '<tr class="align-middle">
-                <td class="text-nowrap">'.$num++.'</td>
-                <td class="text-nowrap">'.$pendbulanan_L->negeri.'</td>
-                <td class="text-nowrap">'.$pendbulanan_L->id_jenis_insentif.'</td>
+            '<tr class="align-middle" style="text-align: center;">
+                <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label">'.$num++.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->negeri.'</label></td>
+                <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">'.$report->jenis.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab4.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab5.'</label></td>
             </tr>';
         }
+        $result .=
+        '<tr class="align-middle" style="text-align: center;">
+            <td colspan="4"></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_penerima.'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_insentif.'</label></td>
+        </tr>
+        ';       
 
         return $result;
     }
