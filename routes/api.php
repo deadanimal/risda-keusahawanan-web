@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AliranController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KategoriAliranController;
 use App\Http\Controllers\PekebunController;
 use App\Http\Controllers\PerniagaanController;
@@ -38,6 +39,7 @@ Route::apiResource('syarikat', SyarikatController::class);
 Route::apiResource('perniagaan', PerniagaanController::class);
 Route::apiResource('kategori_aliran', KategoriAliranController::class);
 Route::apiResource('aliran', AliranController::class);
+Route::apiResource('katalog', KatalogController::class);
 
 // Route::('checkUser', [UserController::class, 'checkUser']);
 Route::post('/sanctum/token', function (Request $request) {

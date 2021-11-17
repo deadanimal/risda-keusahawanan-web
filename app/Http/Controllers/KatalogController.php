@@ -7,35 +7,14 @@ use Illuminate\Http\Request;
 
 class KatalogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $katalog = Katalog::all();
-        return view('katalog.index', [
-            'katalog' => $katalog
-        ]);
+
+        return response()->json($katalog);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $katalog = new Katalog();
@@ -45,31 +24,27 @@ class KatalogController extends Controller
         $katalog->kandungan_produk = $request->kandungan_produk;
         $katalog->harga_produk = $request->harga_produk;
         $katalog->berat_produk = $request->berat_produk;
-        $katalog->kos_per_unit = $request->kos_per_unit;
         $katalog->keterangan_produk = $request->keterangan_produk;
         $katalog->gambar_url = $request->gambar_url;
+        
         $katalog->baki_stok = $request->baki_stok;
         $katalog->unit_production = $request->unit_production;
         $katalog->status_katalog = $request->status_katalog;
-        $katalog->disahkan_oleh = $request->disahkan_oleh;
+        // $katalog->disahkan_oleh = $request->disahkan_oleh;
         $katalog->modified_by = $request->modified_by;
 
         $katalog->save();
         
-        return redirect('/katalog');
+        return response()->json($katalog);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Katalog  $katalog
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Katalog $katalog)
+    
+    public function show($id)
     {
-        return view('katalog.show', [
-            'katalog' => $katalog
-        ]);
+        
+        $katalog = Katalog::where('id_pengguna',$id)->get();
+        // dd($katalog);
+        return response()->json($katalog);
     }
 
     /**
@@ -101,7 +76,9 @@ class KatalogController extends Controller
         $katalog->berat_produk = $request->berat_produk;
         $katalog->kos_per_unit = $request->kos_per_unit;
         $katalog->keterangan_produk = $request->keterangan_produk;
+
         $katalog->gambar_url = $request->gambar_url;
+
         $katalog->baki_stok = $request->baki_stok;
         $katalog->unit_production = $request->unit_production;
         $katalog->status_katalog = $request->status_katalog;

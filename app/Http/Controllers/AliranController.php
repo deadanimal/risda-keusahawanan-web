@@ -92,22 +92,31 @@ class AliranController extends Controller
         $aliran->tarikh_aliran = $request->tarikh_aliran;
         $aliran->keterangan_aliran = $request->keterangan_aliran;
         $aliran->jumlah_aliran = $request->jumlah_aliran;
-        $aliran->kategori_aliran = $request->kategori_aliran;
-        $aliran->dokumen_lampiran = $request->dokumen_lampiran;
-        $aliran->modified_by = $request->modified_by;
+
+        $kategoriAliran = KategoriAliran::find($request->id_kategori_aliran);
+
+        $aliran->kategori_aliran = $kategoriAliran->nama_kategori_aliran;
+
+        if ($request->hasFile('dokumen_lampiran')) {
+            $dokumen_lampiran = $request->file('dokumen_lampiran')->store('dokumen_lampiran');
+            $aliran->dokumen_lampiran =  $dokumen_lampiran;
+        }
+        // if(isset($_FILES['dokumen_lampiran']) && (file_exists($_FILES['dokumen_lampiran']['tmp_name']))){
+        //     $dokumen_lampiran = $request->file('dokumen_lampiran')->store('dokumen_lampiran');
+        //     $aliran->dokumen_lampiran = $dokumen_lampiran;
+        // }
+        
+        $aliran->modified_by = $request->id_pengguna;
         $aliran->save();
 
-        return redirect('/aliran');
+        return response()->json($aliran);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Aliran  $aliran
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Aliran $aliran)
     {
-        //
+        $aliran->delete();
+
+        return response()->json($aliran);
     }
 }
