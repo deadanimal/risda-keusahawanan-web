@@ -21,6 +21,7 @@ class CreateInsentifsTable extends Migration
 
             $table->string('tahun_terima_insentif',4);
             $table->double('nilai_insentif',30,2);
+            $table->string('negeri')->nullable();
             $table->string('created_by',50);
             $table->string('modified_by',50);
 

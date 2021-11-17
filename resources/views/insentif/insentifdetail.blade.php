@@ -69,6 +69,9 @@
                 @csrf
                 @method("POST")
                 <input name="id_pengguna" style="display: none;" type="text" value="{{$id_pengguna}}"/>
+                <input name="negeri" style="display: none;" type="text" value="{{$negeri}}"/>
+                <input name="daerah" style="display: none;" type="text" value="{{$daerah}}"/>
+                <input name="dun" style="display: none;" type="text" value="{{$dun}}"/>
                 <div class="position-relative rounded-1 border bg-white dark__bg-1100 p-3">
                   <div class="row gx-2">
                     <div class="col-sm-6 mb-3">
@@ -98,7 +101,16 @@
                     </div>
                     <div class="col-sm-6 mb-3">
                       <label class="form-label" for="field-name">Tahun Terima Insentif</label>
-                      <input class="form-control form-control-sm" name="tahun_terima_insentif" id="field-name" type="text"/>
+                      <select class="form-select form-select-sm" name="tahun_terima_insentif" id="field-name" type="text"/>
+                      <option value="">Tahun</option>
+                      <?php
+                      $curryear = date("Y") + 2;
+                      $fromyear = date("Y") - 20;
+                      for ($year = $curryear; $year >= $fromyear; $year--) {
+                      $selected = (isset($getYear) && $getYear == $year) ? 'selected' : '';
+                      echo "<option value=$year $selected>$year</option>";
+                      }
+                      ?></select>
                     </div>
                     {{-- <div class="col-12">
                       <label class="form-label" for="field-options">Field Options</label>

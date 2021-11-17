@@ -245,14 +245,15 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
+    GetPengguna();
     const dataTableBasic = new simpleDatatables.DataTable("#penggunatbl", {
           searchable: true,
           fixedHeight: true,
           sortable: true
       });
-    $('#penggunatbl').DataTable(); 
-    $( "#tarikhlahirid" ).datepicker();
-    GetPengguna();
+    //$('#penggunatbl').DataTable(); 
+    //$( "#tarikhlahirid" ).datepicker();
+    
 });
 
 function GetPengguna(){

@@ -13,6 +13,13 @@ use App\Http\Controllers\Web\TindakanLawatanControllerWeb;
 use App\Http\Controllers\Web\JenisInsentifControllerWeb;
 use App\Http\Controllers\Web\KategoriUsahawanControllerWeb;
 use App\Http\Controllers\Web\TemuLawatanControllerWeb;
+use App\Http\Controllers\Web\LaporanProfilControllerWeb;
+use App\Http\Controllers\Web\PendapatanBulananControllerWeb;
+use App\Http\Controllers\Web\PendBulDaerahControllerWeb;
+use App\Http\Controllers\Web\PendBulDunControllerWeb;
+use App\Http\Controllers\Web\LaporanInsentifControllerWeb;
+use App\Http\Controllers\Web\PemantauanLawatanControllerWeb;
+use App\Http\Controllers\Web\LaporanAliranTunaiControllerWeb;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,25 +35,30 @@ use App\Http\Controllers\Web\TemuLawatanControllerWeb;
 Route::get('/', function () {
     return view('landing.index');
 })->middleware(['auth'])->name('landing');
+Route::resource('/landing', LandingControllerWeb::class);
+
 Route::put('pegawaiPost', [PegawaiControllerWeb::class, 'pegawaiPost'])->name('pegawai.post');
 Route::resource('/pegawai', PegawaiControllerWeb::class);
-
 Route::resource('/usahawanWeb', UsahawanControllerWeb::class);
 Route::put('usahawanPost', [UsahawanControllerWeb::class, 'usahawanPost'])->name('usahawan.post');
-
 Route::resource('/insentif', InsentifControllerWeb::class);
 Route::resource('/insentifdetail', InsentifControllerWeb::class);
-
 Route::resource('/komponendash', KomponenDashControllerWeb::class);
 Route::resource('/kategorialiran', KategoriAliranControllerWeb::class);
 Route::resource('/tindakanlawatan', TindakanLawatanControllerWeb::class);
 Route::put('tindakanlawatanPost', [TindakanLawatanControllerWeb::class, 'tindakanlawatanPost'])->name('tindakanlawatan.post');
-
 Route::resource('/jenisinsentif', JenisInsentifControllerWeb::class);
 Route::resource('/kategoriusahawan', KategoriUsahawanControllerWeb::class);
-
 Route::resource('/audittrail', AuditTrailControllerWeb::class);
-Route::resource('/landing', LandingControllerWeb::class);
+
 
 Route::resource('/temulawatan', TemuLawatanControllerWeb::class);
+
+Route::resource('/laporanprofil', LaporanProfilControllerWeb::class);
+Route::resource('/pendapatanbulanan', PendapatanBulananControllerWeb::class);
+Route::resource('/pendbulDaerah', PendBulDaerahControllerWeb::class);
+Route::resource('/pendbulDun', PendBulDunControllerWeb::class);
+Route::resource('/laporaninsentif', LaporanInsentifControllerWeb::class);
+Route::resource('/pemantauanlawatan', PemantauanLawatanControllerWeb::class);
+Route::resource('/laporanalirantunai', LaporanAliranTunaiControllerWeb::class);
 require __DIR__.'/auth.php';

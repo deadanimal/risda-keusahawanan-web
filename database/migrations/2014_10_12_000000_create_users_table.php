@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
 
 
             $table->string('role')->nullable();
+            $table->string('type')->nullable();
             $table->boolean('profile_status')->nullable()->default(false);
 
 

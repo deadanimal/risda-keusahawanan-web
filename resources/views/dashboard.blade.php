@@ -173,7 +173,6 @@
                   
                 </li>
                 <li class="nav-item">
-                  <!-- label-->
                   <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                     <div class="col-auto navbar-vertical-label">Pelaporan
                     </div>
@@ -181,37 +180,44 @@
                       <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                   </div>
-                  <!-- parent pages--><a class="nav-link dropdown-indicator" href="#forms" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Pelaporan</span>
-                    </div>
-                  </a>
-                  <ul class="nav collapse false" id="forms">
-                    <li class="nav-item"><a class="nav-link" href="../modules/forms/floating-labels.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Profil</span>
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanprofil.*') ? 'active' : '' }}" href="/laporanprofil">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Profil</span>
                         </div>
                       </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="../modules/forms/wizard.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pendapatan Bulanan</span>
+                    <a class="nav-link dropdown-indicator" href="#pendapatanbulanan" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'true' : 'false' }}" aria-controls="komponen">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Jualan Penerima Insentif</span>
+                        </div>
+                    </a>
+                    <ul class="nav collapse {{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'show' : 'collapse' }}" id="pendapatanbulanan">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" href="/pendapatanbulanan">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDaerah.*') ? 'active' : '' }}" href="/pendbulDaerah">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDun.*') ? 'active' : '' }}" href="/pendbulDun">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Dun</span>
+                          </div></a>
+                        </li>
+                    </ul>
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporaninsentif.*') ? 'active' : '' }}" href="/laporaninsentif">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Insentif</span>
                         </div>
                       </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pemantauan Lawatan</span>
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('pemantauanlawatan.*') ? 'active' : '' }}" href="/pemantauanlawatan">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Pemantauan Lawatan</span>
                         </div>
                       </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Insentif</span>
-                        </div>
-                      </a>
-                    </li>
-                  <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
-                      <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Aliran Tunai</span>
+                  <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanalirantunai.*') ? 'active' : '' }}" href="/laporanalirantunai">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Aliran Tunai</span>
                       </div>
                     </a>
                   </li>
-                  </ul>
                 </li>
                 
               </ul>
@@ -233,13 +239,13 @@
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <div class="theme-control-toggle fa-icon-wait px-2">
                   <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle" type="checkbox" data-theme-control="theme" value="dark" />
                   <label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to light theme"><span class="fas fa-sun fs-0"></span></label>
                   <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to dark theme"><span class="fas fa-moon fs-0"></span></label>
                 </div>
-              </li>
+              </li> --}}
               
               <li class="nav-item dropdown">
                 <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait" id="navbarDropdownNotification" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-bell" data-fa-transform="shrink-6" style="font-size: 33px;"></span></a>

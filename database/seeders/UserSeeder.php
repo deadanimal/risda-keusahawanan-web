@@ -24,7 +24,8 @@ class UserSeeder extends Seeder
             'usahawanid'=>'1',
             'no_kp'=>'123456789012',
             'status_pengguna'=>'1',
-            'role'=>'2'
+            'role'=>'0',
+            'type'=>'2'
         ]);
 
         User::create([
@@ -34,7 +35,8 @@ class UserSeeder extends Seeder
             'usahawanid'=>'2',
             'no_kp'=>'600606015813',
             'status_pengguna'=>'1',
-            'role'=>'2'
+            'role'=>'0',
+            'type'=>'2'
             
         ]);
 
@@ -42,9 +44,11 @@ class UserSeeder extends Seeder
             'name'=> 'user4',
             'email'=> 'user4@gmail.com',
             'password'=> Hash::make('password'),
-            'usahawanid'=>'5',
+            'usahawanid'=>'3',
             'no_kp'=>'123456789015',
-            'status_pengguna'=>'1'
+            'status_pengguna'=>'1',
+            'role'=>'0',
+            'type'=>'2'
             
         ]);
 
@@ -54,7 +58,9 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('password'),
             'idpegawai'=>'1',
             'no_kp'=>'123456789015',
-            'status_pengguna'=>'1'
+            'status_pengguna'=>'1',
+            'role'=>'1',
+            'type'=>'1'
         ]);
 
         User::create([
@@ -63,7 +69,9 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('password'),
             'idpegawai'=>'2',
             'no_kp'=>'670210000000',
-            'status_pengguna'=>'1'
+            'status_pengguna'=>'1',
+            'role'=>'1',
+            'type'=>'1'
         ]);
 
         User::create([
@@ -73,7 +81,8 @@ class UserSeeder extends Seeder
             'idpegawai'=>'3',
             'no_kp'=>'700510000000',
             'status_pengguna'=>'1',
-            'role'=>'2'
+            'role'=>'1',
+            'type'=>'1'
         ]);
 
 
@@ -84,7 +93,8 @@ class UserSeeder extends Seeder
             'idpegawai'=>'4',
             'no_kp'=>'700510000000',
             'status_pengguna'=>'1',
-            'role'=>'1'
+            'role'=>'1',
+            'type'=>'1'
         ]);
     }
 }
