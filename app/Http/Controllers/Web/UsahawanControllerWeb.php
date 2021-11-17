@@ -5,19 +5,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Usahawan;
+use App\Models\PusatTanggungjawab;
+use App\Models\Negeri;
 
 class UsahawanControllerWeb extends Controller
 {
     public function index()
     {
         $users = Usahawan::all();
+        $ddPT = PusatTanggungjawab::where('status', 1)->get();
         foreach ($users as $usahawan) {
             $status = User::where('usahawanid', $usahawan->id)->first();
             $usahawan->status_pengguna = $status->status_pengguna;
+            $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
+            $usahawan->negeri = $negeri->Negeri;
         }
 
+
         return view('usahawanWeb.index',[
-            'users'=>$users
+            'users'=>$users,
+            'ddPT'=>$ddPT
         ]);
     }
 
@@ -72,9 +79,18 @@ class UsahawanControllerWeb extends Controller
 
     public function usahawanPost(Request $request)
     {
-        $user = User::where('usahawanid', $request->id)->first();
-        $user->status_pengguna = $request->status;
-        $user->save();
+        if($request->type == 'status'){
+            $user = User::where('usahawanid', $request->id)->first();
+            $user->status_pengguna = $request->status;
+            $user->save();
+        } 
+        if($request->type == 'kawasan'){
+            //$user = User::where('usahawanid', $request->id)->first();
+            $usahawan = Usahawan::where('id', $request->id)->first();
+            $usahawan->Kod_PT = $request->status;
+            $usahawan->save();
+        }
+        
     }
 
 }

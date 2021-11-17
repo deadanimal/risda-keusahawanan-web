@@ -91,7 +91,7 @@
                         <th scope="col">Negeri</th>
                         <th scope="col">Jenis Insentif</th>
                         <th scope="col">Tahun</th>
-                        <th scope="col">Bil Penerima Insentif (BIL)</th>
+                        <th scope="col">Bil Penerima Insentif</th>
                         <th scope="col">Jumlah Insentif (RM)</th>
                         <th scope="col">Jumlah Jualan (RM)</th>
                         <th scope="col">Purata Jualan (RM)</th>
@@ -132,7 +132,7 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-
+  
   $( document ).ready(function() {
     const dataTableBasic = new simpleDatatables.DataTable("#pendapatanbultbl", {
       searchable: false,
@@ -140,8 +140,6 @@
       sortable: true,
       paging: false
     });
-
-
   });
 
   function gettabledata(type,val){

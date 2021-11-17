@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-        <div class="row align-items-center">
+        <div class="row align-items-center" id="contentbody">
             <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
                     <option value="">Jenis Insentif</option>
@@ -54,7 +54,68 @@
                 </div>
                 </div>
                 <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                    <table id="pendapatanbultbl" class="table table-sm table-bordered table-hover">
+                    <button onclick="generatepdf()">test</button>
+                    <table id="pendbuldaerah" class="table table-sm table-bordered table-hover">
+                        <colgroup>
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 15%;">
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 10%;">
+                         </colgroup>
+                        <style>
+                            .dataTable-dropdown{
+                                display: inline;
+                                padding-right:10vh;
+                            }
+                            .dataTable-search{
+                                display: inline;
+                            }
+                            ul {
+                                list-style-type: none;
+                            }
+                            .dataTable-pagination-list{
+                                display: inline-flex;
+                            }
+                            .active{
+                                padding-right: 5px;
+                            }
+                            .dataTable-bottom{
+                                padding-top: 3vh;
+                            }
+                        </style>
+                        <thead>
+                            <tr class="align-middle" style="text-align: center;">
+                                <th scope="col" style="padding-right:2vh;">Negeri</th>
+                                <th scope="col">PT</th>
+                                <th scope="col">Jenis Insentif</th>
+                                <th scope="col">Tahun Terima Insentif</th>
+                                <th scope="col">Bil Penerima Insentif</th>
+                                <th scope="col">Jumlah Insentif (RM)</th>
+                                <th scope="col">Jumlah Jualan (RM)</th>
+                                <th scope="col">Purata Jualan (RM)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblname">
+                            @foreach ($reports as $report)
+                            <tr class="align-middle" style="text-align: center;">
+                                <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label">{{$report->negeri}}</label></td>
+                                <td class="text-nowrap"><label class="form-check-label">{{$report->daerah}}</label></td>
+                                <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">{{$report->jenis}}</label></td>
+                                <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
+                                <td class="text-nowrap"><label class="form-check-label">{{$report->tab4}}</label></td>
+                                <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
+                            </tr>
+                            @endforeach
+                            <tr class="align-middle" style="text-align: center;">
+                                <td colspan="4"></td>
+                                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_penerima}}</label></td>
+                                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_insentif}}</label></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
         </div>
@@ -62,4 +123,96 @@
 </div>
 @endsection
 @section('script')
+
+<script type="text/javascript">
+
+    $( document ).ready(function() {
+      const dataTableBasic = new simpleDatatables.DataTable("#pendbuldaerah", {
+        searchable: false,
+        fixedHeight: true,
+        sortable: true,
+        paging: false
+      });
+      
+    });
+
+    function gettabledata(type,val){
+      if (type == 'year'){
+        var year = val;
+        var jenis = document.getElementById("iptJenisInsentif").value;
+      }else if(type == 'jenis'){
+        var year = document.getElementById("iptYear").value;
+        var jenis = val;
+      }
+      $.ajax({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "/pendbulDaerah/apa",
+          type:"GET",
+          data: {     
+              tahun:year,
+              id_jenis_insentif:jenis
+          },
+          success: function(data) {
+  
+            $("#tblname").html(data);
+          }
+      });
+    }
+    
+    function generatepdf(){
+        // $.ajax({
+        //   headers: {
+        //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //   },
+        //   url: "/generatepdf",
+        //   type:"GET",
+        //   success: function(data) {
+        //     alert(data);
+        //   }55
+        // });
+        
+        var pdf = new jsPDF("p", "mm", "a4");
+        // var width = pdf.internal.pageSize.getWidth();
+        // var height = pdf.internal.pageSize.getHeight();
+        
+        source = $('#contentbody')[0];
+
+        // we support special element handlers. Register them with jQuery-style 
+        // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+        // There is no support for any other type of selectors 
+        // (class, of compound) at this time.
+        specialElementHandlers = {
+            // element with id of "bypass" - jQuery style selector
+            '#bypassme': function (element, renderer) {
+                // true = "handled elsewhere, bypass text extraction"
+                return true
+            }
+        };
+        margins = {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: 2480
+        };
+        // all coords and widths are in jsPDF instance's declared units
+        // 'inches' in this case
+        pdf.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left, // x coord
+            margins.top, { // y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+
+            function (dispose) {
+                // dispose: object with X, Y of the last line add to the PDF 
+                //          this allow the insertion of new lines after html
+                pdf.save('Test.pdf');
+            }, margins
+        );
+    }
+      
+</script>
 @endsection

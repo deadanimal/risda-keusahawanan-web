@@ -53,17 +53,20 @@
                         @foreach ($pegawai as $user)
                         <tr class="align-middle">
                             <td class="text-nowrap"><label class="form-check-label">{{$user->nama}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$user->nopekerja}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$user->nopekerja}}</label></td>
-                            <td class="text-nowrap"><select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:8rem;">
-                                <option selected="">Mukim</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <td class="text-nowrap"><label id="fldNegeri{{$user->id}}" class="form-check-label">{{$user->negerinama}}</label></td>
+                            <td class="text-nowrap"><label id="fldDaerah{{$user->id}}" class="form-check-label">{{$user->daerahnama}}</label></td>
+                            <td class="text-nowrap">
+                                <select id="ddmukim{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:10rem;" onchange="ChangeMukim({{$user->id}}, this.value)">
+                                <option selected="true" disabled="disabled">Mukim</option>
+                                @foreach ($ddMukim as $items)
+                                    <option value="{{ $items->U_Mukim_ID }}" {{ ( $items->U_Mukim_ID == $user->mukim) ? 'selected' : '' }}> 
+                                        {{ $items->Mukim }} 
+                                    </option>
+                                @endforeach
                             </select></td>
                             <td>
-                                <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:8rem;">
-                                    <option value="">Peranan</option>
+                                <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:9rem;">
+                                    <option selected="true" disabled="disabled">Peranan</option>
                                     @foreach ($ddPeranan as $items)
                                         <option value="{{ $items->peranan_id }}" {{ ( $items->peranan_id == $user->peranan_pegawai) ? 'selected' : '' }}> 
                                             {{ $items->kod_peranan }} 
@@ -100,6 +103,10 @@ $( document ).ready(function() {
     });
     //$('#pegawaitbl').DataTable();
     GetPengguna();
+    // var user = <?php echo $pegawai; ?>;
+    // for (var i=0; i < user.length; i++) {
+    //     ChangeMukim(user[i].id,user[i].mukim);
+    // }
 });
 
 function GetPengguna(){
@@ -124,6 +131,7 @@ function simpanpengguna(user){
         status = 0;
     }
     var peranan = $("#ddperanan"+id).find(":selected").val();
+    var mukim = $("#ddmukim"+id).find(":selected").val();
     //console.log(peranan);
     $.ajax({
         headers: {
@@ -134,11 +142,35 @@ function simpanpengguna(user){
         data: {     
             id:id,
             status:status,
-            peranan:peranan
+            peranan:peranan,
+            mukim:mukim
         },
         success: function(data) {
             //swal("Congrats!", ", Your account is created!", "success");
             alert("Akaun Pegawai Kemaskini Berjaya");
+            //location.reload();
+        }
+    });
+}
+
+function ChangeMukim(id,value){
+    //alert(value);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/pegawai/apa",
+        type:"GET",
+        data: {     
+            id:id,
+            value:value
+        },
+        success: function(data) {
+            $("#fldNegeri"+id).html(data.negeri);
+            $("#fldDaerah"+id).html(data.daerah);
+            //alert(data.negeri);
+            //swal("Congrats!", ", Your account is created!", "success");
+            //alert("Akaun Pegawai Kemaskini Berjaya");
             //location.reload();
         }
     });

@@ -14,7 +14,6 @@ class CreateDunsTable extends Migration
     public function up()
     {
         Schema::create('duns', function (Blueprint $table) {
-            						
             $table->id();
             $table->string('U_Dun_ID',20);
             $table->string('Dun',100);

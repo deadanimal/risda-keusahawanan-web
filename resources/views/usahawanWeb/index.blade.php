@@ -51,17 +51,20 @@
                         <input style="display: none;" type="text" name="user" value="{{$user->id}}"/>
                         <tr class="align-middle">
                             <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$user->U_Negeri_ID}}</label></td>
-                            <td class="text-nowrap"><select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
-                                <option selected="">Kawasan</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <td class="text-nowrap"><label class="form-check-label">{{$user->negeri}}</label></td>
+                            <td class="text-nowrap">
+                                <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
+                                <option selected="true" disabled="disabled" selected="">Kawasan</option>
+                                @foreach ($ddPT as $items)
+                                    <option value="{{ $items->Kod_PT }}" {{ ( $items->Kod_PT == $user->Kod_PT) ? 'selected' : '' }}> 
+                                        {{ $items->keterangan }} 
+                                    </option>
+                                @endforeach
                             </select></td>
                             <td class="align-middle text-nowrap">
                                 <div class="form-check form-switch" style="margin-left:10px;">
                                 <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                                <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox" onclick="aktifkanpengguna({{$user}})"/>
+                                <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox" onclick="aktifkanpengguna('status',{{$user}})"/>
                                 </div>
                             </td>
                             <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="tetapanpengguna('satu',{{$user}})">
@@ -270,14 +273,22 @@ function GetPengguna(){
     console.log(user);
 }
 
-function aktifkanpengguna(user){
+function aktifkanpengguna(type,user,input){
     var id = user.id;
     var status = "";
-    if ($("#flexSwitchCheckDefault"+id).is(":checked")){
-        status = 1;
-    }else{
-        status = 0;
+    if(type == 'kawasan'){
+        status = input;
+        //$("#ddPT"+user.id).val;
+        //alert(status);
+    }else if(type == 'status'){
+        if ($("#flexSwitchCheckDefault"+id).is(":checked")){
+            status = 1;
+        }else{
+            status = 0;
+        }
     }
+    
+    
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -285,16 +296,24 @@ function aktifkanpengguna(user){
         url: "{{ route('usahawan.post') }}",
         type:"PUT",
         data: {     
+            type:type,
             id:id,
             status:status
         },
         success: function(data) {
-            if(status == 1){
-                alert("Akaun Usahawan Berjaya Diaktifkan");
-            }else{
-                alert("Akaun Usahawan Berjaya Dinyahaktifkan");
+            if(type == 'status'){
+                if(status == 1){
+                    alert("Akaun Usahawan Berjaya Diaktifkan");
+                }else{
+                    alert("Akaun Usahawan Berjaya Dinyahaktifkan");
+                }
             }
-            
+            if(type == 'kawasan'){
+                alert("Pusat Tanggungjawab Usahawan Berjaya Dikemaskini");
+            }
+        },
+        error: function(){
+            alert('failure');
         }
     });
 }

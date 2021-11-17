@@ -104,7 +104,8 @@ class InsentifControllerWeb extends Controller
         return redirect('/insentifdetail/'.$request->id_pengguna);
     }
 
-    public function newreport($type, $request, $insenID){
+    public function newreport($type, $request, $insenID)
+    {
         if($type == 1){
             $report = new Report();
             $report->type = 1;

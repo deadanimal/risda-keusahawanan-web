@@ -26,6 +26,16 @@ class CreateReportsTable extends Migration
             $table->string('tab8',250)->nullable();
             $table->string('tab9',250)->nullable();
             $table->string('tab10',250)->nullable();
+            $table->string('tab11',250)->nullable();
+            $table->string('tab12',250)->nullable();
+            $table->string('tab13',250)->nullable();
+            $table->string('tab14',250)->nullable();
+            $table->string('tab15',250)->nullable();
+            $table->string('tab16',250)->nullable();
+            $table->string('tab17',250)->nullable();
+            $table->string('tab18',250)->nullable();
+            $table->string('tab19',250)->nullable();
+            $table->string('tab20',250)->nullable();
             $table->timestamps();
         });
     }

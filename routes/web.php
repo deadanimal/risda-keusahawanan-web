@@ -18,8 +18,15 @@ use App\Http\Controllers\Web\PendapatanBulananControllerWeb;
 use App\Http\Controllers\Web\PendBulDaerahControllerWeb;
 use App\Http\Controllers\Web\PendBulDunControllerWeb;
 use App\Http\Controllers\Web\LaporanInsentifControllerWeb;
+use App\Http\Controllers\Web\InsentifJenisControllerWeb;
+use App\Http\Controllers\Web\InsentifJantinaUmurControllerWeb;
 use App\Http\Controllers\Web\PemantauanLawatanControllerWeb;
+use App\Http\Controllers\Web\PLDaerahControllerWeb;
+use App\Http\Controllers\Web\PLStafNegeriControllerWeb;
+use App\Http\Controllers\Web\PLIndividuControllerWeb;
 use App\Http\Controllers\Web\LaporanAliranTunaiControllerWeb;
+use App\Http\Controllers\PDFController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,10 +62,23 @@ Route::resource('/audittrail', AuditTrailControllerWeb::class);
 Route::resource('/temulawatan', TemuLawatanControllerWeb::class);
 
 Route::resource('/laporanprofil', LaporanProfilControllerWeb::class);
+
 Route::resource('/pendapatanbulanan', PendapatanBulananControllerWeb::class);
 Route::resource('/pendbulDaerah', PendBulDaerahControllerWeb::class);
 Route::resource('/pendbulDun', PendBulDunControllerWeb::class);
+
 Route::resource('/laporaninsentif', LaporanInsentifControllerWeb::class);
+Route::resource('/insenjenis', InsentifJenisControllerWeb::class);
+Route::resource('/insenjantinaumur', InsentifJantinaUmurControllerWeb::class);
+
 Route::resource('/pemantauanlawatan', PemantauanLawatanControllerWeb::class);
+Route::resource('/pantauDaerah', PLDaerahControllerWeb::class);
+Route::resource('/pantaustafnegeri', PLStafNegeriControllerWeb::class);
+Route::resource('/pantauindividu', PLIndividuControllerWeb::class);
+
+
 Route::resource('/laporanalirantunai', LaporanAliranTunaiControllerWeb::class);
+
+Route::post('generatereport', [LaporanProfilControllerWeb::class, 'generatereport'])->name('generatereport');
+
 require __DIR__.'/auth.php';
