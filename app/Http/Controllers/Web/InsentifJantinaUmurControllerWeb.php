@@ -62,9 +62,12 @@ class InsentifJantinaUmurControllerWeb extends Controller
             if($jumlah->satu != 0){
                 $report->percent1 = $report->tab4 / $jumlah->satu * 100;
             }
-            
-            $report->percent2 = $report->tab5 / $jumlah->tiga * 100;
-            $report->percent3 = $report->tab6 / $jumlah->lima * 100;
+            if($jumlah->tiga != 0){
+                $report->percent2 = $report->tab5 / $jumlah->tiga * 100;
+            }
+            if($jumlah->lima != 0){
+                $report->percent3 = $report->tab6 / $jumlah->lima * 100;
+            }
             
             $report->jumpercent = round($report->jumbil / $jumlah->tujuh * 100, 2);
             $jumlah->lapan = $jumlah->lapan + $report->jumpercent;

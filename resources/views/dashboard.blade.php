@@ -37,6 +37,8 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
     <script src="./../../js/datatables.js"type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
 </head>
 <script>
       var isRTL = JSON.parse(localStorage.getItem('isRTL'));
@@ -85,32 +87,20 @@
             <div class="navbar-vertical-content scrollbar">
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                 <li class="nav-item">
-                  <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('temulawatan.*') ? 'true' : 'false' }}" aria-controls="dashboard">
+                  <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('temulawatan.*') || request()->routeIs('dash.*') ? 'true' : 'false' }}" aria-controls="dashboard">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span>
                     </div>
                   </a>
-                  <ul class="nav collapse {{ request()->routeIs('temulawatan.*') ? 'show' : 'collapse' }}" id="dashboard">
+                  <ul class="nav collapse {{ request()->routeIs('temulawatan.*') || request()->routeIs('dash.*') ? 'show' : 'collapse' }}" id="dashboard">
                     <li class="nav-item"><a class="nav-link {{  request()->routeIs('temulawatan.*') ? 'active' : '' }}" href="/temulawatan">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Temujanji Lawatan</span>
                         </div>
                       </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#statistik" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('dash.*') ? 'active' : '' }}" href="/dash">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Statistik</span>
                         </div>
                       </a>
-                      <ul class="nav collapse false" id="statistik">
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/form-control.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jantina</span>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/input-group.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori Usahawan</span>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
                     </li>
                   </ul>
                 </li>
@@ -227,37 +217,37 @@
                         </div>
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('pemantauanlawatan.*') || request()->routeIs('pantauDaerah.*') || request()->routeIs('pantaustafnegeri.*') || request()->routeIs('pantauindividu.*') ? 'show' : 'collapse' }}" id="laporanlawatan">
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pemantauanlawatan.*') ? 'active' : '' }}" href="/pemantauanlawatan">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pemantauanlawatan.*') ? 'active' : '' }}" href="/pemantauanlawatan" onclick="generatereport(7)">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                         </div></a>
                       </li>
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauDaerah.*') ? 'active' : '' }}" href="/pantauDaerah">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauDaerah.*') ? 'active' : '' }}" href="/pantauDaerah" onclick="generatereport(8)">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
                         </div></a>
                       </li>
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantaustafnegeri.*') ? 'active' : '' }}" href="/pantaustafnegeri">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantaustafnegeri.*') ? 'active' : '' }}" href="/pantaustafnegeri" onclick="generatereport(9)">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Staf Mengikut Negeri</span>
                         </div></a>
                       </li>
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauindivivdu.*') ? 'active' : '' }}" href="/pantauindivivdu">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauindivivdu.*') ? 'active' : '' }}" href="/pantauindivivdu" onclick="generatereport(10)">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pemantauan Individu</span>
                         </div></a>
                       </li>
                     </ul>
-                    <a class="nav-link dropdown-indicator" href="#laporanalirantunai" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanalirantunai.*') ? 'true' : 'false' }}" aria-controls="komponen">
+                    <a class="nav-link dropdown-indicator" href="#laporanalirantunai" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanlejar.*') || request()->routeIs('penyatauntungrugi.*') ? 'true' : 'false' }}" aria-controls="komponen">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Aliran Tunai</span>
                         </div>
                     </a>
-                    <ul class="nav collapse {{ request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanalirantunai.*') ? 'show' : 'collapse' }}" id="laporanalirantunai">
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanalirantunai.*') ? 'active' : '' }}" href="/laporanalirantunai">
+                    <ul class="nav collapse {{ request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanlejar.*') || request()->routeIs('penyatauntungrugi.*') ? 'show' : 'collapse' }}" id="laporanalirantunai">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanalirantunai.*') ? 'active' : '' }}" href="/laporanalirantunai" onclick="generatereport(11)">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Aliran Tunai</span>
                         </div></a>
                       </li>
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanalirantunai.*') ? 'active' : '' }}" href="/laporanalirantunai">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanlejar.*') ? 'active' : '' }}" href="/laporanlejar" onclick="generatereport(12)">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Laporan Lejar</span>
                         </div></a>
                       </li>
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanalirantunai.*') ? 'active' : '' }}" href="/laporanalirantunai">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('penyatauntungrugi.*') ? 'active' : '' }}" href="/penyatauntungrugi" onclick="generatereport(13)">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Penyata Untung Rugi</span>
                         </div></a>
                       </li>

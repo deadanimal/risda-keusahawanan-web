@@ -9,6 +9,8 @@ use App\Models\Report;
 use App\Models\User;
 use App\Models\Usahawan;
 use App\Models\Perniagaan;
+use App\Models\Aliran;
+use App\Models\KategoriAliran;
 
 class LaporanProfilControllerWeb extends Controller
 {
@@ -294,6 +296,83 @@ class LaporanProfilControllerWeb extends Controller
                 return "Laporan Berjaya Dijana";
             }
         }
+
+        if($request->type == 7){
+            $insentifs = Insentif::all();
+            if($insentifs->count()==0){
+                return "Tiada Data Insentif Dijumpai";
+            }else{
+                foreach ($insentifs as $insentif) {
+                    $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                    $insentif->negeri = $usahawan->U_Negeri_ID;
+                    $insentif->usahawan = $usahawan->id;
+                    $reports = Report::where('type', 7)->get();
+                    if($reports->count()==0){
+                        $this->newreport(7,$insentif,$insentif->id);
+                    }else{
+                        $update = false;
+                        foreach ($reports as $report) {
+                            if ($report->tab3 == $insentif->tahun_terima_insentif && $report->tab2 == $insentif->id_jenis_insentif && $report->tab1 == $insentif->negeri) {
+                                
+                                $update = true;
+                                break;
+                            }
+                        }
+                        if($update == false){
+                            $this->newreport(7,$insentif,"1");
+                        }
+                    }
+                }
+                return "Laporan Berjaya Dijana";
+            }
+        }
+
+        if($request->type == 8){
+            $insentifs = Insentif::all();
+            if($insentifs->count()==0){
+                return "Tiada Data Insentif Dijumpai";
+            }else{
+                foreach ($insentifs as $insentif) {
+                    $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                    $insentif->negeri = $usahawan->U_Negeri_ID;
+                    $insentif->daerah = $usahawan->U_Daerah_ID;
+                    $insentif->dun = $usahawan->U_Dun_ID;
+                    $reports = Report::where('type', 8)->get();
+                    if($reports->count()==0){
+                        $this->newreport(8,$insentif,$insentif->id);
+                    }else{
+                        $update = false;
+                        foreach ($reports as $report) {
+                            if ($report->tab4 == $insentif->tahun_terima_insentif && $report->tab3 == $insentif->id_jenis_insentif && $report->tab1 == $insentif->negeri && $report->tab2 == $insentif->daerah) {
+                                $update = true;
+                            }
+                        }
+                        if($update == false){
+                            $this->newreport(8,$insentif,"1");
+                        }
+                    }
+                }
+                return "Laporan Berjaya Dijana";
+            }
+        }
+
+        if($request->type == 11){
+            $alirans = Aliran::all();
+            if($alirans->count()==0){
+                return "Tiada Data Insentif Dijumpai";
+            }else{
+                foreach ($alirans as $aliran) {
+                    $reports = Report::where('type', 11)->get();
+                    if($reports->count()==0){
+                        $this->newreport(11,$aliran,$aliran->id);
+                    }else{
+                    
+                    }
+                }
+            }
+        }
     }
 
     public function newreport($type, $request, $others)
@@ -433,6 +512,57 @@ class LaporanProfilControllerWeb extends Controller
             $report->tab7 = $request->umur;
             $report->tab8 = $umurgrp;
             $report->save();
+        }else if($type == 7){
+            $report = new Report();
+            $report->type = 7;
+            $report->tab1 = $request->negeri;
+            $report->tab2 = $request->id_jenis_insentif;
+            $report->tab3 = $request->tahun_terima_insentif;
+            $report->tab4 = 1;
+            $report->tab5 = 1;
+            $report->tab6 = 1;
+            $report->tab7 = 1;
+            $report->save();
+        }else if($type == 8){
+            $report = new Report();
+            $report->type = 8;
+            $report->tab1 = $request->negeri;
+            $report->tab2 = $request->daerah;
+            $report->tab3 = $request->id_jenis_insentif;
+            $report->tab4 = $request->tahun_terima_insentif;
+            $report->tab5 = 1;
+            $report->tab6 = 1;
+            $report->tab7 = 1;
+            $report->tab8 = 1;
+            $report->save();
+        }
+
+        else if($type == 11){
+            $report = new Report();
+            $report->type = 11;
+            $report->tab1 = $request->bulan;
+            $report->tab2 = $request->tahun;
+            $report->tab3 = $request->tarikh_aliran;
+
+            $kate_aliran = $request->id_kategori_aliran;
+            $kate_aliran = KategoriAliran::where('id', $request->id_kategori_aliran)->first();
+            if($kate_aliran->jenis_aliran == "tunai_masuk"){
+                $report->tab6 = $request->jumlah_aliran;
+                if($kate_aliran->nama_kategori_aliran == "JUALAN/PEROLEHAN"){
+                    $report->tab4 = 1;
+                }else if($kate_aliran->nama_kategori_aliran == "HASIL SEWAAN"){
+                    $report->tab4 = 2;
+                }else if($kate_aliran->nama_kategori_aliran == "HASIL DIVIDEN"){
+                    $report->tab4 = 2;
+                }
+            }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
+                $report->tab4 = 3;
+                $report->tab7 = $request->jumlah_aliran;
+            }
+            
+            $report->tab5 = $request->kategori_aliran;
+            $report->save();
+
         }
     }
 

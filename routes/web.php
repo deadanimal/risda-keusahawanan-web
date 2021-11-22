@@ -24,7 +24,10 @@ use App\Http\Controllers\Web\PemantauanLawatanControllerWeb;
 use App\Http\Controllers\Web\PLDaerahControllerWeb;
 use App\Http\Controllers\Web\PLStafNegeriControllerWeb;
 use App\Http\Controllers\Web\PLIndividuControllerWeb;
-use App\Http\Controllers\Web\LaporanAliranTunaiControllerWeb;
+use App\Http\Controllers\Web\LAT\LaporanAliranTunaiControllerWeb;
+use App\Http\Controllers\Web\LAT\LaporanLejarControllerWeb;
+use App\Http\Controllers\Web\LAT\PenyataUntungRugiControllerWeb;
+use App\Http\Controllers\Web\DashControllerWeb;
 use App\Http\Controllers\PDFController;
 
 /*
@@ -76,8 +79,11 @@ Route::resource('/pantauDaerah', PLDaerahControllerWeb::class);
 Route::resource('/pantaustafnegeri', PLStafNegeriControllerWeb::class);
 Route::resource('/pantauindividu', PLIndividuControllerWeb::class);
 
-
 Route::resource('/laporanalirantunai', LaporanAliranTunaiControllerWeb::class);
+Route::resource('/laporanlejar', LaporanLejarControllerWeb::class);
+Route::resource('/penyatauntungrugi', PenyataUntungRugiControllerWeb::class);
+
+Route::resource('/dash', DashControllerWeb::class);
 
 Route::post('generatereport', [LaporanProfilControllerWeb::class, 'generatereport'])->name('generatereport');
 

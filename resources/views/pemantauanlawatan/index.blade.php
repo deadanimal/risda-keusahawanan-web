@@ -37,7 +37,6 @@
                         <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
-                        <col span="1" style="width:10%;">
                     </colgroup>
                     <style>
                         .dataTable-dropdown{
@@ -66,27 +65,20 @@
                             <th scope="col" rowspan="3">Negeri</th>
                             <th scope="col" rowspan="3">Jenis Insentif</th>
                             <th scope="col" rowspan="3">Tahun</th>
-                            <th scope="col" colspan="10">Jenis Perniagaan</th>
-                            <th scope="col" rowspan="3">Jumlah Project</th>
-                            <th scope="col" rowspan="3">%</th>
+                            <th scope="col" rowspan="3">Jumlah Keseluruhan Usahawan</th>
+                            <th scope="col" >Bulan Semasa</th>
+                            <th scope="col" colspan="3">Kumulatif</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th scope="col" colspan="2">P. PRODUK MAKANAN</th>
-                            <th scope="col" colspan="2">P. PRODUK BUKAN MAKANAN</th>
-                            <th scope="col" colspan="2">P. PRODUK PERTANIAN</th>
-                            <th scope="col" colspan="2">PERKHIDMATAN PEMASARAN</th>
-                            <th scope="col" colspan="2">PERKHIDMATAN BUKAN PEMASARAN</th>
+                            <th scope="col" >Telah Dilawat</th>
+                            <th scope="col" >Telah Dilawat</th>
+                            <th scope="col" >Baki</th>
+                            <th scope="col" >Peratusan Usahawan Keseluruhan</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th scope="col">Bil</th>
-                            <th scope="col">%</th>
-                            <th scope="col">Bil</th>
-                            <th scope="col">%</th>
-                            <th scope="col">Bil</th>
-                            <th scope="col">%</th>
-                            <th scope="col">Bil</th>
-                            <th scope="col">%</th>
-                            <th scope="col">Bil</th>
+                            <th scope="col">Bil Usahawan (Org)</th>
+                            <th scope="col">Bil Usahawan (Org)</th>
+                            <th scope="col">Bil Usahawan (Org)</th>
                             <th scope="col">%</th>
                         </tr>
                     </thead>
@@ -97,6 +89,11 @@
                             <td class="text-nowrap" style="padding-right:2vh;"><?php echo $num++;?></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$report->negeri}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$report->jenis}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab4}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab6}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab7}}</label></td>
                         </tr>
                         @endforeach
                     </tbody>
