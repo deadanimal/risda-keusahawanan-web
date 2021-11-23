@@ -15,27 +15,9 @@ class ProdukController extends Controller
     public function index()
     {
         $produk = Produk::all();
-        return view('produk.index', [
-            'produk' => $produk
-        ]);
+        return response()->json($produk);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $produk = new Produk();
@@ -50,7 +32,7 @@ class ProdukController extends Controller
 
         $produk->save();
 
-        return redirect('/produk');
+        return response()->json($produk);
     }
 
     /**

@@ -3,39 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
+use App\Models\Stok;
+use App\Models\Katalog;
 use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         $pelanggan = Pelanggan::all();
-        return view('pelanggan.index', [
-            'pelanggan' => $pelanggan
-        ]);
+        return response()->json($pelanggan);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $pelanggan = new Pelanggan();
@@ -52,42 +32,24 @@ class PelangganController extends Controller
 
         $pelanggan->save();
 
-        return redirect('/pelanggan');
+        return response()->json($pelanggan);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pelanggan $pelanggan)
+   
+    public function show($id)
     {
-        return view('pelanggan.show', [
-            'pelanggan' => $pelanggan
-        ]);
+
+        $pelanggan = Katalog::where('id_pengguna', $id)
+        ->join('stoks', 'katalogs.id', 'stoks.id_katalog')
+        ->join('pelanggans', 'stoks.id_pelanggan', 'pelanggans.id' )
+        ->select('*')
+        ->get();
+
+        // dd($pelanggan);
+        return response()->json($pelanggan);
+       
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pelanggan $pelanggan)
-    {
-        return view('pelanggan.edit', [
-            'pelanggan' => $pelanggan
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Pelanggan $pelanggan)
     {
         $pelanggan->nama_pelanggan = $request->nama_pelanggan;
@@ -102,17 +64,14 @@ class PelangganController extends Controller
 
         $pelanggan->save();
 
-        return redirect('/pelanggan');
+        return response()->json($pelanggan);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Pelanggan $pelanggan)
     {
-        //
+        $pelanggan->delete();
+
+        return response()->json($pelanggan);
     }
 }

@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\AliranController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DaerahController;
 use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KategoriAliranController;
+use App\Http\Controllers\NegeriController;
 use App\Http\Controllers\PekebunController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PerniagaanController;
+use App\Http\Controllers\StokController;
 use App\Http\Controllers\SyarikatController;
 use App\Http\Controllers\UsahawanController;
 use App\Http\Controllers\UserController;
@@ -40,6 +44,12 @@ Route::apiResource('perniagaan', PerniagaanController::class);
 Route::apiResource('kategori_aliran', KategoriAliranController::class);
 Route::apiResource('aliran', AliranController::class);
 Route::apiResource('katalog', KatalogController::class);
+Route::apiResource('pelanggan', PelangganController::class);
+Route::apiResource('stok', StokController::class);
+
+// datalib 
+Route::apiResource('daerah', DaerahController::class);
+Route::apiResource('negeri', NegeriController::class);
 
 // Route::('checkUser', [UserController::class, 'checkUser']);
 Route::post('/sanctum/token', function (Request $request) {
@@ -59,3 +69,7 @@ Route::post('/sanctum/token', function (Request $request) {
 
     return response()->json($user->createToken($request->no_kp)->plainTextToken);
 });
+
+
+//custom
+Route::get('deleteStok/{id}', [StokController::class, 'deleteMany']);
