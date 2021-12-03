@@ -15,7 +15,7 @@ class UsahawanSeeder extends Seeder
     public function run()
     {
         Usahawan::create([
-            'Kod_PT'=>'423199',
+            'Kod_PT'=>'1',
             'namausahawan'=>'user1',
             'nokadpengenalan'=>'123456789012',
             'tarikhlahir'=>'23-11-20',
@@ -35,7 +35,7 @@ class UsahawanSeeder extends Seeder
             'U_Dun_ID'=>'01140001',
             'U_Kampung_ID'=>'3',
             'U_Seksyen_ID'=>'6',
-            'id_kategori_usahawan'=>'6',
+            'id_kategori_usahawan'=>'KU01',
             // 'gambar_url'=>'user1',
             'notelefon'=>'0987654321',
             'nohp'=>'1234567890',
@@ -47,7 +47,7 @@ class UsahawanSeeder extends Seeder
         ]);
 
         Usahawan::create([
-            'Kod_PT'=>'423199',
+            'Kod_PT'=>'1',
             'namausahawan'=>'A.RAHMAN BIN ADAM',
             'nokadpengenalan'=>'600606015813',
             'tarikhlahir'=>'06-06-20',
@@ -67,7 +67,7 @@ class UsahawanSeeder extends Seeder
             'U_Dun_ID'=>'02004001',
             'U_Kampung_ID'=>'3',
             'U_Seksyen_ID'=>'6',
-            'id_kategori_usahawan'=>'6',
+            'id_kategori_usahawan'=>'KU02',
             // 'gambar_url'=>'user1',
             'notelefon'=>'0987654321',
             'nohp'=>'1234567890',
@@ -99,7 +99,7 @@ class UsahawanSeeder extends Seeder
             'U_Dun_ID'=>'02004002',
             'U_Kampung_ID'=>'3',
             'U_Seksyen_ID'=>'6',
-            'id_kategori_usahawan'=>'6',
+            'id_kategori_usahawan'=>'KU03',
             // 'gambar_url'=>'user1',
             'notelefon'=>'0987654321',
             'nohp'=>'1234567890',

@@ -50,14 +50,14 @@
                 <div class="row g-0">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas" height="400" style="padding:15px;"></canvas>
+                            <canvas id="canvas" height="400px" style="padding:15px;"></canvas>
                         </div>
                     </div>
                 </div>
                 <div class="row g-0">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas2" height="450" width="600" style="padding:15px;"></canvas>
+                            <canvas id="canvas2" height="450px" width="600" style="padding:15px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">
@@ -73,11 +73,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($jantinas as $key => $jantinaval)
                                         <tr class="align-middle" style="text-align: center;">
-                                            <td>Lelaki</td>
-                                            <td>8</td>
+                                            @if($jantinaval == 1)
+                                                <td>Lelaki</td>
+                                            @endif
+                                            @if($jantinaval == 2)
+                                                <td>Perempuan</td>
+                                            @endif
+                                            @if($jantinaval == 3)
+                                                <td>Lain Lain</td>
+                                            @endif
+                                            <td>{{$jantinanums[$key]}}</td>
                                             <td>80%</td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 </div>
@@ -95,7 +105,7 @@
                 <div class="row g-0">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas4" height="450" width="600" style="padding:15px;"></canvas>
+                            <canvas id="canvas4" height="450px" width="600" style="padding:15px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">
@@ -173,13 +183,25 @@
     function createchart(){
         var daerah = <?php echo $daerah; ?>;
         var insentif = <?php echo $insentif; ?>;
+        var countinsentif = <?php echo $countinsentif; ?>;
         var jumdaerah = [];
         var juminsen = [];
+        var countinsent = [];
 
         var jantina = <?php echo $jantina; ?>;
         var numjantina = <?php echo $jantinanum; ?>;
         var jumjantina = [];
         var jumnumjantina = [];
+
+        var jnsperniagaan = <?php echo $jnsperniagaan; ?>;
+        var numjnsperniagaan = <?php echo $jnsperniagaannum; ?>;
+        var jumjnsperniagaan = [];
+        var jumnumjnsperniagaan = [];
+
+        var kateusahawan = <?php echo $kateusahawan; ?>;
+        var numkateusahawan = <?php echo $kateusahawannum; ?>;
+        var jumkateusahawan = [];
+        var jumnumkateusahawan = [];
 
         for (var key in daerah) {
             if (Object.prototype.hasOwnProperty.call(daerah, key)) {
@@ -189,6 +211,11 @@
         for (var key in insentif) {
             if (Object.prototype.hasOwnProperty.call(insentif, key)) {
                 juminsen.push(insentif[key]);
+            }
+        }
+        for (var key in countinsentif) {
+            if (Object.prototype.hasOwnProperty.call(countinsentif, key)) {
+                countinsent.push(""+countinsentif[key]+" orang");
             }
         }
 
@@ -205,6 +232,42 @@
         for (var key in numjantina) {
             if (Object.prototype.hasOwnProperty.call(numjantina, key)) {
                 jumnumjantina.push(numjantina[key]);
+            }
+        }
+
+        for (var key in jnsperniagaan) {
+            if (Object.prototype.hasOwnProperty.call(jnsperniagaan, key)) {
+                if(jnsperniagaan[key] == "A"){
+                    jumjnsperniagaan.push("PENGELUARAN PRODUK MAKANAN");
+                }
+                if(jnsperniagaan[key] == "B"){
+                    jumjnsperniagaan.push("PENGELUARAN PRODUK BUKAN MAKANAN");
+                }
+                if(jnsperniagaan[key] == "C"){
+                    jumjnsperniagaan.push("PENGELUARAN PRODUK PERTANIAN	");
+                }
+                if(jnsperniagaan[key] == "D"){
+                    jumjnsperniagaan.push("PERKHIDMATAN PEMASARAN");
+                }
+                if(jnsperniagaan[key] == "E"){
+                    jumjnsperniagaan.push("PERKHIDMATAN BUKAN PEMASARAN	");
+                }
+            }
+        }
+        for (var key in numjnsperniagaan) {
+            if (Object.prototype.hasOwnProperty.call(numjnsperniagaan, key)) {
+                jumnumjnsperniagaan.push(numjnsperniagaan[key]);
+            }
+        }
+
+        for (var key in kateusahawan) {
+            if (Object.prototype.hasOwnProperty.call(kateusahawan, key)) {
+                jumkateusahawan.push(kateusahawan[key]);
+            }
+        }
+        for (var key in numkateusahawan) {
+            if (Object.prototype.hasOwnProperty.call(numkateusahawan, key)) {
+                jumnumkateusahawan.push(numkateusahawan[key]);
             }
         }
 
@@ -232,6 +295,32 @@
         var barChartData2 = {
             labels: jumjantina,
             datasets: datas2
+        };
+
+        var datas3 = [
+            {
+                label: 'Count',
+                backgroundColor: "pink",
+                data: jumnumjnsperniagaan
+            }
+        ];
+
+        var barChartData3 = {
+            labels: jumjnsperniagaan,
+            datasets: datas3
+        };
+
+        var datas4 = [
+            {
+                label: 'Count',
+                backgroundColor: "pink",
+                data: jumnumkateusahawan
+            }
+        ];
+
+        var barChartData4 = {
+            labels: jumkateusahawan,
+            datasets: datas4
         };
 
         var ctx = document.getElementById("canvas").getContext("2d");
@@ -267,7 +356,9 @@
                             const sum = juminsen.reduce((partial_sum, a) => partial_sum + a, 0);
                             var multistringText = [tooltipItems.yLabel];
                             var val = (tooltipItems.yLabel/sum *100).toFixed(2);
-                            val = "" + val + "%";
+                            val = "" + val + " %";
+                            multistringText[0] = "RM "+tooltipItems.yLabel;
+                            multistringText.push(countinsent[tooltipItems.index]);
                             multistringText.push(val);
                             return multistringText;
                         }
@@ -300,7 +391,7 @@
         var ctx = document.getElementById("canvas3").getContext("2d");
         window.myBar = new Chart(ctx, {
             type: 'bar',
-            data: barChartData,
+            data: barChartData3,
             options: {
                 elements: {
                     rectangle: {
@@ -313,6 +404,31 @@
                 title: {
                     display: true,
                     text: 'Mengikut Jenis Perniagaan'
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            suggestedMin: 0
+                        }
+                    }]
+                },
+                tooltips: {
+                    enabled: true,
+                    mode: 'single',
+                    callbacks: {
+                        label: function(tooltipItems, data) { 
+                            const sum = jumnumjnsperniagaan.reduce((partial_sum, a) => partial_sum + a, 0);
+                            var multistringText = [tooltipItems.yLabel];
+                            var val = (tooltipItems.yLabel/sum *100).toFixed(2);
+                            val = "" + val + "%";
+                            multistringText.push(val);
+                            return multistringText;
+                        }
+                    }
+                },
+                legend: {
+                    display: false
                 }
             }
         });
@@ -338,7 +454,7 @@
         var ctx = document.getElementById("canvas5").getContext("2d");
         window.myBar = new Chart(ctx, {
             type: 'pie',
-            data: barChartData2,
+            data: barChartData4,
             options: {
                 elements: {
                     rectangle: {

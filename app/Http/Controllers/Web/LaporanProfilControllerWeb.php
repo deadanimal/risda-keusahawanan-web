@@ -11,6 +11,7 @@ use App\Models\Usahawan;
 use App\Models\Perniagaan;
 use App\Models\Aliran;
 use App\Models\KategoriAliran;
+use App\Models\Lawatan;
 
 class LaporanProfilControllerWeb extends Controller
 {
@@ -72,7 +73,7 @@ class LaporanProfilControllerWeb extends Controller
                     $usahawan = Usahawan::where('id', $user->usahawanid)->first();
                     $insentif->negeri = $usahawan->U_Negeri_ID;
                     $insentif->daerah = $usahawan->U_Daerah_ID;
-                    $insentif->dun = $usahawan->U_Dun_ID;
+                    // $insentif->dun = $usahawan->U_Dun_ID;
                     $reports = Report::where('type', 2)->get();
                     if($reports->count()==0){
                         $this->newreport(2,$insentif,$insentif->id);
@@ -298,30 +299,71 @@ class LaporanProfilControllerWeb extends Controller
         }
 
         if($request->type == 7){
-            $insentifs = Insentif::all();
-            if($insentifs->count()==0){
+            $insentifuser = Insentif::select('id_pengguna')->distinct()->get();
+            //return json_encode($insentifuser);
+            if($insentifuser->count()==0){
                 return "Tiada Data Insentif Dijumpai";
             }else{
-                foreach ($insentifs as $insentif) {
-                    $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
-                    $insentif->negeri = $usahawan->U_Negeri_ID;
-                    $insentif->usahawan = $usahawan->id;
-                    $reports = Report::where('type', 7)->get();
-                    if($reports->count()==0){
-                        $this->newreport(7,$insentif,$insentif->id);
+                foreach ($insentifuser as $insentifusers) {
+                    $insentifs = Insentif::where('id_pengguna',$insentifusers->id_pengguna)->get();
+                    //return json_encode($insentifs);
+                    
+                    if($insentifs->count()==0){
+                        return "Tiada Data Insentif Dijumpai";
                     }else{
-                        $update = false;
-                        foreach ($reports as $report) {
-                            if ($report->tab3 == $insentif->tahun_terima_insentif && $report->tab2 == $insentif->id_jenis_insentif && $report->tab1 == $insentif->negeri) {
-                                
-                                $update = true;
-                                break;
+                        foreach ($insentifs as $insentif) {
+                            $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                            $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                            $insentif->negeri = $usahawan->U_Negeri_ID;
+                            $insentif->usahawan = $user->id;
+
+                            $reports = Report::where('type', 7)->get();
+                            if($reports->count()==0){
+                                $this->newreport(7,$insentif,$insentif->id);
+                            }else{
+                                $update = false;
+                                foreach ($reports as $report) {
+                                    if($report->tab7 == $insentif->usahawan){
+                                        if ($report->tab2 == $insentif->tahun_terima_insentif && $report->tab1 == $insentif->negeri) {
+                                            $update = true;
+                                        }
+                                    }else{
+                                        if ($report->tab2 == $insentif->tahun_terima_insentif && $report->tab1 == $insentif->negeri) {
+                                            
+                                            $report->tab7 = $insentif->usahawan;
+
+                                            $lawatan = Lawatan::where('id_pengguna', $insentif->usahawan)
+                                            ->where('status_lawatan', 'selesai')
+                                            ->whereYear('tarikh_lawatan', $insentif->tahun_terima_insentif)
+                                            ->first();
+
+                                            // $lawatan->tarikh_lawatan->format('m');
+                                            $month = date('m');
+                                            // if($report->tab7 != $insentif->usahawan){
+                                                $report->tab3 = $report->tab3 + 1;
+                                                if($lawatan==null){
+                                                    $report->tab6 = $report->tab6 + 1;
+                                                }else{
+                                                    $lwtnmonth = date("m",strtotime($lawatan->tarikh_lawatan));
+                                                    if($lwtnmonth == $month){
+                                                        $report->tab4 = $report->tab4 + 1;
+                                                    }
+                                                    $report->tab5 = $report->tab5 + 1;
+                                                }
+                                            // } 
+                                            
+                                            $report->save();
+                                            $update = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if($update == false){
+                                    $this->newreport(7,$insentif,"1");
+                                }
                             }
                         }
-                        if($update == false){
-                            $this->newreport(7,$insentif,"1");
-                        }
+                        //return json_encode($insentifs);
                     }
                 }
                 return "Laporan Berjaya Dijana";
@@ -329,28 +371,66 @@ class LaporanProfilControllerWeb extends Controller
         }
 
         if($request->type == 8){
-            $insentifs = Insentif::all();
-            if($insentifs->count()==0){
+            $insentifuser = Insentif::select('id_pengguna')->distinct()->get();
+            //return json_encode($insentifuser);
+            if($insentifuser->count()==0){
                 return "Tiada Data Insentif Dijumpai";
             }else{
-                foreach ($insentifs as $insentif) {
-                    $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
-                    $insentif->negeri = $usahawan->U_Negeri_ID;
-                    $insentif->daerah = $usahawan->U_Daerah_ID;
-                    $insentif->dun = $usahawan->U_Dun_ID;
-                    $reports = Report::where('type', 8)->get();
-                    if($reports->count()==0){
-                        $this->newreport(8,$insentif,$insentif->id);
+                foreach ($insentifuser as $insentifusers) {
+                    $insentifs = Insentif::where('id_pengguna',$insentifusers->id_pengguna)->get();
+                    //return json_encode($insentifs);
+                    
+                    if($insentifs->count()==0){
+                        return "Tiada Data Insentif Dijumpai";
                     }else{
-                        $update = false;
-                        foreach ($reports as $report) {
-                            if ($report->tab4 == $insentif->tahun_terima_insentif && $report->tab3 == $insentif->id_jenis_insentif && $report->tab1 == $insentif->negeri && $report->tab2 == $insentif->daerah) {
-                                $update = true;
+                        foreach ($insentifs as $insentif) {
+                            $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                            $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                            $insentif->negeri = $usahawan->U_Negeri_ID;
+                            $insentif->daerah = $usahawan->U_Daerah_ID;
+                            $insentif->usahawan = $user->id;
+
+                            $reports = Report::where('type', 8)->get();
+                            if($reports->count()==0){
+                                $this->newreport(8,$insentif,$insentif->id);
+                            }else{
+                                $update = false;
+                                foreach ($reports as $report) {
+                                    if($report->tab8 == $insentif->usahawan){
+                                        if ($report->tab3 == $insentif->tahun_terima_insentif && $report->tab2 == $insentif->daerah && $report->tab1 == $insentif->negeri) {
+                                            $update = true;
+                                        }
+                                    }else{
+                                        if ($report->tab3 == $insentif->tahun_terima_insentif && $report->tab2 == $insentif->daerah && $report->tab1 == $insentif->negeri) {
+                                            $report->tab8 = $insentif->usahawan;
+
+                                            $lawatan = Lawatan::where('id_pengguna', $insentif->usahawan)
+                                            ->where('status_lawatan', 'selesai')
+                                            ->whereYear('tarikh_lawatan', $insentif->tahun_terima_insentif)
+                                            ->first();
+
+                                            $month = date('m');
+                                            $report->tab4 = $report->tab4 + 1;
+                                            if($lawatan==null){
+                                                $report->tab7 = $report->tab7 + 1;
+                                            }else{
+                                                $lwtnmonth = date("m",strtotime($lawatan->tarikh_lawatan));
+                                                if($lwtnmonth == $month){
+                                                    $report->tab5 = $report->tab5 + 1;
+                                                }
+                                                $report->tab6 = $report->tab6 + 1;
+                                            }
+                                            
+                                            $report->save();
+                                            $update = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if($update == false){
+                                    $this->newreport(8,$insentif,"1");
+                                }
                             }
-                        }
-                        if($update == false){
-                            $this->newreport(8,$insentif,"1");
                         }
                     }
                 }
@@ -516,24 +596,49 @@ class LaporanProfilControllerWeb extends Controller
             $report = new Report();
             $report->type = 7;
             $report->tab1 = $request->negeri;
-            $report->tab2 = $request->id_jenis_insentif;
-            $report->tab3 = $request->tahun_terima_insentif;
-            $report->tab4 = 1;
-            $report->tab5 = 1;
-            $report->tab6 = 1;
-            $report->tab7 = 1;
+            $report->tab2 = $request->tahun_terima_insentif;
+            $report->tab3 = 1;
+            $lawatan = Lawatan::where('id_pengguna', $request->usahawan)
+                ->where('status_lawatan', 'selesai')
+                ->whereYear('tarikh_lawatan', $request->tahun_terima_insentif)
+                ->first();
+
+                $month = date('m');
+                if($lawatan==null){
+                    $report->tab6 = 1;
+                }else{
+                    $lwtnmonth = date("m",strtotime($lawatan->tarikh_lawatan));
+                    if($lwtnmonth == $month){
+                        $report->tab4 = 1;
+                    }
+                    $report->tab5 = 1;
+                }
+            $report->tab7 = $request->usahawan;
             $report->save();
         }else if($type == 8){
             $report = new Report();
             $report->type = 8;
             $report->tab1 = $request->negeri;
             $report->tab2 = $request->daerah;
-            $report->tab3 = $request->id_jenis_insentif;
-            $report->tab4 = $request->tahun_terima_insentif;
-            $report->tab5 = 1;
-            $report->tab6 = 1;
-            $report->tab7 = 1;
-            $report->tab8 = 1;
+            $report->tab3 = $request->tahun_terima_insentif;
+            $report->tab4 = 1;
+
+            $lawatan = Lawatan::where('id_pengguna', $request->usahawan)
+                ->where('status_lawatan', 'selesai')
+                ->whereYear('tarikh_lawatan', $request->tahun_terima_insentif)
+                ->first();
+
+                $month = date('m');
+                if($lawatan==null){
+                    $report->tab7 = 1;
+                }else{
+                    $lwtnmonth = date("m",strtotime($lawatan->tarikh_lawatan));
+                    if($lwtnmonth == $month){
+                        $report->tab5 = 1;
+                    }
+                    $report->tab6 = 1;
+                }
+            $report->tab8 = $request->usahawan;
             $report->save();
         }
 

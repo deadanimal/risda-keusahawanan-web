@@ -125,7 +125,7 @@
                     </a>
                   @endif
                   @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5 || Auth::user()->role == 6)
-                    <a class="nav-link {{  request()->routeIs('insentif.*') ? 'active' : '' }}" href="/insentif" role="button">
+                    <a class="nav-link {{  request()->routeIs('insentif.*') || request()->routeIs('insentifdetail.*') ? 'active' : '' }}" href="/insentif" role="button">
                       <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tambah Insentif</span>
                       </div>
                     </a>
@@ -216,7 +216,7 @@
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Pemantauan Lawatan</span>
                         </div>
                     </a>
-                    <ul class="nav collapse {{ request()->routeIs('pemantauanlawatan.*') || request()->routeIs('pantauDaerah.*') || request()->routeIs('pantaustafnegeri.*') || request()->routeIs('pantauindividu.*') ? 'show' : 'collapse' }}" id="laporanlawatan">
+                    <ul class="nav collapse {{ request()->routeIs('pemantauanlawatan.*') || request()->routeIs('pantauDaerah.*') || request()->routeIs('pantaustafnegeri.*') || request()->routeIs('pantauindividu.*') || request()->routeIs('pantauindividudetail.*') ? 'show' : 'collapse' }}" id="laporanlawatan">
                       <li class="nav-item"><a class="nav-link {{  request()->routeIs('pemantauanlawatan.*') ? 'active' : '' }}" href="/pemantauanlawatan" onclick="generatereport(7)">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                         </div></a>
@@ -229,7 +229,8 @@
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Staf Mengikut Negeri</span>
                         </div></a>
                       </li>
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauindivivdu.*') ? 'active' : '' }}" href="/pantauindivivdu" onclick="generatereport(10)">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauindividu.*') || request()->routeIs('pantauindividudetail.*') ? 'active' : '' }}" href="/pantauindividu">
+                        {{-- onclick="generatereport(10)" --}}
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pemantauan Individu</span>
                         </div></a>
                       </li>
@@ -273,15 +274,15 @@
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
-              {{-- <li class="nav-item">
+              <li class="nav-item">
                 <div class="theme-control-toggle fa-icon-wait px-2">
                   <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle" type="checkbox" data-theme-control="theme" value="dark" />
                   <label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to light theme"><span class="fas fa-sun fs-0"></span></label>
                   <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to dark theme"><span class="fas fa-moon fs-0"></span></label>
                 </div>
-              </li> --}}
+              </li>
               
-              <li class="nav-item dropdown">
+              {{-- <li class="nav-item dropdown">
                 <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait" id="navbarDropdownNotification" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-bell" data-fa-transform="shrink-6" style="font-size: 33px;"></span></a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-card dropdown-menu-notification" aria-labelledby="navbarDropdownNotification">
                   <div class="card card-notification shadow-none">
@@ -382,7 +383,7 @@
                   </div>
                 </div>
 
-              </li>
+              </li> --}}
               <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="avatar avatar-xl">
                     <img class="rounded-circle" src="../../../assets/img/gear.png" alt="" style="height:80%;width:80%;"/>

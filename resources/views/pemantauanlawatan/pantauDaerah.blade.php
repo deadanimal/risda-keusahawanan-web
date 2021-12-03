@@ -3,31 +3,26 @@
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center" id="contentbody">
-            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
-                    <option value="">Jenis Insentif</option>
-                      @foreach ($ddInsentif as $items)
-                          <option value="{{ $items->id_jenis_insentif }}"> 
-                              {{ $items->nama_insentif }} 
-                          </option>
-                      @endforeach
+            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT      
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
+                  <option value="">Tahun</option>
+                  <?php
+                  $curryear = date("Y");
+                  $fromyear = date("Y") - 10;
+                  for ($year = $curryear; $year >= $fromyear; $year--) {
+                      $selected = (isset($getYear) && $getYear == $year) ? 'selected' : '';
+                      echo "<option value=$year $selected>$year</option>";
+                  }
+                  ?>
                 </select>
-                  MENGIKUT DAERAH/PT SETAKAT 
-                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
-                    <option value="">Tahun</option>
-                    <?php
-                    $curryear = date("Y");
-                    $fromyear = date("Y") - 10;
-                    for ($year = $curryear; $year >= $fromyear; $year--) {
-                        $selected = (isset($getYear) && $getYear == $year) ? 'selected' : '';
-                        echo "<option value=$year $selected>$year</option>";
-                    }
-                    ?>
-                  </select>
-            </h4>
+                MENGIKUT DAERAH/PT
+          </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
                 <table id="laporaninsentif" class="table table-sm table-bordered table-hover">
                     <colgroup>
+                        <col span="1" style="width:10%;">
+                        <col span="1" style="width:10%;">
+                        <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
@@ -65,7 +60,6 @@
                             <th scope="col" rowspan="3" style="padding-right:2vh;">Bil</th>
                             <th scope="col" rowspan="3">Negeri</th>
                             <th scope="col" rowspan="3">PT</th>
-                            <th scope="col" rowspan="3">Jenis Insentif</th>
                             <th scope="col" rowspan="3">Tahun</th>
                             <th scope="col" rowspan="3">Jumlah Keseluruhan Usahawan</th>
                             <th scope="col" >Bulan Semasa</th>
@@ -91,14 +85,22 @@
                             <td class="text-nowrap" style="padding-right:2vh;"><?php echo $num++;?></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$report->negeri}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$report->daerah}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->jenis}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$report->tab4}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$report->tab6}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$report->tab7}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab8}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent}}</label></td>
                         </tr>
                         @endforeach
+                        <tr class="align-middle" style="text-align: center;">
+                            <td class="text-nowrap" colspan="4"><label class="form-check-label">Jumlah</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$total->satu}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$total->dua}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$total->tiga}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$total->empat}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">100</label></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

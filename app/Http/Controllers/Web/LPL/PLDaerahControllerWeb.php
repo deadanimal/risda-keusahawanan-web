@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Web\LPL;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -13,9 +13,13 @@ class PLDaerahControllerWeb extends Controller
 {
     public function index()
     {
-        $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
+        $total = new \stdClass();
+        $total->satu = 0;
+        $total->dua = 0;
+        $total->tiga = 0;
+        $total->empat = 0;
+
         $reports = Report::where('type', 8)
-        ->orderBy('tab4', 'ASC')
         ->orderBy('tab3', 'ASC')
         ->orderBy('tab1', 'ASC')
         ->orderBy('tab2', 'ASC')
@@ -26,20 +30,24 @@ class PLDaerahControllerWeb extends Controller
             if(isset($negeri)){
                 $report->negeri = $negeri->Negeri;
             }
-            $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab3)->first();
-            if(isset($jenisinsentif)){
-                $report->jenis = $jenisinsentif->nama_insentif;
-            }
             $daerah = Daerah::where('U_Daerah_ID', $report->tab2)->first();
             if(isset($daerah)){
                 $report->daerah = $daerah->Daerah;
             }
+            $total->satu = $total->satu + $report->tab4;
+            $total->dua = $total->dua + $report->tab5;
+            $total->tiga = $total->tiga + $report->tab6;
+            $total->empat = $total->empat + $report->tab7;
+        }
+
+        foreach ($reports as $report) {
+            $report->percent = round(($report->tab4/$total->satu *100), 2);
         }
 
         return view('pemantauanlawatan.pantauDaerah'
         ,[
-            'ddInsentif'=>$ddInsentif,
-            'reports'=>$reports
+            'reports'=>$reports,
+            'total'=>$total
         ]
         );
     }
