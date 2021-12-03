@@ -15,7 +15,7 @@ class UsahawanSeeder extends Seeder
     public function run()
     {
         Usahawan::create([
-            'Kod_PT'=>'1',
+            'Kod_PT'=>'423199',
             'namausahawan'=>'user1',
             'nokadpengenalan'=>'123456789012',
             'tarikhlahir'=>'23-11-20',
@@ -47,7 +47,7 @@ class UsahawanSeeder extends Seeder
         ]);
 
         Usahawan::create([
-            'Kod_PT'=>'1',
+            'Kod_PT'=>'423199',
             'namausahawan'=>'A.RAHMAN BIN ADAM',
             'nokadpengenalan'=>'600606015813',
             'tarikhlahir'=>'06-06-20',

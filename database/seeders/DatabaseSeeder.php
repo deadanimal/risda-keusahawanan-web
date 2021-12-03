@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             KategoriAliranSeeder::class,
             PegawaiSeeder::class,
             JenisInsentifSeeder::class,
-            KategoriUsahawanSeeder::class
+            KategoriUsahawanSeeder::class,
+            TindakanLawatanSeeder::class
         ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Katalog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KatalogController extends Controller
 {
@@ -47,6 +48,8 @@ class KatalogController extends Controller
         return response()->json($katalog);
     }
 
+    
+
    
     public function update(Request $request, Katalog $katalog)
     {
@@ -74,5 +77,27 @@ class KatalogController extends Controller
         $katalog->delete();
 
         return response()->json($katalog);
+    }
+
+    public function showKatalogPegawai($id)
+    {
+        $katalog = DB::table('pegawais')->where('pegawais.id', $id)
+        ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
+        ->join('users', 'users.usahawanid', 'usahawans.id' )
+        ->join('katalogs', 'katalogs.id_pengguna', 'users.id' )
+        ->select('katalogs.id as katalog_id', 'katalogs.nama_produk', 'katalogs.gambar_url', 'katalogs.baki_stok', 'katalogs.berat_produk', 'katalogs.harga_produk', 'katalogs.keterangan_produk', 'katalogs.kandungan_produk', 'katalogs.updated_at', 'katalogs.created_at', 'katalogs.status_katalog', )
+        ->get();
+        return response()->json($katalog);
+    }
+
+    public function pengesahanPegawai($id){
+
+        $katalog = Katalog::find($id);
+
+        $katalog->status_katalog = "publish";
+        $katalog->save();
+
+        return response()->json($katalog);
+
     }
 }

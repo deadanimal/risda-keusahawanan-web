@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usahawan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsahawanController extends Controller
 {
@@ -164,4 +165,6 @@ class UsahawanController extends Controller
     {
         //
     }
+
+    
 }

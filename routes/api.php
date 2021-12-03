@@ -2,17 +2,21 @@
 
 use App\Http\Controllers\AliranController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BuletinController;
 use App\Http\Controllers\DaerahController;
 use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KategoriAliranController;
+use App\Http\Controllers\LawatanController;
 use App\Http\Controllers\NegeriController;
 use App\Http\Controllers\PekebunController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PerniagaanController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SyarikatController;
+use App\Http\Controllers\TindakanLawatanController;
 use App\Http\Controllers\UsahawanController;
 use App\Http\Controllers\UserController;
+use App\Models\Buletin;
 use App\Models\Pekebun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,9 +51,16 @@ Route::apiResource('katalog', KatalogController::class);
 Route::apiResource('pelanggan', PelangganController::class);
 Route::apiResource('stok', StokController::class);
 
+Route::apiResource('lawatan', LawatanController::class);
+Route::apiResource('tindakanLawatan', TindakanLawatanController::class);
+
+Route::apiResource('buletin', BuletinController::class);
+
+
 // datalib 
 Route::apiResource('daerah', DaerahController::class);
 Route::apiResource('negeri', NegeriController::class);
+
 
 // Route::('checkUser', [UserController::class, 'checkUser']);
 Route::post('/sanctum/token', function (Request $request) {
@@ -73,3 +84,13 @@ Route::post('/sanctum/token', function (Request $request) {
 
 //custom
 Route::get('deleteStok/{id}', [StokController::class, 'deleteMany']);
+
+Route::get('/katalogPegawai/{i}', [KatalogController::class, 'showKatalogPegawai']);
+Route::get('/pengesahanPegawai/{i}', [KatalogController::class, 'pengesahanPegawai']);
+
+Route::get('/lawatan/usahawan/{id}', [LawatanController::class, 'showLawatanUsahawan']);
+Route::get('/lawatan/updateUsahawan/{id}', [LawatanController::class, 'updateLawatanUsahawan']);
+Route::post('/lawatan/updateLaporan/{id}', [LawatanController::class, 'updateLaporan']);
+Route::get('/lawatan/senaraiUsahawan/{id}', [LawatanController::class, 'showUsahawanForLawatan']);
+
+

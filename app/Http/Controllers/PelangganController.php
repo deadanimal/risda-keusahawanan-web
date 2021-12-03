@@ -6,6 +6,7 @@ use App\Models\Pelanggan;
 use App\Models\Stok;
 use App\Models\Katalog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PelangganController extends Controller
 {
@@ -39,13 +40,27 @@ class PelangganController extends Controller
     public function show($id)
     {
 
-        $pelanggan = Katalog::where('id_pengguna', $id)
-        ->join('stoks', 'katalogs.id', 'stoks.id_katalog')
+        // $pelanggan = DB::table('katalogs')
+        // ->join('stoks', 'katalogs.id', 'stoks.id_katalog')
+        // ->join('pelanggans', 'stoks.id_pelanggan', 'pelanggans.id' )
+        // ->select('katalogs.*', 'pelanggans.*', 'stoks.id', 'stoks.id_pelanggan')
+        // ->where('id_pengguna', $id)
+        // ->groupBy('stoks.id_pelanggan')
+        // // ->count('stoks.id_pelanggan');
+        // ->get();
+
+        $pelanggan = DB::table('stoks')
+        ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
         ->join('pelanggans', 'stoks.id_pelanggan', 'pelanggans.id' )
-        ->select('*')
+        ->select('katalogs.*', 'pelanggans.*', 'stoks.id', 'stoks.id_pelanggan')
+        ->where('id_pengguna', $id)
+        // ->groupBy('katalogs.id')
+        // ->count('stoks.id_pelanggan');
         ->get();
 
+
         // dd($pelanggan);
+
         return response()->json($pelanggan);
        
     }
