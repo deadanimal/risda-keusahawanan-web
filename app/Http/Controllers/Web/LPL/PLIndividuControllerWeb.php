@@ -12,6 +12,8 @@ use App\Models\Daerah;
 use App\Models\Perniagaan;
 use App\Models\Insentif;
 use App\Models\JenisInsentif;
+use App\Models\Pegawai;
+use App\Models\TindakanLawatan;
 
 class PLIndividuControllerWeb extends Controller
 {
@@ -85,7 +87,17 @@ class PLIndividuControllerWeb extends Controller
         if(isset($lawatan)){
             $usahawan->tarikh_lawatan = $lawatan->tarikh_lawatan;
             $usahawan->masa_lawatan = $lawatan->masa_lawatan;
+            $pegawai = Pegawai::where('id', $lawatan->id_pegawai)->first();
+            if(isset($pegawai)){
+                $usahawan->pegawai = $pegawai->nama;
+            }
+            $tindakan_lawatan = TindakanLawatan::where('id', $lawatan->id_tindakan_lawatan)->first();
+            if(isset($tindakan_lawatan)){
+                $usahawan->tindakan -> $tindakan_lawatan->nama_tindakan_lawatan;
+            }
         }
+
+        
         //dd($lawatan);
         return view('pemantauanlawatan.pantauindividudetail'
         ,[

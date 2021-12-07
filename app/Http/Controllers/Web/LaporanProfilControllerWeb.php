@@ -444,13 +444,33 @@ class LaporanProfilControllerWeb extends Controller
                 return "Tiada Data Insentif Dijumpai";
             }else{
                 foreach ($alirans as $aliran) {
+                    $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
+                    $aliran->tahun = date('y', strtotime($aliran->tarikh_aliran));
                     $reports = Report::where('type', 11)->get();
                     if($reports->count()==0){
                         $this->newreport(11,$aliran,$aliran->id);
                     }else{
-                    
+                        $update = false;
+                        foreach ($reports as $report) {
+                            if($aliran->bulan == $report->tab1 && $aliran->tahun == $report->tab2 && $aliran->id_kategori_aliran == $report->tab4){
+                                $report->tab5 = $report->tab5 ."-". $aliran->keterangan_aliran;
+                                $kate_aliran = KategoriAliran::where('id', $aliran->id_kategori_aliran)->first();
+                                if($kate_aliran->jenis_aliran == "tunai_masuk"){
+                                    $report->tab6 = $report->tab6 + $aliran->jumlah_aliran;
+                                }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
+                                    $report->tab7 = $report->tab7 + $aliran->jumlah_aliran;
+                                }
+                                $report->save();
+                                $update = true;
+                                break;
+                            }
+                        }
+                        if($update == false){
+                            $this->newreport(11,$aliran,$aliran->id);
+                        }
                     }
                 }
+                return "Laporan Berjaya Dijana";
             }
         }
     }
@@ -643,29 +663,25 @@ class LaporanProfilControllerWeb extends Controller
         }
 
         else if($type == 11){
+            $check = "";
             $report = new Report();
             $report->type = 11;
             $report->tab1 = $request->bulan;
             $report->tab2 = $request->tahun;
             $report->tab3 = $request->tarikh_aliran;
+            $report->tab4 = $request->id_kategori_aliran;
+            $report->tab5 = "-".$request->keterangan_aliran;
 
             $kate_aliran = $request->id_kategori_aliran;
             $kate_aliran = KategoriAliran::where('id', $request->id_kategori_aliran)->first();
             if($kate_aliran->jenis_aliran == "tunai_masuk"){
                 $report->tab6 = $request->jumlah_aliran;
-                if($kate_aliran->nama_kategori_aliran == "JUALAN/PEROLEHAN"){
-                    $report->tab4 = 1;
-                }else if($kate_aliran->nama_kategori_aliran == "HASIL SEWAAN"){
-                    $report->tab4 = 2;
-                }else if($kate_aliran->nama_kategori_aliran == "HASIL DIVIDEN"){
-                    $report->tab4 = 2;
-                }
+
             }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
-                $report->tab4 = 3;
                 $report->tab7 = $request->jumlah_aliran;
             }
-            
-            $report->tab5 = $request->kategori_aliran;
+
+            $report->tab8 = $kate_aliran->bahagian;
             $report->save();
 
         }

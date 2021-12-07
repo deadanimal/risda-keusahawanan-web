@@ -8,7 +8,7 @@ class PLStafNegeriControllerWeb extends Controller
 {
     public function index()
     {
-        return view('pemantauanlawatan.index'
+        return view('pemantauanlawatan.pantaustafnegeri'
         // ,[
         //     'users'=>$users
         // ]

@@ -1,5 +1,4 @@
 @extends('dashboard')
-<script src="../../../js/jquery-3.6.0.min.js"></script>
 @section('content')
 <div class="card">
     <div class="card-header bg-light">
