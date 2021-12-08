@@ -34,13 +34,13 @@ class CreateSyarikatsTable extends Migration
             $table->string('alamat3_ssm',150)->nullable();
             $table->date('tarikh_mula_mof')->nullable();
             $table->date('tarikh_tamat_mof')->nullable();
-            $table->string('status_bumiputera',6)->nullable();
+            $table->string('status_bumiputera')->nullable();
             $table->date('tarikh_daftar_ssm')->nullable();
 
             $table->string('notelefon',15);
             $table->string('no_hp',15);
             $table->string('email',100);
-            $table->string('logo_syarikat',150)->nullable();
+            $table->longText('logo_syarikat')->nullable();
             $table->string('prefix_id',50);
             $table->string('createdby_id',50)->nullable();
             $table->string('createdby_kod_PT',50)->nullable();

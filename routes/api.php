@@ -4,13 +4,20 @@ use App\Http\Controllers\AliranController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuletinController;
 use App\Http\Controllers\DaerahController;
+use App\Http\Controllers\DunController;
+use App\Http\Controllers\KampungController;
 use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KategoriAliranController;
+use App\Http\Controllers\KategoriUsahawanController;
 use App\Http\Controllers\LawatanController;
+use App\Http\Controllers\MukimController;
 use App\Http\Controllers\NegeriController;
+use App\Http\Controllers\ParlimenController;
 use App\Http\Controllers\PekebunController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PerniagaanController;
+use App\Http\Controllers\PTController;
+use App\Http\Controllers\SeksyenController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SyarikatController;
 use App\Http\Controllers\TindakanLawatanController;
@@ -60,7 +67,13 @@ Route::apiResource('buletin', BuletinController::class);
 // datalib 
 Route::apiResource('daerah', DaerahController::class);
 Route::apiResource('negeri', NegeriController::class);
-
+Route::apiResource('mukim', MukimController::class);
+Route::apiResource('parlimen', ParlimenController::class);
+Route::apiResource('dun', DunController::class);
+Route::apiResource('kampung', KampungController::class);
+Route::apiResource('seksyen', SeksyenController::class);
+Route::apiResource('kategori_usahawan', KategoriUsahawanController::class);
+Route::apiResource('pusat_tanggungjawab', PTController::class);
 
 // Route::('checkUser', [UserController::class, 'checkUser']);
 Route::post('/sanctum/token', function (Request $request) {

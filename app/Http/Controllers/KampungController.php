@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori_Usahawan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class KategoriUsahawanController extends Controller
+class KampungController extends Controller
 {
     public function index()
     {
-        $kategori = DB::table('kategori_usahawans')->get();
+        $kampung = DB::table('kampungs')->get();
 
         // dd($daerah);
-        return response()->json($kategori);
+        return response()->json($kampung);
     }
 
     public function store(Request $request)

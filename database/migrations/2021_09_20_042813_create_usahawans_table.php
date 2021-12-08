@@ -15,7 +15,7 @@ class CreateUsahawansTable extends Migration
     {
         Schema::create('usahawans', function (Blueprint $table) {
             $table->id();
-            
+            $table->string('usahawanid')->nullable();
             $table->integer('Kod_PT');
             $table->string('namausahawan',150);
             $table->string('nokadpengenalan',14);
@@ -38,11 +38,13 @@ class CreateUsahawansTable extends Migration
             $table->string('U_Kampung_ID',12)->nullable();
             $table->string('U_Seksyen_ID',12)->nullable();
             $table->string('id_kategori_usahawan',12)->nullable();
-            $table->string('gambar_url',50)->nullable();
+            $table->longText('gambar_url')->nullable();
 
             $table->string('notelefon',15);
             $table->string('nohp',15);
             $table->string('email',100);
+
+            $table->string('status_daftar_usahawan')->nullable();
 
             $table->string('createdby_id',50)->nullable();
             $table->string('createdby_kod_PT',50)->nullable();

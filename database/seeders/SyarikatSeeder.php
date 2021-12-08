@@ -17,7 +17,7 @@ class SyarikatSeeder extends Seeder
         Syarikat::create([
             'usahawanid'=> '1',
             'namasyarikat'=> 'I-Segera',
-            'jenismilikanperniagaan'=> 'Tunggal',
+            'jenismilikanperniagaan'=> 'JPP01',
             'nodaftarssm'=>'1',
             'nodaftarpbt'=>'123456789012',
             'nodaftarpersijilanhalal'=>'1',

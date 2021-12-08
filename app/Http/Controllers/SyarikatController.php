@@ -3,40 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Syarikat;
+use App\Models\Usahawan;
 use Illuminate\Http\Request;
 
 class SyarikatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $syarikat = Syarikat::all();
-        // return view('syarikat.index', [
-        //     'syarikat' => $syarikat
-        // ]);
+        
         return response()->json($syarikat);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // dd($request);
@@ -63,10 +47,10 @@ class SyarikatController extends Controller
         $syarikat->email = $request->email;
         $syarikat->logo_syarikat = $request->logo_syarikat;
         $syarikat->prefix_id = $request->prefix_id;
-        $syarikat->createdby_id = $request->createdby_id;
-        $syarikat->createdby_kod_PT = $request->createdby_kod_PT;
-        $syarikat->modifiedby_id = $request->modifiedby_id;
-        $syarikat->modifiedby_kod_PT = $request->modifiedby_kod_PT;
+        $syarikat->createdby_id = $request->usahawanid;
+        $syarikat->createdby_kod_PT = $request->Kod_PT;
+        $syarikat->modifiedby_id = $request->usahawanid;
+        $syarikat->modifiedby_kod_PT = $request->Kod_PT;
 
         $syarikat->save();
 
@@ -74,41 +58,40 @@ class SyarikatController extends Controller
         return response()->json($syarikat);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Syarikat  $syarikat
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        // return view('syarikat.show', [
-        //     'syarikat' => $syarikat
-        // ]);
-        $syarikat = Syarikat::where('usahawanid', $id)->get()->first();
+        $syarikat = Syarikat::where('syarikats.usahawanid', $id)
+        ->join('usahawans', 'usahawans.id', 'syarikats.usahawanid')
+        ->select(
+            'syarikats.logo_syarikat', 
+            'syarikats.namasyarikat', 
+            'syarikats.jenismilikanperniagaan',
+            'syarikats.nodaftarssm',
+            'syarikats.nodaftarpbt',
+            'syarikats.nodaftarpersijilanhalal',
+            'syarikats.nodaftarmesti',
+            'syarikats.tahunmulaoperasi',
+            'syarikats.bilanganpekerja',
+            'syarikats.alamat1_ssm',
+            'syarikats.alamat2_ssm',
+            'syarikats.alamat3_ssm',
+            'syarikats.tarikh_mula_mof',
+            'syarikats.tarikh_tamat_mof',
+            'syarikats.status_bumiputera',
+            'syarikats.prefix_id',
+            'syarikats.notelefon',
+            'syarikats.no_hp',
+            'syarikats.email',
+            'syarikats.usahawanid as usahawanid',
+            'syarikats.id as syarikat_id',
+            'usahawans.Kod_PT',
+            
+            )
+        ->get()->first();
         return response()->json($syarikat);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Syarikat  $syarikat
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Syarikat $syarikat)
-    {
-        return view('syarikat.edit', [
-            'syarikat' => $syarikat
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Syarikat  $syarikat
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, $id)
     {
         $syarikat = Syarikat::where('usahawanid', $id)->get()->first();
@@ -131,12 +114,12 @@ class SyarikatController extends Controller
         $syarikat->notelefon = $request->notelefon;
         $syarikat->no_hp = $request->no_hp;
         $syarikat->email = $request->email;
-        // $syarikat->logo_syarikat = $request->logo_syarikat;
+        $syarikat->logo_syarikat = $request->logo_syarikat;
         $syarikat->prefix_id = $request->prefix_id;
         // $syarikat->createdby_id = $request->createdby_id;
         // $syarikat->createdby_kod_PT = $request->createdby_kod_PT;
-        // $syarikat->modifiedby_id = $request->modifiedby_id;
-        // $syarikat->modifiedby_kod_PT = $request->modifiedby_kod_PT;
+        $syarikat->modifiedby_id = $request->usahawanid;
+        $syarikat->modifiedby_kod_PT = $request->Kod_PT;
 
         $syarikat->save();
 
