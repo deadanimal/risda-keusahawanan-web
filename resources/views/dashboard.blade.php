@@ -114,6 +114,7 @@
                       <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                   </div>
+                  @if (Auth::user())
                   @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4)
                     <a class="nav-link {{  request()->routeIs('pegawai.*') ? 'active' : '' }}" href="/pegawai" role="button">
                       <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Pegawai</span>
@@ -161,6 +162,7 @@
                         </div>
                       </a>
                   @endif 
+                  @endif
                   
                 </li>
                 <li class="nav-item">
@@ -419,6 +421,14 @@
 </body>
 </html>
 <script type="text/javascript">
+  $( document ).ready(function() {
+    var role = ""<?php echo Auth::user(); ?>;
+
+    if(role == ""){
+      alert("Session Expired Kindly Login");
+      window.location.href = "/";
+    }
+  });
 
   function generatereport(type){
     $.ajax({
