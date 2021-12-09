@@ -59,7 +59,7 @@
                             <form method="POST" style="display:inline-block;" action="{{ route('jenisinsentif.destroy', $jenisinsentif->id) }}">
                             @csrf  
                             @method('delete')
-                            <button type="submit" class="btn btn-danger btn-sm">X</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Buang</button>
                             </form>
                         </td>
                     </tr>

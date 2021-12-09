@@ -25,7 +25,12 @@
                         <form method="POST" action="/kategorialiran" enctype="multipart/form-data">
                         @csrf
                         @method("POST")
-                            <td><input class="form-control form-control-sm" name="jenis_aliran" id="field-name" type="text" value=""/></td>
+                            {{-- <td><input class="form-control form-control-sm" name="jenis_aliran" id="field-name" type="text" value=""/></td> --}}
+                            <td><select class="form-select form-select-sm" name="jenis_aliran" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                                <option selected=""></option>
+                                <option value="tunai_masuk">Tunai Masuk</option>
+                                <option value="tunai_keluar">Tunai Keluar</option>
+                            </select></td>
                             <td><input class="form-control form-control-sm" name="nama_kategori_aliran" id="field-name" type="text" value=""/></td>
                             <td><select class="form-select form-select-sm" name="status_kategori_aliran" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
                                 <option selected=""></option>
@@ -41,7 +46,12 @@
                             @csrf
                             @method("PUT")
                             <td class="text-nowrap">
-                                <input class="form-control form-control-sm" name="jenis_aliran" id="field-name" type="text" value="{{$katealiran->jenis_aliran}}"/>
+                                <select class="form-select form-select-sm" name="jenis_aliran" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                                    <option selected="{{$katealiran->jenis_aliran}}"></option>
+                                    <option {{ ( $katealiran->jenis_aliran == "tunai_masuk" ) ? 'selected' : '' }} value="tunai_masuk">Tunai Masuk</option>
+                                    <option {{ ( $katealiran->jenis_aliran == "tunai_keluar" ) ? 'selected' : '' }} value="tunai_keluar">Tunai Keluar</option>
+                                </select>
+                                {{-- <input class="form-control form-control-sm" name="jenis_aliran" id="field-name" type="text" value="{{$katealiran->jenis_aliran}}"/> --}}
                             </td>
                             <td class="text-nowrap">
                                 <input class="form-control form-control-sm" name="nama_kategori_aliran" id="field-name" type="text" value="{{$katealiran->nama_kategori_aliran}}"/>
@@ -66,7 +76,7 @@
                                 <form method="POST" style="display:inline-block;" action="{{ route('kategorialiran.destroy', $katealiran->id) }}">
                                 @csrf  
                                 @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm">X</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Buang</button>
                                 </form>
                             </td>
                         </tr>

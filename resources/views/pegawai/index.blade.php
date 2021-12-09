@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
-                <table id="pegawaitbl" style="padding-bottom:2vh;">
+                <table class="tblpegawai table table-sm table-hover" id="pegawaitbl" style="padding-bottom:2vh;" >
                     <colgroup>
                         <col span="1" style="width: 21%;">
                         <col span="1" style="width: 15%;">
@@ -37,6 +37,10 @@
                         .dataTable-bottom{
                             padding-top: 3vh;
                         }
+                        /* .tblpegawai td{
+                            padding-right: 1vh;
+                            padding-left: 1vh;
+                        } */
                     </style>
                     <thead>
                         <tr class="align-middle">
@@ -53,10 +57,10 @@
                         @foreach ($pegawai as $user)
                         <tr class="align-middle">
                             <td class="text-nowrap"><label class="form-check-label">{{$user->nama}}</label></td>
-                            <td class="text-nowrap"><label id="fldNegeri{{$user->id}}" class="form-check-label">{{$user->negerinama}}</label></td>
-                            <td class="text-nowrap"><label id="fldDaerah{{$user->id}}" class="form-check-label">{{$user->daerahnama}}</label></td>
-                            <td class="text-nowrap">
-                                <select id="ddmukim{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:10rem;" onchange="ChangeMukim({{$user->id}}, this.value)">
+                            <td ><label id="fldNegeri{{$user->id}}" class="form-check-label">{{$user->negerinama}}</label></td>
+                            <td ><label id="fldDaerah{{$user->id}}" class="form-check-label">{{$user->daerahnama}}</label></td>
+                            <td >
+                                <select id="ddmukim{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:27vh;" onchange="ChangeMukim({{$user->id}}, this.value)">
                                 <option selected="true" disabled="disabled">Mukim</option>
                                 @foreach ($ddMukim as $items)
                                     <option value="{{ $items->U_Mukim_ID }}" {{ ( $items->U_Mukim_ID == $user->mukim) ? 'selected' : '' }}> 
@@ -65,7 +69,7 @@
                                 @endforeach
                             </select></td>
                             <td>
-                                <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:9rem;">
+                                <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:18vh;">
                                     <option selected="true" disabled="disabled">Peranan</option>
                                     @foreach ($ddPeranan as $items)
                                         <option value="{{ $items->peranan_id }}" {{ ( $items->peranan_id == $user->peranan_pegawai) ? 'selected' : '' }}> 

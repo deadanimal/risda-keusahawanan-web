@@ -38,9 +38,7 @@ class PegawaiControllerWeb extends Controller
                 
             }
         }
-        //$status = User::select('profil_status')->where('idpegawai', $pegawai->id)->first();
-        //$ddPeranan = Peranan::select('peranan_id', 'kod_peranan')->get();
-        //dd($pegawai);
+        // dd($pegawai);
         return view('pegawai.index'
         ,[
             'pegawai'=>$pegawai,

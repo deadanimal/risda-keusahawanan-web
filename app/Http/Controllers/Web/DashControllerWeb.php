@@ -47,6 +47,7 @@ class DashControllerWeb extends Controller
         $jantina = [];
         $jnsperniagaan = [];
         $kateusahawan = [];
+        $total1 = 0;
         foreach($Insentifdatas as $InsentifData3){
             foreach($array as $key => $value){
                 if($InsentifData3->daerah == $value){
@@ -63,6 +64,7 @@ class DashControllerWeb extends Controller
                 if($InsentifData3->jantina == $value){
                     if(isset($jantina[$key])){
                         $jantina[$key] = $jantina[$key] + 1;
+                        $total1 = $total1 + $jantina[$key] ;
                     }else{
                         $jantina[$key] = 1;
                     }
@@ -88,7 +90,7 @@ class DashControllerWeb extends Controller
             }
         }
         
-        // dd($array2);
+        //  dd($array4);
         return view('dash.index'
         ,[
             'daerah'=>json_encode($array,JSON_NUMERIC_CHECK),
@@ -98,9 +100,11 @@ class DashControllerWeb extends Controller
             'jantinanum'=>json_encode($jantina,JSON_NUMERIC_CHECK),
             'jantinas'=>$array2,
             'jantinanums'=>$jantina,
+            'total1'=>$total1,
             'jnsperniagaan'=>json_encode($array3,JSON_NUMERIC_CHECK),
             'jnsperniagaannum'=>json_encode($jnsperniagaan,JSON_NUMERIC_CHECK),
             'kateusahawan'=>json_encode($array4,JSON_NUMERIC_CHECK),
+            'kateusahawans'=>$array4,
             'kateusahawannum'=>json_encode($kateusahawan,JSON_NUMERIC_CHECK),
         ]
         );

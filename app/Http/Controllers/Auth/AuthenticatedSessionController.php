@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         if($user != null){
-            if($user->role == 1){
+            if($user->type == 1){
                 // dd($user);
                 if($user->email_verified_at != null){
                     // dd($user->profile_status);
