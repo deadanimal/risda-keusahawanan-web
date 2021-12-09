@@ -121,11 +121,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($statdafusahs as $key => $statdafusahval)
                                         <tr class="align-middle" style="text-align: center;">
-                                            <td>Lelaki</td>
-                                            <td>8</td>
-                                            <td>80%</td>
+                                            <td>{{$statdafusahval}}</td>
+                                            <td>{{$statdafusahnums[$key]}}</td>
+                                            <td>{{($statdafusahnums[$key] / $total2) * 100}}</td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 </div>
@@ -155,8 +157,8 @@
                                         @foreach ($kateusahawans as $key => $kateuasahval)
                                         <tr class="align-middle" style="text-align: center;">
                                             <td>{{$kateuasahval}}</td>
-                                            <td>8</td>
-                                            <td>80%</td>
+                                            <td>{{$kateusahawannums[$key]}}</td>
+                                            <td>{{($kateusahawannums[$key] / $total3) * 100}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -199,6 +201,11 @@
         var numjnsperniagaan = <?php echo $jnsperniagaannum; ?>;
         var jumjnsperniagaan = [];
         var jumnumjnsperniagaan = [];
+
+        var statdafusah = <?php echo $statdafusah; ?>;
+        var numstatdafusah = <?php echo $statdafusahnum; ?>;
+        var jumstatdafusah = [];
+        var jumnumstatdafusah = [];
 
         var kateusahawan = <?php echo $kateusahawan; ?>;
         var numkateusahawan = <?php echo $kateusahawannum; ?>;
@@ -265,6 +272,28 @@
             }
         }
 
+        for (var key in statdafusah) {
+            if (Object.prototype.hasOwnProperty.call(statdafusah, key)) {
+                if(statdafusah[key] == "KP01"){
+                    jumstatdafusah.push("PEKEBUN KECIL");
+                }
+                if(statdafusah[key] == "KP02"){
+                    jumstatdafusah.push("SUAMI PEKEBUN KECIL");
+                }
+                if(statdafusah[key] == "KP03"){
+                    jumstatdafusah.push("ISTERI PEKEBUN KECIL");
+                }
+                if(statdafusah[key] == "KP04"){
+                    jumstatdafusah.push("ANAK PEKEBUN KECIL");
+                }
+            }
+        }
+        for (var key in numstatdafusah) {
+            if (Object.prototype.hasOwnProperty.call(numstatdafusah, key)) {
+                jumnumstatdafusah.push(numstatdafusah[key]);
+            }
+        }
+
         for (var key in kateusahawan) {
             if (Object.prototype.hasOwnProperty.call(kateusahawan, key)) {
                 jumkateusahawan.push(kateusahawan[key]);
@@ -319,13 +348,26 @@
             {
                 label: 'Count',
                 backgroundColor: "pink",
-                data: jumnumkateusahawan
+                data: jumnumstatdafusah
             }
         ];
 
         var barChartData4 = {
-            labels: jumkateusahawan,
+            labels: jumstatdafusah,
             datasets: datas4
+        };
+
+        var datas5 = [
+            {
+                label: 'Count',
+                backgroundColor: "pink",
+                data: jumnumkateusahawan
+            }
+        ];
+
+        var barChartData5 = {
+            labels: jumkateusahawan,
+            datasets: datas5
         };
 
         var ctx = document.getElementById("canvas").getContext("2d");
@@ -440,7 +482,7 @@
         var ctx = document.getElementById("canvas4").getContext("2d");
         window.myBar = new Chart(ctx, {
             type: 'pie',
-            data: barChartData2,
+            data: barChartData4,
             options: {
                 elements: {
                     rectangle: {
@@ -459,7 +501,7 @@
         var ctx = document.getElementById("canvas5").getContext("2d");
         window.myBar = new Chart(ctx, {
             type: 'pie',
-            data: barChartData4,
+            data: barChartData5,
             options: {
                 elements: {
                     rectangle: {

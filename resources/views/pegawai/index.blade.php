@@ -103,7 +103,7 @@ $( document ).ready(function() {
     const dataTableBasic = new simpleDatatables.DataTable("#pegawaitbl", {
         searchable: true,
         fixedHeight: true,
-        sortable: true
+        sortable: false
     });
     //$('#pegawaitbl').DataTable();
     GetPengguna();
