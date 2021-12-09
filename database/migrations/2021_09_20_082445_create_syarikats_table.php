@@ -16,18 +16,18 @@ class CreateSyarikatsTable extends Migration
         Schema::create('syarikats', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('usahawanid');
+            $table->string('usahawanid');
 
-            $table->string('namasyarikat',150);
-            $table->string('jenismilikanperniagaan',12);
-            $table->string('nodaftarssm',50);
+            $table->string('namasyarikat',150)->nullable();
+            $table->string('jenismilikanperniagaan',12)->nullable();
+            $table->string('nodaftarssm',50)->nullable();
             
             $table->string('nodaftarpbt',50)->nullable();
             $table->string('nodaftarpersijilanhalal',50)->nullable();
             $table->string('nodaftarmesti',50)->nullable();
 
-            $table->string('tahunmulaoperasi',4);
-            $table->integer('bilanganpekerja');
+            $table->string('tahunmulaoperasi',4)->nullable();
+            $table->integer('bilanganpekerja')->nullable();
 
             $table->string('alamat1_ssm',150)->nullable();
             $table->string('alamat2_ssm',150)->nullable();
@@ -37,11 +37,11 @@ class CreateSyarikatsTable extends Migration
             $table->string('status_bumiputera')->nullable();
             $table->date('tarikh_daftar_ssm')->nullable();
 
-            $table->string('notelefon',15);
-            $table->string('no_hp',15);
-            $table->string('email',100);
+            $table->string('notelefon',15)->nullable();
+            $table->string('no_hp',15)->nullable();
+            $table->string('email',100)->nullable();
             $table->longText('logo_syarikat')->nullable();
-            $table->string('prefix_id',50);
+            $table->string('prefix_id',50)->nullable();
             $table->string('createdby_id',50)->nullable();
             $table->string('createdby_kod_PT',50)->nullable();
             $table->string('modifiedby_id',50)->nullable();

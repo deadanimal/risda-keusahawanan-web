@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perniagaan;
+use App\Models\Usahawan;
 use Illuminate\Http\Request;
 
 class PerniagaanController extends Controller
@@ -96,7 +97,10 @@ class PerniagaanController extends Controller
         // return view('perniagaan.show', [
         //     'perniagaan' => $perniagaan
         // ]);
-        $perniagaan = Perniagaan::where('usahawanid', $id)->get()->first();
+        
+        $perniagaan = Usahawan::where('usahawans.id', $id)
+        ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
+        ->get()->first();
         return response()->json($perniagaan);
     }
 

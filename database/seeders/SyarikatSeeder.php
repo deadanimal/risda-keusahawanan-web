@@ -15,7 +15,7 @@ class SyarikatSeeder extends Seeder
     public function run()
     {
         Syarikat::create([
-            'usahawanid'=> '1',
+            'usahawanid'=> 'J00000',
             'namasyarikat'=> 'I-Segera',
             'jenismilikanperniagaan'=> 'JPP01',
             'nodaftarssm'=>'1',

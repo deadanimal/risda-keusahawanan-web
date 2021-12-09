@@ -13,6 +13,7 @@ use App\Http\Controllers\LawatanController;
 use App\Http\Controllers\MukimController;
 use App\Http\Controllers\NegeriController;
 use App\Http\Controllers\ParlimenController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PekebunController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PerniagaanController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\TindakanLawatanController;
 use App\Http\Controllers\UsahawanController;
 use App\Http\Controllers\UserController;
 use App\Models\Buletin;
+use App\Models\Pegawai;
 use App\Models\Pekebun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +51,8 @@ use Illuminate\Validation\ValidationException;
 
 Route::apiResource('user', UserController::class);
 Route::apiResource('usahawan', UsahawanController::class);
+Route::apiResource('pegawai', PegawaiController::class);
+
 Route::apiResource('pekebun', PekebunController::class);
 Route::apiResource('syarikat', SyarikatController::class);
 Route::apiResource('perniagaan', PerniagaanController::class);

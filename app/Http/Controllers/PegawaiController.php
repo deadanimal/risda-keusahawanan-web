@@ -7,33 +7,13 @@ use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $pegawai = Pegawai::all();
         return $pegawai;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $pegawai = new Pegawai();
@@ -57,17 +37,10 @@ class PegawaiController extends Controller
         return redirect('/pegawai');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pegawai  $pegawai
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Pegawai $pegawai)
     {
-        return view('pegawai.show', [
-            'pegawai' => $pegawai
-        ]);
+        return response()->json($pegawai);
     }
 
     /**

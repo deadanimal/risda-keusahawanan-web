@@ -8,11 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class UsahawanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         $usahawan = Usahawan::all();
@@ -20,22 +16,9 @@ class UsahawanController extends Controller
         return response()->json($usahawan);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $usahawan = new Usahawan();
@@ -76,46 +59,48 @@ class UsahawanController extends Controller
         return response()->json($usahawan);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Usahawan  $usahawan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Usahawan $usahawan)
+    
+    public function show($id)
     {
-        // $usahawan = Usahawan::where('usahawanid', $id)->first();
-
-        // dd($usahawan);
-        // return view('usahawan.show', [
-        //     'usahawan' => $usahawan
-        // ]);
+       
+        $usahawan = Usahawan::where('usahawans.id', $id)
+        ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.id')
+        ->select(
+            'perniagaans.U_Negeri_ID as negeri_perniagaan',
+            'usahawans.gambar_url',
+            'usahawans.Kod_PT',
+            'usahawans.usahawanid',
+            'usahawans.namausahawan',
+            'usahawans.nokadpengenalan',
+            'usahawans.tarikhlahir',
+            'usahawans.U_Jantina_ID',
+            'usahawans.U_Bangsa_ID',
+            'usahawans.statusperkahwinan',
+            'usahawans.U_Pendidikan_ID',
+            'usahawans.alamat1',
+            'usahawans.alamat2',
+            'usahawans.alamat3',
+            'usahawans.bandar',
+            'usahawans.poskod',
+            'usahawans.U_Negeri_ID',
+            'usahawans.U_Daerah_ID',
+            'usahawans.U_Mukim_ID',
+            'usahawans.U_Parlimen_ID',
+            'usahawans.U_Dun_ID',
+            'usahawans.U_Kampung_ID',
+            'usahawans.U_Seksyen_ID',
+            'usahawans.status_daftar_usahawan',
+            'usahawans.id_kategori_usahawan',
+            'usahawans.notelefon',
+            'usahawans.nohp',
+            'usahawans.email',
+            // 'usahawans.',
+        )
+        ->get()->first();
         return response()->json($usahawan);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Usahawan  $usahawan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Usahawan $usahawan)
-    {
-        // $usahawan = Usahawan::where('usahawanid', $id)->first();
-
-        // dd($usahawan);
-        return view('usahawan.edit', [
-            'usahawan' => $usahawan
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Usahawan  $usahawan
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Usahawan $usahawan)
     {
 
@@ -155,12 +140,6 @@ class UsahawanController extends Controller
         return response()->json($usahawan);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Usahawan  $usahawan
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Usahawan $usahawan)
     {
         //

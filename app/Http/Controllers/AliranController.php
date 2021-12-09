@@ -51,16 +51,17 @@ class AliranController extends Controller
    
     public function show($id)
     {
-        $aliran = Aliran::where('id_pengguna', $id)->get();
+        $aliran = Aliran::where('id_pengguna', $id)
+        ->orderBy('created_at', 'desc')->get();
 
         // $test = $aliran->kategori_aliran()->jenis_aliran ;
         // kategori_aliran();
 
-        $test = Aliran::whereHas("kategori_aliran", function ($q) use ($id) {
-            $q->where("jenis_aliran", "tunai_masuk")->where('id_pengguna', $id);
-        })->get();
+        // $test = Aliran::whereHas("kategori_aliran", function ($q) use ($id) {
+        //     $q->where("jenis_aliran", "tunai_masuk")->where('id_pengguna', $id);
+        // })->get();
 
-        dd($test);
+        // dd($test);
 
         return response()->json($aliran);
     }
