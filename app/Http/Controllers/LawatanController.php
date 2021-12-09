@@ -54,17 +54,15 @@ class LawatanController extends Controller
                 $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', 'selesai');
                 $lawatan->save();
                 return $lawatan;
-            });
+            })
+            ;
 
-        // foreach($test as $test){
-        // $test->save();
         // dd($test);
-        // }
 
 
         $lawatan = Pegawai::where('pegawais.id', $id)
             ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
-            ->join('users', 'users.usahawanid', 'usahawans.id')
+            ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
             ->join('lawatans', 'lawatans.id_pengguna', 'users.id')
             ->select('lawatans.id as lawatan_id', 'pegawais.nama as nama_pegawai', 'usahawans.namausahawan', 'usahawans.id as usahawan_id', 'lawatans.updated_at', 'lawatans.created_at', 'lawatans.status_lawatan', 'lawatans.tarikh_lawatan', 'lawatans.masa_lawatan', 'lawatans.gambar_lawatan', 'lawatans.jenis_lawatan', 'lawatans.id_tindakan_lawatan', 'lawatans.komen')
             ->get();
@@ -87,10 +85,10 @@ class LawatanController extends Controller
             });
 
         $lawatan = User::where('users.id', $id)
-            ->join('usahawans', 'usahawans.id', 'users.usahawanid')
+            ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
             ->join('lawatans', 'lawatans.id_pengguna', 'users.id')
             ->join('pegawais', 'pegawais.id', 'lawatans.id_pegawai')
-            ->select('lawatans.id as lawatan_id', 'pegawais.nama as nama_pegawai', 'usahawans.namausahawan', 'usahawans.id as usahawan_id', 'lawatans.updated_at', 'lawatans.created_at', 'lawatans.status_lawatan', 'lawatans.tarikh_lawatan', 'lawatans.masa_lawatan')
+            ->select('lawatans.id as lawatan_id', 'pegawais.nama as nama_pegawai', 'usahawans.namausahawan', 'usahawans.id as usahawan_id', 'lawatans.updated_at', 'lawatans.created_at', 'lawatans.status_lawatan', 'lawatans.tarikh_lawatan', 'lawatans.masa_lawatan', 'lawatans.gambar_lawatan', 'lawatans.jenis_lawatan', 'lawatans.id_tindakan_lawatan', 'lawatans.komen')
             ->get();
 
         return response()->json($lawatan);
@@ -144,7 +142,7 @@ class LawatanController extends Controller
     {
         $usahawan = DB::table('pegawais')->where('pegawais.id', $id_pegawai)
             ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
-            ->join('users', 'users.usahawanid', 'usahawans.id')
+            ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
             ->select('users.id as id_pengguna', 'users.name')
             ->get();
 

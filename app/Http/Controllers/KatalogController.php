@@ -83,7 +83,7 @@ class KatalogController extends Controller
     {
         $katalog = DB::table('pegawais')->where('pegawais.id', $id)
         ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
-        ->join('users', 'users.usahawanid', 'usahawans.id' )
+        ->join('users', 'users.usahawanid', 'usahawans.usahawanid' )
         ->join('katalogs', 'katalogs.id_pengguna', 'users.id' )
         ->select('katalogs.id as katalog_id', 'katalogs.nama_produk', 'katalogs.gambar_url', 'katalogs.baki_stok', 'katalogs.berat_produk', 'katalogs.harga_produk', 'katalogs.keterangan_produk', 'katalogs.kandungan_produk', 'katalogs.updated_at', 'katalogs.created_at', 'katalogs.status_katalog', )
         ->get();

@@ -98,7 +98,7 @@ class PerniagaanController extends Controller
         //     'perniagaan' => $perniagaan
         // ]);
         
-        $perniagaan = Usahawan::where('usahawans.id', $id)
+        $perniagaan = Usahawan::where('usahawans.usahawanid', $id)
         ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
         ->get()->first();
         return response()->json($perniagaan);

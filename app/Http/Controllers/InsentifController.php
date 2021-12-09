@@ -41,8 +41,9 @@ class InsentifController extends Controller
     {
 
         $insentif = Insentif::where('id_pengguna', $id)
+        ->join('jenis_insentifs', 'jenis_insentifs.id_jenis_insentif', 'insentifs.id_jenis_insentif')
         ->get();
-        
+
         return response()->json($insentif);
         
     }

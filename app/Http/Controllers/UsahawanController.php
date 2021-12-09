@@ -62,9 +62,9 @@ class UsahawanController extends Controller
     
     public function show($id)
     {
-       
-        $usahawan = Usahawan::where('usahawans.id', $id)
-        ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.id')
+        // dd($id);
+        $usahawan = Usahawan::where('usahawans.usahawanid', $id)
+        ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
         ->select(
             'perniagaans.U_Negeri_ID as negeri_perniagaan',
             'usahawans.gambar_url',
@@ -101,13 +101,15 @@ class UsahawanController extends Controller
     }
 
     
-    public function update(Request $request, Usahawan $usahawan)
+    public function update(Request $request, $id)
     {
 
-        $usahawan->Kod_PT = $request->Kod_PT;
-        $usahawan->namausahawan = $request->namausahawan;
-        $usahawan->nokadpengenalan = $request->nokadpengenalan;
-        $usahawan->tarikhlahir = $request->tarikhlahir;
+        $usahawan = Usahawan::where('usahawanid', $id)->get()->first();
+
+        // $usahawan->Kod_PT = $request->Kod_PT;
+        // $usahawan->namausahawan = $request->namausahawan;
+        // $usahawan->nokadpengenalan = $request->nokadpengenalan;
+        // $usahawan->tarikhlahir = $request->tarikhlahir;
         $usahawan->U_Jantina_ID = $request->U_Jantina_ID;
         $usahawan->U_Bangsa_ID = $request->U_Bangsa_ID;
         $usahawan->statusperkahwinan = $request->statusperkahwinan;
@@ -133,6 +135,10 @@ class UsahawanController extends Controller
         $usahawan->createdby_kod_PT = $request->createdby_kod_PT;
         $usahawan->modifiedby_id = $request->modifiedby_id;
         $usahawan->modifiedby_kod_PT = $request->modifiedby_kod_PT;
+
+        $usahawan->status_daftar_usahawan = $request->status_daftar_usahawan;
+
+        
 
         $usahawan->save();
 

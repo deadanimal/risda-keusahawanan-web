@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuletinController;
 use App\Http\Controllers\DaerahController;
 use App\Http\Controllers\DunController;
+use App\Http\Controllers\InsentifController;
 use App\Http\Controllers\KampungController;
 use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KategoriAliranController;
@@ -66,7 +67,7 @@ Route::apiResource('lawatan', LawatanController::class);
 Route::apiResource('tindakanLawatan', TindakanLawatanController::class);
 
 Route::apiResource('buletin', BuletinController::class);
-
+Route::apiResource('insentif', InsentifController::class);
 
 // datalib 
 Route::apiResource('daerah', DaerahController::class);
