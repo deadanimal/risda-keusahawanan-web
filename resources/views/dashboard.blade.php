@@ -20,7 +20,8 @@
     <link href="../../../css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="../../../css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="../../../css/user.min.css" rel="stylesheet" id="user-style-default">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    
     <script src="../../../assets/popper/popper.min.js"></script>
     <script src="../../../assets/bootstrap/bootstrap.min.js"></script>
     <script src="../../../assets/anchorjs/anchor.min.js"></script>
@@ -31,6 +32,7 @@
     <script src="../../../js/theme.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
     <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
@@ -422,7 +424,7 @@
 </html>
 <script type="text/javascript">
   $( document ).ready(function() {
-    var role = ""<?php echo Auth::user(); ?>;
+    var role = ''+<?php echo Auth::user(); ?>;
 
     if(role == ""){
       alert("Session Expired Kindly Login");

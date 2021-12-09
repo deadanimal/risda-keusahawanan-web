@@ -8,6 +8,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\User;
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -28,11 +30,41 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
-
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $user = User::where('email', $request->email)->first();
+        if($user != null){
+            if($user->role == 1){
+                // dd($user);
+                if($user->email_verified_at != null){
+                    // dd($user->profile_status);
+                    if($user->status_pengguna == 1){
+                        $request->authenticate();
+                        $request->session()->regenerate();
+                        return redirect('/dash');
+                    }else{
+                        echo '<script language="javascript">';
+                        echo 'alert("Akaun Tidak Aktif. Sila Minta Admin Aktifkan Akaun Anda Untuk Meneruskan ke Applikasi")';
+                        echo '</script>'; 
+                        return redirect('/');
+                    }
+                }else{
+                    echo '<script language="javascript">';
+                    echo 'alert("Akaun Belum Aktif. Sila Aktifkan Akaun Untuk Meneruskan ke Applikasi")';
+                    echo '</script>'; 
+                    return redirect('/');
+                }
+            }else{
+                echo '<script language="javascript">';
+                echo 'alert("Sistem web hanyalah digunakan oleh pegawai sahaja")';
+                echo '</script>'; 
+                return redirect('/');
+            }
+        }else{
+            echo '<script language="javascript">';
+            echo 'alert("Email tiada dalam senarai pegawai")';
+            echo '</script>'; 
+            return redirect('/');
+        }
+        
     }
 
     /**

@@ -45,5 +45,33 @@ class TemuLawatanControllerWeb extends Controller
         );
     }
 
+    public function update(Request $request, $id)
+    {
+        if($request->type == "stat"){
+            $lawatan = Lawatan::where('id', $id)->first();
+            $lawatan->status_lawatan = 3;
+            $lawatan->save();
+            return "stat";
+        
+        }else if($request->type == "done"){
+            $lawatan = Lawatan::where('id', $id)->first();
+            $lawatan->status_lawatan = 4;
+            $lawatan->save();
+            return "done";
+
+        }else{
+            $lawatan = Lawatan::where('id', $id)->first();
+            $lawatan->tarikh_lawatan = $request->tarikh;
+            $lawatan->status_lawatan = 1;
+            $lawatan->save();
+
+            echo '<script language="javascript">';
+            echo 'alert("Tarikh Lawatan Berjaya Di Ubah, Menunggu Persetujuan Usahawan")';
+            echo '</script>'; 
+            return redirect('/temulawatan');
+        }
+
+        
+    }
 
 }

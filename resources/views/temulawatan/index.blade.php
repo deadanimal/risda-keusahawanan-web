@@ -65,30 +65,91 @@
                 <tbody id="tblname">
                 @foreach ($lawatans as $lawatan)
                     <tr class="align-middle" style="text-align: center;">
-                        <td>{{ $lawatan->tarikh_lawatan }}</td>
-                        <td>{{ $lawatan->masa_lawatan }}</td>
-                        <td>{{ $lawatan->nama_usahawan }}</td>
-                        <td>{{ $lawatan->nama_pegawai }}</td>
-                        <td>{{ $lawatan->jenis_lawatan }}</td>
-                        <td>{{ $lawatan->nama_status }}</td>
+                        <td class="text-nowrap"><label class="form-check-label">{{ $lawatan->tarikh_lawatan }}</label></td>
+                        <td class="text-nowrap"><label class="form-check-label">{{ $lawatan->masa_lawatan }}</label></td>
+                        <td class="text-nowrap"><label class="form-check-label">{{ $lawatan->nama_usahawan }}</label></td>
+                        <td class="text-nowrap"><label class="form-check-label">{{ $lawatan->nama_pegawai }}</label></td>
+                        <td ><label class="form-check-label">{{ $lawatan->jenis_lawatan }}</label></td>
+                        <td ><label class="form-check-label">{{ $lawatan->nama_status }}</label></td>
                         @if($lawatan->status_lawatan == 1)
                             <td></td>
                         @endif
                         @if($lawatan->status_lawatan == 2)
-                            <td><div style="width: 190px;"><button class="btn btn-primary btn-sm" style="display: inline-block !important">Setuju</button> 
-                                <button class="btn btn-info btn-sm" style="display: inline-block !important">Tarikh Baru</button></div>
+                            <td><div style="width: 190px;"><button class="btn btn-primary btn-sm" style="display: inline-block !important" onclick="UpdateLawatan('stat',{{ $lawatan->id }}, '{{ $lawatan->tarikh_lawatan }}')">Setuju</button> 
+                                <button class="btn btn-info btn-sm" style="display: inline-block !important" onclick="NewDate({{ $lawatan->id }})">Tarikh Baru</button></div>
                             </td>
                         @endif
                         @if($lawatan->status_lawatan == 3)
-                            <td><button class="btn btn-primary btn-sm" >Selesai</button></td>
+                            <td><button class="btn btn-primary btn-sm" onclick="UpdateLawatan('done',{{ $lawatan->id }}, '{{ $lawatan->tarikh_lawatan }}')">Selesai</button></td>
                         @endif
                         @if($lawatan->status_lawatan == 4)
+                            <td><label class="form-check-label">Lawatan Selesai</label></td>
                         @endif
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
+        <style>
+            .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content/Box */
+            .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            }
+
+            /* The Close Button */
+            .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            }
+
+            .centered {
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+        </style>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal">
+    <div class="modal-content" style="width: 400px;">
+      <span class="close">&times;</span>
+        <div class="centered">
+            <p>Sila Pilih Tarikh Baru Untuk Temujanji :-</p>
+            <form id="formtarikhbaru" method="POST" action="/temulawatan" enctype="multipart/form-data">
+            @csrf
+            @method("PUT")
+                <div class="centered" style="padding-bottom:15px;">
+                    <input class="form-control" id="datetimepicker" name="tarikh" style="width: 100%;"/>
+                </div>
+                <button class="btn btn-primary btn-sm" style="width: 200px">Simpan</button>
+            </form>
         </div>
     </div>
 </div>
@@ -98,13 +159,59 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         const dataTableBasic = new simpleDatatables.DataTable("#tbltemulawatan", {
-        searchable: true,
-        fixedHeight: true,
-        sortable: false,
-        paging: true
+            searchable: true,
+            fixedHeight: true,
+            sortable: false,
+            paging: true
         });
+        $('#datetimepicker').datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+        var span = document.getElementsByClassName("close")[0];
+        var modal = document.getElementById("myModal");
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
     });
 
+    function NewDate(id){
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+        document.getElementById("formtarikhbaru").action = "/temulawatan/"+id;
+    }
+    
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
+    function UpdateLawatan(field,id,tarikh){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/temulawatan/"+id,
+            type:"PUT",
+            data: {     
+                type:field
+            },
+            success: function(data) {
+                if(data == "stat"){
+                    alert("Temujanji Anda Telah Ditetapkan Pada "+tarikh);
+                }
+                if(data == "done"){
+                    alert("Temujanji Anda Pada "+tarikh+" Selesai");
+                }
+                
+                location.reload();
+            },
+            error: function(){
+                alert('connection failure');
+            }
+        });
+    }
+    
 </script>
 @endsection
