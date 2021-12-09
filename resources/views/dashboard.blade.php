@@ -106,7 +106,7 @@
                     </li>
                   </ul>
                 </li>
-                
+                @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5 || Auth::user()->role == 6 || Auth::user()->role == 7)
                 <li class="nav-item">
                   <!-- label-->
                   <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
@@ -116,12 +116,13 @@
                       <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                   </div>
-                  @if (Auth::user())
                   @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4)
                     <a class="nav-link {{  request()->routeIs('pegawai.*') ? 'active' : '' }}" href="/pegawai" role="button">
                       <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Pegawai</span>
                       </div>
                     </a>
+                  @endif
+                  @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 7)
                     <a class="nav-link {{  request()->routeIs('usahawanWeb.*') ? 'active' : '' }}" href="/usahawanWeb" role="button">
                       <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Usahawan</span>
                       </div>
@@ -164,9 +165,9 @@
                         </div>
                       </a>
                   @endif 
-                  @endif
                   
                 </li>
+                @endif
                 <li class="nav-item">
                   <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                     <div class="col-auto navbar-vertical-label">Pelaporan

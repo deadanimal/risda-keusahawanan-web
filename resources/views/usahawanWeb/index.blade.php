@@ -43,7 +43,9 @@
                             <th scope="col">Negeri</th>
                             <th scope="col">Pusat Tanggungjawab</th>
                             <th scope="col">Aktifkan Pengguna</th>
+                            @if (Auth::user()->role == 1 || Auth::user()->role == 7)
                             <th scope="col">Kemaskini Profil</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -53,7 +55,7 @@
                             <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$user->negeri}}</label></td>
                             <td class="text-nowrap">
-                                <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
+                                <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:30vh;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
                                 <option selected="true" disabled="disabled" selected="">Kawasan</option>
                                 @foreach ($ddPT as $items)
                                     <option value="{{ $items->Kod_PT }}" {{ ( $items->Kod_PT == $user->Kod_PT) ? 'selected' : '' }}> 
@@ -67,9 +69,11 @@
                                 <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox" onclick="aktifkanpengguna('status',{{$user}})"/>
                                 </div>
                             </td>
-                            <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="tetapanpengguna('satu',{{$user}})">
-                                <span class="me-1" data-fa-transform="shrink-3"></span>Kemaskini
-                            </button></td>
+                            @if (Auth::user()->role == 1 || Auth::user()->role == 7)
+                                <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="tetapanpengguna('satu',{{$user}})">
+                                    <span class="me-1" data-fa-transform="shrink-3"></span>Kemaskini
+                                </button></td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

@@ -85,7 +85,7 @@
                                                 <td>Lain Lain</td>
                                             @endif
                                             <td>{{$jantinanums[$key]}}</td>
-                                            <td>80%</td>
+                                            <td>{{($jantinanums[$key] / $total1) * 100}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -152,11 +152,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($kateusahawans as $key => $kateuasahval)
                                         <tr class="align-middle" style="text-align: center;">
-                                            <td>Lelaki</td>
+                                            <td>{{$kateuasahval}}</td>
                                             <td>8</td>
                                             <td>80%</td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 </div>
@@ -226,6 +228,9 @@
                 }
                 if(jantina[key] == 2){
                     jumjantina.push("Perempuan");
+                }
+                if(jantina[key] == 3){
+                    jumjantina.push("Lain-Lain");
                 }
             }
         }

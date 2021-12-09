@@ -71,7 +71,7 @@
                             <form method="POST" style="display:inline-block;" action="{{ route('kategoriusahawan.destroy', $kateusahawan->id) }}">
                             @csrf  
                             @method('delete')
-                            <button type="submit" class="btn btn-danger btn-sm">X</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Buang</button>
                             </form>
                         </td>
                     </tr>
