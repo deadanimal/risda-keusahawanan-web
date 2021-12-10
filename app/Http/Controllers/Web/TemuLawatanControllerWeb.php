@@ -33,7 +33,10 @@ class TemuLawatanControllerWeb extends Controller
 
             }
 
-            $lawatan->nama_usahawan = $usahawan->namausahawan;
+            if(isset($lawatan)){
+                $lawatan->nama_usahawan = $usahawan->namausahawan;
+            }
+            
             if(isset($pegawai)){
                 $lawatan->nama_pegawai = $pegawai->nama;
             }

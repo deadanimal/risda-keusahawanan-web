@@ -123,7 +123,18 @@
                                     <tbody>
                                         @foreach ($statdafusahs as $key => $statdafusahval)
                                         <tr class="align-middle" style="text-align: center;">
-                                            <td>{{$statdafusahval}}</td>
+                                            @if($statdafusahval == "KP01")
+                                                <td>PEKEBUN KECIL</td>
+                                            @endif
+                                            @if($statdafusahval == "KP02")
+                                                <td>SUAMI PEKEBUN KECIL</td>
+                                            @endif
+                                            @if($statdafusahval == "KP03")
+                                                <td>ISTERI PEKEBUN KECIL</td>
+                                            @endif
+                                            @if($statdafusahval == "KP04")
+                                                <td>ANAK PEKEBUN KECIL</td>
+                                            @endif
                                             <td>{{$statdafusahnums[$key]}}</td>
                                             <td>{{($statdafusahnums[$key] / $total2) * 100}}</td>
                                         </tr>
