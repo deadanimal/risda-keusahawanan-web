@@ -20,7 +20,9 @@ class UsahawanControllerWeb extends Controller
                 $usahawan->status_pengguna = $status->status_pengguna;
             }
             $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
-            $usahawan->negeri = $negeri->Negeri;
+            if(isset($negeri)){
+                $usahawan->negeri = $negeri->Negeri;
+            }
         }
 
 
