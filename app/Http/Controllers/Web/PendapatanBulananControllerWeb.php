@@ -8,6 +8,11 @@ use App\Models\JenisInsentif;
 use App\Models\Report;
 use App\Models\Negeri;
 
+// use App\PendBul;
+use App\Exports\PendBul;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+
 class PendapatanBulananControllerWeb extends Controller
 {
     public function index()
@@ -87,7 +92,10 @@ class PendapatanBulananControllerWeb extends Controller
         }
         $result .=
         '<tr class="align-middle" style="text-align: center;">
-            <td colspan="4"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_penerima.'</label></td>
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_insentif.'</label></td>
         </tr>
@@ -96,4 +104,14 @@ class PendapatanBulananControllerWeb extends Controller
         return $result;
     }
 
+    // public function export2(Request $request, $tahun, $jenis)
+    // {
+    //     // dd($request);
+    //     return Excel::download(new PendBul($request->tahun,$request->id_jenis_insentif), 'PendapatanBulanan.xlsx');
+    // }
+
+    public function export2($tahun, $jenis)
+    {
+            return Excel::download(new PendBul($tahun,$jenis), 'PendapatanBulanan.xlsx');
+    }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Insentif;
 use App\Models\Report;
 use App\Models\User;
@@ -27,9 +29,12 @@ class LaporanProfilControllerWeb extends Controller
     public function generatereport(Request $request)
     {
         // return($request->type);
-        Report::truncate();
+        // Report::truncate();
         if($request->type == 1){
-
+            // if(isset(Auth::user()->id)){
+            //     $userid = 
+            // }
+            Report::where('tab20', Auth::user()->id)->where('type', 1)->delete();
             $insentifs = Insentif::all();
             if($insentifs->count()==0){
                 return "Tiada Data Insentif Dijumpai";
@@ -486,6 +491,7 @@ class LaporanProfilControllerWeb extends Controller
             $report->tab4 = 1;
             $report->tab5 = $request->nilai_insentif;
             $report->tab10 = $others;
+            $report->tab20 = Auth::user()->id;
             $report->save();
 
         }else if($type == 2){

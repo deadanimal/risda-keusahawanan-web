@@ -16,7 +16,9 @@ class UsahawanControllerWeb extends Controller
         $ddPT = PusatTanggungjawab::where('status', 1)->get();
         foreach ($users as $usahawan) {
             $status = User::where('usahawanid', $usahawan->id)->first();
-            $usahawan->status_pengguna = $status->status_pengguna;
+            if(isset($status)){
+                $usahawan->status_pengguna = $status->status_pengguna;
+            }
             $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
             $usahawan->negeri = $negeri->Negeri;
         }

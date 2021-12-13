@@ -67,6 +67,7 @@ Route::resource('/temulawatan', TemuLawatanControllerWeb::class);
 Route::resource('/laporanprofil', LaporanProfilControllerWeb::class);
 
 Route::resource('/pendapatanbulanan', PendapatanBulananControllerWeb::class);
+Route::get('export2/{tahun}/{jenis}', [PendapatanBulananControllerWeb::class, 'export2']);
 Route::resource('/pendbulDaerah', PendBulDaerahControllerWeb::class);
 Route::resource('/pendbulDun', PendBulDunControllerWeb::class);
 

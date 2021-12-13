@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-        <div class="row align-items-center">
+        <div class="row align-items-center" id="contentbody">
             <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF
               <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
                 <option value="">Jenis Insentif</option>
@@ -53,6 +53,9 @@
                 </div>
               </div>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
+            <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
+            {{-- href="{{ route('export1') }}" --}}
             <table id="pendapatanbultbl" class="table table-sm table-bordered table-hover">
                 <colgroup>
                     <col span="1" style="width: 5%;">
@@ -110,7 +113,10 @@
                   </tr>
                   @endforeach
                   <tr class="align-middle" style="text-align: center;">
-                    <td colspan="4"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_penerima}}</label></td>
                     <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_insentif}}</label></td>
                   </tr>
@@ -166,6 +172,52 @@
         }
     });
   }
+
+  function ExportExcel(){
+    if(document.getElementById("iptJenisInsentif").value == ""){
+      var jenis = "nun";
+    }else{
+      var jenis = document.getElementById("iptJenisInsentif").value;
+    }
     
+    if(document.getElementById("iptYear").value == ""){
+      var year = "nun";
+    }else{
+      var year = document.getElementById("iptYear").value;
+    }
+  
+    window.location.href = "/export2/"+year+"/"+jenis;
+  }
+    
+  function ExportPDF(){
+        
+        var pdf = new jsPDF("l", "mm", "a2");
+        
+        source = $('#contentbody')[0];
+        specialElementHandlers = {
+            '#bypassme': function (element, renderer) {
+                return true
+            }
+        };
+        margins = {
+            top: 10,
+            bottom: 0,
+            left: 10,
+            width: 2480
+        };
+
+        pdf.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left, // x coord
+            margins.top, { // y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+
+            function (dispose) {
+                pdf.save('Test.pdf');
+            }, margins
+        );
+  }
 </script>
 @endsection

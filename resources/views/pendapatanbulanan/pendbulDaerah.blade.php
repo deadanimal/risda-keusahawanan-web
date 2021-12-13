@@ -54,7 +54,8 @@
                 </div>
                 </div>
                 <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                    <button onclick="generatepdf()">test</button>
+                    <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
+                    <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
                     <table id="pendbuldaerah" class="table table-sm table-bordered table-hover">
                         <colgroup>
                             <col span="1" style="width: 10%;">
@@ -111,7 +112,10 @@
                             </tr>
                             @endforeach
                             <tr class="align-middle" style="text-align: center;">
-                                <td colspan="4"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_penerima}}</label></td>
                                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_insentif}}</label></td>
                             </tr>
@@ -160,44 +164,27 @@
           }
       });
     }
-    
-    function generatepdf(){
-        // $.ajax({
-        //   headers: {
-        //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //   },
-        //   url: "/generatepdf",
-        //   type:"GET",
-        //   success: function(data) {
-        //     alert(data);
-        //   }55
-        // });
+    function ExportExcel(){
+
+    }
+
+    function ExportPDF(){
         
-        var pdf = new jsPDF("p", "mm", "a4");
-        // var width = pdf.internal.pageSize.getWidth();
-        // var height = pdf.internal.pageSize.getHeight();
+        var pdf = new jsPDF("l", "mm", "a2");
         
         source = $('#contentbody')[0];
 
-        // we support special element handlers. Register them with jQuery-style 
-        // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-        // There is no support for any other type of selectors 
-        // (class, of compound) at this time.
         specialElementHandlers = {
-            // element with id of "bypass" - jQuery style selector
             '#bypassme': function (element, renderer) {
-                // true = "handled elsewhere, bypass text extraction"
                 return true
             }
         };
         margins = {
-            top: 0,
+            top: 10,
             bottom: 0,
-            left: 0,
+            left: 10,
             width: 2480
         };
-        // all coords and widths are in jsPDF instance's declared units
-        // 'inches' in this case
         pdf.fromHTML(
             source, // HTML string or DOM elem ref.
             margins.left, // x coord
@@ -207,9 +194,7 @@
             },
 
             function (dispose) {
-                // dispose: object with X, Y of the last line add to the PDF 
-                //          this allow the insertion of new lines after html
-                pdf.save('Test.pdf');
+                pdf.save('Pendapatan Bulanan Daerah.pdf');
             }, margins
         );
     }
