@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
                     if($user->status_pengguna == 1){
                         $request->authenticate();
                         $request->session()->regenerate();
-                        return redirect('/dash');
+                        return redirect('/landing');
                     }else{
                         echo '<script language="javascript">';
                         echo 'alert("Akaun Tidak Aktif. Sila Minta Admin Aktifkan Akaun Anda Untuk Meneruskan ke Applikasi")';

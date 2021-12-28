@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Pegawai;
 use App\Models\Peranan;
 use App\Models\User;
@@ -14,7 +15,16 @@ class PegawaiControllerWeb extends Controller
 {
     public function index()
     {
-        $pegawai = Pegawai::All();
+        $authuser = Auth::user();
+        if($authuser->role == 3){
+            
+        }
+        else if($authuser->role == 4){
+
+        }else{
+            $pegawai = Pegawai::All();
+        }
+        
         $ddPeranan = Peranan::All();
         $ddMukim = Mukim::where('status', 1)->orderBy('Mukim', 'ASC')->get();
         foreach ($pegawai as $pegawai_L) {

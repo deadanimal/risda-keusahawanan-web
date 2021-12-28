@@ -223,6 +223,11 @@
         var jumkateusahawan = [];
         var jumnumkateusahawan = [];
 
+        var umurgrp = <?php echo $umurgrp; ?>;
+        var numumurgrp = <?php echo $umurgrpnum; ?>;
+        var jumumurgrp = [];
+        var jumnumumurgrp = [];
+
         for (var key in daerah) {
             if (Object.prototype.hasOwnProperty.call(daerah, key)) {
                 jumdaerah.push(daerah[key]);
@@ -316,6 +321,40 @@
             }
         }
 
+        for (var key in umurgrp) {
+            if (Object.prototype.hasOwnProperty.call(umurgrp, key)) {
+                if(umurgrp[key] == 1){
+                    jumumurgrp.push("BAWAH 20");
+                }
+                if(umurgrp[key] == 2){
+                    jumumurgrp.push("21 - 30");
+                }
+                if(umurgrp[key] == 3){
+                    jumumurgrp.push("31 - 40");
+                }
+                if(umurgrp[key] == 4){
+                    jumumurgrp.push("41 - 50");
+                }
+                if(umurgrp[key] == 5){
+                    jumumurgrp.push("51 - 60");
+                }
+                if(umurgrp[key] == 6){
+                    jumumurgrp.push("61 - 70");
+                }
+                if(umurgrp[key] == 7){
+                    jumumurgrp.push("71 ke atas");
+                }
+                if(umurgrp[key] == 8){
+                    jumumurgrp.push("Tidak diketahui");
+                }
+            }
+        }
+        for (var key in numumurgrp) {
+            if (Object.prototype.hasOwnProperty.call(numumurgrp, key)) {
+                jumnumumurgrp.push(numumurgrp[key]);
+            }
+        }
+
         var datas = [
             {
                 label: 'Count',
@@ -379,6 +418,19 @@
         var barChartData5 = {
             labels: jumkateusahawan,
             datasets: datas5
+        };
+
+        var datas6 = [
+            {
+                label: 'Count',
+                backgroundColor: "pink",
+                data: jumnumumurgrp
+            }
+        ];
+
+        var barChartData6 = {
+            labels: jumumurgrp,
+            datasets: datas6
         };
 
         var ctx = document.getElementById("canvas").getContext("2d");
@@ -531,7 +583,7 @@
         var ctx = document.getElementById("canvas6").getContext("2d");
         window.myBar = new Chart(ctx, {
             type: 'horizontalBar',
-            data: barChartData,
+            data: barChartData6,
             options: {
                 indexAxis: 'y',
                 elements: {
