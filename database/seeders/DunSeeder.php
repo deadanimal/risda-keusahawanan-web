@@ -27,8 +27,8 @@ class DunSeeder extends Seeder
                     "U_Parlimen_ID" => $data['2'],
                     "Kod_Dun" => $data['3'],
                     "Kod_Parlimen" => $data['4'],
-                    "Kod_Negeri" => $data['4'],
-                    "Kod_Dun2" => $data['4'],
+                    "Kod_Negeri" => $data['5'],
+                    "Kod_Dun2" => $data['6'],
                 ]);    
             }
             $firstline = false;
