@@ -15,7 +15,7 @@ class PerniagaanSeeder extends Seeder
     public function run()
     {
         Perniagaan::create([
-            'usahawanid'=> '1',
+            'usahawanid'=> 'J00000',
             'jenisperniagaan'=> 'A',
             'klusterperniagaan'=> 'Tunggal',
             'subkluster'=>'1',

@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $produk = Produk::all();
@@ -35,25 +30,14 @@ class ProdukController extends Controller
         return response()->json($produk);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Produk  $produk
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Produk $produk)
+    public function show( $id)
     {
-        return view('produk.show', [
-            'produk' => $produk
-        ]);
+        $produk = Produk::where('perniagaanid', $id)->get();
+
+        return response()->json($produk);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Produk  $produk
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Produk $produk)
     {
         return view('produk.edit', [
@@ -61,16 +45,11 @@ class ProdukController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Produk  $produk
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Produk $produk)
     {
-        $produk->perniagaanid= $request->perniagaanid;
+        // $produk->perniagaanid= $request->perniagaanid;
+        // $produk->perniagaanid= $request->perniagaanid;
         $produk->jenamaproduk= $request->jenamaproduk;
         $produk->unitmatrik= $request->unitmatrik;
         $produk->kapasitimaksimum= $request->kapasitimaksimum;
@@ -80,15 +59,10 @@ class ProdukController extends Controller
 
         $produk->save();
 
-        return redirect('/produk');
+        return response()->json($produk);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Produk  $produk
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Produk $produk)
     {
         //

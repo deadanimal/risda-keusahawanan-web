@@ -22,8 +22,10 @@ class CreateUsahawansTable extends Migration
             $table->date('tarikhlahir')->nullable();
             $table->integer('U_Jantina_ID')->nullable();
             $table->string('U_Bangsa_ID',14)->nullable();
+            $table->string('U_Etnik_ID')->nullable();
             $table->string('statusperkahwinan',50)->nullable();
             $table->integer('U_Pendidikan_ID')->nullable();
+            $table->string('U_Taraf_Pendidikan_Tertinggi_ID')->nullable();
             $table->string('alamat1',150)->nullable();
             $table->string('alamat2',150)->nullable();
             $table->string('alamat3',150)->nullable();

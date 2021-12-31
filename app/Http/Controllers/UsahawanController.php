@@ -11,7 +11,10 @@ class UsahawanController extends Controller
    
     public function index()
     {
-        $usahawan = Usahawan::all();
+        $usahawan =  DB::table('usahawans')
+        ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
+        ->select('users.id as id_pengguna', 'usahawans.*')
+        ->get();
         // dd($usahawan);
         return response()->json($usahawan);
     }

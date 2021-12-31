@@ -18,6 +18,7 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PekebunController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PerniagaanController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PTController;
 use App\Http\Controllers\SeksyenController;
 use App\Http\Controllers\StokController;
@@ -58,7 +59,10 @@ Route::apiResource('pekebun', PekebunController::class);
 Route::apiResource('syarikat', SyarikatController::class);
 Route::apiResource('perniagaan', PerniagaanController::class);
 Route::apiResource('kategori_aliran', KategoriAliranController::class);
+
 Route::apiResource('aliran', AliranController::class);
+Route::post('aliran/uploadDoc/{id}', [AliranController::class, 'uploadDoc']);
+
 Route::apiResource('katalog', KatalogController::class);
 Route::apiResource('pelanggan', PelangganController::class);
 Route::apiResource('stok', StokController::class);
@@ -69,6 +73,9 @@ Route::apiResource('tindakanLawatan', TindakanLawatanController::class);
 Route::apiResource('buletin', BuletinController::class);
 Route::apiResource('insentif', InsentifController::class);
 
+//produk
+Route::apiResource('produk', ProdukController::class);
+
 // datalib 
 Route::apiResource('daerah', DaerahController::class);
 Route::apiResource('negeri', NegeriController::class);
@@ -78,7 +85,9 @@ Route::apiResource('dun', DunController::class);
 Route::apiResource('kampung', KampungController::class);
 Route::apiResource('seksyen', SeksyenController::class);
 Route::apiResource('kategori_usahawan', KategoriUsahawanController::class);
+
 Route::apiResource('pusat_tanggungjawab', PTController::class);
+Route::get('pusat_tanggungjawab/senarai_pt_pun_pud/{id}', [PTController::class, 'senaraiPTPunPud']);
 
 // Route::('checkUser', [UserController::class, 'checkUser']);
 Route::post('/sanctum/token', function (Request $request) {
@@ -110,5 +119,8 @@ Route::get('/lawatan/usahawan/{id}', [LawatanController::class, 'showLawatanUsah
 Route::get('/lawatan/updateUsahawan/{id}', [LawatanController::class, 'updateLawatanUsahawan']);
 Route::post('/lawatan/updateLaporan/{id}', [LawatanController::class, 'updateLaporan']);
 Route::get('/lawatan/senaraiUsahawan/{id}', [LawatanController::class, 'showUsahawanForLawatan']);
+Route::post('/lawatan/laporanBaru', [LawatanController::class, 'storeLaporan']);
+Route::get('/lawatan/showLaporan/{id}', [LawatanController::class, 'showLaporan']);
+
 
 

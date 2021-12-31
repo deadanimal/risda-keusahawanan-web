@@ -25,8 +25,11 @@ class CreatePelanggansTable extends Migration
             $table->string('U_Daerah_ID',12);
             $table->string('no_telefon',12);
             $table->string('no_fax',12);
-            
 
+            $table->string('cukai_sst')->nullable();
+            $table->string('kos_penghantaran')->nullable();
+            $table->string('diskaun')->nullable();
+            
             $table->timestamps();
         });
     }

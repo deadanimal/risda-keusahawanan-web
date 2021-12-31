@@ -11,11 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class LawatanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         $lawatan = Lawatan::all();
@@ -28,14 +24,11 @@ class LawatanController extends Controller
 
         $lawatan->id_pengguna = $request->id_pengguna;
         $lawatan->id_pegawai = $request->id_pegawai;
-        // $lawatan->id_tindakan_lawatan = $request->id_tindakan_lawatan;
-        // $lawatan->jenis_lawatan = $request->jenis_lawatan;
+       
         $lawatan->tarikh_lawatan = $request->tarikh_lawatan;
         $lawatan->masa_lawatan = $request->masa_lawatan;
-        $lawatan->status_lawatan = "usahawan";
-        // $lawatan->gambar_lawatan = $request->gambar_lawatan;
-        // $lawatan->komen = $request->komen;
-        // $lawatan->modified_by = $$request->id_pengguna;
+        $lawatan->status_lawatan = "1";
+       
 
         $lawatan->save();
 
@@ -65,6 +58,7 @@ class LawatanController extends Controller
             ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
             ->join('lawatans', 'lawatans.id_pengguna', 'users.id')
             ->select('lawatans.id as lawatan_id', 'pegawais.nama as nama_pegawai', 'usahawans.namausahawan', 'usahawans.id as usahawan_id', 'lawatans.updated_at', 'lawatans.created_at', 'lawatans.status_lawatan', 'lawatans.tarikh_lawatan', 'lawatans.masa_lawatan', 'lawatans.gambar_lawatan', 'lawatans.jenis_lawatan', 'lawatans.id_tindakan_lawatan', 'lawatans.komen')
+            ->orderBy('tarikh_lawatan', 'desc')
             ->get();
 
         return response()->json($lawatan);
@@ -93,19 +87,6 @@ class LawatanController extends Controller
 
         return response()->json($lawatan);
     }
-
-    // public function updateLawatanUsahawan(Request $request, $id)
-    // {
-    //     $lawatan = Lawatan::find($id);
-
-    //     $lawatan->tarikh_lawatan = $request->tarikh_lawatan;
-    //     $lawatan->masa_lawatan = $request->masa_lawatan;
-    //     $lawatan->status_lawatan = "pending_pegawai";
-
-    //     $lawatan->save();
-
-    //     return response()->json($lawatan);
-    // }
 
 
     public function update(Request $request, Lawatan $lawatan)
@@ -147,5 +128,37 @@ class LawatanController extends Controller
             ->get();
 
         return response()->json($usahawan);
+    }
+
+    public function storeLaporan(Request $request){
+
+        $lawatan = new Lawatan();
+
+        $lawatan->id_pengguna = $request->id_pengguna;
+        $lawatan->id_pegawai = $request->id_pegawai;
+       
+        $lawatan->tarikh_lawatan = $request->tarikh_lawatan;
+        $lawatan->masa_lawatan = $request->masa_lawatan;
+
+        $lawatan->status_lawatan = "4";
+        $lawatan->jenis_lawatan = $request->jenis_lawatan;
+        $lawatan->id_tindakan_lawatan = $request->id_tindakan_lawatan;
+        $lawatan->komen = $request->komen;
+        $lawatan->gambar_lawatan = $request->gambar_lawatan;
+       
+        $lawatan->save();
+
+        return response()->json($lawatan);
+    }
+
+    public function showLaporan($id_pegawai)
+    {
+        $lawatan = DB::table('pegawais')->where('pegawais.id', $id_pegawai)
+            ->join('lawatans', 'lawatans.id_pegawai', 'pegawais.id')
+            ->join('users', 'users.id', 'lawatans.id_pengguna')
+            ->select('users.name as nama_usahawan', 'lawatans.*')
+            ->get();
+
+        return response()->json($lawatan);
     }
 }

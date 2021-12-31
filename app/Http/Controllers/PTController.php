@@ -15,23 +15,19 @@ class PTController extends Controller
         return response()->json($pt);
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
 
-    public function show($id)
+    public function senaraiPTPunPud($id_pegawai)
     {
-        //
-    }
+        $negeri_pegawai = DB::table('pegawais')->where('pegawais.id', $id_pegawai)
+            ->join('pusat_tanggungjawabs', 'pusat_tanggungjawabs.Kod_PT', 'pegawais.NamaPT')
+            ->join('negeris', 'negeris.Negeri_Rkod', 'pusat_tanggungjawabs.Negeri_Rkod')
+            ->select('pusat_tanggungjawabs.*')
+            ->get()->first();
 
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        // dd($negeri_pegawai);
+        $pt = DB::table('pusat_tanggungjawabs')->where('pusat_tanggungjawabs.Negeri_Rkod', $negeri_pegawai->Negeri_Rkod)
+            ->get();
 
-    public function destroy($id)
-    {
-        //
+        return response()->json($pt);
     }
 }
