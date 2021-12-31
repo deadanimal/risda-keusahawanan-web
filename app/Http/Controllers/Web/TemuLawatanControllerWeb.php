@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Lawatan;
 use App\Models\User;
@@ -14,6 +15,7 @@ class TemuLawatanControllerWeb extends Controller
     public function index()
     {
         $lawatans = Lawatan::orderBy('tarikh_lawatan', 'ASC')->orderBy('status_lawatan', 'ASC')->get();
+        
         foreach($lawatans as $lawatan){
             $user = User::where('id', $lawatan->id_pengguna)->first();
             $usahawan = Usahawan::where('id', $user->usahawanid)->first();

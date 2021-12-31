@@ -88,25 +88,31 @@
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
             <div class="navbar-vertical-content scrollbar">
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+                @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 7)
                 <li class="nav-item">
                   <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('temulawatan.*') || request()->routeIs('dash.*') ? 'true' : 'false' }}" aria-controls="dashboard">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span>
                     </div>
                   </a>
                   <ul class="nav collapse {{ request()->routeIs('temulawatan.*') || request()->routeIs('dash.*') ? 'show' : 'collapse' }}" id="dashboard">
+                    @if (Auth::user()->role == 7)
                     <li class="nav-item"><a class="nav-link {{  request()->routeIs('temulawatan.*') ? 'active' : '' }}" href="/temulawatan">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Temujanji Lawatan</span>
                         </div>
                       </a>
                     </li>
+                    @endif
+                    @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 7)
                     <li class="nav-item"><a class="nav-link {{  request()->routeIs('dash.*') ? 'active' : '' }}" href="/dash">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Statistik</span>
                         </div>
                       </a>
                     </li>
+                    @endif
                   </ul>
                 </li>
-                @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5 || Auth::user()->role == 6 || Auth::user()->role == 7)
+                @endif
+                @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5)
                 <li class="nav-item">
                   <!-- label-->
                   <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
