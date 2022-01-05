@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Daerah;
 use App\Models\Usahawan;
 use Illuminate\Database\Seeder;
 
@@ -26,7 +27,10 @@ class DatabaseSeeder extends Seeder
             PegawaiSeeder::class,
             JenisInsentifSeeder::class,
             KategoriUsahawanSeeder::class,
-            TindakanLawatanSeeder::class
+            TindakanLawatanSeeder::class,
+            DaerahSeeder::class,
+            DunSeeder::class,
+            KampungSeeder::class
         ]);
     }
 }

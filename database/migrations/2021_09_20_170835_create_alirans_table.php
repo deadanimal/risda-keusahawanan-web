@@ -22,6 +22,7 @@ class CreateAliransTable extends Migration
             $table->string('keterangan_aliran', 100)->nullable();
             $table->double('jumlah_aliran',30,2)->nullable();
             $table->string('kategori_aliran',50)->nullable();
+            $table->string('nama_dokumen')->nullable();
             $table->string('dokumen_lampiran',150)->nullable();
             $table->string('modified_by')->nullable();
 

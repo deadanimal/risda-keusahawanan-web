@@ -25,7 +25,7 @@ class CreateLawatansTable extends Migration
             $table->time('masa_lawatan')->nullable();
             $table->string('status_lawatan')->nullable();
             $table->longText('gambar_lawatan')->nullable();
-            $table->string('komen',200)->nullable();
+            $table->string('komen')->nullable();
             $table->string('modified_by',50)->nullable();
 
             $table->timestamps();

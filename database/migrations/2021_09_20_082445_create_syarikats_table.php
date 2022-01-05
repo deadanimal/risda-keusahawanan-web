@@ -42,6 +42,10 @@ class CreateSyarikatsTable extends Migration
             $table->string('email',100)->nullable();
             $table->longText('logo_syarikat')->nullable();
             $table->string('prefix_id',50)->nullable();
+
+            $table->string('nama_akaun_bank')->nullable();
+            $table->string('no_akaun_bank')->nullable();
+
             $table->string('createdby_id',50)->nullable();
             $table->string('createdby_kod_PT',50)->nullable();
             $table->string('modifiedby_id',50)->nullable();

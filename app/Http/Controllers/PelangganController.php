@@ -53,7 +53,7 @@ class PelangganController extends Controller
         ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
         ->join('pelanggans', 'stoks.id_pelanggan', 'pelanggans.id' )
         ->select('katalogs.*', 'pelanggans.*', 'stoks.id', 'stoks.id_pelanggan')
-        // ->where('id_pengguna', $id)
+        ->where('id_pengguna', $id)
         // ->groupBy('katalogs.id')
         // ->count('stoks.id_pelanggan');
         ->get();

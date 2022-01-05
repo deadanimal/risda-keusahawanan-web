@@ -11,7 +11,7 @@ class KatalogController extends Controller
     
     public function index()
     {
-        $katalog = Katalog::all();
+        $katalog = Katalog::orderBy('updated_at', 'desc')->get();
 
         return response()->json($katalog);
     }

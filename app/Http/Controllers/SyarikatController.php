@@ -61,7 +61,7 @@ class SyarikatController extends Controller
     public function show($id)
     {
 
-        $syarikat = Usahawan::where('usahawans.id', $id)
+        $syarikat = Usahawan::where('usahawans.usahawanid', $id)
         ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
         ->select(
             'syarikats.logo_syarikat', 
