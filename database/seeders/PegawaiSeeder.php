@@ -26,7 +26,7 @@ class PegawaiSeeder extends Seeder
             'StesenBertugas'=> '',
             'email'=> 'ruzlan@risda.gov.my',
             'notel'=> '',
-            'mukim'=> '1',
+            'mukim'=> '020740',
             'peranan_pegawai'=> '',
         ]);
 
@@ -42,7 +42,7 @@ class PegawaiSeeder extends Seeder
             'StesenBertugas'=> '',
             'email'=> 'abdzahid@risda.gov.my',
             'notel'=> '',
-            'mukim'=> '2',
+            'mukim'=> '010101',
             'peranan_pegawai'=> '',
         ]);
 
@@ -58,7 +58,7 @@ class PegawaiSeeder extends Seeder
             'StesenBertugas'=> '',
             'email'=> 'a.halim@risda.gov.my',
             'notel'=> '',
-            'mukim'=> '3',
+            'mukim'=> '010101',
             'peranan_pegawai'=> '',
         ]);
 
@@ -74,7 +74,7 @@ class PegawaiSeeder extends Seeder
             'StesenBertugas'=> '',
             'email'=> 'mahanum@risda.gov.my',
             'notel'=> '',
-            'mukim'=> '3',
+            'mukim'=> '010101',
             'peranan_pegawai'=> '',
         ]);
     }

@@ -20,8 +20,16 @@ class DashControllerWeb extends Controller
     public function index()
     {
         $authuser = Auth::user();
-        $pegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-        $Mukim = Mukim::where('U_Mukim_ID', $pegawai->mukim)->first();
+        if(!isset($authuser)){
+            return redirect('/');
+        }
+        if(isset($authuser->idpegawai)){
+            $pegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+        }
+        if(isset($pegawai->mukim)){
+            $Mukim = Mukim::where('U_Mukim_ID', $pegawai->mukim)->first();
+        }
+        
         // dd($Mukim->U_Negeri_ID);
         $Insentifdatas = Insentif::All();
         $array = [];
@@ -36,67 +44,69 @@ class DashControllerWeb extends Controller
             if(isset($user)){
                 if($user->usahawanid != null){
                     $usahawan = Usahawan::where('id', $user->usahawanid)->first();
-                    if($authuser->role == 3){
-                        if(isset($Mukim)){
-                            if($usahawan->U_Negeri_ID != $Mukim->U_Negeri_ID){
-                                $update = false;
-                            }else{
+                    if(isset($usahawan)){
+                        if($authuser->role == 3){
+                            if(isset($Mukim)){
+                                if($usahawan->U_Negeri_ID != $Mukim->U_Negeri_ID){
+                                    $update = false;
+                                }else{
 
+                                }
                             }
                         }
-                    }
-                    if($authuser->role == 4){
-                        if(isset($Mukim)){
-                            if($usahawan->U_Daerah_ID != $Mukim->U_Daerah_ID){
-                                $update = false;
-                            }else{
+                        if($authuser->role == 4){
+                            if(isset($Mukim) && isset($usahawan)){
+                                if($usahawan->U_Daerah_ID != $Mukim->U_Daerah_ID){
+                                    $update = false;
+                                }else{
 
+                                }
                             }
                         }
-                    }
-                    if($authuser->role == 7){
-                        if(isset($Mukim)){
-                            if($usahawan->Kod_PT != $pegawai->NamaPT){
-                                $update = false;
-                            }else{
+                        if($authuser->role == 7){
+                            if(isset($Mukim)){
+                                if($usahawan->Kod_PT != $pegawai->NamaPT){
+                                    $update = false;
+                                }else{
 
+                                }
                             }
                         }
-                    }
                         
-                    $insentifdata2->jantina = $usahawan->U_Jantina_ID;
+                        $insentifdata2->jantina = $usahawan->U_Jantina_ID;
 
-                    $daerah = Daerah::where('U_Daerah_ID', $usahawan->U_Daerah_ID)->first();
-                    $insentifdata2->daerah = $daerah->Daerah;
+                        $daerah = Daerah::where('U_Daerah_ID', $usahawan->U_Daerah_ID)->first();
+                        $insentifdata2->daerah = $daerah->Daerah;
 
-                    $perniagaans = Perniagaan::where('usahawanid', $usahawan->id)->first();
-                    $insentifdata2->jnsperniagaan = $perniagaans->jenisperniagaan;
-                    $insentifdata2->status_daftar_usahawan = $usahawan->status_daftar_usahawan;
+                        $perniagaans = Perniagaan::where('usahawanid', $usahawan->id)->first();
+                        $insentifdata2->jnsperniagaan = $perniagaans->jenisperniagaan;
+                        $insentifdata2->status_daftar_usahawan = $usahawan->status_daftar_usahawan;
 
-                    $KateUsahawan = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
-                    $insentifdata2->kateusahawan = $KateUsahawan->nama_kategori_usahawan;
+                        $KateUsahawan = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
+                        $insentifdata2->kateusahawan = $KateUsahawan->nama_kategori_usahawan;
 
-                    $dateOfBirth = $usahawan->tarikhlahir;
-                    $today = date("Y-m-d");
-                    $diff = date_diff(date_create($dateOfBirth), date_create($today));
-                    $umur = $diff->format('%y');
+                        $dateOfBirth = $usahawan->tarikhlahir;
+                        $today = date("Y-m-d");
+                        $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                        $umur = $diff->format('%y');
 
-                    if($umur <= 20){
-                        $insentifdata2->umurgrp = 1;
-                    }else if($umur >= 21 && $umur <= 30){
-                        $insentifdata2->umurgrp = 2;
-                    }else if($umur >= 31 && $umur <= 40){
-                        $insentifdata2->umurgrp = 3;
-                    }else if($umur >= 41 && $umur <= 50){
-                        $insentifdata2->umurgrp = 4;
-                    }else if($umur >= 51 && $umur <= 60){
-                        $insentifdata2->umurgrp = 5;
-                    }else if($umur >= 61 && $umur <= 70){
-                        $insentifdata2->umurgrp = 6;
-                    }else if($umur >= 71){
-                        $insentifdata2->umurgrp = 7;
-                    }else{
-                        $insentifdata2->umurgrp = 8;
+                        if($umur <= 20){
+                            $insentifdata2->umurgrp = 1;
+                        }else if($umur >= 21 && $umur <= 30){
+                            $insentifdata2->umurgrp = 2;
+                        }else if($umur >= 31 && $umur <= 40){
+                            $insentifdata2->umurgrp = 3;
+                        }else if($umur >= 41 && $umur <= 50){
+                            $insentifdata2->umurgrp = 4;
+                        }else if($umur >= 51 && $umur <= 60){
+                            $insentifdata2->umurgrp = 5;
+                        }else if($umur >= 61 && $umur <= 70){
+                            $insentifdata2->umurgrp = 6;
+                        }else if($umur >= 71){
+                            $insentifdata2->umurgrp = 7;
+                        }else{
+                            $insentifdata2->umurgrp = 8;
+                        }
                     }
                 }
             }
@@ -156,7 +166,7 @@ class DashControllerWeb extends Controller
                         }
                     }
                     if($authuser->role == 4){
-                        if(isset($Mukim)){
+                        if(isset($Mukim) && isset($usahawan)){
                             if($usahawan->U_Daerah_ID != $Mukim->U_Daerah_ID){
                                 $update = false;
                             }else{

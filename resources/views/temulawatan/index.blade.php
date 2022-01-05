@@ -139,7 +139,7 @@
 </div>
 <div id="myModal" class="modal">
     <div class="modal-content" style="width: 400px;">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closemodal()">&times;</span>
         <div class="centered">
             <p>Sila Pilih Tarikh Baru Untuk Temujanji :-</p>
             <form id="formtarikhbaru" method="POST" action="/temulawatan" enctype="multipart/form-data">
@@ -158,12 +158,12 @@
 @section('script')
 <script type="text/javascript">
     $( document ).ready(function() {
-        const dataTableBasic = new simpleDatatables.DataTable("#tbltemulawatan", {
-            searchable: true,
-            fixedHeight: true,
-            sortable: false,
-            paging: true
-        });
+        // const dataTableBasic = new simpleDatatables.DataTable("#tbltemulawatan", {
+        //     searchable: true,
+        //     fixedHeight: true,
+        //     sortable: false,
+        //     paging: true
+        // });
         $('#datetimepicker').datepicker({
             dateFormat: "yy-mm-dd"
         });
@@ -185,6 +185,11 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
+
+    function closemodal(){
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
     }
 
     function UpdateLawatan(field,id,tarikh){

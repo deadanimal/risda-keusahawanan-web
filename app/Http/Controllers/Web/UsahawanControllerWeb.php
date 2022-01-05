@@ -3,17 +3,48 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Usahawan;
 use App\Models\PusatTanggungjawab;
 use App\Models\Negeri;
+use App\Models\Pegawai;
+use App\Models\Mukim;
+use App\Models\Daerah;
+use App\Models\Parlimen;
+use App\Models\Dun;
+use App\Models\Kampung;
+use App\Models\Seksyen;
+use App\Models\KategoriUsahawan;
 
 class UsahawanControllerWeb extends Controller
 {
     public function index()
     {
-        $users = Usahawan::all();
+        $authuser = Auth::user();
+        $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+        $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         $ddPT = PusatTanggungjawab::where('status', 1)->get();
+        $ddNegeri = Negeri::where('status', 1)->get();
+        $ddDaerah = Daerah::where('status', 1)->get();
+        $ddMukim = Mukim::where('status', 1)->get();
+        $ddParlimen = Parlimen::all();
+        $ddDun = Dun::all();
+        $ddKampung = Kampung::where('status', 1)->get();
+        $ddSeksyen = Seksyen::where('status', 1)->get();
+        $ddKateUsahawan = KategoriUsahawan::where('status_kategori_usahawan', 'aktif')->get();
+        if($authuser->role == 1){
+            $users = Usahawan::all();
+        }else if($authuser->role == 3){
+            $users = Usahawan::where('U_Negeri_ID',$authmukim->U_Negeri_ID)->get();
+        }else if($authuser->role == 4){
+            $users = Usahawan::where('U_Daerah_ID',$authmukim->U_Daerah_ID)->get();
+        }else if($authuser->role == 7){
+            $users = Usahawan::where('Kod_PT',$authpegawai->NamaPT)->get();
+        }else{
+            return redirect('/landing');
+        }
+
         foreach ($users as $usahawan) {
             $status = User::where('usahawanid', $usahawan->id)->first();
             if(isset($status)){
@@ -28,7 +59,15 @@ class UsahawanControllerWeb extends Controller
 
         return view('usahawanWeb.index',[
             'users'=>$users,
-            'ddPT'=>$ddPT
+            'ddPT'=>$ddPT,
+            'ddNegeri'=>$ddNegeri,
+            'ddDaerah'=>$ddDaerah,
+            'ddMukim'=>$ddMukim,
+            'ddParlimen'=>$ddParlimen,
+            'ddDun'=>$ddDun,
+            'ddKampung'=>$ddKampung,
+            'ddSeksyen'=>$ddSeksyen,
+            'ddKateUsahawan'=>$ddKateUsahawan
         ]);
     }
 
@@ -95,6 +134,13 @@ class UsahawanControllerWeb extends Controller
             $usahawan->save();
         }
         
+    }
+
+    public function SahUsahawanProfil(Request $request)
+    {
+        $usahawan = Usahawan::where('id', $request->id)->first();
+        $usahawan->status_profil = 1;
+        $usahawan->save();
     }
 
 }

@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
         if($user != null){
             if($user->type == 1){
                 // dd($user);
-                if($user->email_verified_at != null){
+                // if($user->email_verified_at != null){
                     // dd($user->profile_status);
                     if($user->status_pengguna == 1){
                         $request->authenticate();
@@ -43,26 +43,26 @@ class AuthenticatedSessionController extends Controller
                     }else{
                         echo '<script language="javascript">';
                         echo 'alert("Akaun Tidak Aktif. Sila Minta Admin Aktifkan Akaun Anda Untuk Meneruskan ke Applikasi")';
-                        echo '</script>'; 
-                        return redirect('/');
+                        echo "window.location.href='/';";
+                        echo '</script>';
                     }
-                }else{
-                    echo '<script language="javascript">';
-                    echo 'alert("Akaun Belum Aktif. Sila Aktifkan Akaun Untuk Meneruskan ke Applikasi")';
-                    echo '</script>'; 
-                    return redirect('/');
-                }
+                // }else{
+                //     echo '<script language="javascript">';
+                //     echo 'alert("Akaun Belum Aktif. Sila Aktifkan Akaun Untuk Meneruskan ke Applikasi");';
+                //     echo "window.location.href='/';";
+                //     echo '</script>';
+                // }
             }else{
                 echo '<script language="javascript">';
                 echo 'alert("Sistem web hanyalah digunakan oleh pegawai sahaja")';
-                echo '</script>'; 
-                return redirect('/');
+                echo "window.location.href='/';";
+                echo '</script>';
             }
         }else{
             echo '<script language="javascript">';
             echo 'alert("Email tiada dalam senarai pegawai")';
-            echo '</script>'; 
-            return redirect('/');
+            echo "window.location.href='/';";
+            echo '</script>';
         }
         
     }

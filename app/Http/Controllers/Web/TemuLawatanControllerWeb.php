@@ -14,42 +14,48 @@ class TemuLawatanControllerWeb extends Controller
 {
     public function index()
     {
-        $lawatans = Lawatan::orderBy('tarikh_lawatan', 'ASC')->orderBy('status_lawatan', 'ASC')->get();
+        $authuser = Auth::user();
+        if($authuser->role == 7){
+            $lawatans = Lawatan::orderBy('tarikh_lawatan', 'ASC')->orderBy('status_lawatan', 'ASC')->get();
         
-        foreach($lawatans as $lawatan){
-            $user = User::where('id', $lawatan->id_pengguna)->first();
-            $usahawan = Usahawan::where('id', $user->usahawanid)->first();
-            $pegawai = Pegawai::where('id', $lawatan->id_pegawai)->first();
-            
-            if($lawatan->status_lawatan == 1){
-                $lawatan->nama_status = "Menunggu Persetujuan Usahawan";
-            
-            }else if($lawatan->status_lawatan == 2){
-                $lawatan->nama_status = "Menunggu Persetujuan Pegawai";
+            foreach($lawatans as $lawatan){
+                $user = User::where('id', $lawatan->id_pengguna)->first();
+                $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                $pegawai = Pegawai::where('id', $lawatan->id_pegawai)->first();
+                
+                if($lawatan->status_lawatan == 1){
+                    $lawatan->nama_status = "Menunggu Persetujuan Usahawan";
+                
+                }else if($lawatan->status_lawatan == 2){
+                    $lawatan->nama_status = "Menunggu Persetujuan Pegawai";
 
-            }else if($lawatan->status_lawatan == 3){
-                $lawatan->nama_status = "Disahkan";
+                }else if($lawatan->status_lawatan == 3){
+                    $lawatan->nama_status = "Disahkan";
 
-            }else if($lawatan->status_lawatan == 4){
-                $lawatan->nama_status = "Selesai";
+                }else if($lawatan->status_lawatan == 4){
+                    $lawatan->nama_status = "Selesai";
 
-            }
+                }
 
-            if(isset($lawatan)){
-                if($lawatan->nama_usahawan != null){
-                    $lawatan->nama_usahawan = $usahawan->namausahawan;
+                if(isset($lawatan)){
+                    if($lawatan->nama_usahawan != null){
+                        $lawatan->nama_usahawan = $usahawan->namausahawan;
+                    }
+                }
+                
+                if(isset($pegawai)){
+                    $lawatan->nama_pegawai = $pegawai->nama;
                 }
             }
-            
-            if(isset($pegawai)){
-                $lawatan->nama_pegawai = $pegawai->nama;
-            }
+            return view('temulawatan.index'
+            ,[
+                'lawatans'=>$lawatans
+            ]);
+
+        }else{
+            return redirect('/landing');
         }
-        return view('temulawatan.index'
-        ,[
-            'lawatans'=>$lawatans
-        ]
-        );
+
     }
 
     public function update(Request $request, $id)

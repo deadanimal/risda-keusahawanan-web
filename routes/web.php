@@ -51,6 +51,7 @@ Route::put('pegawaiPost', [PegawaiControllerWeb::class, 'pegawaiPost'])->name('p
 Route::resource('/pegawai', PegawaiControllerWeb::class);
 Route::resource('/usahawanWeb', UsahawanControllerWeb::class);
 Route::put('usahawanPost', [UsahawanControllerWeb::class, 'usahawanPost'])->name('usahawan.post');
+Route::put('SahUsahawanProfil', [UsahawanControllerWeb::class, 'SahUsahawanProfil'])->name('usahawan.postsahprofil');
 Route::resource('/insentif', InsentifControllerWeb::class);
 Route::resource('/insentifdetail', InsentifControllerWeb::class);
 Route::resource('/komponendash', KomponenDashControllerWeb::class);
@@ -65,6 +66,7 @@ Route::resource('/audittrail', AuditTrailControllerWeb::class);
 Route::resource('/temulawatan', TemuLawatanControllerWeb::class);
 
 Route::resource('/laporanprofil', LaporanProfilControllerWeb::class);
+Route::resource('/profdetail', LaporanProfilControllerWeb::class);
 
 Route::resource('/pendapatanbulanan', PendapatanBulananControllerWeb::class);
 Route::get('export2/{tahun}/{jenis}', [PendapatanBulananControllerWeb::class, 'export2']);

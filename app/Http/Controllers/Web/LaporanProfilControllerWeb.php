@@ -14,15 +14,65 @@ use App\Models\Perniagaan;
 use App\Models\Aliran;
 use App\Models\KategoriAliran;
 use App\Models\Lawatan;
+use App\Models\Pegawai;
+use App\Models\Mukim;
+use App\Models\PusatTanggungjawab;
+use App\Models\Negeri;
 
 class LaporanProfilControllerWeb extends Controller
 {
     public function index()
     {
+        $authuser = Auth::user();
+        if(isset($authuser)){
+            $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+        }else{
+            return redirect('/landing');
+        }
+        
+        $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
+        if($authuser->role == 1){
+            $users = Usahawan::all();
+        }
+
+        $ddPT = PusatTanggungjawab::where('status', 1)->get();
+
+        foreach ($users as $usahawan) {
+            $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
+            if(isset($negeri)){
+                $usahawan->negeri = $negeri->Negeri;
+            }
+            $PT = PusatTanggungjawab::where('Kod_PT', $usahawan->Kod_PT)->first();
+            if(isset($PT)){
+                $usahawan->PusatTang = $PT->keterangan;
+            }
+        }
+        
         return view('laporanprofil.index'
-        // ,[
-        //     'users'=>$users
-        // ]
+        ,[
+            'users'=>$users,
+            'ddPT'=>$ddPT
+        ]
+        );
+    }
+
+    public function show($id)
+    {
+        $users = Usahawan::where('id', $id)->first();
+        $negeri = Negeri::where('U_Negeri_ID', $users->U_Negeri_ID)->first();
+        if(isset($negeri)){
+            $users->negeri = $negeri->Negeri;
+        }
+        $PT = PusatTanggungjawab::where('Kod_PT', $users->Kod_PT)->first();
+        if(isset($PT)){
+            $users->PusatTang = $PT->keterangan;
+        }
+        $users->umur = '1';
+        
+        return view('laporanprofil.profdetail'
+        ,[
+            'user'=>$users
+        ]
         );
     }
 

@@ -43,17 +43,15 @@
                             <th scope="col">Negeri</th>
                             <th scope="col">Pusat Tanggungjawab</th>
                             <th scope="col">Aktifkan Pengguna</th>
-                            @if (Auth::user()->role == 1 || Auth::user()->role == 7)
                             <th scope="col">Kemaskini Profil</th>
-                            @endif
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
                         <input style="display: none;" type="text" name="user" value="{{$user->id}}"/>
                         <tr class="align-middle">
-                            <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$user->negeri}}</label></td>
+                            <td class="text-nowrap form-check-label">{{$user->namausahawan}}</td>
+                            <td class="text-nowrap form-check-label">{{$user->negeri}}</td>
                             <td class="text-nowrap">
                                 <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:30vh;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
                                 <option selected="true" disabled="disabled" selected="">Kawasan</option>
@@ -73,21 +71,28 @@
                                 <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="tetapanpengguna('satu',{{$user}})">
                                     <span class="me-1" data-fa-transform="shrink-3"></span>Kemaskini
                                 </button></td>
+
+                            @elseif ((Auth::user()->role == 3 || Auth::user()->role == 4) && $user->status_profil == 0)
+                                    <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="tetapanpengguna('satu',{{$user}})">
+                                        <span class="me-1" data-fa-transform="shrink-3"></span>Sahkan
+                                    </button></td>
+
+                            @else
+                                <td></td>
                             @endif
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot style="border: none">
+                        <tr style="border: none">
+                            <th><input type="text" placeholder="Search Nama" /></th>
+                            <th>Negeri</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
-                {{-- @foreach ($users as $user) 
-                <div class="form-check form-switch">
-                    <input style="display: none;" type="text" name="user" value="{{$user->id}}"/>
-                    <label class="form-check-label" for="flexSwitchCheckDefault">{{$user->name}} ( {{$user->no_kp}} )</label>
-                    <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox" onclick="aktifkanpengguna({{$user->id}},{{$user->status_pengguna}})"/>
-                    <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" style="float: right;" onclick="tetapanpengguna('satu')">
-                        <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Tetapan Profil
-                    </button>
-                </div>
-                @endforeach --}}
             </div>
             <div id="displaydua" style="display: none">
                 <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" onclick="tetapanpengguna('dua')"> 
@@ -122,6 +127,7 @@
                       <form class="row g-3" id="datausahawan" method="POST" action="/usahawanWeb" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
+                        <input name="idusahawan" style="display: none"/>
                         <div class="col-lg-12">
                           <label class="form-label">Nama Usahawan</label>
                           <input class="form-control usahawanfield" name="namausahawan"   type="text"/>
@@ -132,7 +138,7 @@
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label" >No. Usahawan</label>
-                            <input class="form-control usahawanfield" name="U_Pendidikan_ID"   type="text"  />
+                            <input class="form-control usahawanfield" name="No_Usahawan"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" for="tarikhlahir">Tarikh Lahir</label>
@@ -140,30 +146,72 @@
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" >Jantina</label>
-                          <input class="form-control usahawanfield" name="U_Jantina_ID"   type="text"/>
+                          <select name="U_Jantina_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                            <option value=""></option>
+                            <option value="1">Lelaki</option>
+                            <option value="2">Perempuan</option>
+                            <option value="3">Lain-Lain</option>
+                          </select>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" >Bangsa</label>
-                          <input class="form-control usahawanfield" name="U_Bangsa_ID"   type="text"/>
+                          <select name="U_Bangsa_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                            <option value=""></option>
+                            <option value="1">Melayu</option>
+                            <option value="2">Orang Asli Semenanjung</option>
+                            <option value="3">Bumiputera Sabah</option>
+                            <option value="4">Bumiputera Sarawak</option>
+                            <option value="5">Cina</option>
+                            <option value="6">India</option>
+                            <option value="7">Lain-Lain</option>
+                          </select>
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label">Status Perkahwinan</label>
-                          <input class="form-control usahawanfield" name="statusperkahwinan"   type="text"/>
+                          <select name="statusperkahwinan" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                            <option value=""></option>
+                            <option value="1">Tidak Pernah Berkahwin</option>
+                            <option value="2">Berkahwin</option>
+                            <option value="3">Balu / Duda</option>
+                            <option value="4">Bercerai</option>
+                            <option value="5">Berpisah</option>
+                            <option value="9">Tiada Maklumat</option>
+                          </select>
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label" >Pendidikan</label>
-                            <input class="form-control usahawanfield" name="U_Pendidikan_ID"   type="text"  />
+                            <select name="U_Pendidikan_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                <option value="1">Tidak Bersekolah</option>
+                                <option value="2">Sekolah Rendah / Setara</option>
+                                <option value="3">Sekolah Menengah / Setara</option>
+                                <option value="4">Kolej / Universiti / Setara</option>
+                            </select>
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label" >Negeri Premis Perniagaan</label>
-                            <input class="form-control usahawanfield" name="U_Pendidikan_ID"   type="text"  />
+                            <select name="Negeri_Perniagaan" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddNegeri as $items)
+                                    <option value="{{ $items->U_Negeri_ID }}"> 
+                                        {{ $items->Negeri }} 
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="Negeri_Perniagaan"   type="text"  /> --}}
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label" >Pusat Tanggungjawab</label>
-                            <input class="form-control usahawanfield" name="U_Pendidikan_ID"   type="text"  />
+                            <select name="Kod_PT" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddPT as $items)
+                                    <option value="{{ $items->Kod_PT }}"> 
+                                        {{ $items->keterangan }} 
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="Pusat_Tanggungjawab"   type="text"  /> --}}
                         </div>
-                        
-                        
                         <div class="col-lg-12">
                             <label class="form-label">Alamat</label>
                             <input class="form-control usahawanfield" name="alamat1"   type="text"  />
@@ -178,35 +226,99 @@
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Negeri</label>
-                            <input class="form-control usahawanfield" name="U_Negeri_ID"   type="text"  />
+                            <select name="U_Negeri_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddNegeri as $items)
+                                    <option value="{{ $items->U_Negeri_ID }}"> 
+                                        {{ $items->Negeri }} 
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="U_Negeri_ID"   type="text"  /> --}}
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Daerah</label>
-                            <input class="form-control usahawanfield" name="U_Daerah_ID"   type="text"  />
+                            <select name="U_Daerah_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddDaerah as $items)
+                                    <option value="{{ $items->U_Daerah_ID }}"> 
+                                        {{ $items->Daerah }} 
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="U_Daerah_ID"   type="text"  /> --}}
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Mukim</label>
-                            <input class="form-control usahawanfield" name="U_Mukim_ID"   type="text"  />
+                            <select name="U_Mukim_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddMukim as $items)
+                                    <option value="{{ $items->U_Mukim_ID }}"> 
+                                        {{ $items->Mukim }} 
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="U_Mukim_ID"   type="text"  /> --}}
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Parlimen</label>
-                            <input class="form-control usahawanfield" name="U_Parlimen_ID"   type="text"  />
+                            <select name="U_Parlimen_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddParlimen as $items)
+                                    <option value="{{ $items->U_Parlimen_ID }}"> 
+                                        {{ $items->Parlimen }} 
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="U_Parlimen_ID"   type="text"  /> --}}
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Dun</label>
-                            <input class="form-control usahawanfield" name="U_Dun_ID"   type="text"  />
+                            <select name="U_Dun_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddDun as $items)
+                                    <option value="{{ $items->U_Dun_ID }}"> 
+                                        {{ $items->Dun }} 
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="U_Dun_ID"   type="text"  /> --}}
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Kampung</label>
-                            <input class="form-control usahawanfield" name="U_Kampung_ID"   type="text"  />
+                            <select name="U_Kampung_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddKampung as $items)
+                                    <option value="{{ $items->U_Kampung_ID }}"> 
+                                        {{ $items->Kampung }} 
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="U_Kampung_ID"   type="text"  /> --}}
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Seksyen</label>
-                            <input class="form-control usahawanfield" name="U_Seksyen_ID"   type="text"  />
+                            <select name="U_Seksyen_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddSeksyen as $items)
+                                    <option value="{{ $items->U_Seksyen_ID }}"> 
+                                        {{ $items->Seksyen }} 
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="U_Seksyen_ID"   type="text"  /> --}}
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Kategori</label>
-                            <input class="form-control usahawanfield" name="id_kategori_usahawan"   type="text"  />
+                            <select name="id_kategori_usahawan" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                @foreach ($ddKateUsahawan as $items)
+                                    <option value="{{ $items->id_kategori_usahawan }}"> 
+                                        {{ $items->nama_kategori_usahawan }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control usahawanfield" name="id_kategori_usahawan"   type="text"  /> --}}
                         </div>
                         {{-- <div class="col-lg-6">
                             <label class="form-label">Gambar</label>
@@ -225,7 +337,12 @@
                             <input class="form-control usahawanfield" name="email"   type="text"  />
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                          <button class="btn btn-primary" type="submit" onclick="SubmitUsahawan()">Kemas Kini</button>
+                            @if (Auth::user()->role == 1 || Auth::user()->role == 7)
+                                <button class="btn btn-primary" type="submit" onclick="SubmitUsahawan()">Kemas Kini Profil
+                            @endif
+                            @if (Auth::user()->role == 3 || Auth::user()->role == 4)
+                                <button class="btn btn-primary" type="button" onclick="SahkanUsahawan()">Sahkan Profil
+                            @endif
                         </div>
                       </form>
                     </div>
@@ -253,15 +370,61 @@
 
 $( document ).ready(function() {
     GetPengguna();
-    const dataTableBasic = new simpleDatatables.DataTable("#penggunatbl", {
-          searchable: true,
-          fixedHeight: true,
-          sortable: true
-      });
-    //$('#penggunatbl').DataTable(); 
-    //$( "#tarikhlahirid" ).datepicker();
-    
+    datatable();
 });
+
+function datatable(){
+    var table = $('#penggunatbl').DataTable({
+        "paging":   true,
+        "bFilter": true,
+        // "stateSave": true,
+        // stateSaveCallback: function(settings,data) {
+        //     localStorage.setItem( 'DataTables_' + settings.sInstance, JSON.stringify(data) )
+        // },
+        // stateLoadCallback: function(settings) {
+        //     return JSON.parse( localStorage.getItem( 'DataTables_' + settings.sInstance ) )
+        // },
+        initComplete: function () {
+            this.api().columns([1]).every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+
+            this.api().columns([0]).every( function () {
+                var that = this;
+ 
+                $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
+
+            var r = $('#penggunatbl tfoot tr');
+            r.find('th').each(function(){
+                $(this).css('padding', 8);
+            });
+            $('#penggunatbl thead').append(r);
+            $('#search_0').css('text-align', 'center');
+        }
+    });
+}
 
 function GetPengguna(){
     var user = <?php echo $users; ?>;
@@ -329,24 +492,32 @@ function tetapanpengguna(page,data){
 
         var role = <?php echo Auth::user()->role ?>;
 
+        $("#displaydua input[name=idusahawan]").val(data.id);
         $("#displaydua input[name=namausahawan]").val(data.namausahawan);
         $("#displaydua input[name=nokadpengenalan]").val(data.nokadpengenalan);
-        $("#displaydua input[name=tarikhlahir]").val(data.tarikhlahir);
-        $("#displaydua input[name=U_Jantina_ID]").val(data.U_Jantina_ID);
-        $("#displaydua input[name=U_Bangsa_ID]").val(data.U_Bangsa_ID);
-        $("#displaydua input[name=statusperkahwinan]").val(data.statusperkahwinan);
-        $("#displaydua input[name=U_Pendidikan_ID]").val(data.U_Pendidikan_ID);
+        $("#displaydua input[name=No_Usahawan]").val(data.usahawanid);
+        var tarikhlahir = new Date(data.tarikhlahir);
+        $('#displaydua input[name=tarikhlahir]').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $('#displaydua input[name=tarikhlahir]').datepicker("setDate", tarikhlahir );
+        $("#displaydua select[name=U_Jantina_ID]").val(data.U_Jantina_ID);
+        $("#displaydua select[name=U_Bangsa_ID]").val(data.U_Bangsa_ID);
+        $("#displaydua select[name=statusperkahwinan]").val(data.statusperkahwinan);
+        $("#displaydua select[name=U_Pendidikan_ID]").val(data.U_Pendidikan_ID);
+        //Negeri Premis Perniagaan
+        $("#displaydua select[name=Kod_PT]").val(data.Kod_PT); 
         $("#displaydua input[name=alamat1]").val(data.alamat1);
         $("#displaydua input[name=bandar]").val(data.bandar);
         $("#displaydua input[name=poskod]").val(data.poskod);
-        $("#displaydua input[name=U_Negeri_ID]").val(data.U_Negeri_ID);
-        $("#displaydua input[name=U_Daerah_ID]").val(data.U_Daerah_ID);
-        $("#displaydua input[name=U_Mukim_ID]").val(data.U_Mukim_ID);
-        $("#displaydua input[name=U_Parlimen_ID]").val(data.U_Parlimen_ID);
-        $("#displaydua input[name=U_Dun_ID]").val(data.U_Dun_ID);
-        $("#displaydua input[name=U_Kampung_ID]").val(data.U_Kampung_ID);
-        $("#displaydua input[name=U_Seksyen_ID]").val(data.U_Seksyen_ID);
-        $("#displaydua input[name=id_kategori_usahawan]").val(data.id_kategori_usahawan);
+        $("#displaydua select[name=U_Negeri_ID]").val(data.U_Negeri_ID);
+        $("#displaydua select[name=U_Daerah_ID]").val(data.U_Daerah_ID);
+        $("#displaydua select[name=U_Mukim_ID]").val(data.U_Mukim_ID);
+        $("#displaydua select[name=U_Parlimen_ID]").val(data.U_Parlimen_ID);
+        $("#displaydua select[name=U_Dun_ID]").val(data.U_Dun_ID);
+        $("#displaydua select[name=U_Kampung_ID]").val(data.U_Kampung_ID);
+        $("#displaydua select[name=U_Seksyen_ID]").val(data.U_Seksyen_ID);
+        $("#displaydua select[name=id_kategori_usahawan]").val(data.id_kategori_usahawan);
         $("#displaydua input[name=gambar_url]").val(data.gambar_url);
         $("#displaydua input[name=notelefon]").val(data.notelefon);
         $("#displaydua input[name=nohp]").val(data.nohp);
@@ -358,7 +529,8 @@ function tetapanpengguna(page,data){
             for (var i = 0; i < x.length; i++) {
                 x[i].disabled = false;
             }        
-        }else{
+        }
+        if (role == 3 || role == 4){
             for (var i = 0; i < x.length; i++) {
                 x[i].disabled = true;
             }
@@ -377,6 +549,28 @@ function SubmitUsahawan(){
         
     }
     
+}
+
+function SahkanUsahawan(){
+    var id = $("#displaydua input[name=idusahawan]").val();
+    console.log(id);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('usahawan.postsahprofil') }}",
+        type:"PUT",
+        data: {
+            id:id
+        },
+        success: function(data) {
+            alert("Profil Usahawan Sahkan Berjaya");
+            location.reload();
+        },
+        error: function(){
+            alert('failure');
+        }
+    });
 }
 
 </script>

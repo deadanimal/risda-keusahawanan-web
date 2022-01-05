@@ -44,12 +44,14 @@ class CreateUsahawansTable extends Migration
             $table->string('nohp')->nullable();
             $table->string('email',100)->nullable();
 
-            $table->string('status_daftar_usahawan')->nullable()->nullable();
+            $table->string('status_daftar_usahawan')->nullable();
 
             $table->string('createdby_id',50)->nullable();
             $table->string('createdby_kod_PT',50)->nullable();
             $table->string('modifiedby_id',50)->nullable();
             $table->string('modifiedby_kod_PT',50)->nullable();
+            
+            $table->integer('status_profil')->nullable()->default(0);
             
             $table->timestamps();
         });

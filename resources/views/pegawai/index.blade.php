@@ -1,13 +1,12 @@
 @extends('dashboard')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-<script src="../../../js/jquery-3.6.0.min.js"> </script>
 @section('content')
 <div class="card">
     <div class="card-body p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
         <div class="row align-items-center">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
-                <table class="tblpegawai table table-sm table-hover" id="pegawaitbl" style="padding-bottom:2vh;" >
+                <table class="tblpegawai table table-sm table-hover" id="pegawaitbl" style="padding-bottom:2vh;padding-right:4vh" >
                     <colgroup>
                         <col span="1" style="width: 21%;">
                         <col span="1" style="width: 15%;">
@@ -56,9 +55,9 @@
                     <tbody>
                         @foreach ($pegawai as $user)
                         <tr class="align-middle">
-                            <td class="text-nowrap"><label class="form-check-label">{{$user->nama}}</label></td>
-                            <td ><label id="fldNegeri{{$user->id}}" class="form-check-label">{{$user->negerinama}}</label></td>
-                            <td ><label id="fldDaerah{{$user->id}}" class="form-check-label">{{$user->daerahnama}}</label></td>
+                            <td class="form-check-label">{{$user->nama}}</td>
+                            <td class="form-check-label">{{$user->negerinama}}</td>
+                            <td id="fldDaerah{{$user->id}}" class="form-check-label">{{$user->daerahnama}}</td>
                             <td >
                                 <select id="ddmukim{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:27vh;" onchange="ChangeMukim({{$user->id}}, this.value)">
                                 <option selected="true" disabled="disabled">Mukim</option>
@@ -86,10 +85,20 @@
                             <td class="align-middle text-nowrap">
                                 <button class="btn btn-primary" type="submit" onclick="simpanpengguna({{$user}})" >Simpan </button>
                             </td>
-                            <td></td>
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot style="border: none">
+                        <tr style="border: none">
+                            <th><input type="text" placeholder="Search Nama" /></th>
+                            <th>Negeri</th>
+                            <th>Daerah</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -98,20 +107,58 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-
 $( document ).ready(function() {
-    const dataTableBasic = new simpleDatatables.DataTable("#pegawaitbl", {
-        searchable: true,
-        fixedHeight: true,
-        sortable: false
-    });
-    //$('#pegawaitbl').DataTable();
     GetPengguna();
-    // var user = <?php echo $pegawai; ?>;
-    // for (var i=0; i < user.length; i++) {
-    //     ChangeMukim(user[i].id,user[i].mukim);
-    // }
+    datatable();
+    
 });
+
+function datatable(){
+    var table = $('#pegawaitbl').DataTable({
+        "paging":   true,
+        "bFilter": true,
+        "stateSave": true,
+        initComplete: function () {
+            this.api().columns([1, 2]).every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+
+            this.api().columns([0]).every( function () {
+                var that = this;
+ 
+                $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
+
+            var r = $('#pegawaitbl tfoot tr');
+            r.find('th').each(function(){
+                $(this).css('padding', 8);
+            });
+            $('#pegawaitbl thead').append(r);
+            $('#search_0').css('text-align', 'center');
+        }
+    });
+}
 
 function GetPengguna(){
     var user = <?php echo $pegawai; ?>;
@@ -152,7 +199,7 @@ function simpanpengguna(user){
         success: function(data) {
             //swal("Congrats!", ", Your account is created!", "success");
             alert("Akaun Pegawai Kemaskini Berjaya");
-            //location.reload();
+            location.reload();
         }
     });
 }

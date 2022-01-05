@@ -60,10 +60,9 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
-    const dataTableBasic = new simpleDatatables.DataTable("#insentiftbl", {
-        searchable: true,
-        fixedHeight: true,
-        sortable: false
+    var table = $('#insentiftbl').DataTable({
+        "paging":   true,
+        "bFilter": true,
     });
 });
 

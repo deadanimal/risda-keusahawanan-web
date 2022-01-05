@@ -14,6 +14,11 @@ class LandingControllerWeb extends Controller
         $role="";
         if(isset(Auth::user()->role)){
             $role = Peranan::where('peranan_id', Auth::user()->role)->first();
+        }else{
+            echo '<script language="javascript">';
+            echo 'alert("Session Expired Kindly Login")';
+            echo '</script>';
+            return redirect('/');
         }
         
         return view('landing.index'

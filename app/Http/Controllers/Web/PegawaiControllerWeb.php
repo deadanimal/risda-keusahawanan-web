@@ -16,17 +16,24 @@ class PegawaiControllerWeb extends Controller
     public function index()
     {
         $authuser = Auth::user();
-        if($authuser->role == 3){
-            
-        }
-        else if($authuser->role == 4){
-
-        }else{
+        $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+        $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
+        if($authuser->role == 1){
             $pegawai = Pegawai::All();
+            $ddPeranan = Peranan::All();
+            $ddMukim = Mukim::where('status', 1)->orderBy('Mukim', 'ASC')->get();
+        }else if($authuser->role == 3){
+            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authmukim->U_Negeri_ID)->get()->unique();
+            $ddPeranan = Peranan::where('peranan_id', '>=', '3')->get();
+            $ddMukim = Mukim::where('status', 1)->where('U_Negeri_ID', $authmukim->U_Negeri_ID)->orderBy('Mukim', 'ASC')->get();
+        }else if($authuser->role == 4){
+            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Daerah_ID',$authmukim->U_Daerah_ID)->get()->unique();
+            $ddPeranan = Peranan::where('peranan_id', '>=', '4')->get();
+            $ddMukim = Mukim::where('status', 1)->where('U_Daerah_ID', $authmukim->U_Daerah_ID)->orderBy('Mukim', 'ASC')->get();
+        }else{
+            return redirect('/landing');
         }
         
-        $ddPeranan = Peranan::All();
-        $ddMukim = Mukim::where('status', 1)->orderBy('Mukim', 'ASC')->get();
         foreach ($pegawai as $pegawai_L) {
             if($pegawai_L->id != null){
                 $status = User::where('idpegawai', $pegawai_L->id)->first();

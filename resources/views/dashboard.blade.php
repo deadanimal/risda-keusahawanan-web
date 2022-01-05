@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="../../../js/config.js"></script>
     <script src="../../../assets/overlayscrollbars/OverlayScrollbars.min.js"></script>
-
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
     <link href="../../../assets/overlayscrollbars/OverlayScrollbars.min.css" rel="stylesheet">
@@ -20,6 +19,7 @@
     <link href="../../../css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="../../../css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="../../../css/user.min.css" rel="stylesheet" id="user-style-default">
+    <link href="../../../css/jquery.dataTables.min.css" rel="stylesheet" id="user-style-default">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     
     <script src="../../../assets/popper/popper.min.js"></script>
@@ -36,9 +36,10 @@
     
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
-    <script src="./../../js/datatables.js"type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- <script src="../../../js/datatables.js"type="text/javascript"></script> --}}
+    <script src="../../../js/jquery.dataTables.min.js"type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
 </head>
@@ -182,7 +183,7 @@
                       <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                   </div>
-                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanprofil.*') ? 'active' : '' }}" href="/laporanprofil">
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanprofil.*') || request()->routeIs('profdetail.*') ? 'active' : '' }}" href="/laporanprofil">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Profil</span>
                         </div>
                       </a>
