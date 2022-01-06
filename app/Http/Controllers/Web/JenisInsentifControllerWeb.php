@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JenisInsentif;
+use App\Models\AuditTrail;
+use Illuminate\Support\Facades\Auth;
 
 class JenisInsentifControllerWeb extends Controller
 {
@@ -26,6 +28,14 @@ class JenisInsentifControllerWeb extends Controller
         $jenisinsentif->status = $request->status;
         $jenisinsentif->save();
 
+        $audit = new AuditTrail();
+        $authuser = Auth::user();
+        $audit->idpegawai = $authuser->idpegawai;
+        $audit->Type = 4;
+        $audit->Desc = "Tambah data Jenis Insentif";
+        $audit->Date = date("Y-m-d H:i:s");
+        $audit->save();
+
         echo '<script language="javascript">';
         echo 'alert("Jenis Insentif Berjaya Di Simpan")';
         echo '</script>';
@@ -41,6 +51,14 @@ class JenisInsentifControllerWeb extends Controller
         $jenisinsentif->status = $request->status;
         $jenisinsentif->save();
 
+        $audit = new AuditTrail();
+        $authuser = Auth::user();
+        $audit->idpegawai = $authuser->idpegawai;
+        $audit->Type = 4;
+        $audit->Desc = "Ubah data Jenis Insentif";
+        $audit->Date = date("Y-m-d H:i:s");
+        $audit->save();
+
         echo '<script language="javascript">';
         echo 'alert("Jenis Insentif Berjaya Di Ubah")';
         echo '</script>';
@@ -51,6 +69,14 @@ class JenisInsentifControllerWeb extends Controller
     {
         $jenisinsentif=JenisInsentif::find($id);
         $jenisinsentif->delete();
+
+        $audit = new AuditTrail();
+        $authuser = Auth::user();
+        $audit->idpegawai = $authuser->idpegawai;
+        $audit->Type = 4;
+        $audit->Desc = "Buang data Jenis Insentif";
+        $audit->Date = date("Y-m-d H:i:s");
+        $audit->save();
 
         echo '<script language="javascript">';
         echo 'alert("Jenis Insentif Berjaya Di Buang")';

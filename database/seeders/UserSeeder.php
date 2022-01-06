@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'name'=> 'user1',
             'email'=> 'user1@gmail.com',
             'password'=> Hash::make('password'),
-            'usahawanid'=>'J00000',
+            'usahawanid'=>'1',
             'no_kp'=>'123456789012',
             'status_pengguna'=>'1',
             'role'=>'0',

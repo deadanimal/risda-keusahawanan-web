@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Web;
+ini_set('memory_limit', '-1');
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ use App\Models\Dun;
 use App\Models\Kampung;
 use App\Models\Seksyen;
 use App\Models\KategoriUsahawan;
+use App\Models\AuditTrail;
 
 class UsahawanControllerWeb extends Controller
 {
@@ -89,6 +91,7 @@ class UsahawanControllerWeb extends Controller
         $usahawan = Usahawan::where('id', $id)->first();
         $usahawan->namausahawan = $request->namausahawan;
         $usahawan->nokadpengenalan = $request->nokadpengenalan;
+        $usahawan->usahawanid = $request->No_Usahawan;
         $usahawan->tarikhlahir = $request->tarikhlahir;
         $usahawan->U_Jantina_ID = $request->U_Jantina_ID;
         $usahawan->U_Bangsa_ID = $request->U_Bangsa_ID;
@@ -112,12 +115,21 @@ class UsahawanControllerWeb extends Controller
         $usahawan->notelefon = $request->notelefon;
         $usahawan->nohp = $request->nohp;
         $usahawan->email = $request->email;
-        
         $usahawan->save();
+
+        $audit = new AuditTrail();
+        $authuser = Auth::user();
+        $audit->idpegawai = $authuser->idpegawai;
+        $audit->Type = 2;
+        $audit->Desc = "Kemakini data untuk ".$request->namausahawan."";
+        $audit->Date = date("Y-m-d H:i:s");
+        $audit->save();
+
         echo '<script language="javascript">';
-        echo 'alert("Profil Usahawan Berjaya Di Kemaskini")';
+        echo 'alert("Profil Usahawan Berjaya Di Kemaskini");';
+        echo "window.location.href = '/usahawanWeb';";
         echo '</script>';
-        return redirect('/usahawanWeb');
+        // return redirect('/usahawanWeb');
     }
 
     public function usahawanPost(Request $request)
@@ -126,12 +138,27 @@ class UsahawanControllerWeb extends Controller
             $user = User::where('usahawanid', $request->id)->first();
             $user->status_pengguna = $request->status;
             $user->save();
+            $audit = new AuditTrail();
+
+            $authuser = Auth::user();
+            $audit->idpegawai = $authuser->idpegawai;
+            $audit->Type = 2;
+            $audit->Desc = "Ubah Status Profil Usahawan ".$request->namausahawan."";
+            $audit->Date = date("Y-m-d H:i:s");
+            $audit->save();
         } 
         if($request->type == 'kawasan'){
             //$user = User::where('usahawanid', $request->id)->first();
             $usahawan = Usahawan::where('id', $request->id)->first();
             $usahawan->Kod_PT = $request->status;
             $usahawan->save();
+
+            $authuser = Auth::user();
+            $audit->idpegawai = $authuser->idpegawai;
+            $audit->Type = 2;
+            $audit->Desc = "Tetapkan Pusat Tanggungjawab Usahawan ".$request->namausahawan."";
+            $audit->Date = date("Y-m-d H:i:s");
+            $audit->save();
         }
         
     }
@@ -141,7 +168,28 @@ class UsahawanControllerWeb extends Controller
         $usahawan = Usahawan::where('id', $request->id)->first();
         $usahawan->status_profil = 1;
         $usahawan->save();
+
+        $authuser = Auth::user();
+        $audit->idpegawai = $authuser->idpegawai;
+        $audit->Type = 2;
+        $audit->Desc = "Sahkan Profil Usahawan ".$request->namausahawan."";
+        $audit->Date = date("Y-m-d H:i:s");
+        $audit->save();
     }
 
+    public function UploadProfile(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]); 
+        $imgname = $request->id.'.'.$request->file->extension();
+        $request->file->move(public_path('images'), $imgname);
+
+        $usahawan = Usahawan::where('id', $request->id)->first();
+        $usahawan->gambar_url = '../images/'.$imgname;
+        $usahawan->save();
+
+        return '../images/'.$imgname;
+    }
 }
  

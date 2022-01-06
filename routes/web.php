@@ -52,6 +52,7 @@ Route::resource('/pegawai', PegawaiControllerWeb::class);
 Route::resource('/usahawanWeb', UsahawanControllerWeb::class);
 Route::put('usahawanPost', [UsahawanControllerWeb::class, 'usahawanPost'])->name('usahawan.post');
 Route::put('SahUsahawanProfil', [UsahawanControllerWeb::class, 'SahUsahawanProfil'])->name('usahawan.postsahprofil');
+Route::post('UploadProfile', [UsahawanControllerWeb::class, 'UploadProfile'])->name('usahawan.uploadprofile');
 Route::resource('/insentif', InsentifControllerWeb::class);
 Route::resource('/insentifdetail', InsentifControllerWeb::class);
 Route::resource('/komponendash', KomponenDashControllerWeb::class);

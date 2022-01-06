@@ -113,9 +113,14 @@
                                 </div>
                               </div>
                               <div class="avatar avatar-5xl avatar-profile shadow-sm img-thumbnail rounded-circle" style="position: relative !important;">
-                                <div class="h-100 w-100 rounded-circle overflow-hidden position-relative"> <img src="../../assets/img/team/2.jpg" width="200" alt="" data-dz-thumbnail="data-dz-thumbnail" />
-                                  <input class="d-none" id="profile-image" type="file" name="gambarusahawan"/>
-                                  {{-- <label class="mb-0 overlay-icon d-flex flex-center" for="profile-image"><span class="bg-holder overlay overlay-0"></span><span class="z-index-1 text-white dark__text-white text-center fs--1"><span class="fas fa-camera"></span><span class="d-block">Update</span></span></label> --}}
+                                <div class="h-100 w-100 rounded-circle overflow-hidden position-relative"> 
+                                <img id="usahawanprofilpic" src="#" width="200" alt="" data-dz-thumbnail="data-dz-thumbnail" />
+                                <form action="{{ route('usahawan.uploadprofile') }}" method="POST" id="fileupform" enctype="multipart/form-data">
+                                    @csrf
+                                    @method("POST")
+                                    <input class="d-none" id="profile-image" type="file" name="img" onchange="profileimg()"/>
+                                </form>
+                                  <label class="mb-0 overlay-icon d-flex flex-center" for="profile-image"><span class="bg-holder overlay overlay-0"></span><span class="z-index-1 text-white dark__text-white text-center fs--1"><span class="fas fa-camera"></span><span class="d-block">Update</span></span></label>
                                 </div>
                               </div>
                             </div>
@@ -492,6 +497,8 @@ function tetapanpengguna(page,data){
 
         var role = <?php echo Auth::user()->role ?>;
 
+        $("#usahawanprofilpic").attr("src",data.gambar_url);
+
         $("#displaydua input[name=idusahawan]").val(data.id);
         $("#displaydua input[name=namausahawan]").val(data.namausahawan);
         $("#displaydua input[name=nokadpengenalan]").val(data.nokadpengenalan);
@@ -566,6 +573,30 @@ function SahkanUsahawan(){
         success: function(data) {
             alert("Profil Usahawan Sahkan Berjaya");
             location.reload();
+        },
+        error: function(){
+            alert('failure');
+        }
+    });
+}
+
+function profileimg(){
+    var formData = new FormData();
+    formData.append('file', $("#profile-image")[0].files[0]);
+    formData.append('id', $("#displaydua input[name=idusahawan]").val());
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('usahawan.uploadprofile') }}",
+        type:"POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+            alert("Muat Naik Gambar Profil Usahawan Berjaya");
+            $("#usahawanprofilpic").attr("src",data);
         },
         error: function(){
             alert('failure');

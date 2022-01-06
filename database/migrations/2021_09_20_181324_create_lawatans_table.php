@@ -22,12 +22,11 @@ class CreateLawatansTable extends Migration
 
             $table->string('jenis_lawatan',15)->nullable();
             $table->date('tarikh_lawatan')->nullable();
-            $table->time('masa_lawatan')->nullable();
+            $table->time('masa_lawatan')->nullable()->change();
             $table->string('status_lawatan')->nullable();
             $table->longText('gambar_lawatan')->nullable();
             $table->string('komen')->nullable();
             $table->string('modified_by',50)->nullable();
-
             $table->timestamps();
         });
     }

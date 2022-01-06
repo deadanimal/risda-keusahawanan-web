@@ -18,6 +18,12 @@ use App\Models\Pegawai;
 use App\Models\Mukim;
 use App\Models\PusatTanggungjawab;
 use App\Models\Negeri;
+use App\Models\Daerah;
+use App\Models\Dun;
+use App\Models\Parlimen;
+use App\Models\Pekebun;
+use App\Models\KategoriUsahawan;
+use App\Models\Syarikat;
 
 class LaporanProfilControllerWeb extends Controller
 {
@@ -59,16 +65,69 @@ class LaporanProfilControllerWeb extends Controller
     public function show($id)
     {
         $users = Usahawan::where('id', $id)->first();
+        // dd($users);
         $negeri = Negeri::where('U_Negeri_ID', $users->U_Negeri_ID)->first();
         if(isset($negeri)){
             $users->negeri = $negeri->Negeri;
         }
+
         $PT = PusatTanggungjawab::where('Kod_PT', $users->Kod_PT)->first();
         if(isset($PT)){
             $users->PusatTang = $PT->keterangan;
         }
-        $users->umur = '1';
+
+        $dateOfBirth = $users->tarikhlahir;
+        $today = date("Y-m-d");
+        $diff = date_diff(date_create($dateOfBirth), date_create($today));
+        $users->umur = $diff->format('%y');
+
+        if($users->U_Jantina_ID == 1){
+            $users->jantina = "Lelaki";
+        }else if($users->U_Jantina_ID == 2){
+            $users->jantina = "Perempuan";
+        }else{
+            $users->jantina = "Lain - Lain";
+        }
         
+        $users->taraf_pendidikan = $users->U_Taraf_Pendidikan_Tertinggi_ID;
+        $daerah = Daerah::select('Daerah')->where('U_Daerah_ID', $users->U_Daerah_ID)->first();
+        $users->daerah = $daerah->Daerah;
+        $dun = Dun::select('Dun')->where('U_Dun_ID', $users->U_Dun_ID)->first();
+        $users->dun = $dun->Dun;
+        $parlimen = Parlimen::select('Parlimen')->where('U_Parlimen_ID', $users->U_Parlimen_ID)->first();
+        $users->parlimen = $parlimen->Parlimen;
+        $pekebun = Pekebun::where('usahawanid', $users->usahawanid)->first();
+        if(isset($pekebun)){
+            $users->PKnoTS = $pekebun->noTS;
+            $users->PKnoKP = $pekebun->No_KP;
+        }
+        $temp = KategoriUsahawan::where('id_kategori_usahawan', $users->id_kategori_usahawan)->first();
+        if(isset($temp1)){
+            $users->KateUsahawan = $temp->nama_kategori_usahawan;
+        }
+        $perniagaan = Perniagaan::where('usahawanid', $users->usahawanid)->first();
+        if(isset($perniagaan)){
+            $JnsPerniagaan = JenisPerniagaan::where('kod_jenis_perniagaan', $perniagaan->jenisperniagaan)->first();
+            $users->JenisPerniagaan = $JnsPerniagaan->nama_jenis_perniagaan;
+            $users->KlusterPerniagaan = $perniagaan->klusterperniagaan;
+            $users->SubKlusterPerniagaan = $perniagaan->subkluster;
+            if($perniagaan->facebook != ""){
+                $users->MediumPemasaran = "Facebook ";
+            }
+            if($perniagaan->instagram != ""){
+                $users->MediumPemasaran .= "Instagram ";
+            }
+            if($perniagaan->twitter != ""){
+                $users->MediumPemasaran .= "Twitter ";
+            }
+            // $users->MediumPemasaran = "Facebook, Instagram, Twitter";
+            $users->AlamatMediumPemasaran = "Facebook - ".$perniagaan->facebook."Instagram - " .$perniagaan->instagram."Twitter - ".$perniagaan->twitter;
+        }
+        $syarikat = Syarikat::where('usahawanid', $users->usahawanid)->first();
+        if(isset($syarikat)){
+            $users->syarikat = $syarikat->namasyarikat;
+        }
+
         return view('laporanprofil.profdetail'
         ,[
             'user'=>$users

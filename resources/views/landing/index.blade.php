@@ -1,6 +1,10 @@
 @extends('dashboard')
 @section('content')
-{{$peranan->nama_peranan ?? ''}}
+<div class="card">
+    <div class="card-body overflow-hidden p-lg-6">
+        {{$peranan->nama_peranan ?? ''}}
+    </div>
+</div>
 @endsection
 @section('script')
 @endsection

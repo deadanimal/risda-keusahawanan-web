@@ -14,24 +14,32 @@ class PendBulDunControllerWeb extends Controller
 {
     public function index()
     {
-        $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
-        $reports = Report::where('type', 3)
-        ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab9', 'ASC')->get();
+            $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
+            $reports = Report::where('type', 3)
+            ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab9', 'ASC')->get();
 
-        $c_penerima = 0;
-        $c_insentif = 0;
-        foreach ($reports as $report) {
-            $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
-            $report->negeri = $negeri->Negeri;
-            $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
-            $report->jenis = $jenisinsentif->nama_insentif;
-            $dun = Dun::where('U_Dun_ID', $report->tab9)->first();
-            $report->dun = $dun->Dun;
-            $parlimen = Parlimen::where('U_Parlimen_ID', $dun->U_Parlimen_ID)->first();
-            $report->parlimen = $parlimen->Parlimen;
-            $c_penerima = $c_penerima + $report->tab4;
-            $c_insentif = $c_insentif + $report->tab5;
-        }
+            $c_penerima = 0;
+            $c_insentif = 0;
+            try{
+                foreach ($reports as $report) {
+                    $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
+                    if(isset($negeri)){
+                        $report->negeri = $negeri->Negeri;
+                    }
+                    $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
+                    if(isset($jenisinsentif)){
+                        $report->jenis = $jenisinsentif->nama_insentif;
+                    }
+                    $dun = Dun::where('U_Dun_ID', $report->tab9)->first();
+                    if(isset($dun)){
+                        $report->dun = $dun->Dun;
+                        $parlimen = Parlimen::where('U_Parlimen_ID', $dun->U_Parlimen_ID)->first();
+                        $report->parlimen = $parlimen->Parlimen;
+                    }
+                    $c_penerima = $c_penerima + $report->tab4;
+                    $c_insentif = $c_insentif + $report->tab5;
+                }
+            }catch(Exception $e){}
 
         return view('pendapatanbulanan.pendbulDun'
         ,[

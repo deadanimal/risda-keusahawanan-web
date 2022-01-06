@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Mukim;
 use App\Models\Negeri;
 use App\Models\Daerah;
+use App\Models\AuditTrail;
 
 class PegawaiControllerWeb extends Controller
 {
@@ -77,9 +78,16 @@ class PegawaiControllerWeb extends Controller
         $pegawai->peranan_pegawai = $request->peranan;
         $pegawai->mukim = $request->mukim;
         $pegawai->save();
-        //header('Location:pegawai');
+
+        $audit = new AuditTrail();
+        $authuser = Auth::user();
+        $audit->idpegawai = $authuser->idpegawai;
+        $audit->Type = 1;
+        $audit->Desc = "Kemakini data untuk ".$pegawai->nama."";
+        $audit->Date = date("Y-m-d H:i:s");
+        $audit->save();
+
         return '/pegawai';
-        //return redirect(url()->previous());
     }
 
     public function show(Request $request)

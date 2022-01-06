@@ -8,18 +8,15 @@
             <div class="col">
               <h6 class="mb-0">Statistik Dashboard</h6>
             </div>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:40vh;margin-left:20px;">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:40vh;margin-left:20px;" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
                 <option value="">Jenis Insentif</option>
-                <?php
-                $currtahun = date("Y");
-                $fromtahun = date("Y") - 10;
-                for ($tahun = $currtahun; $tahun >= $fromtahun; $tahun--) {
-                    $selected = (isset($gettahun) && $gettahun == $tahun) ? 'selected' : '';
-                    echo "<option value=$tahun $selected>$tahun</option>";
-                }
-                ?>
+                @foreach ($ddInsentif as $items)
+                    <option value="{{ $items->id_jenis_insentif }}" {{ ( $items->id_jenis_insentif == $getjenisinsentif) ? 'selected' : '' }}>
+                        {{ $items->nama_insentif }} 
+                    </option>
+                @endforeach
             </select>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                 <option selected="true" disabled="disabled" value="">Tahun</option>
                 <?php
                 $currtahun = date("Y");
@@ -30,7 +27,7 @@
                 }
                 ?>
             </select>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('Negeri',this.value)" id="iptNegeri">
                 <option value="">Negeri</option>
                 <?php
                 $currtahun = date("Y");
@@ -193,6 +190,31 @@
     
     window.onload = function() {
         createchart();
+    }
+
+    function gettabledata(type,val){
+        var year = document.getElementById("iptYear").value;
+        var jenis = document.getElementById("iptJenisInsentif").value;
+        var negeri = document.getElementById("iptNegeri").value;
+        
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/dash/apa",
+            type:"GET",
+            data: {     
+                tahun:year,
+                id_jenis_insentif:jenis,
+                negeri:negeri
+            },
+            success: function(data) {
+                document.open();
+                document.write(data);
+                document.close();
+                createchart();
+            }
+        });
     }
 
     function createchart(){

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KategoriUsahawan;
+use App\Models\AuditTrail;
+use Illuminate\Support\Facades\Auth;
 
 class KategoriUsahawanControllerWeb extends Controller
 {
@@ -27,6 +29,14 @@ class KategoriUsahawanControllerWeb extends Controller
         $kategoriusahawan->status_kategori_usahawan = $request->status_kategori_usahawan;
         $kategoriusahawan->save();
 
+        $audit = new AuditTrail();
+        $authuser = Auth::user();
+        $audit->idpegawai = $authuser->idpegawai;
+        $audit->Type = 4;
+        $audit->Desc = "Tambah data Kategori Usahawan";
+        $audit->Date = date("Y-m-d H:i:s");
+        $audit->save();
+
         echo '<script language="javascript">';
         echo 'alert("Kategori Usahawan Berjaya Di Simpan")';
         echo '</script>';
@@ -43,6 +53,14 @@ class KategoriUsahawanControllerWeb extends Controller
         $kategoriusahawan->status_kategori_usahawan = $request->status_kategori_usahawan;
         $kategoriusahawan->save();
 
+        $audit = new AuditTrail();
+        $authuser = Auth::user();
+        $audit->idpegawai = $authuser->idpegawai;
+        $audit->Type = 4;
+        $audit->Desc = "Ubah data Kategori Usahawan";
+        $audit->Date = date("Y-m-d H:i:s");
+        $audit->save();
+
         echo '<script language="javascript">';
         echo 'alert("Kategori Usahawan Berjaya Di Ubah")';
         echo '</script>';
@@ -53,6 +71,14 @@ class KategoriUsahawanControllerWeb extends Controller
     {
         $kategoriusahawan=KategoriUsahawan::find($id);
         $kategoriusahawan->delete();
+
+        $audit = new AuditTrail();
+        $authuser = Auth::user();
+        $audit->idpegawai = $authuser->idpegawai;
+        $audit->Type = 4;
+        $audit->Desc = "Buang data Kategori Usahawan";
+        $audit->Date = date("Y-m-d H:i:s");
+        $audit->save();
 
         echo '<script language="javascript">';
         echo 'alert("Kategori Usahawan Berjaya Di Buang")';
