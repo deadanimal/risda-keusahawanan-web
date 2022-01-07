@@ -332,7 +332,7 @@ class DashControllerWeb extends Controller
         $getNegeri="";
         if($request->negeri != null){
             $getNegeri = $request->negeri;
-            
+            $Insentifdatas = $Insentifdatas->where('negeri', $getNegeri);
         }
 
         $Insentifdatas = $Insentifdatas->get();

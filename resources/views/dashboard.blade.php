@@ -405,13 +405,14 @@
                 <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                   <div class="bg-white dark__bg-1000 rounded-2 py-2">
 
-                    <div class="dropdown-divider"></div>
+                    
                     {{-- <a class="dropdown-item" href="#!">Set status</a>
                     <a class="dropdown-item" href="../pages/user/profile.html">Profile &amp; account</a>
                     <a class="dropdown-item" href="#!">Feedback</a>
 
+                    <div class="dropdown-divider"></div>--}}
+                    <a class="dropdown-item" href="/ChangePass">Change Password</a> 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../pages/user/settings.html">Settings</a> --}}
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">Logout</a>
                     <form id="frm-logout" action="logout" method="POST" style="display: none;">
                         {{ csrf_field() }}

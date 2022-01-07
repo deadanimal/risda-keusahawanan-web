@@ -43,7 +43,7 @@ class PerniagaanSeeder extends Seeder
         ]);
 
         Perniagaan::create([
-            'usahawanid'=> '2',
+            'usahawanid'=> 'J00001',
             'jenisperniagaan'=> 'B',
             'klusterperniagaan'=> 'Tunggal',
             'subkluster'=>'1',
@@ -71,7 +71,7 @@ class PerniagaanSeeder extends Seeder
         ]);
 
         Perniagaan::create([
-            'usahawanid'=> '3',
+            'usahawanid'=> 'J00002',
             'jenisperniagaan'=> 'C',
             'klusterperniagaan'=> 'Tunggal',
             'subkluster'=>'1',

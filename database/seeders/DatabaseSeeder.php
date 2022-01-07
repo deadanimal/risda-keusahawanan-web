@@ -30,7 +30,10 @@ class DatabaseSeeder extends Seeder
             TindakanLawatanSeeder::class,
             DaerahSeeder::class,
             DunSeeder::class,
-            KampungSeeder::class
+            KampungSeeder::class,
+            NegeriSeeder::class,
+            MukimSeeder::class,
+            PusatTanggungjawabSeeder::class
         ]);
     }
 }

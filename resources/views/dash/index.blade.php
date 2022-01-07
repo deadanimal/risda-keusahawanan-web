@@ -29,14 +29,11 @@
             </select>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('Negeri',this.value)" id="iptNegeri">
                 <option value="">Negeri</option>
-                <?php
-                $currtahun = date("Y");
-                $fromtahun = date("Y") - 10;
-                for ($tahun = $currtahun; $tahun >= $fromtahun; $tahun--) {
-                    $selected = (isset($gettahun) && $gettahun == $tahun) ? 'selected' : '';
-                    echo "<option value=$tahun $selected>$tahun</option>";
-                }
-                ?>
+                @foreach ($ddNegeri as $items)
+                    <option value="{{ $items->U_Negeri_ID }}" {{ ( $items->U_Negeri_ID == $getNegeri) ? 'selected' : '' }}>
+                        {{ $items->Negeri }} 
+                    </option>
+                @endforeach
             </select>
           </div>
         </div>

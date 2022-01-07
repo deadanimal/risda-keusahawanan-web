@@ -12,8 +12,6 @@
                 @method("POST")
                 <input name="id_pengguna" style="display: none;" type="text" value="{{$id_pengguna}}"/>
                 <input name="negeri" style="display: none;" type="text" value="{{$negeri}}"/>
-                <input name="daerah" style="display: none;" type="text" value="{{$daerah}}"/>
-                <input name="dun" style="display: none;" type="text" value="{{$dun}}"/>
                 <div class="position-relative rounded-1 border bg-white dark__bg-1100 p-3">
                   <div class="row gx-2">
                     <div class="col-sm-6 mb-3">

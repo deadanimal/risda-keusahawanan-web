@@ -28,6 +28,7 @@ use App\Http\Controllers\Web\LAT\LaporanAliranTunaiControllerWeb;
 use App\Http\Controllers\Web\LAT\LaporanLejarControllerWeb;
 use App\Http\Controllers\Web\LAT\PenyataUntungRugiControllerWeb;
 use App\Http\Controllers\Web\DashControllerWeb;
+use App\Http\Controllers\Web\ChangePassControllerWeb;
 use App\Http\Controllers\PDFController;
 
 /*
@@ -89,6 +90,8 @@ Route::resource('/laporanlejar', LaporanLejarControllerWeb::class);
 Route::resource('/penyatauntungrugi', PenyataUntungRugiControllerWeb::class);
 
 Route::resource('/dash', DashControllerWeb::class);
+
+Route::resource('/ChangePass', ChangePassControllerWeb::class);
 
 Route::post('generatereport', [LaporanProfilControllerWeb::class, 'generatereport'])->name('generatereport');
 
