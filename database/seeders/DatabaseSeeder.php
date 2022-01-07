@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Daerah;
+use App\Models\Parlimen;
 use App\Models\Usahawan;
 use Illuminate\Database\Seeder;
 

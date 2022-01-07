@@ -19,7 +19,7 @@ class MukimSeeder extends Seeder
         $csvFile = fopen(base_path("database/data/Mukim.csv"), "r");
   
         $firstline = true;
-        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+        while (($data = fgetcsv($csvFile, 15000, ",")) !== FALSE) {
             if (!$firstline) {
                 Mukim::create([
                     "U_Mukim_ID" => $data['0'],

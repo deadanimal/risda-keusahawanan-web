@@ -80,6 +80,8 @@ class SyarikatController extends Controller
             'syarikats.tarikh_tamat_mof',
             'syarikats.status_bumiputera',
             'syarikats.prefix_id',
+            'syarikats.nama_akaun_bank',
+            'syarikats.no_akaun_bank',
             'syarikats.notelefon',
             'syarikats.no_hp',
             'syarikats.email',
@@ -117,6 +119,10 @@ class SyarikatController extends Controller
         $syarikat->email = $request->email;
         $syarikat->logo_syarikat = $request->logo_syarikat;
         $syarikat->prefix_id = $request->prefix_id;
+
+        $syarikat->nama_akaun_bank = $request->nama_akaun_bank;
+        $syarikat->no_akaun_bank = $request->no_akaun_bank;
+
         // $syarikat->createdby_id = $request->createdby_id;
         // $syarikat->createdby_kod_PT = $request->createdby_kod_PT;
         $syarikat->modifiedby_id = $request->usahawanid;

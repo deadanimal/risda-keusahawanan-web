@@ -19,7 +19,7 @@ class PusatTanggungjawabSeeder extends Seeder
         $csvFile = fopen(base_path("database/data/Pusat_Tanggungjawab.csv"), "r");
   
         $firstline = true;
-        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+        while (($data = fgetcsv($csvFile, 15000, ",")) !== FALSE) {
             if (!$firstline) {
                 PusatTanggungjawab::create([
                     "Kod_PT" => $data['0'],

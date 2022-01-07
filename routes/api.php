@@ -64,7 +64,12 @@ Route::apiResource('aliran', AliranController::class);
 Route::post('aliran/uploadDoc/{id}', [AliranController::class, 'uploadDoc']);
 
 Route::apiResource('katalog', KatalogController::class);
+
 Route::apiResource('pelanggan', PelangganController::class);
+
+Route::get('/janaDokumen/{id}', [PelangganController::class, 'janaDokumen']);
+
+
 Route::apiResource('stok', StokController::class);
 
 Route::apiResource('lawatan', LawatanController::class);
