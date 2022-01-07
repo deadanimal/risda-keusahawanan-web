@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ParlimenSeeder extends Seeder
+class SeksyenSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,18 +14,20 @@ class ParlimenSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('parlimens')->truncate();
+        DB::table('seksyens')->truncate();
   
-        $csvFile = fopen(base_path("database/data/Parlimen.csv"), "r");
+        $csvFile = fopen(base_path("database/data/Seksyen.csv"), "r");
   
         $firstline = true;
         while (($data = fgetcsv($csvFile, 15000, ",")) !== FALSE) {
             if (!$firstline) {
-                DB::table('parlimens')->insert([
-                    "U_Parlimen_ID" => $data['0'],
-                    "Parlimen" => $data['1'],
+                DB::table('seksyens')->insert([
+                    "U_Seksyen_ID" => $data['0'],
+                    "Seksyen" => $data['1'],
                     "U_Negeri_ID" => $data['2'],
-                    "Kod_Parlimen" => $data['3'],
+                    "U_Daerah_ID" => $data['3'],
+                    "U_Mukim_ID" => $data['4'],
+                    "status" => $data['5'],
                 ]);    
             }
             $firstline = false;

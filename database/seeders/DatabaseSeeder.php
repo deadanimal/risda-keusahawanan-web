@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Daerah;
+use App\Models\Parlimen;
 use App\Models\Usahawan;
 use Illuminate\Database\Seeder;
 
@@ -30,7 +31,12 @@ class DatabaseSeeder extends Seeder
             TindakanLawatanSeeder::class,
             DaerahSeeder::class,
             DunSeeder::class,
-            KampungSeeder::class
+            KampungSeeder::class,
+            MukimSeeder::class,
+            NegeriSeeder::class,
+            ParlimenSeeder::class,
+            PusatTanggungjawabSeeder::class,
+            SeksyenSeeder::class,
         ]);
     }
 }

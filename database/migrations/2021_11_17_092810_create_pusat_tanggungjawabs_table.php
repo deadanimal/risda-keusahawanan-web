@@ -16,6 +16,7 @@ class CreatePusatTanggungjawabsTable extends Migration
         Schema::create('pusat_tanggungjawabs', function (Blueprint $table) {
             $table->id();
             $table->string('Kod_PT',12);
+            $table->string('Bahagian_ID');
             $table->string('Negeri_Rkod',12);
             $table->string('keterangan',100);
             $table->string('status',2);
