@@ -193,7 +193,8 @@
                         </div>
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'show' : 'collapse' }}" id="pendapatanbulanan">
-                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" href="/pendapatanbulanan" onclick="generatereport(1)">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" onclick="generatereport(1)" href="/pendapatanbulanan">
+                          {{-- href="/pendapatanbulanan" --}}
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                           </div></a>
                         </li>

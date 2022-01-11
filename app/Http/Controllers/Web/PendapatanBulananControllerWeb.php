@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\JenisInsentif;
 use App\Models\Report;
@@ -17,14 +18,24 @@ class PendapatanBulananControllerWeb extends Controller
 {
     public function index()
     {
-        $reports = Report::where('type', 1)
-        ->orderBy('tab3', 'ASC')
-        ->orderBy('tab2', 'ASC')
-        ->orderBy('tab1', 'ASC')
-        ->get();
-        
+        $authuser = Auth::user();
+        $getYear = date("Y");
+        if(isset($authuser)){
+            $reports = Report::where('type', 1)
+            ->where('tab3', $getYear)
+            ->where('tab20', $authuser->id)
+            ->orderBy('tab3', 'ASC')
+            ->orderBy('tab2', 'ASC')
+            ->orderBy('tab1', 'ASC')
+            ->get();
+        }else{
+            return redirect('/landing');
+        }
+                
         $c_penerima = 0;
         $c_insentif = 0;
+        $c_jualan = 0;
+        $c_puratajual = 0;
         foreach ($reports as $report) {
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
             if(isset($negeri)){
@@ -36,6 +47,9 @@ class PendapatanBulananControllerWeb extends Controller
             }
             $c_penerima = $c_penerima + $report->tab4;
             $c_insentif = $c_insentif + $report->tab5;
+            $report->tab7 = $report->tab6 / $report->tab4;
+            $c_jualan = $c_jualan + $report->tab6; 
+            $c_puratajual = $c_puratajual + $report->tab7; 
         }
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
         
@@ -44,7 +58,10 @@ class PendapatanBulananControllerWeb extends Controller
             'reports'=>$reports,
             'ddInsentif'=>$ddInsentif,
             'c_penerima'=>$c_penerima,
-            'c_insentif'=>$c_insentif
+            'c_insentif'=>$c_insentif,
+            'getYear'=>$getYear,
+            'c_jualan'=>$c_jualan,
+            'c_puratajual'=>$c_puratajual
         ]
         );
     }
@@ -76,6 +93,8 @@ class PendapatanBulananControllerWeb extends Controller
         $num=1;
         $c_penerima = 0;
         $c_insentif = 0;
+        $c_jualan = 0;
+        $c_puratajual = 0;
         foreach ($reports as $report) {
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
             if(isset($negeri)){
@@ -87,6 +106,9 @@ class PendapatanBulananControllerWeb extends Controller
             }
             $c_penerima = $c_penerima + $report->tab4;
             $c_insentif = $c_insentif + $report->tab5;
+            $report->tab7 = $report->tab6 / $report->tab4;
+            $c_jualan = $c_jualan + $report->tab6; 
+            $c_puratajual = $c_puratajual + $report->tab7; 
 
             $result .= 
             '<tr class="align-middle" style="text-align: center;">
@@ -96,16 +118,17 @@ class PendapatanBulananControllerWeb extends Controller
                 <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</label></td>
                 <td class="text-nowrap"><label class="form-check-label">'.$report->tab4.'</label></td>
                 <td class="text-nowrap"><label class="form-check-label">'.$report->tab5.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab6.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab7.'</label></td>
             </tr>';
         }
         $result .=
         '<tr class="align-middle" style="text-align: center;">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_penerima.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_insentif.'</label></td>
+            <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$c_penerima.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$c_insentif.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$c_jualan.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$c_puratajual.'</td>
         </tr>
         ';       
 

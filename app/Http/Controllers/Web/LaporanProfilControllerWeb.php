@@ -41,8 +41,16 @@ class LaporanProfilControllerWeb extends Controller
         }
         
         $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
-        if($authuser->role == 1){
+        if($authuser->role == 1 || $authuser->role == 2){
             $users = Usahawan::all();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $users = Usahawan::where('U_Negeri_ID', $authmukim->$U_Negeri_ID)->get();
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $users = Usahawan::where('U_Daerah_ID', $authmukim->$U_Daerah_ID)->get();
+        }else if($authuser->role == 7){
+            $users = Usahawan::where('Kod_PT', $authpegawai->$NamaPT)->get();
+        }else{
+            return redirect('/landing');
         }
 
         $ddPT = PusatTanggungjawab::where('status', 1)->get();
@@ -143,12 +151,7 @@ class LaporanProfilControllerWeb extends Controller
 
     public function generatereport(Request $request)
     {
-        // return($request->type);
-        // Report::truncate();
         if($request->type == 1){
-            // if(isset(Auth::user()->id)){
-            //     $userid = 
-            // }
             Report::where('tab20', Auth::user()->id)->where('type', 1)->delete();
             $insentifs = Insentif::all();
             if($insentifs->count()==0){
@@ -160,20 +163,31 @@ class LaporanProfilControllerWeb extends Controller
                     $insentif->negeri = $usahawan->U_Negeri_ID;
                     $reports = Report::where('type', 1)->get();
                     if($reports->count()==0){
+                        $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                        ->sum('jumlah_aliran');
+                        $insentif->aliran = $aliran;
                         $this->newreport(1,$insentif,$insentif->id);
+                        
                     }else{
                         $update = false;
+
                         foreach ($reports as $report) {
                             if ($report->tab3 == $insentif->tahun_terima_insentif && $report->tab2 == $insentif->id_jenis_insentif && $report->tab1 == $insentif->negeri) {
                                 $report->tab4 = $report->tab4 + 1;
                                 $report->tab5 = $report->tab5 + $insentif->nilai_insentif;
+                                $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                                ->sum('jumlah_aliran');
+                                $report->tab6 = $report->tab6 + $aliran;
                                 $report->save();
                                 $update = true;
                                 break;
                             }
                         }
                         if($update == false){
-                            $this->newreport(1,$insentif,"1");
+                            $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                            ->sum('jumlah_aliran');
+                            $insentif->aliran = $aliran;
+                            $this->newreport(1,$insentif,$insentif->id_pengguna);
                         }
                     }
                 }
@@ -605,6 +619,7 @@ class LaporanProfilControllerWeb extends Controller
             $report->tab3 = $request->tahun_terima_insentif;
             $report->tab4 = 1;
             $report->tab5 = $request->nilai_insentif;
+            $report->tab6 = $request->aliran;
             $report->tab10 = $others;
             $report->tab20 = Auth::user()->id;
             $report->save();

@@ -25,12 +25,12 @@ class PendBul implements FromCollection, WithHeadings
     {
         // dd($this->tahun);
         if($this->tahun == 'nun' && $this->jenis != 'nun'){
-            $reports = Report::where('type', 1)
+            $reports = Report::select('tab1','tab2','tab3','tab4','tab5')->where('type', 1)
             ->where('tab2', $this->jenis)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
         if($this->jenis == 'nun' && $this->tahun != 'nun'){
-            $reports = Report::where('type', 1)
+            $reports = Report::select('tab1','tab2','tab3','tab4','tab5')->where('type', 1)
             ->where('tab3', $this->tahun)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
@@ -61,6 +61,7 @@ class PendBul implements FromCollection, WithHeadings
             $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
             $report->tab2 = $jenisinsentif->nama_insentif;
             $report->tab1 = $negeri->Negeri;
+            $report->tab7 = $report->tab6 / $report->tab4;
         }
         return $reports;
     }

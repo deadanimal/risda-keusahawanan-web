@@ -23,6 +23,6 @@ class LapProf implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["NEGERI", "JENIS INSENTIF", "TAHUN", "BILANGAN PENERIMA INSENTIF", "JUMLAH INSENTIF", "JUMLAH JUALAN", "PURATA JUALAN"];
+        return ["NEGERI", "PUSAT TANGGUNGJAWAB RISDA", "TAHUN", "BILANGAN PENERIMA INSENTIF", "JUMLAH INSENTIF", "JUMLAH JUALAN", "PURATA JUALAN"];
     }
 }
