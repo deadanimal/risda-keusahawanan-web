@@ -34,7 +34,9 @@ class DatabaseSeeder extends Seeder
             KampungSeeder::class,
             NegeriSeeder::class,
             MukimSeeder::class,
-            PusatTanggungjawabSeeder::class
+            PusatTanggungjawabSeeder::class,
+            ParlimenSeeder::class,
+            JenisPerniagaanSeeder::class
         ]);
     }
 }

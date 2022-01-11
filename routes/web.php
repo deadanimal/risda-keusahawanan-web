@@ -69,6 +69,7 @@ Route::resource('/temulawatan', TemuLawatanControllerWeb::class);
 
 Route::resource('/laporanprofil', LaporanProfilControllerWeb::class);
 Route::resource('/profdetail', LaporanProfilControllerWeb::class);
+Route::get('ExcelLapProfil', [LaporanProfilControllerWeb::class, 'ExcelLapProfil']);
 
 Route::resource('/pendapatanbulanan', PendapatanBulananControllerWeb::class);
 Route::get('export2/{tahun}/{jenis}', [PendapatanBulananControllerWeb::class, 'export2']);

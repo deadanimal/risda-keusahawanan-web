@@ -16,7 +16,7 @@ class CreatePekebunsTable extends Migration
         Schema::create('pekebuns', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('usahawanid');
+            $table->string('usahawanid',50);
             $table->string('status_daftar_usahawan',50);
             $table->string('Nama_PK',250);
             $table->string('No_KP',50);

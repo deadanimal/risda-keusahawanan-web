@@ -24,6 +24,10 @@ use App\Models\Parlimen;
 use App\Models\Pekebun;
 use App\Models\KategoriUsahawan;
 use App\Models\Syarikat;
+use App\Models\JenisPerniagaan;
+
+use App\Exports\LapProf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanProfilControllerWeb extends Controller
 {
@@ -108,7 +112,9 @@ class LaporanProfilControllerWeb extends Controller
         $perniagaan = Perniagaan::where('usahawanid', $users->usahawanid)->first();
         if(isset($perniagaan)){
             $JnsPerniagaan = JenisPerniagaan::where('kod_jenis_perniagaan', $perniagaan->jenisperniagaan)->first();
-            $users->JenisPerniagaan = $JnsPerniagaan->nama_jenis_perniagaan;
+            if(isset($JnsPerniagaan)){
+                $users->JenisPerniagaan = $JnsPerniagaan->nama_jenis_perniagaan;
+            }
             $users->KlusterPerniagaan = $perniagaan->klusterperniagaan;
             $users->SubKlusterPerniagaan = $perniagaan->subkluster;
             if($perniagaan->facebook != ""){
@@ -802,4 +808,8 @@ class LaporanProfilControllerWeb extends Controller
         }
     }
 
+    public function ExcelLapProfil()
+    {
+        return Excel::download(new LapProf(), 'LaporanProfil.xlsx');
+    }
 }

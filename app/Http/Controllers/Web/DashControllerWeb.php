@@ -16,6 +16,7 @@ use App\Models\KategoriUsahawan;
 use App\Models\Mukim;
 use App\Models\JenisInsentif;
 use App\Models\Negeri;
+use App\Models\Pekebun;
 
 class DashControllerWeb extends Controller
 {
@@ -85,11 +86,15 @@ class DashControllerWeb extends Controller
                             $insentifdata2->daerah = $daerah->Daerah;
                         }
 
-                        $perniagaans = Perniagaan::where('usahawanid', $usahawan->id)->first();
+                        $perniagaans = Perniagaan::where('usahawanid', $usahawan->usahawanid)->first();
                         if(isset($perniagaans)){
                             $insentifdata2->jnsperniagaan = $perniagaans->jenisperniagaan;
                         }
-                        $insentifdata2->status_daftar_usahawan = $usahawan->status_daftar_usahawan;
+
+                        $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
+                        if(isset($pekebun)){
+                            $insentifdata2->status_daftar_usahawan = $pekebun->status_daftar_usahawan;
+                        }
 
                         $KateUsahawan = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
                         if(isset($KateUsahawan)){
@@ -385,11 +390,14 @@ class DashControllerWeb extends Controller
                             $insentifdata2->daerah = $daerah->Daerah;
                         }
 
-                        $perniagaans = Perniagaan::where('usahawanid', $usahawan->id)->first();
+                        $perniagaans = Perniagaan::where('usahawanid', $usahawan->usahawanid)->first();
                         if(isset($perniagaans)){
                             $insentifdata2->jnsperniagaan = $perniagaans->jenisperniagaan;
                         }
-                        $insentifdata2->status_daftar_usahawan = $usahawan->status_daftar_usahawan;
+                        $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
+                        if(isset($pekebun)){
+                            $insentifdata2->status_daftar_usahawan = $pekebun->status_daftar_usahawan;
+                        }
 
                         $KateUsahawan = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
                         if(isset($KateUsahawan)){

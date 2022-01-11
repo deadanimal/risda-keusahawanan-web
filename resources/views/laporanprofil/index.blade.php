@@ -78,6 +78,10 @@
             "bFilter": true,
         });
     });
+
+    function ExportExcel(){
+        window.location.href = "/ExcelLapProfil";
+    }
     
 </script>
 @endsection
