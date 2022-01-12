@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Mukim;
+use Illuminate\Support\Facades\DB;
 
 class MukimSeeder extends Seeder
 {
@@ -14,14 +14,14 @@ class MukimSeeder extends Seeder
      */
     public function run()
     {
-        Mukim::truncate();
+        DB::table('mukims')->truncate();
   
         $csvFile = fopen(base_path("database/data/Mukim.csv"), "r");
   
         $firstline = true;
         while (($data = fgetcsv($csvFile, 15000, ",")) !== FALSE) {
             if (!$firstline) {
-                Mukim::create([
+                DB::table('mukims')->insert([
                     "U_Mukim_ID" => $data['0'],
                     "Mukim" => $data['1'],
                     "Kod_Mukim" => $data['2'],
@@ -30,7 +30,7 @@ class MukimSeeder extends Seeder
                     "U_Daerah_ID" => $data['5'],
                     "Kod_Daerah" => $data['6'],
                     "Stesen_kod" => $data['7'],
-                    "status" => $data['8']
+                    "status" => $data['8'],
                 ]);    
             }
             $firstline = false;

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Negeri;
+use Illuminate\Support\Facades\DB;
 
 class NegeriSeeder extends Seeder
 {
@@ -14,14 +14,14 @@ class NegeriSeeder extends Seeder
      */
     public function run()
     {
-        Negeri::truncate();
+        DB::table('negeris')->truncate();
   
         $csvFile = fopen(base_path("database/data/Negeri.csv"), "r");
   
         $firstline = true;
-        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+        while (($data = fgetcsv($csvFile, 15000, ",")) !== FALSE) {
             if (!$firstline) {
-                Negeri::create([
+                DB::table('negeris')->insert([
                     "U_Negeri_ID" => $data['0'],
                     "Negeri" => $data['1'],
                     "Kod_Negeri" => $data['2'],
