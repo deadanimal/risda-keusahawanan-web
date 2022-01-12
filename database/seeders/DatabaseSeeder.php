@@ -32,11 +32,12 @@ class DatabaseSeeder extends Seeder
             DaerahSeeder::class,
             DunSeeder::class,
             KampungSeeder::class,
-            NegeriSeeder::class,
+            JenisPerniagaanSeeder::class,
             MukimSeeder::class,
-            PusatTanggungjawabSeeder::class,
+            NegeriSeeder::class,
             ParlimenSeeder::class,
-            JenisPerniagaanSeeder::class
+            PusatTanggungjawabSeeder::class,
+            SeksyenSeeder::class,
         ]);
     }
 }
