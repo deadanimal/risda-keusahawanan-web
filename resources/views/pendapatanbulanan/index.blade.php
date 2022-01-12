@@ -121,11 +121,11 @@
                   </tr>
                   @endforeach
                   <tr class="align-middle" style="text-align: center;">
-                    <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</td>
-                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$c_penerima}}</td>
-                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$c_insentif}}</td>
-                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$c_jualan}}</td>
-                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$c_puratajual}}</td>
+                    <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
+                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_penerima}}</label></td>
+                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_insentif}}</label></td>
+                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_jualan}}</label></td>
+                    <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_puratajual}}</label></td>
                   </tr>
                     {{-- @foreach ($users as $user)
                     <tr class="align-middle">
@@ -147,9 +147,10 @@
 <script type="text/javascript">
   
   $( document ).ready(function() {
-    var table = $('#pendapatanbultbl').DataTable({
-        "paging":   true
-      });
+      // var table = $('#pendapatanbultbl').DataTable({
+      //   "paging":   true,
+      //   "bFilter": true,
+      // });
   });
 
   function gettabledata(type,val){
@@ -190,38 +191,15 @@
       var year = document.getElementById("iptYear").value;
     }
   
-    window.location.href = "/export2/"+year+"/"+jenis;
+    window.location.href = "/export1/"+year+"/"+jenis;
   }
     
   function ExportPDF(){
         
-        var pdf = new jsPDF("l", "mm", "a2");
-        
-        source = $('#contentbody')[0];
-        specialElementHandlers = {
-            '#bypassme': function (element, renderer) {
-                return true
-            }
-        };
-        margins = {
-            top: 10,
-            bottom: 0,
-            left: 10,
-            width: 2480
-        };
+    var doc = new jsPDF("p", "mm", "a4")
+    doc.autoTable({ html: '#pendapatanbultbl' })
+    doc.save('PendapatanBulananNegeri.pdf')
 
-        pdf.fromHTML(
-            source, // HTML string or DOM elem ref.
-            margins.left, // x coord
-            margins.top, { // y coord
-                'width': margins.width, // max width of content on PDF
-                'elementHandlers': specialElementHandlers
-            },
-
-            function (dispose) {
-                pdf.save('Test.pdf');
-            }, margins
-        );
   }
 </script>
 @endsection

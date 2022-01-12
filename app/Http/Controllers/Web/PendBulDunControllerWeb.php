@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\JenisInsentif;
 use App\Models\Report;
@@ -10,43 +11,59 @@ use App\Models\Negeri;
 use App\Models\Dun;
 use App\Models\Parlimen;
 
+use App\Exports\PendBulDun;
+use Maatwebsite\Excel\Facades\Excel;
+
 class PendBulDunControllerWeb extends Controller
 {
     public function index()
     {
+        try{
+            $authuser = Auth::user();
+            $getYear = date("Y");
             $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
-            $reports = Report::where('type', 3)
+            $reports = Report::where('type', 3)->where('tab3', $getYear)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab9', 'ASC')->get();
 
             $c_penerima = 0;
             $c_insentif = 0;
-            try{
-                foreach ($reports as $report) {
-                    $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
-                    if(isset($negeri)){
-                        $report->negeri = $negeri->Negeri;
-                    }
-                    $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
-                    if(isset($jenisinsentif)){
-                        $report->jenis = $jenisinsentif->nama_insentif;
-                    }
-                    $dun = Dun::where('U_Dun_ID', $report->tab9)->first();
-                    if(isset($dun)){
-                        $report->dun = $dun->Dun;
-                        $parlimen = Parlimen::where('U_Parlimen_ID', $dun->U_Parlimen_ID)->first();
-                        $report->parlimen = $parlimen->Parlimen;
-                    }
-                    $c_penerima = $c_penerima + $report->tab4;
-                    $c_insentif = $c_insentif + $report->tab5;
+            $c_jualan = 0;
+            $c_puratajual = 0;
+
+        }catch(Exception $e){}
+        try{
+            foreach ($reports as $report) {
+                $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
+                if(isset($negeri)){
+                    $report->negeri = $negeri->Negeri;
                 }
-            }catch(Exception $e){}
+                $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
+                if(isset($jenisinsentif)){
+                    $report->jenis = $jenisinsentif->nama_insentif;
+                }
+                $dun = Dun::where('U_Dun_ID', $report->tab9)->first();
+                if(isset($dun)){
+                    $report->dun = $dun->Dun;
+                    $parlimen = Parlimen::where('U_Parlimen_ID', $dun->U_Parlimen_ID)->first();
+                    $report->parlimen = $parlimen->Parlimen;
+                }
+                $c_penerima = $c_penerima + $report->tab4;
+                $c_insentif = $c_insentif + $report->tab5;
+                $report->tab7 = $report->tab6 / $report->tab4;
+                $c_jualan = $c_jualan + $report->tab6; 
+                $c_puratajual = $c_puratajual + $report->tab7; 
+            }
+        }catch(Exception $e){}
 
         return view('pendapatanbulanan.pendbulDun'
         ,[
             'ddInsentif'=>$ddInsentif,
             'reports'=>$reports,
             'c_penerima'=>$c_penerima,
-            'c_insentif'=>$c_insentif
+            'c_insentif'=>$c_insentif,
+            'getYear'=>$getYear,
+            'c_jualan'=>$c_jualan,
+            'c_puratajual'=>$c_puratajual
         ]
         );
     }
@@ -112,4 +129,8 @@ class PendBulDunControllerWeb extends Controller
         return $result;
     }
 
+    public function export3($tahun, $jenis)
+    {
+            return Excel::download(new PendBulDun($tahun,$jenis), 'PendapatanBulananDun.xlsx');
+    }
 }

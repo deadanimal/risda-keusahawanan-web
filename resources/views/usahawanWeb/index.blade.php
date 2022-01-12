@@ -499,7 +499,7 @@ function tetapanpengguna(page,data){
 
         $("#usahawanprofilpic").attr("src",data.gambar_url);
 
-        $("#displaydua input[name=idusahawan]").val(data.id);
+        $("#displaydua input[name=idusahawan]").val(data.usahawanid);
         $("#displaydua input[name=namausahawan]").val(data.namausahawan);
         $("#displaydua input[name=nokadpengenalan]").val(data.nokadpengenalan);
         $("#displaydua input[name=No_Usahawan]").val(data.usahawanid);
@@ -529,7 +529,7 @@ function tetapanpengguna(page,data){
         $("#displaydua input[name=notelefon]").val(data.notelefon);
         $("#displaydua input[name=nohp]").val(data.nohp);
         $("#displaydua input[name=email]").val(data.email);
-        $("#datausahawan").attr("action", "/usahawanWeb/"+data.id);
+        $("#datausahawan").attr("action", "/usahawanWeb/"+data.usahawanid);
 
         var x = document.getElementsByClassName("usahawanfield");       
         if (role == 1 || role == 7){

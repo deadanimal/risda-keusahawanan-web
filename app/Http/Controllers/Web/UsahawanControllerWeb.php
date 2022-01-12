@@ -88,7 +88,7 @@ class UsahawanControllerWeb extends Controller
         $user->no_kp = $request->nokadpengenalan;
         $user->save();
 
-        $usahawan = Usahawan::where('id', $id)->first();
+        $usahawan = Usahawan::where('usahawanid', $id)->first();
         $usahawan->namausahawan = $request->namausahawan;
         $usahawan->nokadpengenalan = $request->nokadpengenalan;
         $usahawan->usahawanid = $request->No_Usahawan;

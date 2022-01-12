@@ -83,7 +83,7 @@ class UsahawanSeeder extends Seeder
         Usahawan::create([
             'Kod_PT'=>'1',
             'namausahawan'=>'user4',
-            'usahawanid'=>'J00003',
+            'usahawanid'=>'J00002',
             'nokadpengenalan'=>'600606015813',
             'tarikhlahir'=>'06-06-20',
             'U_Jantina_ID'=>'1',

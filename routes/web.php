@@ -72,9 +72,11 @@ Route::resource('/profdetail', LaporanProfilControllerWeb::class);
 Route::get('ExcelLapProfil', [LaporanProfilControllerWeb::class, 'ExcelLapProfil']);
 
 Route::resource('/pendapatanbulanan', PendapatanBulananControllerWeb::class);
-Route::get('export2/{tahun}/{jenis}', [PendapatanBulananControllerWeb::class, 'export2']);
+Route::get('export1/{tahun}/{jenis}', [PendapatanBulananControllerWeb::class, 'export1']);
 Route::resource('/pendbulDaerah', PendBulDaerahControllerWeb::class);
+Route::get('export2/{tahun}/{jenis}', [PendBulDaerahControllerWeb::class, 'export2']);
 Route::resource('/pendbulDun', PendBulDunControllerWeb::class);
+Route::get('export3/{tahun}/{jenis}', [PendBulDunControllerWeb::class, 'export3']);
 
 Route::resource('/laporaninsentif', LaporanInsentifControllerWeb::class);
 Route::resource('/insenjenis', InsentifJenisControllerWeb::class);

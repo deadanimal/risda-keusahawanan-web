@@ -31,6 +31,7 @@
     <script src="../../../assets/list.js/list.min.js"></script>
     <script src="../../../js/theme.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.5.22/dist/jspdf.plugin.autotable.js"></script>
     <script src="../../../js/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     
@@ -213,6 +214,7 @@
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('laporaninsentif.*') || request()->routeIs('insenjenis.*') || request()->routeIs('insenjantinaumur.*') ? 'show' : 'collapse' }}" id="laporaninsentif">
                       <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporaninsentif.*') ? 'active' : '' }}" href="/laporaninsentif" onclick="generatereport(4)">
+                        {{-- href="/laporaninsentif" --}}
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                         </div></a>
                       </li>

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\JenisInsentif;
 use App\Models\Report;
 use App\Models\Negeri;
 use App\Models\Daerah;
+
+use App\Exports\PendBulDaerah;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Exception;
 
@@ -16,12 +20,16 @@ class PendBulDaerahControllerWeb extends Controller
     public function index()
     {
         try{
+            $authuser = Auth::user();
+            $getYear = date("Y");
             $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
-            $reports = Report::where('type', 2)
+            $reports = Report::where('type', 2)->where('tab3', $getYear)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab8', 'ASC')->get();
 
             $c_penerima = 0;
             $c_insentif = 0;
+            $c_jualan = 0;
+            $c_puratajual = 0;
             foreach ($reports as $report) {
                 $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
                 $report->negeri = $negeri->Negeri;
@@ -31,6 +39,9 @@ class PendBulDaerahControllerWeb extends Controller
                 $report->daerah = $daerah->Daerah;
                 $c_penerima = $c_penerima + $report->tab4;
                 $c_insentif = $c_insentif + $report->tab5;
+                $report->tab7 = $report->tab6 / $report->tab4;
+                $c_jualan = $c_jualan + $report->tab6; 
+                $c_puratajual = $c_puratajual + $report->tab7; 
             }
         }
         catch(Exception $e){
@@ -43,7 +54,10 @@ class PendBulDaerahControllerWeb extends Controller
             'ddInsentif'=>$ddInsentif,
             'reports'=>$reports,
             'c_penerima'=>$c_penerima,
-            'c_insentif'=>$c_insentif
+            'c_insentif'=>$c_insentif,
+            'getYear'=>$getYear,
+            'c_jualan'=>$c_jualan,
+            'c_puratajual'=>$c_puratajual
         ]
         );
     }
@@ -109,4 +123,8 @@ class PendBulDaerahControllerWeb extends Controller
         catch(Exception $e){}
     }
 
+    public function export2($tahun, $jenis)
+    {
+            return Excel::download(new PendBulDaerah($tahun,$jenis), 'PendapatanBulananDaerah.xlsx');
+    }
 }

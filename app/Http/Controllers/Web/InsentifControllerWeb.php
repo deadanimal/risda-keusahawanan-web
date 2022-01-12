@@ -48,7 +48,7 @@ class InsentifControllerWeb extends Controller
         return view('insentif.insentifdetail'
         ,[
             'insentifs'=>$insentifs,
-            'id_pengguna'=>$id,
+            'id_pengguna'=>$usahawan->usahawanid,
             'ddInsentif'=>$ddInsentif,
             'negeri'=>$usahawan->U_Negeri_ID,
             'daerah'=>$usahawan->U_Daerah_ID,
