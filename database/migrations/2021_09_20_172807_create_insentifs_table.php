@@ -16,7 +16,7 @@ class CreateInsentifsTable extends Migration
         Schema::create('insentifs', function (Blueprint $table) {
             $table->id();
 
-            $table->string('usahawanid')->nullable();
+            $table->string('id_pengguna')->nullable();
             $table->string('id_jenis_insentif')->nullable();
 
             $table->string('tahun_terima_insentif',4)->nullable();

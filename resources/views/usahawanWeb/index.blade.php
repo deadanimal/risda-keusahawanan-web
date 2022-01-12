@@ -64,7 +64,7 @@
                             <td class="align-middle text-nowrap">
                                 <div class="form-check form-switch" style="margin-left:10px;">
                                 <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                                <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox" onclick="aktifkanpengguna('status',{{$user}})"/>
+                                <input class="form-check-input" id="flexSwitchCheckDefault{{$user->usahawanid}}" name="pengguna" type="checkbox" onclick="aktifkanpengguna('status',{{$user}})"/>
                                 </div>
                             </td>
                             @if (Auth::user()->role == 1 || Auth::user()->role == 7)
@@ -437,7 +437,7 @@ function GetPengguna(){
     for (var i=0; i < user.length; i++) {
         //console.log("flexSwitchCheckDefault"+user[i].value);
         if(user[i].status_pengguna == 1){
-            $("#flexSwitchCheckDefault"+user[i].id).attr("checked","");
+            $("#flexSwitchCheckDefault"+user[i].usahawanid).attr("checked","");
         }else{
             //$("#flexSwitchCheckDefault"+user[i].value).attr("checked","");
         }
@@ -446,7 +446,7 @@ function GetPengguna(){
 }
 
 function aktifkanpengguna(type,user,input){
-    var id = user.id;
+    var id = user.usahawanid;
     var status = "";
     if(type == 'kawasan'){
         status = input;

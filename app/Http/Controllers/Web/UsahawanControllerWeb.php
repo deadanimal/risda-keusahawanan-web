@@ -48,7 +48,7 @@ class UsahawanControllerWeb extends Controller
         }
 
         foreach ($users as $usahawan) {
-            $status = User::where('usahawanid', $usahawan->id)->first();
+            $status = User::where('usahawanid', $usahawan->usahawanid)->first();
             if(isset($status)){
                 $usahawan->status_pengguna = $status->status_pengguna;
             }
@@ -149,10 +149,11 @@ class UsahawanControllerWeb extends Controller
         } 
         if($request->type == 'kawasan'){
             //$user = User::where('usahawanid', $request->id)->first();
-            $usahawan = Usahawan::where('id', $request->id)->first();
+            $usahawan = Usahawan::where('usahawanid', $request->id)->first();
             $usahawan->Kod_PT = $request->status;
             $usahawan->save();
-
+            
+            $audit = new AuditTrail();
             $authuser = Auth::user();
             $audit->idpegawai = $authuser->idpegawai;
             $audit->Type = 2;
