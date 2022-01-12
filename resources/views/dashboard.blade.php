@@ -203,7 +203,8 @@
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
                           </div></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDun.*') ? 'active' : '' }}" href="/pendbulDun" onclick="generatereport(3)">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDun.*') ? 'active' : '' }}" onclick="generatereport(3)" href="/pendbulDun">
+                          {{-- href="/pendbulDun" --}}
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Dun</span>
                           </div></a>
                         </li>

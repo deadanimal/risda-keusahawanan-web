@@ -159,11 +159,12 @@ class LaporanProfilControllerWeb extends Controller
             }else{
                 foreach ($insentifs as $insentif) {
                     // $user = User::where('id', $insentif->id_pengguna)->first();
-                    $usahawan = Usahawan::where('id', $insentif->id_pengguna)->first();
+                    $usahawan = Usahawan::where('usahawanid', $insentif->id_pengguna)->first();
                     $insentif->negeri = $usahawan->U_Negeri_ID;
                     $reports = Report::where('type', 1)->get();
                     if($reports->count()==0){
-                        $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                        $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                        $aliran = Aliran::where('id_pengguna', $user->id)
                         ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
                         ->sum('jumlah_aliran');
                         $insentif->aliran = $aliran;
@@ -176,7 +177,8 @@ class LaporanProfilControllerWeb extends Controller
                             if ($report->tab3 == $insentif->tahun_terima_insentif && $report->tab2 == $insentif->id_jenis_insentif && $report->tab1 == $insentif->negeri) {
                                 $report->tab4 = $report->tab4 + 1;
                                 $report->tab5 = $report->tab5 + $insentif->nilai_insentif;
-                                $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                                $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                                $aliran = Aliran::where('id_pengguna', $user->id)
                                 ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
                                 ->sum('jumlah_aliran');
                                 $report->tab6 = $report->tab6 + $aliran;
@@ -186,7 +188,8 @@ class LaporanProfilControllerWeb extends Controller
                             }
                         }
                         if($update == false){
-                            $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                            $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                            $aliran = Aliran::where('id_pengguna', $user->id)
                             ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
                             ->sum('jumlah_aliran');
                             $insentif->aliran = $aliran;
@@ -207,13 +210,14 @@ class LaporanProfilControllerWeb extends Controller
             }else{
                 foreach ($insentifs as $insentif) {
                     // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                    $usahawan = Usahawan::where('id', $insentif->id_pengguna)->first();
+                    $usahawan = Usahawan::where('usahawanid', $insentif->id_pengguna)->first();
                     $insentif->negeri = $usahawan->U_Negeri_ID;
                     $insentif->daerah = $usahawan->U_Daerah_ID;
                     // $insentif->dun = $usahawan->U_Dun_ID;
                     $reports = Report::where('type', 2)->get();
                     if($reports->count()==0){
-                        $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                        $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                        $aliran = Aliran::where('id_pengguna', $user->id)
                         ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
                         ->sum('jumlah_aliran');
                         $insentif->aliran = $aliran;
@@ -224,7 +228,8 @@ class LaporanProfilControllerWeb extends Controller
                             if ($report->tab3 == $insentif->tahun_terima_insentif && $report->tab2 == $insentif->id_jenis_insentif && $report->tab1 == $insentif->negeri && $report->tab8 == $insentif->daerah) {
                                 $report->tab4 = $report->tab4 + 1;
                                 $report->tab5 = $report->tab5 + $insentif->nilai_insentif;
-                                $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                                $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                                $aliran = Aliran::where('id_pengguna', $user->id)
                                 ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
                                 ->sum('jumlah_aliran');
                                 $report->tab6 = $report->tab6 + $aliran;
@@ -233,7 +238,8 @@ class LaporanProfilControllerWeb extends Controller
                             }
                         }
                         if($update == false){
-                            $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                            $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                            $aliran = Aliran::where('id_pengguna', $user->id)
                             ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
                             ->sum('jumlah_aliran');
                             $insentif->aliran = $aliran;
@@ -253,13 +259,14 @@ class LaporanProfilControllerWeb extends Controller
             }else{
                 foreach ($insentifs as $insentif) {
                     $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                    $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
                     $insentif->negeri = $usahawan->U_Negeri_ID;
                     $insentif->daerah = $usahawan->U_Daerah_ID;
                     $insentif->dun = $usahawan->U_Dun_ID;
                     $reports = Report::where('type', 3)->get();
                     if($reports->count()==0){
-                        $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                        $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                        $aliran = Aliran::where('id_pengguna', $user->id)
                         ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
                         ->sum('jumlah_aliran');
                         $insentif->aliran = $aliran;
@@ -270,7 +277,8 @@ class LaporanProfilControllerWeb extends Controller
                             if ($report->tab3 == $insentif->tahun_terima_insentif && $report->tab2 == $insentif->id_jenis_insentif && $report->tab1 == $insentif->negeri && $report->tab8 == $insentif->daerah && $report->tab9 == $insentif->dun) {
                                 $report->tab4 = $report->tab4 + 1;
                                 $report->tab5 = $report->tab5 + $insentif->nilai_insentif;
-                                $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                                $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                                $aliran = Aliran::where('id_pengguna', $user->id)
                                 ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
                                 ->sum('jumlah_aliran');
                                 $report->tab6 = $report->tab6 + $aliran;
@@ -280,7 +288,8 @@ class LaporanProfilControllerWeb extends Controller
                             }
                         }
                         if($update == false){
-                            $aliran = Aliran::where('id_pengguna', $insentif->id_pengguna)
+                            $user = User::where('usahawanid', $insentif->id_pengguna)->first();
+                            $aliran = Aliran::where('id_pengguna', $user->id)
                             ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
                             ->sum('jumlah_aliran');
                             $insentif->aliran = $aliran;
@@ -293,6 +302,7 @@ class LaporanProfilControllerWeb extends Controller
         }
         
         if($request->type == 4){
+            Report::where('tab20', Auth::user()->id)->where('type', 4)->delete();
             $insentifs = Insentif::all();
             if($insentifs->count()==0){
                 return "Tiada Data Insentif Dijumpai";

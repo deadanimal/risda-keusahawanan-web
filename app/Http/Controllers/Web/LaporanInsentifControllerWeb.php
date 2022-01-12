@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\JenisInsentif;
 use App\Models\Report;
@@ -13,27 +14,33 @@ class LaporanInsentifControllerWeb extends Controller
     public function index()
     {
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
-        $reports = Report::where('type', 4)
-        ->orderBy('tab3', 'ASC')
-        ->orderBy('tab2', 'ASC')
-        ->orderBy('tab1', 'ASC')
-        ->get();
+        $authuser = Auth::user();
+        if(isset($authuser)){
+            $getYear = date("Y");
+            $reports = Report::where('type', 4)->where('tab3', $getYear)->where('tab20', $authuser->id)
+            ->orderBy('tab3', 'ASC')
+            ->orderBy('tab2', 'ASC')
+            ->orderBy('tab1', 'ASC')
+            ->get();
 
-        $total = new \stdClass();
-        $total->satu = 0;
-        $total->dua = 0;
-        $total->tiga = 0;
-        $total->empat = 0;
-        $total->lima = 0;
-        $total->enam = 0;
-        $percent = new \stdClass();
-        $percent->satu = 0;
-        $percent->dua = 0;
-        $percent->tiga = 0;
-        $percent->empat = 0;
-        $percent->lima = 0;
-        $percent->enam = 0;
+            $total = new \stdClass();
+            $total->satu = 0;
+            $total->dua = 0;
+            $total->tiga = 0;
+            $total->empat = 0;
+            $total->lima = 0;
+            $total->enam = 0;
+            $percent = new \stdClass();
+            $percent->satu = 0;
+            $percent->dua = 0;
+            $percent->tiga = 0;
+            $percent->empat = 0;
+            $percent->lima = 0;
+            $percent->enam = 0;
 
+        }else{
+            return redirect('/landing');
+        }
         foreach ($reports as $report) {
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
             if(isset($negeri)){
@@ -82,7 +89,8 @@ class LaporanInsentifControllerWeb extends Controller
             'ddInsentif'=>$ddInsentif,
             'reports'=>$reports,
             'total'=>$total,
-            'percent'=>$percent
+            'percent'=>$percent,
+            'getYear'=>$getYear
         ]
         );
     }
@@ -207,5 +215,10 @@ class LaporanInsentifControllerWeb extends Controller
         ';       
 
         return $result;
+    }
+
+    public function export4($tahun, $jenis)
+    {
+            return Excel::download(new InsenNegeri($tahun,$jenis), 'InsentifNegeri.xlsx');
     }
 }

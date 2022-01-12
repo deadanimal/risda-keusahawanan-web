@@ -44,7 +44,7 @@ class InsentifControllerWeb extends Controller
     {
         $insentifs = Insentif::where('id_pengguna', $id)->get();
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
-        $usahawan = Usahawan::where('id', $id)->first();
+        $usahawan = Usahawan::where('usahawanid', $id)->first();
         return view('insentif.insentifdetail'
         ,[
             'insentifs'=>$insentifs,
@@ -71,7 +71,7 @@ class InsentifControllerWeb extends Controller
         $insentif->negeri = $request->negeri;
         $insentif->save();
         
-        $usahawan = Usahawan::where('id', $request->id_pengguna)->first();
+        $usahawan = Usahawan::where('usahawanid', $request->id_pengguna)->first();
 
         $audit = new AuditTrail();
         $authuser = Auth::user();
@@ -100,7 +100,7 @@ class InsentifControllerWeb extends Controller
         $insentif->negeri = $request->negeri;
         $insentif->save();
 
-        $usahawan = Usahawan::where('id', $request->id_pengguna)->first();
+        $usahawan = Usahawan::where('usahawanid', $request->id_pengguna)->first();
 
         $audit = new AuditTrail();
         $authuser = Auth::user();
@@ -121,7 +121,7 @@ class InsentifControllerWeb extends Controller
         $insentif=Insentif::find($id);
         $insentif->delete();
         
-        $usahawan = Usahawan::where('id', $insentif->id_pengguna)->first();
+        $usahawan = Usahawan::where('usahawanid', $insentif->id_pengguna)->first();
 
         $audit = new AuditTrail();
         $authuser = Auth::user();

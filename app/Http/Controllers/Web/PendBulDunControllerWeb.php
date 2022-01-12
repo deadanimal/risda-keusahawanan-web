@@ -20,15 +20,20 @@ class PendBulDunControllerWeb extends Controller
     {
         try{
             $authuser = Auth::user();
-            $getYear = date("Y");
-            $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
-            $reports = Report::where('type', 3)->where('tab3', $getYear)->where('tab20', $authuser->id)
-            ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab9', 'ASC')->get();
+            if(isset($authuser)){
+                $getYear = date("Y");
+                $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
+                $reports = Report::where('type', 3)->where('tab3', $getYear)->where('tab20', $authuser->id)
+                ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab9', 'ASC')->get();
 
-            $c_penerima = 0;
-            $c_insentif = 0;
-            $c_jualan = 0;
-            $c_puratajual = 0;
+                $c_penerima = 0;
+                $c_insentif = 0;
+                $c_jualan = 0;
+                $c_puratajual = 0;
+                
+            }else{
+                return redirect('/landing');
+            }
 
         }catch(Exception $e){}
         try{

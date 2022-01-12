@@ -49,7 +49,7 @@ class DashControllerWeb extends Controller
             $user = User::where('usahawanid', $insentifdata2->id_pengguna)->first();
             if(isset($user)){
                 if($user->usahawanid != null){
-                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                    $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
                     if(isset($usahawan)){
                         if($authuser->role == 3){
                             if(isset($Mukim)){
@@ -171,7 +171,7 @@ class DashControllerWeb extends Controller
             $user = User::where('usahawanid', $InsentifData3->id_pengguna)->first();
             if(isset($user)){
                 if($user->usahawanid != null){
-                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                    $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
                     if($authuser->role == 3){
                         if(isset($Mukim)){
                             if($usahawan->U_Negeri_ID != $Mukim->U_Negeri_ID){
@@ -353,7 +353,7 @@ class DashControllerWeb extends Controller
             $user = User::where('usahawanid', $insentifdata2->id_pengguna)->first();
             if(isset($user)){
                 if($user->usahawanid != null){
-                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                    $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
                     if(isset($usahawan)){
                         if($authuser->role == 3){
                             if(isset($Mukim)){
@@ -474,7 +474,7 @@ class DashControllerWeb extends Controller
             $user = User::where('usahawanid', $InsentifData3->id_pengguna)->first();
             if(isset($user)){
                 if($user->usahawanid != null){
-                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                    $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
                     if($authuser->role == 3){
                         if(isset($Mukim)){
                             if($usahawan->U_Negeri_ID != $Mukim->U_Negeri_ID){

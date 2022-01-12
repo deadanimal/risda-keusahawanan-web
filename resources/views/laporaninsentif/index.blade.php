@@ -26,6 +26,10 @@
                   </select>
             </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+                <div style="padding-bottom: 20px;">
+                    <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
+                    <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
+                </div>
                 <table id="tbllaporaninsentif" class="table table-sm table-bordered table-hover">
                     <colgroup>
                         <col span="1" style="width:10%;">
@@ -138,15 +142,15 @@
 @section('script')
 <script type="text/javascript">
     $( document ).ready(function() {
-        const dataTableBasic = new simpleDatatables.DataTable("#tbllaporaninsentif", {
-        searchable: false,
-        fixedHeight: true,
-        sortable: true,
-        paging: false
-        });
+        // const dataTableBasic = new simpleDatatables.DataTable("#tbllaporaninsentif", {
+        // searchable: false,
+        // fixedHeight: true,
+        // sortable: true,
+        // paging: false
+        // });
     });
 
-    function gettabledata(type,val){
+  function gettabledata(type,val){
     if (type == 'year'){
       var year = val;
       var jenis = document.getElementById("iptJenisInsentif").value;
@@ -170,5 +174,28 @@
         }
     });
   }
+
+    function ExportExcel(){
+        if(document.getElementById("iptJenisInsentif").value == ""){
+            var jenis = "nun";
+        }else{
+            var jenis = document.getElementById("iptJenisInsentif").value;
+        }
+        
+        if(document.getElementById("iptYear").value == ""){
+            var year = "nun";
+        }else{
+            var year = document.getElementById("iptYear").value;
+        }
+    
+        window.location.href = "/export4/"+year+"/"+jenis;
+    }
+
+    function ExportPDF(){
+        var doc = new jsPDF("l", "mm", "a4");
+        doc.setFontSize(11);
+        doc.autoTable({ html: '#tbllaporaninsentif' })
+        doc.save('InsentifNegeri.pdf')
+    }
 </script>
 @endsection
