@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Insentif;
 use App\Models\Lawatan;
 use App\Models\Pegawai;
 use App\Models\Usahawan;
@@ -9,9 +10,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 class LawatanController extends Controller
 {
-   
+
     public function index()
     {
         $lawatan = Lawatan::all();
@@ -24,11 +28,11 @@ class LawatanController extends Controller
 
         $lawatan->id_pengguna = $request->id_pengguna;
         $lawatan->id_pegawai = $request->id_pegawai;
-       
+
         $lawatan->tarikh_lawatan = $request->tarikh_lawatan;
         $lawatan->masa_lawatan = $request->masa_lawatan;
         $lawatan->status_lawatan = "1";
-       
+
 
         $lawatan->save();
 
@@ -47,8 +51,7 @@ class LawatanController extends Controller
                 $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', 'selesai');
                 $lawatan->save();
                 return $lawatan;
-            })
-            ;
+            });
 
         // dd($test);
 
@@ -130,13 +133,14 @@ class LawatanController extends Controller
         return response()->json($usahawan);
     }
 
-    public function storeLaporan(Request $request){
+    public function storeLaporan(Request $request)
+    {
 
         $lawatan = new Lawatan();
 
         $lawatan->id_pengguna = $request->id_pengguna;
         $lawatan->id_pegawai = $request->id_pegawai;
-       
+
         $lawatan->tarikh_lawatan = $request->tarikh_lawatan;
         $lawatan->masa_lawatan = $request->masa_lawatan;
 
@@ -145,7 +149,7 @@ class LawatanController extends Controller
         $lawatan->id_tindakan_lawatan = $request->id_tindakan_lawatan;
         $lawatan->komen = $request->komen;
         $lawatan->gambar_lawatan = $request->gambar_lawatan;
-       
+
         $lawatan->save();
 
         return response()->json($lawatan);
@@ -160,5 +164,74 @@ class LawatanController extends Controller
             ->get();
 
         return response()->json($lawatan);
+    }
+
+
+    public function janaDokumenLawatan($id)
+    {
+        // dd("yeayyy");
+
+        $year = date("Y");
+
+        $lawatan = Lawatan::where('lawatans.id', $id)
+            ->join('pegawais', 'pegawais.id', 'lawatans.id_pegawai')
+            ->join('users', 'users.id', 'lawatans.id_pengguna')
+            ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+            ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+            ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
+            ->join('daerahs', 'daerahs.U_Daerah_ID', 'perniagaans.U_Daerah_ID')
+            ->join('negeris', 'negeris.U_Negeri_ID', 'perniagaans.U_Negeri_ID')
+            ->join('tindakan_lawatans', 'tindakan_lawatans.id', 'lawatans.id_tindakan_lawatan')
+            ->select(
+                "users.id as id_pengguna",
+                "usahawans.namausahawan as namausahawan",
+                "daerahs.Daerah",
+                "negeris.Negeri",
+                "syarikats.namasyarikat",
+                "perniagaans.jenisperniagaan",
+                "lawatans.gambar_lawatan",
+                "lawatans.tarikh_lawatan",
+                "lawatans.masa_lawatan",
+                "pegawais.nama as nama_pegawai",
+                "tindakan_lawatans.nama_tindakan_lawatan",
+                "lawatans.komen",
+            )
+            ->get()->first();
+
+        $insentif = Insentif::where('id_pengguna', $lawatan->id_pengguna)
+            ->join('jenis_insentifs', 'jenis_insentifs.id_jenis_insentif', 'insentifs.id_jenis_insentif')
+            ->get();
+
+        // dd($insentif);
+
+        // dd($lawatan);
+
+        $pdff = new Dompdf();
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $pdff->setOptions($options);
+        $pdff->loadHtml(view('pdf.laporanLawatan', [
+            'year' => $year,
+            'lawatan' => $lawatan,
+            'insentifs' => $insentif,
+        ]));
+        $customPaper = array(2, -35, 480, 627);
+        $pdff->setPaper($customPaper);
+        $pdff->render();
+        // $pdff->stream(
+        //     "laporan lawatan ".$lawatan->namausahawan,
+        //     array("Attachment" => false)
+        // );
+
+        // exit(0);
+
+        $fname = "laporan lawatan ".$lawatan->namausahawan.".pdf";
+        $output = $pdff->output();
+
+        \Storage::put('laporan_lawatan/'.$fname, $output);
+        // file_put_contents(, $output);
+
+        return response()->json('laporan_lawatan/'.$fname);
     }
 }

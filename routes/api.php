@@ -73,6 +73,7 @@ Route::get('/janaDokumen/{id}', [PelangganController::class, 'janaDokumen']);
 Route::apiResource('stok', StokController::class);
 
 Route::apiResource('lawatan', LawatanController::class);
+Route::get('lawatan/janaDokumenLawatan/{id}', [LawatanController::class, "janaDokumenLawatan"]);
 Route::apiResource('tindakanLawatan', TindakanLawatanController::class);
 
 Route::apiResource('buletin', BuletinController::class);
