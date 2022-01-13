@@ -9,6 +9,9 @@ use App\Models\JenisInsentif;
 use App\Models\Report;
 use App\Models\Negeri;
 
+use App\Exports\InsenNegeri;
+use Maatwebsite\Excel\Facades\Excel;
+
 class LaporanInsentifControllerWeb extends Controller
 {
     public function index()
@@ -97,6 +100,10 @@ class LaporanInsentifControllerWeb extends Controller
 
     public function show(Request $request, $tahun)
     {
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
         $total = new \stdClass();
         $total->satu = 0;
         $total->dua = 0;
@@ -114,26 +121,27 @@ class LaporanInsentifControllerWeb extends Controller
 
         if($request->tahun == null){
             $reports = Report::where('type', 4)
-            ->where('tab2', $request->id_jenis_insentif)
+            ->where('tab2', $request->id_jenis_insentif)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
         if($request->id_jenis_insentif == null){
             $reports = Report::where('type', 4)
-            ->where('tab3', $request->tahun)
+            ->where('tab3', $request->tahun)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
         if($request->id_jenis_insentif != null && $request->tahun != null){
             $reports = Report::where('type', 4)
             ->where('tab2', $request->id_jenis_insentif)
-            ->where('tab3', $request->tahun)
+            ->where('tab3', $request->tahun)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
         if($request->id_jenis_insentif == null && $request->tahun == null){
-            $reports = Report::where('type', 4)
+            $reports = Report::where('type', 4)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
 
         $result = "";
+        $foot = "";
         $num=1;
         foreach ($reports as $report) {
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
@@ -178,47 +186,42 @@ class LaporanInsentifControllerWeb extends Controller
 
             $result .= 
             '<tr class="align-middle" style="text-align: center;">
-                <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label">'.$num++.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->negeri.'</label></td>
-                <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">'.$report->jenis.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab4.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->percent1.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab5.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->percent2.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab6.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->percent3.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab7.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->percent4.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab8.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->percent5.'</label></td>
-                <td class="text-nowrap" style="padding-left:2vh;"><label class="form-check-label">'.$report->jumproject.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->jumprojectpercent.'</label></td>
+                <td class="text-nowrap" style="padding-right:2vh;">'.$num++.'</td>
+                <td class="text-nowrap">'.$report->negeri.'</td>
+                <td class="text-nowrap" style="text-align: left;">'.$report->jenis.'</td>
+                <td class="text-nowrap">'.$report->tab3.'</td>
+                <td class="text-nowrap">'.$report->tab4.'</td>
+                <td class="text-nowrap">'.$report->percent1.'</td>
+                <td class="text-nowrap">'.$report->tab5.'</td>
+                <td class="text-nowrap">'.$report->percent2.'</td>
+                <td class="text-nowrap">'.$report->tab6.'</td>
+                <td class="text-nowrap">'.$report->percent3.'</td>
+                <td class="text-nowrap">'.$report->tab7.'</td>
+                <td class="text-nowrap">'.$report->percent4.'</td>
+                <td class="text-nowrap">'.$report->tab8.'</td>
+                <td class="text-nowrap">'.$report->percent5.'</td>
+                <td class="text-nowrap" style="padding-left:2vh;">'.$report->jumproject.'</td>
+                <td class="text-nowrap">'.$report->jumprojectpercent.'</td>
             </tr>';
         }
-        $result .=
+        $foot .=
         '<tr class="align-middle" style="text-align: center;">
-            <td colspan="4"></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$total->satu.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$percent->satu.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$total->dua.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$percent->dua.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$total->tiga.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$percent->tiga.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$total->empat.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$percent->empat.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$total->lima.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$percent->lima.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$total->enam.'</label></td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$percent->enam.'</label></td>
+            <td colspan="4">Jumlah</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->satu.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$percent->satu.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->dua.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$percent->dua.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->tiga.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$percent->tiga.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->empat.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$percent->empat.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->lima.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$percent->lima.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->enam.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$percent->enam.'</td>
         </tr>
         ';       
 
-        return $result;
-    }
-
-    public function export4($tahun, $jenis)
-    {
-            return Excel::download(new InsenNegeri($tahun,$jenis), 'InsentifNegeri.xlsx');
+        return [$result, $foot];
     }
 }

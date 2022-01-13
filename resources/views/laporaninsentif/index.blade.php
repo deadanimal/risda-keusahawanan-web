@@ -14,7 +14,7 @@
                 </select>
                   MENGIKUT DAERAH/PT SETAKAT 
                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
-                    <option value="">Tahun</option>
+                    {{-- <option value="">Tahun</option> --}}
                     <?php
                     $curryear = date("Y");
                     $fromyear = date("Y") - 10;
@@ -26,10 +26,10 @@
                   </select>
             </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <div style="padding-bottom: 20px;">
+                {{-- <div style="padding-bottom: 20px;">
                     <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
                     <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
-                </div>
+                </div> --}}
                 <table id="tbllaporaninsentif" class="table table-sm table-bordered table-hover">
                     <colgroup>
                         <col span="1" style="width:10%;">
@@ -99,39 +99,41 @@
                         @foreach ($reports as $report)
                         <tr class="align-middle" style="text-align: center;">
                             <td class="text-nowrap" style="padding-right:2vh;"><?php echo $num++;?></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->negeri}}</label></td>
-                            <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">{{$report->jenis}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab4}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent1}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent2}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab6}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent3}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab7}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent4}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab8}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent5}}</label></td>
-                            <td class="text-nowrap" style="padding-left:2vh;"><label class="form-check-label">{{$report->jumproject}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->jumprojectpercent}}</label></td>
+                            <td class="text-nowrap">{{$report->negeri}}</td>
+                            <td class="text-nowrap" style="text-align: left;">{{$report->jenis}}</td>
+                            <td class="text-nowrap">{{$report->tab3}}</td>
+                            <td class="text-nowrap">{{$report->tab4}}</td>
+                            <td class="text-nowrap">{{$report->percent1}}</td>
+                            <td class="text-nowrap">{{$report->tab5}}</td>
+                            <td class="text-nowrap">{{$report->percent2}}</td>
+                            <td class="text-nowrap">{{$report->tab6}}</td>
+                            <td class="text-nowrap">{{$report->percent3}}</td>
+                            <td class="text-nowrap">{{$report->tab7}}</td>
+                            <td class="text-nowrap">{{$report->percent4}}</td>
+                            <td class="text-nowrap">{{$report->tab8}}</td>
+                            <td class="text-nowrap">{{$report->percent5}}</td>
+                            <td class="text-nowrap" style="padding-left:2vh;">{{$report->jumproject}}</td>
+                            <td class="text-nowrap">{{$report->jumprojectpercent}}</td>
                         </tr>
                         @endforeach
-                        <tr class="align-middle" style="text-align: center;">
-                            <td colspan="4"></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->satu}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$percent->satu}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->dua}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$percent->dua}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->tiga}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$percent->tiga}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->empat}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$percent->empat}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->lima}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$percent->lima}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->enam}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$percent->enam}}</label></td>
-                        </tr>
                     </tbody>
+                    <tfoot id="tblfoot">
+                        <tr class="align-middle" style="text-align: center;">
+                            <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;" colspan="4">Jumlah</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->satu}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$percent->satu}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->dua}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$percent->dua}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->tiga}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$percent->tiga}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->empat}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$percent->empat}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->lima}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$percent->lima}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->enam}}</td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$percent->enam}}</td>
+                        </tr>
+                    </tfoot>
                 </table>
                 
             </div>
@@ -142,15 +144,18 @@
 @section('script')
 <script type="text/javascript">
     $( document ).ready(function() {
-        // const dataTableBasic = new simpleDatatables.DataTable("#tbllaporaninsentif", {
-        // searchable: false,
-        // fixedHeight: true,
-        // sortable: true,
-        // paging: false
-        // });
+        $('#tbllaporaninsentif').DataTable( {
+            searching: false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
     });
 
   function gettabledata(type,val){
+    $('#tbllaporaninsentif').dataTable().fnClearTable();
+    $('#tbllaporaninsentif').dataTable().fnDestroy();
     if (type == 'year'){
       var year = val;
       var jenis = document.getElementById("iptJenisInsentif").value;
@@ -169,33 +174,20 @@
             id_jenis_insentif:jenis
         },
         success: function(data) {
-
-          $("#tblname").html(data);
+            
+            $("#tblname").html(data[0]);
+            $("#tblfoot").html(data[1]);
+            if(data[0] != null){
+                $('#tbllaporaninsentif').DataTable( {
+                    searching: false,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
+            }
         }
     });
   }
-
-    function ExportExcel(){
-        if(document.getElementById("iptJenisInsentif").value == ""){
-            var jenis = "nun";
-        }else{
-            var jenis = document.getElementById("iptJenisInsentif").value;
-        }
-        
-        if(document.getElementById("iptYear").value == ""){
-            var year = "nun";
-        }else{
-            var year = document.getElementById("iptYear").value;
-        }
-    
-        window.location.href = "/export4/"+year+"/"+jenis;
-    }
-
-    function ExportPDF(){
-        var doc = new jsPDF("l", "mm", "a4");
-        doc.setFontSize(11);
-        doc.autoTable({ html: '#tbllaporaninsentif' })
-        doc.save('InsentifNegeri.pdf')
-    }
 </script>
 @endsection

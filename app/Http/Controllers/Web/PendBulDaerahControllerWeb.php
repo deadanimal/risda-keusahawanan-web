@@ -73,22 +73,22 @@ class PendBulDaerahControllerWeb extends Controller
         try{
             if($request->tahun == null){
                 $reports = Report::where('type', 2)
-                ->where('tab2', $request->id_jenis_insentif)
+                ->where('tab2', $request->id_jenis_insentif)->where('tab20', $authuser->id)
                 ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab8', 'ASC')->get();
             }
             if($request->id_jenis_insentif == null){
                 $reports = Report::where('type', 2)
-                ->where('tab3', $request->tahun)
+                ->where('tab3', $request->tahun)->where('tab20', $authuser->id)
                 ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab8', 'ASC')->get();
             }
             if($request->id_jenis_insentif != null && $request->tahun != null){
                 $reports = Report::where('type', 2)
                 ->where('tab2', $request->id_jenis_insentif)
-                ->where('tab3', $request->tahun)
+                ->where('tab3', $request->tahun)->where('tab20', $authuser->id)
                 ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab8', 'ASC')->get();
             }
             if($request->id_jenis_insentif == null && $request->tahun == null){
-                $reports = Report::where('type', 2)
+                $reports = Report::where('type', 2)->where('tab20', $authuser->id)
                 ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->orderBy('tab8', 'ASC')->get();
             }
     

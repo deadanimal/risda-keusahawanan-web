@@ -79,7 +79,6 @@ Route::resource('/pendbulDun', PendBulDunControllerWeb::class);
 Route::get('export3/{tahun}/{jenis}', [PendBulDunControllerWeb::class, 'export3']);
 
 Route::resource('/laporaninsentif', LaporanInsentifControllerWeb::class);
-Route::get('export4/{tahun}/{jenis}', [LaporanInsentifControllerWeb::class, 'export4']);
 Route::resource('/insenjenis', InsentifJenisControllerWeb::class);
 Route::resource('/insenjantinaumur', InsentifJantinaUmurControllerWeb::class);
 

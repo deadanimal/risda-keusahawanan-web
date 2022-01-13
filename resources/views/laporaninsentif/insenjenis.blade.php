@@ -26,7 +26,7 @@
                   </select>
             </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <table id="laporaninsentif" class="table table-sm table-bordered table-hover">
+                <table id="laporaninsentifjenis" class="table table-sm table-bordered table-hover">
                     <colgroup>
                         <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
@@ -98,39 +98,55 @@
                         @foreach ($reports as $report)
                         <tr class="align-middle" style="text-align: center;">
                             <td class="text-nowrap" style="padding-right:2vh;"><?php echo $num++;?></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->negeri}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->jenis}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab4}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab6}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab7}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab8}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab9}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab10}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab11}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab12}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab13}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->jumbil}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->jumrm}}</label></td>
+                            <td class="text-nowrap">{{$report->negeri}}</td>
+                            <td class="text-nowrap">{{$report->jenis}}</td>
+                            <td class="text-nowrap">{{$report->tab3}}</td>
+                            <td class="text-nowrap">{{$report->tab4}}</td>
+                            <td class="text-nowrap">{{$report->tab5}}</td>
+                            <td class="text-nowrap">{{$report->tab6}}</td>
+                            <td class="text-nowrap">{{$report->tab7}}</td>
+                            <td class="text-nowrap">{{$report->tab8}}</td>
+                            <td class="text-nowrap">{{$report->tab9}}</td>
+                            <td class="text-nowrap">{{$report->tab10}}</td>
+                            <td class="text-nowrap">{{$report->tab11}}</td>
+                            <td class="text-nowrap">{{$report->tab12}}</td>
+                            <td class="text-nowrap">{{$report->tab13}}</td>
+                            <td class="text-nowrap">{{$report->jumbil}}</td>
+                            <td class="text-nowrap">{{$report->jumrm}}</td>
+                            <td class="text-nowrap">{{$report->puratajual}}</td>
+                            <td class="text-nowrap">{{$report->puratapend}}</td>
                         </tr>
                         @endforeach
-                        <tr class="align-middle" style="text-align: center;">
-                            <td colspan="4">JUMLAH</td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->satu}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$rm->satu}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->dua}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$rm->dua}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->tiga}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$rm->tiga}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->empat}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$rm->empat}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->lima}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$rm->lima}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$total->enam}}</label></td>
-                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$rm->enam}}</label></td>
-                        </tr>
                     </tbody>
+                    <tfoot id="tblfoot">
+                        <tr class="align-middle" style="text-align: center;">
+                            <th colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->satu}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->satu}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->dua}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->dua}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->tiga}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->tiga}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->empat}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->empat}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->lima}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->lima}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->enam}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->enam}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->tujuh}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->tujuh}}</th>
+                        </tr>
+                        <tr class="align-middle" style="text-align: center;">
+                            <th colspan="4" style="border-bottom: 1px solid black;">Purata Jualan</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->satu}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->dua}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->tiga}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->empat}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->lima}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->enam}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;"></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -140,37 +156,51 @@
 @section('script')
 <script type="text/javascript">
     $( document ).ready(function() {
-        const dataTableBasic = new simpleDatatables.DataTable("#laporaninsentif", {
-        searchable: false,
-        fixedHeight: true,
-        sortable: true,
-        paging: false
+        $('#laporaninsentifjenis').DataTable( {
+            searching: false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         });
     });
 
     function gettabledata(type,val){
-    if (type == 'year'){
-      var year = val;
-      var jenis = document.getElementById("iptJenisInsentif").value;
-    }else if(type == 'jenis'){
-      var year = document.getElementById("iptYear").value;
-      var jenis = val;
-    }
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "/insenjenis/apa",
-        type:"GET",
-        data: {     
-            tahun:year,
-            id_jenis_insentif:jenis
-        },
-        success: function(data) {
-
-          $("#tblname").html(data);
+        $('#laporaninsentifjenis').dataTable().fnClearTable();
+        $('#laporaninsentifjenis').dataTable().fnDestroy();
+        if (type == 'year'){
+            var year = val;
+            var jenis = document.getElementById("iptJenisInsentif").value;
+        }else if(type == 'jenis'){
+            var year = document.getElementById("iptYear").value;
+            var jenis = val;
         }
-    });
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/insenjenis/apa",
+            type:"GET",
+            data: {     
+                tahun:year,
+                id_jenis_insentif:jenis
+            },
+            success: function(data) {
+                console.log(data[0]);
+                $("#tblname").html(data[0]);
+                $("#tblfoot").html(data[1]);
+                if(data[0] != null){
+                    $('#laporaninsentifjenis').DataTable( {
+                        searching: false,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                }
+                
+            }
+        });
   }
 </script>
 @endsection
