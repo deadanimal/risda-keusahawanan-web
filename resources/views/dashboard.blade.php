@@ -229,7 +229,8 @@
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jenis Peniagaan</span>
                         </div></a>
                       </li>
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('insenjantinaumur.*') ? 'active' : '' }}" href="/insenjantinaumur" onclick="generatereport(6)">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('insenjantinaumur.*') ? 'active' : '' }}" onclick="generatereport(6)" href="/insenjantinaumur">
+                        {{-- href="/insenjantinaumur" --}}
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jantina & Umur</span>
                         </div></a>
                       </li>
@@ -243,7 +244,8 @@
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                         </div></a>
                       </li>
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauDaerah.*') ? 'active' : '' }}" href="/pantauDaerah" onclick="generatereport(8)">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauDaerah.*') ? 'active' : '' }}" onclick="generatereport(8)" href="/pantauDaerah">
+                        {{-- href="/pantauDaerah" --}}
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
                         </div></a>
                       </li>

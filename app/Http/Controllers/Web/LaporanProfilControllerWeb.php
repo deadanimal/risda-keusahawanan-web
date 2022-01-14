@@ -413,14 +413,15 @@ class LaporanProfilControllerWeb extends Controller
         }
 
         if($request->type == 6){
+            Report::where('tab20', Auth::user()->id)->where('type', 6)->delete();
             $insentifs = Insentif::all();
             if($insentifs->count()==0){
                 return "Tiada Data Insentif Dijumpai";
             }else{
                 foreach ($insentifs as $insentif) {
                     $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                    $usahawan = Usahawan::where('id', $user->usahawanid)->first();
-                    
+                    $usahawan = Usahawan::where('usahawanid', $insentif->id_pengguna)->first();
+
                     $dateOfBirth = $usahawan->tarikhlahir;
                     $today = date("Y-m-d");
                     $diff = date_diff(date_create($dateOfBirth), date_create($today));
@@ -473,6 +474,7 @@ class LaporanProfilControllerWeb extends Controller
         }
 
         if($request->type == 7){
+            Report::where('tab20', Auth::user()->id)->where('type', 7)->delete();
             $insentifuser = Insentif::select('id_pengguna')->distinct()->get();
             //return json_encode($insentifuser);
             if($insentifuser->count()==0){
@@ -487,7 +489,7 @@ class LaporanProfilControllerWeb extends Controller
                     }else{
                         foreach ($insentifs as $insentif) {
                             $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                            $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                            $usahawan = Usahawan::where('usahawanid', $insentif->id_pengguna)->first();
                             $insentif->negeri = $usahawan->U_Negeri_ID;
                             $insentif->usahawan = $user->id;
 
@@ -545,6 +547,7 @@ class LaporanProfilControllerWeb extends Controller
         }
 
         if($request->type == 8){
+            Report::where('tab20', Auth::user()->id)->where('type', 8)->delete();
             $insentifuser = Insentif::select('id_pengguna')->distinct()->get();
             //return json_encode($insentifuser);
             if($insentifuser->count()==0){
@@ -559,7 +562,7 @@ class LaporanProfilControllerWeb extends Controller
                     }else{
                         foreach ($insentifs as $insentif) {
                             $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                            $usahawan = Usahawan::where('id', $user->usahawanid)->first();
+                            $usahawan = Usahawan::where('usahawanid', $insentif->id_pengguna)->first();
                             $insentif->negeri = $usahawan->U_Negeri_ID;
                             $insentif->daerah = $usahawan->U_Daerah_ID;
                             $insentif->usahawan = $user->id;

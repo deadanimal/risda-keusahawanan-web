@@ -26,7 +26,7 @@
                   </select>
             </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <table id="laporaninsentif" class="table table-sm table-bordered table-hover">
+                <table id="laporaninsentifjantina" class="table table-sm table-bordered table-hover">
                     <colgroup>
                         <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
@@ -89,31 +89,33 @@
                     <tbody id="tblname">
                         @foreach ($reports as $report)
                         <tr class="align-middle" style="text-align: center;">
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab1}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->jenis}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab4}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent1}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent2}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab6}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent3}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->jumbil}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->jumpercent}}</label></td>
+                            <td class="text-nowrap">{{$report->tab1}}</td>
+                            <td class="text-nowrap">{{$report->jenis}}</td>
+                            <td class="text-nowrap">{{$report->tab3}}</td>
+                            <td class="text-nowrap">{{$report->tab4}}</td>
+                            <td class="text-nowrap">{{$report->percent1}}</td>
+                            <td class="text-nowrap">{{$report->tab5}}</td>
+                            <td class="text-nowrap">{{$report->percent2}}</td>
+                            <td class="text-nowrap">{{$report->tab6}}</td>
+                            <td class="text-nowrap">{{$report->percent3}}</td>
+                            <td class="text-nowrap">{{$report->jumbil}}</td>
+                            <td class="text-nowrap">{{$report->jumpercent}}</td>
                         </tr>
                         @endforeach
-                        <tr class="align-middle" style="text-align: center;">
-                            <td class="text-nowrap" colspan="3"><label class="form-check-label">Jumlah</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$jumlah->satu}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$jumlah->dua}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$jumlah->tiga}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$jumlah->empat}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$jumlah->lima}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$jumlah->enam}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$jumlah->tujuh}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$jumlah->lapan}}</label></td>
-                        </tr>
                     </tbody>
+                    <tfoot id="tblfoot">
+                        <tr class="align-middle" style="text-align: center;">
+                            <th class="text-nowrap" colspan="3">Jumlah</th>
+                            <th class="text-nowrap">{{$jumlah->satu}}</th>
+                            <th class="text-nowrap">{{$jumlah->dua}}</th>
+                            <th class="text-nowrap">{{$jumlah->tiga}}</th>
+                            <th class="text-nowrap">{{$jumlah->empat}}</th>
+                            <th class="text-nowrap">{{$jumlah->lima}}</th>
+                            <th class="text-nowrap">{{$jumlah->enam}}</th>
+                            <th class="text-nowrap">{{$jumlah->tujuh}}</th>
+                            <th class="text-nowrap">{{$jumlah->lapan}}</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -123,37 +125,50 @@
 @section('script')
 <script type="text/javascript">
     $( document ).ready(function() {
-        const dataTableBasic = new simpleDatatables.DataTable("#laporaninsentif", {
-        searchable: false,
-        fixedHeight: true,
-        sortable: true,
-        paging: false
+        $('#laporaninsentifjantina').DataTable( {
+            searching: false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         });
     });
 
     function gettabledata(type,val){
-    if (type == 'year'){
-      var year = val;
-      var jenis = document.getElementById("iptJenisInsentif").value;
-    }else if(type == 'jenis'){
-      var year = document.getElementById("iptYear").value;
-      var jenis = val;
-    }
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "/insenjantinaumur/apa",
-        type:"GET",
-        data: {     
-            tahun:year,
-            id_jenis_insentif:jenis
-        },
-        success: function(data) {
-
-          $("#tblname").html(data);
+        $('#laporaninsentifjantina').dataTable().fnClearTable();
+        $('#laporaninsentifjantina').dataTable().fnDestroy();
+        if (type == 'year'){
+        var year = val;
+        var jenis = document.getElementById("iptJenisInsentif").value;
+        }else if(type == 'jenis'){
+        var year = document.getElementById("iptYear").value;
+        var jenis = val;
         }
-    });
-  }
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/insenjantinaumur/apa",
+            type:"GET",
+            data: {     
+                tahun:year,
+                id_jenis_insentif:jenis
+            },
+            success: function(data) {
+
+                $("#tblname").html(data[0]);
+                $("#tblfoot").html(data[1]);
+                if(data[0] != null){
+                    $('#laporaninsentifjantina').DataTable( {
+                        searching: false,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                }
+            }
+        });
+    }
 </script>
 @endsection

@@ -18,7 +18,7 @@
                 MENGIKUT DAERAH/PT
           </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <table id="laporaninsentif" class="table table-sm table-bordered table-hover">
+                <table id="laporlawatdaerah" class="table table-sm table-bordered table-hover">
                     <colgroup>
                         <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
@@ -83,25 +83,27 @@
                         @foreach ($reports as $report)
                         <tr class="align-middle" style="text-align: center;">
                             <td class="text-nowrap" style="padding-right:2vh;"><?php echo $num++;?></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->negeri}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->daerah}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab4}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab6}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab7}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$report->percent}}</label></td>
+                            <td class="text-nowrap">{{$report->negeri}}</td>
+                            <td class="text-nowrap">{{$report->daerah}}</td>
+                            <td class="text-nowrap">{{$report->tab3}}</td>
+                            <td class="text-nowrap">{{$report->tab4}}</td>
+                            <td class="text-nowrap">{{$report->tab5}}</td>
+                            <td class="text-nowrap">{{$report->tab6}}</td>
+                            <td class="text-nowrap">{{$report->tab7}}</td>
+                            <td class="text-nowrap">{{$report->percent}}</td>
                         </tr>
                         @endforeach
-                        <tr class="align-middle" style="text-align: center;">
-                            <td class="text-nowrap" colspan="4"><label class="form-check-label">Jumlah</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$total->satu}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$total->dua}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$total->tiga}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{$total->empat}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">100</label></td>
-                        </tr>
                     </tbody>
+                    <tfoot id="tblfoot">
+                        <tr class="align-middle" style="text-align: center;">
+                            <th class="text-nowrap" colspan="4">Jumlah</th>
+                            <th class="text-nowrap">{{$total->satu}}</th>
+                            <th class="text-nowrap">{{$total->dua}}</th>
+                            <th class="text-nowrap">{{$total->tiga}}</th>
+                            <th class="text-nowrap">{{$total->empat}}</th>
+                            <th class="text-nowrap">100</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -109,4 +111,47 @@
 </div>
 @endsection
 @section('script')
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('#laporlawatdaerah').DataTable( {
+            searching: false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+
+    function gettabledata(type,val){
+        $('#laporlawatdaerah').dataTable().fnClearTable();
+        $('#laporlawatdaerah').dataTable().fnDestroy();
+        if (type == 'year'){
+            var year = val;
+        }
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/pantauDaerah/apa",
+            type:"GET",
+            data: {     
+                tahun:year
+            },
+            success: function(data) {
+                console.log(data);
+                $("#tblname").html(data[0]);
+                $("#tblfoot").html(data[1]);
+                if(data[0] != null){
+                    $('#laporlawatdaerah').DataTable( {
+                        searching: false,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                }
+            }
+        });
+    }
+</script>
 @endsection

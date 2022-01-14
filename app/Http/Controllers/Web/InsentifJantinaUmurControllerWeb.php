@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\JenisInsentif;
 use App\Models\Report;
@@ -29,7 +30,12 @@ class InsentifJantinaUmurControllerWeb extends Controller
     public function index()
     {
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
-        $reports = Report::where('type', 6)
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
+        $getYear = date("Y");
+        $reports = Report::where('type', 6)->where('tab3', $getYear)->where('tab20', $authuser->id)
         ->orderBy('tab3', 'ASC')
         ->orderBy('tab2', 'ASC')
         ->orderBy('tab8', 'ASC')
@@ -79,13 +85,18 @@ class InsentifJantinaUmurControllerWeb extends Controller
         ,[
             'ddInsentif'=>$ddInsentif,
             'reports'=>$reports,
-            'jumlah'=>$jumlah
+            'jumlah'=>$jumlah,
+            'getYear'=>$getYear
         ]
         );
     }
 
     public function show(Request $request, $tahun)
     {
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
         $jumlah = new \stdClass();
         $jumlah->satu = 0;
         $jumlah->dua = 0;
@@ -98,26 +109,27 @@ class InsentifJantinaUmurControllerWeb extends Controller
 
         if($request->tahun == null){
             $reports = Report::where('type', 6)
-            ->where('tab2', $request->id_jenis_insentif)
+            ->where('tab2', $request->id_jenis_insentif)->where('tab3', $getYear)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab8', 'ASC')->get();
         }
         if($request->id_jenis_insentif == null){
             $reports = Report::where('type', 6)
-            ->where('tab3', $request->tahun)
+            ->where('tab3', $request->tahun)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab8', 'ASC')->get();
         }
         if($request->id_jenis_insentif != null && $request->tahun != null){
             $reports = Report::where('type', 6)
             ->where('tab2', $request->id_jenis_insentif)
-            ->where('tab3', $request->tahun)
+            ->where('tab3', $request->tahun)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab8', 'ASC')->get();
         }
         if($request->id_jenis_insentif == null && $request->tahun == null){
-            $reports = Report::where('type', 6)
+            $reports = Report::where('type', 6)->where('tab3', $getYear)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab8', 'ASC')->get();
         }
 
         $result = "";
+        $foot = "";
         foreach ($reports as $report) {
             $jumlah->satu = $jumlah->satu + $report->tab4;
             $jumlah->tiga = $jumlah->tiga + $report->tab5;
@@ -148,34 +160,34 @@ class InsentifJantinaUmurControllerWeb extends Controller
 
             $result .= 
             '<tr class="align-middle" style="text-align: center;">
-                <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label">'.$report->tab1.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->jenis.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->tab3.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->tab4.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->percent1.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->tab5.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->percent2.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->tab6.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->percent3.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->jumbil.'</label></td>
-                <td class="text-nowrap" ><label class="form-check-label">'.$report->jumpercent.'</label></td>
+                <td class="text-nowrap" style="padding-right:2vh;">'.$report->tab1.'</td>
+                <td class="text-nowrap" >'.$report->jenis.'</td>
+                <td class="text-nowrap" >'.$report->tab3.'</td>
+                <td class="text-nowrap" >'.$report->tab4.'</td>
+                <td class="text-nowrap" >'.$report->percent1.'</td>
+                <td class="text-nowrap" >'.$report->tab5.'</td>
+                <td class="text-nowrap" >'.$report->percent2.'</td>
+                <td class="text-nowrap" >'.$report->tab6.'</td>
+                <td class="text-nowrap" >'.$report->percent3.'</td>
+                <td class="text-nowrap" >'.$report->jumbil.'</td>
+                <td class="text-nowrap" >'.$report->jumpercent.'</td>
             </tr>';
         }
 
-        $result .= '
+        $foot .= '
         <tr class="align-middle" style="text-align: center;">
-            <td class="text-nowrap" colspan="3"><label class="form-check-label">Jumlah</label></td>
-            <td class="text-nowrap"><label class="form-check-label">'.$jumlah->satu.'</label></td>
-            <td class="text-nowrap"><label class="form-check-label">'.$jumlah->dua.'</label></td>
-            <td class="text-nowrap"><label class="form-check-label">'.$jumlah->tiga.'</label></td>
-            <td class="text-nowrap"><label class="form-check-label">'.$jumlah->empat.'</label></td>
-            <td class="text-nowrap"><label class="form-check-label">'.$jumlah->lima.'</label></td>
-            <td class="text-nowrap"><label class="form-check-label">'.$jumlah->enam.'</label></td>
-            <td class="text-nowrap"><label class="form-check-label">'.$jumlah->tujuh.'</label></td>
-            <td class="text-nowrap"><label class="form-check-label">'.$jumlah->lapan.'</label></td>
+            <td class="text-nowrap" colspan="3">Jumlah</td>
+            <td class="text-nowrap">'.$jumlah->satu.'</td>
+            <td class="text-nowrap">'.$jumlah->dua.'</td>
+            <td class="text-nowrap">'.$jumlah->tiga.'</td>
+            <td class="text-nowrap">'.$jumlah->empat.'</td>
+            <td class="text-nowrap">'.$jumlah->lima.'</td>
+            <td class="text-nowrap">'.$jumlah->enam.'</td>
+            <td class="text-nowrap">'.$jumlah->tujuh.'</td>
+            <td class="text-nowrap">'.$jumlah->lapan.'</td>
         </tr>';
 
-        return $result;
+        return [$result, $foot];
     }
 }
 

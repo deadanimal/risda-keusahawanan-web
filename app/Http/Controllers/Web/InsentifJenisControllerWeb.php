@@ -118,6 +118,7 @@ class InsentifJenisControllerWeb extends Controller
         if(!isset($authuser)){
             return redirect('/landing');
         }
+        $getYear = date("Y");
         $total = new \stdClass();
         $total->satu = 0;
         $total->dua = 0;
@@ -144,7 +145,7 @@ class InsentifJenisControllerWeb extends Controller
 
         if($request->tahun == null){
             $reports = Report::where('type', 5)
-            ->where('tab2', $request->id_jenis_insentif)->where('tab20', $authuser->id)
+            ->where('tab2', $request->id_jenis_insentif)->where('tab3', $getYear)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
         if($request->id_jenis_insentif == null){
@@ -159,7 +160,7 @@ class InsentifJenisControllerWeb extends Controller
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
         if($request->id_jenis_insentif == null && $request->tahun == null){
-            $reports = Report::where('type', 5)->where('tab20', $authuser->id)
+            $reports = Report::where('type', 5)->where('tab3', $getYear)->where('tab20', $authuser->id)
             ->orderBy('tab3', 'ASC')->orderBy('tab2', 'ASC')->orderBy('tab1', 'ASC')->get();
         }
         $getYear = date("Y");

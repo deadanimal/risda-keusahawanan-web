@@ -11,6 +11,10 @@ class KategoriAliranControllerWeb extends Controller
 {
     public function index()
     {
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
         $kategorialiran = KategoriAliran::All();
         return view('komponendash.kategorialiran'
         ,[
@@ -24,6 +28,7 @@ class KategoriAliranControllerWeb extends Controller
         $kategorialiran = new KategoriAliran();
 
         $kategorialiran->jenis_aliran = $request->jenis_aliran;
+        $kategorialiran->bahagian = $request->jenis_aliran_dua;
         $kategorialiran->nama_kategori_aliran = $request->nama_kategori_aliran;
         $kategorialiran->status_kategori_aliran = $request->status_kategori_aliran;
         $kategorialiran->save();
