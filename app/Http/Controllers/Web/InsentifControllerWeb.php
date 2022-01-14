@@ -59,11 +59,12 @@ class InsentifControllerWeb extends Controller
     
     public function store(Request $request)
     {
-        if($insentif->tahun_terima_insentif == null || $insentif->id_jenis_insentif == null || $insentif->nilai_insentif == null){
+        if($request->tahun_terima_insentif == null || $request->id_jenis_insentif == null || $request->nilai_insentif == null){
             echo '<script language="javascript">';
             echo 'alert("Data tidak lengkap");';
             echo "window.location.href='insentifdetail/".$request->id_pengguna."';";
             echo '</script>';
+            // return redirect('/insentifdetail/'.$request->id_pengguna);
         }else{
             $userId = $request->user()->id;
             $insentif = new Insentif();
