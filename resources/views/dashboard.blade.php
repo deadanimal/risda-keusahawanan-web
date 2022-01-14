@@ -216,7 +216,7 @@
                         </li>
                     </ul>
                     <a class="nav-link dropdown-indicator" href="#laporaninsentif" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('laporaninsentif.*') || request()->routeIs('insenjenis.*') || request()->routeIs('insenjantinaumur.*') ? 'true' : 'false' }}" aria-controls="komponen">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Insentif</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Analisa Insentif</span>
                         </div>
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('laporaninsentif.*') || request()->routeIs('insenjenis.*') || request()->routeIs('insenjantinaumur.*') ? 'show' : 'collapse' }}" id="laporaninsentif">

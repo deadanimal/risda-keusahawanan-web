@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center" id="contentbody">
-            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF
+            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
                     <option value="">Jenis Insentif</option>
                       @foreach ($ddInsentif as $items)
@@ -12,7 +12,7 @@
                           </option>
                       @endforeach
                 </select>
-                  MENGIKUT DAERAH/PT SETAKAT 
+                  MENGIKUT JENIS PERNIAGAAN SETAKAT 
                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                     <option value="">Tahun</option>
                     <?php
