@@ -509,7 +509,7 @@ class LaporanProfilControllerWeb extends Controller
                                             $report->tab7 = $insentif->usahawan;
 
                                             $lawatan = Lawatan::where('id_pengguna', $insentif->usahawan)
-                                            ->where('status_lawatan', 'selesai')
+                                            ->where('status_lawatan', 4)
                                             ->whereYear('tarikh_lawatan', $insentif->tahun_terima_insentif)
                                             ->first();
 
@@ -582,7 +582,7 @@ class LaporanProfilControllerWeb extends Controller
                                             $report->tab8 = $insentif->usahawan;
 
                                             $lawatan = Lawatan::where('id_pengguna', $insentif->usahawan)
-                                            ->where('status_lawatan', 'selesai')
+                                            ->where('status_lawatan', 4)
                                             ->whereYear('tarikh_lawatan', $insentif->tahun_terima_insentif)
                                             ->first();
 
@@ -613,6 +613,56 @@ class LaporanProfilControllerWeb extends Controller
                 }
                 return "Laporan Berjaya Dijana";
             }
+        }
+
+        if($request->type == 9){
+            Report::where('tab20', Auth::user()->id)->where('type', 9)->delete();
+            $lawatans = Lawatan::all();
+            if($lawatans->count()==0){
+                return "Tiada Data Insentif Dijumpai";
+            }else{
+                foreach ($lawatans as $lawatan) {
+                    
+                    $user = User::where('id', $lawatan->id_pengguna)->first();
+                    $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
+                    $lawatan->negeri = $usahawan->U_Negeri_ID;
+                    $lawatan->year = date("Y",strtotime($lawatan->tarikh_lawatan));
+                    $lawatan->daerah = $usahawan->U_Daerah_ID;
+                    $reports = Report::where('type', 9)->get();
+                    if($reports->count()==0){
+                        $this->newreport(9,$lawatan,$lawatan->id);
+                    }else{
+                        $update = false;
+                        foreach ($reports as $report) {
+                            if($report->tab1 == $lawatan->negeri && $report->tab2 == $lawatan->year && $report->tab3 == $lawatan->daerah && $report->tab4 == $lawatan->id_pegawai){
+                                $update = true;
+                                $report->tab5 = $report->tab5 + 1;
+                                if($lawatan->status_lawatan != 4){
+                                    $report->tab8 = $report->tab8 + 1;
+                                }else{
+                                    $month = date('m');
+                                    $lwtnmonth = date("m",strtotime($request->tarikh_lawatan));
+                                    if($lwtnmonth == $month){
+                                        $report->tab6 = $report->tab6 + 1;
+                                    }
+                                    $report->tab7 = $report->tab7 + 1;
+                                }
+                                $report->save();
+                            }
+
+                        }
+                        if($update == false){
+                            $this->newreport(9,$lawatan,$lawatan->id);
+                        }
+                    }
+                    
+                }
+            }
+            return "Laporan Berjaya Dijana";
+        }
+
+        if($request->type == 10){
+            return "Laporan Berjaya Dijana";
         }
 
         if($request->type == 11){
@@ -805,7 +855,7 @@ class LaporanProfilControllerWeb extends Controller
             $report->tab2 = $request->tahun_terima_insentif;
             $report->tab3 = 1;
             $lawatan = Lawatan::where('id_pengguna', $request->usahawan)
-                ->where('status_lawatan', 'selesai')
+                ->where('status_lawatan', 4)
                 ->whereYear('tarikh_lawatan', $request->tahun_terima_insentif)
                 ->first();
 
@@ -831,7 +881,7 @@ class LaporanProfilControllerWeb extends Controller
             $report->tab4 = 1;
 
             $lawatan = Lawatan::where('id_pengguna', $request->usahawan)
-                ->where('status_lawatan', 'selesai')
+                ->where('status_lawatan', 4)
                 ->whereYear('tarikh_lawatan', $request->tahun_terima_insentif)
                 ->first();
 
@@ -848,9 +898,27 @@ class LaporanProfilControllerWeb extends Controller
             $report->tab8 = $request->usahawan;
             $report->tab20 = Auth::user()->id;
             $report->save();
-        }
-
-        else if($type == 11){
+        }else if($type == 9){
+            $report = new Report();
+            $report->type = 9;
+            $report->tab1 = $request->negeri;
+            $report->tab2 = $request->year;
+            $report->tab3 = $request->daerah;
+            $report->tab4 = $request->id_pegawai;
+            $report->tab5 = 1;
+            if($request->status_lawatan != 4){
+                $report->tab8 = 1;
+            }else{
+                $month = date('m');
+                $lwtnmonth = date("m",strtotime($request->tarikh_lawatan));
+                if($lwtnmonth == $month){
+                    $report->tab6 = 1;
+                }
+                $report->tab7 = 1;
+            }
+            $report->tab20 = Auth::user()->id;
+            $report->save();
+        }else if($type == 11){
             $check = "";
             $report = new Report();
             $report->type = 11;

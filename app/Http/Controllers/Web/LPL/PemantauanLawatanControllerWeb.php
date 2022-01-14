@@ -24,7 +24,7 @@ class PemantauanLawatanControllerWeb extends Controller
         $total->tiga = 0;
         $total->empat = 0;
         
-        $reports = Report::where('type', 7)->where('tab20', $authuser->id)
+        $reports = Report::where('type', 7)->where('tab20', $authuser->id)->where('tab2', $getYear)
         ->orderBy('tab1', 'ASC')
         ->orderBy('tab2', 'ASC')
         ->get();

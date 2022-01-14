@@ -59,32 +59,40 @@ class InsentifControllerWeb extends Controller
     
     public function store(Request $request)
     {
-        $userId = $request->user()->id;
-        $insentif = new Insentif();
+        if($insentif->tahun_terima_insentif == null || $insentif->id_jenis_insentif == null || $insentif->nilai_insentif == null){
+            echo '<script language="javascript">';
+            echo 'alert("Data tidak lengkap");';
+            echo "window.location.href='insentifdetail/".$request->id_pengguna."';";
+            echo '</script>';
+        }else{
+            $userId = $request->user()->id;
+            $insentif = new Insentif();
 
-        $insentif->id_pengguna = $request->id_pengguna;
-        $insentif->id_jenis_insentif = $request->id_jenis_insentif;
-        $insentif->tahun_terima_insentif = $request->tahun_terima_insentif;
-        $insentif->nilai_insentif = $request->nilai_insentif;
-        $insentif->created_by = $userId;
-        $insentif->modified_by = $userId;
-        $insentif->negeri = $request->negeri;
-        $insentif->save();
+            $insentif->id_pengguna = $request->id_pengguna;
+            $insentif->id_jenis_insentif = $request->id_jenis_insentif;
+            $insentif->tahun_terima_insentif = $request->tahun_terima_insentif;
+            $insentif->nilai_insentif = $request->nilai_insentif;
+            $insentif->created_by = $userId;
+            $insentif->modified_by = $userId;
+            $insentif->negeri = $request->negeri;
+            $insentif->save();
+            
+            $usahawan = Usahawan::where('usahawanid', $request->id_pengguna)->first();
+
+            $audit = new AuditTrail();
+            $authuser = Auth::user();
+            $audit->idpegawai = $authuser->idpegawai;
+            $audit->Type = 3;
+            $audit->Desc = "Tambah data insentif untuk ".$usahawan->namausahawan."";
+            $audit->Date = date("Y-m-d H:i:s");
+            $audit->save();
+
+            echo '<script language="javascript">';
+            echo 'alert("Insentif Berjaya Di Simpan")';
+            echo '</script>';
+            return redirect('/insentifdetail/'.$request->id_pengguna);
+        }
         
-        $usahawan = Usahawan::where('usahawanid', $request->id_pengguna)->first();
-
-        $audit = new AuditTrail();
-        $authuser = Auth::user();
-        $audit->idpegawai = $authuser->idpegawai;
-        $audit->Type = 3;
-        $audit->Desc = "Tambah data insentif untuk ".$usahawan->namausahawan."";
-        $audit->Date = date("Y-m-d H:i:s");
-        $audit->save();
-
-        echo '<script language="javascript">';
-        echo 'alert("Insentif Berjaya Di Simpan")';
-        echo '</script>';
-        return redirect('/insentifdetail/'.$request->id_pengguna);
     }
 
     public function update(Request $request, $id)

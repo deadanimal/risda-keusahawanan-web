@@ -50,11 +50,11 @@
                             <button type="submit" class="btn btn-primary btn-sm">Ubah </button>
                         </form>
                             &nbsp
-                            <form method="POST" style="display:inline-block;" action="{{ route('tindakanlawatan.destroy', $tindlawatan->id) }}">
+                            {{-- <form method="POST" style="display:inline-block;" action="{{ route('tindakanlawatan.destroy', $tindlawatan->id) }}">
                             @csrf  
                             @method('delete')
                             <button type="submit" class="btn btn-danger btn-sm">Buang</button>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                     @endforeach

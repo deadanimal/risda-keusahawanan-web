@@ -67,12 +67,12 @@
                         <td class="text-nowrap">
                             <button type="submit" class="btn btn-primary btn-sm">Ubah </button>
                         </form>
-                            &nbsp
+                            {{-- &nbsp
                             <form method="POST" style="display:inline-block;" action="{{ route('kategoriusahawan.destroy', $kateusahawan->id) }}">
                             @csrf  
                             @method('delete')
                             <button type="submit" class="btn btn-danger btn-sm">Buang</button>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                     @endforeach

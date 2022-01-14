@@ -5,7 +5,7 @@
         <div class="row align-items-center" id="contentbody">
             <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT      
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
-                  <option value="">Tahun</option>
+                  {{-- <option value="">Tahun</option> --}}
                   <?php
                   $curryear = date("Y");
                   $fromyear = date("Y") - 10;

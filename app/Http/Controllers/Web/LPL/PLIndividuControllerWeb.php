@@ -22,7 +22,7 @@ class PLIndividuControllerWeb extends Controller
         $usahawans = Usahawan::all();
         $result = [];
         foreach ($usahawans as $usahawan) {
-            $user = User::where('usahawanid', $usahawan->id)->first();
+            $user = User::where('usahawanid', $usahawan->usahawanid)->first();
             if($user != null){
                 $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
                 $usahawan->negeri = $negeri->Negeri;
@@ -43,11 +43,11 @@ class PLIndividuControllerWeb extends Controller
         );
     }
 
-    public function show($id)
+    public function show($usahawanid)
     {
-        $usahawan = Usahawan::where('id', $id)->first();
-        $user = User::where('usahawanid', $usahawan->id)->first();
-        $syarikat = Syarikat::where('usahawanid', $usahawan->id)->first();
+        $usahawan = Usahawan::where('usahawanid', $usahawanid)->first();
+        $user = User::where('usahawanid', $usahawan->usahawanid)->first();
+        $syarikat = Syarikat::where('usahawanid', $usahawan->usahawanid)->first();
         $usahawan->syarikat = $syarikat->namasyarikat;
         $usahawan->jenisperniagaan = $syarikat->namasyarikat;
 
@@ -93,7 +93,7 @@ class PLIndividuControllerWeb extends Controller
             }
             $tindakan_lawatan = TindakanLawatan::where('id', $lawatan->id_tindakan_lawatan)->first();
             if(isset($tindakan_lawatan)){
-                $usahawan->tindakan -> $tindakan_lawatan->nama_tindakan_lawatan;
+                $usahawan->tindakan = $tindakan_lawatan->nama_tindakan_lawatan;
             }
         }
 

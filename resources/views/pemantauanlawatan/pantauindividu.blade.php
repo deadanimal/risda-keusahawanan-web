@@ -46,7 +46,7 @@
                             <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$user->nokadpengenalan}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$user->negeri}}</label></td>
-                            <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="window.location.href='/pantauindividudetail/{{$user->id}}'">
+                            <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="window.location.href='/pantauindividudetail/{{$user->usahawanid}}'">
                                 <span class="me-1" data-fa-transform="shrink-3"></span>Laporan Lawatan
                             </button></td>
                         </tr>

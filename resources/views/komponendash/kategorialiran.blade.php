@@ -15,6 +15,7 @@
                      <thead>
                         <tr class="align-middle">
                             <th scope="col">Jenis Aliran</th>
+                            <th scope="col">Bahagian Aliran</th>
                             <th scope="col">Nama Aliran</th>
                             <th scope="col">Status Aliran</th>
                             <th scope="col"></th>
