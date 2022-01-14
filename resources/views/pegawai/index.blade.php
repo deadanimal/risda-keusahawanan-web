@@ -118,6 +118,9 @@ function datatable(){
         "paging":   true,
         "bFilter": true,
         "stateSave": true,
+        "columnDefs": [
+    { "orderable": false, "targets": [3,4] }
+  ],
         initComplete: function () {
             this.api().columns([1, 2]).every( function () {
                 var column = this;

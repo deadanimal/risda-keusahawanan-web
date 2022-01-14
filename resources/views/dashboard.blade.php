@@ -266,7 +266,7 @@
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanlejar.*') || request()->routeIs('penyatauntungrugi.*') ? 'show' : 'collapse' }}" id="laporanalirantunai">
                       <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanalirantunai.*') ? 'active' : '' }}" href="/laporanalirantunai" onclick="generatereport(11)">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Aliran Tunai</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Buku Tunai</span>
                         </div></a>
                       </li>
                       <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanlejar.*') ? 'active' : '' }}" href="/laporanlejar" onclick="generatereport(12)">
