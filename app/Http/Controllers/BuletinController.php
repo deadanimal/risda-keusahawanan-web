@@ -12,7 +12,7 @@ class BuletinController extends Controller
 
     public function index()
     {
-        $buletin = Buletin::all();
+        $buletin = Buletin::orderBy('updated_at', 'desc')->get();
         return response()->json($buletin);
     }
 
@@ -62,4 +62,6 @@ class BuletinController extends Controller
     {
         //
     }
+
+    
 }

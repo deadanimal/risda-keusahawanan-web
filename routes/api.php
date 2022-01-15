@@ -62,12 +62,14 @@ Route::apiResource('kategori_aliran', KategoriAliranController::class);
 
 Route::apiResource('aliran', AliranController::class);
 Route::post('aliran/uploadDoc/{id}', [AliranController::class, 'uploadDoc']);
+Route::get('aliran/getYear/{id}', [AliranController::class, 'getCurrentYearData']);
+Route::get('aliran/getMonth/{id}', [AliranController::class, 'getCurrentMonthData']);
 
 Route::apiResource('katalog', KatalogController::class);
 
 Route::apiResource('pelanggan', PelangganController::class);
 
-Route::get('/janaDokumen/{id}', [PelangganController::class, 'janaDokumen']);
+Route::get('pelanggan/janaDokumen/{id}', [PelangganController::class, 'janaDokumen']);
 
 
 Route::apiResource('stok', StokController::class);

@@ -44,17 +44,16 @@ class LawatanController extends Controller
         $date = date("Y-m-d");
         $test = Lawatan::where([
             ['tarikh_lawatan', '<=', $date],
-            ['status_lawatan', '=', "disahkan"],
+            ['status_lawatan', '=', "3"],
         ])
             ->get()
             ->map(function ($lawatan) {
-                $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', 'selesai');
+                $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', '4');
                 $lawatan->save();
                 return $lawatan;
             });
 
         // dd($test);
-
 
         $lawatan = Pegawai::where('pegawais.id', $id)
             ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
@@ -72,11 +71,11 @@ class LawatanController extends Controller
         $date = date("Y-m-d");
         $test = Lawatan::where([
             ['tarikh_lawatan', '<=', $date],
-            ['status_lawatan', '=', "disahkan"],
+            ['status_lawatan', '=', "3"],
         ])
             ->get()
             ->map(function ($lawatan) {
-                $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', 'selesai');
+                $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', '4');
                 $lawatan->save();
                 return $lawatan;
             });
@@ -185,6 +184,7 @@ class LawatanController extends Controller
             ->select(
                 "users.id as id_pengguna",
                 "usahawans.namausahawan as namausahawan",
+                "usahawans.usahawanid as usahawanid",
                 "daerahs.Daerah",
                 "negeris.Negeri",
                 "syarikats.namasyarikat",
@@ -198,7 +198,7 @@ class LawatanController extends Controller
             )
             ->get()->first();
 
-        $insentif = Insentif::where('id_pengguna', $lawatan->id_pengguna)
+        $insentif = Insentif::where('id_pengguna', $lawatan->usahawanid)
             ->join('jenis_insentifs', 'jenis_insentifs.id_jenis_insentif', 'insentifs.id_jenis_insentif')
             ->get();
 
@@ -226,7 +226,7 @@ class LawatanController extends Controller
 
         // exit(0);
 
-        $fname = "laporan lawatan ".$lawatan->namausahawan.".pdf";
+        $fname = time()."laporan lawatan ".$lawatan->namausahawan.".pdf";
         $output = $pdff->output();
 
         \Storage::put('laporan_lawatan/'.$fname, $output);

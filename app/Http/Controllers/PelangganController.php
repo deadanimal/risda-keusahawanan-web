@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pelanggan;
 use App\Models\Stok;
 use App\Models\Katalog;
+use App\Models\Usahawan;
 // use Doctrine\DBAL\Driver\Mysqli\Initializer\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +31,7 @@ class PelangganController extends Controller
     {
         $pelanggan = new Pelanggan();
 
+        $pelanggan->tajuk = $request->tajuk;
         $pelanggan->nama_pelanggan = $request->nama_pelanggan;
         $pelanggan->alamat1 = $request->alamat1;
         $pelanggan->alamat2 = $request->alamat2;
@@ -52,23 +54,19 @@ class PelangganController extends Controller
 
     public function show($id)
     {
+        // $pelanggan = DB::table('stoks')
+        //     ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
+        //     ->join('pelanggans', 'stoks.id_pelanggan', 'pelanggans.id')
+        //     ->select('pelanggans.*', 'stoks.id', 'stoks.id_pelanggan')
+        //     ->where('id_pengguna', $id)->distinct()
+        //     ->get();
 
-        // $pelanggan = DB::table('katalogs')
-        // ->join('stoks', 'katalogs.id', 'stoks.id_katalog')
-        // ->join('pelanggans', 'stoks.id_pelanggan', 'pelanggans.id' )
-        // ->select('katalogs.*', 'pelanggans.*', 'stoks.id', 'stoks.id_pelanggan')
-        // ->where('id_pengguna', $id)
-        // ->groupBy('stoks.id_pelanggan')
-        // // ->count('stoks.id_pelanggan');
-        // ->get();
-
-        $pelanggan = DB::table('stoks')
-            ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
+        $pelanggan = DB::table('katalogs')
+            ->where('katalogs.id_pengguna', $id)
+            ->join('stoks', 'stoks.id_katalog', 'katalogs.id')
             ->join('pelanggans', 'stoks.id_pelanggan', 'pelanggans.id')
-            ->select('pelanggans.*', 'stoks.id', 'stoks.id_pelanggan')
-            ->where('id_pengguna', $id)->distinct()
-            // ->groupBy('stoks.id_pelanggan')
-            // ->count('stoks.id_pelanggan')
+            ->select('pelanggans.*', 'stoks.id_pelanggan')
+            ->distinct()
             ->get();
 
 
@@ -79,6 +77,7 @@ class PelangganController extends Controller
 
     public function update(Request $request, Pelanggan $pelanggan)
     {
+        $pelanggan->tajuk = $request->tajuk;
         $pelanggan->nama_pelanggan = $request->nama_pelanggan;
         $pelanggan->alamat1 = $request->alamat1;
         $pelanggan->alamat2 = $request->alamat2;
@@ -110,19 +109,65 @@ class PelangganController extends Controller
     public function janaDokumen($id)
     {
         // dd($id);
-        $pelanggan = DB::table('pelanggans', 'pelanggans.id', $id)
+
+        $data = DB::table('stoks')->where('stoks.id_pelanggan', $id)
+            ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
+            ->join('users', 'users.id', 'katalogs.id_pengguna')
+            ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+            ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+            ->select(
+                // 'perniagaans.gambar_url as logo_perniagaan',
+                'syarikats.logo_syarikat as logo_syarikat',
+                'syarikats.nodaftarssm',
+
+                'syarikats.alamat1_ssm as alamat1',
+                'syarikats.alamat2_ssm as alamat2',
+                'syarikats.alamat3_ssm as alamat3',
+                'syarikats.prefix_id',
+                'syarikats.nama_akaun_bank',
+                'syarikats.no_akaun_bank',
+            )
             ->get()->first();
 
-        // dd($pelanggan);
+        // $data =[];
+
+        // return $data;
+        // dd($perniagaan);
+
+        $pelanggan = DB::table('pelanggans')
+            ->where('pelanggans.id', $id)
+            ->join('negeris', 'negeris.U_Negeri_ID', 'pelanggans.U_Negeri_ID')
+            ->select(
+                'pelanggans.nama_pelanggan',
+                'pelanggans.alamat1',
+                'pelanggans.alamat2',
+                'pelanggans.alamat3',
+                'pelanggans.poskod',
+                'negeris.Negeri',
+
+                'pelanggans.no_telefon',
+                'pelanggans.no_fax',
+                'pelanggans.cukai_sst',
+                'pelanggans.kos_penghantaran',
+                'pelanggans.diskaun',
+                'pelanggans.id',
+                'pelanggans.tajuk',
+            )
+            ->get()->first();
+
+
 
         $stok = DB::table('stoks')
-            ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
             ->where('stoks.id_pelanggan', $id)
+            ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
             ->get();
         // dd($stok);
 
+        // return $stok;
+
+
         $today = date("d/m/Y");
-        // dd($today);
+        $year = date("Y");
 
 
         $pdff = new Dompdf();
@@ -131,18 +176,30 @@ class PelangganController extends Controller
         $options->set('isRemoteEnabled', true);
         $pdff->setOptions($options);
         $pdff->loadHtml(view('pdf.jana_dokumen', [
+            'today' => $today,
+            "year" => $year,
             'stoks' => $stok,
-            'today' => $today
+            'data' => $data,
+            'pelanggan' => $pelanggan,
+
             // 'no_dpa' => $no_dpa
         ]));
         $customPaper = array(2, -35, 480, 627);
         $pdff->setPaper($customPaper);
         $pdff->render();
-        $pdff->stream(
-            "newdompdf",
-            array("Attachment" => false)
-        );
+        // $pdff->stream(
+        //     "newdompdf",
+        //     array("Attachment" => false)
+        // );
 
-        exit(0);
+        // exit(0);
+
+        $fname = time()."_quotation_".$pelanggan->nama_pelanggan.".pdf";
+        $output = $pdff->output();
+
+        \Storage::put('jana_dokumen/'.$fname, $output);
+        // file_put_contents(, $output);
+
+        return response()->json('jana_dokumen/'.$fname);
     }
 }

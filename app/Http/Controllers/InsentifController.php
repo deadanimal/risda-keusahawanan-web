@@ -31,12 +31,7 @@ class InsentifController extends Controller
         return redirect('/insentif');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Insentif  $insentif
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show($id)
     {
 

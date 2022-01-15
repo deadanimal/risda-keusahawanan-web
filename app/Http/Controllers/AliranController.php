@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aliran;
 use App\Models\KategoriAliran;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AliranController extends Controller
 {
@@ -71,7 +72,7 @@ class AliranController extends Controller
     public function show($id)
     {
         $aliran = Aliran::where('id_pengguna', $id)
-        ->orderBy('created_at', 'desc')->get();
+        ->orderBy('tarikh_aliran', 'desc')->get();
 
         return response()->json($aliran);
     }
@@ -110,5 +111,47 @@ class AliranController extends Controller
         $aliran->delete();
 
         return response()->json($aliran);
+    }
+
+    public function getCurrentYearData($id){
+
+        $aliran = Aliran::where('id_pengguna', $id)
+        ->where('id_kategori_aliran', 1)
+        ->whereBetween('tarikh_aliran', [
+            Carbon::now()->startOfYear(),
+            Carbon::now()->endOfYear(),
+        ])
+        ->orderBy('tarikh_aliran', 'desc')->get();
+
+        $total = 0;
+
+        // dd($aliran);
+
+        foreach($aliran as $x){
+            $total += $x->jumlah_aliran;
+
+        }
+        // dd($total);
+
+        return response()->json($total);
+
+    }
+
+    public function getCurrentMonthData($id){
+
+        $aliran = Aliran::where('id_pengguna', $id)
+        ->where('id_kategori_aliran', 1)
+        ->whereMonth('tarikh_aliran', Carbon::now()->month)
+        ->orderBy('tarikh_aliran', 'desc')->get();
+
+        $total = 0;
+
+        foreach($aliran as $x){
+            $total += $x->jumlah_aliran;
+
+        }
+        // dd($total);
+        return response()->json($total);
+
     }
 }

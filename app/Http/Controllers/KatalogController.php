@@ -43,7 +43,9 @@ class KatalogController extends Controller
     public function show($id)
     {
         
-        $katalog = Katalog::where('id_pengguna',$id)->get();
+        $katalog = Katalog::where('id_pengguna',$id)
+        ->orderBy('updated_at', 'desc')
+        ->get();
         // dd($katalog);
         return response()->json($katalog);
     }
