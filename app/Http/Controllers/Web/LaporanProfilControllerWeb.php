@@ -617,12 +617,12 @@ class LaporanProfilControllerWeb extends Controller
 
         if($request->type == 9){
             Report::where('tab20', Auth::user()->id)->where('type', 9)->delete();
-            $lawatans = Lawatan::all();
-            if($lawatans->count()==0){
+            $lawatansUniqs = Lawatan::select('id_pengguna')->distinct()->get();
+            if($lawatansUniqs->count()==0){
                 return "Tiada Data Insentif Dijumpai";
             }else{
-                foreach ($lawatans as $lawatan) {
-                    
+                foreach ($lawatansUniqs as $lawatansUniq) {
+                    $lawatan = Lawatan::where('id_pengguna',$lawatansUniq->id_pengguna)->first();
                     $user = User::where('id', $lawatan->id_pengguna)->first();
                     $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
                     $lawatan->negeri = $usahawan->U_Negeri_ID;
