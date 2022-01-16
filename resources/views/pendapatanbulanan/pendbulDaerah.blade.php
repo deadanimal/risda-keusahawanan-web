@@ -14,7 +14,7 @@
                 </select>
                   MENGIKUT DAERAH/PT SETAKAT 
                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
-                    <option value="">Tahun</option>
+                    {{-- <option value="">Tahun</option> --}}
                     <?php
                     $curryear = date("Y");
                     $fromyear = date("Y") - 10;

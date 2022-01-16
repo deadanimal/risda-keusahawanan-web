@@ -68,6 +68,10 @@ class PendapatanBulananControllerWeb extends Controller
 
     public function show(Request $request, $tahun)
     {
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
         if($request->tahun == null){
             $reports = Report::where('type', 1)
             ->where('tab2', $request->id_jenis_insentif)->where('tab20', $authuser->id)
