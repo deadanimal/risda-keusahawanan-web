@@ -122,7 +122,7 @@ class PendBulDaerahControllerWeb extends Controller
             }
             $result .=
             '<tr class="align-middle" style="text-align: center;">
-                <td colspan="4"></td>
+                <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_penerima.'</label></td>
                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_insentif.'</label></td>
             </tr>
