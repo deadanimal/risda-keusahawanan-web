@@ -356,24 +356,24 @@
     <div class="page_break"
         style="position:absolute;left:50%;margin-left:-306px;top:0px;width:612px;height:792px;overflow:hidden">
 
-        <div style="position:absolute;left:220px;top:10px">
+        <div style="position:absolute;left:268px;top:10px">
 
             <img src="{{ $data->logo_syarikat }}" width=90 height=90>
-
+			
         </div>
 
-        <div style="position:absolute;left:302.22px;top:81.50px" class="cls_004">
-            <span class="cls_005">({{ $data->nodaftarssm }})</span>
+        <div style="position:absolute;left:91.32px;top:95px; text-align:center; width:450px;" class="cls_004">
+            <span class="cls_005">({{ $data->nodaftarssm }}) </span>
         </div>
-        <div style="position:absolute;left:91.32px;top:98.49px; text-align:center; width:450px;" class="cls_005">
+        <div style="position:absolute;left:91.32px;top:110px; text-align:center; width:450px;" class="cls_005">
             <span class="cls_005">
                 {{ $data->alamat1 }}, {{ $data->alamat2 }}, {{ $data->alamat3 }}
             </span>
         </div>
-        <div style="position:absolute;left:72.00px;top:108.84px" class="cls_006"><span
+        <div style="position:absolute;left:72.00px;top:120px" class="cls_006"><span
                 class="cls_006">_____________________________________________________________________________________</span>
         </div>
-        <div style="position:absolute;left:259.70px;top:136.26px" class="cls_007"><span
+        <div style="position:absolute;left:259.70px;top:138.26px" class="cls_007"><span
                 class="cls_007">QUOTATION</span>
         </div>
         <div style="position:absolute;left:72.00px;top:177.60px; text-transform: uppercase !important; width:250px;"
@@ -383,7 +383,7 @@
                 class="cls_008">Tarikh : {{ $today }}</span></div>
 
         <div style="position:absolute;left:363.06px;top:190.35px" class="cls_008"><span class="cls_008">No
-                Rujukan : :
+                Rujukan :
                 {{ $data->prefix_id }}/Q/{{ $year }}-{{ $pelanggan->id }}</span></div>
         <div style="position:absolute;left:72.00px;top:191.35px; text-transform: uppercase !important; width:250px;"
             class="cls_008">
@@ -414,8 +414,8 @@
         <div style="position:absolute;left:72.00px;top:280px" class="cls_011"><span
                 class="cls_011">Tuan,</span>
         </div>
-        <div style="position:absolute;left:72.00px;top:300px" class="cls_012"><span class="cls_012"
-                style="text-transform: uppercase !important">
+        <div style="position:absolute;left:72.00px;top:300px;width:500px;" class="cls_012"><span
+                class="cls_012" style="text-transform: uppercase !important">
                 {{ $pelanggan->tajuk }}
             </span></div>
 
@@ -438,8 +438,10 @@
 
                         </td>
                         <td style=" text-align:center">{{ $stok->stok_dijual }}</td>
-                        <td style=" text-align:center">{{ $stok->harga_produk }}</td>
-                        <td style=" text-align:center">{{ $stok->stok_dijual * $stok->harga_produk }}</td>
+                        <td style=" text-align:center">{{ number_format($stok->harga_produk, 2) }}
+                        </td>
+                        <td style=" text-align:center">
+                            {{ number_format($stok->stok_dijual * $stok->harga_produk, 2) }} </td>
                     </tr>
                 @endforeach
                 <tr>
@@ -460,7 +462,7 @@
                             # code...
                             $total += $stok->stok_dijual * $stok->harga_produk;
                         }
-                        echo $total;
+                        echo number_format($total, 2);
                         ?>
                     </td>
                 </tr>
@@ -475,7 +477,7 @@
                         DISKAUN
                     </td>
                     <td style="text-align:center">
-                        {{ $pelanggan->diskaun }}
+                        {{ number_format($pelanggan->diskaun, 2) }}
                     </td>
                 </tr>
                 <tr>
@@ -484,7 +486,7 @@
                         CUKAI
                     </td>
                     <td style=" text-align:center">
-                        {{ $pelanggan->cukai_sst }}
+                        {{ number_format($pelanggan->cukai_sst, 2) }}
                     </td>
                 </tr>
                 <tr>
@@ -493,7 +495,7 @@
                         KOS PENGHANTARAN
                     </td>
                     <td style=" text-align:center">
-                        {{ $pelanggan->kos_penghantaran }}
+                        {{ number_format($pelanggan->kos_penghantaran, 2) }}
                     </td>
                 </tr>
                 <tr>
@@ -504,7 +506,7 @@
                     <td style=" text-align:center">
                         @php
                             $grandtotal = $total - $pelanggan->diskaun + $pelanggan->kos_penghantaran + $pelanggan->cukai_sst;
-                            echo $grandtotal;
+                            echo number_format($grandtotal, 2);
                             
                         @endphp
                     </td>
@@ -525,24 +527,24 @@
 
     <div class="page_break"
         style="position:absolute;left:50%;margin-left:-306px;top:0px;width:612px;height:792px;overflow:hidden">
-        <div style="position:absolute;left:220px;top:10px">
+        <div style="position:absolute;left:268px;top:10px">
 
             <img src="{{ $data->logo_syarikat }}" width=90 height=90>
-
+			
         </div>
 
-        <div style="position:absolute;left:302.22px;top:81.50px" class="cls_004">
-            <span class="cls_005">({{ $data->nodaftarssm }})</span>
+        <div style="position:absolute;left:91.32px;top:95px; text-align:center; width:450px;" class="cls_004">
+            <span class="cls_005">({{ $data->nodaftarssm }}) </span>
         </div>
-        <div style="position:absolute;left:91.32px;top:98.49px; text-align:center; width:450px;" class="cls_005">
+        <div style="position:absolute;left:91.32px;top:110px; text-align:center; width:450px;" class="cls_005">
             <span class="cls_005">
                 {{ $data->alamat1 }}, {{ $data->alamat2 }}, {{ $data->alamat3 }}
             </span>
         </div>
-        <div style="position:absolute;left:72.00px;top:108.84px" class="cls_006"><span
+        <div style="position:absolute;left:72.00px;top:120px" class="cls_006"><span
                 class="cls_006">_____________________________________________________________________________________</span>
         </div>
-        <div style="position:absolute;left:237.46px;top:136.26px" class="cls_007"><span
+        <div style="position:absolute;left:237.46px;top:138.26px" class="cls_007"><span
                 class="cls_007">DELIVERY
                 ORDER</span></div>
         <div style="position:absolute;left:72.00px;top:177.60px; text-transform: uppercase !important; width:250px;"
@@ -552,8 +554,8 @@
                 class="cls_008">Tarikh : {{ $today }}</span></div>
 
         <div style="position:absolute;left:363.06px;top:190.35px" class="cls_008"><span class="cls_008">No
-                Rujukan : :
-                {{ $data->prefix_id }}/Q/{{ $year }}-{{ $pelanggan->id }}</span></div>
+                Rujukan :
+                {{ $data->prefix_id }}/DO/{{ $year }}-{{ $pelanggan->id }}</span></div>
         <div style="position:absolute;left:72.00px;top:191.35px; text-transform: uppercase !important; width:250px;"
             class="cls_008">
             <span class="cls_008">{{ $pelanggan->alamat1 }}, {{ $pelanggan->alamat2 }},
@@ -581,8 +583,8 @@
                 class="cls_008">Fax: {{ $pelanggan->no_fax }}</span>
         </div>
 
-        <div style="position:absolute;left:72.00px;top:280px" class="cls_012"><span class="cls_012"
-                style="text-transform: uppercase !important">
+        <div style="position:absolute;left:72.00px;top:280px; width:500px;" class="cls_012"><span
+                class="cls_012" style="text-transform: uppercase !important">
                 {{ $pelanggan->tajuk }}
             </span></div>
 
@@ -636,21 +638,21 @@
     </div>
     <div class="page_break"
         style="position:absolute;left:50%;margin-left:-306px;width:612px;height:792px;overflow:hidden">
-        <div style="position:absolute;left:220px;top:10px">
+        <div style="position:absolute;left:268px;top:10px">
 
             <img src="{{ $data->logo_syarikat }}" width=90 height=90>
-
+			
         </div>
 
-        <div style="position:absolute;left:302.22px;top:81.50px" class="cls_004">
-            <span class="cls_005">({{ $data->nodaftarssm }})</span>
+        <div style="position:absolute;left:91.32px;top:95px; text-align:center; width:450px;" class="cls_004">
+            <span class="cls_005">({{ $data->nodaftarssm }}) </span>
         </div>
-        <div style="position:absolute;left:91.32px;top:98.49px; text-align:center; width:450px;" class="cls_005">
+        <div style="position:absolute;left:91.32px;top:110px; text-align:center; width:450px;" class="cls_005">
             <span class="cls_005">
                 {{ $data->alamat1 }}, {{ $data->alamat2 }}, {{ $data->alamat3 }}
             </span>
         </div>
-        <div style="position:absolute;left:72.00px;top:108.84px" class="cls_006"><span
+        <div style="position:absolute;left:72.00px;top:120px" class="cls_006"><span
                 class="cls_006">_____________________________________________________________________________________</span>
         </div>
         <div style="position:absolute;left:72.00px;top:177.60px; text-transform: uppercase !important; width:250px;"
@@ -660,7 +662,7 @@
                 class="cls_008">Tarikh : {{ $today }}</span></div>
 
         <div style="position:absolute;left:363.06px;top:190.35px" class="cls_008"><span class="cls_008">No
-                Rujukan : :
+                Rujukan :
                 {{ $data->prefix_id }}/Q/{{ $year }}-{{ $pelanggan->id }}</span></div>
         <div style="position:absolute;left:72.00px;top:191.35px; text-transform: uppercase !important; width:250px;"
             class="cls_008">
@@ -692,8 +694,8 @@
         <div style="position:absolute;left:72.00px;top:276.18px" class="cls_011"><span
                 class="cls_011">Tuan,</span>
         </div>
-        <div style="position:absolute;left:72.00px;top:300px" class="cls_012"><span class="cls_012"
-                style="text-transform: uppercase !important">
+        <div style="position:absolute;left:72.00px;top:300px; width:500px;" class="cls_012"><span
+                class="cls_012" style="text-transform: uppercase !important">
                 {{ $pelanggan->tajuk }}
             </span></div>
 
@@ -716,8 +718,9 @@
 
                         </td>
                         <td style=" text-align:center">{{ $stok->stok_dijual }}</td>
-                        <td style=" text-align:center">{{ $stok->harga_produk }}</td>
-                        <td style=" text-align:center">{{ $stok->stok_dijual * $stok->harga_produk }}</td>
+                        <td style=" text-align:center">{{ number_format($stok->harga_produk, 2) }}</td>
+                        <td style=" text-align:center">
+                            {{ number_format($stok->stok_dijual * $stok->harga_produk, 2) }}</td>
                     </tr>
                 @endforeach
                 <tr>
@@ -738,19 +741,35 @@
                             # code...
                             $total += $stok->stok_dijual * $stok->harga_produk;
                         }
-                        echo $total;
+                        echo number_format($total, 2);
                         ?>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="4">
+					<td colspan="3" style="text-align:center; border-style: none;">
+                        {{-- <div style=""> --}}
+                        {{-- <p>CATATAN</p> --}}
 
-                        <table style="border-style: none !important; width:100%">
+                        {{-- </div> --}}
+
+                    </td>
+                    
+                    <td style="text-align:center; border-style: none;">
+                        DISKAUN
+                    </td>
+                    <td style="text-align:center">
+                        {{ number_format($pelanggan->diskaun, 2) }}
+                    </td>
+                </tr>
+                <tr>
+					<td colspan="3" rowspan="3">
+
+                        <table style="border-style: none !important; width:100%; font-weight:bold">
                             <tr>
                                 <td style="border-style: none !important; width: 40%">
                                     NAMA BANK
                                 </td>
-                                <td style="border-style: none !important;">
+                                <td style="border-style: none !important;text-transform:uppercase">
                                     : {{ $data->nama_akaun_bank }}
                                 </td>
                             </tr>
@@ -765,20 +784,12 @@
                         </table>
 
                     </td>
-                    <td style="text-align:center; border-style: none;">
-                        DISKAUN
-                    </td>
-                    <td style="text-align:center">
-                        {{ $pelanggan->diskaun }}
-                    </td>
-                </tr>
-                <tr>
 
                     <td style=" text-align:center; border-style: none;">
                         CUKAI
                     </td>
                     <td style=" text-align:center">
-                        {{ $pelanggan->cukai_sst }}
+                        {{ number_format($pelanggan->cukai_sst, 2) }}
                     </td>
                 </tr>
                 <tr>
@@ -787,7 +798,7 @@
                         CUKAI PENGHANTARAN
                     </td>
                     <td style=" text-align:center">
-                        {{ $pelanggan->kos_penghantaran }}
+                        {{ number_format($pelanggan->kos_penghantaran, 2) }}
                     </td>
                 </tr>
                 <tr>
@@ -798,7 +809,7 @@
                     <td style=" text-align:center">
                         @php
                             $grandtotal = $total - $pelanggan->diskaun + $pelanggan->kos_penghantaran + $pelanggan->cukai_sst;
-                            echo $grandtotal;
+                            echo number_format($grandtotal, 2);
                             
                         @endphp
                     </td>

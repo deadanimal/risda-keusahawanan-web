@@ -106,13 +106,30 @@ class PelangganController extends Controller
     }
 
 
-    public function janaDokumen($id)
+    public function janaDokumen($id, Request $request)
     {
-        // dd($id);
 
-        $data = DB::table('stoks')->where('stoks.id_pelanggan', $id)
-            ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
-            ->join('users', 'users.id', 'katalogs.id_pengguna')
+        // return $request->id_pengguna;
+        // $data = DB::table('stoks')->where('stoks.id_pelanggan', $id)
+        //     ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
+        // ->join('users', 'users.id', 'katalogs.id_pengguna')
+        // ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+        // ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+        // ->select(
+        //     // 'perniagaans.gambar_url as logo_perniagaan',
+        //     'syarikats.logo_syarikat as logo_syarikat',
+        //     'syarikats.nodaftarssm',
+
+        //     'syarikats.alamat1_ssm as alamat1',
+        //     'syarikats.alamat2_ssm as alamat2',
+        //     'syarikats.alamat3_ssm as alamat3',
+        //     'syarikats.prefix_id',
+        //     'syarikats.nama_akaun_bank',
+        //     'syarikats.no_akaun_bank',
+        // )
+        // ->get()->first();
+
+        $data = DB::table('users')->where('users.id', $request->id_pengguna)
             ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
             ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
             ->select(
@@ -129,10 +146,9 @@ class PelangganController extends Controller
             )
             ->get()->first();
 
-        // $data =[];
-
+        // dd($data);
         // return $data;
-        // dd($perniagaan);
+        
 
         $pelanggan = DB::table('pelanggans')
             ->where('pelanggans.id', $id)
@@ -194,12 +210,12 @@ class PelangganController extends Controller
 
         // exit(0);
 
-        $fname = time()."_quotation_".$pelanggan->nama_pelanggan.".pdf";
+        $fname = time() . "_quotation_" . $pelanggan->nama_pelanggan . ".pdf";
         $output = $pdff->output();
 
-        \Storage::put('jana_dokumen/'.$fname, $output);
+        \Storage::put('jana_dokumen/' . $fname, $output);
         // file_put_contents(, $output);
 
-        return response()->json('jana_dokumen/'.$fname);
+        return response()->json('jana_dokumen/' . $fname);
     }
 }

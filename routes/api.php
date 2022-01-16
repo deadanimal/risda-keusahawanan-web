@@ -69,7 +69,7 @@ Route::apiResource('katalog', KatalogController::class);
 
 Route::apiResource('pelanggan', PelangganController::class);
 
-Route::get('pelanggan/janaDokumen/{id}', [PelangganController::class, 'janaDokumen']);
+Route::post('pelanggan/janaDokumen/{id}', [PelangganController::class, 'janaDokumen']);
 
 
 Route::apiResource('stok', StokController::class);
