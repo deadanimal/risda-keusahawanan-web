@@ -64,6 +64,7 @@ $( document ).ready(function() {
         "paging":   true,
         "bFilter": true,
     });
+    $('.loader').hide();
 });
 
 </script>

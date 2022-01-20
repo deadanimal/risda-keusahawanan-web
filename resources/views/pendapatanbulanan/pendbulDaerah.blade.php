@@ -138,10 +138,7 @@
 <script type="text/javascript">
 
     $( document ).ready(function() {
-        // var table = $('#pendbuldaerah').DataTable({
-        //     "paging":   true,
-        //     "bFilter": true,
-        // });
+      $('.loader').hide();
     });
 
     function gettabledata(type,val){

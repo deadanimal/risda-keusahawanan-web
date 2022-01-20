@@ -4,7 +4,7 @@
     <div class="card-body overflow-hidden p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
         <div class="row align-items-center">
             <div id="displaysatu" >
-                <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Usahawan</h3>
+                <h3 class="text" style="padding-bottom:20px;color:#00A651;">Pemantauan Lawatan Individu</h3>
                 <table id="LPItbl">
                     <colgroup>
                         <col span="1" style="width: 35%;">
@@ -59,4 +59,11 @@
 </div>
 @endsection
 @section('script')
+<script type="text/javascript">
+
+    $( document ).ready(function() {
+        $('.loader').hide();
+    })
+    
+    </script>
 @endsection

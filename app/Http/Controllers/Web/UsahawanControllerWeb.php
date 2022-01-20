@@ -180,13 +180,13 @@ class UsahawanControllerWeb extends Controller
 
     public function UploadProfile(Request $request)
     {
-        $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]); 
+        // $request->validate([
+        //     'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]); 
         $imgname = $request->id.'.'.$request->file->extension();
         $request->file->move(public_path('images'), $imgname);
 
-        $usahawan = Usahawan::where('id', $request->id)->first();
+        $usahawan = Usahawan::where('usahawanid', $request->id)->first();
         $usahawan->gambar_url = '../images/'.$imgname;
         $usahawan->save();
 

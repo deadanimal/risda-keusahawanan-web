@@ -112,20 +112,52 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-    $( document ).ready(function() {
-        $('#laporlawatstaf').DataTable( {
-            searching: false,
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
+$( document ).ready(function() {
+    $('#laporlawatstaf').DataTable( {
+        searching: false,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
     });
+    $('.loader').hide();
+});
 
-    function gettabledata(type,val){
-        $('#laporlawatstaf').dataTable().fnClearTable();
-        $('#laporlawatstaf').dataTable().fnDestroy();
-
+function gettabledata(type,val){
+    $('#laporlawatstaf').dataTable().fnClearTable();
+    $('#laporlawatstaf').dataTable().fnDestroy();
+    if (type == 'negeri'){
+      var negeri = val;
+      var year = document.getElementById("iptYear").value;
+    }else if(type == 'year'){
+      var negeri = document.getElementById("iptNegeri").value;
+      var year = val;
     }
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/pantaustafnegeri/apa",
+        type:"GET",
+        data: {     
+            tahun:year,
+            negeri:negeri
+        },
+        success: function(data) {
+            
+            $("#tblname").html(data[0]);
+            $("#tblfoot").html(data[1]);
+            if(data[0] != null){
+                $('#laporlawatstaf').DataTable( {
+                    searching: false,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
+            }
+        }
+    });
+}
 </script>
 @endsection

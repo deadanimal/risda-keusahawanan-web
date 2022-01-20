@@ -17,4 +17,11 @@
   </div>
 @endsection
 @section('script')
+<script type="text/javascript">
+
+$( document ).ready(function() {
+    $('.loader').hide();
+})
+
+</script>
 @endsection

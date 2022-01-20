@@ -17,6 +17,9 @@ class PegawaiControllerWeb extends Controller
     public function index()
     {
         $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
         $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
         $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         if($authuser->role == 1){
