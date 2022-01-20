@@ -139,12 +139,7 @@
 <script type="text/javascript">
 
     $( document ).ready(function() {
-    //   const dataTableBasic = new simpleDatatables.DataTable("#pendbuldun", {
-    //     searchable: false,
-    //     fixedHeight: true,
-    //     sortable: true,
-    //     paging: false
-    //   });
+      $('.loader').hide();
     });
   
     function gettabledata(type,val){
