@@ -7,22 +7,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-use App\Models\User;
-
 class ForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $user;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct( $user)
+
+    protected $name;
+    protected $email;
+    protected $password;
+    public function __construct($data)
     {
-        //dd($user);
-        $this->user = $user;
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+        $this->password = $data['password'];
     }
 
     /**
@@ -32,10 +34,10 @@ class ForgotPassword extends Mailable
      */
     public function build()
     {
-        return $this->view('email.forgotpassword')->with([
-            'name'=>$this->user['name'],
-            'email'=>$this->user['email'],
-            'password'=>$this->user['password']
+        return $this->view('email.forgot_password')->subject('NOTIFIKASI PERMOHONAN KUPA KATA LALUAN')->with([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password
         ]);
     }
 }

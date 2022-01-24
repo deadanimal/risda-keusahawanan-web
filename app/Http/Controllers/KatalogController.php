@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Katalog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class KatalogController extends Controller
 {
@@ -100,6 +101,39 @@ class KatalogController extends Controller
         $katalog->save();
 
         return response()->json($katalog);
+
+    }
+
+
+    public function katalogPdf($id)
+    {
+
+        $katalog = Katalog::where("katalogs.id",$id)
+        ->join('users', 'users.id', 'katalogs.id_pengguna')
+        ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+        ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+        ->get()->first();
+
+        dd($katalog);
+
+        $pdf = PDF::loadView('pdf.katalog', [
+            'katalog' => $katalog
+        ])->setPaper('a4', 'landscape');
+
+        $fname = time() . '-katalog-' . $id;
+
+        \Storage::put('/katalog/' . $fname, $pdf->output());
+
+        $file = public_path() . "/storage/katalog/" . $fname;
+
+        // dd($file);
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+
+        return $pdf->download($fname . '.pdf');
+
+        // return response()->json("katalog/".$fname);
 
     }
 }
