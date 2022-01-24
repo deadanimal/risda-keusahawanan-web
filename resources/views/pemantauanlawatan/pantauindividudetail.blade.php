@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;padding-top:3vh;">LAPORAN LAWATAN PEMANTAUAN INDIVIDU BAGI TAHUN 
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
-                    <option value="">Tahun</option>
+                    {{-- <option value="">Tahun</option> --}}
                     <?php
                     $curryear = date("Y");
                     $fromyear = date("Y") - 10;
@@ -49,6 +49,7 @@
                         }
                     </style>
                     <tbody id="tblname">
+                        <input style="display: none;" id="userid" value="{{$usahawan->usahawanid}}" />
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap" >Nama Usahawan</td>
                             <td class="text-nowrap" >: &nbsp {{$usahawan->namausahawan}}</td>
@@ -87,15 +88,12 @@
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap" >Pegawai Lawatan</td>
-                            <td class="text-nowrap" >: &nbsp {{$usahawan->pegawai_lawatan}}</td>
+                            <td class="text-nowrap" >: &nbsp {{$usahawan->pegawai}}</td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap" >Gambar Lawatan</td>
                             <td class="text-nowrap" style="padding-top: 20px;">:
-                                <div style="margin-left:12px;margin-top:10px;display:inline-block;border: 1px solid black;height:200px;width:200px;">Test</div>
-                                <div style="margin-left:12px;display:inline-block;border: 1px solid black;height:200px;width:200px;">Test</div><br>
-                                <div style="margin-left:20px;margin-top:10px;display:inline-block;border: 1px solid black;height:200px;width:200px;">Test</div>
-                                <div style="margin-left:12px;display:inline-block;border: 1px solid black;height:200px;width:200px;">Test</div>
+                                <div style="margin-left:12px;margin-top:10px;display:inline-block;border: 1px solid black;"><img style="height:200px;width:200px;" src="{{$usahawan->gambar_lawatan}}"/></div>
                             </td>
                         </tr>
                         <tr>
@@ -105,6 +103,7 @@
                         </tr>
                         <tr>
                             <td class="text-nowrap" colspan="2" style="border: 1px solid black;padding:25px 15px">
+                                {{$usahawan->tindakan}}
                             </td>
                         </tr>
                         <tr>
@@ -114,6 +113,7 @@
                         </tr>
                         <tr>
                             <td class="text-nowrap" colspan="2" style="border: 1px solid black;padding:25px 15px">
+                                {{$usahawan->komen}}
                             </td>
                         </tr>
                     </tbody>
@@ -130,5 +130,28 @@
         $('.loader').hide();
     })
     
+    function gettabledata(type,val){
+        $('.loader').show();
+        
+        var year = document.getElementById("iptYear").value;
+        var usahawanid = document.getElementById("userid").value;
+        console.log(usahawanid);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('pantauinddtl.get') }}",
+            type:"GET",
+            data: {     
+                tahun:year,
+                usahawanid:usahawanid
+            },
+            success: function(data) {
+                console.log(data);
+                $("#tblname").html(data);
+                $('.loader').hide();
+            }
+        });
+    }
 </script>
 @endsection

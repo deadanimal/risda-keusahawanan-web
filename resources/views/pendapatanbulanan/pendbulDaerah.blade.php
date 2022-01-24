@@ -138,7 +138,7 @@
 <script type="text/javascript">
 
     $( document ).ready(function() {
-      $('.loader').hide();
+        $('.loader').hide();
     });
 
     function gettabledata(type,val){

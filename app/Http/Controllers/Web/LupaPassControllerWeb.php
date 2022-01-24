@@ -11,38 +11,47 @@ use App\Mail\ForgotPassword;
 use App\Models\User;
 use App\Models\Pegawai;
 
-class ChangePassControllerWeb extends Controller
+class LupaPassControllerWeb extends Controller
 {
     public function index()
     {
-        $authuser = Auth::user();
-        if(!isset($authuser)){
-            return redirect('/landing');
-        }
-        return view('ChangePass');
+        // $authuser = Auth::user();
+        // if(!isset($authuser)){
+        //     return redirect('/landing');
+        // }
+        return view('LupaPass');
     }
 
     public function store(Request $request)
     {
-        $authuser = Auth::user();
-        if(!isset($authuser)){
-            return redirect('/landing');
-        }
+        // $authuser = Auth::user();
+        // if(!isset($authuser)){
+        //     return redirect('/landing');
+        // }
         $request->validate([
             'email' => ['required'],
             'current_password' => ['required'],
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);
-        $check = Hash::check($request->current_password, auth()->user()->password);
+        $user = User::where('email', $request->email)->first();
+        if(!isset($user)){
+            echo '<script language="javascript">';
+            echo 'alert("Email Tiada Dalam Pengkalan Data");';
+            echo "window.location.href = '/LupaPass';";
+            echo '</script>';
+        }
+        $check = Hash::check($request->current_password, $user->password);
+        
         if($check == false){
             echo '<script language="javascript">';
             echo 'alert("Kata Laluan Lama Tidak Tepat");';
-            echo "window.location.href = '/ChangePass';";
+            echo "window.location.href = '/LupaPass';";
             echo '</script>';
         }else{
+            
             $pass = Hash::make($request->new_password);
-            $user = User::where('id', $authuser->id)->first();
+            
             $pegawai = Pegawai::where('id', $user->idpegawai)->first();
 
             $user->email = $request->email;
@@ -53,17 +62,19 @@ class ChangePassControllerWeb extends Controller
             $pegawai->email = $request->email;
             $pegawai->save();
 
+            $maildata = [
+                'name' => $user->name,
+                'email' => $request->email,
+                'password' => $request->new_password
+            ];
+            Mail::to($request->email)->send(new \App\Mail\ForgotPassword($maildata));
+
             echo '<script language="javascript">';
             echo 'alert("Kemaskini Akaun Berjaya");';
             echo "window.location.href = '/landing';";
             echo '</script>';
 
-            // $maildata = [
-            //     'name' => $user->name,
-            //     'email' => $user->email,
-            //     'password' => $defpassword
-            // ];
-            // Mail::to($request->email)->send(new \App\Mail\ForgotPassword($maildata));
+            
         }
     }
 

@@ -9,7 +9,7 @@ use App\Models\KategoriAliran;
 
 class LaporanAliranTunaiDetailControllerWeb extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $authuser = Auth::user();
         if(!isset($authuser)){
@@ -17,6 +17,7 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
         }
         $getYear = date("Y");
         $reports = Report::where('type', 11)
+        ->where('tab20', $authuser->id)
         ->whereIn('tab2', [$getYear,1000])
         ->orderBy('tab8', 'ASC')
         ->orderBy('tab2', 'ASC')
@@ -147,6 +148,9 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
                     <td class="text-nowrap">'.$report->total.'</td>
                 </tr>';
             }
+            if($report->tab8 == 3 && $count != 4){
+                $count = 3;
+            }
             if($report->tab8 == 3 && $count == 3){
                 $result .= '<tr class="align-middle" style="text-align: left;">
                     <td></td>
@@ -157,10 +161,8 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
                     <td></td>
                 </tr>';
             }
-            if($report->tab8 == 3 && $count != 4){
-                $count = 3;
-            }
             if($report->tab8 == 3 && $count == 3){
+                // return $report->tab8;
                 $count = 4;
                 $result .='<tr class="align-middle" style="text-align: left;">
                     <td></td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Usahawan;
@@ -13,6 +14,10 @@ class AuditTrailControllerWeb extends Controller
 {
     public function index()
     {
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
         $Audits = AuditTrail::orderBy('Date', 'DESC')->get();
         foreach ($Audits as $Audit) {
             $Audit->user = $Audit->idpegawai;

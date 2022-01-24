@@ -95,8 +95,7 @@ class UserSeeder extends Seeder
             'no_kp'=>'700510000000',
             'status_pengguna'=>'1',
             'role'=>'1',
-            'type'=>'1',
-            'email_verified_at'=>'2021-12-30 06:02:00'
+            'type'=>'1'
         ]);
     }
 }

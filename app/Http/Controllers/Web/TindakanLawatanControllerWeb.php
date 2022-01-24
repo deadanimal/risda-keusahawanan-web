@@ -11,6 +11,10 @@ class TindakanLawatanControllerWeb extends Controller
 {
     public function index()
     {
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
         $tindakanlawatan = TindakanLawatan::All();
         return view('komponendash.tindakanlawatan'
         ,[

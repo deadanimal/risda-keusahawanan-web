@@ -32,6 +32,7 @@ use App\Http\Controllers\Web\LAT\PenyataUntungRugiControllerWeb;
 use App\Http\Controllers\Web\LAT\PenyataUntungRugiDetailControllerWeb;
 use App\Http\Controllers\Web\DashControllerWeb;
 use App\Http\Controllers\Web\ChangePassControllerWeb;
+use App\Http\Controllers\Web\LupaPassControllerWeb;
 use App\Http\Controllers\PDFController;
 
 /*
@@ -90,6 +91,7 @@ Route::resource('/pantauDaerah', PLDaerahControllerWeb::class);
 Route::resource('/pantaustafnegeri', PLStafNegeriControllerWeb::class);
 Route::resource('/pantauindividu', PLIndividuControllerWeb::class);
 Route::resource('/pantauindividudetail', PLIndividuControllerWeb::class);
+Route::get('pantauinddtl', [PLIndividuControllerWeb::class, 'pantauinddtl'])->name('pantauinddtl.get');
 
 Route::resource('/laporanalirantunai', LaporanAliranTunaiControllerWeb::class);
 Route::resource('/laporanalirantunaiDetail', LaporanAliranTunaiDetailControllerWeb::class);
@@ -101,6 +103,7 @@ Route::resource('/penyatauntungrugiDetail', PenyataUntungRugiDetailControllerWeb
 Route::resource('/dash', DashControllerWeb::class);
 
 Route::resource('/ChangePass', ChangePassControllerWeb::class);
+Route::resource('/LupaPass', LupaPassControllerWeb::class);
 
 Route::post('generatereport', [LaporanProfilControllerWeb::class, 'generatereport'])->name('generatereport');
 

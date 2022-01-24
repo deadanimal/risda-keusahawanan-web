@@ -35,7 +35,7 @@
                       <div class="mb-3">
                         <div class="d-flex justify-content-between">
                           <label class="form-label" for="split-login-password" :value="__('Password')">Kata Laluan</label>
-                          {{-- <a class="fs--1" href="../../../pages/authentication/split/forgot-password.html ">Lupa Kata Laluan?</a> --}}
+                          <a class="fs--1" href="/LupaPass">Lupa Kata Laluan?</a>
                         </div>
                         <input class="form-control" id="split-login-password" type="password" name="password" autocomplete="current-password" required/>
                       </div>

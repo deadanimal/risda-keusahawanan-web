@@ -57,7 +57,7 @@
                             <td class="text-nowrap textlbl">{{$user->negeri}}</td>
                             <td class="text-nowrap textlbl">{{$user->PusatTang}}</td>
                             <td class="text-nowrap" style="text-align: center;">
-                                <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="generatereport(12,'/laporanlejarDetail?id={{$user->id}}',{{$user->id}});return false;">
+                                <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="generatereport(12,'/laporanlejarDetail',{{$user->id}});return false;">
                                 <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Lejar
                             </button></td>
                         </tr>

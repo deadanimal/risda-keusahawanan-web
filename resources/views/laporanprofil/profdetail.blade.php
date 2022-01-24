@@ -91,13 +91,13 @@
             <label class="form-label">Alamat Medium Pemasaran (Media Sosial)</label> : <label class="form-label">{{$user->AlamatMediumPemasaran}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">Jenis Bantuan (Program Tahun Semasa)</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">Jenis Bantuan (Program Tahun Semasa)</label> : <label class="form-label">{{$user->jnsbantuansemasa}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">Kelulusan Bantuan Tahun Semasa (RM)</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">Kelulusan Bantuan Tahun Semasa (RM)</label> : <label class="form-label">{{$user->kelulusanbantuansemasa}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">Tahun Terima Bantuan Tahun Semasa</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">Tahun Terima Bantuan Tahun Semasa</label> : <label class="form-label">{{$user->thnbantuansemasa}}</label>
         </div>
         <div class="col-lg-12">
             <label class="form-label">JUMLAH JUALAN BULANAN  (RM)  - TAHUN 2021</label>

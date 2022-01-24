@@ -279,7 +279,7 @@
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Laporan Lejar</span>
                         </div></a>
                       </li>
-                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('penyatauntungrugi.*') || request()->routeIs('penyatauntungrugiDetail.*') ? 'active' : '' }}" href="/penyatauntungrugi">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('penyatauntungrugi.*') || request()->routeIs('penyatauntungrugiDetail.*') ? 'active' : '' }}" onclick="generatereport(13,this.href,'');return false;" href="/penyatauntungrugi">
                         {{-- onclick="generatereport(13,this.href);return false;" --}}
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Penyata Untung Rugi</span>
                         </div></a>
@@ -431,9 +431,9 @@
                     <a class="dropdown-item" href="#!">Feedback</a>
 
                     <div class="dropdown-divider"></div>--}}
-                    <a class="dropdown-item" href="/ChangePass">Change Password</a> 
+                    <a class="dropdown-item" href="/ChangePass">Lengkapkan Pendaftaran</a> 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">Logout</a>
+                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">Log Keluar</a>
                     <form id="frm-logout" action="logout" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -462,6 +462,7 @@
   });
 
   function generatereport(type,nextPage,userid){
+    
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -473,6 +474,7 @@
           id:userid
         },
         success: function(data) {
+          // console.log(data);
           alert(data);
           location.href = nextPage;
           return true;

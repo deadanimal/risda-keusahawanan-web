@@ -1,0 +1,365 @@
+@extends('dashboard')
+@section('content')
+<div class="card">
+    <div class="card-body overflow-hidden p-lg-6">
+        <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/penyatauntungrugi"> 
+        <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
+        <div class="row align-items-center" id="contentbody" style="padding-top:15px;">
+            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">PENYATA UNTUNG RUGI BAGI BULAN
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('month',this.value)" id="iptBulan">
+                    <option value="">Bulan</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                  <br>DAN TAHUN
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
+                    {{-- <option value="">Tahun</option> --}}
+                    <?php
+                    $curryear = date("Y");
+                    $fromyear = date("Y") - 10;
+                    for ($year = $curryear; $year >= $fromyear; $year--) {
+                        $selected = (isset($getYear) && $getYear == $year) ? 'selected' : '';
+                        echo "<option value=$year $selected>$year</option>";
+                    }
+                    ?>
+                  </select>
+            </h4>
+            <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+                <table id="pnldetail" class="table table-sm table-bordered table-hover">
+                    <colgroup>
+                        <col span="1" style="width:55%;">
+                        <col span="1" style="width:15%;">
+                        <col span="1" style="width:15%;">
+                        <col span="1" style="width:15%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>RM</th>
+                            <th>RM</th>
+                            <th>RM</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblname">
+                        <tr class="align-middle" style="text-align: left;">
+                            <td>HASIL JUALAN / PEROLEHAN (SALES)</td>
+                            <td class="text-nowrap"></td> 
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Jualan/ Perolehan</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum1}}</td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Deposit Jualan</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum2}}</td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Pulangan Jualan</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum3}}</td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Jualan Bersih</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum4}}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 20px;"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">KOS LANGSUNG / KOS JUALAN (COGS)</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Stok Awal</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum5}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Deposit Belian </td>
+                            <td class="text-nowrap">{{$val->jum6}}</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Belian</td>
+                            <td class="text-nowrap">{{$val->jum7}}</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Belian Bersih</td>
+                            <td class="text-nowrap">{{$val->jum8}}</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Pulangan Belian</td>
+                            <td class="text-nowrap">{{$val->jum9}}</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Kos Belian</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum10}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Kos Barang Sedia Dijual</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum11}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Stok Akhir</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum12}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Kos Jualan</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum13}}</td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">UNTUNG / RUGI KASAR</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum14}}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 20px;"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">PERBELANJAAN PENTADBIRAN DAN OPERASI (OPEX)</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Kos Pengeposan</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum15}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Kos Alat Tulis</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum16}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Bayaran Sewa</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum17}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Upah/ Gaji Pekerja</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum18}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Upah/ Gaji Sendiri</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum19}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">KWSP/ SOCSO</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum20}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Bayaran Bil (Utiliti)</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum21}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Petrol/ Tol/ Parking</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum22}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Penyelenggaraan</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum23}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Belian Aset</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum24}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Bayaran Komisen</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum25}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Cukai/ Zakat</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum26}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Bayaran Lain</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum27}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">JUMLAH PERBELANJAAN PENTADBIRAN DAN OPERASI</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum28}}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 20px;"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">HASIL - HASIL LAIN</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Hasil Komisen</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum29}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Hasil Dividen</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum30}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Hasil Sewaan</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum31}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">Hasil Lain</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum32}}</td>
+                            <td class="text-nowrap"></td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">JUMLAH HASIL -HASIL LAIN</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum33}}</td>
+                        </tr>
+                        <tr class="align-middle" style="text-align: left;">
+                            <td class="text-nowrap">UNTUNG / RUGI BERSIH</td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap"></td>
+                            <td class="text-nowrap">{{$val->jum34}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+@section('script')
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('#pnldetail').DataTable( {
+            searching: false,
+            sorting:false,
+            paging:false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+        $('.loader').hide();
+    });
+
+    function gettabledata(type,val){
+        $('.loader').show();
+        $('#pnldetail').dataTable().fnClearTable();
+        $('#pnldetail').dataTable().fnDestroy();
+        if (type == 'month'){
+            var bulan = val;
+            var year = document.getElementById("iptYear").value;
+        }else if(type == 'year'){
+            var bulan = document.getElementById("iptBulan").value;
+            var year = val;
+        }
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/penyatauntungrugiDetail/apa",
+            type:"GET",
+            data: {     
+                tahun:year,
+                bulan:bulan
+            },
+            success: function(data) {
+                console.log(data);
+                $("#tblname").html(data);
+                // $("#tblfoot").html(data[1]);
+                if(data[0] != null){
+                    $('#pnldetail').DataTable( {
+                        searching: false,
+                        sorting:false,
+                        paging:false,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                }
+                $('.loader').hide();
+            }
+        });
+    }
+</script>
+@endsection

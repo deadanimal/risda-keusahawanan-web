@@ -1,12 +1,12 @@
-@extends('dashboard')
-@section('content')
+{{-- @extends('dashboard') --}}
+{{-- @section('content') --}}
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6" style="text-align: center;">
         <div class="mb-3" style="width: 400px;margin:0 auto;">
             @foreach($errors->all() as $error)
                     <li>{{$error}}</li>
                 @endforeach
-            <form method="POST" action="/ChangePass" enctype="multipart/form-data">
+            <form method="POST" action="/LupaPass" enctype="multipart/form-data">
                 @csrf
                 @method("POST")
                 <div class="d-flex justify-content-between">
@@ -32,7 +32,7 @@
         </div>
     </div>
 </div>
-@endsection
+{{-- @endsection --}}
 @section('script')
 <script type="text/javascript">
 

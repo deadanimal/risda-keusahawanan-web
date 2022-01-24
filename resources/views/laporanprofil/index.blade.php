@@ -5,11 +5,139 @@
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Laporan Profil Usahawan</h3>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                {{-- <div style="padding-bottom:10px;">
-                    <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
-                    <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
-                </div> --}}
-                <table id="insentiftbl">
+                <table id="lapprofall">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" >NO</th>
+                            <th rowspan="2">NEGERI</th>
+                            <th rowspan="2">PT RISDA</th>
+                            <th rowspan="2">NAMA PEMOHON</th>
+                            <th rowspan="2">NO K/P</th>
+                            <th rowspan="2">UMUR</th>
+                            <th rowspan="2">JANTINA</th>
+                            <th rowspan="2">TARAF PENDIDIKAN</th>
+                            <th rowspan="2">ALAMAT</th>
+                            <th rowspan="2">POSKOD</th>
+                            <th rowspan="2">DAERAH</th>
+                            <th rowspan="2">NEGERI</th>
+                            <th rowspan="2">DUN</th>
+                            <th rowspan="2">PARLIMEN</th>
+                            <th rowspan="2">NO TEL</th>
+                            <th rowspan="2">NO SIC/ NO T/S (PEKEBUN KECIL)</th>
+                            <th rowspan="2">NO K/P (PEKEBUN KECIL)</th>
+                            <th rowspan="2">KATEGORI PEMOHON</th>
+                            <th rowspan="2">JENIS PERNIAGAAN</th>
+                            <th rowspan="2">KLUSTER PROJEK</th>
+                            <th rowspan="2">SUB KLUSTER (PRODUK/ PERKHIDMATAN)</th>
+                            <th rowspan="2">MEDIUM PEMASARAN (MEDIA SOSIAL)</th>
+                            <th rowspan="2">ALAMAT MEDIUM (MEDIA SOSIAL)</th>
+                            <th rowspan="2">JENIS BANTUAN (PROGRAM THN SEMASA)</th>
+                            <th rowspan="2">KELULUSAN BANTUAN THN SEMASA (RM)</th>
+                            <th rowspan="2">TAHUN TERIMA BANTUAN THN SEMASA</th>
+                            <th colspan="12">JUMLAH JUALAN BULANAN  (RM)  - TAHUN 2021</th>
+                            <th rowspan="2">JUMLAH JUALAN (RM)</th>
+                            <th rowspan="2">PURATA JUALAN BULANAN (RM)</th>
+                            <th rowspan="2">PENCAPAIAN SASARAN RM 2500/BLN</th>
+                            <th rowspan="2">KATEGORI USAHAWAN</th>
+                            <th rowspan="2">NAMA SYSRIKAT</th>
+                            <th rowspan="2">JENIS MILIKAN SYARIKAT</th>
+                            <th rowspan="2">NO. DAFTAR SYARIKAT (SSM)</th>
+                            <th rowspan="2">ALAMAT SYARIKAT/ PERNIAGAAN</th>
+                            <th colspan="2">KOORDINAT PREMIS PERNIAGAAN</th>
+                            <th rowspan="2">E-MAIL</th>
+                            <th rowspan="2">STATUS PERNIAGAAN (AKTIF / TIDAK AKTIF)</th>
+                            <th rowspan="2">LAIN-LAIN BANTUAN RISDA TAHUN SEBELUM</th>
+                            <th rowspan="2">LATIHAN/KURSUS RISDA TELAH DIHADIRI</th>
+                            <th rowspan="2">DAFTAR JENAMA PRODUK</th>
+                            <th rowspan="2">NO SIJIL HALAL JAKIM</th>
+                        </tr>
+                        <tr>
+                            <th>JAN</th>
+                            <th>FEB</th>
+                            <th>MAC</th>
+                            <th>APR</th>
+                            <th>MEI</th>
+                            <th>JUN</th>
+                            <th>JUL</th>
+                            <th>AUG</th>
+                            <th>SEP</th>
+                            <th>OKT</th>
+                            <th>NOV</th>
+                            <th>DIS</th>
+                            <th>LATITUD</th>
+                            <th>LONGITUD</th>
+                            <th>JENIS BANTUAN</th>
+                            <th>KELULUSAN BANTUAN (RM)</th>
+                            <th>TAHUN TERIMA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $num=1; ?>
+                        @foreach ($users as $user)
+                        <tr>
+                            <td><?php echo $num++;?></td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->PusatTang}}</td>
+                            <td>{{$user->namausahawan}}</td>
+                            <td>{{$user->nokadpengenalan}}</td>
+                            <td>{{$user->umur}}</td>
+                            <td>{{$user->jantina}}</td>
+                            <td>{{$user->taraf_pendidikan}}</td>
+                            <td>@if($user->alamat1 != ""){{$user->alamat1}}, &nbsp;@endif @if($user->alamat2 != ""){{$user->alamat2}}, &nbsp;@endif {{$user->alamat3}}</td>
+                            <td>{{$user->poskod}}</td>
+                            <td>{{$user->daerah}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->dun}}</td>
+                            <td>{{$user->parlimen}}</td>
+                            <td>@if($user->notelefon != "") {{$user->notelefon}} @endif {{$user->nohp}}</td>
+                            <td>{{$user->PKnoTS}}</td>
+                            <td>{{$user->PKnoKP}}</td>
+                            <td>{{$user->status_daftar_usahawan}}</td>
+                            <td>{{$user->JenisPerniagaan}}</td>
+                            <td>{{$user->KlusterPerniagaan}}</td>
+                            <td>{{$user->SubKlusterPerniagaan}}</td>
+                            <td>{{$user->MediumPemasaran}}</td>
+                            <td>{{$user->AlamatMediumPemasaran}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->negeri}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <div style="padding-top: 10px;"> </div>
+                <table id="insentiftbl" >
                     <colgroup>
                         <col span="1" style="width: 40%;">
                         <col span="1" style="width: 15%;">
@@ -68,6 +196,7 @@
         </div>
     </div>
 </div>
+{{-- style="display:none;" --}}
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -77,12 +206,22 @@
             "paging":   true,
             "bFilter": true,
         });
+        $('#lapprofall').DataTable( {
+            searching: false,
+            sorting:false,
+            paging:false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel'
+            ]
+        });
+        $('#lapprofall').hide();
+        $('#lapprofall_info').hide();
+        
         $('.loader').hide();
     });
 
-    function ExportExcel(){
-        window.location.href = "/ExcelLapProfil";
-    }
+    
     
 </script>
 @endsection
