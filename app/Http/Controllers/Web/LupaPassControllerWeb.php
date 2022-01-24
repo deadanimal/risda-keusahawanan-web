@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ForgotPassword;
+use App\Mail\LupaPassword;
 
 use App\Models\User;
 use App\Models\Pegawai;
@@ -67,7 +67,7 @@ class LupaPassControllerWeb extends Controller
                 'email' => $request->email,
                 'password' => $request->new_password
             ];
-            Mail::to($request->email)->send(new \App\Mail\ForgotPassword($maildata));
+            Mail::to($request->email)->send(new \App\Mail\LupaPassword($maildata));
 
             echo '<script language="javascript">';
             echo 'alert("Kemaskini Akaun Berjaya");';

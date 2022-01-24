@@ -217,6 +217,8 @@ class LaporanProfilControllerWeb extends Controller
             $users->thnbantuansemasa = $insentif->tahun_terima_insentif;
         }
 
+        $aliran = Aliran::where('id_pengguna', $users->id);
+
         return view('laporanprofil.profdetail'
         ,[
             'user'=>$users
