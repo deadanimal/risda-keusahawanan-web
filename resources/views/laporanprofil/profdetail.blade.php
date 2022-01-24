@@ -119,55 +119,57 @@
                     <td>Dis</td>
                 </tr>
                 <tr>
-                    <td>100</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{$user->aliran1}}</td>
+                    <td>{{$user->aliran2}}</td>
+                    <td>{{$user->aliran3}}</td>
+                    <td>{{$user->aliran4}}</td>
+                    <td>{{$user->aliran5}}</td>
+                    <td>{{$user->aliran6}}</td>
+                    <td>{{$user->aliran7}}</td>
+                    <td>{{$user->aliran8}}</td>
+                    <td>{{$user->aliran9}}</td>
+                    <td>{{$user->aliran10}}</td>
+                    <td>{{$user->aliran11}}</td>
+                    <td>{{$user->aliran12}}</td>
                 </tr>
             </table>
         </div>
 
         <div class="col-lg-5">
-            <label class="form-label">Jumlah Jualan (RM)</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">Jumlah Jualan (RM)</label> : <label class="form-label">{{$user->jumaliran}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">Purata Jualan Bulanan (RM)</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">Purata Jualan Bulanan (RM)</label> : <label class="form-label">{{$user->purataaliran}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">Pencapaian Sasaran RM 2500/BLN</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">Pencapaian Sasaran RM 2500/BLN</label> : <label class="form-label">{{$user->capaisasaran}}</label>
         </div>
         <div class="col-lg-5">
             <label class="form-label">Kategori Usahawan</label> : <label class="form-label">{{$user->KateUsahawan}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">Nama Syarikat</label> : <label class="form-label">{{$user->syarikat}}</label>
+            <label class="form-label">Nama Syarikat</label> : <label class="form-label">{{$user->namasyarikat}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">Jenis Milikan Syarikat</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">Jenis Milikan Syarikat</label> : <label class="form-label">{{$user->jenismilikan}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">No. Daftar Syarikat (SSM)</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">No. Daftar Syarikat (SSM)</label> : <label class="form-label">{{$user->nodaftarssm}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">Alamat Syarikat/Perniagaan</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">Alamat Syarikat/Perniagaan</label> : <label class="form-label">{{$user->alamatsyarikat}}</label>
         </div>
         <div class="col-lg-12">
             <label class="form-label">Koordinat Premis Perniagaan</label>
-            <label class="form-label">Latitud</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
-            <label class="form-label">Longitud</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">Latitud</label> : <label class="form-label">{{$user->latitud}}</label>
+            <label class="form-label">Longitud</label> : <label class="form-label">{{$user->logitud}}</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">E-Mail</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">E-Mail</label> : <label class="form-label">{{$user->emailsyarikat}}</label>
         </div>
-        <div class="col-lg-5">
-            <label class="form-label">Status Perniagaan (Aktif / TIdak Aktif)</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
-        </div>
+        {{-- <div class="col-lg-5">
+            <label class="form-label">Status Perniagaan (Aktif / TIdak Aktif)</label> : <label class="form-label">None</label>
+        </div> --}}
         <div class="col-lg-12">
             <label class="form-label">Lain - Lain Bantuan RISDA Tahun Sebelum</label>
         </div>
@@ -179,20 +181,22 @@
                     <td>Tahun Terima</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td></td>
-                    <td></td>
+                    @foreach ($insentif2 as $insentif2s)
+                    <td>{{$insentif2s->namainsen}}</td>
+                    <td>{{$insentif2s->nilai_insentif}}</td>
+                    <td>{{$insentif2s->tahun_terima_insentif}}</td>
+                    @endforeach
                 </tr>
             </table>
         </div>
-        <div class="col-lg-5">
-            <label class="form-label">Latihan/Kursus RISDA Telah Dihadiri</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+        {{-- <div class="col-lg-5">
+            <label class="form-label">Latihan/Kursus RISDA Telah Dihadiri</label> : <label class="form-label">None</label>
         </div>
         <div class="col-lg-5">
-            <label class="form-label">Daftar Jenama Produk </label><span> (Jika Menerima Bantuan Pembungkusan & Pelabelan RISDA)</span> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
-        </div>
+            <label class="form-label">Daftar Jenama Produk </label><span> (Jika Menerima Bantuan Pembungkusan & Pelabelan RISDA)</span> : <label class="form-label">None</label>
+        </div> --}}
         <div class="col-lg-5">
-            <label class="form-label">No Sijil HALAL JAKIM</label> : <label class="form-label">{{$user->U_Jantina_ID}}</label>
+            <label class="form-label">No Sijil HALAL JAKIM</label> : <label class="form-label">{{$user->nodaftarpersijilanhalal}}</label>
         </div>
     </div>
 </div>

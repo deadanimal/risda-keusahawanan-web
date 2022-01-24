@@ -101,9 +101,12 @@ class PendBulDunControllerWeb extends Controller
         }
         
         $result = "";
+        $tfoot ="";
         $num=1;
         $c_penerima = 0;
         $c_insentif = 0;
+        $c_jualan = 0;
+        $c_puratajual = 0;
         foreach ($reports as $report) {
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
             $report->negeri = $negeri->Negeri;
@@ -115,6 +118,9 @@ class PendBulDunControllerWeb extends Controller
             $report->parlimen = $parlimen->Parlimen;
             $c_penerima = $c_penerima + $report->tab4;
             $c_insentif = $c_insentif + $report->tab5;
+            $report->tab7 = $report->tab6 / $report->tab4;
+            $c_jualan = $c_jualan + $report->tab6; 
+            $c_puratajual = $c_puratajual + $report->tab7; 
 
             $result .= 
             '<tr class="align-middle" style="text-align: center;">
@@ -125,17 +131,21 @@ class PendBulDunControllerWeb extends Controller
                 <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</label></td>
                 <td class="text-nowrap"><label class="form-check-label">'.$report->tab4.'</label></td>
                 <td class="text-nowrap"><label class="form-check-label">'.$report->tab5.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab6.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab7.'</label></td>
             </tr>';
         }
-        $result .=
+        $tfoot .=
         '<tr class="align-middle" style="text-align: center;">
             <td colspan="5" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_penerima.'</label></td>
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_insentif.'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_jualan.'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.$c_puratajual.'</label></td>
         </tr>
         ';  
         
-        return $result;
+        return [$result,$tfoot,$c_insentif,$c_jualan];
     }
 
     public function export3($tahun, $jenis)

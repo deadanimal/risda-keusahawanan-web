@@ -126,10 +126,10 @@
                                 <tr class="align-middle" style="text-align: center;">
                                     <td></td>
                                     <td class="text-nowrap" style="text-align: left;">C) JUMLAH ALIRAN MASUK (RM)</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td class="text-nowrap">{{$total->satu}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>
                             @endif
                             @if ($report->tab8 == 3 && $count != 4)
@@ -161,19 +161,19 @@
                         <tr class="align-middle" style="text-align: center;">
                             <td></td>
                             <td class="text-nowrap" style="text-align: left;">G) JUMLAH ALIRAN KELUAR</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td class="text-nowrap">{{$total->dua}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         @endif
                         <tr class="align-middle" style="text-align: center;">
                             <td></td>
                             <td class="text-nowrap" style="text-align: left;">JUMLAH BAKI/SIMPANAN</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td class="text-nowrap">{{$total->tiga}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                     </tbody>
                 </table>

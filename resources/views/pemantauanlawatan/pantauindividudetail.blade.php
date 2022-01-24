@@ -19,7 +19,10 @@
                 </select>
             </h3>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <table id="laporaninsentif" class="table table-sm table-hover" style="border:none;border-collapse: collapse;">
+                <div style="padding-bottom: 20px;">
+                    <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
+                </div>
+                <table id="laporanpantauind" class="table table-sm table-hover" style="border:none;border-collapse: collapse;">
                     <colgroup>
                         <col span="1" style="width:30%;border:none;">
                         <col span="1" style="width:70%;">
@@ -48,6 +51,12 @@
                             border: none;
                         }
                     </style>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
                     <tbody id="tblname">
                         <input style="display: none;" id="userid" value="{{$usahawan->usahawanid}}" />
                         <tr class="align-middle" style="text-align: left;">
@@ -93,28 +102,46 @@
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap" >Gambar Lawatan</td>
                             <td class="text-nowrap" style="padding-top: 20px;">:
-                                <div style="margin-left:12px;margin-top:10px;display:inline-block;border: 1px solid black;"><img style="height:200px;width:200px;" src="{{$usahawan->gambar_lawatan}}"/></div>
+                                <div style="display: none;">
+                                    &nbsp;<br>
+                                    &nbsp;<br>
+                                    &nbsp;<br>
+                                    &nbsp;<br>
+                                    &nbsp;<br>
+                                    &nbsp;<br>
+                                    &nbsp;<br>
+                                    &nbsp;<br>
+                                </div>
+                                    <img id="gambau" style="height:200px;width:200px;" src="{{$usahawan->gambar_lawatan}}"/>
+                                
                             </td>
                         </tr>
                         <tr>
                             <td class="text-nowrap" colspan="2" style="padding-top: 20px;">
                                 Tindakan yang perlu dilaksanakan oleh usahawan
                             </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td class="text-nowrap" colspan="2" style="border: 1px solid black;padding:25px 15px">
                                 {{$usahawan->tindakan}}
                             </td>
+                            <td></td>
+                            
                         </tr>
                         <tr>
                             <td class="text-nowrap" colspan="2" style="padding-top: 20px;">
                                 Catatan/Komen Keseluruhan
                             </td>
+                            <td></td>
+
                         </tr>
                         <tr>
                             <td class="text-nowrap" colspan="2" style="border: 1px solid black;padding:25px 15px">
                                 {{$usahawan->komen}}
                             </td>
+                            <td></td>
+
                         </tr>
                     </tbody>
                 </table>
@@ -127,6 +154,18 @@
 <script type="text/javascript">
 
     $( document ).ready(function() {
+        $('#laporanpantauind').DataTable( {
+            searching: false,
+            sorting:false,
+            paging:false,
+            dom: 'Bfrtip',
+            exportOptions: {
+                stripHtml: false,
+            },
+            buttons: [
+                'copy', 'csv', 'excel'
+            ]
+        });
         $('.loader').hide();
     })
     
@@ -152,6 +191,16 @@
                 $('.loader').hide();
             }
         });
+    }
+
+    function ExportPDF(){
+        
+        var doc = new jsPDF("p", "mm", "a4")
+        doc.autoTable({ html: '#laporanpantauind' })
+        var myImage = document.getElementById("gambau").src; 
+        doc.addImage(myImage, 'JPEG', 80, 100, 60, 35);
+        doc.save('PemantauanLawatanIndividu.pdf')
+    
     }
 </script>
 @endsection

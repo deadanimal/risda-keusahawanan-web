@@ -132,9 +132,11 @@
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
         });
+        $('.loader').hide();
     });
 
     function gettabledata(type,val){
+        $('.loader').show();
         $('#laporaninsentifjantina').dataTable().fnClearTable();
         $('#laporaninsentifjantina').dataTable().fnDestroy();
         if (type == 'year'){
@@ -167,6 +169,7 @@
                         ]
                     });
                 }
+                $('.loader').hide();
             }
         });
     }

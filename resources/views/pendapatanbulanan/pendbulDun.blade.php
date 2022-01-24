@@ -35,7 +35,7 @@
                   <div class="card-body d-flex flex-column justify-content-end">
                     <div class="row">
                       <div class="col">
-                        <p class="font-sans-serif lh-1 mb-1 fs-4">RM{{$c_insentif}}</p>
+                        <p class="font-sans-serif lh-1 mb-1 fs-4" id="c_insentif">RM{{$c_insentif}}</p>
                       </div>
                     </div>
                   </div>
@@ -51,17 +51,17 @@
                   <div class="card-body d-flex flex-column justify-content-end">
                     <div class="row">
                       <div class="col">
-                        <p class="font-sans-serif lh-1 mb-1 fs-4">RM{{$c_jualan}}</p>
+                        <p class="font-sans-serif lh-1 mb-1 fs-4" id="c_jualan">RM{{$c_jualan}}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
                 <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                    <div style="padding-bottom: 20px;">
+                    {{-- <div style="padding-bottom: 20px;">
                         <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
                         <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
-                    </div>
+                    </div> --}}
                     <table id="pendbuldun" class="table table-sm table-bordered table-hover">
                         <colgroup>
                             <col span="1" style="width: 10%;">
@@ -121,6 +121,8 @@
                                 <td class="text-nowrap"><label class="form-check-label">{{$report->tab7}}</label></td>
                             </tr>
                             @endforeach
+                          </tbody>
+                          <tfoot id="tblfoot">
                             <tr class="align-middle" style="text-align: center;">
                                 <td colspan="5" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
                                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_penerima}}</label></td>
@@ -128,7 +130,7 @@
                                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_jualan}}</label></td>
                                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{$c_puratajual}}</label></td>
                             </tr>
-                        </tbody>
+                          </tfoot>
                     </table>
                 </div>
         </div>
@@ -139,10 +141,20 @@
 <script type="text/javascript">
 
     $( document ).ready(function() {
+      $('#pendbuldun').DataTable( {
+          searching: false,
+          dom: 'Bfrtip',
+          buttons: [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+          ]
+      });
       $('.loader').hide();
     });
   
     function gettabledata(type,val){
+      $('.loader').show();
+      $('#pendbuldun').dataTable().fnClearTable();
+      $('#pendbuldun').dataTable().fnDestroy();
       if (type == 'year'){
         var year = val;
         var jenis = document.getElementById("iptJenisInsentif").value;
@@ -161,8 +173,20 @@
               id_jenis_insentif:jenis
           },
           success: function(data) {
-  
-            $("#tblname").html(data);
+            $("#tblname").html(data[0]);
+            $("#tblfoot").html(data[1]);
+            if(data[0] != null){
+                $('#pendbuldun').DataTable( {
+                    searching: false,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
+            }
+            $("#c_insentif").html(data[2]);
+            $("#c_jualan").html(data[3]);
+            $('.loader').hide();
           }
       });
     }

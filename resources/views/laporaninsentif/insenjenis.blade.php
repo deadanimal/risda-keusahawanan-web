@@ -163,9 +163,11 @@
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
         });
+        $('.loader').hide();
     });
 
     function gettabledata(type,val){
+        $('.loader').show();
         $('#laporaninsentifjenis').dataTable().fnClearTable();
         $('#laporaninsentifjenis').dataTable().fnDestroy();
         if (type == 'year'){
@@ -198,7 +200,7 @@
                         ]
                     });
                 }
-                
+                $('.loader').hide();
             }
         });
   }

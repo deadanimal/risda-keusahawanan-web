@@ -45,10 +45,10 @@
                             <th rowspan="2">ALAMAT SYARIKAT/ PERNIAGAAN</th>
                             <th colspan="2">KOORDINAT PREMIS PERNIAGAAN</th>
                             <th rowspan="2">E-MAIL</th>
-                            <th rowspan="2">STATUS PERNIAGAAN (AKTIF / TIDAK AKTIF)</th>
-                            <th rowspan="2">LAIN-LAIN BANTUAN RISDA TAHUN SEBELUM</th>
-                            <th rowspan="2">LATIHAN/KURSUS RISDA TELAH DIHADIRI</th>
-                            <th rowspan="2">DAFTAR JENAMA PRODUK</th>
+                            {{-- <th rowspan="2">STATUS PERNIAGAAN (AKTIF / TIDAK AKTIF)</th> --}}
+                            <th colspan="3">LAIN-LAIN BANTUAN RISDA TAHUN SEBELUM</th>
+                            {{-- <th rowspan="2">LATIHAN/KURSUS RISDA TELAH DIHADIRI</th> --}}
+                            {{-- <th rowspan="2">DAFTAR JENAMA PRODUK</th> --}}
                             <th rowspan="2">NO SIJIL HALAL JAKIM</th>
                         </tr>
                         <tr>
@@ -98,40 +98,36 @@
                             <td>{{$user->SubKlusterPerniagaan}}</td>
                             <td>{{$user->MediumPemasaran}}</td>
                             <td>{{$user->AlamatMediumPemasaran}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->negeri}}</td>
+                            <td>{{$user->jnsbantuansemasa}}</td>
+                            <td>{{$user->kelulusanbantuansemasa}}</td>
+                            <td>{{$user->thnbantuansemasa}}</td>
+                            <td>{{$user->aliran1}}</td>
+                            <td>{{$user->aliran2}}</td>
+                            <td>{{$user->aliran3}}</td>
+                            <td>{{$user->aliran4}}</td>
+                            <td>{{$user->aliran5}}</td>
+                            <td>{{$user->aliran6}}</td>
+                            <td>{{$user->aliran7}}</td>
+                            <td>{{$user->aliran8}}</td>
+                            <td>{{$user->aliran9}}</td>
+                            <td>{{$user->aliran10}}</td>
+                            <td>{{$user->aliran11}}</td>
+                            <td>{{$user->aliran12}}</td>
+                            <td>{{$user->jumaliran}}</td>
+                            <td>{{$user->purataaliran}}</td>
+                            <td>{{$user->capaisasaran}}</td>
+                            <td>{{$user->KateUsahawan}}</td>
+                            <td>{{$user->namasyarikat}}</td>
+                            <td>{{$user->jenismilikan}}</td>
+                            <td>{{$user->nodaftarssm}}</td>
+                            <td>{{$user->alamatsyarikat}}</td>
+                            <td>{{$user->latitud}}</td>
+                            <td>{{$user->logitud}}</td>
+                            <td>{{$user->emailsyarikat}}</td>
+                            <td>{{$user->insentifsebelumnama}}</td>
+                            <td>{{$user->insentifsebelumjum}}</td>
+                            <td>{{$user->insentifsebelumtahun}}</td>
+                            <td>{{$user->nodaftarpersijilanhalal}}</td>
                         </tr>
                         @endforeach
                     </tbody>

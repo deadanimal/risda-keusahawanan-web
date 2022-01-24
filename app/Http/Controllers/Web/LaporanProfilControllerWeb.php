@@ -114,12 +114,29 @@ class LaporanProfilControllerWeb extends Controller
                 }
                 // $usahawan->MediumPemasaran = "Facebook, Instagram, Twitter";
                 $usahawan->AlamatMediumPemasaran = "Facebook - ".$perniagaan->facebook."Instagram - " .$perniagaan->instagram."Twitter - ".$perniagaan->twitter;
+                $usahawan->latitud = $perniagaan->latitud;
+                $usahawan->logitud = $perniagaan->logitud;
             }
             $syarikat = Syarikat::where('usahawanid', $usahawan->usahawanid)->first();
             if(isset($syarikat)){
-                $usahawan->syarikat = $syarikat->namasyarikat;
+                $usahawan->namasyarikat = $syarikat->namasyarikat;
+                if($syarikat->jenismilikanperniagaan == "JPP01"){
+                    $usahawan->jenismilikan = "PEMILIKAN TUNGGAL";
+                }else if($syarikat->jenismilikanperniagaan == "JPP02"){
+                    $usahawan->jenismilikan = "PERKONGSIAN";
+                }else if($syarikat->jenismilikanperniagaan == "JPP03"){
+                    $usahawan->jenismilikan = "SYARIKAT SDN BHD";
+                }else if($syarikat->jenismilikanperniagaan == "JPP04"){
+                    $usahawan->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
+                }
+                
+                $usahawan->nodaftarssm = $syarikat->nodaftarssm;
+                $usahawan->alamatsyarikat = $syarikat->alamat1_ssm.",".$syarikat->alamat2_ssm.",".$syarikat->alamat3_ssm;
+                $usahawan->emailsyarikat = $syarikat->email;
+                $usahawan->nodaftarpersijilanhalal = $syarikat->nodaftarpersijilanhalal;
+                
             }
-
+            // dd($usahawan->usahawanid);
             $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->orderBy('tahun_terima_insentif', 'desc')->first();
             if(isset($insentif)){
                 $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif->id_jenis_insentif)->first();
@@ -128,6 +145,61 @@ class LaporanProfilControllerWeb extends Controller
                 }
                 $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
                 $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
+            }
+
+            $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
+            foreach ($insentif2 as $insentif2s) {
+                $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
+                if(isset($jenisinsentif)){
+                    $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama.",".$jenisinsentif->nama_insentif;
+                }
+                $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum.",".$insentif2s->nilai_insentif;
+                $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun.",".$insentif2s->tahun_terima_insentif;
+            }   
+             
+
+            $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
+            $getYear = date("Y");
+            $alirans = Aliran::where('id_pengguna', $pengguna->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
+            // dd($aliran);
+            if(isset($alirans)){
+                foreach ($alirans as $aliran) {
+                    $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
+                    if($aliran->bulan == 1){
+                        $usahawan->aliran1 = $usahawan->aliran1 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 2){
+                        $usahawan->aliran2 = $usahawan->aliran2 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 3){
+                        $usahawan->aliran3 = $usahawan->aliran3 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 4){
+                        $usahawan->aliran4 = $usahawan->aliran4 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 5){
+                        $usahawan->aliran5 = $usahawan->aliran5 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 6){
+                        $usahawan->aliran6 = $usahawan->aliran6 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 7){
+                        $usahawan->aliran7 = $usahawan->aliran7 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 8){
+                        $usahawan->aliran8 = $usahawan->aliran8 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 9){
+                        $usahawan->aliran9 = $usahawan->aliran9 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 10){
+                        $usahawan->aliran10 = $usahawan->aliran10 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 11){
+                        $usahawan->aliran11 = $usahawan->aliran11 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 12){
+                        $usahawan->aliran12 = $usahawan->aliran12 + $aliran->jumlah_aliran;
+                    }
+                    $usahawan->jumaliran = $usahawan->jumaliran + $aliran->jumlah_aliran;
+                }
+            }
+            
+            $usahawan->purataaliran = $usahawan->jumaliran / 12;
+
+            if($usahawan->purataaliran >= 2500){
+                $usahawan->capaisasaran = "capai";
+            }else{
+                $usahawan->capaisasaran = "tidak capai";
             }
         }
         
@@ -179,7 +251,7 @@ class LaporanProfilControllerWeb extends Controller
             $users->PKnoKP = $pekebun->No_KP;
         }
         $temp = KategoriUsahawan::where('id_kategori_usahawan', $users->id_kategori_usahawan)->first();
-        if(isset($temp1)){
+        if(isset($temp)){
             $users->KateUsahawan = $temp->nama_kategori_usahawan;
         }
         $perniagaan = Perniagaan::where('usahawanid', $users->usahawanid)->first();
@@ -201,10 +273,27 @@ class LaporanProfilControllerWeb extends Controller
             }
             // $users->MediumPemasaran = "Facebook, Instagram, Twitter";
             $users->AlamatMediumPemasaran = "Facebook - ".$perniagaan->facebook."Instagram - " .$perniagaan->instagram."Twitter - ".$perniagaan->twitter;
+            $users->latitud = $perniagaan->latitud;
+            $users->logitud = $perniagaan->logitud;
         }
         $syarikat = Syarikat::where('usahawanid', $users->usahawanid)->first();
         if(isset($syarikat)){
-            $users->syarikat = $syarikat->namasyarikat;
+            $users->namasyarikat = $syarikat->namasyarikat;
+            if($syarikat->jenismilikanperniagaan == "JPP01"){
+                $users->jenismilikan = "PEMILIKAN TUNGGAL";
+            }else if($syarikat->jenismilikanperniagaan == "JPP02"){
+                $users->jenismilikan = "PERKONGSIAN";
+            }else if($syarikat->jenismilikanperniagaan == "JPP03"){
+                $users->jenismilikan = "SYARIKAT SDN BHD";
+            }else if($syarikat->jenismilikanperniagaan == "JPP04"){
+                $users->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
+            }
+            
+            $users->nodaftarssm = $syarikat->nodaftarssm;
+            $users->alamatsyarikat = $syarikat->alamat1_ssm.",".$syarikat->alamat2_ssm.",".$syarikat->alamat3_ssm;
+            $users->emailsyarikat = $syarikat->email;
+            $users->nodaftarpersijilanhalal = $syarikat->nodaftarpersijilanhalal;
+            
         }
         // dd($users->usahawanid);
         $insentif = Insentif::where('id_pengguna', $users->usahawanid)->orderBy('tahun_terima_insentif', 'desc')->first();
@@ -217,11 +306,62 @@ class LaporanProfilControllerWeb extends Controller
             $users->thnbantuansemasa = $insentif->tahun_terima_insentif;
         }
 
-        $aliran = Aliran::where('id_pengguna', $users->id);
+        $insentif2 = Insentif::where('id_pengguna', $users->usahawanid)->get();
+        foreach ($insentif2 as $insentif2s) {
+            $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
+            if(isset($jenisinsentif)){
+                $insentif2s->namainsen = $jenisinsentif->nama_insentif;
+            }
+        }   
+
+        $pengguna = User::where('usahawanid', $users->usahawanid)->first();
+        $getYear = date("Y");
+        $alirans = Aliran::where('id_pengguna', $pengguna->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
+        // dd($aliran);
+        if(isset($alirans)){
+            foreach ($alirans as $aliran) {
+                $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
+                if($aliran->bulan == 1){
+                    $users->aliran1 = $users->aliran1 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 2){
+                    $users->aliran2 = $users->aliran2 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 3){
+                    $users->aliran3 = $users->aliran3 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 4){
+                    $users->aliran4 = $users->aliran4 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 5){
+                    $users->aliran5 = $users->aliran5 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 6){
+                    $users->aliran6 = $users->aliran6 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 7){
+                    $users->aliran7 = $users->aliran7 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 8){
+                    $users->aliran8 = $users->aliran8 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 9){
+                    $users->aliran9 = $users->aliran9 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 10){
+                    $users->aliran10 = $users->aliran10 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 11){
+                    $users->aliran11 = $users->aliran11 + $aliran->jumlah_aliran;
+                }else if($aliran->bulan == 12){
+                    $users->aliran12 = $users->aliran12 + $aliran->jumlah_aliran;
+                }
+                $users->jumaliran = $users->jumaliran + $aliran->jumlah_aliran;
+            }
+        }
+        
+        $users->purataaliran = $users->jumaliran / 12;
+
+        if($users->purataaliran >= 2500){
+            $users->capaisasaran = "capai";
+        }else{
+            $users->capaisasaran = "tidak capai";
+        }
 
         return view('laporanprofil.profdetail'
         ,[
-            'user'=>$users
+            'user'=>$users,
+            'insentif2'=>$insentif2
         ]
         );
     }
@@ -759,6 +899,7 @@ class LaporanProfilControllerWeb extends Controller
                 $report->tab20 = Auth::user()->id;
                 $report->save();
                 foreach ($alirans as $aliran) {
+                    $aliran->newdate = date("d-m-Y", strtotime($aliran->tarikh_aliran));
                     $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
                     $aliran->tahun = date('Y', strtotime($aliran->tarikh_aliran));
                     $reports = Report::where('tab20', Auth::user()->id)->where('type', 11)->get();
@@ -1109,7 +1250,7 @@ class LaporanProfilControllerWeb extends Controller
             $report->type = 11;
             $report->tab1 = $request->bulan;
             $report->tab2 = $request->tahun;
-            $report->tab3 = $request->tarikh_aliran;
+            $report->tab3 = $request->newdate;
             $report->tab4 = $request->id_kategori_aliran;
             $report->tab5 = $request->keterangan_aliran;
 

@@ -57,8 +57,10 @@ class PLIndividuControllerWeb extends Controller
         $usahawan = Usahawan::where('usahawanid', $usahawanid)->first();
         $user = User::where('usahawanid', $usahawan->usahawanid)->first();
         $syarikat = Syarikat::where('usahawanid', $usahawan->usahawanid)->first();
-        $usahawan->syarikat = $syarikat->namasyarikat;
-        $usahawan->jenisperniagaan = $syarikat->namasyarikat;
+        if(isset($syarikat)){
+            $usahawan->syarikat = $syarikat->namasyarikat;
+            $usahawan->jenisperniagaan = $syarikat->namasyarikat;
+        }
 
         $daerah = Daerah::where('U_Daerah_ID', $usahawan->U_Daerah_ID)->first();
         if(isset($daerah)){
@@ -133,8 +135,10 @@ class PLIndividuControllerWeb extends Controller
         $usahawan = Usahawan::where('usahawanid', $request->usahawanid)->first();
         $user = User::where('usahawanid', $usahawan->usahawanid)->first();
         $syarikat = Syarikat::where('usahawanid', $usahawan->usahawanid)->first();
-        $usahawan->syarikat = $syarikat->namasyarikat;
-        $usahawan->jenisperniagaan = $syarikat->namasyarikat;
+        if(isset($syarikat)){
+            $usahawan->syarikat = $syarikat->namasyarikat;
+            $usahawan->jenisperniagaan = $syarikat->namasyarikat;
+        }
 
         $daerah = Daerah::where('U_Daerah_ID', $usahawan->U_Daerah_ID)->first();
         if(isset($daerah)){
