@@ -95,6 +95,7 @@ class PendapatanBulananControllerWeb extends Controller
         }
         
         $result = "";
+        $tfoot = "";
         $num=1;
         $c_penerima = 0;
         $c_insentif = 0;
@@ -127,7 +128,7 @@ class PendapatanBulananControllerWeb extends Controller
                 <td class="text-nowrap"><label class="form-check-label">'.$report->tab7.'</label></td>
             </tr>';
         }
-        $result .=
+        $tfoot .=
         '<tr class="align-middle" style="text-align: center;">
             <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</td>
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$c_penerima.'</td>
@@ -137,7 +138,7 @@ class PendapatanBulananControllerWeb extends Controller
         </tr>
         ';       
 
-        return $result;
+        return [$result,$tfoot,$c_insentif,$c_jualan];
     }
 
     public function export1($tahun, $jenis)

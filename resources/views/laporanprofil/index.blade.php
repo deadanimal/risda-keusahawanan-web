@@ -77,6 +77,7 @@
             "paging":   true,
             "bFilter": true,
         });
+        $('.loader').hide();
     });
 
     function ExportExcel(){

@@ -376,6 +376,7 @@
 $( document ).ready(function() {
     GetPengguna();
     datatable();
+    $('.loader').hide();
 });
 
 function datatable(){
@@ -446,6 +447,7 @@ function GetPengguna(){
 }
 
 function aktifkanpengguna(type,user,input){
+    $('.loader').show();
     var id = user.usahawanid;
     var status = "";
     if(type == 'kawasan'){
@@ -483,6 +485,7 @@ function aktifkanpengguna(type,user,input){
             if(type == 'kawasan'){
                 alert("Pusat Tanggungjawab Usahawan Berjaya Dikemaskini");
             }
+            $('.loader').hide();
         },
         error: function(){
             alert('failure');
@@ -491,6 +494,8 @@ function aktifkanpengguna(type,user,input){
 }
 
 function tetapanpengguna(page,data){
+    $('.loader').show();
+    console.log(data);
     if(page == 'satu'){
         $("#displaysatu").hide();
         $("#displaydua").show();
@@ -542,23 +547,24 @@ function tetapanpengguna(page,data){
                 x[i].disabled = true;
             }
         }
-        
+        $('.loader').hide();
     }else if(page == 'dua'){
         $("#displaysatu").show();
         $("#displaydua").hide();
+        $('.loader').hide();
     }
 }
 
 function SubmitUsahawan(){
     if (confirm('Anda pasti ingin simpan data usahawan?')) {
+        $('.loader').show();
         $('#datausahawan').submit();
-    } else {
-        
     }
     
 }
 
 function SahkanUsahawan(){
+    $('.loader').show();
     var id = $("#displaydua input[name=idusahawan]").val();
     console.log(id);
     $.ajax({
@@ -575,12 +581,14 @@ function SahkanUsahawan(){
             location.reload();
         },
         error: function(){
+            $('.loader').hide();
             alert('failure');
         }
     });
 }
 
 function profileimg(){
+    $('.loader').show();
     var formData = new FormData();
     formData.append('file', $("#profile-image")[0].files[0]);
     formData.append('id', $("#displaydua input[name=idusahawan]").val());
@@ -597,9 +605,11 @@ function profileimg(){
         success: function(data) {
             alert("Muat Naik Gambar Profil Usahawan Berjaya");
             $("#usahawanprofilpic").attr("src",data);
+            $('.loader').hide();
         },
         error: function(){
             alert('failure');
+            $('.loader').hide();
         }
     });
 }

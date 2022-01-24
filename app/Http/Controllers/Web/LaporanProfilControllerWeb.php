@@ -44,11 +44,11 @@ class LaporanProfilControllerWeb extends Controller
         if($authuser->role == 1 || $authuser->role == 2){
             $users = Usahawan::all();
         }else if($authuser->role == 3 || $authuser->role == 5){
-            $users = Usahawan::where('U_Negeri_ID', $authmukim->$U_Negeri_ID)->get();
+            $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
-            $users = Usahawan::where('U_Daerah_ID', $authmukim->$U_Daerah_ID)->get();
+            $users = Usahawan::where('U_Daerah_ID', $authmukim->U_Daerah_ID)->get();
         }else if($authuser->role == 7){
-            $users = Usahawan::where('Kod_PT', $authpegawai->$NamaPT)->get();
+            $users = Usahawan::where('Kod_PT', $authpegawai->NamaPT)->get();
         }else{
             return redirect('/landing');
         }
@@ -661,44 +661,59 @@ class LaporanProfilControllerWeb extends Controller
             return "Laporan Berjaya Dijana";
         }
 
-        if($request->type == 10){
-            return "Laporan Berjaya Dijana";
-        }
-
         if($request->type == 11){
-            $alirans = Aliran::all();
+            Report::where('tab20', Auth::user()->id)->where('type', 11)->delete();
+            $alirans = Aliran::where('id_pengguna',$request->id)->get();
             if($alirans->count()==0){
-                return "Tiada Data Insentif Dijumpai";
+                return "Tiada Data Aliran Dijumpai";
             }else{
+                $report = new Report();
+                $report->type = 11;
+                $report->tab1 = 1000;
+                $report->tab2 = 1000;
+                $report->tab8 = 2;
+                $report->tab20 = Auth::user()->id;
+                $report->save();
+                $report = new Report();
+                $report->type = 11;
+                $report->tab1 = 1000;
+                $report->tab2 = 1000;
+                $report->tab8 = 3;
+                $report->tab20 = Auth::user()->id;
+                $report->save();
                 foreach ($alirans as $aliran) {
                     $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
-                    $aliran->tahun = date('y', strtotime($aliran->tarikh_aliran));
+                    $aliran->tahun = date('Y', strtotime($aliran->tarikh_aliran));
                     $reports = Report::where('type', 11)->get();
                     if($reports->count()==0){
                         $this->newreport(11,$aliran,$aliran->id);
                     }else{
-                        $update = false;
-                        foreach ($reports as $report) {
-                            if($aliran->bulan == $report->tab1 && $aliran->tahun == $report->tab2 && $aliran->id_kategori_aliran == $report->tab4){
-                                $report->tab5 = $report->tab5 ."-". $aliran->keterangan_aliran;
-                                $kate_aliran = KategoriAliran::where('id', $aliran->id_kategori_aliran)->first();
-                                if($kate_aliran->jenis_aliran == "tunai_masuk"){
-                                    $report->tab6 = $report->tab6 + $aliran->jumlah_aliran;
-                                }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
-                                    $report->tab7 = $report->tab7 + $aliran->jumlah_aliran;
-                                }
-                                $report->save();
-                                $update = true;
-                                break;
-                            }
-                        }
-                        if($update == false){
-                            $this->newreport(11,$aliran,$aliran->id);
-                        }
+                        // $update = false;
+                        // foreach ($reports as $report) {
+                        //     if($aliran->bulan == $report->tab1 && $aliran->tahun == $report->tab2 && $aliran->id_kategori_aliran == $report->tab4){
+                        //         $report->tab5 = $report->tab5 ."-". $aliran->keterangan_aliran;
+                        //         $kate_aliran = KategoriAliran::where('id', $aliran->id_kategori_aliran)->first();
+                        //         if($kate_aliran->jenis_aliran == "tunai_masuk"){
+                        //             $report->tab6 = $report->tab6 + $aliran->jumlah_aliran;
+                        //         }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
+                        //             $report->tab7 = $report->tab7 + $aliran->jumlah_aliran;
+                        //         }
+                        //         $report->save();
+                        //         $update = true;
+                        //         break;
+                        //     }
+                        // }
+                        // if($update == false){
+                        $this->newreport(11,$aliran,$aliran->id);
+                        // }
                     }
                 }
                 return "Laporan Berjaya Dijana";
             }
+        }
+
+        if($request->type == 12){
+
         }
     }
 
@@ -919,14 +934,13 @@ class LaporanProfilControllerWeb extends Controller
             $report->tab20 = Auth::user()->id;
             $report->save();
         }else if($type == 11){
-            $check = "";
             $report = new Report();
             $report->type = 11;
             $report->tab1 = $request->bulan;
             $report->tab2 = $request->tahun;
             $report->tab3 = $request->tarikh_aliran;
             $report->tab4 = $request->id_kategori_aliran;
-            $report->tab5 = "-".$request->keterangan_aliran;
+            $report->tab5 = $request->keterangan_aliran;
 
             $kate_aliran = $request->id_kategori_aliran;
             $kate_aliran = KategoriAliran::where('id', $request->id_kategori_aliran)->first();

@@ -36,11 +36,14 @@
                 @endforeach
             </select>
           </div>
+          <div style="padding-top: 10px;">
+            <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
+          </div>
         </div>
       </div>
     </div>
 </div>
-            <div>
+            <div id="wholepage">
                 <div class="row g-0">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
@@ -189,7 +192,79 @@
         createchart();
     }
 
+    function ExportPDF(){
+        var page = document.getElementById("wholepage");
+        html2canvas(document.getElementById("wholepage"), {
+            onrendered: function(canvas) {
+                // var img = canvas.toDataURL(); //image data of canvas
+                var pdf = new jsPDF('p', 'pt', 'letter');
+                for (var i = 0; i <= page.clientHeight/980; i++) {
+                    //! This is all just html2canvas stuff
+                    var srcImg  = canvas;
+                    var sX      = 0;
+                    var sY      = 980*i; // start 980 pixels down for every new page
+                    var sWidth  = 900;
+                    var sHeight = 980;
+                    var dX      = 0;
+                    var dY      = 0;
+                    var dWidth  = 900;
+                    var dHeight = 980;
+
+                    window.onePageCanvas = document.createElement("canvas");
+                    onePageCanvas.setAttribute('width', 900);
+                    onePageCanvas.setAttribute('height', 980);
+                    var ctx = onePageCanvas.getContext('2d');
+                    // details on this usage of this function: 
+                    // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images#Slicing
+                    ctx.drawImage(srcImg,sX,sY,sWidth,sHeight,dX,dY,dWidth,dHeight);
+
+                    // document.body.appendChild(canvas);
+                    var canvasDataURL = onePageCanvas.toDataURL("image/png", 1.0);
+
+                    var width         = onePageCanvas.width;
+                    var height        = onePageCanvas.clientHeight;
+
+                    //! If we're on anything other than the first page,
+                    // add another page
+                    if (i > 0) {
+                        pdf.addPage(612, 791); //8.5" x 11" in pts (in*72)
+                    }
+                    //! now we declare that we're working on that page
+                    pdf.setPage(i+1);
+                    //! now we add content to that page!
+                    pdf.addImage(canvasDataURL, 'PNG', 20, 40, (width*.62), (height*.62));
+
+                }
+                // doc.addImage(img, 10, 10);
+                pdf.save('test.pdf');
+            }
+        });
+        
+        // var doc = new jsPDF("p", "mm", "a4")
+        // var elementHandler = {
+        // '#ignorePDF': function (element, renderer) {
+        //     return true;
+        // }
+        // };
+        // var source = document.getElementById('statpdf');
+        // doc.fromHTML(
+        //     source,
+        //     15,
+        //     15,
+        //     {
+        //     'width': 180,'elementHandlers': elementHandler
+        //     }
+        // )
+        // doc.save('Statistic.pdf')
+
+    }
+    
+    $( document ).ready(function() {
+        $('.loader').hide();
+    });
+
     function gettabledata(type,val){
+        $('.loader').show();
         var year = document.getElementById("iptYear").value;
         var jenis = document.getElementById("iptJenisInsentif").value;
         var negeri = document.getElementById("iptNegeri").value;
@@ -210,6 +285,7 @@
                 document.write(data);
                 document.close();
                 createchart();
+                $('.loader').hide();
             }
         });
     }

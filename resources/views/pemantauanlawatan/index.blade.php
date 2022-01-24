@@ -115,9 +115,11 @@
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
         });
+        $('.loader').hide();
     });
 
     function gettabledata(type,val){
+        $('.loader').show();
         $('#tbllaporanlawatan').dataTable().fnClearTable();
         $('#tbllaporanlawatan').dataTable().fnDestroy();
         if (type == 'year'){
@@ -145,6 +147,7 @@
                         ]
                     });
                 }
+                $('.loader').hide();
             }
         });
     }

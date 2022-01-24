@@ -25,8 +25,11 @@ use App\Http\Controllers\Web\LPL\PLDaerahControllerWeb;
 use App\Http\Controllers\Web\LPL\PLStafNegeriControllerWeb;
 use App\Http\Controllers\Web\LPL\PLIndividuControllerWeb;
 use App\Http\Controllers\Web\LAT\LaporanAliranTunaiControllerWeb;
+use App\Http\Controllers\Web\LAT\LaporanAliranTunaiDetailControllerWeb;
 use App\Http\Controllers\Web\LAT\LaporanLejarControllerWeb;
+use App\Http\Controllers\Web\LAT\LaporanLejarDetailControllerWeb;
 use App\Http\Controllers\Web\LAT\PenyataUntungRugiControllerWeb;
+use App\Http\Controllers\Web\LAT\PenyataUntungRugiDetailControllerWeb;
 use App\Http\Controllers\Web\DashControllerWeb;
 use App\Http\Controllers\Web\ChangePassControllerWeb;
 use App\Http\Controllers\PDFController;
@@ -89,8 +92,11 @@ Route::resource('/pantauindividu', PLIndividuControllerWeb::class);
 Route::resource('/pantauindividudetail', PLIndividuControllerWeb::class);
 
 Route::resource('/laporanalirantunai', LaporanAliranTunaiControllerWeb::class);
+Route::resource('/laporanalirantunaiDetail', LaporanAliranTunaiDetailControllerWeb::class);
 Route::resource('/laporanlejar', LaporanLejarControllerWeb::class);
+Route::resource('/laporanlejarDetail', LaporanLejarDetailControllerWeb::class);
 Route::resource('/penyatauntungrugi', PenyataUntungRugiControllerWeb::class);
+Route::resource('/penyatauntungrugiDetail', PenyataUntungRugiDetailControllerWeb::class);
 
 Route::resource('/dash', DashControllerWeb::class);
 

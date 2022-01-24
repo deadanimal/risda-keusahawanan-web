@@ -110,7 +110,7 @@
 $( document ).ready(function() {
     GetPengguna();
     datatable();
-    
+    $('.loader').hide();
 });
 
 function datatable(){
@@ -177,6 +177,7 @@ function GetPengguna(){
 }
 
 function simpanpengguna(user){
+    $('.loader').show();
     var id = user.id;
     var status = "";
     if ($("#flexSwitchCheckDefault"+id).is(":checked")){
@@ -202,12 +203,14 @@ function simpanpengguna(user){
         success: function(data) {
             //swal("Congrats!", ", Your account is created!", "success");
             alert("Akaun Pegawai Kemaskini Berjaya");
+            $('.loader').hide();
             location.reload();
         }
     });
 }
 
 function ChangeMukim(id,value){
+    $('.loader').show();
     //alert(value);
     $.ajax({
         headers: {
@@ -222,6 +225,7 @@ function ChangeMukim(id,value){
         success: function(data) {
             $("#fldNegeri"+id).html(data.negeri);
             $("#fldDaerah"+id).html(data.daerah);
+            $('.loader').hide();
             //alert(data.negeri);
             //swal("Congrats!", ", Your account is created!", "success");
             //alert("Akaun Pegawai Kemaskini Berjaya");
