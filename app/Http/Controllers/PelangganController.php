@@ -133,7 +133,6 @@ class PelangganController extends Controller
             ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
             ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
             ->select(
-                // 'perniagaans.gambar_url as logo_perniagaan',
                 'syarikats.logo_syarikat as logo_syarikat',
                 'syarikats.nodaftarssm',
 
@@ -148,6 +147,7 @@ class PelangganController extends Controller
 
         // dd($data);
         // return $data;
+        // return response()->json($data);
         
 
         $pelanggan = DB::table('pelanggans')

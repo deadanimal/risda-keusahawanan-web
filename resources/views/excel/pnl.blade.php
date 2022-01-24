@@ -1,0 +1,402 @@
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <style type="text/css">
+        h4 {
+            font-family: "Calibri", sans-serif;
+            /* font-size: 11.1px; */
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none;
+            text-align: center
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            font-family: "Calibri", sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 2px
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h4> PENYATA UNTUNG RUGI</h4>
+    <h4>BULAN {{ $bulan }} TAHUN {{ $tahun }}</h4>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 300px"></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            <tr>
+                <td style="font-weight: bold">HASIL JUALAN / PEROLEHAN (SALES) </td>
+                <td style="text-align: center">RM</td>
+                <td style="text-align: center">RM</td>
+                <td style="text-align: center">RM</td>
+            </tr>
+
+            <tr>
+                <td>JUALAN/PEROLEHAN</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: end">{{ number_format($jualan_perolehan, 2) }}</td>
+            </tr>
+
+            <tr>
+                <td>Deposit Jualan</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: end">{{ number_format($deposit_jualan, 2) }}</td>
+            </tr>
+
+            <tr>
+                <td>Pulangan Jualan</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: end">{{ number_format($pulangan_jualan, 2) }}</td>
+            </tr>
+
+            <tr>
+                <td style="color: red">Jualan Bersih</td>
+                <td></td>
+                <td></td>
+                <td>
+                    @php
+                        $jualan_bersih = $jualan_perolehan + $deposit_jualan - $pulangan_jualan;
+                    @endphp
+                    {{ number_format($jualan_bersih, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="font-weight: bold">KOS LANGSUNG / KOS JUALAN (COGS)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Stok Awal</td>
+                <td></td>
+                <td>{{ number_format($stok_awal, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Deposit Belian</td>
+                <td> {{ number_format($deposit_belian, 2) }} </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Belian</td>
+                <td> {{ number_format($belian, 2) }} </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="color: red">Belian Bersih</td>
+                <td>
+                    <?php
+                    $belian_bersih = $deposit_belian + $belian;
+                    
+                    ?>
+                    {{ number_format($belian_bersih, 2) }}
+
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Pulangan Belian</td>
+                <td>{{ number_format($pulangan_belian, 2) }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="color: red">Kos Belian</td>
+                <td></td>
+                <td>
+                    @php
+                        $kos_belian = $belian_bersih - $pulangan_belian;
+                    @endphp
+                    {{ number_format($kos_belian, 2) }}
+
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="color: red">Kos Barang Sedia Dijual</td>
+                <td></td>
+                <td>
+                    @php
+                        $kos_barang_sedia_dijual = $stok_awal + $kos_belian;
+                    @endphp
+                    {{ number_format($kos_barang_sedia_dijual, 2) }}
+
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Stok Akhir</td>
+                <td></td>
+                <td>{{ $stok_akhir }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="color: red">Kos Jualan</td>
+                <td></td>
+                <td></td>
+                <td>
+                    @php
+                        $kos_jualan = $kos_barang_sedia_dijual - $stok_akhir;
+                    @endphp
+                    {{ number_format($kos_jualan, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td style="font-weight: bold">UNTUNG / RUGI KASAR</td>
+                <td></td>
+                <td></td>
+                <td>
+                    @php
+                        $untung_rugi_kasar = $jualan_bersih - $kos_jualan;
+                    @endphp
+                    {{ number_format($untung_rugi_kasar, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="font-weight: bold">PERBELANJAAN PENTADBIRAN DAN OPERASI (OPEX)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Kos Pengeposan</td>
+                <td></td>
+                <td>{{ number_format($kos_pengeposan, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Kos Alat Tulis</td>
+                <td></td>
+                <td>{{ number_format($kos_alat_tulis, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Bayaran Sewa</td>
+                <td></td>
+                <td>{{ number_format($bayaran_sewa, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Upah/ Gaji Pekerja</td>
+                <td></td>
+                <td>{{ number_format($upah_gaji_pekerja, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Upah/ Gaji Sendiri</td>
+                <td></td>
+                <td>{{ number_format($upah_gaji_sendiri, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>KWSP/ SOCSO</td>
+                <td></td>
+                <td>{{ number_format($kwsp_socso, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Bayaran Bil (Utiliti)</td>
+                <td></td>
+                <td>{{ number_format($bayaran_bil, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Petrol/ Tol/ Parking</td>
+                <td></td>
+                <td>{{ number_format($petrol_tol_parking, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Penyelenggaraan</td>
+                <td></td>
+                <td>{{ number_format($penyelenggaraan, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Belian Aset</td>
+                <td></td>
+                <td>{{ number_format($belian_aset, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Bayaran Komisen</td>
+                <td></td>
+                <td>{{ number_format($bayaran_komisen, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Cukai/ Zakat</td>
+                <td></td>
+                <td>{{ number_format($cukai_zakat, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Bayaran Lain</td>
+                <td></td>
+                <td>{{ number_format($bayaran_lain, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="color: red">JUMLAH PERBELANJAAN PENTADBIRAN DAN OPERASI</td>
+                <td></td>
+                <td></td>
+                <td>
+                    @php
+                        $jumlah_perbelanjaan = $kos_pengeposan + $kos_alat_tulis + $bayaran_sewa + $upah_gaji_pekerja + $upah_gaji_sendiri + $kwsp_socso + $bayaran_bil + $petrol_tol_parking + $penyelenggaraan + $belian_aset + $bayaran_komisen + $cukai_zakat + $bayaran_lain;
+                    @endphp
+                    {{ number_format($jumlah_perbelanjaan, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>HASIL - HASIL LAIN</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Hasil Komisen</td>
+                <td></td>
+                <td> {{ number_format($hasil_komisen, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Hasil Dividen</td>
+                <td></td>
+                <td> {{ number_format($hasil_dividen, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Hasil Sewaan</td>
+                <td></td>
+                <td> {{ number_format($hasil_sewaan, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Hasil Lain</td>
+                <td></td>
+                <td> {{ number_format($hasil_lain, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="color: red">JUMLAH HASIL -HASIL LAIN</td>
+                <td></td>
+                <td></td>
+                <td>
+                    @php
+                        $jumlah_hasil = $hasil_komisen + $hasil_dividen + $hasil_sewaan + $hasil_lain;
+                    @endphp
+
+                    {{ number_format($jumlah_hasil, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="font-weight: bold">UNTUNG / RUGI BERSIH</td>
+                <td></td>
+                <td></td>
+                <td>
+                    @php
+                        $untung_rugi_bersih = $jualan_bersih - $untung_rugi_kasar - $jumlah_perbelanjaan + $jumlah_hasil;
+                    @endphp
+                    {{ number_format($untung_rugi_bersih, 2) }}
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</body>

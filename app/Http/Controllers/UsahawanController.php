@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usahawan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -57,6 +58,7 @@ class UsahawanController extends Controller
         $usahawan->modifiedby_kod_PT = $request->modifiedby_kod_PT;
 
         $usahawan->save();
+
 
         // return redirect("/usahawan");
         return response()->json($usahawan);
@@ -145,9 +147,11 @@ class UsahawanController extends Controller
 
         $usahawan->status_daftar_usahawan = $request->status_daftar_usahawan;
 
-
-
         $usahawan->save();
+
+        $user = User::where('usahawanid', $id)->get()->first();
+        $user->profile_status = 1;
+        $user->save();
 
         // return redirect("/usahawan");
         return response()->json($usahawan);

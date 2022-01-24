@@ -337,6 +337,8 @@
             height: 29.7cm;
         }
 
+       
+
         @media print {
 
             body,
@@ -346,6 +348,7 @@
             }
         }
 
+
     </style>
     <script type="text/javascript"
         src="9df7e0ba-6dff-11ec-a980-0cc47a792c0a_id_9df7e0ba-6dff-11ec-a980-0cc47a792c0a_files/wz_jsgraphics.js"></script>
@@ -353,13 +356,14 @@
 
 <body>
 
+    {{-- <page size="A4"></page> --}}
     <div class="page_break"
         style="position:absolute;left:50%;margin-left:-306px;top:0px;width:612px;height:792px;overflow:hidden">
 
         <div style="position:absolute;left:268px;top:10px">
 
             <img src="{{ $data->logo_syarikat }}" width=90 height=90>
-			
+
         </div>
 
         <div style="position:absolute;left:91.32px;top:95px; text-align:center; width:450px;" class="cls_004">
@@ -419,9 +423,9 @@
                 {{ $pelanggan->tajuk }}
             </span></div>
 
-        <div style="position:absolute;left:76.75px;top:352.80px; width:500px" class="cls_013">
+        <div style="position:absolute;left:76.75px;top:352.80px; width:500px;" class="cls_013">
             {{-- <span class="cls_013">BIL</span> --}}
-            <table style="width: 100%;">
+            <table class="page-break" style="width: 100%;">
                 <tr>
                     <th style="width: 5%">BIL</th>
                     <th style="width: 50%">PERKARA</th>
@@ -530,7 +534,7 @@
         <div style="position:absolute;left:268px;top:10px">
 
             <img src="{{ $data->logo_syarikat }}" width=90 height=90>
-			
+
         </div>
 
         <div style="position:absolute;left:91.32px;top:95px; text-align:center; width:450px;" class="cls_004">
@@ -641,7 +645,7 @@
         <div style="position:absolute;left:268px;top:10px">
 
             <img src="{{ $data->logo_syarikat }}" width=90 height=90>
-			
+
         </div>
 
         <div style="position:absolute;left:91.32px;top:95px; text-align:center; width:450px;" class="cls_004">
@@ -746,14 +750,14 @@
                     </td>
                 </tr>
                 <tr>
-					<td colspan="3" style="text-align:center; border-style: none;">
+                    <td colspan="3" style="text-align:center; border-style: none;">
                         {{-- <div style=""> --}}
                         {{-- <p>CATATAN</p> --}}
 
                         {{-- </div> --}}
 
                     </td>
-                    
+
                     <td style="text-align:center; border-style: none;">
                         DISKAUN
                     </td>
@@ -762,7 +766,7 @@
                     </td>
                 </tr>
                 <tr>
-					<td colspan="3" rowspan="3">
+                    <td colspan="3" rowspan="3">
 
                         <table style="border-style: none !important; width:100%; font-weight:bold">
                             <tr>
