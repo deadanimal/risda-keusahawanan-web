@@ -91,10 +91,10 @@ class DashControllerWeb extends Controller
                             $insentifdata2->jnsperniagaan = $perniagaans->jenisperniagaan;
                         }
 
-                        $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
-                        if(isset($pekebun)){
-                            $insentifdata2->status_daftar_usahawan = $pekebun->status_daftar_usahawan;
-                        }
+                        // $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
+                        // if(isset($pekebun)){
+                            $insentifdata2->status_daftar_usahawan = $usahawan->status_daftar_usahawan;
+                        // }
 
                         $KateUsahawan = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
                         if(isset($KateUsahawan)){
@@ -394,10 +394,10 @@ class DashControllerWeb extends Controller
                         if(isset($perniagaans)){
                             $insentifdata2->jnsperniagaan = $perniagaans->jenisperniagaan;
                         }
-                        $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
-                        if(isset($pekebun)){
-                            $insentifdata2->status_daftar_usahawan = $pekebun->status_daftar_usahawan;
-                        }
+                        // $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
+                        // if(isset($pekebun)){
+                            $insentifdata2->status_daftar_usahawan = $usahawan->status_daftar_usahawan;
+                        // }
 
                         $KateUsahawan = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
                         if(isset($KateUsahawan)){
