@@ -202,7 +202,8 @@ class UsahawanControllerWeb extends Controller
         ]);
         $response = $request->getBody()->getContents();
         $vals = json_decode($response);
-        dd($vals);
+        return $vals;
+        // dd($vals);
     }
 }
  

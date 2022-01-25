@@ -350,12 +350,12 @@
                             @endif
                         </div>
                         <div class="col-lg-6">
-                            <label class="form-label">Nama Pekebun</label>
-                            <input class="form-control usahawanfield" name="pekebunname"   type="text"  />
+                            <label class="form-label">No KP Pekebun</label>
+                            <input class="form-control" name="pekebunkp" type="text" disable="true"/>
                         </div>
                         <div class="col-lg-6">
-                            <label class="form-label">No KP Pekebun</label>
-                            <input class="form-control usahawanfield" name="pekebunkp"   type="text"  />
+                            <label class="form-label">Nama Pekebun</label>
+                            <input class="form-control" name="pekebunname" type="text" disabled/>
                         </div>
                         <div class="col-12 d-flex justify-content-end">
                             <button class="btn btn-primary" type="button" onclick="API()">Kemas Kini Pekebun
@@ -388,13 +388,13 @@
 $( document ).ready(function() {
     GetPengguna();
     datatable();
-    API();
+    // API();
     $('.loader').hide();
 });
 
 function API(){
     $('.loader').show();
-    var nokp = '610916015420';
+    var nokp = $("#displaydua input[name=pekebunkp]").val();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -405,6 +405,8 @@ function API(){
             nokp:nokp
         },
         success: function(data) {
+            console.log(data);
+            $("#displaydua input[name=pekebunname]").val(data.Nama_PK);
             alert("Data Pekebun Berjaya Ditarik");
             $('.loader').hide();
         }
@@ -527,7 +529,7 @@ function aktifkanpengguna(type,user,input){
 
 function tetapanpengguna(page,data){
     $('.loader').show();
-    console.log(data);
+    // console.log(data.pekebun);
     if(page == 'satu'){
         $("#displaysatu").hide();
         $("#displaydua").show();
@@ -566,6 +568,11 @@ function tetapanpengguna(page,data){
         $("#displaydua input[name=notelefon]").val(data.notelefon);
         $("#displaydua input[name=nohp]").val(data.nohp);
         $("#displaydua input[name=email]").val(data.email);
+        if(data.pekebun){
+            $("#displaydua input[name=pekebunkp]").val(data.pekebun.No_KP);
+            $("#displaydua input[name=pekebunname]").val(data.pekebun.Nama_PK);
+        }
+        
         $("#datausahawan").attr("action", "/usahawanWeb/"+data.usahawanid);
 
         var x = document.getElementsByClassName("usahawanfield");       
