@@ -49,7 +49,10 @@ class PasswordController extends Controller
 
     public function updateEmailPassword(Request $request, $id){
 
+        // User::find($id)->update(['password'=> Hash::make($request->password)]);
+
         $user = User::find($id);
+        
 
         $user->email = $request->email;
         $user->password = Hash::make($request->password);

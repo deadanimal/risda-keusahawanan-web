@@ -659,6 +659,8 @@
         <div style="position:absolute;left:72.00px;top:120px" class="cls_006"><span
                 class="cls_006">_____________________________________________________________________________________</span>
         </div>
+        <div style="position:absolute;left:237.46px;top:138.26px" class="cls_007"><span
+            class="cls_007">INVOICE</span></div>
         <div style="position:absolute;left:72.00px;top:177.60px; text-transform: uppercase !important; width:250px;"
             class="cls_008"><span class="cls_008">{{ $pelanggan->nama_pelanggan }}</span>
         </div>
@@ -667,7 +669,7 @@
 
         <div style="position:absolute;left:363.06px;top:190.35px" class="cls_008"><span class="cls_008">No
                 Rujukan :
-                {{ $data->prefix_id }}/Q/{{ $year }}-{{ $pelanggan->id }}</span></div>
+                {{ $data->prefix_id }}/I/{{ $year }}-{{ $pelanggan->id }}</span></div>
         <div style="position:absolute;left:72.00px;top:191.35px; text-transform: uppercase !important; width:250px;"
             class="cls_008">
             <span class="cls_008">{{ $pelanggan->alamat1 }}, {{ $pelanggan->alamat2 }},

@@ -39,6 +39,8 @@ class InsentifController extends Controller
         ->join('jenis_insentifs', 'jenis_insentifs.id_jenis_insentif', 'insentifs.id_jenis_insentif')
         ->get();
 
+        // dd($insentif);
+
         return response()->json($insentif);
         
     }

@@ -44,7 +44,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">TUNAI A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">TUNAI A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -71,6 +71,10 @@
                 <td></td>
                 <td></td>
             </tr>
+            @php
+                $jumlah_credit = 0;
+                $jumlah_debit = 0;
+            @endphp
 
             @foreach ($alirans as $aliran)
 
@@ -83,6 +87,11 @@
                         <td></td>
                         <td></td>
                         <td></td>
+
+                        @php
+                            $jumlah_debit += $aliran->jumlah_aliran;
+                        @endphp
+
                     @else
                         <td></td>
                         <td></td>
@@ -92,11 +101,25 @@
                         <td>{{ $aliran->keterangan_aliran }}</td>
                         <td>{{ $aliran->jumlah_aliran }}</td>
 
+                        @php
+                            $jumlah_credit += $aliran->jumlah_aliran;
+                        @endphp
+
                     @endif
 
                 </tr>
 
             @endforeach
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{{ $jumlah_debit }}</td>
+
+                <td></td>
+                <td></td>
+                <td>{{ $jumlah_credit }}</td>
+            </tr>
 
         </tbody>
     </table>
@@ -111,7 +134,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">JUALAN/PEROLEHAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">JUALAN/PEROLEHAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -145,11 +168,8 @@
 
                 @if ($aliran->id_kategori_aliran == 1)
                     <tr>
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
 
-                        @if ($loop->index == 0)
+                        @if ($loop->index == 1)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
                             <td>{{ $jualan_perolehan }}</td>
@@ -158,11 +178,30 @@
                             <td></td>
                             <td></td>
                         @endif
+
+
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
                     </tr>
 
+                @else
+
+                    @if ($loop->index == 1)
+                        <tr>
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $jualan_perolehan }}</td>
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    @endif
+
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -188,13 +227,16 @@
 
 
             <tr>
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $jualan_perolehan }}</td>
 
                 <td></td>
                 <td></td>
                 <td></td>
+
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $jualan_perolehan }}</td>
+
+
             </tr>
 
         </tbody>
@@ -210,7 +252,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">DEPOSIT JUALAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">DEPOSIT JUALAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -244,11 +286,8 @@
 
                 @if ($aliran->id_kategori_aliran == 2)
                     <tr>
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
 
-                        @if ($loop->index == 0)
+                        @if ($loop->index == 1)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
                             <td>{{ $deposit_jualan }}</td>
@@ -257,11 +296,30 @@
                             <td></td>
                             <td></td>
                         @endif
+
+
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
                     </tr>
 
+                @else
+
+                    @if ($loop->index == 1)
+                        <tr>
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $deposit_jualan }}</td>
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    @endif
+
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -287,13 +345,15 @@
 
 
             <tr>
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $deposit_jualan }}</td>
 
                 <td></td>
                 <td></td>
                 <td></td>
+
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $deposit_jualan }}</td>
+
             </tr>
 
         </tbody>
@@ -309,7 +369,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">PULANGAN BELIAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">PULANGAN BELIAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -343,11 +403,8 @@
 
                 @if ($aliran->id_kategori_aliran == 3)
                     <tr>
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
 
-                        @if ($loop->index == 0)
+                        @if ($loop->index == 1)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
                             <td>{{ $pulangan_jualan }}</td>
@@ -356,11 +413,30 @@
                             <td></td>
                             <td></td>
                         @endif
+
+
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
                     </tr>
 
+                @else
+
+                    @if ($loop->index == 1)
+                        <tr>
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $pulangan_jualan }}</td>
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    @endif
+
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -386,13 +462,13 @@
 
 
             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $pulangan_jualan }}</td>
-
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
 
         </tbody>
@@ -408,7 +484,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">STOK AKHIR A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">STOK AKHIR A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -442,11 +518,8 @@
 
                 @if ($aliran->id_kategori_aliran == 4)
                     <tr>
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
 
-                        @if ($loop->index == 0)
+                        @if ($loop->index == 1)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
                             <td>{{ $stok_akhir }}</td>
@@ -455,11 +528,30 @@
                             <td></td>
                             <td></td>
                         @endif
+
+
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
                     </tr>
 
+                @else
+
+                    @if ($loop->index == 1)
+                        <tr>
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $stok_akhir }}</td>
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    @endif
+
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -485,13 +577,14 @@
 
 
             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $stok_akhir }}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
 
         </tbody>
@@ -507,7 +600,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">HASIL SEWAAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">HASIL SEWAAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -541,11 +634,8 @@
 
                 @if ($aliran->id_kategori_aliran == 5)
                     <tr>
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
 
-                        @if ($loop->index == 0)
+                        @if ($loop->index == 1)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
                             <td>{{ $hasil_sewaan }}</td>
@@ -554,11 +644,30 @@
                             <td></td>
                             <td></td>
                         @endif
+
+
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
                     </tr>
 
+                @else
+
+                    @if ($loop->index == 1)
+                        <tr>
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $hasil_sewaan }}</td>
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    @endif
+
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -584,13 +693,14 @@
 
 
             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $hasil_sewaan }}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
 
         </tbody>
@@ -606,7 +716,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">HASIL DIVIDEN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">HASIL DIVIDEN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -636,15 +746,10 @@
 
 
             @foreach ($alirans as $aliran)
-
-
                 @if ($aliran->id_kategori_aliran == 6)
                     <tr>
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
 
-                        @if ($loop->index == 0)
+                        @if ($loop->index == 1)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
                             <td>{{ $hasil_dividen }}</td>
@@ -653,11 +758,30 @@
                             <td></td>
                             <td></td>
                         @endif
+
+
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
                     </tr>
 
+                @else
+
+                    @if ($loop->index == 1)
+                        <tr>
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $hasil_dividen }}</td>
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    @endif
+
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -683,13 +807,14 @@
 
 
             <tr>
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $hasil_dividen }}</td>
 
                 <td></td>
                 <td></td>
                 <td></td>
+
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $hasil_dividen }}</td>
             </tr>
 
         </tbody>
@@ -705,7 +830,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">HASIL KOMISEN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">HASIL KOMISEN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -739,11 +864,8 @@
 
                 @if ($aliran->id_kategori_aliran == 7)
                     <tr>
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
 
-                        @if ($loop->index == 0)
+                        @if ($loop->index == 1)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
                             <td>{{ $hasil_komisen }}</td>
@@ -752,11 +874,30 @@
                             <td></td>
                             <td></td>
                         @endif
+
+
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
                     </tr>
 
+                @else
+
+                    @if ($loop->index == 1)
+                        <tr>
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $hasil_komisen }}</td>
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    @endif
+
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -782,13 +923,13 @@
 
 
             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $hasil_komisen }}</td>
-
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
 
         </tbody>
@@ -804,7 +945,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">HASIL LAIN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">HASIL LAIN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -838,11 +979,8 @@
 
                 @if ($aliran->id_kategori_aliran == 8)
                     <tr>
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
 
-                        @if ($loop->index == 0)
+                        @if ($loop->index == 1)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
                             <td>{{ $hasil_lain }}</td>
@@ -851,11 +989,30 @@
                             <td></td>
                             <td></td>
                         @endif
+
+
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
                     </tr>
 
+                @else
+
+                    @if ($loop->index == 1)
+                        <tr>
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $hasil_lain }}</td>
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    @endif
+
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -879,15 +1036,15 @@
 
             </tr>
 
-
             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $hasil_lain }}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
 
         </tbody>
@@ -905,7 +1062,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">BELIAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">BELIAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -939,6 +1096,11 @@
 
                 @if ($aliran->id_kategori_aliran == 9)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -948,16 +1110,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $belian }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -983,13 +1152,13 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $belian }}</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </tbody>
@@ -1005,7 +1174,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">DEPOSIT BELIAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">DEPOSIT BELIAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1039,6 +1208,11 @@
 
                 @if ($aliran->id_kategori_aliran == 10)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1048,16 +1222,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $deposit_belian }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1083,13 +1264,13 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $deposit_belian }}</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </tbody>
@@ -1104,7 +1285,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">PULANGAN JUALAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">PULANGAN JUALAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1138,6 +1319,11 @@
 
                 @if ($aliran->id_kategori_aliran == 11)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1147,16 +1333,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $pulangan_jualan }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1182,13 +1375,14 @@
 
 
             <tr>
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $pulangan_jualan }}</td>
+
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $pulangan_jualan }}</td>
             </tr>
 
         </tbody>
@@ -1204,7 +1398,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">STOK AWAL A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">STOK AWAL A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1238,6 +1432,11 @@
 
                 @if ($aliran->id_kategori_aliran == 12)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1247,16 +1446,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $stok_awal }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1282,13 +1488,15 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+
 
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $stok_awal }}</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </tbody>
@@ -1305,7 +1513,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">KOS PENGEPOSAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">KOS PENGEPOSAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1339,6 +1547,11 @@
 
                 @if ($aliran->id_kategori_aliran == 13)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1348,16 +1561,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $kos_pengeposan }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1383,13 +1603,13 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $kos_pengeposan }}</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </tbody>
@@ -1405,7 +1625,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">KOS ALAT TULIS A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">KOS ALAT TULIS A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1439,6 +1659,11 @@
 
                 @if ($aliran->id_kategori_aliran == 14)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1448,16 +1673,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $kos_alat_tulis }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1483,13 +1715,13 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $kos_alat_tulis }}</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </tbody>
@@ -1505,7 +1737,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">BAYARAN SEWA A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">BAYARAN SEWA A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1539,6 +1771,11 @@
 
                 @if ($aliran->id_kategori_aliran == 15)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1548,16 +1785,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $bayaran_sewa }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1583,13 +1827,15 @@
 
 
             <tr>
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $bayaran_sewa }}</td>
+
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $bayaran_sewa }}</td>
+
             </tr>
 
         </tbody>
@@ -1605,7 +1851,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">UPAH/GAJI PEKERJA A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">UPAH/GAJI PEKERJA A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1639,6 +1885,11 @@
 
                 @if ($aliran->id_kategori_aliran == 16)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1648,16 +1899,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $upah_gaji_pekerja }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1683,13 +1941,14 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
 
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $upah_gaji_pekerja }}</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </tbody>
@@ -1705,7 +1964,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">UPAH/GAJI SENDIRI A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">UPAH/GAJI SENDIRI A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1739,6 +1998,11 @@
 
                 @if ($aliran->id_kategori_aliran == 17)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1748,16 +2012,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $upah_gaji_sendiri }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1783,13 +2054,13 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $upah_gaji_sendiri }}</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </tbody>
@@ -1805,7 +2076,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">KWSP/SOCSO A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">KWSP/SOCSO A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1839,6 +2110,11 @@
 
                 @if ($aliran->id_kategori_aliran == 18)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1848,16 +2124,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $kwsp_socso }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1883,13 +2166,15 @@
 
 
             <tr>
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $kwsp_socso }}</td>
+
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $kwsp_socso }}</td>
+
             </tr>
 
         </tbody>
@@ -1906,7 +2191,8 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">BAYARAN BIL (UTILITI) A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">BAYARAN BIL (UTILITI) A/C
+                </th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -1940,6 +2226,11 @@
 
                 @if ($aliran->id_kategori_aliran == 19)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -1949,16 +2240,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $bayaran_bil }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -1984,13 +2282,15 @@
 
 
             <tr>
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $bayaran_bil }}</td>
+
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $bayaran_bil }}</td>
+
             </tr>
 
         </tbody>
@@ -2006,7 +2306,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">PETROL/TOL/PARKING A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">PETROL/TOL/PARKING A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -2040,6 +2340,11 @@
 
                 @if ($aliran->id_kategori_aliran == 20)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -2049,16 +2354,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $petrol_tol_parking }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -2084,13 +2396,13 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $petrol_tol_parking }}</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </tbody>
@@ -2107,7 +2419,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">PENYELENGGARAAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">PENYELENGGARAAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -2141,6 +2453,11 @@
 
                 @if ($aliran->id_kategori_aliran == 21)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -2150,16 +2467,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $penyelenggaraan }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -2185,13 +2509,14 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
 
                 <td>{{ date('M d', strtotime($nextmonth)) }}</td>
                 <td>BAKI B/B</td>
                 <td>{{ $penyelenggaraan }}</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
 
         </tbody>
@@ -2207,7 +2532,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">BELIAN ASET A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">BELIAN ASET A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -2241,6 +2566,11 @@
 
                 @if ($aliran->id_kategori_aliran == 22)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -2250,16 +2580,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $belian_aset }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -2285,13 +2622,15 @@
 
 
             <tr>
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $belian_aset }}</td>
+
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $belian_aset }}</td>
+
             </tr>
 
         </tbody>
@@ -2307,7 +2646,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">BAYARAN KOMISEN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">BAYARAN KOMISEN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -2341,6 +2680,11 @@
 
                 @if ($aliran->id_kategori_aliran == 23)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -2350,16 +2694,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $bayaran_komisen }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -2385,13 +2736,15 @@
 
 
             <tr>
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $bayaran_komisen }}</td>
+
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $bayaran_komisen }}</td>
+
             </tr>
 
         </tbody>
@@ -2407,7 +2760,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">CUKAI/ZAKAT A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">CUKAI/ZAKAT A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -2439,8 +2792,13 @@
             @foreach ($alirans as $aliran)
 
 
-                @if ($aliran->id_kategori_aliran == 25)
+                @if ($aliran->id_kategori_aliran == 24)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -2450,16 +2808,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $cukai_zakat }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -2485,13 +2850,15 @@
 
 
             <tr>
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $cukai_zakat }}</td>
+
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $cukai_zakat }}</td>
+
             </tr>
 
         </tbody>
@@ -2508,7 +2875,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">PEMBAYARAN PINJAMAN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">PEMBAYARAN PINJAMAN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -2542,6 +2909,11 @@
 
                 @if ($aliran->id_kategori_aliran == 25)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -2551,16 +2923,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $bayaran_pinjaman }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -2586,13 +2965,15 @@
 
 
             <tr>
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $bayaran_pinjaman }}</td>
+
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $bayaran_pinjaman }}</td>
+
             </tr>
 
         </tbody>
@@ -2609,7 +2990,7 @@
         <thead>
             <tr>
                 <th>DR</th>
-                <th colspan="4" style="width: 200px; text-align:center">BAYARAN LAIN A/C</th>
+                <th colspan="4" style="width: 200px; text-align:center; font-weight: bold;">BAYARAN LAIN A/C</th>
                 <th style="text-align::right">CR</th>
 
             </tr>
@@ -2643,6 +3024,11 @@
 
                 @if ($aliran->id_kategori_aliran == 26)
                     <tr>
+                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
+                        <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td>{{ $aliran->jumlah_aliran }}</td>
+
+
                         @if ($loop->index == 0)
                             <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
                             <td>BAKI H/B</td>
@@ -2652,16 +3038,23 @@
                             <td></td>
                             <td></td>
                         @endif
-
-
-                        <td>{{ date('M d', strtotime($aliran->tarikh_aliran)) }}</td>
-                        <td>{{ $aliran->keterangan_aliran }}</td>
-                        <td>{{ $aliran->jumlah_aliran }}</td>
                     </tr>
+                @else
+
+                    @if ($loop->index == 0)
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ date('M t', strtotime($aliran->tarikh_aliran)) }}</td>
+                            <td>BAKI H/B</td>
+                            <td>{{ $bayaran_lain }}</td>
+
+                        </tr>
+                    @endif
 
                 @endif
-
-
 
             @endforeach
             <tr>
@@ -2687,13 +3080,15 @@
 
 
             <tr>
+                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
+                <td>BAKI B/B</td>
+                <td>{{ $bayaran_lain }}</td>
+
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td>{{ date('M d', strtotime($nextmonth)) }}</td>
-                <td>BAKI B/B</td>
-                <td>{{ $bayaran_lain }}</td>
+
             </tr>
 
         </tbody>

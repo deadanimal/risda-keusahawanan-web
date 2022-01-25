@@ -112,9 +112,35 @@ class KatalogController extends Controller
         ->join('users', 'users.id', 'katalogs.id_pengguna')
         ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
         ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+        ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
+        ->join('negeris', 'negeris.U_Negeri_ID', 'perniagaans.U_Negeri_ID')
+        ->select(
+            "syarikats.namasyarikat",
+            "syarikats.notelefon",
+            "perniagaans.alamat1",
+            "perniagaans.alamat2",
+            "perniagaans.alamat3",
+            "perniagaans.poskod",
+            "negeris.Negeri",
+            "perniagaans.latitud",
+            "perniagaans.logitud",
+
+            "perniagaans.facebook",
+            "perniagaans.instagram",
+            "perniagaans.twitter",
+            "perniagaans.lamanweb",
+            // "perniagaans.lamanweb",
+
+            "katalogs.nama_produk",
+            "katalogs.kandungan_produk",
+            "katalogs.harga_produk",
+            "katalogs.berat_produk",
+            "katalogs.keterangan_produk",
+            "katalogs.gambar_url",
+            )
         ->get()->first();
 
-        dd($katalog);
+        // dd($katalog);
 
         $pdf = PDF::loadView('pdf.katalog', [
             'katalog' => $katalog
@@ -122,18 +148,9 @@ class KatalogController extends Controller
 
         $fname = time() . '-katalog-' . $id;
 
-        \Storage::put('/katalog/' . $fname, $pdf->output());
+        \Storage::put('katalog/' . $fname, $pdf->output());
 
-        $file = public_path() . "/storage/katalog/" . $fname;
-
-        // dd($file);
-        $headers = [
-            'Content-Type' => 'application/pdf',
-        ];
-
-        return $pdf->download($fname . '.pdf');
-
-        // return response()->json("katalog/".$fname);
+        return response()->json("katalog/".$fname);
 
     }
 }

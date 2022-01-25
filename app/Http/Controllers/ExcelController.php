@@ -59,16 +59,11 @@ class ExcelController extends Controller
             'tahun' => $year,
         ]);
 
-        $fname = time() . '-buku-tunai-' . $month . $year;
+        $fname = time() . '-buku-tunai-' . $month . $year.'.pdf';
 
-        \Storage::put('/buku-tunai-pdf/' . $fname, $pdf->output());
-
-        $file = public_path() . "/storage/buku-tunai-pdf/" . $fname;
+        \Storage::put('buku-tunai-pdf/' . $fname, $pdf->output());
 
         // dd($file);
-        $headers = [
-            'Content-Type' => 'application/pdf',
-        ];
 
         return response()->json("buku-tunai-pdf/".$fname);
 
@@ -261,16 +256,9 @@ class ExcelController extends Controller
             'hasil_lain'=>$hasil_lain,
         ]);
 
-        $fname = time() . '-pnl-' . $month . $year;
+        $fname = time() . '-pnl-' . $month . $year.".pdf";
 
-        \Storage::put('/pnl-pdf/' . $fname, $pdf->output());
-
-        $file = public_path() . "/storage/pnl-pdf/" . $fname;
-
-        // dd($file);
-        $headers = [
-            'Content-Type' => 'application/pdf',
-        ];
+        \Storage::put('pnl-pdf/' . $fname, $pdf->output());
 
         return response()->json("pnl-pdf/".$fname);
 
@@ -467,18 +455,11 @@ class ExcelController extends Controller
 
         
 
-        $fname = time() . '-Lejer-' . $month . $year;
+        $fname = time() . '-Lejer-' . $month . $year.".pdf";
 
         // return $pdf->download($fname . '.pdf');
 
-        \Storage::put('/Lejer-pdf/' . $fname, $pdf->output());
-
-        $file = public_path() . "/storage/Lejer-pdf/" . $fname;
-
-        // // dd($file);
-        $headers = [
-            'Content-Type' => 'application/pdf',
-        ];
+        \Storage::put('Lejer-pdf/' . $fname, $pdf->output());
 
         return response()->json("Lejer-pdf/".$fname);
 
