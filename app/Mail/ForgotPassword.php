@@ -34,7 +34,7 @@ class ForgotPassword extends Mailable
      */
     public function build()
     {
-        return $this->view('email.forgot_password')->subject('NOTIFIKASI PERMOHONAN KUPA KATA LALUAN')->with([
+        return $this->view('email.forgot_password')->subject('NOTIFIKASI PERMOHONAN LUPA KATA LALUAN')->with([
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password

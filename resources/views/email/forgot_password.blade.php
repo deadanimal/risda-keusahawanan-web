@@ -1,7 +1,7 @@
 <h3>Notifikasi Permohonan Lupa Kata Laluan Aplikasi Risda-Keusahawanan</h3> 
 <p>Salam Sejahtera,</p>
 <p>Tuan/Puan,</p>
-<p>Aplikasi Risda-Keusahawanan telah menerima permohonan lupa kata laluan daripada pihak Tuan/Puan. Berikut adalah butiran pengguna:</p>
+<p>Aplikasi RISDA-Keusahawanan telah menerima permohonan lupa kata laluan daripada pihak Tuan/Puan. Berikut adalah butiran pengguna:</p>
 
 <p>Nama : {{ $name }}</p>
 <p>Emel Pengguna : {{$email}}</p>

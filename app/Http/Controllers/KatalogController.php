@@ -146,7 +146,7 @@ class KatalogController extends Controller
             'katalog' => $katalog
         ])->setPaper('a4', 'landscape');
 
-        $fname = time() . '-katalog-' . $id;
+        $fname = time() . '-katalog-' . $id.'.pdf';
 
         \Storage::put('katalog/' . $fname, $pdf->output());
 
