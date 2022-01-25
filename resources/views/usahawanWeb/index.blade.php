@@ -395,6 +395,7 @@ $( document ).ready(function() {
 function API(){
     $('.loader').show();
     var nokp = $("#displaydua input[name=pekebunkp]").val();
+    var idusahawan = $("#displaydua input[name=idusahawan]").val();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -402,7 +403,8 @@ function API(){
         url: "{{ route('usahawan.get') }}",
         type:"POST",
         data: {     
-            nokp:nokp
+            nokp:nokp,
+            idusahawan:idusahawan
         },
         success: function(data) {
             console.log(data);
