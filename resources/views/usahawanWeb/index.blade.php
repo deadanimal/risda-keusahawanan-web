@@ -408,7 +408,7 @@ function API(){
         },
         success: function(data) {
             console.log(data);
-            $("#displaydua input[name=pekebunname]").val(data.Nama_PK);
+            $("#displaydua input[name=pekebunname]").val(data[0].Nama_PK);
             alert("Data Pekebun Berjaya Ditarik");
             $('.loader').hide();
         }

@@ -18,12 +18,16 @@ use App\Models\Kampung;
 use App\Models\Seksyen;
 use App\Models\KategoriUsahawan;
 use App\Models\AuditTrail;
+use App\Models\Pekebun;
 
 class UsahawanControllerWeb extends Controller
 {
     public function index()
     {
         $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
         $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
         $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         $ddPT = PusatTanggungjawab::where('status', 1)->get();
@@ -195,17 +199,27 @@ class UsahawanControllerWeb extends Controller
 
     public function usahawanGet(Request $req)
     {
-        $pekebun = Pekebun::where('usahawanid', $request->idusahawan)->first();
-        // $pekebun->Nama_PK = $vals->Nama_PK;
-        // $pekebun->No_KP = 
-        // $pekebun->noTS = 
-
         $client = new \GuzzleHttp\Client();
         $request = $client->request('GET', 'https://www4.risda.gov.my/espek/portalpkprofiltanah/?nokp='.$req->nokp.'', [
             'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', '1cc11a9fec81dc1f99f353f403d6f5bac620aa8f']
         ]);
+        
         $response = $request->getBody()->getContents();
         $vals = json_decode($response);
+
+        $pekebun = Pekebun::where('usahawanid', $req->idusahawan)->first();
+        if(isset($pekebun)){
+            $pekebun->Nama_PK = $vals[0]->Nama_PK;
+            $pekebun->No_KP = $vals[0]->No_KP;
+            $pekebun->save();
+        }else{
+            $pekebun = new Pekebun();
+            $pekebun->Nama_PK = $vals[0]->Nama_PK;
+            $pekebun->No_KP = $vals[0]->No_KP;
+            $pekebun->usahawanid = $req->idusahawan;
+            $pekebun->save();
+        }
+
         return $vals;
         // dd($vals);
     }

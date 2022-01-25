@@ -17,8 +17,8 @@ class CreatePekebunsTable extends Migration
             $table->id();
 
             $table->string('usahawanid',50);
-            $table->string('status_daftar_usahawan',50);
-            $table->string('Nama_PK',250);
+            $table->string('status_daftar_usahawan',50)->nullable();
+            $table->string('Nama_PK',250)->nullable();
             $table->string('No_KP',50);
             // $table->string('Tsmohon_No',20);
             
