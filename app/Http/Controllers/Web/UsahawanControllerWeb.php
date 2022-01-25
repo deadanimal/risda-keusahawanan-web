@@ -195,8 +195,10 @@ class UsahawanControllerWeb extends Controller
 
     public function usahawanGet(Request $req)
     {
-        $usahawan = Usahawan::where('usahawanid', $request->idusahawan)->first();
-
+        $pekebun = Pekebun::where('usahawanid', $request->idusahawan)->first();
+        // $pekebun->Nama_PK = $vals->Nama_PK;
+        // $pekebun->No_KP = 
+        // $pekebun->noTS = 
 
         $client = new \GuzzleHttp\Client();
         $request = $client->request('GET', 'https://www4.risda.gov.my/espek/portalpkprofiltanah/?nokp='.$req->nokp.'', [
