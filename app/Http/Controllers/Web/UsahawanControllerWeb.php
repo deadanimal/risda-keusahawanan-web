@@ -223,5 +223,15 @@ class UsahawanControllerWeb extends Controller
         return $vals;
         // dd($vals);
     }
+
+    public function usahawanPost2(Request $request)
+    {
+        // return $request->id;
+        $user = User::where('usahawanid', $request->id)->first();
+        $user->password = '$2y$10$HWYZbKricDxuacRL/cpBoOSiZo7F3nQafsQkjXN2Q9fxy9ghPZFm.';
+        $user->profile_status = 0;
+        $user->save();
+
+    }
 }
  

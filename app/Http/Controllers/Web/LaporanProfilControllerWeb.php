@@ -151,10 +151,10 @@ class LaporanProfilControllerWeb extends Controller
             foreach ($insentif2 as $insentif2s) {
                 $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
                 if(isset($jenisinsentif)){
-                    $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama.",".$jenisinsentif->nama_insentif;
+                    $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama."/".$jenisinsentif->nama_insentif;
                 }
-                $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum.",".$insentif2s->nilai_insentif;
-                $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun.",".$insentif2s->tahun_terima_insentif;
+                $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum."/".$insentif2s->nilai_insentif;
+                $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
             }   
              
 

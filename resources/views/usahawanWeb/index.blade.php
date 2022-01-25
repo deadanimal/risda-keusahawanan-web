@@ -349,6 +349,11 @@
                                 <button class="btn btn-primary" type="button" onclick="SahkanUsahawan()">Sahkan Profil
                             @endif
                         </div>
+                        @if (Auth::user()->role == 1)
+                        <div class="col-12 d-flex justify-content-end">
+                            <button class="btn btn-primary" type="button" onclick="ResetPass()">Reset Password
+                        </div>
+                        @endif
                         <div class="col-lg-6">
                             <label class="form-label">No KP Pekebun</label>
                             <input class="form-control" name="pekebunkp" type="text" disable="true"/>
@@ -391,6 +396,25 @@ $( document ).ready(function() {
     // API();
     $('.loader').hide();
 });
+
+function ResetPass(){
+    var id = $("#displaydua input[name=idusahawan]").val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('usahawan.post2') }}",
+        type:"POST",
+        data: {     
+            id:id
+        },
+        success: function(data) {
+            console.log(data);
+            alert("Password Berjaya Di Set Semula");
+            $('.loader').hide();
+        }
+    });
+}
 
 function API(){
     $('.loader').show();
