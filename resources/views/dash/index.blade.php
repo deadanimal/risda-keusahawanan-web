@@ -47,14 +47,14 @@
                 <div class="row g-0">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas" height="400px" style="padding:15px;"></canvas>
+                            <canvas id="canvas" height="500px" style="padding:15px;"></canvas>
                         </div>
                     </div>
                 </div>
                 <div class="row g-0">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas2" height="450px" width="600" style="padding:15px;"></canvas>
+                            <canvas id="canvas2" height="500px" width="600" style="padding:15px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">
@@ -95,14 +95,14 @@
                 <div class="row g-0">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas3" height="400" style="padding:15px;"></canvas>
+                            <canvas id="canvas3" height="500" style="padding:15px;"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="row g-0">
+                <div class="row g-0" style="padding-top: 10px;">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas4" height="450px" width="600" style="padding:15px;"></canvas>
+                            <canvas id="canvas4" height="500px" width="600" style="padding:15px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">
@@ -143,10 +143,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row g-0">
+                <div class="row g-0" style="padding-top: 10px;">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas5" height="450" width="600" style="padding:15px;"></canvas>
+                            <canvas id="canvas5" height="500" width="600" style="padding:15px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">

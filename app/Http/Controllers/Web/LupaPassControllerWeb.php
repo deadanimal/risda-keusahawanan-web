@@ -30,7 +30,7 @@ class LupaPassControllerWeb extends Controller
         // }
         $request->validate([
             'email' => ['required'],
-            'current_password' => ['required'],
+            // 'current_password' => ['required'],
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);
@@ -41,41 +41,30 @@ class LupaPassControllerWeb extends Controller
             echo "window.location.href = '/LupaPass';";
             echo '</script>';
         }
-        $check = Hash::check($request->current_password, $user->password);
+
+        $pass = Hash::make($request->new_password);
         
-        if($check == false){
-            echo '<script language="javascript">';
-            echo 'alert("Kata Laluan Lama Tidak Tepat");';
-            echo "window.location.href = '/LupaPass';";
-            echo '</script>';
-        }else{
-            
-            $pass = Hash::make($request->new_password);
-            
-            $pegawai = Pegawai::where('id', $user->idpegawai)->first();
+        $pegawai = Pegawai::where('id', $user->idpegawai)->first();
 
-            $user->email = $request->email;
-            $user->password = $pass;
-            $user->email_verified_at = date('Y-m-d H:i:s');
-            $user->save();
+        $user->email = $request->email;
+        $user->password = $pass;
+        $user->email_verified_at = date('Y-m-d H:i:s');
+        $user->save();
 
-            $pegawai->email = $request->email;
-            $pegawai->save();
+        $pegawai->email = $request->email;
+        $pegawai->save();
 
-            $maildata = [
-                'name' => $user->name,
-                'email' => $request->email,
-                'password' => $request->new_password
-            ];
-            Mail::to($request->email)->send(new \App\Mail\LupaPassword($maildata));
+        $maildata = [
+            'name' => $user->name,
+            'email' => $request->email,
+            'password' => $request->new_password
+        ];
+        Mail::to($request->email)->send(new \App\Mail\LupaPassword($maildata));
 
-            echo '<script language="javascript">';
-            echo 'alert("Kemaskini Akaun Berjaya");';
-            echo "window.location.href = '/landing';";
-            echo '</script>';
-
-            
-        }
+        echo '<script language="javascript">';
+        echo 'alert("Kemaskini Akaun Berjaya");';
+        echo "window.location.href = '/landing';";
+        echo '</script>';
     }
 
 }

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Web;
+// ini_set('max_execution_time', 180);
+ini_set('memory_limit', '-1');
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +23,13 @@ class PegawaiControllerWeb extends Controller
             return redirect('/landing');
         }
         $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-        $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
+        $authmukim = $authpegawai->Negeri;
         if($authuser->role == 1){
-            $pegawai = Pegawai::All();
+            $pegawai = Pegawai::take(10)->get();
+            // all();
+            // take(100)->get();
             $ddPeranan = Peranan::All();
-            $ddMukim = Mukim::where('status', 1)->orderBy('Mukim', 'ASC')->get();
+            $ddMukim = Mukim::select('U_Mukim_ID','Mukim')->where('status', 1)->orderBy('Mukim', 'ASC')->get();
         }else if($authuser->role == 3){
             $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authmukim->U_Negeri_ID)->get()->unique();
             $ddPeranan = Peranan::where('peranan_id', '>=', '3')->get();
@@ -38,28 +42,8 @@ class PegawaiControllerWeb extends Controller
             return redirect('/landing');
         }
         
-        foreach ($pegawai as $pegawai_L) {
-            if($pegawai_L->id != null){
-                $status = User::where('idpegawai', $pegawai_L->id)->first();
-                //$temp = 
-                if(isset($status->status_pengguna) == true){
-                    $pegawai_L->status_pengguna = $status->status_pengguna;
-                }
-                $mukim = Mukim::where('U_Mukim_ID', $pegawai_L->mukim)->first();
-                if(isset($mukim->U_Negeri_ID)){
-                    $negeri = Negeri::where('U_Negeri_ID', $mukim->U_Negeri_ID)->first();
-                    if(isset($negeri->Negeri)){
-                        $pegawai_L->negerinama = $negeri->Negeri;
-                    }
-                    $daerah = Daerah::where('U_Daerah_ID', $mukim->U_Daerah_ID)->first();
-                    if(isset($daerah)){
-                        $pegawai_L->daerahnama = $daerah->Daerah;
-                    }
-                }
-                
-            }
-        }
         // dd($pegawai);
+
         return view('pegawai.index'
         ,[
             'pegawai'=>$pegawai,
@@ -71,7 +55,7 @@ class PegawaiControllerWeb extends Controller
 
     public function pegawaiPost(Request $request)
     {
-        //dd($request->status);
+        // dd($request);
         $user = User::where('idpegawai', $request->id)->first();
         $user->status_pengguna = $request->status;
         $user->role = $request->peranan;
@@ -118,4 +102,36 @@ class PegawaiControllerWeb extends Controller
         return $mukim;
     }
 
+    public function pegawaiPost2()
+    {
+        $client = new \GuzzleHttp\Client();
+        $request = $client->request('GET', 'https://www4.risda.gov.my/fire/getallstaff/', [
+            'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', 'f9d00dae5c6d6d549c306bae6e88222eb2f84307']
+        ]);
+        $response = $request->getBody()->getContents();
+        $vals = json_decode($response);
+        foreach ($vals as $val){
+            $pegawai = Pegawai::where('nokp', $val->nokp)->first();
+            if(!isset($pegawai)){
+                $newpegawai = new Pegawai();
+                $newpegawai->nama = $val->nama;
+                $newpegawai->nokp = $val->nokp;
+                $newpegawai->nopekerja = $val->nopekerja;
+                $newpegawai->GelaranJwtn = $val->GelaranJwtn;
+                $newpegawai->NamaPT = $val->Kod_PT;
+                $newpegawai->NamaPA = $val->NamaPA;
+                $newpegawai->NamaUnit = $val->NamaUnit;
+                $newpegawai->Jawatan = $val->Jawatan;
+                $newpegawai->StesenBertugas = $val->StesenBertugas;
+                $newpegawai->email = $val->email;
+                $newpegawai->notel = $val->notel;
+                $newpegawai->mukim = "";
+                $newpegawai->peranan_pegawai = "";
+
+                $newpegawai->save();
+            }
+
+        }
+        return true;
+    }
 }

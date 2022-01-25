@@ -9,7 +9,7 @@
         PERANAN PEGAWAI : {{$authuser->peranan->nama_peranan ?? ''}} <br>
     </div>
 </div>
-@if ($noti == 1)
+@if ($noti ?? '' == 1)
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
         Sila Sahkan Kemaskini Usahawan Di <a class="btn btn-primary" href="/usahawanWeb">Tetapan Usahawan</a>

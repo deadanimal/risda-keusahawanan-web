@@ -349,7 +349,19 @@
                                 <button class="btn btn-primary" type="button" onclick="SahkanUsahawan()">Sahkan Profil
                             @endif
                         </div>
+                        <div class="col-lg-6">
+                            <label class="form-label">Nama Pekebun</label>
+                            <input class="form-control usahawanfield" name="pekebunname"   type="text"  />
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label">No KP Pekebun</label>
+                            <input class="form-control usahawanfield" name="pekebunkp"   type="text"  />
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button class="btn btn-primary" type="submit" onclick="SubmitUsahawan()">Kemas Kini Pekebun
+                        </div>
                       </form>
+                        
                     </div>
                 </div>
             </div>
