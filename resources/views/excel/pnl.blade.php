@@ -389,7 +389,7 @@
                 <td></td>
                 <td>
                     @php
-                        $untung_rugi_bersih = $jualan_bersih - $untung_rugi_kasar - $jumlah_perbelanjaan + $jumlah_hasil;
+                        $untung_rugi_bersih = $jualan_bersih - $kos_jualan - $jumlah_perbelanjaan + $jumlah_hasil; 
                     @endphp
                     {{ number_format($untung_rugi_bersih, 2) }}
                 </td>

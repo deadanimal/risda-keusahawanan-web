@@ -26,7 +26,7 @@
             border-collapse: collapse;
         }
 
-        td{
+        td {
             padding: 2px
         }
 
@@ -109,7 +109,7 @@
                         $totalJualanPerolehan += $aliran->jumlah_aliran;
                     @endphp
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>JUALAN/PEROLEHAN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
@@ -128,7 +128,7 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>DEPOSIT JUALAN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
@@ -145,7 +145,7 @@
                         $total_pulangan_belian += $aliran->jumlah_aliran;
                     @endphp
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>PULANGAN BELIAN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
@@ -164,7 +164,7 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>STOK AKHIR</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
@@ -182,7 +182,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                
+
             </tr>
 
             @foreach ($alirans as $aliran)
@@ -192,7 +192,7 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>HASIL SEWAAN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
@@ -209,7 +209,7 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>HASIL DIVIDEN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
@@ -226,7 +226,7 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>HASIL KOMISEN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
@@ -243,7 +243,7 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>HASIL LAIN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
@@ -285,12 +285,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>BELIAN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -302,12 +303,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>DEPOSIT BELIAN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -319,12 +321,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>PULANGAN JUALAN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -336,12 +339,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>STOK AWAL</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -353,12 +357,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>KOS PENGEPOSAN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -370,12 +375,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>KOS ALAT TULIS</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -387,12 +393,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>BAYARAN SEWA</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -404,12 +411,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>UPAH/ GAJI PEKERJA</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -422,12 +430,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>UPAH/ GAJI SENDIRI</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -439,12 +448,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>KWSP/SOCSO</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -456,12 +466,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>BAYARAN BIL (UTILITI)</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -473,12 +484,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>PETROL/TOL/PARKING</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -490,12 +502,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>PENYELENGGARAAN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -507,12 +520,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>BELIAN ASET</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -524,12 +538,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>BAYARAN KOMISEN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -541,12 +556,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>CUKAI/ ZAKAT</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach
@@ -558,12 +574,13 @@
                     @endphp
 
                     <tr>
-                        <td>{{ $aliran->tarikh_aliran }}</td>
+                        <td>{{ date('d/m/y', strtotime($aliran->tarikh_aliran)) }}</td>
                         <td>BAYARAN LAIN</td>
                         <td>{{ $aliran->keterangan_aliran }}</td>
+                        <td></td>
                         <td>{{ number_format($aliran->jumlah_aliran, 2) }}</td>
                         <td></td>
-                        <td></td>
+
                     </tr>
                 @endif
             @endforeach

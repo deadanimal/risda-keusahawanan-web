@@ -9,11 +9,7 @@ use League\Config\Exception\ValidationException;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $user = User::all();
@@ -21,36 +17,25 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         $user = User::where('no_kp', $request->no_kp)->get()->first();
 
-        return response()->json($user);
+        
         if (!$user || !Hash::check($request->password, $user->password)) {
             // throw ValidationException::withMessages([
             //     'no_kp' => ['The provided credentials are incorrect.'],
             // ]);
+            return response()->json();
+
+            
         }
+        return response()->json($user);
 
-        $token = $request->user()->createToken($request->token_name);
+        // $token = $request->user()->createToken($request->token_name);
 
-        return ['token' => $token->plainTextToken];
+        // return ['token' => $token->plainTextToken];
     }
 
     /**

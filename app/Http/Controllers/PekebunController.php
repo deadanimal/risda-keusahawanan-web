@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 
 class PekebunController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         $pekebun = Pekebun::all();
@@ -21,22 +17,7 @@ class PekebunController extends Controller
         return response()->json($pekebun);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $pekebun = new Pekebun();
@@ -62,43 +43,14 @@ class PekebunController extends Controller
         return response()->json($pekebun);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pekebun  $pekebun
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
-        // $pekebun = Pekebun::all();
-        // return view('pekebun.show', [
-        //     'pekebun' => $pekebun
-        // ]);
         $pekebun = Pekebun::where('usahawanid', $id)->get()->first();
         return response()->json($pekebun);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pekebun  $pekebun
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pekebun $pekebun)
-    {
-        // $pekebun = Pekebun::all();
-        return view('pekebun.edit', [
-            'pekebun' => $pekebun
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pekebun  $pekebun
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Pekebun $pekebun)
     {
         $pekebun->usahawanid =$request->usahawanid;
@@ -123,14 +75,18 @@ class PekebunController extends Controller
         return response()->json($pekebun);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pekebun  $pekebun
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Pekebun $pekebun)
+    public function getPekebunEspek($nokp)
     {
-        //
+
+        // dd($nokp);
+        $client = new \GuzzleHttp\Client();
+        $request = $client->request('GET', 'https://www4.risda.gov.my/espek/portalpkprofiltanah/?nokp='.$nokp.'', [
+            'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', '1cc11a9fec81dc1f99f353f403d6f5bac620aa8f']
+        ]);
+        $response = $request->getBody()->getContents();
+        $vals = json_decode($response);
+        // dd($vals);
+
+        return response()->json($vals);
     }
 }

@@ -58,6 +58,9 @@ Route::apiResource('usahawan', UsahawanController::class);
 Route::apiResource('pegawai', PegawaiController::class);
 
 Route::apiResource('pekebun', PekebunController::class);
+Route::get('pekebun/getPekebunEspek/{id}', [PekebunController::class, 'getPekebunEspek']);
+
+
 Route::apiResource('syarikat', SyarikatController::class);
 Route::apiResource('perniagaan', PerniagaanController::class);
 Route::apiResource('kategori_aliran', KategoriAliranController::class);
@@ -124,7 +127,7 @@ Route::get('deleteStok/{id}', [StokController::class, 'deleteMany']);
 
 Route::get('/katalogPegawai/{i}', [KatalogController::class, 'showKatalogPegawai']);
 Route::get('/pengesahanPegawai/{i}', [KatalogController::class, 'pengesahanPegawai']);
-Route::get('/katalogPdf/{i}', [KatalogController::class, 'katalogPdf']);
+Route::get('katalog/katalogPdf/{i}', [KatalogController::class, 'katalogPdf']);
 
 Route::get('/lawatan/usahawan/{id}', [LawatanController::class, 'showLawatanUsahawan']);
 Route::get('/lawatan/updateUsahawan/{id}', [LawatanController::class, 'updateLawatanUsahawan']);
