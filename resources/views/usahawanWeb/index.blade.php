@@ -358,7 +358,7 @@
                             <input class="form-control usahawanfield" name="pekebunkp"   type="text"  />
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                            <button class="btn btn-primary" type="submit" onclick="SubmitUsahawan()">Kemas Kini Pekebun
+                            <button class="btn btn-primary" type="button" onclick="API()">Kemas Kini Pekebun
                         </div>
                       </form>
                         
@@ -388,8 +388,28 @@
 $( document ).ready(function() {
     GetPengguna();
     datatable();
+    API();
     $('.loader').hide();
 });
+
+function API(){
+    $('.loader').show();
+    var nokp = '610916015420';
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('usahawan.get') }}",
+        type:"POST",
+        data: {     
+            nokp:nokp
+        },
+        success: function(data) {
+            alert("Data Pekebun Berjaya Ditarik");
+            $('.loader').hide();
+        }
+    });
+}
 
 function datatable(){
     var table = $('#penggunatbl').DataTable({

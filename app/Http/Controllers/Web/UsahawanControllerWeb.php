@@ -192,5 +192,17 @@ class UsahawanControllerWeb extends Controller
 
         return '../images/'.$imgname;
     }
+
+    public function usahawanGet(Request $req)
+    {
+        // dd($req->nokp);
+        $client = new \GuzzleHttp\Client();
+        $request = $client->request('GET', 'https://www4.risda.gov.my/espek/portalpkprofiltanah/?nokp='.$req->nokp.'', [
+            'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', '1cc11a9fec81dc1f99f353f403d6f5bac620aa8f']
+        ]);
+        $response = $request->getBody()->getContents();
+        $vals = json_decode($response);
+        dd($vals);
+    }
 }
  
