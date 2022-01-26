@@ -21,7 +21,7 @@ class CreatePekebunsTable extends Migration
             $table->string('Nama_PK',250)->nullable();
             $table->string('No_KP',50);
 
-            $table->string('noTS');
+            // $table->string('noTS');
            
 
             $table->timestamps();
