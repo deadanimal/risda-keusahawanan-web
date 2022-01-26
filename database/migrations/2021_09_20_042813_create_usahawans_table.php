@@ -26,9 +26,9 @@ class CreateUsahawansTable extends Migration
             $table->string('statusperkahwinan',50)->nullable();
             $table->integer('U_Pendidikan_ID')->nullable();
             $table->string('U_Taraf_Pendidikan_Tertinggi_ID')->nullable();
-            $table->string('alamat1',150)->nullable();
-            $table->string('alamat2',150)->nullable();
-            $table->string('alamat3',150)->nullable();
+            $table->string('alamat1')->nullable();
+            $table->string('alamat2')->nullable();
+            $table->string('alamat3')->nullable();
             $table->string('bandar',50)->nullable();
             $table->integer('poskod')->length(5)->nullable();
             $table->string('U_Negeri_ID',12)->nullable();

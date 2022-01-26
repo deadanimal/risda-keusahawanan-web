@@ -20,9 +20,9 @@ class CreatePerniagaansTable extends Migration
             $table->string('jenisperniagaan',12)->nullable();
             $table->string('klusterperniagaan',12)->nullable();
             $table->string('subkluster')->nullable();
-            $table->string('alamat1',150)->nullable();
-            $table->string('alamat2',150)->nullable();
-            $table->string('alamat3',150)->nullable();
+            $table->string('alamat1')->nullable();
+            $table->string('alamat2')->nullable();
+            $table->string('alamat3')->nullable();
             $table->string('bandar',50)->nullable();
             $table->integer('poskod')->length(5)->nullable();
             $table->string('U_Negeri_ID',12)->nullable();

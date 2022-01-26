@@ -29,9 +29,9 @@ class CreateSyarikatsTable extends Migration
             $table->string('tahunmulaoperasi',4)->nullable();
             $table->integer('bilanganpekerja')->nullable();
 
-            $table->string('alamat1_ssm',150)->nullable();
-            $table->string('alamat2_ssm',150)->nullable();
-            $table->string('alamat3_ssm',150)->nullable();
+            $table->string('alamat1_ssm')->nullable();
+            $table->string('alamat2_ssm')->nullable();
+            $table->string('alamat3_ssm')->nullable();
             $table->date('tarikh_mula_mof')->nullable();
             $table->date('tarikh_tamat_mof')->nullable();
             $table->string('status_bumiputera')->nullable();
