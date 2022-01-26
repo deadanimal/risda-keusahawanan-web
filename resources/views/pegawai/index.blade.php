@@ -263,7 +263,7 @@ function simpanpengguna(user){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ route('pegawai.post') }}",
+        url: "/pegawaiPost",
         type:"PUT",
         data: {     
             id:id,
