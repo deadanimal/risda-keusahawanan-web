@@ -129,6 +129,18 @@ class PegawaiControllerWeb extends Controller
                 $newpegawai->peranan_pegawai = "";
 
                 $newpegawai->save();
+
+                $newuser = new User();
+                $newuser->name = $val->nama;
+                $newuser->email = $val->email;
+                $newuser->password = '$2y$10$HWYZbKricDxuacRL/cpBoOSiZo7F3nQafsQkjXN2Q9fxy9ghPZFm.';
+                $newuser->idpegawai = $newpegawai->id;
+                $newuser->status_pengguna = 1;
+                $newuser->no_kp = $val->nokp;
+                $newuser->role = 0;
+                $newuser->type = 1;
+                $newuser->profile_status = 0;
+                $newuser->save();
             }
 
         }
