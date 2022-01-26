@@ -112,6 +112,7 @@ class PegawaiControllerWeb extends Controller
         $vals = json_decode($response);
         foreach ($vals as $val){
             $pegawai = Pegawai::where('nokp', $val->nokp)->first();
+            $user = User::where('no_kp', $val->nokp)->first();
             if(!isset($pegawai)){
                 $newpegawai = new Pegawai();
                 $newpegawai->nama = $val->nama;
@@ -129,7 +130,8 @@ class PegawaiControllerWeb extends Controller
                 $newpegawai->peranan_pegawai = "";
 
                 $newpegawai->save();
-
+            }
+            if(!isset($user)){
                 $newuser = new User();
                 $newuser->name = $val->nama;
                 $newuser->email = $val->email;
@@ -142,7 +144,6 @@ class PegawaiControllerWeb extends Controller
                 $newuser->profile_status = 0;
                 $newuser->save();
             }
-
         }
         return true;
     }
