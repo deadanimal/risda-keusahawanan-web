@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePekebunsTable extends Migration
+class CreateJenisTanaman extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreatePekebunsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pekebuns', function (Blueprint $table) {
+        Schema::create('jenis_tanaman', function (Blueprint $table) {
             $table->id();
 
-            $table->string('usahawanid',50);
-            $table->string('status_daftar_usahawan',50)->nullable();
-            $table->string('Nama_PK',250)->nullable();
-            $table->string('No_KP',50);
-
-            $table->string('noTS');
-           
+            $table->string('tanahid');
+            $table->string('jenis_tanaman_kebun'); 
 
             $table->timestamps();
         });
@@ -35,6 +30,6 @@ class CreatePekebunsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pekebuns');
+        Schema::dropIfExists('jenis_tanaman');
     }
 }
