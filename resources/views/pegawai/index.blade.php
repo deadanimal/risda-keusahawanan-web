@@ -156,7 +156,7 @@ function API(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ route('pegawai.post2') }}",
+        url: "/pegawaiPost2",
         type:"GET",
         success: function(data) {
             alert("Data Pegawai Berjaya Ditarik");

@@ -403,7 +403,7 @@ function ResetPass(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ route('usahawan.post2') }}",
+        url: "/usahawanPost2",
         type:"POST",
         data: {     
             id:id
@@ -424,7 +424,7 @@ function API(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ route('usahawan.get') }}",
+        url: "/usahawanGet",
         type:"POST",
         data: {     
             nokp:nokp,
@@ -527,7 +527,7 @@ function aktifkanpengguna(type,user,input){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ route('usahawan.post') }}",
+        url: "/usahawanPost",
         type:"PUT",
         data: {     
             type:type,
@@ -636,7 +636,7 @@ function SahkanUsahawan(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ route('usahawan.postsahprofil') }}",
+        url: "/SahUsahawanProfil",
         type:"PUT",
         data: {
             id:id
@@ -662,7 +662,7 @@ function profileimg(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ route('usahawan.uploadprofile') }}",
+        url: "/UploadProfile",
         type:"POST",
         data: formData,
         processData: false,

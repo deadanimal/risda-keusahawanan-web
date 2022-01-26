@@ -179,7 +179,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ route('pantauinddtl.get') }}",
+            url: "/pantauinddtl",
             type:"GET",
             data: {     
                 tahun:year,
