@@ -31,6 +31,7 @@ class PasswordController extends Controller
             Mail::to($request->email)->send(new \App\Mail\ForgotPassword($maildata));
 
             $user->password = Hash::make($defpassword);
+            $user->profile_status = 0;
             $user->save();
 
             $header = "Berjaya";
