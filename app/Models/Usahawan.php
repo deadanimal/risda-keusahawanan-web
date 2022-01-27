@@ -9,17 +9,17 @@ class Usahawan extends Model
 {
     use HasFactory;
 
-    protected $with = ['pekebun'];
+    // protected $with = ['pekebun'];
 
         /**
          * Get the user associated with the Pegawai
          *
          * @return \Illuminate\Database\Eloquent\Relations\HasOne
          */
-        public function pekebun()
-        {
-            return $this->hasOne(Pekebun::class, 'usahawanid', 'usahawanid');
-        }
+        // public function pekebun()
+        // {
+        //     return $this->hasOne(Pekebun::class, 'usahawanid', 'usahawanid');
+        // }
         // public function negeri()
         // {
         //     return $this->hasOne(Negeri::class, 'U_Negeri_ID', 'U_Negeri_ID');
