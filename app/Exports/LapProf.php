@@ -128,8 +128,8 @@ class LapProf implements FromArray, WithHeadings
                 $usahawan->taraf_pendidikan = '';
             }
             
-            $usahawan->MediumPemasaran = '';
-            $usahawan->AlamatMediumPemasaran = '';
+            // $usahawan->MediumPemasaran = '';
+            // $usahawan->AlamatMediumPemasaran = '';
 
             // if(isset($usahawan->perniagaan)){
                 
@@ -285,8 +285,8 @@ class LapProf implements FromArray, WithHeadings
                 $excel->data20 = $usahawan->perniagaan->subkluster;
             }
             
-            $excel->data21 = $usahawan->MediumPemasaran;
-            $excel->data22 = $usahawan->AlamatMediumPemasaran;
+            // $excel->data21 = $usahawan->MediumPemasaran;
+            // $excel->data22 = $usahawan->AlamatMediumPemasaran;
             // $excel->data23 = $usahawan->jnsbantuansemasa;
             // $excel->data24 = $usahawan->kelulusanbantuansemasa;
             // $excel->data25 = $usahawan->thnbantuansemasa;
@@ -305,9 +305,9 @@ class LapProf implements FromArray, WithHeadings
             // $excel->data38 = $usahawan->jumaliran;
             // $excel->data39 = $usahawan->purataaliran;
             // $excel->data40 = $usahawan->capaisasaran;
-            // if(isset($usahawan->kateusah)){
-            //     $excel->data41 = $usahawan->kateusah->nama_kategori_usahawan;
-            // }
+            if(isset($usahawan->kateusah)){
+                $excel->data41 = $usahawan->kateusah->nama_kategori_usahawan;
+            }
             
             // if(isset($usahawan->syarikat)){
             //     $excel->data42 = $usahawan->syarikat->namasyarikat;
