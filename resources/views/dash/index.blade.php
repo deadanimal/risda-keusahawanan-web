@@ -8,7 +8,7 @@
             <div class="col">
               <h6 class="mb-0">Statistik Dashboard</h6>
             </div>
-            <select id="sort1" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:40vh;margin-left:20px;" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:40vh;margin-left:20px;" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
                 <option value="">Jenis Insentif</option>
                 @foreach ($ddInsentif as $items)
                     <option value="{{ $items->id_jenis_insentif }}" {{ ( $items->id_jenis_insentif == $getjenisinsentif) ? 'selected' : '' }}>
@@ -16,7 +16,7 @@
                     </option>
                 @endforeach
             </select>
-            <select id="sort2" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                 <option selected="true" disabled="disabled" value="">Tahun</option>
                 <?php
                 $currtahun = date("Y");
@@ -27,7 +27,7 @@
                 }
                 ?>
             </select>
-            <select id="sort3" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('Negeri',this.value)" id="iptNegeri">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('Negeri',this.value)" id="iptNegeri">
                 <option value="">Negeri</option>
                 @foreach ($ddNegeri as $items)
                     <option value="{{ $items->U_Negeri_ID }}" {{ ( $items->U_Negeri_ID == $getNegeri) ? 'selected' : '' }}>
@@ -199,7 +199,7 @@
                 // var img = canvas.toDataURL(); //image data of canvas
                 var pdf = new jsPDF('p', 'pt', 'letter');
                 // pdf.text(50, 30, );
-                var rep = "RISDA eKeusahawanan Statistic Report \n Jenis Insentif -" + document.getElementById("sort1").value + "     Tahun -" + document.getElementById("sort2").value + "     Negeri -" + document.getElementById("sort3").value;
+                var rep = "RISDA eKeusahawanan Statistic Report \n Jenis Insentif -" + document.getElementById("iptJenisInsentif").value + "     Tahun -" + document.getElementById("iptYear").value + "     Negeri -" + document.getElementById("iptNegeri").value;
                 console.log(rep);
                 pdf.setFontSize(9);
                 pdf.text(50, 30, rep);
