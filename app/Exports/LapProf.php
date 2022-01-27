@@ -253,9 +253,9 @@ class LapProf implements FromArray, WithHeadings
             $excel->data3 = $usahawan->namausahawan;
             $excel->data4 = $usahawan->nokadpengenalan;
             $excel->data5 = $usahawan->umur;
-            // $excel->data6 = $usahawan->jantina;
-            // $excel->data7 = $usahawan->taraf_pendidikan;
-            // $excel->data8 = $usahawan->alamat1.','.$usahawan->alamat2.','.$usahawan->alamat3;
+            $excel->data6 = $usahawan->jantina;
+            $excel->data7 = $usahawan->taraf_pendidikan;
+            $excel->data8 = $usahawan->alamat1.','.$usahawan->alamat2.','.$usahawan->alamat3;
             // $excel->data9 = $usahawan->poskod;
             // $excel->data10 = $usahawan->daerah->Daerah;
             // $excel->data11 = $usahawan->negeri->Negeri;
@@ -330,9 +330,9 @@ class LapProf implements FromArray, WithHeadings
                         "data3"=>$excel->data3,
                         "data4"=>$excel->data4,
                         "data5"=>$excel->data5,
-                        // "data6"=>$excel->data6,
-                        // "data7"=>$excel->data7,
-                        // "data8"=>$excel->data8,
+                        "data6"=>$excel->data6,
+                        "data7"=>$excel->data7,
+                        "data8"=>$excel->data8,
                         // "data9"=>$excel->data9,
                         // "data10"=>$excel->data10,
                         // "data11"=>$excel->data11,
