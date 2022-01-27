@@ -19,7 +19,7 @@ class LapProf implements FromCollection, WithHeadings
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function array(): array
+    public function collection()
     {
         // $authuser = Auth::user();
         // if(isset($authuser)){
