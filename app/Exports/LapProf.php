@@ -21,24 +21,25 @@ class LapProf implements FromArray, WithHeadings
     */
     public function array(): array
     {
-        $authuser = Auth::user();
-        if(isset($authuser)){
-            $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-        }else{
-            return redirect('/landing');
-        }
+        // $authuser = Auth::user();
+        // if(isset($authuser)){
+        //     $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+        // }else{
+        //     return redirect('/landing');
+        // }
         
-        $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
-        if($authuser->role == 1 || $authuser->role == 2){
-            $users = Usahawan::take(5)->get();
-            // all();
-        }else if($authuser->role == 3 || $authuser->role == 5){
-            $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
-        }else if($authuser->role == 4 || $authuser->role == 6){
-            $users = Usahawan::where('U_Daerah_ID', $authmukim->U_Daerah_ID)->get();
-        }else if($authuser->role == 7){
-            $users = Usahawan::where('Kod_PT', $authpegawai->NamaPT)->get();
-        }
+        // $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
+        $users = Usahawan::take(5)->get();
+        // if($authuser->role == 1 || $authuser->role == 2){
+        //     $users = Usahawan::take(5)->get();
+        //     // all();
+        // }else if($authuser->role == 3 || $authuser->role == 5){
+        //     $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
+        // }else if($authuser->role == 4 || $authuser->role == 6){
+        //     $users = Usahawan::where('U_Daerah_ID', $authmukim->U_Daerah_ID)->get();
+        // }else if($authuser->role == 7){
+        //     $users = Usahawan::where('Kod_PT', $authpegawai->NamaPT)->get();
+        // }
 
         
 
