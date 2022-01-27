@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6" style="text-align: center;">
-        <div class="mb-3" style="width: 400px;margin:0 auto;">
+        <div class="mb-3" style="width: 400px;margin:0 auto;overflow-x: scroll !important;overflow-y: scroll !important;">
             @foreach($errors->all() as $error)
                     <li>{{$error}}</li>
                 @endforeach
