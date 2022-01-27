@@ -71,13 +71,13 @@
                             <th>TAHUN TERIMA</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
+                    <tbody>
                         <?php $num=1; ?>
                         @foreach ($users as $user)
                         <tr>
                             <td><?php echo $num++;?></td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->PusatTang}}</td>
+                            <td>@if($user->negeri){{$user->negeri->Negeri}}@endif</td>
+                            <td>@if($user->PT){{$user->PT->keterangan}}@endif</td>
                             <td>{{$user->namausahawan}}</td>
                             <td>{{$user->nokadpengenalan}}</td>
                             <td>{{$user->umur}}</td>
@@ -85,23 +85,23 @@
                             <td>{{$user->taraf_pendidikan}}</td>
                             <td>@if($user->alamat1 != ""){{$user->alamat1}}, &nbsp;@endif @if($user->alamat2 != ""){{$user->alamat2}}, &nbsp;@endif {{$user->alamat3}}</td>
                             <td>{{$user->poskod}}</td>
-                            <td>{{$user->daerah}}</td>
-                            <td>{{$user->negeri}}</td>
-                            <td>{{$user->dun}}</td>
-                            <td>{{$user->parlimen}}</td>
+                            <td>@if($user->daerah){{$user->daerah->Daerah}}@endif</td>
+                            <td>@if($user->negeri){{$user->negeri->Negeri}}@endif</td>
+                            <td>@if($user->dun){{$user->dun->Dun}}@endif</td>
+                            <td>@if($user->parlimen){{$user->parlimen->Parlimen}}@endif</td>
                             <td>@if($user->notelefon != "") {{$user->notelefon}} @endif {{$user->nohp}}</td>
-                            <td>{{$user->PKnoTS}}</td>
-                            <td>{{$user->PKnoKP}}</td>
+                            <td>@if($user->pekebun){{$user->pekebun->noTS}}@endif</td>
+                            <td>@if($user->pekebun){{$user->pekebun->No_KP}}@endif</td>
                             <td>{{$user->status_daftar_usahawan}}</td>
-                            <td>{{$user->JenisPerniagaan}}</td>
-                            <td>{{$user->KlusterPerniagaan}}</td>
-                            <td>{{$user->SubKlusterPerniagaan}}</td>
+                            <td>@if($user->perniagaan){{$user->perniagaan->jenis->nama_jenis_perniagaan}}@endif</td>
+                            <td>@if($user->perniagaan){{$user->perniagaan->klusterperniagaan}}@endif</td>
+                            <td>@if($user->perniagaan){{$user->perniagaan->subkluster}}@endif</td>
                             <td>{{$user->MediumPemasaran}}</td>
                             <td>{{$user->AlamatMediumPemasaran}}</td>
                             <td>{{$user->jnsbantuansemasa}}</td>
                             <td>{{$user->kelulusanbantuansemasa}}</td>
                             <td>{{$user->thnbantuansemasa}}</td>
-                            <td>{{$user->aliran1}}</td>
+                            <td>@if(isset($user->aliran1)){{$user->aliran1}}@endif</td>
                             <td>{{$user->aliran2}}</td>
                             <td>{{$user->aliran3}}</td>
                             <td>{{$user->aliran4}}</td>
@@ -116,21 +116,21 @@
                             <td>{{$user->jumaliran}}</td>
                             <td>{{$user->purataaliran}}</td>
                             <td>{{$user->capaisasaran}}</td>
-                            <td>{{$user->KateUsahawan}}</td>
-                            <td>{{$user->namasyarikat}}</td>
+                            <td>@if($user->kateusah){{$user->kateusah->nama_kategori_usahawan}}@endif</td>
+                            <td>@if($user->syarikat){{$user->syarikat->namasyarikat}}@endif</td>
                             <td>{{$user->jenismilikan}}</td>
-                            <td>{{$user->nodaftarssm}}</td>
+                            <td>@if($user->syarikat){{$user->syarikat->nodaftarssm}}@endif</td>
                             <td>{{$user->alamatsyarikat}}</td>
-                            <td>{{$user->latitud}}</td>
-                            <td>{{$user->logitud}}</td>
-                            <td>{{$user->emailsyarikat}}</td>
+                            <td>@if($user->perniagaan){{$user->perniagaan->latitud}}@endif</td>
+                            <td>@if($user->perniagaan){{$user->perniagaan->logitud}}@endif</td>
+                            <td>@if($user->syarikat){{$user->syarikat->email}}@endif</td>
                             <td>{{$user->insentifsebelumnama}}</td>
                             <td>{{$user->insentifsebelumjum}}</td>
                             <td>{{$user->insentifsebelumtahun}}</td>
-                            <td>{{$user->nodaftarpersijilanhalal}}</td>
+                            <td>@if($user->syarikat){{$user->syarikat->nodaftarpersijilanhalal}}@endif</td>
                         </tr>
                         @endforeach
-                    </tbody> --}}
+                    </tbody>
                 </table>
                 <div style="padding-top: 10px;"> </div>
                 <table id="insentiftbl" >
@@ -178,8 +178,8 @@
                         @foreach ($users as $user)
                         <tr class="align-middle">
                             <td class="text-nowrap textlbl">{{$user->namausahawan}}</td>
-                            <td class="text-nowrap textlbl">{{$user->negeri}}</td>
-                            <td class="text-nowrap textlbl">{{$user->PusatTang}}</td>
+                            <td class="text-nowrap textlbl">@if($user->negeri){{$user->negeri->Negeri}}@endif</td>
+                            <td class="text-nowrap textlbl">@if($user->PT){{$user->PT->keterangan}}@endif</td>
                             <td class="text-nowrap" style="text-align: center;">
                                 <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="window.location.href='/profdetail/{{$user->id}}'">
                                 <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Laporan
