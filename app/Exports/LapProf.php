@@ -160,18 +160,18 @@ class LapProf implements FromArray, WithHeadings
 
                 $usahawan->alamatsyarikat = $usahawan->syarikat->alamat1_ssm.",".$usahawan->syarikat->alamat2_ssm.",".$usahawan->syarikat->alamat3_ssm;
             }
-            // $usahawan->jnsbantuansemasa = "";
-            // $usahawan->kelulusanbantuansemasa = "";
-            // $usahawan->thnbantuansemasa = "";
-            // $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->orderBy('tahun_terima_insentif', 'desc')->first();
-            // if(isset($insentif)){
-            //     $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif->id_jenis_insentif)->first();
-            //     if(isset($jenisinsentif)){
-            //         $usahawan->jnsbantuansemasa = $jenisinsentif->nama_insentif;
-            //     }
-            //     $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
-            //     $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
-            // }
+            $usahawan->jnsbantuansemasa = "";
+            $usahawan->kelulusanbantuansemasa = "";
+            $usahawan->thnbantuansemasa = "";
+            $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->latest()->first();
+            if(isset($insentif)){
+                $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif->id_jenis_insentif)->first();
+                if(isset($jenisinsentif)){
+                    $usahawan->jnsbantuansemasa = $jenisinsentif->nama_insentif;
+                }
+                $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
+                $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
+            }
 
             // $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
             // foreach ($insentif2 as $insentif2s) {
@@ -292,9 +292,9 @@ class LapProf implements FromArray, WithHeadings
             
             $excel->data21 = $usahawan->MediumPemasaran;
             $excel->data22 = $usahawan->AlamatMediumPemasaran;
-            // $excel->data23 = $usahawan->jnsbantuansemasa;
-            // $excel->data24 = $usahawan->kelulusanbantuansemasa;
-            // $excel->data25 = $usahawan->thnbantuansemasa;
+            $excel->data23 = $usahawan->jnsbantuansemasa;
+            $excel->data24 = $usahawan->kelulusanbantuansemasa;
+            $excel->data25 = $usahawan->thnbantuansemasa;
             // $excel->data26 = $usahawan->aliran1;
             // $excel->data27 = $usahawan->aliran2;
             // $excel->data28 = $usahawan->aliran3;
