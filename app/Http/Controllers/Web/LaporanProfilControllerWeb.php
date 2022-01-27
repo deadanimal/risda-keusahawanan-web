@@ -880,7 +880,9 @@ class LaporanProfilControllerWeb extends Controller
 
         if($request->type == 11){
             Report::where('tab20', Auth::user()->id)->where('type', 11)->delete();
-            $alirans = Aliran::where('id_pengguna',$request->id)->get();
+            $usaha = Usahawan::where('id', $request->id)->first();
+            $pengguna = User::where('usahawanid', $usaha->usahawanid)->first();
+            $alirans = Aliran::where('id_pengguna',$pengguna->id)->get();
             if($alirans->count()==0){
                 return "Tiada Data Aliran Dijumpai";
             }else{
@@ -915,7 +917,9 @@ class LaporanProfilControllerWeb extends Controller
 
         if($request->type == 12){
             Report::where('tab20', Auth::user()->id)->where('type', 12)->delete();
-            $alirans = Aliran::where('id_pengguna',$request->id)->get();
+            $usaha = Usahawan::where('id', $request->id)->first();
+            $pengguna = User::where('usahawanid', $usaha->usahawanid)->first();
+            $alirans = Aliran::where('id_pengguna',$pengguna->id)->get();
             if($alirans->count()==0){
                 return "Tiada Data Aliran Dijumpai";
             }else{
@@ -999,6 +1003,8 @@ class LaporanProfilControllerWeb extends Controller
 
         if($request->type == 14){
             Report::where('tab20', Auth::user()->id)->where('type', 14)->delete();
+            $usaha = Usahawan::where('id', $request->id)->first();
+            $pengguna = User::where('usahawanid', $usaha->usahawanid)->first();
             $alirans = Aliran::where('id_pengguna',$request->id)->get();
             if($alirans->count()==0){
                 return "Tiada Data Aliran Dijumpai";
