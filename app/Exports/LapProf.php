@@ -28,7 +28,7 @@ class LapProf implements FromArray, WithHeadings
         
         $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         if($authuser->role == 1 || $authuser->role == 2){
-            $users = Usahawan::chunk(5)->get();
+            $users = Usahawan::take(5)->get();
             // all();
         }else if($authuser->role == 3 || $authuser->role == 5){
             $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
@@ -40,7 +40,7 @@ class LapProf implements FromArray, WithHeadings
 
         
 
-        foreach($users as $usahawan){
+        // foreach($users as $usahawan){
             // $excel = (object)[];
             // $excel->data1 = '';
             // $excel->data2 = '';
@@ -375,7 +375,7 @@ class LapProf implements FromArray, WithHeadings
             //             "data52"=>$excel->data52
                         
             // );
-        }
+        // }
         return $users;
     }
 
