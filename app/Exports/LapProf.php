@@ -21,15 +21,15 @@ class LapProf implements FromArray, WithHeadings
     */
     public function array(): array
     {
-        // $authuser = Auth::user();
-        // if(isset($authuser)){
-        //     $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-        // }else{
-        //     return redirect('/landing');
-        // }
+        $authuser = Auth::user();
+        if(isset($authuser)){
+            $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+        }else{
+            return redirect('/landing');
+        }
         
-        // $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
-        $users = Usahawan::take(5)->get();
+        $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
+        // $users = Usahawan::take(5)->get();
         if($authuser->role == 1 || $authuser->role == 2){
             $users = Usahawan::take(5)->get();
             // all();
@@ -379,6 +379,7 @@ class LapProf implements FromArray, WithHeadings
                         
             );
         }
+        dd($array);
         return $array;
     }
 
