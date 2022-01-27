@@ -327,9 +327,9 @@ class LapProf implements FromArray, WithHeadings
             $array[] = array(
                         "data1"=>$excel->data1, 
                         "data2"=>$excel->data2,
-                        // "data3"=>$excel->data3,
-                        // "data4"=>$excel->data4,
-                        // "data5"=>$excel->data5,
+                        "data3"=>$excel->data3,
+                        "data4"=>$excel->data4,
+                        "data5"=>$excel->data5,
                         // "data6"=>$excel->data6,
                         // "data7"=>$excel->data7,
                         // "data8"=>$excel->data8,
