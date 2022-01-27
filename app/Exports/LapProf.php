@@ -163,15 +163,15 @@ class LapProf implements FromArray, WithHeadings
             $usahawan->jnsbantuansemasa = "";
             $usahawan->kelulusanbantuansemasa = "";
             $usahawan->thnbantuansemasa = "";
-            $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->first();
-            if(isset($insentif)){
-                $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif->id_jenis_insentif)->first();
-                if(isset($jenisinsentif)){
-                    $usahawan->jnsbantuansemasa = $jenisinsentif->nama_insentif;
-                }
-                $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
-                $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
-            }
+            // $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->first();
+            // if(isset($insentif)){
+            //     $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif->id_jenis_insentif)->first();
+            //     if(isset($jenisinsentif)){
+            //         $usahawan->jnsbantuansemasa = $jenisinsentif->nama_insentif;
+            //     }
+            //     $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
+            //     $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
+            // }
 
             // $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
             // foreach ($insentif2 as $insentif2s) {
