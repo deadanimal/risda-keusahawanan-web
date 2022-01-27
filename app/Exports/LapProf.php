@@ -257,11 +257,16 @@ class LapProf implements FromArray, WithHeadings
             $excel->data7 = $usahawan->taraf_pendidikan;
             $excel->data8 = $usahawan->alamat1.','.$usahawan->alamat2.','.$usahawan->alamat3;
             $excel->data9 = $usahawan->poskod;
-            $excel->data10 = $usahawan->daerah->Daerah;
-            $excel->data11 = $usahawan->negeri->Negeri;
-            $excel->data12 = $usahawan->dun->Dun;
-            $excel->data13 = $usahawan->parlimen->Parlimen;
-            $excel->data14 = $usahawan->notelefon.'/'.$usahawan->nohp;
+            if(isset($usahawan->daerah)){
+                $excel->data10 = $usahawan->daerah->Daerah;
+            }
+            if(isset($usahawan->negeri)){
+                $excel->data11 = $usahawan->negeri->Negeri;
+            }
+            
+            // $excel->data12 = $usahawan->dun->Dun;
+            // $excel->data13 = $usahawan->parlimen->Parlimen;
+            // $excel->data14 = $usahawan->notelefon.'/'.$usahawan->nohp;
             // if(isset($usahawan->pekebun)){
             //     $excel->data15 = $usahawan->pekebun->noTS;
             //     $excel->data16 = $usahawan->pekebun->No_KP;
@@ -336,9 +341,9 @@ class LapProf implements FromArray, WithHeadings
                         "data9"=>$excel->data9,
                         "data10"=>$excel->data10,
                         "data11"=>$excel->data11,
-                        "data12"=>$excel->data12,
-                        "data13"=>$excel->data13,
-                        "data14"=>$excel->data14,
+                        // "data12"=>$excel->data12,
+                        // "data13"=>$excel->data13,
+                        // "data14"=>$excel->data14,
             //             "data15"=>$excel->data15,
             //             "data16"=>$excel->data16,
             //             "data17"=>$excel->data17,
