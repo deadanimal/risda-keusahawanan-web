@@ -72,13 +72,7 @@
 <body>
 <main class="main" id="top">
   <?php 
-  try {
-    $app->run();
-} catch(\Exception $e) {
-    echo "<pre>";
-    echo $e;
-    echo "</pre>";
-}
+  // ini_set('memory_limit', '-1');
   ?>
       <div class="container" data-layout="container">
         <script>
