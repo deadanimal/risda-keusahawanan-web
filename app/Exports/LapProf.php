@@ -128,8 +128,8 @@ class LapProf implements FromArray, WithHeadings
                 $usahawan->taraf_pendidikan = '';
             }
             
-            $usahawan->MediumPemasaran = "";
-            $usahawan->AlamatMediumPemasaran = "";
+            $usahawan->MediumPemasaran = '';
+            $usahawan->AlamatMediumPemasaran = '';
 
             // if(isset($usahawan->perniagaan)){
                 
