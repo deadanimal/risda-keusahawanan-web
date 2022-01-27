@@ -198,7 +198,7 @@
 }
 </style>
 <div id="myModal" class="modal">
-    <div class="modal-content" style="height: 150px; width:320px;margin-top:100px;">
+    <div class="modal-content" style="height: 150px; width:60vh;margin-top:100px;">
         <span class="close" style="float: left">&times;</span>
         <input style="display: none;" value="" id="pegawaiid"/>
         <input style="display: none;" value="" id="mukimval"/>
