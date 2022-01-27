@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // error_reporting(0);
-ini_set('memory_limit', '-1');
-ini_set('max_execution_time', 180);
+// ini_set('memory_limit', '-1');
+// ini_set('max_execution_time', 180);
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Insentif;
