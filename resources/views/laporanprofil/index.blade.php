@@ -5,7 +5,10 @@
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Laporan Profil Usahawan</h3>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <table id="lapprofall">
+                {{-- <div style="padding-bottom: 20px;">
+                    <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
+                </div> --}}
+                {{-- <table id="lapprofall">
                     <thead>
                         <tr>
                             <th rowspan="2" >NO</th>
@@ -45,10 +48,7 @@
                             <th rowspan="2">ALAMAT SYARIKAT/ PERNIAGAAN</th>
                             <th colspan="2">KOORDINAT PREMIS PERNIAGAAN</th>
                             <th rowspan="2">E-MAIL</th>
-                            {{-- <th rowspan="2">STATUS PERNIAGAAN (AKTIF / TIDAK AKTIF)</th> --}}
                             <th colspan="3">LAIN-LAIN BANTUAN RISDA TAHUN SEBELUM</th>
-                            {{-- <th rowspan="2">LATIHAN/KURSUS RISDA TELAH DIHADIRI</th> --}}
-                            {{-- <th rowspan="2">DAFTAR JENAMA PRODUK</th> --}}
                             <th rowspan="2">NO SIJIL HALAL JAKIM</th>
                         </tr>
                         <tr>
@@ -71,7 +71,7 @@
                             <th>TAHUN TERIMA</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
+                    <tbody>
                         <?php $num=1; ?>
                         @foreach ($users as $user)
                         <tr>
@@ -130,8 +130,8 @@
                             <td>@if($user->syarikat){{$user->syarikat->nodaftarpersijilanhalal}}@endif</td>
                         </tr>
                         @endforeach
-                    </tbody> --}}
-                </table>
+                    </tbody>
+                </table> --}}
                 <div style="padding-top: 10px;"> </div>
                 <table id="insentiftbl" >
                     <colgroup>
@@ -202,28 +202,32 @@
             "paging":   true,
             "bFilter": true,
         });
-        $('#lapprofall').DataTable( {
-            searching: false,
-            sorting:false,
-            paging:false,
-            dom: 'Bfrtip',
-            buttons: [
-                'copy',
-                {
-                    extend: 'csv',
-                    title: 'LAPORAN BUKU TUNAI'
-                },
-                {
-                    extend: 'excel',
-                    title: 'LAPORAN BUKU TUNAI'
-                }
-            ]
-        });
-        $('#lapprofall').hide();
-        $('#lapprofall_info').hide();
+        // $('#lapprofall').DataTable( {
+        //     searching: false,
+        //     sorting:false,
+        //     paging:false,
+        //     dom: 'Bfrtip',
+        //     buttons: [
+        //         'copy',
+        //         {
+        //             extend: 'csv',
+        //             title: 'LAPORAN BUKU TUNAI'
+        //         },
+        //         {
+        //             extend: 'excel',
+        //             title: 'LAPORAN BUKU TUNAI'
+        //         }
+        //     ]
+        // });
+        // $('#lapprofall').hide();
+        // $('#lapprofall_info').hide();
         
         $('.loader').hide();
     });
+
+    function ExportExcel(){
+        window.location.href = "/ExcelLapProfil";
+    }
 
     
     

@@ -140,9 +140,4 @@ class PendapatanBulananControllerWeb extends Controller
 
         return [$result,$tfoot,$c_insentif,$c_jualan];
     }
-
-    public function export1($tahun, $jenis)
-    {
-            return Excel::download(new PendBul($tahun,$jenis), 'PendapatanBulananNegeri.xlsx');
-    }
 }
