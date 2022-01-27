@@ -273,10 +273,10 @@ class LapProf implements FromArray, WithHeadings
             
             
             $excel->data14 = $usahawan->notelefon.'/'.$usahawan->nohp;
-            // if(isset($usahawan->pekebun)){
-            //     $excel->data15 = $usahawan->pekebun->noTS;
-            //     $excel->data16 = $usahawan->pekebun->No_KP;
-            // }
+            if(isset($usahawan->pekebun)){
+                $excel->data15 = $usahawan->pekebun->noTS;
+                $excel->data16 = $usahawan->pekebun->No_KP;
+            }
             
             // $excel->data17 = $usahawan->status_daftar_usahawan;
             // if(isset($usahawan->perniagaan)){
@@ -350,8 +350,8 @@ class LapProf implements FromArray, WithHeadings
                         "data12"=>$excel->data12,
                         "data13"=>$excel->data13,
                         "data14"=>$excel->data14,
-                        // "data15"=>$excel->data15,
-                        // "data16"=>$excel->data16,
+                        "data15"=>$excel->data15,
+                        "data16"=>$excel->data16,
                         // "data17"=>$excel->data17,
                         // "data18"=>$excel->data18,
                         // "data19"=>$excel->data19,
