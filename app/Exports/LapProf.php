@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Exports;
-
 use Illuminate\Support\Facades\Auth;
 use App\Models\Usahawan;
 use App\Models\Pegawai;
@@ -29,7 +28,8 @@ class LapProf implements FromArray, WithHeadings
         
         $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         if($authuser->role == 1 || $authuser->role == 2){
-            $users = Usahawan::all();
+            $users = Usahawan::take(100)->get();
+            // all();
         }else if($authuser->role == 3 || $authuser->role == 5){
             $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
