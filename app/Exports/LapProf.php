@@ -95,67 +95,67 @@ class LapProf implements FromArray, WithHeadings
             $excel->data51 = '';
             $excel->data52 = '';
 
-            $dateOfBirth = $usahawan->tarikhlahir;
-            $today = date("Y-m-d");
-            $diff = date_diff(date_create($dateOfBirth), date_create($today));
-            $usahawan->umur = $diff->format('%y');
+            // $dateOfBirth = $usahawan->tarikhlahir;
+            // $today = date("Y-m-d");
+            // $diff = date_diff(date_create($dateOfBirth), date_create($today));
+            // $usahawan->umur = $diff->format('%y');
 
-            if($usahawan->U_Jantina_ID == 1){
-                $usahawan->jantina = "Lelaki";
-            }else if($usahawan->U_Jantina_ID == 2){
-                $usahawan->jantina = "Perempuan";
-            }else{
-                $usahawan->jantina = "Lain - Lain";
-            }
+            // if($usahawan->U_Jantina_ID == 1){
+            //     $usahawan->jantina = "Lelaki";
+            // }else if($usahawan->U_Jantina_ID == 2){
+            //     $usahawan->jantina = "Perempuan";
+            // }else{
+            //     $usahawan->jantina = "Lain - Lain";
+            // }
             
-            if($usahawan->U_Pendidikan_ID == 1){
-                $usahawan->taraf_pendidikan = 'UPSR/PSRA/Setaraf';
-            }else if($usahawan->U_Pendidikan_ID == 2){
-                $usahawan->taraf_pendidikan = 'PMR/SRP/LCE/Setaraf';
-            }else if($usahawan->U_Pendidikan_ID == 3){
-                $usahawan->taraf_pendidikan = 'SPM/MCE/Setaraf';
-            }else if($usahawan->U_Pendidikan_ID == 4){
-                $usahawan->taraf_pendidikan = 'STPM/Diploma/Setaraf';
-            }else if($usahawan->U_Pendidikan_ID == 5){
-                $usahawan->taraf_pendidikan = 'Ijazah Pertama/Ke Atas';
-            }else if($usahawan->U_Pendidikan_ID == 6){
-                $usahawan->taraf_pendidikan = 'Tiada';
-            }else{
-                $usahawan->taraf_pendidikan = '';
-            }
+            // if($usahawan->U_Pendidikan_ID == 1){
+            //     $usahawan->taraf_pendidikan = 'UPSR/PSRA/Setaraf';
+            // }else if($usahawan->U_Pendidikan_ID == 2){
+            //     $usahawan->taraf_pendidikan = 'PMR/SRP/LCE/Setaraf';
+            // }else if($usahawan->U_Pendidikan_ID == 3){
+            //     $usahawan->taraf_pendidikan = 'SPM/MCE/Setaraf';
+            // }else if($usahawan->U_Pendidikan_ID == 4){
+            //     $usahawan->taraf_pendidikan = 'STPM/Diploma/Setaraf';
+            // }else if($usahawan->U_Pendidikan_ID == 5){
+            //     $usahawan->taraf_pendidikan = 'Ijazah Pertama/Ke Atas';
+            // }else if($usahawan->U_Pendidikan_ID == 6){
+            //     $usahawan->taraf_pendidikan = 'Tiada';
+            // }else{
+            //     $usahawan->taraf_pendidikan = '';
+            // }
             
-            $usahawan->MediumPemasaran = "";
-            $usahawan->AlamatMediumPemasaran = "";
+            // $usahawan->MediumPemasaran = "";
+            // $usahawan->AlamatMediumPemasaran = "";
 
-            if(isset($usahawan->perniagaan)){
+            // if(isset($usahawan->perniagaan)){
                 
-                if($usahawan->perniagaan->facebook != ""){
-                    $usahawan->MediumPemasaran .= "Facebook ";
-                    $usahawan->AlamatMediumPemasaran .= "Facebook - ".$usahawan->perniagaan->facebook;
-                }
-                if($usahawan->perniagaan->instagram != ""){
-                    $usahawan->MediumPemasaran .= "Instagram ";
-                    $usahawan->AlamatMediumPemasaran .= "Instagram - ".$usahawan->perniagaan->instagram;
-                }
-                if($usahawan->perniagaan->twitter != ""){
-                    $usahawan->MediumPemasaran .= "Twitter ";
-                    $usahawan->AlamatMediumPemasaran .= "Twitter - ".$usahawan->perniagaan->twitter;
-                }
-            }
+            //     if($usahawan->perniagaan->facebook != ""){
+            //         $usahawan->MediumPemasaran .= "Facebook ";
+            //         $usahawan->AlamatMediumPemasaran .= "Facebook - ".$usahawan->perniagaan->facebook;
+            //     }
+            //     if($usahawan->perniagaan->instagram != ""){
+            //         $usahawan->MediumPemasaran .= "Instagram ";
+            //         $usahawan->AlamatMediumPemasaran .= "Instagram - ".$usahawan->perniagaan->instagram;
+            //     }
+            //     if($usahawan->perniagaan->twitter != ""){
+            //         $usahawan->MediumPemasaran .= "Twitter ";
+            //         $usahawan->AlamatMediumPemasaran .= "Twitter - ".$usahawan->perniagaan->twitter;
+            //     }
+            // }
             
-            if(isset($usahawan->syarikat)){
-                if($usahawan->syarikat->jenismilikanperniagaan == "JPP01"){
-                    $usahawan->jenismilikan = "PEMILIKAN TUNGGAL";
-                }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP02"){
-                    $usahawan->jenismilikan = "PERKONGSIAN";
-                }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP03"){
-                    $usahawan->jenismilikan = "SYARIKAT SDN BHD";
-                }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP04"){
-                    $usahawan->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
-                }
+            // if(isset($usahawan->syarikat)){
+            //     if($usahawan->syarikat->jenismilikanperniagaan == "JPP01"){
+            //         $usahawan->jenismilikan = "PEMILIKAN TUNGGAL";
+            //     }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP02"){
+            //         $usahawan->jenismilikan = "PERKONGSIAN";
+            //     }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP03"){
+            //         $usahawan->jenismilikan = "SYARIKAT SDN BHD";
+            //     }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP04"){
+            //         $usahawan->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
+            //     }
 
-                $usahawan->alamatsyarikat = $usahawan->syarikat->alamat1_ssm.",".$usahawan->syarikat->alamat2_ssm.",".$usahawan->syarikat->alamat3_ssm;
-            }
+            //     $usahawan->alamatsyarikat = $usahawan->syarikat->alamat1_ssm.",".$usahawan->syarikat->alamat2_ssm.",".$usahawan->syarikat->alamat3_ssm;
+            // }
 
             // $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->orderBy('tahun_terima_insentif', 'desc')->first();
             // if(isset($insentif)){
