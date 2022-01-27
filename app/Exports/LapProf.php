@@ -171,76 +171,77 @@ class LapProf implements FromArray, WithHeadings
                 $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
             }
 
-            $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
-            foreach ($insentif2 as $insentif2s) {
-                $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
-                if(isset($jenisinsentif)){
-                    $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama."/".$jenisinsentif->nama_insentif;
-                }
-                $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum."/".$insentif2s->nilai_insentif;
-                $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
-            }
-            // dd($usahawan->usahawanid);
-            $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
-            $getYear = date("Y");
-            unset($usahawan->aliran1);
-            unset($usahawan->aliran2);
-            unset($usahawan->aliran3);
-            unset($usahawan->aliran4);
-            unset($usahawan->aliran5);
-            unset($usahawan->aliran6);
-            unset($usahawan->aliran7);
-            unset($usahawan->aliran8);
-            unset($usahawan->aliran9);
-            unset($usahawan->aliran10);
-            unset($usahawan->aliran11);
-            unset($usahawan->aliran12);
-            if(isset($pengguna)){
-                $alirans = Aliran::where('id_pengguna', $pengguna->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
-            }else{
-                unset($alirans);
-            }
+            // $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
+            // foreach ($insentif2 as $insentif2s) {
+            //     $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
+            //     if(isset($jenisinsentif)){
+            //         $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama."/".$jenisinsentif->nama_insentif;
+            //     }
+            //     $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum."/".$insentif2s->nilai_insentif;
+            //     $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
+            // }
+            // // dd($usahawan->usahawanid);
+            // $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
+            // $getYear = date("Y");
+            // unset($usahawan->aliran1);
+            // unset($usahawan->aliran2);
+            // unset($usahawan->aliran3);
+            // unset($usahawan->aliran4);
+            // unset($usahawan->aliran5);
+            // unset($usahawan->aliran6);
+            // unset($usahawan->aliran7);
+            // unset($usahawan->aliran8);
+            // unset($usahawan->aliran9);
+            // unset($usahawan->aliran10);
+            // unset($usahawan->aliran11);
+            // unset($usahawan->aliran12);
+            // if(isset($pengguna)){
+            //     $alirans = Aliran::where('id_pengguna', $pengguna->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
+            // }else{
+            //     unset($alirans);
+            // }
             
-            // dd($aliran);
-            if(isset($alirans)){
-                foreach ($alirans as $aliran) {
-                    $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
-                    if($aliran->bulan == 1){
-                        $usahawan->aliran1 = $usahawan->aliran1 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 2){
-                        $usahawan->aliran2 = $usahawan->aliran2 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 3){
-                        $usahawan->aliran3 = $usahawan->aliran3 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 4){
-                        $usahawan->aliran4 = $usahawan->aliran4 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 5){
-                        $usahawan->aliran5 = $usahawan->aliran5 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 6){
-                        $usahawan->aliran6 = $usahawan->aliran6 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 7){
-                        $usahawan->aliran7 = $usahawan->aliran7 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 8){
-                        $usahawan->aliran8 = $usahawan->aliran8 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 9){
-                        $usahawan->aliran9 = $usahawan->aliran9 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 10){
-                        $usahawan->aliran10 = $usahawan->aliran10 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 11){
-                        $usahawan->aliran11 = $usahawan->aliran11 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 12){
-                        $usahawan->aliran12 = $usahawan->aliran12 + $aliran->jumlah_aliran;
-                    }
-                    $usahawan->jumaliran = $usahawan->jumaliran + $aliran->jumlah_aliran;
-                }
-            }
+            // // dd($aliran);
+            // if(isset($alirans)){
+            //     foreach ($alirans as $aliran) {
+            //         $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
+            //         if($aliran->bulan == 1){
+            //             $usahawan->aliran1 = $usahawan->aliran1 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 2){
+            //             $usahawan->aliran2 = $usahawan->aliran2 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 3){
+            //             $usahawan->aliran3 = $usahawan->aliran3 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 4){
+            //             $usahawan->aliran4 = $usahawan->aliran4 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 5){
+            //             $usahawan->aliran5 = $usahawan->aliran5 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 6){
+            //             $usahawan->aliran6 = $usahawan->aliran6 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 7){
+            //             $usahawan->aliran7 = $usahawan->aliran7 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 8){
+            //             $usahawan->aliran8 = $usahawan->aliran8 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 9){
+            //             $usahawan->aliran9 = $usahawan->aliran9 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 10){
+            //             $usahawan->aliran10 = $usahawan->aliran10 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 11){
+            //             $usahawan->aliran11 = $usahawan->aliran11 + $aliran->jumlah_aliran;
+            //         }else if($aliran->bulan == 12){
+            //             $usahawan->aliran12 = $usahawan->aliran12 + $aliran->jumlah_aliran;
+            //         }
+            //         $usahawan->jumaliran = $usahawan->jumaliran + $aliran->jumlah_aliran;
+            //     }
+            //     $usahawan->purataaliran = $usahawan->jumaliran / 12;
+            // }
             
-            $usahawan->purataaliran = $usahawan->jumaliran / 12;
+            
 
-            if($usahawan->purataaliran >= 2500){
-                $usahawan->capaisasaran = "capai";
-            }else{
-                $usahawan->capaisasaran = "tidak capai";
-            }
+            // if($usahawan->purataaliran >= 2500){
+            //     $usahawan->capaisasaran = "capai";
+            // }else{
+            //     $usahawan->capaisasaran = "tidak capai";
+            // }
 
             if(isset($usahawan->negeri)){
                 $excel->data1 = $usahawan->negeri->Negeri;
@@ -284,11 +285,11 @@ class LapProf implements FromArray, WithHeadings
                 $excel->data20 = $usahawan->perniagaan->subkluster;
             }
             
-            // $excel->data21 = $usahawan->MediumPemasaran;
-            // $excel->data22 = $usahawan->AlamatMediumPemasaran;
-            // $excel->data23 = $usahawan->jnsbantuansemasa;
-            // $excel->data24 = $usahawan->kelulusanbantuansemasa;
-            // $excel->data25 = $usahawan->thnbantuansemasa;
+            $excel->data21 = $usahawan->MediumPemasaran;
+            $excel->data22 = $usahawan->AlamatMediumPemasaran;
+            $excel->data23 = $usahawan->jnsbantuansemasa;
+            $excel->data24 = $usahawan->kelulusanbantuansemasa;
+            $excel->data25 = $usahawan->thnbantuansemasa;
             // $excel->data26 = $usahawan->aliran1;
             // $excel->data27 = $usahawan->aliran2;
             // $excel->data28 = $usahawan->aliran3;
@@ -355,11 +356,11 @@ class LapProf implements FromArray, WithHeadings
                         "data18"=>$excel->data18,
                         "data19"=>$excel->data19,
                         "data20"=>$excel->data20,
-                        // "data21"=>$excel->data21,
-                        // "data22"=>$excel->data22,
-                        // "data23"=>$excel->data23,
-                        // "data24"=>$excel->data24,
-                        // "data25"=>$excel->data25,
+                        "data21"=>$excel->data21,
+                        "data22"=>$excel->data22,
+                        "data23"=>$excel->data23,
+                        "data24"=>$excel->data24,
+                        "data25"=>$excel->data25,
                         // "data26"=>$excel->data26,
                         // "data27"=>$excel->data27,
                         // "data28"=>$excel->data28,
