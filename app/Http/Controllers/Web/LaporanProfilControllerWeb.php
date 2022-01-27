@@ -43,7 +43,7 @@ class LaporanProfilControllerWeb extends Controller
         
         $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         if($authuser->role == 1 || $authuser->role == 2){
-            $users = Usahawan::all();
+            $users = Usahawan::take(100)->get();
             // take(10)->get();
             // all();
         }else if($authuser->role == 3 || $authuser->role == 5){
