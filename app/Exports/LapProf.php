@@ -11,7 +11,7 @@ use App\Models\User;
 use App\Models\jenisinsentif;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-App::abort(500);
+// App::abort(500);
 class LapProf implements FromArray, WithHeadings
 {
     /**
