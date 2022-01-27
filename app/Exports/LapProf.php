@@ -147,19 +147,19 @@ class LapProf implements FromArray, WithHeadings
                 }
             }
             
-            if(isset($usahawan->syarikat)){
-                if($usahawan->syarikat->jenismilikanperniagaan == "JPP01"){
-                    $usahawan->jenismilikan = "PEMILIKAN TUNGGAL";
-                }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP02"){
-                    $usahawan->jenismilikan = "PERKONGSIAN";
-                }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP03"){
-                    $usahawan->jenismilikan = "SYARIKAT SDN BHD";
-                }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP04"){
-                    $usahawan->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
-                }
+            // if(isset($usahawan->syarikat)){
+            //     if($usahawan->syarikat->jenismilikanperniagaan == "JPP01"){
+            //         $usahawan->jenismilikan = "PEMILIKAN TUNGGAL";
+            //     }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP02"){
+            //         $usahawan->jenismilikan = "PERKONGSIAN";
+            //     }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP03"){
+            //         $usahawan->jenismilikan = "SYARIKAT SDN BHD";
+            //     }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP04"){
+            //         $usahawan->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
+            //     }
 
-                $usahawan->alamatsyarikat = $usahawan->syarikat->alamat1_ssm.",".$usahawan->syarikat->alamat2_ssm.",".$usahawan->syarikat->alamat3_ssm;
-            }
+            //     $usahawan->alamatsyarikat = $usahawan->syarikat->alamat1_ssm.",".$usahawan->syarikat->alamat2_ssm.",".$usahawan->syarikat->alamat3_ssm;
+            // }
 
             // $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->orderBy('tahun_terima_insentif', 'desc')->first();
             // if(isset($insentif)){
