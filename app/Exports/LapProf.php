@@ -9,17 +9,17 @@ use App\Models\Insentif;
 use App\Models\Aliran;
 use App\Models\User;
 use App\Models\jenisinsentif;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-class LapProf implements FromCollection, WithHeadings
+class LapProf implements FromArray, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
+    public function array(): array
     {
         // $authuser = Auth::user();
         // if(isset($authuser)){
@@ -30,23 +30,23 @@ class LapProf implements FromCollection, WithHeadings
         
         // $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         $users = Usahawan::take(5)->get();
-        // if($authuser->role == 1 || $authuser->role == 2){
-        //     $users = Usahawan::take(5)->get();
-        //     // all();
-        // }else if($authuser->role == 3 || $authuser->role == 5){
-        //     $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
-        // }else if($authuser->role == 4 || $authuser->role == 6){
-        //     $users = Usahawan::where('U_Daerah_ID', $authmukim->U_Daerah_ID)->get();
-        // }else if($authuser->role == 7){
-        //     $users = Usahawan::where('Kod_PT', $authpegawai->NamaPT)->get();
-        // }
+        if($authuser->role == 1 || $authuser->role == 2){
+            $users = Usahawan::take(5)->get();
+            // all();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $users = Usahawan::where('U_Daerah_ID', $authmukim->U_Daerah_ID)->get();
+        }else if($authuser->role == 7){
+            $users = Usahawan::where('Kod_PT', $authpegawai->NamaPT)->get();
+        }
 
         
 
-        // foreach($users as $usahawan){
-            // $excel = (object)[];
-            // $excel->data1 = '';
-            // $excel->data2 = '';
+        foreach($users as $usahawan){
+            $excel = (object)[];
+            $excel->data1 = '';
+            $excel->data2 = '';
             // $excel->data3 = '';
             // $excel->data4 = '';
             // $excel->data5 = '';
@@ -241,13 +241,13 @@ class LapProf implements FromCollection, WithHeadings
             //     $usahawan->capaisasaran = "tidak capai";
             // }
 
-            // if(isset($usahawan->negeri)){
-            //     $excel->data1 = $usahawan->negeri->Negeri;
-            // }
+            if(isset($usahawan->negeri)){
+                $excel->data1 = $usahawan->negeri->Negeri;
+            }
             
-            // if(isset($usahawan->PT)){
-            //     $excel->data2 = $usahawan->PT->keterangan;
-            // }
+            if(isset($usahawan->PT)){
+                $excel->data2 = $usahawan->PT->keterangan;
+            }
             
             // $excel->data3 = $usahawan->namausahawan;
             // $excel->data4 = $usahawan->nokadpengenalan;
@@ -323,9 +323,9 @@ class LapProf implements FromCollection, WithHeadings
             //     $excel->data52 = $usahawan->syarikat->nodaftarpersijilanhalal;
             // }
             
-            // $array[] = array(
-            //             "data1"=>$excel->data1, 
-            //             "data2"=>$excel->data2,
+            $array[] = array(
+                        "data1"=>$excel->data1, 
+                        "data2"=>$excel->data2,
             //             "data3"=>$excel->data3,
             //             "data4"=>$excel->data4,
             //             "data5"=>$excel->data5,
@@ -377,9 +377,9 @@ class LapProf implements FromCollection, WithHeadings
             //             "data51"=>$excel->data51,
             //             "data52"=>$excel->data52
                         
-            // );
-        // }
-        return $users;
+            );
+        }
+        return $array;
     }
 
     public function headings(): array
