@@ -42,7 +42,7 @@ class AuthenticatedSessionController extends Controller
                         return redirect('/landing');
                     }else{
                         echo '<script language="javascript">';
-                        echo 'alert("Akaun Tidak Aktif. Sila Minta Admin Aktifkan Akaun Anda Untuk Meneruskan ke Applikasi")';
+                        echo 'alert("Akaun Tidak Aktif. Sila Minta Admin Aktifkan Akaun Anda Untuk Meneruskan ke Applikasi");';
                         echo "window.location.href='/';";
                         echo '</script>';
                     }
@@ -54,13 +54,13 @@ class AuthenticatedSessionController extends Controller
                 // }
             }else{
                 echo '<script language="javascript">';
-                echo 'alert("Sistem web hanyalah digunakan oleh pegawai sahaja")';
+                echo 'alert("Sistem web hanyalah digunakan oleh pegawai sahaja");';
                 echo "window.location.href='/';";
                 echo '</script>';
             }
         }else{
             echo '<script language="javascript">';
-            echo 'alert("Email tiada dalam senarai pegawai")';
+            echo 'alert("Email tiada dalam senarai pegawai");';
             echo "window.location.href='/';";
             echo '</script>';
         }

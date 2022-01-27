@@ -26,7 +26,7 @@
                     </div>
                     <x-auth-session-status class="mb-4" :status="session('status')" />
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                    <form method="POST" action="{{ route('login') }}"> 
+                    <form method="POST" action="/login"> 
                     @csrf
                       <div class="mb-3">
                         <label class="form-label" for="split-login-email" :value="old('email')">Alamat E-mel</label>

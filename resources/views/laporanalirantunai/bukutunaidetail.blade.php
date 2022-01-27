@@ -192,7 +192,19 @@ $( document ).ready(function() {
         paging:false,
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'copy',
+            {
+                extend: 'excel',
+                title: 'LAPORAN BUKU TUNAI'
+            },
+            {
+                extend: 'pdf',
+                title: 'LAPORAN BUKU TUNAI'
+            },
+            {
+                extend: 'print',
+                title: 'LAPORAN BUKU TUNAI'
+            }
         ]
     });
     $('.loader').hide();
