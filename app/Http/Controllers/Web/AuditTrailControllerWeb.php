@@ -33,7 +33,7 @@ class AuditTrailControllerWeb extends Controller
             $pegawai = Pegawai::where('id', $Audit->idpegawai)->first();
             $Audit->pegawai = $pegawai->nama;
         }
-        
+        // $users = Usahawan::all();
         // foreach ($users as $usahawan) {
         //     $user = new User();
         //     $user->name = $usahawan->namausahawan;

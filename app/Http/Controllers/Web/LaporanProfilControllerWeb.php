@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+// error_reporting(0);
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Insentif;
@@ -43,7 +43,8 @@ class LaporanProfilControllerWeb extends Controller
         
         $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         if($authuser->role == 1 || $authuser->role == 2){
-            $users = Usahawan::all();
+            $users = Usahawan::take(100)->get();
+            // all();
         }else if($authuser->role == 3 || $authuser->role == 5){
             $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
@@ -57,149 +58,162 @@ class LaporanProfilControllerWeb extends Controller
         $ddPT = PusatTanggungjawab::where('status', 1)->get();
 
         foreach ($users as $usahawan) {
-            $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
-            if(isset($negeri)){
-                $usahawan->negeri = $negeri->Negeri;
-            }
-            $PT = PusatTanggungjawab::where('Kod_PT', $usahawan->Kod_PT)->first();
-            if(isset($PT)){
-                $usahawan->PusatTang = $PT->keterangan;
-            }
+            try{
+                $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
+                if(isset($negeri)){
+                    $usahawan->negeri = $negeri->Negeri;
+                }
+                $PT = PusatTanggungjawab::where('Kod_PT', $usahawan->Kod_PT)->first();
+                if(isset($PT)){
+                    $usahawan->PusatTang = $PT->keterangan;
+                }
 
-            $dateOfBirth = $usahawan->tarikhlahir;
-            $today = date("Y-m-d");
-            $diff = date_diff(date_create($dateOfBirth), date_create($today));
-            $usahawan->umur = $diff->format('%y');
+                $dateOfBirth = $usahawan->tarikhlahir;
+                $today = date("Y-m-d");
+                $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                $usahawan->umur = $diff->format('%y');
 
-            if($usahawan->U_Jantina_ID == 1){
-                $usahawan->jantina = "Lelaki";
-            }else if($usahawan->U_Jantina_ID == 2){
-                $usahawan->jantina = "Perempuan";
-            }else{
-                $usahawan->jantina = "Lain - Lain";
-            }
-            
-            $usahawan->taraf_pendidikan = $usahawan->U_Taraf_Pendidikan_Tertinggi_ID;
-            $daerah = Daerah::select('Daerah')->where('U_Daerah_ID', $usahawan->U_Daerah_ID)->first();
-            $usahawan->daerah = $daerah->Daerah;
-            $dun = Dun::select('Dun')->where('U_Dun_ID', $usahawan->U_Dun_ID)->first();
-            $usahawan->dun = $dun->Dun;
-            $parlimen = Parlimen::select('Parlimen')->where('U_Parlimen_ID', $usahawan->U_Parlimen_ID)->first();
-            $usahawan->parlimen = $parlimen->Parlimen;
-            $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
-            if(isset($pekebun)){
-                $usahawan->PKnoTS = $pekebun->noTS;
-                $usahawan->PKnoKP = $pekebun->No_KP;
-            }
-            $temp = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
-            if(isset($temp1)){
-                $usahawan->KateUsahawan = $temp->nama_kategori_usahawan;
-            }
-            $perniagaan = Perniagaan::where('usahawanid', $usahawan->usahawanid)->first();
-            if(isset($perniagaan)){
-                $JnsPerniagaan = JenisPerniagaan::where('kod_jenis_perniagaan', $perniagaan->jenisperniagaan)->first();
-                if(isset($JnsPerniagaan)){
-                    $usahawan->JenisPerniagaan = $JnsPerniagaan->nama_jenis_perniagaan;
-                }
-                $usahawan->KlusterPerniagaan = $perniagaan->klusterperniagaan;
-                $usahawan->SubKlusterPerniagaan = $perniagaan->subkluster;
-                if($perniagaan->facebook != ""){
-                    $usahawan->MediumPemasaran = "Facebook ";
-                }
-                if($perniagaan->instagram != ""){
-                    $usahawan->MediumPemasaran .= "Instagram ";
-                }
-                if($perniagaan->twitter != ""){
-                    $usahawan->MediumPemasaran .= "Twitter ";
-                }
-                // $usahawan->MediumPemasaran = "Facebook, Instagram, Twitter";
-                $usahawan->AlamatMediumPemasaran = "Facebook - ".$perniagaan->facebook."Instagram - " .$perniagaan->instagram."Twitter - ".$perniagaan->twitter;
-                $usahawan->latitud = $perniagaan->latitud;
-                $usahawan->logitud = $perniagaan->logitud;
-            }
-            $syarikat = Syarikat::where('usahawanid', $usahawan->usahawanid)->first();
-            if(isset($syarikat)){
-                $usahawan->namasyarikat = $syarikat->namasyarikat;
-                if($syarikat->jenismilikanperniagaan == "JPP01"){
-                    $usahawan->jenismilikan = "PEMILIKAN TUNGGAL";
-                }else if($syarikat->jenismilikanperniagaan == "JPP02"){
-                    $usahawan->jenismilikan = "PERKONGSIAN";
-                }else if($syarikat->jenismilikanperniagaan == "JPP03"){
-                    $usahawan->jenismilikan = "SYARIKAT SDN BHD";
-                }else if($syarikat->jenismilikanperniagaan == "JPP04"){
-                    $usahawan->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
+                if($usahawan->U_Jantina_ID == 1){
+                    $usahawan->jantina = "Lelaki";
+                }else if($usahawan->U_Jantina_ID == 2){
+                    $usahawan->jantina = "Perempuan";
+                }else{
+                    $usahawan->jantina = "Lain - Lain";
                 }
                 
-                $usahawan->nodaftarssm = $syarikat->nodaftarssm;
-                $usahawan->alamatsyarikat = $syarikat->alamat1_ssm.",".$syarikat->alamat2_ssm.",".$syarikat->alamat3_ssm;
-                $usahawan->emailsyarikat = $syarikat->email;
-                $usahawan->nodaftarpersijilanhalal = $syarikat->nodaftarpersijilanhalal;
-                
-            }
-            // dd($usahawan->usahawanid);
-            $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->orderBy('tahun_terima_insentif', 'desc')->first();
-            if(isset($insentif)){
-                $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif->id_jenis_insentif)->first();
-                if(isset($jenisinsentif)){
-                    $usahawan->jnsbantuansemasa = $jenisinsentif->nama_insentif;
+                $usahawan->taraf_pendidikan = $usahawan->U_Taraf_Pendidikan_Tertinggi_ID;
+                $daerah = Daerah::select('Daerah')->where('U_Daerah_ID', $usahawan->U_Daerah_ID)->first();
+                $usahawan->daerah = $daerah->Daerah;
+                $dun = Dun::select('Dun')->where('U_Dun_ID', $usahawan->U_Dun_ID)->first();
+                if(isset($dun->Dun)){
+                    
+                    $usahawan->dun = $dun->Dun;
                 }
-                $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
-                $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
-            }
-
-            $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
-            foreach ($insentif2 as $insentif2s) {
-                $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
-                if(isset($jenisinsentif)){
-                    $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama."/".$jenisinsentif->nama_insentif;
+                $parlimen = Parlimen::select('Parlimen')->where('U_Parlimen_ID', $usahawan->U_Parlimen_ID)->first();
+                if(isset($parlimen->Parlimen)){
+                    $usahawan->parlimen = $parlimen->Parlimen;
                 }
-                $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum."/".$insentif2s->nilai_insentif;
-                $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
-            }   
-             
-
-            $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
-            $getYear = date("Y");
-            $alirans = Aliran::where('id_pengguna', $pengguna->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
-            // dd($aliran);
-            if(isset($alirans)){
-                foreach ($alirans as $aliran) {
-                    $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
-                    if($aliran->bulan == 1){
-                        $usahawan->aliran1 = $usahawan->aliran1 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 2){
-                        $usahawan->aliran2 = $usahawan->aliran2 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 3){
-                        $usahawan->aliran3 = $usahawan->aliran3 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 4){
-                        $usahawan->aliran4 = $usahawan->aliran4 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 5){
-                        $usahawan->aliran5 = $usahawan->aliran5 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 6){
-                        $usahawan->aliran6 = $usahawan->aliran6 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 7){
-                        $usahawan->aliran7 = $usahawan->aliran7 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 8){
-                        $usahawan->aliran8 = $usahawan->aliran8 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 9){
-                        $usahawan->aliran9 = $usahawan->aliran9 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 10){
-                        $usahawan->aliran10 = $usahawan->aliran10 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 11){
-                        $usahawan->aliran11 = $usahawan->aliran11 + $aliran->jumlah_aliran;
-                    }else if($aliran->bulan == 12){
-                        $usahawan->aliran12 = $usahawan->aliran12 + $aliran->jumlah_aliran;
+                $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
+                if(isset($pekebun)){
+                    $usahawan->PKnoTS = $pekebun->noTS;
+                    $usahawan->PKnoKP = $pekebun->No_KP;
+                }
+                $temp = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
+                if(isset($temp1)){
+                    $usahawan->KateUsahawan = $temp->nama_kategori_usahawan;
+                }
+                $perniagaan = Perniagaan::where('usahawanid', $usahawan->usahawanid)->first();
+                if(isset($perniagaan)){
+                    $JnsPerniagaan = JenisPerniagaan::where('kod_jenis_perniagaan', $perniagaan->jenisperniagaan)->first();
+                    if(isset($JnsPerniagaan)){
+                        $usahawan->JenisPerniagaan = $JnsPerniagaan->nama_jenis_perniagaan;
                     }
-                    $usahawan->jumaliran = $usahawan->jumaliran + $aliran->jumlah_aliran;
+                    $usahawan->KlusterPerniagaan = $perniagaan->klusterperniagaan;
+                    $usahawan->SubKlusterPerniagaan = $perniagaan->subkluster;
+                    if($perniagaan->facebook != ""){
+                        $usahawan->MediumPemasaran = "Facebook ";
+                    }
+                    if($perniagaan->instagram != ""){
+                        $usahawan->MediumPemasaran .= "Instagram ";
+                    }
+                    if($perniagaan->twitter != ""){
+                        $usahawan->MediumPemasaran .= "Twitter ";
+                    }
+                    // $usahawan->MediumPemasaran = "Facebook, Instagram, Twitter";
+                    $usahawan->AlamatMediumPemasaran = "Facebook - ".$perniagaan->facebook."Instagram - " .$perniagaan->instagram."Twitter - ".$perniagaan->twitter;
+                    $usahawan->latitud = $perniagaan->latitud;
+                    $usahawan->logitud = $perniagaan->logitud;
+                }
+                $syarikat = Syarikat::where('usahawanid', $usahawan->usahawanid)->first();
+                if(isset($syarikat)){
+                    $usahawan->namasyarikat = $syarikat->namasyarikat;
+                    if($syarikat->jenismilikanperniagaan == "JPP01"){
+                        $usahawan->jenismilikan = "PEMILIKAN TUNGGAL";
+                    }else if($syarikat->jenismilikanperniagaan == "JPP02"){
+                        $usahawan->jenismilikan = "PERKONGSIAN";
+                    }else if($syarikat->jenismilikanperniagaan == "JPP03"){
+                        $usahawan->jenismilikan = "SYARIKAT SDN BHD";
+                    }else if($syarikat->jenismilikanperniagaan == "JPP04"){
+                        $usahawan->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
+                    }
+                    
+                    $usahawan->nodaftarssm = $syarikat->nodaftarssm;
+                    $usahawan->alamatsyarikat = $syarikat->alamat1_ssm.",".$syarikat->alamat2_ssm.",".$syarikat->alamat3_ssm;
+                    $usahawan->emailsyarikat = $syarikat->email;
+                    $usahawan->nodaftarpersijilanhalal = $syarikat->nodaftarpersijilanhalal;
+                    
+                }
+                // dd($usahawan->usahawanid);
+                $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->orderBy('tahun_terima_insentif', 'desc')->first();
+                if(isset($insentif)){
+                    $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif->id_jenis_insentif)->first();
+                    if(isset($jenisinsentif)){
+                        $usahawan->jnsbantuansemasa = $jenisinsentif->nama_insentif;
+                    }
+                    $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
+                    $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
+                }
+
+                $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
+                foreach ($insentif2 as $insentif2s) {
+                    $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
+                    if(isset($jenisinsentif)){
+                        $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama."/".$jenisinsentif->nama_insentif;
+                    }
+                    $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum."/".$insentif2s->nilai_insentif;
+                    $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
+                }   
+                
+
+                $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
+                $getYear = date("Y");
+                if(isset($pengguna)){
+                    $alirans = Aliran::where('id_pengguna', $pengguna->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
+                }
+                
+                // dd($aliran);
+                if(isset($alirans)){
+                    foreach ($alirans as $aliran) {
+                        $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
+                        if($aliran->bulan == 1){
+                            $usahawan->aliran1 = $usahawan->aliran1 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 2){
+                            $usahawan->aliran2 = $usahawan->aliran2 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 3){
+                            $usahawan->aliran3 = $usahawan->aliran3 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 4){
+                            $usahawan->aliran4 = $usahawan->aliran4 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 5){
+                            $usahawan->aliran5 = $usahawan->aliran5 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 6){
+                            $usahawan->aliran6 = $usahawan->aliran6 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 7){
+                            $usahawan->aliran7 = $usahawan->aliran7 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 8){
+                            $usahawan->aliran8 = $usahawan->aliran8 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 9){
+                            $usahawan->aliran9 = $usahawan->aliran9 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 10){
+                            $usahawan->aliran10 = $usahawan->aliran10 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 11){
+                            $usahawan->aliran11 = $usahawan->aliran11 + $aliran->jumlah_aliran;
+                        }else if($aliran->bulan == 12){
+                            $usahawan->aliran12 = $usahawan->aliran12 + $aliran->jumlah_aliran;
+                        }
+                        $usahawan->jumaliran = $usahawan->jumaliran + $aliran->jumlah_aliran;
+                    }
+                }
+                
+                $usahawan->purataaliran = $usahawan->jumaliran / 12;
+
+                if($usahawan->purataaliran >= 2500){
+                    $usahawan->capaisasaran = "capai";
+                }else{
+                    $usahawan->capaisasaran = "tidak capai";
                 }
             }
-            
-            $usahawan->purataaliran = $usahawan->jumaliran / 12;
+            catch(Exception $e){
 
-            if($usahawan->purataaliran >= 2500){
-                $usahawan->capaisasaran = "capai";
-            }else{
-                $usahawan->capaisasaran = "tidak capai";
             }
         }
         

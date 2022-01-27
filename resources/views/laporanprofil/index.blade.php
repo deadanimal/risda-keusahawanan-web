@@ -208,7 +208,15 @@
             paging:false,
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel'
+                'copy',
+                {
+                    extend: 'csv',
+                    title: 'LAPORAN BUKU TUNAI'
+                },
+                {
+                    extend: 'excel',
+                    title: 'LAPORAN BUKU TUNAI'
+                }
             ]
         });
         $('#lapprofall').hide();
