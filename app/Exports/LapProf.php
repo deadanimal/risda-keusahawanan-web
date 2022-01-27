@@ -132,19 +132,21 @@ class LapProf implements FromArray, WithHeadings
             $usahawan->AlamatMediumPemasaran = "";
 
             if(isset($usahawan->perniagaan)){
+                if(isset($usahawan->perniagaan->facebook)){
+                    if($usahawan->perniagaan->facebook != ""){
+                        $usahawan->MediumPemasaran .= "Facebook ";
+                        $usahawan->AlamatMediumPemasaran .= "Facebook - ".$usahawan->perniagaan->facebook;
+                    }
+                }
                 
-                if($usahawan->perniagaan->facebook != ""){
-                    $usahawan->MediumPemasaran .= "Facebook ";
-                    $usahawan->AlamatMediumPemasaran .= "Facebook - ".$usahawan->perniagaan->facebook;
-                }
-                if($usahawan->perniagaan->instagram != ""){
-                    $usahawan->MediumPemasaran .= "Instagram ";
-                    $usahawan->AlamatMediumPemasaran .= "Instagram - ".$usahawan->perniagaan->instagram;
-                }
-                if($usahawan->perniagaan->twitter != ""){
-                    $usahawan->MediumPemasaran .= "Twitter ";
-                    $usahawan->AlamatMediumPemasaran .= "Twitter - ".$usahawan->perniagaan->twitter;
-                }
+                // if($usahawan->perniagaan->instagram != ""){
+                //     $usahawan->MediumPemasaran .= "Instagram ";
+                //     $usahawan->AlamatMediumPemasaran .= "Instagram - ".$usahawan->perniagaan->instagram;
+                // }
+                // if($usahawan->perniagaan->twitter != ""){
+                //     $usahawan->MediumPemasaran .= "Twitter ";
+                //     $usahawan->AlamatMediumPemasaran .= "Twitter - ".$usahawan->perniagaan->twitter;
+                // }
             }
             
             // if(isset($usahawan->syarikat)){
