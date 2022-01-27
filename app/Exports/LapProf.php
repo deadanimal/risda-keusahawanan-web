@@ -9,12 +9,12 @@ use App\Models\Insentif;
 use App\Models\Aliran;
 use App\Models\User;
 use App\Models\jenisinsentif;
-use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-class LapProf implements FromArray, WithHeadings
+class LapProf implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
