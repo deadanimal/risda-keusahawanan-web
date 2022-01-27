@@ -31,7 +31,9 @@ class AuditTrailControllerWeb extends Controller
                 $Audit->jenis = "Tetapan Komponen";
             }
             $pegawai = Pegawai::where('id', $Audit->idpegawai)->first();
-            $Audit->pegawai = $pegawai->nama;
+            if(isset($pegawai)){
+                $Audit->pegawai = $pegawai->nama;
+            }
         }
         // $users = Usahawan::all();
         // foreach ($users as $usahawan) {
