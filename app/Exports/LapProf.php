@@ -128,38 +128,38 @@ class LapProf implements FromArray, WithHeadings
                 $usahawan->taraf_pendidikan = '';
             }
             
-            // $usahawan->MediumPemasaran = '';
-            // $usahawan->AlamatMediumPemasaran = '';
+            $usahawan->MediumPemasaran = '';
+            $usahawan->AlamatMediumPemasaran = '';
 
-            // if(isset($usahawan->perniagaan)){
+            if(isset($usahawan->perniagaan)){
                 
-            //     if($usahawan->perniagaan->facebook != ""){
-            //         $usahawan->MediumPemasaran = $usahawan->MediumPemasaran."Facebook ";
-            //         $usahawan->AlamatMediumPemasaran = $usahawan->AlamatMediumPemasaran."Facebook - ".$usahawan->perniagaan->facebook;
-            //     }
-            //     if($usahawan->perniagaan->instagram != ""){
-            //         $usahawan->MediumPemasaran = $usahawan->MediumPemasaran."Instagram ";
-            //         $usahawan->AlamatMediumPemasaran = $usahawan->AlamatMediumPemasaran."Instagram - ".$usahawan->perniagaan->instagram;
-            //     }
-            //     if($usahawan->perniagaan->twitter != ""){
-            //         $usahawan->MediumPemasaran = $usahawan->MediumPemasaran."Twitter ";
-            //         $usahawan->AlamatMediumPemasaran = $usahawan->AlamatMediumPemasaran."Twitter - ".$usahawan->perniagaan->twitter;
-            //     }
-            // }
+                if($usahawan->perniagaan->facebook != ""){
+                    $usahawan->MediumPemasaran = $usahawan->MediumPemasaran."Facebook ";
+                    $usahawan->AlamatMediumPemasaran = $usahawan->AlamatMediumPemasaran."Facebook - ".$usahawan->perniagaan->facebook;
+                }
+                if($usahawan->perniagaan->instagram != ""){
+                    $usahawan->MediumPemasaran = $usahawan->MediumPemasaran."Instagram ";
+                    $usahawan->AlamatMediumPemasaran = $usahawan->AlamatMediumPemasaran."Instagram - ".$usahawan->perniagaan->instagram;
+                }
+                if($usahawan->perniagaan->twitter != ""){
+                    $usahawan->MediumPemasaran = $usahawan->MediumPemasaran."Twitter ";
+                    $usahawan->AlamatMediumPemasaran = $usahawan->AlamatMediumPemasaran."Twitter - ".$usahawan->perniagaan->twitter;
+                }
+            }
             
-            // if(isset($usahawan->syarikat)){
-            //     if($usahawan->syarikat->jenismilikanperniagaan == "JPP01"){
-            //         $usahawan->jenismilikan = "PEMILIKAN TUNGGAL";
-            //     }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP02"){
-            //         $usahawan->jenismilikan = "PERKONGSIAN";
-            //     }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP03"){
-            //         $usahawan->jenismilikan = "SYARIKAT SDN BHD";
-            //     }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP04"){
-            //         $usahawan->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
-            //     }
+            if(isset($usahawan->syarikat)){
+                if($usahawan->syarikat->jenismilikanperniagaan == "JPP01"){
+                    $usahawan->jenismilikan = "PEMILIKAN TUNGGAL";
+                }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP02"){
+                    $usahawan->jenismilikan = "PERKONGSIAN";
+                }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP03"){
+                    $usahawan->jenismilikan = "SYARIKAT SDN BHD";
+                }else if($usahawan->syarikat->jenismilikanperniagaan == "JPP04"){
+                    $usahawan->jenismilikan = "PERKONGSIAN LIABILITI TERHAD";
+                }
 
-            //     $usahawan->alamatsyarikat = $usahawan->syarikat->alamat1_ssm.",".$usahawan->syarikat->alamat2_ssm.",".$usahawan->syarikat->alamat3_ssm;
-            // }
+                $usahawan->alamatsyarikat = $usahawan->syarikat->alamat1_ssm.",".$usahawan->syarikat->alamat2_ssm.",".$usahawan->syarikat->alamat3_ssm;
+            }
 
             // $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->orderBy('tahun_terima_insentif', 'desc')->first();
             // if(isset($insentif)){
@@ -288,8 +288,8 @@ class LapProf implements FromArray, WithHeadings
                 $excel->data20 = $usahawan->perniagaan->subkluster;
             }
             
-            // $excel->data21 = $usahawan->MediumPemasaran;
-            // $excel->data22 = $usahawan->AlamatMediumPemasaran;
+            $excel->data21 = $usahawan->MediumPemasaran;
+            $excel->data22 = $usahawan->AlamatMediumPemasaran;
             // $excel->data23 = $usahawan->jnsbantuansemasa;
             // $excel->data24 = $usahawan->kelulusanbantuansemasa;
             // $excel->data25 = $usahawan->thnbantuansemasa;
@@ -359,8 +359,8 @@ class LapProf implements FromArray, WithHeadings
                         "data18"=>$excel->data18,
                         "data19"=>$excel->data19,
                         "data20"=>$excel->data20,
-                        // "data21"=>$excel->data21,
-                        // "data22"=>$excel->data22,
+                        "data21"=>$excel->data21,
+                        "data22"=>$excel->data22,
                         // "data23"=>$excel->data23,
                         // "data24"=>$excel->data24,
                         // "data25"=>$excel->data25,
