@@ -45,7 +45,7 @@ class LaporanProfilControllerWeb extends Controller
         
         $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         if($authuser->role == 1 || $authuser->role == 2){
-            $users = Usahawan::take(100)->get();
+            $users = Usahawan::all();
             // take(10)->get();
             // all();
         }else if($authuser->role == 3 || $authuser->role == 5){
@@ -781,6 +781,7 @@ class LaporanProfilControllerWeb extends Controller
                 return "Tiada Data Aliran Dijumpai";
             }else{
                 foreach ($alirans as $aliran) {
+                    $aliran->newdate = date("d-m-Y", strtotime($aliran->tarikh_aliran));
                     $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
                     $aliran->tahun = date('Y', strtotime($aliran->tarikh_aliran));
                     $reports = Report::where('tab20', Auth::user()->id)->where('type', 12)->get();
@@ -862,7 +863,7 @@ class LaporanProfilControllerWeb extends Controller
             Report::where('tab20', Auth::user()->id)->where('type', 14)->delete();
             $usaha = Usahawan::where('id', $request->id)->first();
             $pengguna = User::where('usahawanid', $usaha->usahawanid)->first();
-            $alirans = Aliran::where('id_pengguna',$request->id)->get();
+            $alirans = Aliran::where('id_pengguna',$pengguna->id)->get();
             if($alirans->count()==0){
                 return "Tiada Data Aliran Dijumpai";
             }else{
@@ -1145,7 +1146,7 @@ class LaporanProfilControllerWeb extends Controller
                 $report->tab4 = 1;
 
             }
-            $report->tab5 = $request->tarikh_aliran;
+            $report->tab5 = $request->newdate;
             $report->tab6 = $kate_aliran->nama_kategori_aliran;
             $report->tab7 = $request->jumlah_aliran;
             $report->tab20 = Auth::user()->id;
@@ -1161,7 +1162,7 @@ class LaporanProfilControllerWeb extends Controller
             }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
                 $report->tab4 = 1;
             }
-            $report->tab5 = $request->tarikh_aliran;
+            $report->tab5 = $request->newdate;
             $report->tab6 = $kate_aliran->nama_kategori_aliran;
             $report->tab7 = $request->jumlah_aliran;
             $report->tab20 = Auth::user()->id;
