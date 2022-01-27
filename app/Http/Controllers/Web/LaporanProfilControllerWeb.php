@@ -58,7 +58,6 @@ class LaporanProfilControllerWeb extends Controller
         $ddPT = PusatTanggungjawab::where('status', 1)->get();
 
         foreach ($users as $usahawan) {
-            try{
                 $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
                 if(isset($negeri)){
                     $usahawan->negeri = $negeri->Negeri;
@@ -211,10 +210,6 @@ class LaporanProfilControllerWeb extends Controller
                 }else{
                     $usahawan->capaisasaran = "tidak capai";
                 }
-            }
-            catch(Exception $e){
-
-            }
         }
         
         return view('laporanprofil.index'
