@@ -379,7 +379,7 @@ class LapProf implements FromArray, WithHeadings
                         
             );
         }
-        dd($array);
+        // dd($array);
         return $array;
     }
 
