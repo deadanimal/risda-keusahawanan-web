@@ -17,7 +17,7 @@ error_reporting(E_ALL);
 class LapProf implements FromArray, WithHeadings
 {
     /**
-    * @return \Illuminate\Support\Collection
+    * @return \Illuminate\Support\Arrayable
     */
     public function array(): array
     {
