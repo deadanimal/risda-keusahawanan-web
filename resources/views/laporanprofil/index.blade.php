@@ -71,7 +71,7 @@
                             <th>TAHUN TERIMA</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {{-- <tbody>
                         <?php $num=1; ?>
                         @foreach ($users as $user)
                         <tr>
@@ -130,7 +130,7 @@
                             <td>{{$user->nodaftarpersijilanhalal}}</td>
                         </tr>
                         @endforeach
-                    </tbody>
+                    </tbody> --}}
                 </table>
                 <div style="padding-top: 10px;"> </div>
                 <table id="insentiftbl" >
