@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
-
+ini_set('memory_limit', '-1');
 use App\Models\Insentif;
 use App\Models\User;
 use App\Models\Usahawan;

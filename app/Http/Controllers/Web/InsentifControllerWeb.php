@@ -33,7 +33,7 @@ class InsentifControllerWeb extends Controller
             return redirect('/landing');
         }
         
-        return view('insentif.index'
+        return view('insentifWeb.index'
         ,[
             'users'=>$users
         ]
@@ -45,7 +45,7 @@ class InsentifControllerWeb extends Controller
         $insentifs = Insentif::where('id_pengguna', $id)->get();
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
         $usahawan = Usahawan::where('usahawanid', $id)->first();
-        return view('insentif.insentifdetail'
+        return view('insentifWeb.insentifdetail'
         ,[
             'insentifs'=>$insentifs,
             'id_pengguna'=>$usahawan->usahawanid,

@@ -53,7 +53,7 @@ Route::get('/', function () {
 Route::resource('/landing', LandingControllerWeb::class);
 
 Route::put('pegawaiPost', [PegawaiControllerWeb::class, 'pegawaiPost'])->name('pegawai.post');
-Route::resource('/pegawai', PegawaiControllerWeb::class);
+Route::resource('/pegawaiWeb', PegawaiControllerWeb::class);
 Route::get('pegawaiPost2', [PegawaiControllerWeb::class, 'pegawaiPost2'])->name('pegawai.post2');
 Route::resource('/usahawanWeb', UsahawanControllerWeb::class);
 Route::put('usahawanPost', [UsahawanControllerWeb::class, 'usahawanPost'])->name('usahawan.post');
@@ -61,7 +61,7 @@ Route::post('usahawanGet', [UsahawanControllerWeb::class, 'usahawanGet'])->name(
 Route::post('usahawanPost2', [UsahawanControllerWeb::class, 'usahawanPost2'])->name('usahawan.post2');
 Route::put('SahUsahawanProfil', [UsahawanControllerWeb::class, 'SahUsahawanProfil'])->name('usahawan.postsahprofil');
 Route::post('UploadProfile', [UsahawanControllerWeb::class, 'UploadProfile'])->name('usahawan.uploadprofile');
-Route::resource('/insentif', InsentifControllerWeb::class);
+Route::resource('/insentifWeb', InsentifControllerWeb::class);
 Route::resource('/insentifdetail', InsentifControllerWeb::class);
 Route::resource('/komponendash', KomponenDashControllerWeb::class);
 Route::resource('/kategorialiran', KategoriAliranControllerWeb::class);

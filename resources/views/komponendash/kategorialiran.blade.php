@@ -2,7 +2,7 @@
 @section('content') 
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-        <div class="row align-items-center">
+        <div class="row align-items-center" style="overflow-x: scroll !important;overflow-y: scroll !important;">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Kategori Aliran</h3>
                 <table id="pegawaitbl" style="padding-bottom:2vh;text-align:center;">
@@ -85,7 +85,7 @@
                             </td> -->
                         
                             <td>
-                                <button type="submit" class="btn btn-primary btn-sm" style="width:15vh">Ubah</button>
+                                <button type="submit" class="btn btn-primary btn-sm" style="width:15vh">Kemaskini</button>
                                 </form>
                                 {{-- <form method="POST" style="display:inline-block;" action="{{ route('kategorialiran.destroy', $katealiran->id) }}">
                                 @csrf  

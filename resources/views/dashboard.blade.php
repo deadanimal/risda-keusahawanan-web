@@ -71,6 +71,9 @@
     </script>
 <body>
 <main class="main" id="top">
+  <?php 
+  // ini_set('memory_limit', '-1');
+  ?>
       <div class="container" data-layout="container">
         <script>
           var isFluid = JSON.parse(localStorage.getItem('isFluid'));
@@ -99,7 +102,7 @@
           </div>
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
             <div class="navbar-vertical-content scrollbar">
-              <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+              <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav" style="padding-top: 15px;padding-bottom: 15px;">
                 @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 7)
                 <li class="nav-item">
                   <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('temulawatan.*') || request()->routeIs('dash.*') ? 'true' : 'false' }}" aria-controls="dashboard">
@@ -135,7 +138,7 @@
                     </div>
                   </div>
                   @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4)
-                    <a class="nav-link {{  request()->routeIs('pegawai.*') ? 'active' : '' }}" href="/pegawai" role="button">
+                    <a class="nav-link {{  request()->routeIs('pegawaiWeb.*') ? 'active' : '' }}" href="/pegawaiWeb" role="button">
                       <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Pegawai</span>
                       </div>
                     </a>
@@ -147,7 +150,7 @@
                     </a>
                   @endif
                   @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5 || Auth::user()->role == 6)
-                    <a class="nav-link {{  request()->routeIs('insentif.*') || request()->routeIs('insentifdetail.*') ? 'active' : '' }}" href="/insentif" role="button">
+                    <a class="nav-link {{  request()->routeIs('insentifWeb.*') || request()->routeIs('insentifdetail.*') ? 'active' : '' }}" href="/insentifWeb" role="button">
                       <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tambah Insentif</span>
                       </div>
                     </a>

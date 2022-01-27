@@ -2,12 +2,12 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-      <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/insentif"> 
+      <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/insentifWeb"> 
         <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;padding-top:3vh;">Insentif Usahawan</h3>
             <div class="card-body bg-light" style="padding-top: 1vh;">
-              <form class="row g-3" method="POST" action="/insentif" enctype="multipart/form-data">
+              <form class="row g-3" method="POST" action="/insentifWeb" enctype="multipart/form-data">
                 @csrf
                 @method("POST")
                 <input name="id_pengguna" style="display: none;" type="text" value="{{$id_pengguna}}"/>
@@ -67,7 +67,7 @@
                 
                   <div class="position-relative rounded-1 border bg-white dark__bg-1100 p-3">
                   <div class="position-absolute end-0 top-0 mt-2 me-3 z-index-1">
-                    <form method="POST" action="{{ route('insentif.destroy', $insentif->id) }}">
+                    <form method="POST" action="{{ route('insentifWeb.destroy', $insentif->id) }}">
                       @csrf  
                       @method('delete')
                     <button class="btn btn-link btn-sm p-0">
@@ -75,7 +75,7 @@
                     </button>
                     </form>
                   </div>
-                  <form class="row g-3" method="POST" action="/insentif/{{$insentif->id}}" enctype="multipart/form-data">
+                  <form class="row g-3" method="POST" action="/insentifWeb/{{$insentif->id}}" enctype="multipart/form-data">
                     @csrf  
                     @method('PUT')
                     <input name="id_pengguna" style="display: none;" type="text" value="{{$id_pengguna}}"/>

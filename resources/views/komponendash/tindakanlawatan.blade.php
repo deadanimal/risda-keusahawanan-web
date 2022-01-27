@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-        <div class="row align-items-center">
+        <div class="row align-items-center" style="overflow-x: scroll !important;overflow-y: scroll !important;">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Tindakan Lawatan</h3>
             <table id="tbl" style="padding-bottom:2vh;text-align:center;">
                 <colgroup>
@@ -28,7 +28,7 @@
                             <option value="aktif">aktif</option>
                             <option value="tak aktif">tak aktif</option>
                         </select></td>
-                        <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="submit" onclick="simpanaliran();" >Simpan </button></td>
+                        <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="submit" style="width:15vh" onclick="simpanaliran();" >Simpan </button></td>
                         </form>
                     </tr>
                     @foreach ($tindakanlawatan as $tindlawatan)
@@ -47,7 +47,7 @@
                             </select>
                         </td>
                         <td class="text-nowrap">
-                            <button type="submit" class="btn btn-primary btn-sm">Ubah </button>
+                            <button type="submit" class="btn btn-primary btn-sm" style="width:15vh">Kemaskini</button>
                         </form>
                             &nbsp
                             {{-- <form method="POST" style="display:inline-block;" action="{{ route('tindakanlawatan.destroy', $tindlawatan->id) }}">

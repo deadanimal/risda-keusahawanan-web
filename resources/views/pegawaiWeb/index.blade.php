@@ -6,9 +6,11 @@
         <div class="row align-items-center">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
+                @if (Auth::user()->role == 1)
                 <div style="padding-bottom: 20px;" id="test">
                     <a class="btn btn-primary" onclick="API()" href="pegawaiPost2">CALL HRIP</a>
                 </div>
+                @endif
                 <table class="tblpegawai table table-sm table-hover" id="pegawaitbl" style="padding-bottom:2vh;padding-right:4vh" >
                     <colgroup>
                         <col span="1" style="width: 21%;">
@@ -59,17 +61,20 @@
                         @foreach ($pegawai as $user)
                             <tr>
                                 <td class="form-check-label">{{$user->nama}}</td>
-                                <td class="form-check-label">@if($user->Negeri){{$user->Negeri->Negeri}}@endif</td>
-                                <td id="fldDaerah{{$user->id}}" class="form-check-label">@if($user->Daerah){{$user->Daerah->Daerah}}@endif</td>
-                                <td >
-                                    <select id="ddmukim{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:27vh;" onchange="ChangeMukim({{$user->id}}, this.value)">
+                                <td id="fldNegeri{{$user->id}}" class="form-check-label">@if($user->Mukim){{$user->Mukim->Negeri->Negeri}}@endif</td>
+                                <td id="fldDaerah{{$user->id}}" class="form-check-label">@if($user->Mukim){{$user->Mukim->Daerah->Daerah}}@endif</td>
+                                <td>@if($user->Mukim)<input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:150px;" value="{{$user->Mukim->Mukim}}" onclick="mukim({{$user->Mukim}},{{$user->id}})"/>
+                                    @else <input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:150px;" onclick="mukim('',$user->id)"/>
+                                    @endif
+                                    {{-- <select id="ddmukim{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:27vh;" onchange="ChangeMukim({{$user->id}}, this.value)">
                                     <option selected="true" disabled="disabled">Mukim</option>
                                     @foreach ($ddMukim as $items)
                                         <option value="{{ $items->U_Mukim_ID }}" @if($user->Negeri){{ ( $items->U_Mukim_ID == $user->mukim) ? 'selected' : '' }} @endif> 
                                             {{ $items->Mukim }} 
                                         </option>
                                     @endforeach
-                                </select></td>
+                                </select>--}}
+                                </td> 
                                 <td>
                                     <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:18vh;">
                                         <option selected="true" disabled="disabled">Peranan</option>
@@ -141,6 +146,27 @@
         </div>
     </div>
 </div>
+<div id="myModal" class="modal">
+    <div class="modal-content" style="height: 150px; width:320px;margin-top:100px;">
+        <span class="close" style="float: left">&times;</span>
+        <input style="display: none;" value="" id="pegawaiid"/>
+        <input style="display: none;" value="" id="mukimval"/>
+        <div class="modal-body">
+            <label class="form-check-label">Sila Pilih Mukim</label>
+            <select id="ddmukim" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:50vh;">
+                <option selected="true" value='' disabled="disabled">Mukim</option>
+                @foreach ($ddMukim as $items)
+                    <option value="{{ $items->U_Mukim_ID }}"> 
+                        {{ $items->Mukim }} 
+                    </option>
+                @endforeach
+            </select>
+            <div style="padding-top: 10px;padding-left:10px;">
+                <a class="btn btn-primary" onclick="ChangeMukim()">Simpan</a>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -149,6 +175,62 @@ $( document ).ready(function() {
     datatable();
     $('.loader').hide();
 });
+
+function ChangeMukim(){
+    $('.loader').show();
+    var id = document.getElementById("pegawaiid").value;
+    var value = document.getElementById("ddmukim").value;
+    //alert(value);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/pegawaiWeb/apa",
+        type:"GET",
+        data: {     
+            id:id,
+            value:value
+        },
+        success: function(data) {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+            alert("Mukim Berjaya Disimpan");
+            console.log(data);
+            $("#sltMukim"+id).val(data.Mukim);
+            $("#fldNegeri"+id).html(data.negeri.Negeri);
+            $("#fldDaerah"+id).html(data.daerah.Daerah);
+            $('.loader').hide();
+            //alert(data.negeri);
+            //swal("Congrats!", ", Your account is created!", "success");
+            //alert("Akaun Pegawai Kemaskini Berjaya");
+            //location.reload();
+        }
+    });
+}
+
+function mukim(val,userid){
+    console.log(val.U_Mukim_ID);
+    if(val.U_Mukim_ID){
+        document.getElementById("ddmukim").value = val.U_Mukim_ID;
+    }else{
+        document.getElementById("ddmukim").value = '';
+    }
+    document.getElementById("pegawaiid").value = userid;
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+}
+
+window.onclick = function(event) {
+    var modal = document.getElementById("myModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+    var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
 
 function API(){
     $('.loader').show();
@@ -159,7 +241,7 @@ function API(){
         url: "/pegawaiPost2",
         type:"GET",
         success: function(data) {
-            alert("Data Pegawai Berjaya Ditarik");
+            alert("Data Pegawai Berjaya dan Selesai Ditarik");
             $('.loader').hide();
             location.reload();
         }
@@ -172,7 +254,7 @@ function datatable(){
         "bFilter": true,
         "stateSave": true,
         "columnDefs": [
-    { "orderable": false, "targets": [3,4] }
+    { "orderable": false, "targets": [4] }
   ],
         initComplete: function () {
             this.api().columns([1, 2]).every( function () {
@@ -257,7 +339,7 @@ function simpanpengguna(user){
         status = 0;
     }
     var peranan = $("#ddperanan"+id).find(":selected").val();
-    var mukim = $("#ddmukim"+id).find(":selected").val();
+    // var mukim = $("#sltMukim"+id).val();
     //console.log(peranan);
     $.ajax({
         headers: {
@@ -269,38 +351,13 @@ function simpanpengguna(user){
             id:id,
             status:status,
             peranan:peranan,
-            mukim:mukim
+            // mukim:mukim
         },
         success: function(data) {
             //swal("Congrats!", ", Your account is created!", "success");
             alert("Akaun Pegawai Kemaskini Berjaya");
             $('.loader').hide();
             // location.reload();
-        }
-    });
-}
-
-function ChangeMukim(id,value){
-    $('.loader').show();
-    //alert(value);
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "/pegawai/apa",
-        type:"GET",
-        data: {     
-            id:id,
-            value:value
-        },
-        success: function(data) {
-            $("#fldNegeri"+id).html(data.negeri);
-            $("#fldDaerah"+id).html(data.daerah);
-            $('.loader').hide();
-            //alert(data.negeri);
-            //swal("Congrats!", ", Your account is created!", "success");
-            //alert("Akaun Pegawai Kemaskini Berjaya");
-            //location.reload();
         }
     });
 }

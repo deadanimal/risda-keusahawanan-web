@@ -25,7 +25,7 @@ class PegawaiControllerWeb extends Controller
         $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
         $authmukim = $authpegawai->Negeri;
         if($authuser->role == 1){
-            $pegawai = Pegawai::take(10)->get();
+            $pegawai = Pegawai::all();
             // all();
             // take(100)->get();
             $ddPeranan = Peranan::All();
@@ -41,10 +41,15 @@ class PegawaiControllerWeb extends Controller
         }else{
             return redirect('/landing');
         }
-        
-        // dd($pegawai);
 
-        return view('pegawai.index'
+        // foreach ($pegawai as $pegawai_d){
+        //     $muk = Mukim::select('Mukim')->where('U_Mukim_ID',$pegawai_d->mukim)->first();
+        //     if(isset($muk)){
+        //         $pegawai_d->Mukimname = $muk->Mukim;
+        //     }
+        // }
+            // dd($pegawai);
+        return view('pegawaiWeb.index'
         ,[
             'pegawai'=>$pegawai,
             'ddPeranan'=>$ddPeranan,
@@ -63,7 +68,7 @@ class PegawaiControllerWeb extends Controller
 
         $pegawai = Pegawai::where('id', $request->id)->first();
         $pegawai->peranan_pegawai = $request->peranan;
-        $pegawai->mukim = $request->mukim;
+        // $pegawai->mukim = $request->mukim;
         $pegawai->save();
 
         $audit = new AuditTrail();
@@ -74,7 +79,7 @@ class PegawaiControllerWeb extends Controller
         $audit->Date = date("Y-m-d H:i:s");
         $audit->save();
 
-        return '/pegawai';
+        return '/pegawaiWeb';
     }
 
     public function show(Request $request)
@@ -83,22 +88,11 @@ class PegawaiControllerWeb extends Controller
         $mukim->negeri = "";
         $mukim->daerah = "";
 
-        //$pegawai = Pegawai::where('id', $request->id)->first();
-        $mukim = Mukim::where('U_Mukim_ID', $request->value)->first();
-        //return $mukim->U_Negeri_ID;
-        if(isset($mukim->U_Negeri_ID)){
-            $negeri = Negeri::where('U_Negeri_ID', $mukim->U_Negeri_ID)->first();
-            if(isset($negeri->Negeri)){
-                $mukim->negeri = $negeri->Negeri;
-            }
-        }
-        if(isset($mukim->U_Daerah_ID)){
-            $daerah = Daerah::where('U_Daerah_ID', $mukim->U_Daerah_ID)->first();
-            if(isset($daerah->Daerah)){
-                $mukim->daerah = $daerah->Daerah;
-            }
-        }
+        $pegawai = Pegawai::where('id', $request->id)->first();
+        $pegawai->mukim = $request->value;
+        $pegawai->save();
 
+        $mukim = Mukim::where('U_Mukim_ID', $request->value)->first();
         return $mukim;
     }
 

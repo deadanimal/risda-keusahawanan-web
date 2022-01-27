@@ -8,7 +8,7 @@
             <div class="col">
               <h6 class="mb-0">Statistik Dashboard</h6>
             </div>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:40vh;margin-left:20px;" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
+            <select id="sort1" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:40vh;margin-left:20px;" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
                 <option value="">Jenis Insentif</option>
                 @foreach ($ddInsentif as $items)
                     <option value="{{ $items->id_jenis_insentif }}" {{ ( $items->id_jenis_insentif == $getjenisinsentif) ? 'selected' : '' }}>
@@ -16,7 +16,7 @@
                     </option>
                 @endforeach
             </select>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
+            <select id="sort2" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                 <option selected="true" disabled="disabled" value="">Tahun</option>
                 <?php
                 $currtahun = date("Y");
@@ -27,7 +27,7 @@
                 }
                 ?>
             </select>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('Negeri',this.value)" id="iptNegeri">
+            <select id="sort3" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('Negeri',this.value)" id="iptNegeri">
                 <option value="">Negeri</option>
                 @foreach ($ddNegeri as $items)
                     <option value="{{ $items->U_Negeri_ID }}" {{ ( $items->U_Negeri_ID == $getNegeri) ? 'selected' : '' }}>
@@ -44,17 +44,17 @@
     </div>
 </div>
             <div id="wholepage">
-                <div class="row g-0">
+                <div class="row g-0" style="padding-top:15px;">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas" height="500px" style="padding:15px;"></canvas>
+                            <canvas id="canvas" height="500px" style="padding:10px;"></canvas>
                         </div>
                     </div>
                 </div>
                 <div class="row g-0">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas2" height="500px" width="600" style="padding:15px;"></canvas>
+                            <canvas id="canvas2" height="500px" width="600" style="padding:10px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">
@@ -198,6 +198,11 @@
             onrendered: function(canvas) {
                 // var img = canvas.toDataURL(); //image data of canvas
                 var pdf = new jsPDF('p', 'pt', 'letter');
+                // pdf.text(50, 30, );
+                var rep = "RISDA eKeusahawanan Statistic Report \n Jenis Insentif -" + document.getElementById("sort1").value + "     Tahun -" + document.getElementById("sort2").value + "     Negeri -" + document.getElementById("sort3").value;
+                console.log(rep);
+                pdf.setFontSize(9);
+                pdf.text(50, 30, rep);
                 for (var i = 0; i <= page.clientHeight/980; i++) {
                     //! This is all just html2canvas stuff
                     var srcImg  = canvas;
@@ -236,7 +241,7 @@
 
                 }
                 // doc.addImage(img, 10, 10);
-                pdf.save('test.pdf');
+                pdf.save('RisdaStatistic.pdf');
             }
         });
         
