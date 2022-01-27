@@ -280,7 +280,10 @@ class LapProf implements FromArray, WithHeadings
             
             $excel->data17 = $usahawan->status_daftar_usahawan;
             if(isset($usahawan->perniagaan)){
-                $excel->data18 = $usahawan->perniagaan->jenis->nama_jenis_perniagaan;
+                if(isset($usahawan->perniagaan->jenis)){
+                    $excel->data18 = $usahawan->perniagaan->jenis->nama_jenis_perniagaan;
+                }
+                
                 // $excel->data19 = $usahawan->perniagaan->klusterperniagaan;
                 // $excel->data20 = $usahawan->perniagaan->subkluster;
             }
