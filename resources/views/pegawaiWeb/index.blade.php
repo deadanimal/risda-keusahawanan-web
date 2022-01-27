@@ -64,7 +64,7 @@
                                 <td id="fldNegeri{{$user->id}}" class="form-check-label">@if($user->Mukim){{$user->Mukim->Negeri->Negeri}}@endif</td>
                                 <td id="fldDaerah{{$user->id}}" class="form-check-label">@if($user->Mukim){{$user->Mukim->Daerah->Daerah}}@endif</td>
                                 <td>@if($user->Mukim)<input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:150px;" value="{{$user->Mukim->Mukim}}" onclick="mukim({{$user->Mukim}},{{$user->id}})"/>
-                                    @else <input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:150px;" onclick="mukim('',$user->id)"/>
+                                    @else <input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:150px;" onclick="mukim('',{{$user->id}})"/>
                                     @endif
                                     {{-- <select id="ddmukim{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:27vh;" onchange="ChangeMukim({{$user->id}}, this.value)">
                                     <option selected="true" disabled="disabled">Mukim</option>
