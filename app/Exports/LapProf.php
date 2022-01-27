@@ -310,18 +310,18 @@ class LapProf implements FromArray, WithHeadings
             // $excel->data38 = $usahawan->jumaliran;
             // $excel->data39 = $usahawan->purataaliran;
             // $excel->data40 = $usahawan->capaisasaran;
-            // if(isset($usahawan->kateusah)){
-            //     $excel->data41 = $usahawan->kateusah->nama_kategori_usahawan;
-            // }
+            if(isset($usahawan->kateusah)){
+                $excel->data41 = $usahawan->kateusah->nama_kategori_usahawan;
+            }
             
-            // if(isset($usahawan->syarikat)){
-            //     $excel->data42 = $usahawan->syarikat->namasyarikat;
-            // }
+            if(isset($usahawan->syarikat)){
+                $excel->data42 = $usahawan->syarikat->namasyarikat;
+            }
             
-            // $excel->data43 = $usahawan->jenismilikan;
-            // if(isset($usahawan->syarikat)){
-            //     $excel->data44 = $usahawan->syarikat->nodaftarssm;
-            // }
+            $excel->data43 = $usahawan->jenismilikan;
+            if(isset($usahawan->syarikat)){
+                $excel->data44 = $usahawan->syarikat->nodaftarssm;
+            }
             
             // $excel->data45 = $usahawan->alamatsyarikat;
             // if(isset($usahawan->perniagaan)){
@@ -366,25 +366,25 @@ class LapProf implements FromArray, WithHeadings
                         "data23"=>$excel->data23,
                         "data24"=>$excel->data24,
                         "data25"=>$excel->data25,
-                        // "data26"=>$excel->data26,
-                        // "data27"=>$excel->data27,
-                        // "data28"=>$excel->data28,
-                        // "data29"=>$excel->data29,
-                        // "data30"=>$excel->data30,
-                        // "data31"=>$excel->data31,
-                        // "data32"=>$excel->data32,
-                        // "data33"=>$excel->data33,
-                        // "data34"=>$excel->data34,
-                        // "data35"=>$excel->data35,
-                        // "data36"=>$excel->data36,
-                        // "data37"=>$excel->data37,
-                        // "data38"=>$excel->data38,
-                        // "data39"=>$excel->data39,
-                        // "data40"=>$excel->data40,
-                        // "data41"=>$excel->data41,
-                        // "data42"=>$excel->data42,
-                        // "data43"=>$excel->data43,
-                        // "data44"=>$excel->data44,
+                        "data26"=>$excel->data26,
+                        "data27"=>$excel->data27,
+                        "data28"=>$excel->data28,
+                        "data29"=>$excel->data29,
+                        "data30"=>$excel->data30,
+                        "data31"=>$excel->data31,
+                        "data32"=>$excel->data32,
+                        "data33"=>$excel->data33,
+                        "data34"=>$excel->data34,
+                        "data35"=>$excel->data35,
+                        "data36"=>$excel->data36,
+                        "data37"=>$excel->data37,
+                        "data38"=>$excel->data38,
+                        "data39"=>$excel->data39,
+                        "data40"=>$excel->data40,
+                        "data41"=>$excel->data41,
+                        "data42"=>$excel->data42,
+                        "data43"=>$excel->data43,
+                        "data44"=>$excel->data44,
                         // "data45"=>$excel->data45,
                         // "data46"=>$excel->data46,
                         // "data47"=>$excel->data47,
