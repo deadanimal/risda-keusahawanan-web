@@ -60,8 +60,13 @@ class LaporanInsentifControllerWeb extends Controller
             }
             
             try{
-                $total->satu = $total->satu + $report->tab4;
-                $total->dua = $total->dua + $report->tab5;
+                if(isset($report->tab4)){
+                    $total->satu = $total->satu + $report->tab4;
+                }
+                if(isset($report->tab5)){
+                    $total->dua = $total->dua + $report->tab5;
+                }
+                
                 $total->tiga = $total->tiga + $report->tab6;
                 $total->empat = $total->empat + $report->tab7;
                 $total->lima = $total->lima + $report->tab8;
@@ -77,25 +82,37 @@ class LaporanInsentifControllerWeb extends Controller
             try{
                 if($total->satu != 0){
                     $report->percent1 = round(($report->tab4/$total->satu)*100, 2);
+                }else{
+                    $report->percent1 = 0;
                 }
                 if($total->dua != 0){
                     $report->percent2 = round(($report->tab5/$total->dua)*100, 2);
+                }else{
+                    $report->percent2 = 0;
                 }
                 if($total->tiga != 0){
                     $report->percent3 = round(($report->tab6/$total->tiga)*100, 2);
+                }else{
+                    $report->percent3 = 0;
                 }
                 if($total->empat != 0){
                     $report->percent4 = round(($report->tab7/$total->empat)*100, 2);
+                }else{
+                    $report->percent4 = 0;
                 }
                 if($total->lima != 0){
                     $report->percent5 = round(($report->tab8/$total->lima)*100, 2);
+                }else{
+                    $report->percent5 = 0;
+                }
+                if($total->enam != 0){
+                    $percent->satu = $total->satu / $total->enam *100;
+                    $percent->dua = $total->dua / $total->enam *100;
+                    $percent->tiga = $total->tiga / $total->enam *100;
+                    $percent->empat = $total->empat / $total->enam *100;
+                    $percent->lima = $total->lima / $total->enam *100;
                 }
                 
-                $percent->satu = $total->satu / $total->enam *100;
-                $percent->dua = $total->dua / $total->enam *100;
-                $percent->tiga = $total->tiga / $total->enam *100;
-                $percent->empat = $total->empat / $total->enam *100;
-                $percent->lima = $total->lima / $total->enam *100;
                 $percent->enam = 100;
             }catch(Exception $e){
 
