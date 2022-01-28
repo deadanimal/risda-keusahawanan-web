@@ -48,10 +48,17 @@ class LaporanInsentifControllerWeb extends Controller
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
             if(isset($negeri)){
                 $report->negeri = $negeri->Negeri;
+            }else{
+                $report->negeri = "";
             }
             
             $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
-            $report->jenis = $jenisinsentif->nama_insentif;
+            if(isset($jenisinsentif)){
+                $report->jenis = $jenisinsentif->nama_insentif;
+            }else{
+                $report->jenis = "";
+            }
+            
 
             $total->satu = $total->satu + $report->tab4;
             $total->dua = $total->dua + $report->tab5;
@@ -85,7 +92,11 @@ class LaporanInsentifControllerWeb extends Controller
             $percent->empat = $total->empat / $total->enam *100;
             $percent->lima = $total->lima / $total->enam *100;
             $percent->enam = 100;
-            $report->jumprojectpercent = round(($report->jumproject / $total->enam) *100, 2);
+            if(isset($report->jumproject) && isset($total->enam)){
+                $report->jumprojectpercent = round(($report->jumproject / $total->enam) *100, 2);
+            }else{
+                $report->jumprojectpercent = "";
+            }
         }
         return view('laporaninsentif.index'
         ,[

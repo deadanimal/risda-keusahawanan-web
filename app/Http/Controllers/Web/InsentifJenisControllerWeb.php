@@ -55,10 +55,14 @@ class InsentifJenisControllerWeb extends Controller
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
             if(isset($negeri)){
                 $report->negeri = $negeri->Negeri;
+            }else{
+                $report->negeri = "";
             }
             $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
             if(isset($jenisinsentif)){
                 $report->jenis = $jenisinsentif->nama_insentif;
+            }else{
+                $report->jenis = "";
             }
 
             $report->jumbil = $report->tab4 + $report->tab6 + $report->tab8 + $report->tab10 + $report->tab12;
