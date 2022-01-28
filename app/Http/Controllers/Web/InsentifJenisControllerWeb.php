@@ -65,28 +65,33 @@ class InsentifJenisControllerWeb extends Controller
                 $report->jenis = "";
             }
 
-            $report->jumbil = $report->tab4 + $report->tab6 + $report->tab8 + $report->tab10 + $report->tab12;
-            $report->jumrm = $report->tab5 + $report->tab7 + $report->tab9 + $report->tab11 + $report->tab13;
+            try{
+                $report->jumbil = $report->tab4 + $report->tab6 + $report->tab8 + $report->tab10 + $report->tab12;
+                $report->jumrm = $report->tab5 + $report->tab7 + $report->tab9 + $report->tab11 + $report->tab13;
 
-            $report->puratajual = ($report->jumrm / $report->jumbil) /$getMonth;
-            $report->puratapend = $report->puratajual * 0.3;
+                $report->puratajual = ($report->jumrm / $report->jumbil) /$getMonth;
+                $report->puratapend = $report->puratajual * 0.3;
 
-            $total->satu = $total->satu + $report->tab4;
-            $total->dua = $total->dua + $report->tab6;
-            $total->tiga = $total->tiga + $report->tab8;
-            $total->empat = $total->empat + $report->tab10;
-            $total->lima = $total->lima + $report->tab12;
-            $total->enam = $total->satu + $total->dua + $total->tiga + $total->empat + $total->lima;
+                $total->satu = $total->satu + $report->tab4;
+                $total->dua = $total->dua + $report->tab6;
+                $total->tiga = $total->tiga + $report->tab8;
+                $total->empat = $total->empat + $report->tab10;
+                $total->lima = $total->lima + $report->tab12;
+                $total->enam = $total->satu + $total->dua + $total->tiga + $total->empat + $total->lima;
 
-            $rm->satu = $rm->satu + $report->tab5;
-            $rm->dua = $rm->dua + $report->tab7;
-            $rm->tiga = $rm->tiga + $report->tab9;
-            $rm->empat = $rm->empat + $report->tab11;
-            $rm->lima = $rm->lima + $report->tab13;
-            $rm->enam = $rm->satu + $rm->dua + $rm->tiga + $rm->empat + $rm->lima;
+                $rm->satu = $rm->satu + $report->tab5;
+                $rm->dua = $rm->dua + $report->tab7;
+                $rm->tiga = $rm->tiga + $report->tab9;
+                $rm->empat = $rm->empat + $report->tab11;
+                $rm->lima = $rm->lima + $report->tab13;
+                $rm->enam = $rm->satu + $rm->dua + $rm->tiga + $rm->empat + $rm->lima;
 
-            $total->tujuh = $total->tujuh + $report->puratajual;
-            $rm->tujuh = $rm->tujuh + $report->puratapend;
+                $total->tujuh = $total->tujuh + $report->puratajual;
+                $rm->tujuh = $rm->tujuh + $report->puratapend;
+            }catch(Exception $e){
+
+            }
+            
         }
 
         foreach ($reports as $report) {
