@@ -77,7 +77,7 @@ class InsentifJenisControllerWeb extends Controller
                     $report->jumrm = 0;
                 }
                 
-                if(isset($report->jumrm) && isset($report->jumbil)){
+                if(isset($report->jumrm) && $report->jumbil != 0){
                     $report->puratajual = ($report->jumrm / $report->jumbil) /$getMonth;
                     $report->puratapend = $report->puratajual * 0.3;
                 }else{
