@@ -465,7 +465,7 @@
   });
 
   function generatereport(type,nextPage,userid){
-    
+    $('.loader').show();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -478,6 +478,7 @@
         },
         success: function(data) {
           // console.log(data);
+          $('.loader').hide();
           alert(data);
           location.href = nextPage;
           return true;
