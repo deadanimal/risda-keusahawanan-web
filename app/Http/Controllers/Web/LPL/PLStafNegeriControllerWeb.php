@@ -33,9 +33,19 @@ class PLStafNegeriControllerWeb extends Controller
 
         foreach ($reports as $report) {
             $daerah = Daerah::select('Daerah')->where('U_Daerah_ID', $report->tab3)->first();
-            $report->daerah = $daerah->Daerah;
+            if(isset($daerah)){
+                $report->daerah = $daerah->Daerah;
+            }else{
+                $report->daerah = "";
+            }
             $pegawai = Pegawai::select('nama')->where('id', $report->tab4)->first();
-            $report->pegawai = $pegawai->nama;
+            if(isset($pegawai)){
+                $report->pegawai = $pegawai->nama;
+            }else{
+                $report->pegawai = "";
+            }
+            
+            
             $total->satu = $total->satu + $report->tab5;
             $total->dua = $total->dua + $report->tab6;
             $total->tiga = $total->tiga + $report->tab7;
@@ -43,7 +53,12 @@ class PLStafNegeriControllerWeb extends Controller
         }
 
         foreach ($reports as $report) {
-            $report->percent = round(($report->tab5/$total->satu *100), 2);
+            if(isset($report->tab5) && isset($total->satu)){
+                $report->percent = round(($report->tab5/$total->satu *100), 2);
+            }else{
+                $report->percent = "";
+            }
+            
         }
 
         return view('pemantauanlawatan.pantaustafnegeri'

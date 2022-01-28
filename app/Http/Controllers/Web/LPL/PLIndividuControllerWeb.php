@@ -30,8 +30,10 @@ class PLIndividuControllerWeb extends Controller
             $user = User::where('usahawanid', $usahawan->usahawanid)->first();
             if($user != null){
                 $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
-                $usahawan->negeri = $negeri->Negeri;
-
+                if(isset($negeri)){
+                    $usahawan->negeri = $negeri->Negeri;
+                }
+                
                 $lawatan = Lawatan::where('id_pengguna', $user->id)->get();
                 if($lawatan->count()==0){
                     

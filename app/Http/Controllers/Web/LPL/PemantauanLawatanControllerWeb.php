@@ -31,14 +31,24 @@ class PemantauanLawatanControllerWeb extends Controller
 
         foreach ($reports as $report) {
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
-            $report->negeri = $negeri->Negeri;
+            if(isset($negeri)){
+                $report->negeri = $negeri->Negeri;
+            }else{
+                $report->negeri = "";
+            }
+            
             $total->satu = $total->satu + $report->tab3;
             $total->dua = $total->dua + $report->tab4;
             $total->tiga = $total->tiga + $report->tab5;
             $total->empat = $total->empat + $report->tab6;
         }
         foreach ($reports as $report) {
-            $report->percent = round(($report->tab3/$total->satu *100), 2);
+            if(isset($report->tab3) && isset($total->satu)){
+                $report->percent = round(($report->tab3/$total->satu *100), 2);
+            }else{
+                $report->percent = 0;
+            }
+            
         }
 
         return view('pemantauanlawatan.index'
@@ -75,14 +85,22 @@ class PemantauanLawatanControllerWeb extends Controller
         $total->empat = 0;
         foreach ($reports as $report) {
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
-            $report->negeri = $negeri->Negeri;
+            if(isset($negeri)){
+                $report->negeri = $negeri->Negeri;
+            }else{
+                $report->negeri = "";
+            }
             $total->satu = $total->satu + $report->tab3;
             $total->dua = $total->dua + $report->tab4;
             $total->tiga = $total->tiga + $report->tab5;
             $total->empat = $total->empat + $report->tab6;
         }
         foreach ($reports as $report) {
-            $report->percent = round(($report->tab3/$total->satu *100), 2);
+            if(isset($report->tab3) && isset($total->satu)){
+                $report->percent = round(($report->tab3/$total->satu *100), 2);
+            }else{
+                $report->percent = 0;
+            }
             $result .= 
             '<tr class="align-middle" style="text-align: center;">
             <td class="text-nowrap" style="padding-right:2vh;">'.$num++.'</td>
