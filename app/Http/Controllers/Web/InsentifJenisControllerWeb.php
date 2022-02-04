@@ -66,16 +66,16 @@ class InsentifJenisControllerWeb extends Controller
             }
 
             try{
-                if(isset($report->tab4)&&isset($report->tab6 )&&isset($report->tab8)&&isset($report->tab10)&&isset($report->tab12)){
+                // if(isset($report->tab4)&&isset($report->tab6 )&&isset($report->tab8)&&isset($report->tab10)&&isset($report->tab12)){
                     $report->jumbil = $report->tab4 + $report->tab6 + $report->tab8 + $report->tab10 + $report->tab12;
-                }else{
-                    $report->jumbil = 0;
-                }
-                if(isset($report->tab5)&&isset($report->tab7)&&isset($report->tab9)&&isset($report->tab11)&&isset($report->tab13)){
+                // }else{
+                    // $report->jumbil = 0;
+                // }
+                // if(isset($report->tab5)&&isset($report->tab7)&&isset($report->tab9)&&isset($report->tab11)&&isset($report->tab13)){
                     $report->jumrm = $report->tab5 + $report->tab7 + $report->tab9 + $report->tab11 + $report->tab13;
-                }else{
-                    $report->jumrm = 0;
-                }
+                // }else{
+                    // $report->jumrm = 0;
+                // }
                 
                 if(isset($report->jumrm) && $report->jumbil != 0){
                     $report->puratajual = ($report->jumrm / $report->jumbil) /$getMonth;

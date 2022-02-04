@@ -43,6 +43,12 @@ class InsentifControllerWeb extends Controller
     public function show($id)
     {
         $insentifs = Insentif::where('id_pengguna', $id)->get();
+        $insentifCount = $insentifs->count();
+        if($insentifCount >= 10){
+            $addinsen = false;
+        }else{
+            $addinsen = true;
+        }
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
         $usahawan = Usahawan::where('usahawanid', $id)->first();
         return view('insentifWeb.insentifdetail'
@@ -52,7 +58,8 @@ class InsentifControllerWeb extends Controller
             'ddInsentif'=>$ddInsentif,
             'negeri'=>$usahawan->U_Negeri_ID,
             'daerah'=>$usahawan->U_Daerah_ID,
-            'dun'=>$usahawan->U_Dun_ID
+            'dun'=>$usahawan->U_Dun_ID,
+            'addinsen'=>$addinsen
         ]
         );
     }
@@ -89,9 +96,10 @@ class InsentifControllerWeb extends Controller
             $audit->save();
 
             echo '<script language="javascript">';
-            echo 'alert("Insentif Berjaya Di Simpan")';
+            echo 'alert("Insentif Berjaya Di Simpan");';
+            echo "window.location.href = '/insentifdetail/".$request->id_pengguna."';";
             echo '</script>';
-            return redirect('/insentifdetail/'.$request->id_pengguna);
+            // return redirect('/insentifdetail/'.$request->id_pengguna);
         }
         
     }
@@ -120,9 +128,10 @@ class InsentifControllerWeb extends Controller
         $audit->save();
 
         echo '<script language="javascript">';
-        echo 'alert("Insentif Berjaya Di Ubah")';
+        echo 'alert("Insentif Berjaya Di Ubah");';
+        echo "window.location.href = '/insentifdetail/".$request->id_pengguna."';";
         echo '</script>'; 
-        return redirect('/insentifdetail/'.$request->id_pengguna);
+        // return redirect('/insentifdetail/'.$request->id_pengguna);
     }
 
     public function destroy($id)
@@ -141,8 +150,9 @@ class InsentifControllerWeb extends Controller
         $audit->save();
 
         echo '<script language="javascript">';
-        echo 'alert("Insentif Berjaya Di Buang")';
+        echo 'alert("Insentif Berjaya Di Buang");';
+        echo "window.location.href = '/insentifdetail/".$insentif->id_pengguna."';";
         echo '</script>';
-        return redirect(url()->previous());
+        // return redirect(url()->previous());
     }
 }

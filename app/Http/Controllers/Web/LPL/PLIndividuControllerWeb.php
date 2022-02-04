@@ -191,6 +191,7 @@ class PLIndividuControllerWeb extends Controller
                 $result .= '
                 <tr>
                 <td style="display: none;" id="userid">'.$usahawan->usahawanid.'</td>
+                <td></td>
                 </tr>
                 <tr class="align-middle" style="text-align: left;">
                     <td class="text-nowrap" >Nama Usahawan</td>
@@ -242,21 +243,25 @@ class PLIndividuControllerWeb extends Controller
                     <td class="text-nowrap" colspan="2" style="padding-top: 20px;">
                         Tindakan yang perlu dilaksanakan oleh usahawan
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="text-nowrap" colspan="2" style="border: 1px solid black;padding:25px 15px">
                     '.$usahawan->tindakan.'
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="text-nowrap" colspan="2" style="padding-top: 20px;">
                         Catatan/Komen Keseluruhan
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="text-nowrap" colspan="2" style="border: 1px solid black;padding:25px 15px">
                     '.$usahawan->komen.'
                     </td>
+                    <td></td>
                 </tr>';
 
                 

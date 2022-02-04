@@ -18,7 +18,8 @@ class AuditTrailControllerWeb extends Controller
         if(!isset($authuser)){
             return redirect('/landing');
         }
-        $Audits = AuditTrail::orderBy('Date', 'DESC')->get();
+        $today = date("Y");
+        $Audits = AuditTrail::whereYear('Date', $today)->orderBy('Date', 'DESC')->get();
         foreach ($Audits as $Audit) {
             $Audit->user = $Audit->idpegawai;
             if($Audit->Type == 1){
@@ -56,4 +57,37 @@ class AuditTrailControllerWeb extends Controller
         );
     }
 
+    public function show(Request $request)
+    {
+        // dd($request);
+        $from = date($request->start);
+        $to = date($request->end);
+        // dd($from .'--'. $to);
+        $Audits = AuditTrail::whereBetween('Date', [$from, $to])->get();
+        $result = '';
+        foreach ($Audits as $Audit) {
+            $Audit->user = $Audit->idpegawai;
+            if($Audit->Type == 1){
+                $Audit->jenis = "Tetapan Pegawai";
+            }else if($Audit->Type == 2){
+                $Audit->jenis = "Tetapan Usahawan";
+            }else if($Audit->Type == 3){
+                $Audit->jenis = "Insentif";
+            }else if($Audit->Type == 4){
+                $Audit->jenis = "Tetapan Komponen";
+            }
+            $pegawai = Pegawai::where('id', $Audit->idpegawai)->first();
+            if(isset($pegawai)){
+                $Audit->pegawai = $pegawai->nama;
+            }
+
+            $result .='
+                <tr class="border-bottom-0 rounded-0 border-x-0 border border-300">
+                    <td class="notification-time">'.$Audit->Date.'</td>
+                    <td class="notification-body"><p class="mb-1"><strong>'.$Audit->pegawai.'</strong> '.$Audit->Desc.' di <strong>'.$Audit->jenis.'</strong></p></td>
+                </tr>
+            ';
+        }
+        return $result;
+    }
 }

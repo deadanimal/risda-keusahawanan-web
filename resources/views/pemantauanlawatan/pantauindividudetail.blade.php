@@ -20,7 +20,7 @@
             </h3>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
                 <div style="padding-bottom: 20px;">
-                    <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
+                    <a class="btn btn-primary" onclick="ExportPDF()"><span class="bi bi-file-earmark-pdf">PDF</span></a>
                 </div>
                 <table id="laporanpantauind" class="table table-sm table-hover" style="border:none;border-collapse: collapse;">
                     <colgroup>
@@ -154,6 +154,8 @@
 <script type="text/javascript">
 
     $( document ).ready(function() {
+        var today = new Date();
+        var year = today.getFullYear();
         $('#laporanpantauind').DataTable( {
             searching: false,
             sorting:false,
@@ -163,7 +165,27 @@
                 stripHtml: false,
             },
             buttons: [
-                'copy', 'csv', 'excel'
+                {
+                    extend:    'copyHtml5',
+                    text:       '<span class="bi bi-files">Copy</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'Copy',
+                    title: 'LAPORAN LAWATAN PEMANTAUAN INDIVIDU BAGI TAHUN '+year
+                },
+                {
+                    extend:    'excelHtml5',
+                    text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'Excel',
+                    title: 'LAPORAN LAWATAN PEMANTAUAN INDIVIDU BAGI TAHUN '+year
+                },
+                {
+                    extend:    'csvHtml5',
+                    text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'CSV',
+                    title: 'LAPORAN LAWATAN PEMANTAUAN INDIVIDU BAGI TAHUN '+year
+                }
             ]
         });
         $('.loader').hide();
@@ -171,7 +193,8 @@
     
     function gettabledata(type,val){
         $('.loader').show();
-        
+        $('#laporanpantauind').dataTable().fnClearTable();
+        $('#laporanpantauind').dataTable().fnDestroy();
         var year = document.getElementById("iptYear").value;
         var usahawanid = document.getElementById("userid").value;
         console.log(usahawanid);
@@ -188,6 +211,38 @@
             success: function(data) {
                 console.log(data);
                 $("#tblname").html(data);
+                $('#laporanpantauind').DataTable( {
+                    searching: false,
+                    sorting:false,
+                    paging:false,
+                    dom: 'Bfrtip',
+                    exportOptions: {
+                        stripHtml: false,
+                    },
+                    buttons: [
+                        {
+                            extend:    'copyHtml5',
+                            text:       '<span class="bi bi-files">Copy</span>',
+                            className: 'btn btn-primary btn-xs',
+                            titleAttr: 'Copy',
+                            title: 'LAPORAN LAWATAN PEMANTAUAN INDIVIDU BAGI TAHUN '+year
+                        },
+                        {
+                            extend:    'excelHtml5',
+                            text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                            className: 'btn btn-primary btn-xs',
+                            titleAttr: 'Excel',
+                            title: 'LAPORAN LAWATAN PEMANTAUAN INDIVIDU BAGI TAHUN '+year
+                        },
+                        {
+                            extend:    'csvHtml5',
+                            text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                            className: 'btn btn-primary btn-xs',
+                            titleAttr: 'CSV',
+                            title: 'LAPORAN LAWATAN PEMANTAUAN INDIVIDU BAGI TAHUN '+year
+                        }
+                    ]
+                });
                 $('.loader').hide();
             }
         });
@@ -197,8 +252,12 @@
         
         var doc = new jsPDF("p", "mm", "a4")
         doc.autoTable({ html: '#laporanpantauind' })
-        var myImage = document.getElementById("gambau").src; 
-        doc.addImage(myImage, 'JPEG', 80, 100, 60, 35);
+        var elem = document.getElementById('gambau');
+        // console.log(elem.getAttribute('src'));
+        if(elem.getAttribute('src') != ""){
+            var myImage = document.getElementById("gambau").src; 
+            doc.addImage(myImage, 'JPEG', 80, 100, 60, 35);
+        }
         doc.save('PemantauanLawatanIndividu.pdf')
     
     }

@@ -11,10 +11,11 @@ use App\Models\User;
 use App\Models\jenisinsentif;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-class LapProf implements FromArray, WithHeadings
+class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implements WithCustomValueBinder, FromArray, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Arrayable

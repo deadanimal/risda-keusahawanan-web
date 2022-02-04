@@ -25,45 +25,61 @@ class TindakanLawatanControllerWeb extends Controller
 
     public function store(Request $request)
     {
-        $tindakanlawatan = new TindakanLawatan();
-        $tindakanlawatan->nama_tindakan_lawatan = $request->nama_tindakan_lawatan;
-        $tindakanlawatan->status_tindakan_lawatan = $request->status_tindakan_lawatan;
-        $tindakanlawatan->save();
+        if($request->nama_tindakan_lawatan == null){
+            echo '<script language="javascript">';
+            echo 'alert("Data Tidak Lengkap");';
+            echo "window.location.href='/tindakanlawatan';";
+            echo '</script>';
+        }else{
 
-        $audit = new AuditTrail();
-        $authuser = Auth::user();
-        $audit->idpegawai = $authuser->idpegawai;
-        $audit->Type = 4;
-        $audit->Desc = "Tambah data Tindakan Lawatan";
-        $audit->Date = date("Y-m-d H:i:s");
-        $audit->save();
+            $tindakanlawatan = new TindakanLawatan();
+            $tindakanlawatan->nama_tindakan_lawatan = $request->nama_tindakan_lawatan;
+            $tindakanlawatan->status_tindakan_lawatan = $request->status_tindakan_lawatan;
+            $tindakanlawatan->save();
 
-        echo '<script language="javascript">';
-        echo 'alert("Kategori Aliran Berjaya Di Simpan")';
-        echo '</script>';
-        return redirect('/tindakanlawatan');
+            $audit = new AuditTrail();
+            $authuser = Auth::user();
+            $audit->idpegawai = $authuser->idpegawai;
+            $audit->Type = 4;
+            $audit->Desc = "Tambah data Tindakan Lawatan";
+            $audit->Date = date("Y-m-d H:i:s");
+            $audit->save();
+
+            echo '<script language="javascript">';
+            echo 'alert("Kategori Aliran Berjaya Di Simpan");';
+            echo "window.location.href='/tindakanlawatan';";
+            echo '</script>';
+        }
+        
     }
 
     public function update(Request $request, $id)
     {
-        //dd ($id);
-        $tindakanlawatan = TindakanLawatan::where('id', $id)->first();
-        $tindakanlawatan->nama_tindakan_lawatan = $request->nama_tindakan_lawatan;
-        $tindakanlawatan->status_tindakan_lawatan = $request->status_tindakan_lawatan;
-        $tindakanlawatan->save();
+        if($request->nama_tindakan_lawatan == null){
+            echo '<script language="javascript">';
+            echo 'alert("Data Tidak Lengkap");';
+            echo "window.location.href='/tindakanlawatan';";
+            echo '</script>';
+        }else{
 
-        $audit = new AuditTrail();
-        $authuser = Auth::user();
-        $audit->idpegawai = $authuser->idpegawai;
-        $audit->Type = 4;
-        $audit->Desc = "Ubah data Tindakan Lawatan";
-        $audit->Date = date("Y-m-d H:i:s");
-        $audit->save();
+            $tindakanlawatan = TindakanLawatan::where('id', $id)->first();
+            $tindakanlawatan->nama_tindakan_lawatan = $request->nama_tindakan_lawatan;
+            $tindakanlawatan->status_tindakan_lawatan = $request->status_tindakan_lawatan;
+            $tindakanlawatan->save();
 
-        echo '<script language="javascript">';
-        echo 'alert("Tindakan Lawatan Berjaya Di Ubah")';
-        echo '</script>';
-        return redirect('/tindakanlawatan');
+            $audit = new AuditTrail();
+            $authuser = Auth::user();
+            $audit->idpegawai = $authuser->idpegawai;
+            $audit->Type = 4;
+            $audit->Desc = "Ubah data Tindakan Lawatan";
+            $audit->Date = date("Y-m-d H:i:s");
+            $audit->save();
+
+            echo '<script language="javascript">';
+            echo 'alert("Tindakan Lawatan Berjaya Di Ubah");';
+            echo "window.location.href='/tindakanlawatan';";
+            echo '</script>';
+        }
     }
 
     public function destroy($id)

@@ -308,13 +308,49 @@
 @section('script')
 <script type="text/javascript">
     $( document ).ready(function() {
+        var today = new Date();
+        var year = today.getFullYear();
         $('#pnldetail').DataTable( {
             searching: false,
             sorting:false,
             paging:false,
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                {
+                    extend:    'copyHtml5',
+                    text:       '<span class="bi bi-files">Copy</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'Copy',
+                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN DAN TAHUN '+year
+                },
+                {
+                    extend:    'excelHtml5',
+                    text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'Excel',
+                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN DAN TAHUN '+year
+                },
+                {
+                    extend:    'csvHtml5',
+                    text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'CSV',
+                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN DAN TAHUN '+year
+                },
+                {
+                    extend:    'pdfHtml5',
+                    text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'PDF',
+                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN DAN TAHUN '+year
+                },
+                {
+                    extend:    'print',
+                    text:      '<span class="bi bi-printer">Print</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'PDF',
+                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN DAN TAHUN '+year
+                }
             ]
         });
         $('.loader').hide();
@@ -324,6 +360,13 @@
         $('.loader').show();
         $('#pnldetail').dataTable().fnClearTable();
         $('#pnldetail').dataTable().fnDestroy();
+        var sel = document.getElementById("iptBulan");
+        if(sel.selectedIndex == 0){
+            var jenistext = '';
+        }else{
+            var jenistext= sel.options[sel.selectedIndex].text;
+        }
+
         if (type == 'month'){
             var bulan = val;
             var year = document.getElementById("iptYear").value;
@@ -353,7 +396,41 @@
                         paging:false,
                         dom: 'Bfrtip',
                         buttons: [
-                            'copy', 'csv', 'excel', 'pdf', 'print'
+                            {
+                                extend:    'copyHtml5',
+                                text:       '<span class="bi bi-files">Copy</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'Copy',
+                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year
+                            },
+                            {
+                                extend:    'excelHtml5',
+                                text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'Excel',
+                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year
+                            },
+                            {
+                                extend:    'csvHtml5',
+                                text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'CSV',
+                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year
+                            },
+                            {
+                                extend:    'pdfHtml5',
+                                text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'PDF',
+                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year
+                            },
+                            {
+                                extend:    'print',
+                                text:      '<span class="bi bi-printer">Print</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'PDF',
+                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year
+                            }
                         ]
                     });
                 }

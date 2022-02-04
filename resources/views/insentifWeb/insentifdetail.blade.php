@@ -6,6 +6,7 @@
         <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;padding-top:3vh;">Insentif Usahawan</h3>
+            @if ($addinsen == true)
             <div class="card-body bg-light" style="padding-top: 1vh;">
               <form class="row g-3" method="POST" action="/insentifWeb" enctype="multipart/form-data">
                 @csrf
@@ -44,7 +45,7 @@
                       <select class="form-select form-select-sm" name="tahun_terima_insentif" id="field-name" type="text"/>
                       <option value="">Tahun</option>
                       <?php
-                      $curryear = date("Y") + 2;
+                      $curryear = date("Y");
                       $fromyear = date("Y") - 20;
                       for ($year = $curryear; $year >= $fromyear; $year--) {
                       $selected = (isset($getYear) && $getYear == $year) ? 'selected' : '';
@@ -62,6 +63,7 @@
                 </div>
               </form>
             </div>
+            @endif
               @foreach ($insentifs as $insentif)
               <div class="card-body bg-light">
                 

@@ -186,24 +186,48 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
+    var today = new Date();
+    var year = today.getFullYear();
     $('#laporanbukutunai').DataTable( {
         searching: false,
         sorting:false,
         paging:false,
         dom: 'Bfrtip',
         buttons: [
-            'copy',
             {
-                extend: 'excel',
-                title: 'LAPORAN BUKU TUNAI'
+                extend:    'copyHtml5',
+                text:       '<span class="bi bi-files">Copy</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'Copy',
+                title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year
             },
             {
-                extend: 'pdf',
-                title: 'LAPORAN BUKU TUNAI'
+                extend:    'excelHtml5',
+                text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'Excel',
+                title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year
             },
             {
-                extend: 'print',
-                title: 'LAPORAN BUKU TUNAI'
+                extend:    'csvHtml5',
+                text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'CSV',
+                title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'PDF',
+                title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year
+            },
+            {
+                extend:    'print',
+                text:      '<span class="bi bi-printer">Print</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'PDF',
+                title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year
             }
         ]
     });
@@ -214,6 +238,13 @@ function gettabledata(type,val){
     $('.loader').show();
     $('#laporanbukutunai').dataTable().fnClearTable();
     $('#laporanbukutunai').dataTable().fnDestroy();
+    var sel = document.getElementById("iptBulan");
+    if(sel.selectedIndex == 0){
+        var jenistext = '';
+    }else{
+        var jenistext= sel.options[sel.selectedIndex].text;
+    }
+
     if (type == 'month'){
       var bulan = val;
       var year = document.getElementById("iptYear").value;
@@ -243,7 +274,41 @@ function gettabledata(type,val){
                     paging:false,
                     dom: 'Bfrtip',
                     buttons: [
-                        'copy', 'csv', 'excel', 'pdf', 'print'
+                        {
+                            extend:    'copyHtml5',
+                            text:       '<span class="bi bi-files">Copy</span>',
+                            className: 'btn btn-primary btn-xs',
+                            titleAttr: 'Copy',
+                            title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                        },
+                        {
+                            extend:    'excelHtml5',
+                            text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                            className: 'btn btn-primary btn-xs',
+                            titleAttr: 'Excel',
+                            title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                        },
+                        {
+                            extend:    'csvHtml5',
+                            text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                            className: 'btn btn-primary btn-xs',
+                            titleAttr: 'CSV',
+                            title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                        },
+                        {
+                            extend:    'pdfHtml5',
+                            text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                            className: 'btn btn-primary btn-xs',
+                            titleAttr: 'PDF',
+                            title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                        },
+                        {
+                            extend:    'print',
+                            text:      '<span class="bi bi-printer">Print</span>',
+                            className: 'btn btn-primary btn-xs',
+                            titleAttr: 'PDF',
+                            title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                        }
                     ]
                 });
             }

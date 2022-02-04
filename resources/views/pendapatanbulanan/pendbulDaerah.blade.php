@@ -142,11 +142,47 @@
 <script type="text/javascript">
 
     $( document ).ready(function() {
+      var today = new Date();
+      var yyyy = today.getFullYear();
       $('#pendbuldaerah').DataTable( {
-          searching: false,
+          searching: true,
           dom: 'Bfrtip',
           buttons: [
-              'copy', 'csv', 'excel', 'pdf', 'print'
+            {
+                extend:    'copyHtml5',
+                text:       '<span class="bi bi-files">Copy</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'Copy',
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy
+            },
+            {
+                extend:    'excelHtml5',
+                text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'Excel',
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy
+            },
+            {
+                extend:    'csvHtml5',
+                text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'CSV',
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'PDF',
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy
+            },
+            {
+                extend:    'print',
+                text:      '<span class="bi bi-printer">Print</span>',
+                className: 'btn btn-primary btn-xs',
+                titleAttr: 'PDF',
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy
+            }
           ]
       });
         $('.loader').hide();
@@ -156,6 +192,13 @@
       $('.loader').show();
       $('#pendbuldaerah').dataTable().fnClearTable();
       $('#pendbuldaerah').dataTable().fnDestroy();
+      var sel = document.getElementById("iptJenisInsentif");
+      if(sel.selectedIndex == 0){
+        var jenistext = '';
+      }else{
+        var jenistext= sel.options[sel.selectedIndex].text;
+      }
+
       if (type == 'year'){
         var year = val;
         var jenis = document.getElementById("iptJenisInsentif").value;
@@ -177,10 +220,44 @@
             $("#tblname").html(data[0]);
             $("#tblfoot").html(data[1]);
             $('#pendbuldaerah').DataTable( {
-                searching: false,
+                searching: true,
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                  {
+                      extend:    'copyHtml5',
+                      text:       '<span class="bi bi-files">Copy</span>',
+                      className: 'btn btn-primary btn-xs',
+                      titleAttr: 'Copy',
+                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year
+                  },
+                  {
+                      extend:    'excelHtml5',
+                      text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                      className: 'btn btn-primary btn-xs',
+                      titleAttr: 'Excel',
+                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year
+                  },
+                  {
+                      extend:    'csvHtml5',
+                      text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                      className: 'btn btn-primary btn-xs',
+                      titleAttr: 'CSV',
+                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year
+                  },
+                  {
+                      extend:    'pdfHtml5',
+                      text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                      className: 'btn btn-primary btn-xs',
+                      titleAttr: 'PDF',
+                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year
+                  },
+                  {
+                      extend:    'print',
+                      text:      '<span class="bi bi-printer">Print</span>',
+                      className: 'btn btn-primary btn-xs',
+                      titleAttr: 'PDF',
+                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year
+                  }
                 ]
             });
             $("#c_insentif").html(data[2]);
@@ -189,27 +266,27 @@
           }
       });
     }
-    function ExportExcel(){
-        if(document.getElementById("iptJenisInsentif").value == ""){
-            var jenis = "nun";
-        }else{
-            var jenis = document.getElementById("iptJenisInsentif").value;
-        }
+    // function ExportExcel(){
+    //     if(document.getElementById("iptJenisInsentif").value == ""){
+    //         var jenis = "nun";
+    //     }else{
+    //         var jenis = document.getElementById("iptJenisInsentif").value;
+    //     }
         
-        if(document.getElementById("iptYear").value == ""){
-            var year = "nun";
-        }else{
-            var year = document.getElementById("iptYear").value;
-        }
+    //     if(document.getElementById("iptYear").value == ""){
+    //         var year = "nun";
+    //     }else{
+    //         var year = document.getElementById("iptYear").value;
+    //     }
     
-        window.location.href = "/export2/"+year+"/"+jenis;
-    }
+    //     window.location.href = "/export2/"+year+"/"+jenis;
+    // }
 
-    function ExportPDF(){
-        var doc = new jsPDF("p", "mm", "a4")
-        doc.autoTable({ html: '#pendbuldaerah' })
-        doc.save('PendapatanBulananDaerah.pdf')
-    }
+    // function ExportPDF(){
+    //     var doc = new jsPDF("p", "mm", "a4")
+    //     doc.autoTable({ html: '#pendbuldaerah' })
+    //     doc.save('PendapatanBulananDaerah.pdf')
+    // }
       
 </script>
 @endsection

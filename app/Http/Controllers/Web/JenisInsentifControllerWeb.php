@@ -22,47 +22,71 @@ class JenisInsentifControllerWeb extends Controller
 
     public function store(Request $request)
     {
-        $jenisinsentif = new JenisInsentif();
-        $jenisinsentif->id_jenis_insentif = $request->id_jenis_insentif;
-        $jenisinsentif->nama_insentif = $request->nama_insentif;
-        $jenisinsentif->status = $request->status;
-        $jenisinsentif->save();
+        $checkinsen = JenisInsentif::where('id_jenis_insentif',$request->id_jenis_insentif)->first();
+        if($checkinsen != null){
 
-        $audit = new AuditTrail();
-        $authuser = Auth::user();
-        $audit->idpegawai = $authuser->idpegawai;
-        $audit->Type = 4;
-        $audit->Desc = "Tambah data Jenis Insentif";
-        $audit->Date = date("Y-m-d H:i:s");
-        $audit->save();
+            echo '<script language="javascript">';
+            echo 'alert("Ralat! Kod Insentif Sudah Wujud. Data Tidak Disimpan");';
+            echo "window.location.href='/jenisinsentif';";
+            echo '</script>';
 
-        echo '<script language="javascript">';
-        echo 'alert("Jenis Insentif Berjaya Di Simpan")';
-        echo '</script>';
-        return redirect('/jenisinsentif');
+        }else{
+            if($request->id_jenis_insentif == null || $request->nama_insentif == null){
+                echo '<script language="javascript">';
+                echo 'alert("Data Tidak Lengkap");';
+                echo "window.location.href='/jenisinsentif';";
+                echo '</script>';
+            }else{
+                $jenisinsentif = new JenisInsentif();
+                $jenisinsentif->id_jenis_insentif = $request->id_jenis_insentif;
+                $jenisinsentif->nama_insentif = $request->nama_insentif;
+                $jenisinsentif->status = $request->status;
+                $jenisinsentif->save();
+
+                $audit = new AuditTrail();
+                $authuser = Auth::user();
+                $audit->idpegawai = $authuser->idpegawai;
+                $audit->Type = 4;
+                $audit->Desc = "Tambah data Jenis Insentif";
+                $audit->Date = date("Y-m-d H:i:s");
+                $audit->save();
+
+                echo '<script language="javascript">';
+                echo 'alert("Jenis Insentif Berjaya Di Simpan");';
+                echo "window.location.href='/jenisinsentif';";
+                echo '</script>';
+            }
+        }
     }
 
     public function update(Request $request, $id)
     {
-        //dd ($id);
-        $jenisinsentif = JenisInsentif::where('id', $id)->first();
-        $jenisinsentif->id_jenis_insentif = $request->id_jenis_insentif;
-        $jenisinsentif->nama_insentif = $request->nama_insentif;
-        $jenisinsentif->status = $request->status;
-        $jenisinsentif->save();
+        if($request->id_jenis_insentif == null || $request->nama_insentif == null){
+            echo '<script language="javascript">';
+            echo 'alert("Data Tidak Lengkap");';
+            echo "window.location.href='/jenisinsentif';";
+            echo '</script>';
+        }else{
 
-        $audit = new AuditTrail();
-        $authuser = Auth::user();
-        $audit->idpegawai = $authuser->idpegawai;
-        $audit->Type = 4;
-        $audit->Desc = "Ubah data Jenis Insentif";
-        $audit->Date = date("Y-m-d H:i:s");
-        $audit->save();
+            $jenisinsentif = JenisInsentif::where('id', $id)->first();
+            $jenisinsentif->id_jenis_insentif = $request->id_jenis_insentif;
+            $jenisinsentif->nama_insentif = $request->nama_insentif;
+            $jenisinsentif->status = $request->status;
+            $jenisinsentif->save();
 
-        echo '<script language="javascript">';
-        echo 'alert("Jenis Insentif Berjaya Di Ubah")';
-        echo '</script>';
-        return redirect('/jenisinsentif');
+            $audit = new AuditTrail();
+            $authuser = Auth::user();
+            $audit->idpegawai = $authuser->idpegawai;
+            $audit->Type = 4;
+            $audit->Desc = "Ubah data Jenis Insentif";
+            $audit->Date = date("Y-m-d H:i:s");
+            $audit->save();
+
+            echo '<script language="javascript">';
+            echo 'alert("Jenis Insentif Berjaya Di Ubah");';
+            echo "window.location.href='/jenisinsentif';";
+            echo '</script>';
+        }
     }
 
     public function destroy($id)

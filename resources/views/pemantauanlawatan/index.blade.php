@@ -108,11 +108,47 @@
 @section('script')
 <script type="text/javascript">
     $( document ).ready(function() {
+        var today = new Date();
+        var yyyy = today.getFullYear();
         $('#tbllaporanlawatan').DataTable( {
-            searching: false,
+            searching: true,
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                {
+                    extend:    'copyHtml5',
+                    text:       '<span class="bi bi-files">Copy</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'Copy',
+                    title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+yyyy+' MENGIKUT NEGERI'
+                },
+                {
+                    extend:    'excelHtml5',
+                    text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'Excel',
+                    title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+yyyy+' MENGIKUT NEGERI'
+                },
+                {
+                    extend:    'csvHtml5',
+                    text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'CSV',
+                    title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+yyyy+' MENGIKUT NEGERI'
+                },
+                {
+                    extend:    'pdfHtml5',
+                    text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'PDF',
+                    title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+yyyy+' MENGIKUT NEGERI'
+                },
+                {
+                    extend:    'print',
+                    text:      '<span class="bi bi-printer">Print</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'PDF',
+                    title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+yyyy+' MENGIKUT NEGERI'
+                }
             ]
         });
         $('.loader').hide();
@@ -140,10 +176,44 @@
                 $("#tblfoot").html(data[1]);
                 if(data[0] != null){
                     $('#tbllaporanlawatan').DataTable( {
-                        searching: false,
+                        searching: true,
                         dom: 'Bfrtip',
                         buttons: [
-                            'copy', 'csv', 'excel', 'pdf', 'print'
+                            {
+                                extend:    'copyHtml5',
+                                text:       '<span class="bi bi-files">Copy</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'Copy',
+                                title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT NEGERI'
+                            },
+                            {
+                                extend:    'excelHtml5',
+                                text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'Excel',
+                                title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT NEGERI'
+                            },
+                            {
+                                extend:    'csvHtml5',
+                                text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'CSV',
+                                title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT NEGERI'
+                            },
+                            {
+                                extend:    'pdfHtml5',
+                                text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'PDF',
+                                title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT NEGERI'
+                            },
+                            {
+                                extend:    'print',
+                                text:      '<span class="bi bi-printer">Print</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'PDF',
+                                title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT NEGERI'
+                            }
                         ]
                     });
                 }

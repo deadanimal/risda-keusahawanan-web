@@ -31,11 +31,11 @@ class PegawaiControllerWeb extends Controller
             // take(100)->get();
             $ddPeranan = Peranan::All();
             $ddMukim = Mukim::select('U_Mukim_ID','Mukim')->where('status', 1)->orderBy('Mukim', 'ASC')->get();
-        }else if($authuser->role == 3){
+        }else if($authuser->role == 3 || $authuser->role == 5){
             $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authmukim->U_Negeri_ID)->get()->unique();
             $ddPeranan = Peranan::where('peranan_id', '>=', '3')->get();
             $ddMukim = Mukim::where('status', 1)->where('U_Negeri_ID', $authmukim->U_Negeri_ID)->orderBy('Mukim', 'ASC')->get();
-        }else if($authuser->role == 4){
+        }else if($authuser->role == 4 || $authuser->role == 6){
             $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Daerah_ID',$authmukim->U_Daerah_ID)->get()->unique();
             $ddPeranan = Peranan::where('peranan_id', '>=', '4')->get();
             $ddMukim = Mukim::where('status', 1)->where('U_Daerah_ID', $authmukim->U_Daerah_ID)->orderBy('Mukim', 'ASC')->get();
@@ -131,7 +131,7 @@ class PegawaiControllerWeb extends Controller
                 $newuser->email = $val->email;
                 $newuser->password = '$2y$10$HWYZbKricDxuacRL/cpBoOSiZo7F3nQafsQkjXN2Q9fxy9ghPZFm.';
                 $newuser->idpegawai = $newpegawai->id;
-                $newuser->status_pengguna = 1;
+                $newuser->status_pengguna = 0;
                 $newuser->no_kp = $val->nokp;
                 $newuser->role = 0;
                 $newuser->type = 1;

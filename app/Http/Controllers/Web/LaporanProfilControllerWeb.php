@@ -693,7 +693,7 @@ class LaporanProfilControllerWeb extends Controller
             Report::where('tab20', Auth::user()->id)->where('type', 9)->delete();
             $lawatansUniqs = Lawatan::select('id_pengguna')->distinct()->get();
             if($lawatansUniqs->count()==0){
-                return "Tiada Data Insentif Dijumpai";
+                return "Tiada Data Lawatan Dijumpai";
             }else{
                 foreach ($lawatansUniqs as $lawatansUniq) {
                     $lawatan = Lawatan::where('id_pengguna',$lawatansUniq->id_pengguna)->first();

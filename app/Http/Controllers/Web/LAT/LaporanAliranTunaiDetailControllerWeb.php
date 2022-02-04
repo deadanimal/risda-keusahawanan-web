@@ -84,6 +84,7 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
         $total->satu = 0;
         $total->dua = 0;
         $total->tiga = 0;
+        $count = 0;
         foreach ($reports as $report) {
             if($report->tab1 != 1000){
                 $report->total = $report->tab6 - $report->tab7;

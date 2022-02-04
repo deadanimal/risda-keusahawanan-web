@@ -40,6 +40,7 @@
                     <thead>
                         <tr class="align-middle">
                             <th scope="col">Nama</th>
+                            <th scope="col">No Kad Pengenalan</th>
                             <th scope="col">Negeri</th>
                             <th scope="col">Pusat Tanggungjawab</th>
                             <th scope="col">Aktifkan Pengguna</th>
@@ -51,6 +52,7 @@
                         <input style="display: none;" type="text" name="user" value="{{$user->id}}"/>
                         <tr class="align-middle">
                             <td class="text-nowrap form-check-label">{{$user->namausahawan}}</td>
+                            <td class="text-nowrap form-check-label">{{$user->nokadpengenalan}}</td>
                             <td class="text-nowrap form-check-label">{{$user->negeri}}</td>
                             <td class="text-nowrap">
                                 <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:30vh;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
@@ -86,8 +88,8 @@
                     <tfoot style="border: none">
                         <tr style="border: none">
                             <th><input type="text" placeholder="Search Nama" /></th>
+                            <th><input type="text" placeholder="Search No KP" /></th>
                             <th>Negeri</th>
-                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -172,6 +174,19 @@
                           </select>
                         </div>
                         <div class="col-lg-6">
+                            <label class="form-label" >Etnik</label>
+                            <select name="U_Etnik_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                              <option value=""></option>
+                              <option value="1">Melayu</option>
+                              <option value="2">Orang Asli Semenanjung</option>
+                              <option value="3">Bumiputera Sabah</option>
+                              <option value="4">Bumiputera Sarawak</option>
+                              <option value="5">Cina</option>
+                              <option value="6">India</option>
+                              <option value="7">Lain-Lain</option>
+                            </select>
+                          </div>
+                        <div class="col-lg-6">
                           <label class="form-label">Status Perkahwinan</label>
                           <select name="statusperkahwinan" class="form-select usahawanfield" aria-label=".form-select-sm example">
                             <option value=""></option>
@@ -191,6 +206,18 @@
                                 <option value="2">Sekolah Rendah / Setara</option>
                                 <option value="3">Sekolah Menengah / Setara</option>
                                 <option value="4">Kolej / Universiti / Setara</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label" >Taraf Kelulusan Tertinggi</label>
+                            <select name="U_Taraf_Pendidikan_Tertinggi_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                                <option value=""></option>
+                                <option value="1">UPSR/PSRA/Setaraf</option>
+                                <option value="2">PMR/SRP/LCE/Setaraf</option>
+                                <option value="3">SPM/MCE/Setaraf</option>
+                                <option value="4">STPM/Diploma/Setaraf</option>
+                                <option value="5">Ijazah Pertama/Ke Atas</option>
+                                <option value="6">Tiada</option>
                             </select>
                         </div>
                         <div class="col-lg-6">
@@ -343,7 +370,7 @@
                         </div>
                         <div class="col-12 d-flex justify-content-end">
                             @if (Auth::user()->role == 1 || Auth::user()->role == 7)
-                                <button class="btn btn-primary" type="submit" onclick="SubmitUsahawan()">Kemas Kini Profil
+                                <button class="btn btn-primary" type="button" onclick="SubmitUsahawan()">Kemas Kini Profil
                             @endif
                             @if (Auth::user()->role == 3 || Auth::user()->role == 4)
                                 <button class="btn btn-primary" type="button" onclick="SahkanUsahawan()">Sahkan Profil
@@ -451,7 +478,7 @@ function datatable(){
         //     return JSON.parse( localStorage.getItem( 'DataTables_' + settings.sInstance ) )
         // },
         initComplete: function () {
-            this.api().columns([1]).every( function () {
+            this.api().columns([2]).every( function () {
                 var column = this;
                 var select = $('<select><option value=""></option></select>')
                     .appendTo( $(column.footer()).empty() )
@@ -470,7 +497,7 @@ function datatable(){
                 } );
             } );
 
-            this.api().columns([0]).every( function () {
+            this.api().columns([0,1]).every( function () {
                 var that = this;
  
                 $( 'input', this.footer() ).on( 'keyup change clear', function () {
@@ -568,9 +595,14 @@ function tetapanpengguna(page,data){
         $("#displaydua input[name=namausahawan]").val(data.namausahawan);
         $("#displaydua input[name=nokadpengenalan]").val(data.nokadpengenalan);
         $("#displaydua input[name=No_Usahawan]").val(data.usahawanid);
-        var tarikhlahir = new Date(data.tarikhlahir);
+        if (typeof data.tarikhlahir === 'undefined' || data.tarikhlahir === null) {
+            var tarikhlahir = new Date()
+        }else{
+            var tarikhlahir = new Date(data.tarikhlahir);
+        }
+        
         $('#displaydua input[name=tarikhlahir]').datepicker({
-            format: 'yyyy-mm-dd'
+            format: 'dd-mm-yyyy'
         });
         $('#displaydua input[name=tarikhlahir]').datepicker("setDate", tarikhlahir );
         $("#displaydua select[name=U_Jantina_ID]").val(data.U_Jantina_ID);
@@ -624,6 +656,8 @@ function SubmitUsahawan(){
     if (confirm('Anda pasti ingin simpan data usahawan?')) {
         $('.loader').show();
         $('#datausahawan').submit();
+    }else{
+        alert('Data Usahawan tidak disimpan');
     }
     
 }

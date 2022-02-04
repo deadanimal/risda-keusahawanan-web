@@ -38,7 +38,7 @@ class PLStafNegeriControllerWeb extends Controller
             }else{
                 $report->daerah = "";
             }
-            $pegawai = Pegawai::select('nama')->where('id', $report->tab4)->first();
+            $pegawai = Pegawai::where('id', $report->tab4)->first();
             if(isset($pegawai)){
                 $report->pegawai = $pegawai->nama;
             }else{
@@ -53,7 +53,7 @@ class PLStafNegeriControllerWeb extends Controller
         }
 
         foreach ($reports as $report) {
-            if(isset($report->tab5) && isset($total->satu)){
+            if(isset($report->tab5) && $total->satu != 0){
                 $report->percent = round(($report->tab5/$total->satu *100), 2);
             }else{
                 $report->percent = "";

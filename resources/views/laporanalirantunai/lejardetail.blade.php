@@ -5,7 +5,7 @@
         <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/laporanlejar"> 
         <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
         <div class="row align-items-center" id="contentbody" style="padding-top:15px;">
-            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">BUKU TUNAI RINGKASAN BULAN
+            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LEJAR RINGKASAN BULAN
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('month',this.value)" id="iptBulan">
                     <option value="">Bulan</option>
                     <option value="01">January</option>
@@ -272,13 +272,49 @@
 @section('script')
 <script type="text/javascript">
     $( document ).ready(function() {
+        var today = new Date();
+        var year = today.getFullYear();
         $('#laporanlejar').DataTable( {
             searching: false,
             sorting:false,
             paging:false,
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                {
+                    extend:    'copyHtml5',
+                    text:       '<span class="bi bi-files">Copy</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'Copy',
+                    title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year
+                },
+                {
+                    extend:    'excelHtml5',
+                    text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'Excel',
+                    title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year
+                },
+                {
+                    extend:    'csvHtml5',
+                    text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'CSV',
+                    title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year
+                },
+                {
+                    extend:    'pdfHtml5',
+                    text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'PDF',
+                    title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year
+                },
+                {
+                    extend:    'print',
+                    text:      '<span class="bi bi-printer">Print</span>',
+                    className: 'btn btn-primary btn-xs',
+                    titleAttr: 'PDF',
+                    title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year
+                }
             ]
         });
         $('.loader').hide();
@@ -289,6 +325,14 @@
         $('.loader').show();
         $('#laporanlejar').dataTable().fnClearTable();
         $('#laporanlejar').dataTable().fnDestroy();
+
+        var sel = document.getElementById("iptBulan");
+        if(sel.selectedIndex == 0){
+            var jenistext = '';
+        }else{
+            var jenistext= sel.options[sel.selectedIndex].text;
+        }
+
         if (type == 'month'){
             var bulan = val;
             var year = document.getElementById("iptYear").value;
@@ -318,7 +362,41 @@
                         paging:false,
                         dom: 'Bfrtip',
                         buttons: [
-                            'copy', 'csv', 'excel', 'pdf', 'print'
+                            {
+                                extend:    'copyHtml5',
+                                text:       '<span class="bi bi-files">Copy</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'Copy',
+                                title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                            },
+                            {
+                                extend:    'excelHtml5',
+                                text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'Excel',
+                                title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                            },
+                            {
+                                extend:    'csvHtml5',
+                                text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'CSV',
+                                title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                            },
+                            {
+                                extend:    'pdfHtml5',
+                                text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'PDF',
+                                title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                            },
+                            {
+                                extend:    'print',
+                                text:      '<span class="bi bi-printer">Print</span>',
+                                className: 'btn btn-primary btn-xs',
+                                titleAttr: 'PDF',
+                                title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                            }
                         ]
                     });
                 }
