@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Katalog;
+use App\Models\Syarikat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
@@ -88,7 +90,7 @@ class KatalogController extends Controller
         ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
         ->join('users', 'users.usahawanid', 'usahawans.usahawanid' )
         ->join('katalogs', 'katalogs.id_pengguna', 'users.id' )
-        ->select('katalogs.id as katalog_id', 'katalogs.nama_produk', 'katalogs.gambar_url', 'katalogs.baki_stok', 'katalogs.berat_produk', 'katalogs.harga_produk', 'katalogs.keterangan_produk', 'katalogs.kandungan_produk', 'katalogs.updated_at', 'katalogs.created_at', 'katalogs.status_katalog', )
+        ->select('katalogs.id as katalog_id', 'katalogs.nama_produk', 'katalogs.gambar_url', 'katalogs.baki_stok', 'katalogs.berat_produk', 'katalogs.harga_produk', 'katalogs.keterangan_produk', 'katalogs.kandungan_produk', 'katalogs.updated_at', 'katalogs.created_at', 'katalogs.status_katalog', 'katalogs.id_pengguna',)
         ->get();
         return response()->json($katalog);
     }
@@ -151,6 +153,18 @@ class KatalogController extends Controller
         \Storage::put('katalog/' . $fname, $pdf->output());
 
         return response()->json("katalog/".$fname);
+
+    }
+
+
+    public function showMaklumatUsahawan($id){
+
+        $usahawan = User::where('users.id', $id)
+        ->join('syarikats', 'syarikats.usahawanid', 'users.usahawanid')
+        ->select('users.name', 'syarikats.namasyarikat')
+        ->get()->first();
+
+        return response()->json($usahawan);
 
     }
 }

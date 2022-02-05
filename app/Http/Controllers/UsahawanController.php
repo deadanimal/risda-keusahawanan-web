@@ -116,7 +116,7 @@ class UsahawanController extends Controller
         // $usahawan->Kod_PT = $request->Kod_PT;
         // $usahawan->namausahawan = $request->namausahawan;
         // $usahawan->nokadpengenalan = $request->nokadpengenalan;
-        // $usahawan->tarikhlahir = $request->tarikhlahir;
+        $usahawan->tarikhlahir = $request->tarikhlahir;
         $usahawan->U_Jantina_ID = $request->U_Jantina_ID;
         $usahawan->U_Bangsa_ID = $request->U_Bangsa_ID;
         $usahawan->U_Etnik_ID = $request->U_Etnik_ID;
@@ -148,9 +148,11 @@ class UsahawanController extends Controller
         $usahawan->status_daftar_usahawan = $request->status_daftar_usahawan;
 
         $usahawan->save();
+        
 
         $user = User::where('usahawanid', $id)->get()->first();
         $user->profile_status = 1;
+        $user->email = $request->email;
         $user->save();
 
         // return redirect("/usahawan");

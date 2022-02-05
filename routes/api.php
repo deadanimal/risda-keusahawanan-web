@@ -135,6 +135,7 @@ Route::get('deleteStok/{id}', [StokController::class, 'deleteMany']);
 Route::get('/katalogPegawai/{i}', [KatalogController::class, 'showKatalogPegawai']);
 Route::get('/pengesahanPegawai/{i}', [KatalogController::class, 'pengesahanPegawai']);
 Route::get('katalog/katalogPdf/{i}', [KatalogController::class, 'katalogPdf']);
+Route::get('katalog/showMaklumatUsahawan/{i}', [KatalogController::class, 'showMaklumatUsahawan']);
 
 Route::get('/lawatan/usahawan/{id}', [LawatanController::class, 'showLawatanUsahawan']);
 Route::get('/lawatan/updateUsahawan/{id}', [LawatanController::class, 'updateLawatanUsahawan']);
@@ -156,6 +157,7 @@ Route::post('lejerPdf', [ExcelController::class, 'lejerPdf']);
 
 Route::post('forgot-password', [PasswordController::class, 'forgot_user']);
 Route::post('update-email-password/{id}', [PasswordController::class, 'updateEmailPassword']);
+Route::post('updatePassword/{id}', [PasswordController::class, 'updatePassword']);
 
 
 
