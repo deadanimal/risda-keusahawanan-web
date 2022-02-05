@@ -226,12 +226,12 @@ class LawatanController extends Controller
 
         // exit(0);
 
-        $fname = time()."laporan lawatan ".$lawatan->namausahawan.".pdf";
+        $fname = time() . "laporan lawatan " . $lawatan->namausahawan . ".pdf";
         $output = $pdff->output();
 
-        \Storage::put('laporan_lawatan/'.$fname, $output);
+        \Storage::put('laporan_lawatan/' . $fname, $output);
         // file_put_contents(, $output);
 
-        return response()->json('laporan_lawatan/'.$fname);
+        return response()->json('laporan_lawatan/' . $fname);
     }
 }

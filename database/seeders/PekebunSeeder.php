@@ -17,8 +17,8 @@ class PekebunSeeder extends Seeder
         Pekebun::create([
             'usahawanid'=> 'J00000',
             'status_daftar_usahawan'=> 'KP01',
-            'Nama_PK'=> 'Tunggal',
-            'No_KP'=>'1',
+            'Nama_PK'=> 'aminah',
+            'No_KP'=>'610916015420',
             'noTS'=>'1'
             
         ]);

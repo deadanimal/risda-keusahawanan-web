@@ -25,6 +25,8 @@ use App\Http\Controllers\PTController;
 use App\Http\Controllers\SeksyenController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SyarikatController;
+use App\Http\Controllers\TanahController;
+use App\Http\Controllers\TanamanController;
 use App\Http\Controllers\TindakanLawatanController;
 use App\Http\Controllers\UsahawanController;
 use App\Http\Controllers\UserController;
@@ -59,6 +61,11 @@ Route::apiResource('pegawai', PegawaiController::class);
 
 Route::apiResource('pekebun', PekebunController::class);
 Route::get('pekebun/getPekebunEspek/{id}', [PekebunController::class, 'getPekebunEspek']);
+Route::get('pekebun/getNoTS/{id}', [PekebunController::class, 'getNoTS']);
+
+
+Route::apiResource('tanah', TanahController::class);
+Route::apiResource('tanaman', TanamanController::class);
 
 
 Route::apiResource('syarikat', SyarikatController::class);
