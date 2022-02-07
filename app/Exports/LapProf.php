@@ -181,67 +181,81 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
                 $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
             }
             // // dd($usahawan->usahawanid);
-            // $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
-            // $getYear = date("Y");
-            // unset($usahawan->aliran1);
-            // unset($usahawan->aliran2);
-            // unset($usahawan->aliran3);
-            // unset($usahawan->aliran4);
-            // unset($usahawan->aliran5);
-            // unset($usahawan->aliran6);
-            // unset($usahawan->aliran7);
-            // unset($usahawan->aliran8);
-            // unset($usahawan->aliran9);
-            // unset($usahawan->aliran10);
-            // unset($usahawan->aliran11);
-            // unset($usahawan->aliran12);
-            // if(isset($pengguna)){
-            //     $alirans = Aliran::where('id_pengguna', $pengguna->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
-            // }else{
-            //     unset($alirans);
-            // }
-            
-            // // dd($aliran);
-            // if(isset($alirans)){
-            //     foreach ($alirans as $aliran) {
-            //         $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
-            //         if($aliran->bulan == 1){
-            //             $usahawan->aliran1 = $usahawan->aliran1 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 2){
-            //             $usahawan->aliran2 = $usahawan->aliran2 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 3){
-            //             $usahawan->aliran3 = $usahawan->aliran3 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 4){
-            //             $usahawan->aliran4 = $usahawan->aliran4 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 5){
-            //             $usahawan->aliran5 = $usahawan->aliran5 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 6){
-            //             $usahawan->aliran6 = $usahawan->aliran6 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 7){
-            //             $usahawan->aliran7 = $usahawan->aliran7 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 8){
-            //             $usahawan->aliran8 = $usahawan->aliran8 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 9){
-            //             $usahawan->aliran9 = $usahawan->aliran9 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 10){
-            //             $usahawan->aliran10 = $usahawan->aliran10 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 11){
-            //             $usahawan->aliran11 = $usahawan->aliran11 + $aliran->jumlah_aliran;
-            //         }else if($aliran->bulan == 12){
-            //             $usahawan->aliran12 = $usahawan->aliran12 + $aliran->jumlah_aliran;
-            //         }
-            //         $usahawan->jumaliran = $usahawan->jumaliran + $aliran->jumlah_aliran;
-            //     }
-            //     $usahawan->purataaliran = $usahawan->jumaliran / 12;
+            $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
+            $getYear = date("Y");
+            unset($usahawan->aliran1);
+            unset($usahawan->aliran2);
+            unset($usahawan->aliran3);
+            unset($usahawan->aliran4);
+            unset($usahawan->aliran5);
+            unset($usahawan->aliran6);
+            unset($usahawan->aliran7);
+            unset($usahawan->aliran8);
+            unset($usahawan->aliran9);
+            unset($usahawan->aliran10);
+            unset($usahawan->aliran11);
+            unset($usahawan->aliran12);
+            if(isset($pengguna)){
+                $alirans = Aliran::where('id_pengguna', $pengguna->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
+            }else{
+                unset($alirans);
             }
+            
+            // dd($aliran);
+            if(isset($alirans)){
+                foreach ($alirans as $aliran) {
+                    $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
+                    if($aliran->bulan == 1){
+                        $usahawan->aliran1 = $usahawan->aliran1 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 2){
+                        $usahawan->aliran2 = $usahawan->aliran2 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 3){
+                        $usahawan->aliran3 = $usahawan->aliran3 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 4){
+                        $usahawan->aliran4 = $usahawan->aliran4 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 5){
+                        $usahawan->aliran5 = $usahawan->aliran5 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 6){
+                        $usahawan->aliran6 = $usahawan->aliran6 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 7){
+                        $usahawan->aliran7 = $usahawan->aliran7 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 8){
+                        $usahawan->aliran8 = $usahawan->aliran8 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 9){
+                        $usahawan->aliran9 = $usahawan->aliran9 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 10){
+                        $usahawan->aliran10 = $usahawan->aliran10 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 11){
+                        $usahawan->aliran11 = $usahawan->aliran11 + $aliran->jumlah_aliran;
+                    }else if($aliran->bulan == 12){
+                        $usahawan->aliran12 = $usahawan->aliran12 + $aliran->jumlah_aliran;
+                    }
+                    $usahawan->jumaliran = $usahawan->jumaliran + $aliran->jumlah_aliran;
+                }
+                $usahawan->purataaliran = $usahawan->jumaliran / 12;
+            }
+
+            $usahawan->aliran1 = 0;
+            $usahawan->aliran2 = 0;
+            $usahawan->aliran3 = 0;
+            $usahawan->aliran4 = 0;
+            $usahawan->aliran5 = 0;
+            $usahawan->aliran6 = 0;
+            $usahawan->aliran7 = 0;
+            $usahawan->aliran8 = 0;
+            $usahawan->aliran9 = 0;
+            $usahawan->aliran10 = 0;
+            $usahawan->aliran11 = 0;
+            $usahawan->aliran12 = 0;
+        }
             
             
 
-            // if($usahawan->purataaliran >= 2500){
-            //     $usahawan->capaisasaran = "capai";
-            // }else{
-            //     $usahawan->capaisasaran = "tidak capai";
-            // }
+            if($usahawan->purataaliran >= 2500){
+                $usahawan->capaisasaran = "capai";
+            }else{
+                $usahawan->capaisasaran = "tidak capai";
+            }
 
             if(isset($usahawan->negeri)){
                 $excel->data1 = $usahawan->negeri->Negeri;
@@ -293,21 +307,21 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
             $excel->data23 = $usahawan->jnsbantuansemasa;
             $excel->data24 = $usahawan->kelulusanbantuansemasa;
             $excel->data25 = $usahawan->thnbantuansemasa;
-            // $excel->data26 = $usahawan->aliran1;
-            // $excel->data27 = $usahawan->aliran2;
-            // $excel->data28 = $usahawan->aliran3;
-            // $excel->data29 = $usahawan->aliran4;
-            // $excel->data30 = $usahawan->aliran5;
-            // $excel->data31 = $usahawan->aliran6;
-            // $excel->data32 = $usahawan->aliran7;
-            // $excel->data33 = $usahawan->aliran8;
-            // $excel->data34 = $usahawan->aliran9;
-            // $excel->data35 = $usahawan->aliran10;
-            // $excel->data36 = $usahawan->aliran11;
-            // $excel->data37 = $usahawan->aliran12;
-            // $excel->data38 = $usahawan->jumaliran;
-            // $excel->data39 = $usahawan->purataaliran;
-            // $excel->data40 = $usahawan->capaisasaran;
+            $excel->data26 = $usahawan->aliran1;
+            $excel->data27 = $usahawan->aliran2;
+            $excel->data28 = $usahawan->aliran3;
+            $excel->data29 = $usahawan->aliran4;
+            $excel->data30 = $usahawan->aliran5;
+            $excel->data31 = $usahawan->aliran6;
+            $excel->data32 = $usahawan->aliran7;
+            $excel->data33 = $usahawan->aliran8;
+            $excel->data34 = $usahawan->aliran9;
+            $excel->data35 = $usahawan->aliran10;
+            $excel->data36 = $usahawan->aliran11;
+            $excel->data37 = $usahawan->aliran12;
+            $excel->data38 = $usahawan->jumaliran;
+            $excel->data39 = $usahawan->purataaliran;
+            $excel->data40 = $usahawan->capaisasaran;
             if(isset($usahawan->kateusah)){
                 $excel->data41 = $usahawan->kateusah->nama_kategori_usahawan;
             }
