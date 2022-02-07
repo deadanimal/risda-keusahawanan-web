@@ -92,6 +92,7 @@
                             <th>Negeri</th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </tfoot>
                 </table>
@@ -162,7 +163,7 @@
                         </div>
                         <div class="col-lg-6">
                           <label class="form-label" >Bangsa</label>
-                          <select name="U_Bangsa_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                          <select name="U_Bangsa_ID" class="form-select usahawanfield" aria-label=".form-select-sm example" onchange="BangsaDD(this.value)">
                             <option value=""></option>
                             <option value="1">Melayu</option>
                             <option value="2">Orang Asli Semenanjung</option>
@@ -175,7 +176,7 @@
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label" >Etnik</label>
-                            <select name="U_Etnik_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                            <select id="Etnik_DD" name="U_Etnik_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
                                 <option value=""></option>
                                 @foreach ($ddEtnik as $items)
                                     <option value="{{ $items->U_Etnik_ID }}"> 
@@ -430,6 +431,34 @@ $( document ).ready(function() {
     $('.loader').hide();
 });
 
+function BangsaDD(val){
+    console.log(val);
+    if(val == 1){
+        $("#Etnik_DD").html("<option value=''></option><option value='1100'>Melayu</option>");
+        $("#Etnik_DD").val(1100);
+
+    }else if(val == 2){
+        $("#Etnik_DD").html("<option value=''></option><option value='2111'>Negrito - Bateq</option><option value='2112'>Negrito - Jahai</option><option value='2113'>Negrito - Kensiu</option><option value='2114'>Negrito - Kintak</option><option value='2115'>Negrito - Lanoh</option><option value='2116'>Negrito - Mendriq</option><option value='2121'>Senoi - Che Wong</option><option value='2122'>Senoi - Jahut</option><option value='2123'>Senoi - Mah Meri</option><option value='2124'>Senoi - Semai</option><option value='2125'>Senoi - Semoq Beri</option><option value='2126'>Senoi - Temiar</option><option value='2131'>Melayu Asli - Jakun</option><option value='2132'>Melayu Asli - Prang Kanaq</option><option value='2133'>Melayu Asli - Orang Kuala</option><option value='2134'>Melayu Asli - Orang Seletar</option><option value='2135'>Melayu Asli - Semalai</option><option value='2136'>Melayu Asli - Temuan</option>");
+    
+    }else if(val == 3){
+        $("#Etnik_DD").html("<option value=''></option><option value='3110'>Bajau</option><option value='3120'>Balbak/Molbog</option><option value='3130'>Bisaya/Bisayah</option><option value='3140'>Bulongan</option><option value='3150'>Dusun</option><option value='3160'>Idahan/Ida'an</option><option value='3170'>Iranun/Ilanun</option><option value='3180'>Kadayan/Kedayan</option><option value='3190'>Kadazan</option><option value='3200'>Lundayuh/Lundayeh</option><option value='3210'>Melayu Brunei</option><option value='3220'>Murut</option><option value='3230'>Orang Sungai/Sungoi</option><option value='3240'>Rungus</option><option value='3250'>Suluk</option><option value='3260'>Tidung</option><option value='3998'>Bumiputera Sabah Lain</option>");
+    
+    }else if(val == 4){
+        $("#Etnik_DD").html("<option value=''></option><option value='4110'>Bidayuh</option><option value='4120'>Bisayah (Sarawak)</option><option value='4130'>Bukitan</option><option value='4140'>Iban</option><option value='4150'>Kadayan (Sarawak)</option><option value='4160'>Kajang</option><option value='4170'>Kanowit</option><option value='4180'>Kayan</option><option value='4190'>Kejaman</option><option value='4200'>Kalabit</option><option value='4210'>Kenyah</option><option value='4220'>Iahanan</option><option value='4230'>Lisum</option><option value='4240'>Lugat</option><option value='4250'>Lun Bawang/Murut (Sarawak)</option><option value='4260'>Melanau</option><option value='4270'>Penan</option><option value='4280'>Punan</option><option value='4290'>Sabup</option><option value='4300'>Sekapan</option><option value='4310'>Sian</option><option value='4320'>Sipeng</option><option value='4330'>Tabun</option><option value='4340'>Tagal</option><option value='4350'>Tanjong</option><option value='4360'>Ukit</option><option value='4998'>Bumiputera Sarawak Lain</option>");
+    
+    }else if(val == 5){
+        $("#Etnik_DD").html("<option value=''></option><option value='5110'>Foochow</option><option value='5120'>Hainan</option><option value='5130'>Henghua</option><option value='5140'>Hokchia</option><option value='5150'>Hokchiu</option><option value='5160'>Hookien</option><option value='5170'>Kantonis</option><option value='5180'>Khek (Hakka)</option><option value='5190'>Kwongsai</option><option value='5200'>Teochew</option><option value='5998'>Orang Cina Lain</option>");
+    
+    }else if(val == 6){
+        $("#Etnik_DD").html("<option value=''></option><option value='6110'>India Muslim/Malabari</option><option value='6120'>Malayali</option><option value='6130'>Punjabi (Kecuali Sikh)</option><option value='6140'>Sikh</option><option value='6150'>Sinhala</option><option value='6160'>Tamil India</option><option value='6170'>Tamil Sri Lanka</option><option value='6180'>Telugu</option><option value='6998'>Orang India Lain</option>");
+    
+    }else if(val == 7){
+        $("#Etnik_DD").html("<option value=''></option><option value='7000'>Lain-Lain</option>");
+        $("#Etnik_DD").val(7000);
+    }
+
+}
+
 function ResetPass(){
     var id = $("#displaydua input[name=idusahawan]").val();
     $.ajax({
@@ -617,6 +646,7 @@ function tetapanpengguna(page,data){
         $('#displaydua input[name=tarikhlahir]').datepicker("setDate", tarikhlahir );
         $("#displaydua select[name=U_Jantina_ID]").val(data.U_Jantina_ID);
         $("#displaydua select[name=U_Bangsa_ID]").val(data.U_Bangsa_ID);
+        BangsaDD(data.U_Bangsa_ID);
         $("#displaydua select[name=U_Etnik_ID]").val(data.U_Etnik_ID);
         // console.log(data.U_Etnik_ID)
         // console.log($("#displaydua select[name=U_Etnik_ID]").val())

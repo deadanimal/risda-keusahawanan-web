@@ -441,7 +441,7 @@
                     <a class="dropdown-item" href="/ChangePass">Kemaskini Kata Laluan</a> 
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">Log Keluar</a>
-                    <form id="frm-logout" action="logout" method="POST" style="display: none;">
+                    <form id="frm-logout" action="../../logout" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                     

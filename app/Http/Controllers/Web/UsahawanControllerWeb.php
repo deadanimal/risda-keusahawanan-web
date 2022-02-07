@@ -19,7 +19,7 @@ use App\Models\Seksyen;
 use App\Models\KategoriUsahawan;
 use App\Models\AuditTrail;
 use App\Models\Pekebun;
-use App\Models\Etnik;
+// use App\Models\Etnik;
 use GuzzleHttp\Exception\ClientException;
 error_reporting(0);
 
@@ -42,7 +42,7 @@ class UsahawanControllerWeb extends Controller
         $ddKampung = Kampung::where('status', 1)->get();
         $ddSeksyen = Seksyen::where('status', 1)->get();
         $ddKateUsahawan = KategoriUsahawan::where('status_kategori_usahawan', 'aktif')->get();
-        $ddEtnik = Etnik::all();
+        // $ddEtnik = Etnik::all();
         if($authuser->role == 1){
             $users = Usahawan::all();
         }else if($authuser->role == 3){
@@ -78,7 +78,7 @@ class UsahawanControllerWeb extends Controller
             'ddKampung'=>$ddKampung,
             'ddSeksyen'=>$ddSeksyen,
             'ddKateUsahawan'=>$ddKateUsahawan,
-            'ddEtnik'=>$ddEtnik
+            // 'ddEtnik'=>$ddEtnik
         ]);
     }
 
@@ -238,6 +238,7 @@ class UsahawanControllerWeb extends Controller
             return $vals;
         }
         catch(\Exception $e){
+            // dd($e);
             return '400';
         }
        
