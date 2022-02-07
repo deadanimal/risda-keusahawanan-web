@@ -18,17 +18,17 @@ class InsentifControllerWeb extends Controller
     {
         $authuser = Auth::user();
         $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-        $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
+        // $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         if($authuser->role == 1){
             $users = Usahawan::all();
         }else if($authuser->role == 3){
-            $users = Usahawan::where('U_Negeri_ID',$authmukim->U_Negeri_ID)->get();
+            $users = Usahawan::where('U_Negeri_ID',$authpegawai->mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4){
-            $users = Usahawan::where('U_Daerah_ID',$authmukim->U_Daerah_ID)->get();
+            $users = Usahawan::where('U_Daerah_ID',$authpegawai->mukim->U_Daerah_ID)->get();
         }else if($authuser->role == 5){
-            $users = Usahawan::where('U_Negeri_ID',$authmukim->U_Negeri_ID)->get();
+            $users = Usahawan::where('U_Negeri_ID',$authpegawai->mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 6){
-            $users = Usahawan::where('U_Daerah_ID',$authmukim->U_Daerah_ID)->get();
+            $users = Usahawan::where('U_Daerah_ID',$authpegawai->mukim->U_Daerah_ID)->get();
         }else{
             return redirect('/landing');
         }

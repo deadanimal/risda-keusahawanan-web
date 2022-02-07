@@ -24,7 +24,7 @@ class PegawaiControllerWeb extends Controller
             return redirect('/landing');
         }
         $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-        $authmukim = $authpegawai->Negeri;
+        // $authmukim = $authpegawai->Negeri;
         if($authuser->role == 1){
             $pegawai = Pegawai::all();
             // all();
@@ -32,13 +32,13 @@ class PegawaiControllerWeb extends Controller
             $ddPeranan = Peranan::All();
             $ddMukim = Mukim::select('U_Mukim_ID','Mukim')->where('status', 1)->orderBy('Mukim', 'ASC')->get();
         }else if($authuser->role == 3 || $authuser->role == 5){
-            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authmukim->U_Negeri_ID)->get()->unique();
+            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authpegawai->mukim->U_Negeri_ID)->get()->unique();
             $ddPeranan = Peranan::where('peranan_id', '>=', '3')->get();
-            $ddMukim = Mukim::where('status', 1)->where('U_Negeri_ID', $authmukim->U_Negeri_ID)->orderBy('Mukim', 'ASC')->get();
+            $ddMukim = Mukim::where('status', 1)->where('U_Negeri_ID', $authpegawai->mukim->U_Negeri_ID)->orderBy('Mukim', 'ASC')->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
-            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Daerah_ID',$authmukim->U_Daerah_ID)->get()->unique();
+            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Daerah_ID',$authpegawai->mukim->U_Daerah_ID)->get()->unique();
             $ddPeranan = Peranan::where('peranan_id', '>=', '4')->get();
-            $ddMukim = Mukim::where('status', 1)->where('U_Daerah_ID', $authmukim->U_Daerah_ID)->orderBy('Mukim', 'ASC')->get();
+            $ddMukim = Mukim::where('status', 1)->where('U_Daerah_ID', $authpegawai->mukim->U_Daerah_ID)->orderBy('Mukim', 'ASC')->get();
         }else{
             return redirect('/landing');
         }

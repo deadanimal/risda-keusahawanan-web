@@ -50,6 +50,7 @@
                         <tr class="align-middle">
                             <th scope="col">Nama</th>
                             <th scope="col">Negeri</th>
+                            <th scope="col">Pusat Tanggungjawab</th>
                             <th scope="col">Daerah</th>
                             <th scope="col">Mukim</th>
                             <th scope="col">Peranan</th>
@@ -62,6 +63,7 @@
                             <tr>
                                 <td class="form-check-label">{{$user->nama}}</td>
                                 <td id="fldNegeri{{$user->id}}" class="form-check-label">@if($user->Mukim){{$user->Mukim->Negeri->Negeri}}@endif</td>
+                                <td id="fldPT{{$user->id}}" class="form-check-label">@if($user->PT){{$user->PT->keterangan}}@endif</td>
                                 <td id="fldDaerah{{$user->id}}" class="form-check-label">@if($user->Mukim){{$user->Mukim->Daerah->Daerah}}@endif</td>
                                 <td>@if($user->Mukim)<input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:150px;" value="{{$user->Mukim->Mukim}}" onclick="mukim({{$user->Mukim}},{{$user->id}})" />
                                     @else <input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:150px;" onclick="mukim('',{{$user->id}})" />
@@ -134,6 +136,7 @@
                         <tr style="border: none">
                             <th><input type="text" placeholder="Search Nama" /></th>
                             <th>Negeri</th>
+                            <th></th>
                             <th>Daerah</th>
                             <th></th>
                             <th></th>
@@ -308,7 +311,7 @@ function datatable(){
     { "orderable": false, "targets": [4] }
   ],
         initComplete: function () {
-            this.api().columns([1, 2]).every( function () {
+            this.api().columns([1, 2, 3]).every( function () {
                 var column = this;
                 var select = $('<select><option value=""></option></select>')
                     .appendTo( $(column.footer()).empty() )
