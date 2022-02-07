@@ -15,12 +15,14 @@
           <div class="col-sm-10 col-md-6 px-sm-0 align-self-center mx-auto py-5">
             <div class="row justify-content-center g-0">
               <div class="col-lg-9 col-xl-8 col-xxl-6">
-                <div class="card">
-                    <div style="align-content:left;padding:20px 20px;">
+                <div class="card" style="background-color: #1C4020">
+                  <div class="card-header bg-circle-shape bg-shape text-center p-2" style="background-color:rgb(2, 95, 47);" ><span class="font-sans-serif fw-bolder fs-4 z-index-1 position-relative link-light light">RISDA KEUSAHAWANAN</span></div>
+                  <div class="card-body p-4">
+                    <div style="align-content:left;">
                         <a class="btn btn-primary" href="/login">Back Login</a>
                     </div>
-                    <div class="card-body overflow-hidden p-lg-6" style="text-align: center;">
-                        <div class="mb-3" style="width: 400px;margin:0 auto;">
+                    <div class="card-body overflow-hidden p-lg-4" style="text-align: center;">
+                        <div class="mb-3">
                         
                             @foreach($errors->all() as $error)
                                     <li>{{$error}}</li>
@@ -40,7 +42,7 @@
                                     <label class="form-label" for="split-login-password">Sahkan Kata Laluan Baru</label>
                                 </div>
                                 <input class="form-control" id="split-login-password" type="password" name="new_confirm_password" autocomplete="current-password" required/>
-                                <div style="padding-top: 20px;">
+                                <div style="padding-top: 30px;">
                                     <button class="btn btn-primary" type="submit" >Tukar Password</button>
                                 </div>
                             </form>
