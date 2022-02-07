@@ -101,7 +101,8 @@ class UsahawanControllerWeb extends Controller
         $usahawan->namausahawan = $request->namausahawan;
         $usahawan->nokadpengenalan = $request->nokadpengenalan;
         $usahawan->usahawanid = $request->No_Usahawan;
-        $usahawan->tarikhlahir = $request->tarikhlahir;
+        $tarikh = date("Y-m-d", strtotime($request->tarikhlahir));  
+        $usahawan->tarikhlahir = $tarikh;
         $usahawan->U_Jantina_ID = $request->U_Jantina_ID;
         $usahawan->U_Bangsa_ID = $request->U_Bangsa_ID;
         $usahawan->U_Etnik_ID = $request->U_Etnik_ID;
