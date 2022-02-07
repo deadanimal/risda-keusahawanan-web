@@ -171,15 +171,15 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
                 $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
 
 
-            // $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
-            // foreach ($insentif2 as $insentif2s) {
-            //     $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
-            //     if(isset($jenisinsentif)){
-            //         $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama."/".$jenisinsentif->nama_insentif;
-            //     }
-            //     $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum."/".$insentif2s->nilai_insentif;
-            //     $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
-            // }
+            $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
+            $usahawan->insentifsebelumnama = "";
+            $usahawan->insentifsebelumjum = "";
+            $usahawan->insentifsebelumtahun = "";
+            foreach ($insentif2 as $insentif2s) {
+                $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama."/".$insentif2->jenis->nama_insentif;
+                $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum."/".$insentif2s->nilai_insentif;
+                $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
+            }
             // // dd($usahawan->usahawanid);
             // $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
             // $getYear = date("Y");
@@ -331,9 +331,9 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
                 $excel->data48 = $usahawan->syarikat->email;
             }
             
-            // $excel->data49 = $usahawan->insentifsebelumnama;
-            // $excel->data50 = $usahawan->insentifsebelumjum;
-            // $excel->data51 = $usahawan->insentifsebelumtahun;
+            $excel->data49 = $usahawan->insentifsebelumnama;
+            $excel->data50 = $usahawan->insentifsebelumjum;
+            $excel->data51 = $usahawan->insentifsebelumtahun;
             if(isset($usahawan->syarikat)){
                 $excel->data52 = $usahawan->syarikat->nodaftarpersijilanhalal;
             }
