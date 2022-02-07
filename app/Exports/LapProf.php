@@ -169,7 +169,7 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
                 $usahawan->jnsbantuansemasa = $insentif->jenis->nama_insentif;
                 $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
                 $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
-
+            }
 
             $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
             $usahawan->insentifsebelumnama = "";
@@ -201,7 +201,7 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
                 unset($alirans);
             }
             
-            // dd($aliran);
+            // dd($alirans);
             if(isset($alirans)){
                 foreach ($alirans as $aliran) {
                     $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
@@ -233,23 +233,23 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
                     $usahawan->jumaliran = $usahawan->jumaliran + $aliran->jumlah_aliran;
                 }
                 $usahawan->purataaliran = $usahawan->jumaliran / 12;
-            }
+            }else{
 
-            $usahawan->aliran1 = 0;
-            $usahawan->aliran2 = 0;
-            $usahawan->aliran3 = 0;
-            $usahawan->aliran4 = 0;
-            $usahawan->aliran5 = 0;
-            $usahawan->aliran6 = 0;
-            $usahawan->aliran7 = 0;
-            $usahawan->aliran8 = 0;
-            $usahawan->aliran9 = 0;
-            $usahawan->aliran10 = 0;
-            $usahawan->aliran11 = 0;
-            $usahawan->aliran12 = 0;
-        }
-            
-            
+                $usahawan->aliran1 = 0;
+                $usahawan->aliran2 = 0;
+                $usahawan->aliran3 = 0;
+                $usahawan->aliran4 = 0;
+                $usahawan->aliran5 = 0;
+                $usahawan->aliran6 = 0;
+                $usahawan->aliran7 = 0;
+                $usahawan->aliran8 = 0;
+                $usahawan->aliran9 = 0;
+                $usahawan->aliran10 = 0;
+                $usahawan->aliran11 = 0;
+                $usahawan->aliran12 = 0;
+                $usahawan->jumaliran = 0;
+                $usahawan->purataaliran = 0;
+            }
 
             if($usahawan->purataaliran >= 2500){
                 $usahawan->capaisasaran = "capai";
