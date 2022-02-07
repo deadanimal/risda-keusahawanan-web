@@ -1,0 +1,85 @@
+﻿U_Etnik_ID,Etnik,U_Bangsa_ID
+1100,Melayu,1
+2111,Negrito - Bateq,2
+2112,Negrito - Jahai,2
+2113,Negrito - Kensiu,2
+2114,Negrito - Kintak,2
+2115,Negrito - Ianoh,2
+2116,Negrito - Mendriq,2
+2121,Senoi - Che Wong,2
+2122,Senoi - Jahut,2
+2123,Senoi - Mah Meri,2
+2124,Senoi - Semai,2
+2125,Senoi - Semoq Beri,2
+2126,Senoi - Temiar,2
+2131,Melayu Asli - Jakun,2
+2132,Melayu Asli - Prang Kanaq,2
+2133,Melayu Asli - Orang Kuala,2
+2134,Melayu Asli - Orang Seletar,2
+2135,Melayu Asli - Semalai,2
+2136,Melayu Asli - Temuan,2
+3110,Bajau,3
+3120,Balbak/Molbog,3
+3130,Bisaya/Bisayah,3
+3140,Bulongan,3
+3150,Dusun,3
+3160,Idahan/Ida'an,3
+3170,Iranun/Ilanun,3
+3180,Kadayan/Kedayan,3
+3190,Kadazan,3
+3200,Lundayuh/Lundayeh,3
+3210,Melayu Brunei,3
+3220,Murut,3
+3230,Orang Sungai/Sungoi,3
+3240,Rungus,3
+3250,Suluk,3
+3260,Tidung,3
+3998,Bumiputera Sabah Lain,3
+4110,Bidayuh,4
+4120,Bisayah (Sarawak),4
+4130,Bukitan,4
+4140,Iban,4
+4150,Kadayan (Sarawak),4
+4160,Kajang,4
+4170,Kanowit,4
+4180,Kayan,4
+4190,Kejaman,4
+4200,Kalabit,4
+4210,Kenyah,4
+4220,Iahanan,4
+4230,Lisum,4
+4240,Lugat,4
+4250,Lun Bawang/Murut (Sarawak),4
+4260,Melanau,4
+4270,Penan,4
+4280,Punan,4
+4290,Sabup,4
+4300,Sekapan,4
+4310,Sian,4
+4320,Sipeng,4
+4330,Tabun,4
+4340,Tagal,4
+4350,Tanjong,4
+4360,Ukit,4
+4998,Bumiputera Sarawak Lain,4
+5110,Foochow,5
+5120,Hainan,5
+5130,Henghua,5
+5140,Hokchia,5
+5150,Hokchiu,5
+5160,Hookien,5
+5170,Kantonis,5
+5180,Khek (Hakka),5
+5190,Kwongsai,5
+5200,Teochew,5
+5998,Orang Cina Lain,5
+6110,India Muslim/Malabari,6
+6120,Malayali,6
+6130,Punjabi (Kecuali Sikh),6
+6140,Sikh,6
+6150,Sinhala,6
+6160,Tamil India,6
+6170,Tamil Sri Lanka,6
+6180,Telugu,6
+6998,Orang India Lain,6
+7000,Lain-Lain,7

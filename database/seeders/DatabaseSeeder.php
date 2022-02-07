@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             ParlimenSeeder::class,
             PusatTanggungjawabSeeder::class,
             SeksyenSeeder::class,
+            EtnikSeeder::class,
         ]);
     }
 }

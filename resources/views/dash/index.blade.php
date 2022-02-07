@@ -458,7 +458,7 @@
         var datas = [
             {
                 label: 'Count',
-                backgroundColor: "pink",
+                backgroundColor: ["#027A6A", "#507315", "#443166", "#678731", "#6226C9", "#5F9107","#A978FF","#A6CF61"], 
                 data: juminsen
             }
         ];
@@ -471,7 +471,7 @@
         var datas2 = [
             {
                 label: 'Count',
-                backgroundColor: "pink",
+                backgroundColor: ["#6CA8E0", "#2BBDB8", "#456CBA", "#417DAB", "#CCEBEB", "#41CFE8","#87BAE6","#C1C2C7"], 
                 data: jumnumjantina
             }
         ];
@@ -484,7 +484,7 @@
         var datas3 = [
             {
                 label: 'Count',
-                backgroundColor: "pink",
+                backgroundColor: ["#5B9CCF", "#042C4A", "#4A2894", "#2B10DE", "#262A69", "#33228F","#081C52","#363ED1"], 
                 data: jumnumjnsperniagaan
             }
         ];
@@ -497,7 +497,7 @@
         var datas4 = [
             {
                 label: 'Count',
-                backgroundColor: "pink",
+                backgroundColor: ["#027A6A", "#507315", "#443166", "#678731", "#6226C9", "#5F9107","#A978FF","#A6CF61"], 
                 data: jumnumstatdafusah
             }
         ];
@@ -510,7 +510,7 @@
         var datas5 = [
             {
                 label: 'Count',
-                backgroundColor: "pink",
+                backgroundColor: ["#027A6A", "#507315", "#443166", "#678731", "#6226C9", "#5F9107","#A978FF","#A6CF61"], 
                 data: jumnumkateusahawan
             }
         ];
@@ -523,7 +523,7 @@
         var datas6 = [
             {
                 label: 'Count',
-                backgroundColor: "pink",
+                backgroundColor: ["#5B9CCF", "#042C4A", "#4A2894", "#2B10DE", "#262A69", "#33228F","#081C52","#363ED1"], 
                 data: jumnumumurgrp
             }
         ];

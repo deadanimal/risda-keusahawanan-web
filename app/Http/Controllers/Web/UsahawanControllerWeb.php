@@ -19,6 +19,9 @@ use App\Models\Seksyen;
 use App\Models\KategoriUsahawan;
 use App\Models\AuditTrail;
 use App\Models\Pekebun;
+use App\Models\Etnik;
+use GuzzleHttp\Exception\ClientException;
+error_reporting(0);
 
 class UsahawanControllerWeb extends Controller
 {
@@ -39,6 +42,7 @@ class UsahawanControllerWeb extends Controller
         $ddKampung = Kampung::where('status', 1)->get();
         $ddSeksyen = Seksyen::where('status', 1)->get();
         $ddKateUsahawan = KategoriUsahawan::where('status_kategori_usahawan', 'aktif')->get();
+        $ddEtnik = Etnik::all();
         if($authuser->role == 1){
             $users = Usahawan::all();
         }else if($authuser->role == 3){
@@ -73,7 +77,8 @@ class UsahawanControllerWeb extends Controller
             'ddDun'=>$ddDun,
             'ddKampung'=>$ddKampung,
             'ddSeksyen'=>$ddSeksyen,
-            'ddKateUsahawan'=>$ddKateUsahawan
+            'ddKateUsahawan'=>$ddKateUsahawan,
+            'ddEtnik'=>$ddEtnik
         ]);
     }
 
@@ -99,9 +104,14 @@ class UsahawanControllerWeb extends Controller
         $usahawan->tarikhlahir = $request->tarikhlahir;
         $usahawan->U_Jantina_ID = $request->U_Jantina_ID;
         $usahawan->U_Bangsa_ID = $request->U_Bangsa_ID;
-        $usahawan->statusperkahwinan = $request->statusperkahwinan;
+        $usahawan->U_Etnik_ID = $request->U_Etnik_ID;
         $usahawan->U_Pendidikan_ID = $request->U_Pendidikan_ID;
+        $usahawan->U_Taraf_Pendidikan_Tertinggi_ID = $request->U_Taraf_Pendidikan_Tertinggi_ID;
+        $usahawan->statusperkahwinan = $request->statusperkahwinan;
+        $usahawan->Kod_PT = $request->Kod_PT;
         $usahawan->alamat1 = $request->alamat1;
+        $usahawan->alamat2 = $request->alamat2;
+        $usahawan->alamat3 = $request->alamat3;
         $usahawan->bandar = $request->bandar;
         $usahawan->poskod = $request->poskod;
         $usahawan->U_Negeri_ID = $request->U_Negeri_ID;
@@ -120,6 +130,8 @@ class UsahawanControllerWeb extends Controller
         $usahawan->nohp = $request->nohp;
         $usahawan->email = $request->email;
         $usahawan->save();
+
+        // negeriperniaga
 
         $audit = new AuditTrail();
         $authuser = Auth::user();
@@ -200,27 +212,33 @@ class UsahawanControllerWeb extends Controller
     public function usahawanGet(Request $req)
     {
         $client = new \GuzzleHttp\Client();
-        $request = $client->request('GET', 'https://www4.risda.gov.my/espek/portalpkprofiltanah/?nokp='.$req->nokp.'', [
-            'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', '1cc11a9fec81dc1f99f353f403d6f5bac620aa8f']
-        ]);
-        
-        $response = $request->getBody()->getContents();
-        $vals = json_decode($response);
+        try{
+            $request = $client->request('GET', 'https://www4.risda.gov.my/espek/portalpkprofiltanah/?nokp='.$req->nokp.'', [
+                'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', '1cc11a9fec81dc1f99f353f403d6f5bac620aa8f']
+            ]);
 
-        $pekebun = Pekebun::where('usahawanid', $req->idusahawan)->first();
-        if(isset($pekebun)){
-            $pekebun->Nama_PK = $vals[0]->Nama_PK;
-            $pekebun->No_KP = $vals[0]->No_KP;
-            $pekebun->save();
-        }else{
-            $pekebun = new Pekebun();
-            $pekebun->Nama_PK = $vals[0]->Nama_PK;
-            $pekebun->No_KP = $vals[0]->No_KP;
-            $pekebun->usahawanid = $req->idusahawan;
-            $pekebun->save();
+            $response = $request->getBody()->getContents();
+            $vals = json_decode($response);
+    
+            $pekebun = Pekebun::where('usahawanid', $req->idusahawan)->first();
+            if(isset($pekebun)){
+                $pekebun->Nama_PK = $vals[0]->Nama_PK;
+                $pekebun->No_KP = $vals[0]->No_KP;
+                $pekebun->save();
+            }else{
+                $pekebun = new Pekebun();
+                $pekebun->Nama_PK = $vals[0]->Nama_PK;
+                $pekebun->No_KP = $vals[0]->No_KP;
+                $pekebun->usahawanid = $req->idusahawan;
+                $pekebun->save();
+            }
+    
+            return $vals;
         }
-
-        return $vals;
+        catch(\Exception $e){
+            return '400';
+        }
+       
         // dd($vals);
     }
 

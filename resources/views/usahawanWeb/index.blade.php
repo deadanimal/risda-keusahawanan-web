@@ -176,28 +176,14 @@
                         <div class="col-lg-6">
                             <label class="form-label" >Etnik</label>
                             <select name="U_Etnik_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
-                              <option value=""></option>
-                              <option value="1">Melayu</option>
-                              <option value="2">Orang Asli Semenanjung</option>
-                              <option value="3">Bumiputera Sabah</option>
-                              <option value="4">Bumiputera Sarawak</option>
-                              <option value="5">Cina</option>
-                              <option value="6">India</option>
-                              <option value="7">Lain-Lain</option>
+                                <option value=""></option>
+                                @foreach ($ddEtnik as $items)
+                                    <option value="{{ $items->U_Etnik_ID }}"> 
+                                        {{ $items->Etnik }} 
+                                    </option>
+                                @endforeach
                             </select>
                           </div>
-                        <div class="col-lg-6">
-                          <label class="form-label">Status Perkahwinan</label>
-                          <select name="statusperkahwinan" class="form-select usahawanfield" aria-label=".form-select-sm example">
-                            <option value=""></option>
-                            <option value="1">Tidak Pernah Berkahwin</option>
-                            <option value="2">Berkahwin</option>
-                            <option value="3">Balu / Duda</option>
-                            <option value="4">Bercerai</option>
-                            <option value="5">Berpisah</option>
-                            <option value="9">Tiada Maklumat</option>
-                          </select>
-                        </div>
                         <div class="col-lg-6">
                             <label class="form-label" >Pendidikan</label>
                             <select name="U_Pendidikan_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
@@ -221,16 +207,28 @@
                             </select>
                         </div>
                         <div class="col-lg-6">
+                            <label class="form-label">Status Perkahwinan</label>
+                            <select name="statusperkahwinan" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                              <option value=""></option>
+                              <option value="1">Tidak Pernah Berkahwin</option>
+                              <option value="2">Berkahwin</option>
+                              <option value="3">Balu / Duda</option>
+                              <option value="4">Bercerai</option>
+                              <option value="5">Berpisah</option>
+                              <option value="9">Tiada Maklumat</option>
+                            </select>
+                          </div>
+                        <div class="col-lg-6">
                             <label class="form-label" >Negeri Premis Perniagaan</label>
-                            <select name="Negeri_Perniagaan" class="form-select usahawanfield" aria-label=".form-select-sm example">
+                            {{-- <select name="negeriperniaga" class="form-select usahawanfield" aria-label=".form-select-sm example">
                                 <option value=""></option>
                                 @foreach ($ddNegeri as $items)
                                     <option value="{{ $items->U_Negeri_ID }}"> 
                                         {{ $items->Negeri }} 
                                     </option>
                                 @endforeach
-                            </select>
-                            {{-- <input class="form-control usahawanfield" name="Negeri_Perniagaan"   type="text"  /> --}}
+                            </select> --}}
+                            <input class="form-control" name="negeriperniaga"   type="text"  disabled/>
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label" >Pusat Tanggungjawab</label>
@@ -247,6 +245,14 @@
                         <div class="col-lg-12">
                             <label class="form-label">Alamat</label>
                             <input class="form-control usahawanfield" name="alamat1"   type="text"  />
+                        </div>
+                        <div class="col-lg-12">
+                            {{-- <label class="form-label">Alamat</label> --}}
+                            <input class="form-control usahawanfield" name="alamat2"   type="text"  />
+                        </div>
+                        <div class="col-lg-12">
+                            {{-- <label class="form-label">Alamat</label> --}}
+                            <input class="form-control usahawanfield" name="alamat3"   type="text"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Bandar</label>
@@ -459,8 +465,12 @@ function API(){
         },
         success: function(data) {
             console.log(data);
-            $("#displaydua input[name=pekebunname]").val(data[0].Nama_PK);
-            alert("Data Pekebun Berjaya Ditarik");
+            if(data == 400){
+                alert("Error API Pekebun")
+            }else{
+                $("#displaydua input[name=pekebunname]").val(data[0].Nama_PK);
+                alert("Data Pekebun Berjaya Ditarik");
+            }
             $('.loader').hide();
         }
     });
@@ -582,7 +592,7 @@ function aktifkanpengguna(type,user,input){
 
 function tetapanpengguna(page,data){
     $('.loader').show();
-    // console.log(data.pekebun);
+    console.log(data);
     if(page == 'satu'){
         $("#displaysatu").hide();
         $("#displaydua").show();
@@ -607,11 +617,17 @@ function tetapanpengguna(page,data){
         $('#displaydua input[name=tarikhlahir]').datepicker("setDate", tarikhlahir );
         $("#displaydua select[name=U_Jantina_ID]").val(data.U_Jantina_ID);
         $("#displaydua select[name=U_Bangsa_ID]").val(data.U_Bangsa_ID);
+        $("#displaydua select[name=U_Etnik_ID]").val(data.U_Etnik_ID);
+        // console.log(data.U_Etnik_ID)
+        // console.log($("#displaydua select[name=U_Etnik_ID]").val())
         $("#displaydua select[name=statusperkahwinan]").val(data.statusperkahwinan);
         $("#displaydua select[name=U_Pendidikan_ID]").val(data.U_Pendidikan_ID);
+        $("#displaydua select[name=U_Taraf_Pendidikan_Tertinggi_ID]").val(data.U_Taraf_Pendidikan_Tertinggi_ID);
         //Negeri Premis Perniagaan
         $("#displaydua select[name=Kod_PT]").val(data.Kod_PT); 
         $("#displaydua input[name=alamat1]").val(data.alamat1);
+        $("#displaydua input[name=alamat2]").val(data.alamat2);
+        $("#displaydua input[name=alamat3]").val(data.alamat3);
         $("#displaydua input[name=bandar]").val(data.bandar);
         $("#displaydua input[name=poskod]").val(data.poskod);
         $("#displaydua select[name=U_Negeri_ID]").val(data.U_Negeri_ID);
@@ -626,11 +642,14 @@ function tetapanpengguna(page,data){
         $("#displaydua input[name=notelefon]").val(data.notelefon);
         $("#displaydua input[name=nohp]").val(data.nohp);
         $("#displaydua input[name=email]").val(data.email);
+
         if(data.pekebun){
             $("#displaydua input[name=pekebunkp]").val(data.pekebun.No_KP);
             $("#displaydua input[name=pekebunname]").val(data.pekebun.Nama_PK);
         }
-        
+        if(data.perniagaan){
+            $("#displaydua input[name=negeriperniaga]").val(data.perniagaan.U_Negeri_ID);
+        }
         $("#datausahawan").attr("action", "/usahawanWeb/"+data.usahawanid);
 
         var x = document.getElementsByClassName("usahawanfield");       

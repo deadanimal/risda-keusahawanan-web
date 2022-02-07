@@ -474,14 +474,14 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "generatereport",
+        url: "../generatereport",
         type:"POST",
         data:{
           type:type,
           id:userid
         },
         success: function(data) {
-          // console.log(data);
+          // console.log(nextPage);
           $('.loader').hide();
           alert(data);
           location.href = nextPage;
