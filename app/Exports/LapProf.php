@@ -176,7 +176,7 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
             $usahawan->insentifsebelumjum = "";
             $usahawan->insentifsebelumtahun = "";
             foreach ($insentif2 as $insentif2s) {
-                $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama."/".$insentif2->jenis->nama_insentif;
+                $usahawan->insentifsebelumnama = $usahawan->insentifsebelumnama."/".$insentif2s->jenis->nama_insentif;
                 $usahawan->insentifsebelumjum = $usahawan->insentifsebelumjum."/".$insentif2s->nilai_insentif;
                 $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
             }
