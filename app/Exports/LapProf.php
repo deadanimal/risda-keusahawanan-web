@@ -166,13 +166,10 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
             $usahawan->thnbantuansemasa = "";
             $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->first();
             if(isset($insentif)){
-            //     $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif->id_jenis_insentif)->first();
-            //     if(isset($jenisinsentif)){
-            // $usahawan->jnsbantuansemasa = $jenisinsentif->nama_insentif;
-            //     }
-            //     $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
-            //     $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
-            // }
+                $usahawan->jnsbantuansemasa = $insentif->jenis->nama_insentif;
+                $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
+                $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
+
 
             // $insentif2 = Insentif::where('id_pengguna', $usahawan->usahawanid)->get();
             // foreach ($insentif2 as $insentif2s) {
