@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'email'=> 'user1@gmail.com',
             'password'=> Hash::make('password'),
             'usahawanid'=>'J00000',
-            'no_kp'=>'123456789012',
+            'no_kp'=>'970203085559',
             'status_pengguna'=>'1',
             'role'=>'0',
             'type'=>'2'

@@ -18,7 +18,7 @@ class UsahawanSeeder extends Seeder
             'Kod_PT'=>'427199',
             'namausahawan'=>'user1',
             'usahawanid'=>'J00000',
-            'nokadpengenalan'=>'123456789012',
+            'nokadpengenalan'=>'970203085559',
             'tarikhlahir'=>'23-11-20',
             'U_Jantina_ID'=>'1',
             'U_Bangsa_ID'=>'2',
