@@ -164,11 +164,11 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
             $usahawan->jnsbantuansemasa = "";
             $usahawan->kelulusanbantuansemasa = "";
             $usahawan->thnbantuansemasa = "";
-            // $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->first();
-            // if(isset($insentif)){
+            $insentif = Insentif::where('id_pengguna', $usahawan->usahawanid)->first();
+            if(isset($insentif)){
             //     $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif->id_jenis_insentif)->first();
             //     if(isset($jenisinsentif)){
-            //         $usahawan->jnsbantuansemasa = $jenisinsentif->nama_insentif;
+            // $usahawan->jnsbantuansemasa = $jenisinsentif->nama_insentif;
             //     }
             //     $usahawan->kelulusanbantuansemasa = $insentif->nilai_insentif;
             //     $usahawan->thnbantuansemasa = $insentif->tahun_terima_insentif;
@@ -236,7 +236,7 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
             //         $usahawan->jumaliran = $usahawan->jumaliran + $aliran->jumlah_aliran;
             //     }
             //     $usahawan->purataaliran = $usahawan->jumaliran / 12;
-            // }
+            }
             
             
 
