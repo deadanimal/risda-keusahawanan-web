@@ -30,16 +30,16 @@ class LandingControllerWeb extends Controller
 
         if($authuser->role != 1 && ($authuser->role != 2) && ($authuser->role != 7)){
             $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-            $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
-
+            // $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
+            // dd($authpegawai);
             if($authuser->role == 1){
                 $users = Usahawan::where('status_profil',0)->first();
             }else if($authuser->role == 3){
-                $users = Usahawan::where('status_profil',0)->where('U_Negeri_ID',$authmukim->U_Negeri_ID)->first();
+                $users = Usahawan::where('status_profil',0)->where('U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->first();
             }else if($authuser->role == 4){
-                $users = Usahawan::where('status_profil',0)->where('U_Daerah_ID',$authmukim->U_Daerah_ID)->first();
+                $users = Usahawan::where('status_profil',0)->where('U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID)->first();
             }else if($authuser->role == 7){
-                $users = Usahawan::where('status_profil',0)->where('Kod_PT',$authpegawai->NamaPT)->first();
+                $users = Usahawan::where('status_profil',0)->where('Kod_PT',$authpegawai->Mukim->NamaPT)->first();
             }
 
             if(isset($users)){

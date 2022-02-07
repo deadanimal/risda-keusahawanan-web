@@ -22,13 +22,13 @@ class InsentifControllerWeb extends Controller
         if($authuser->role == 1){
             $users = Usahawan::all();
         }else if($authuser->role == 3){
-            $users = Usahawan::where('U_Negeri_ID',$authpegawai->mukim->U_Negeri_ID)->get();
+            $users = Usahawan::where('U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4){
-            $users = Usahawan::where('U_Daerah_ID',$authpegawai->mukim->U_Daerah_ID)->get();
+            $users = Usahawan::where('U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID)->get();
         }else if($authuser->role == 5){
-            $users = Usahawan::where('U_Negeri_ID',$authpegawai->mukim->U_Negeri_ID)->get();
+            $users = Usahawan::where('U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 6){
-            $users = Usahawan::where('U_Daerah_ID',$authpegawai->mukim->U_Daerah_ID)->get();
+            $users = Usahawan::where('U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID)->get();
         }else{
             return redirect('/landing');
         }
