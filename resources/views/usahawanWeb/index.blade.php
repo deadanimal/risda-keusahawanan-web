@@ -689,7 +689,7 @@ function SahkanUsahawan(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "/SahUsahawanProfil",
+        url: "SahUsahawanProfil",
         type:"PUT",
         data: {
             id:id
@@ -698,7 +698,8 @@ function SahkanUsahawan(){
             alert("Profil Usahawan Sahkan Berjaya");
             location.reload();
         },
-        error: function(){
+        error: function(e){
+            console.log(e);
             $('.loader').hide();
             alert('failure');
         }

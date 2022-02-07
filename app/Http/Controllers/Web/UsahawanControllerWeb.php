@@ -183,10 +183,11 @@ class UsahawanControllerWeb extends Controller
 
     public function SahUsahawanProfil(Request $request)
     {
-        $usahawan = Usahawan::where('id', $request->id)->first();
+        $usahawan = Usahawan::where('usahawanid', $request->id)->first();
         $usahawan->status_profil = 1;
         $usahawan->save();
 
+        $audit = new AuditTrail();
         $authuser = Auth::user();
         $audit->idpegawai = $authuser->idpegawai;
         $audit->Type = 2;
