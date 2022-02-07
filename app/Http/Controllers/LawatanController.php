@@ -41,44 +41,36 @@ class LawatanController extends Controller
 
     public function show($id)
     {
-        $date = date("Y-m-d");
-        $test = Lawatan::where([
-            ['tarikh_lawatan', '<=', $date],
-            ['status_lawatan', '=', "3"],
-        ])
-            ->get()
-            ->map(function ($lawatan) {
-                $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', '4');
-                $lawatan->save();
-                return $lawatan;
-            });
-
-        // dd($test);
 
         $lawatan = Pegawai::where('pegawais.id', $id)
             ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
             ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
             ->join('lawatans', 'lawatans.id_pengguna', 'users.id')
-            ->select('lawatans.id as lawatan_id', 'pegawais.nama as nama_pegawai', 'usahawans.namausahawan', 'usahawans.id as usahawan_id', 'lawatans.updated_at', 'lawatans.created_at', 'lawatans.status_lawatan', 'lawatans.tarikh_lawatan', 'lawatans.masa_lawatan', 'lawatans.gambar_lawatan', 'lawatans.jenis_lawatan', 'lawatans.id_tindakan_lawatan', 'lawatans.komen')
-            ->orderBy('tarikh_lawatan', 'desc')
+            ->select(
+                'pegawais.*',
+                'lawatans.id as lawatan_id',
+                'pegawais.nama as nama_pegawai',
+                'usahawans.namausahawan',
+                'usahawans.id as usahawan_id',
+                'lawatans.updated_at',
+                'lawatans.created_at',
+                'lawatans.status_lawatan',
+                'lawatans.tarikh_lawatan',
+                'lawatans.masa_lawatan',
+                'lawatans.gambar_lawatan',
+                'lawatans.jenis_lawatan',
+                'lawatans.id_tindakan_lawatan',
+                'lawatans.komen'
+            )
+            // ->orderBy('tarikh_lawatan', 'desc')
             ->get();
+
 
         return response()->json($lawatan);
     }
 
     public function showLawatanUsahawan($id)
     {
-        $date = date("Y-m-d");
-        $test = Lawatan::where([
-            ['tarikh_lawatan', '<=', $date],
-            ['status_lawatan', '=', "3"],
-        ])
-            ->get()
-            ->map(function ($lawatan) {
-                $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', '4');
-                $lawatan->save();
-                return $lawatan;
-            });
 
         $lawatan = User::where('users.id', $id)
             ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
