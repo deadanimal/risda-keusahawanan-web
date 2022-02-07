@@ -35,16 +35,7 @@ class AliranController extends Controller
 
         $aliran->kategori_aliran = $kategoriAliran->nama_kategori_aliran;
 
-        // if ($request->hasFile($request->dokumen_lampiran)) {
-        //     $dokumen_lampiran = $request->file('dokumen_lampiran')->store('dokumen_lampiran');
-        //     $aliran->dokumen_lampiran =  $dokumen_lampiran;
-        // } else {
-        //     return response()->json("failed");
-        // }
-        // if(isset($_FILES['dokumen_lampiran']) && (file_exists($_FILES['dokumen_lampiran']['tmp_name']))){
-        //     $dokumen_lampiran = $request->file('dokumen_lampiran')->store('dokumen_lampiran');
-        //     $aliran->dokumen_lampiran = $dokumen_lampiran;
-        // }
+        
         
         $aliran->modified_by = $request->id_pengguna;
         $aliran->save();
@@ -89,15 +80,6 @@ class AliranController extends Controller
         $kategoriAliran = KategoriAliran::find($request->id_kategori_aliran);
 
         $aliran->kategori_aliran = $kategoriAliran->nama_kategori_aliran;
-
-        // if ($request->hasFile('dokumen_lampiran')) {
-        //     $dokumen_lampiran = $request->file('dokumen_lampiran')->store('dokumen_lampiran');
-        //     $aliran->dokumen_lampiran =  $dokumen_lampiran;
-        // }
-        // if(isset($_FILES['dokumen_lampiran']) && (file_exists($_FILES['dokumen_lampiran']['tmp_name']))){
-        //     $dokumen_lampiran = $request->file('dokumen_lampiran')->store('dokumen_lampiran');
-        //     $aliran->dokumen_lampiran = $dokumen_lampiran;
-        // }
         
         $aliran->modified_by = $request->id_pengguna;
         $aliran->save();
@@ -115,12 +97,17 @@ class AliranController extends Controller
 
     public function getCurrentYearData($id){
 
+        // $aliran = Aliran::where('id_pengguna', $id)
+        // ->where('id_kategori_aliran', 1)
+        // ->whereBetween('tarikh_aliran', [
+        //     Carbon::now()->startOfYear(),
+        //     Carbon::now()->endOfYear(),
+        // ])
+        // ->orderBy('tarikh_aliran', 'desc')->get();
+
         $aliran = Aliran::where('id_pengguna', $id)
         ->where('id_kategori_aliran', 1)
-        ->whereBetween('tarikh_aliran', [
-            Carbon::now()->startOfYear(),
-            Carbon::now()->endOfYear(),
-        ])
+        ->whereYear('tarikh_aliran', date('Y', strtotime('-1 year')))
         ->orderBy('tarikh_aliran', 'desc')->get();
 
         $total = 0;

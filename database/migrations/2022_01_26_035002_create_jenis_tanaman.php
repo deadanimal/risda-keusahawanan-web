@@ -17,7 +17,7 @@ class CreateJenisTanaman extends Migration
             $table->id();
 
             $table->string('tanahid');
-            $table->string('jenis_tanaman_kebun'); 
+            $table->string('jenis_tanaman_kebun')->nullable();
 
             $table->timestamps();
         });

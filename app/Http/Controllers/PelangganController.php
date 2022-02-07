@@ -109,26 +109,6 @@ class PelangganController extends Controller
     public function janaDokumen($id, Request $request)
     {
 
-        // return $request->id_pengguna;
-        // $data = DB::table('stoks')->where('stoks.id_pelanggan', $id)
-        //     ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
-        // ->join('users', 'users.id', 'katalogs.id_pengguna')
-        // ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
-        // ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
-        // ->select(
-        //     // 'perniagaans.gambar_url as logo_perniagaan',
-        //     'syarikats.logo_syarikat as logo_syarikat',
-        //     'syarikats.nodaftarssm',
-
-        //     'syarikats.alamat1_ssm as alamat1',
-        //     'syarikats.alamat2_ssm as alamat2',
-        //     'syarikats.alamat3_ssm as alamat3',
-        //     'syarikats.prefix_id',
-        //     'syarikats.nama_akaun_bank',
-        //     'syarikats.no_akaun_bank',
-        // )
-        // ->get()->first();
-
         $data = DB::table('users')->where('users.id', $request->id_pengguna)
             ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
             ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
@@ -145,9 +125,7 @@ class PelangganController extends Controller
             )
             ->get()->first();
 
-        // dd($data);
-        // return $data;
-        // return response()->json($data);
+        
         
 
         $pelanggan = DB::table('pelanggans')
@@ -177,10 +155,7 @@ class PelangganController extends Controller
             ->where('stoks.id_pelanggan', $id)
             ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
             ->get();
-        // dd($stok);
-
-        // return $stok;
-
+        
 
         $today = date("d/m/Y");
         $year = date("Y");

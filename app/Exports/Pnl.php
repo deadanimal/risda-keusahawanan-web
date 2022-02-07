@@ -24,6 +24,14 @@ class Pnl implements FromView
     {
 
         $user_id = $this->id;
+
+        $syarikat = User::where('users.id', $user_id)
+        ->join('usahawans', 'usahawans.usahawanid','users.usahawanid')
+        ->join('syarikats', 'syarikats.usahawanid','users.usahawanid')
+        ->select('syarikats.namasyarikat')
+        ->get()->first();
+
+        
         $aliran = Aliran::where('id_pengguna', $this->id)
         ->whereMonth('tarikh_aliran', '=', $this->month)
         ->whereYear('tarikh_aliran', '=', $this->year)
@@ -147,6 +155,8 @@ class Pnl implements FromView
             'id' => $user_id,
             'bulan' => $this->month,
             'tahun' => $this->year,
+
+            'syarikat' => $syarikat,
 
             'jualan_perolehan' => $jualan_perolehan,
             'deposit_jualan' => $deposit_jualan,

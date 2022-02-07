@@ -34,16 +34,14 @@ class Kernel extends ConsoleKernel
             $date = date("Y-m-d");
             Lawatan::where([
                 ['tarikh_lawatan', '<=', $date],
-                ['status_lawatan', '=', "disahkan"],
+                ['status_lawatan', '=', "3"],
             ])
                 ->get()
                 ->map(function ($lawatan) {
-                    $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', 'selesai');
+                    $lawatan->status_lawatan = str_replace($lawatan->status_lawatan, '', '4');
                     $lawatan->save();
                     return $lawatan;
                 });
-
-
         })->daily();
     }
 

@@ -103,6 +103,13 @@ class ExcelController extends Controller
         $user_id = $id;
 
 
+        $syarikat = User::where('users.id', $user_id)
+        ->join('usahawans', 'usahawans.usahawanid','users.usahawanid')
+        ->join('syarikats', 'syarikats.usahawanid','users.usahawanid')
+        ->select('syarikats.namasyarikat')
+        ->get()->first();
+
+
         $aliran = Aliran::where('id_pengguna', $user_id)
         ->whereMonth('tarikh_aliran', '=', $month)
         ->whereYear('tarikh_aliran', '=', $year)
@@ -226,6 +233,8 @@ class ExcelController extends Controller
             'id' => $user_id,
             'bulan' => $month,
             'tahun' => $year,
+
+            'syarikat' => $syarikat,
 
             'jualan_perolehan' => $jualan_perolehan,
             'deposit_jualan' => $deposit_jualan,

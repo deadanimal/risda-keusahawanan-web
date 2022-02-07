@@ -25,6 +25,8 @@ use App\Http\Controllers\PTController;
 use App\Http\Controllers\SeksyenController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SyarikatController;
+use App\Http\Controllers\TanahController;
+use App\Http\Controllers\TanamanController;
 use App\Http\Controllers\TindakanLawatanController;
 use App\Http\Controllers\UsahawanController;
 use App\Http\Controllers\UserController;
@@ -59,6 +61,11 @@ Route::apiResource('pegawai', PegawaiController::class);
 
 Route::apiResource('pekebun', PekebunController::class);
 Route::get('pekebun/getPekebunEspek/{id}', [PekebunController::class, 'getPekebunEspek']);
+Route::get('pekebun/getNoTS/{id}', [PekebunController::class, 'getNoTS']);
+
+
+Route::apiResource('tanah', TanahController::class);
+Route::apiResource('tanaman', TanamanController::class);
 
 
 Route::apiResource('syarikat', SyarikatController::class);
@@ -128,6 +135,7 @@ Route::get('deleteStok/{id}', [StokController::class, 'deleteMany']);
 Route::get('/katalogPegawai/{i}', [KatalogController::class, 'showKatalogPegawai']);
 Route::get('/pengesahanPegawai/{i}', [KatalogController::class, 'pengesahanPegawai']);
 Route::get('katalog/katalogPdf/{i}', [KatalogController::class, 'katalogPdf']);
+Route::get('katalog/showMaklumatUsahawan/{i}', [KatalogController::class, 'showMaklumatUsahawan']);
 
 Route::get('/lawatan/usahawan/{id}', [LawatanController::class, 'showLawatanUsahawan']);
 Route::get('/lawatan/updateUsahawan/{id}', [LawatanController::class, 'updateLawatanUsahawan']);
@@ -149,6 +157,7 @@ Route::post('lejerPdf', [ExcelController::class, 'lejerPdf']);
 
 Route::post('forgot-password', [PasswordController::class, 'forgot_user']);
 Route::post('update-email-password/{id}', [PasswordController::class, 'updateEmailPassword']);
+Route::post('updatePassword/{id}', [PasswordController::class, 'updatePassword']);
 
 
 
