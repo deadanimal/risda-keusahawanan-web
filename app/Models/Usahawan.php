@@ -9,7 +9,7 @@ class Usahawan extends Model
 {
     use HasFactory;
 
-    protected $with = ['pekebun','negeri','PT','daerah','dun','parlimen','perniagaan','kateusah','syarikat'];
+    protected $with = ['pekebun','negeri','PT','daerah','dun','parlimen','perniagaan','kateusah','syarikat', 'insentif'];
 
         /**
          * Get the user associated with the Pegawai
@@ -51,6 +51,10 @@ class Usahawan extends Model
         public function syarikat()
         {
             return $this->hasOne(Syarikat::class, 'usahawanid', 'usahawanid');
+        }
+        public function insentif()
+        {
+            return $this->hasMany(Insentif::class, 'id_pengguna', 'usahawanid');
         }
         
         

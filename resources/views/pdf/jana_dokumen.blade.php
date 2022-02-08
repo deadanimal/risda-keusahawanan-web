@@ -496,7 +496,7 @@
                 <tr>
 
                     <td style=" text-align:center; border-style: none;">
-                        CUKAI PENGHANTARAN
+                        KOS PENGHANTARAN
                     </td>
                     <td style=" text-align:center">
                         {{ number_format($pelanggan->kos_penghantaran, 2) }}
@@ -801,7 +801,7 @@
                 <tr>
 
                     <td style=" text-align:center; border-style: none;">
-                        CUKAI PENGHANTARAN
+                        KOS PENGHANTARAN
                     </td>
                     <td style=" text-align:center">
                         {{ number_format($pelanggan->kos_penghantaran, 2) }}

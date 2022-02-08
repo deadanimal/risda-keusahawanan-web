@@ -3,10 +3,12 @@
 use App\Http\Controllers\AliranController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuletinController;
+use App\Http\Controllers\CarianController;
 use App\Http\Controllers\DaerahController;
 use App\Http\Controllers\DunController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\InsentifController;
+use App\Http\Controllers\JenisInsentifController;
 use App\Http\Controllers\KampungController;
 use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KategoriAliranController;
@@ -31,6 +33,7 @@ use App\Http\Controllers\TindakanLawatanController;
 use App\Http\Controllers\UsahawanController;
 use App\Http\Controllers\UserController;
 use App\Models\Buletin;
+use App\Models\JenisInsentif;
 use App\Models\Pegawai;
 use App\Models\Pekebun;
 use Illuminate\Http\Request;
@@ -66,6 +69,8 @@ Route::get('pekebun/getNoTS/{id}', [PekebunController::class, 'getNoTS']);
 
 Route::apiResource('tanah', TanahController::class);
 Route::apiResource('tanaman', TanamanController::class);
+
+Route::apiResource('jenis_insentif', JenisInsentifController::class);
 
 
 Route::apiResource('syarikat', SyarikatController::class);
@@ -159,5 +164,9 @@ Route::post('forgot-password', [PasswordController::class, 'forgot_user']);
 Route::post('update-email-password/{id}', [PasswordController::class, 'updateEmailPassword']);
 Route::post('updatePassword/{id}', [PasswordController::class, 'updatePassword']);
 
+
+
+Route::get('carian/{i}', [CarianController::class, 'carianUsahawan']);
+Route::get('downloadCarian/{i}', [CarianController::class, 'downloadCarian']);
 
 

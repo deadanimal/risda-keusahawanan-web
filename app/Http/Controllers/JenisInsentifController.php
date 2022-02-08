@@ -7,17 +7,12 @@ use Illuminate\Http\Request;
 
 class JenisInsentifController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $jenis_Insentif = JenisInsentif::all();
-        return view('jenis_Insentif.index', [
-            'jenis_Insentif' => $jenis_Insentif
-        ]);
+        
+        return response()->json($jenis_Insentif);
     }
 
     /**
