@@ -41,6 +41,9 @@ $( document ).ready(function() {
     $('.loader').show();
     var start_=start.format('YYYY-MM-DD');
     var end_=end.format('YYYY-MM-DD');
+    if(start == end){
+      alert("Sila Pilih Dua Tarikh berbeza");
+    }
     // console.log(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
     $.ajax({
         headers: {

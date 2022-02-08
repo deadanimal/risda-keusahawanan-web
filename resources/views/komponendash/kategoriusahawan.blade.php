@@ -25,7 +25,7 @@
                  </thead>
                  <tbody>
                     <tr>
-                        <form method="POST" action="/kategoriusahawan" enctype="multipart/form-data">
+                        <form id="kategoriUsahawan" method="POST" action="/kategoriusahawan" enctype="multipart/form-data">
                         @csrf
                         @method("POST")
                         <td><input class="form-control form-control-sm" name="id_kategori_usahawan" id="field-name" type="text" value=""/></td>
@@ -37,7 +37,7 @@
                             <option value="aktif">aktif</option>
                             <option value="tak aktif">tak aktif</option>
                         </select></td>
-                        <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="submit" style="width:15vh" onclick="simpanaliran();" >Simpan </button></td>
+                        <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="button" style="width:15vh" onclick="simpankategori();" >Simpan </button></td>
                         </form>
                     </tr>
                     @foreach ($kategoriusahawan as $kateusahawan)
@@ -87,5 +87,14 @@
     $( document ).ready(function() {
         $('.loader').hide();
     })
-    </script>
+
+    function simpankategori(){
+        if (confirm('Anda pasti ingin simpan data Kategori Usahawan?')) {
+            $('.loader').show();
+            $('#kategoriUsahawan').submit();
+        }else{
+            alert('Data tidak disimpan');
+        }
+    }
+</script>
 @endsection 

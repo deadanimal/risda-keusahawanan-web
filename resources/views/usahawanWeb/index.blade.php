@@ -390,7 +390,7 @@
                         @endif
                         <div class="col-lg-6">
                             <label class="form-label">No KP Pekebun</label>
-                            <input class="form-control" name="pekebunkp" type="text" disable="true"/>
+                            <input class="form-control" name="pekebunkp" type="text" maxlength="12"/>
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Nama Pekebun</label>
@@ -479,9 +479,16 @@ function ResetPass(){
 }
 
 function API(){
-    $('.loader').show();
+    
     var nokp = $("#displaydua input[name=pekebunkp]").val();
     var idusahawan = $("#displaydua input[name=idusahawan]").val();
+    let isnum = /^\d+$/.test(nokp);
+    if(isnum == false){
+        alert("Format No KP Tidak Betul. Sila Isi Nombor Sahaja");
+        $("#displaydua input[name=pekebunkp]").val('')
+        return;
+    }
+    $('.loader').show();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

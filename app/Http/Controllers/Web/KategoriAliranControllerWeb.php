@@ -15,7 +15,7 @@ class KategoriAliranControllerWeb extends Controller
         if(!isset($authuser)){
             return redirect('/landing');
         }
-        $kategorialiran = KategoriAliran::All();
+        $kategorialiran = KategoriAliran::orderBy('created_at', 'DESC')->get();
         return view('komponendash.kategorialiran'
         ,[
             'kategorialiran'=>$kategorialiran

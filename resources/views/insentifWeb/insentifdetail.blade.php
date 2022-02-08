@@ -8,7 +8,7 @@
             <h3 class="text" style="padding-bottom:20px;color:#00A651;padding-top:3vh;">Insentif Usahawan</h3>
             @if ($addinsen == true)
             <div class="card-body bg-light" style="padding-top: 1vh;">
-              <form class="row g-3" method="POST" action="/insentifWeb" enctype="multipart/form-data">
+              <form id="dataInsentif" class="row g-3" method="POST" action="/insentifWeb" enctype="multipart/form-data">
                 @csrf
                 @method("POST")
                 <input name="id_pengguna" style="display: none;" type="text" value="{{$id_pengguna}}"/>
@@ -59,7 +59,7 @@
                       <div class="form-text fs--1 text-warning">* Separate your options with comma</div>
                     </div> --}}
                   </div>
-                  <button class="btn btn-falcon-default btn-sm mt-2" type="submit"><span class="fas fa-plus fs--2 me-1" data-fa-transform="up-1"></span>Tambah Insentif</button>
+                  <button class="btn btn-falcon-default btn-sm mt-2" type="button" onclick="SubmitInsentif()"><span class="fas fa-plus fs--2 me-1" data-fa-transform="up-1"></span>Tambah Insentif</button>
                 </div>
               </form>
             </div>
@@ -69,10 +69,10 @@
                 
                   <div class="position-relative rounded-1 border bg-white dark__bg-1100 p-3">
                   <div class="position-absolute end-0 top-0 mt-2 me-3 z-index-1">
-                    <form method="POST" action="{{ route('insentifWeb.destroy', $insentif->id) }}">
+                    <form id="buangdata" method="POST" action="{{ route('insentifWeb.destroy', $insentif->id) }}">
                       @csrf  
                       @method('delete')
-                    <button class="btn btn-link btn-sm p-0">
+                    <button class="btn btn-link btn-sm p-0" type="button" onclick="DeleteInsentif()">
                       <span class="fas fa-times-circle text-danger" data-fa-transform="shrink-1"></span>
                     </button>
                     </form>
@@ -133,5 +133,22 @@
       $('.loader').hide();
   });
   
+  function SubmitInsentif(){
+    if (confirm('Anda pasti ingin simpan data insentif usahawan?')) {
+        $('.loader').show();
+        $('#dataInsentif').submit();
+    }else{
+        alert('Data Insentif Usahawan tidak disimpan');
+    }
+  }
+
+  function DeleteInsentif(){
+    if (confirm('Anda pasti ingin buang data insentif usahawan?')) {
+        $('.loader').show();
+        $('#buangdata').submit();
+    }else{
+        alert('Data Insentif Usahawan Tidak Dibuang');
+    }
+  }
   </script>
 @endsection

@@ -15,7 +15,7 @@ class TindakanLawatanControllerWeb extends Controller
         if(!isset($authuser)){
             return redirect('/landing');
         }
-        $tindakanlawatan = TindakanLawatan::All();
+        $tindakanlawatan = TindakanLawatan::orderBy('created_at', 'DESC')->get();
         return view('komponendash.tindakanlawatan'
         ,[
             'tindakanlawatan'=>$tindakanlawatan

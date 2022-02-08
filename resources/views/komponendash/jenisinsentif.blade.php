@@ -21,7 +21,7 @@
                  </thead>
                  <tbody>
                     <tr>
-                        <form method="POST" action="/jenisinsentif" enctype="multipart/form-data">
+                        <form id="jenisInsen" method="POST" action="/jenisinsentif" enctype="multipart/form-data">
                         @csrf
                         @method("POST")
                         <td><input class="form-control form-control-sm" name="id_jenis_insentif" id="field-name" type="text" value=""/></td>
@@ -31,7 +31,7 @@
                             <option value="aktif">aktif</option>
                             <option value="tak aktif">tak aktif</option>
                         </select></td>
-                        <td style="text-align:center;"><button class="btn btn-primary btn-sm" style="width:15vh" type="submit" >Simpan </button></td>
+                        <td style="text-align:center;"><button class="btn btn-primary btn-sm" style="width:15vh" type="button" onclick="simpanJenis();">Simpan </button></td>
                         </form>
                     </tr>
                     @foreach ($jenisinsentif as $jenisinsentif)
@@ -75,5 +75,14 @@
     $( document ).ready(function() {
         $('.loader').hide();
     })
+
+    function simpanJenis(){
+        if (confirm('Anda pasti ingin simpan data Jenis Insentif?')) {
+            $('.loader').show();
+            $('#jenisInsen').submit();
+        }else{
+            alert('Data tidak disimpan');
+        }
+    }
 </script>
 @endsection 

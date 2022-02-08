@@ -11,7 +11,7 @@ class JenisInsentifControllerWeb extends Controller
 {
     public function index()
     {
-        $jenisinsentif = JenisInsentif::All();
+        $jenisinsentif = JenisInsentif::orderBy('created_at', 'DESC')->get();
         return view('komponendash.jenisinsentif'
         ,[
             'jenisinsentif'=>$jenisinsentif

@@ -62,8 +62,13 @@ class AuditTrailControllerWeb extends Controller
         // dd($request);
         $from = date($request->start);
         $to = date($request->end);
+        if ($from == $to){
+            $Audits = AuditTrail::whereDate('Date', $from)->get();
+        }else{
+            $Audits = AuditTrail::whereBetween('Date', [$from, $to])->get();
+        }
         // dd($from .'--'. $to);
-        $Audits = AuditTrail::whereBetween('Date', [$from, $to])->get();
+        
         $result = '';
         foreach ($Audits as $Audit) {
             $Audit->user = $Audit->idpegawai;

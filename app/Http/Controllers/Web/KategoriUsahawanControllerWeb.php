@@ -11,7 +11,7 @@ class KategoriUsahawanControllerWeb extends Controller
 {
     public function index()
     {
-        $kategoriusahawan = KategoriUsahawan::All();
+        $kategoriusahawan = KategoriUsahawan::orderBy('created_at', 'DESC')->get();
         return view('komponendash.kategoriusahawan'
         ,[
             'kategoriusahawan'=>$kategoriusahawan

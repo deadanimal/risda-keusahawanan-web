@@ -23,7 +23,7 @@
                      </thead>
                      <tbody>
                         <tr>
-                        <form method="POST" action="/kategorialiran" enctype="multipart/form-data">
+                        <form id="kateAliran" method="POST" action="/kategorialiran" enctype="multipart/form-data">
                         @csrf
                         @method("POST")
                             {{-- <td><input class="form-control form-control-sm" name="jenis_aliran" id="field-name" type="text" value=""/></td> --}}
@@ -44,7 +44,7 @@
                                 <option value="aktif">aktif</option>
                                 <option value="tak aktif">tak aktif</option>
                             </select></td>
-                            <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="submit" style="width:15vh" onclick="simpanaliran();" >Simpan </button></td>
+                            <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="button" style="width:15vh" onclick="simpanaliran();" >Simpan </button></td>
                         </form>
                         </tr>
                         @foreach ($kategorialiran as $katealiran)
@@ -107,5 +107,14 @@
 $( document ).ready(function() {
     $('.loader').hide();
 })
+
+function simpanaliran(){
+    if (confirm('Anda pasti ingin simpan data kategori aliran?')) {
+        $('.loader').show();
+        $('#kateAliran').submit();
+    }else{
+        alert('Data tidak disimpan');
+    }
+}
 </script>
 @endsection
