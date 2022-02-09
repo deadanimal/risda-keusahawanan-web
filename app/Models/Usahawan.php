@@ -9,7 +9,7 @@ class Usahawan extends Model
 {
     use HasFactory;
 
-    protected $with = ['pekebun','negeri','PT','daerah','dun','parlimen','perniagaan','kateusah','syarikat', 'insentif'];
+    protected $with = ['pekebun','negeri','PT','daerah','dun','parlimen','perniagaan','kateusah','syarikat', 'insentif', 'etnik', 'mukim', 'kampung', 'seksyen'];
 
         /**
          * Get the user associated with the Pegawai
@@ -55,6 +55,22 @@ class Usahawan extends Model
         public function insentif()
         {
             return $this->hasMany(Insentif::class, 'id_pengguna', 'usahawanid');
+        }
+        public function etnik()
+        {
+            return $this->hasOne(Etnik::class, 'U_Etnik_ID', 'U_Etnik_ID');
+        }
+        public function mukim()
+        {
+            return $this->hasOne(Mukim::class, 'U_Mukim_ID', 'U_Mukim_ID');
+        }
+        public function kampung()
+        {
+            return $this->hasOne(Kampung::class, 'U_Kampung_ID', 'U_Kampung_ID');
+        }
+        public function seksyen()
+        {
+            return $this->hasOne(Seksyen::class, 'U_Seksyen_ID', 'U_Seksyen_ID');
         }
         
         

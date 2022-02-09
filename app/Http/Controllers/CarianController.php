@@ -33,7 +33,9 @@ class CarianController extends Controller
             'usahawan'=> $usahawan
         ]);
 
-        // $pdf->render();
+        dd($usahawan); 
+
+        return $pdf->stream('result.pdf', array('Attachment'=>0));  
 
         // $fname = time() . '-maklumat-usahawan-'. $id .'.pdf';
 
