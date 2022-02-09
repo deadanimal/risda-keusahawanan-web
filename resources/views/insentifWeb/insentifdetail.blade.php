@@ -113,7 +113,7 @@
                         <input class="form-control form-control-sm" name="tahun_terima_insentif" id="field-name" type="text" value="{{$insentif->tahun_terima_insentif}}"/>
                       </div>
                     </div>
-                    <button class="btn btn-falcon-default btn-sm mt-2" style="width:fit-content;" type="submit"><span class="fas fa-plus fs--2 me-1" data-fa-transform="up-1"></span>Ubah Insentif</button>
+                    <button class="btn btn-falcon-default btn-sm mt-2" style="width:fit-content;" type="submit"><span class="fas fa-plus fs--2 me-1" data-fa-transform="up-1"></span>Kemaskini Insentif</button>
                   </form>
                   </div>
                 

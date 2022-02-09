@@ -31,7 +31,7 @@ class JenisInsentifControllerWeb extends Controller
             echo '</script>';
 
         }else{
-            if($request->id_jenis_insentif == null || $request->nama_insentif == null){
+            if($request->id_jenis_insentif == null || $request->nama_insentif == null || $request->status == null){
                 echo '<script language="javascript">';
                 echo 'alert("Data Tidak Lengkap");';
                 echo "window.location.href='/jenisinsentif';";
@@ -61,7 +61,7 @@ class JenisInsentifControllerWeb extends Controller
 
     public function update(Request $request, $id)
     {
-        if($request->id_jenis_insentif == null || $request->nama_insentif == null){
+        if($request->id_jenis_insentif == null || $request->nama_insentif == null || $request->status == null){
             echo '<script language="javascript">';
             echo 'alert("Data Tidak Lengkap");';
             echo "window.location.href='/jenisinsentif';";

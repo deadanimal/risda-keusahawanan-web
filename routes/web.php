@@ -48,8 +48,8 @@ use App\Http\Controllers\PDFController;
 
 
 Route::get('/', function () {
-    return view('landing.index');
-})->middleware(['auth'])->name('landing');
+    return redirect('/landing');
+});
 Route::resource('/landing', LandingControllerWeb::class);
 
 Route::put('pegawaiPost', [PegawaiControllerWeb::class, 'pegawaiPost'])->name('pegawai.post');

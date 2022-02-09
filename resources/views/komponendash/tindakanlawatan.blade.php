@@ -5,11 +5,11 @@
         <div class="row align-items-center" style="overflow-x: scroll !important;overflow-y: scroll !important;">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Tindakan Lawatan</h3>
             <table id="tbl" style="padding-bottom:2vh;text-align:center;">
-                <colgroup>
+                {{-- <colgroup>
                     <col span="1" style="width: 50%;">
                     <col span="1" style="width: 20%;">
                     <col span="1" style="width: 30%;">
-                 </colgroup>
+                 </colgroup> --}}
                  <thead>
                     <tr class="align-middle">
                         <th scope="col">Nama Tindakan Lawatan</th>
@@ -22,13 +22,13 @@
                         <form id="tindLawatan" method="POST" action="/tindakanlawatan" enctype="multipart/form-data">
                         @csrf
                         @method("POST") 
-                        <td><input class="form-control form-control-sm" name="nama_tindakan_lawatan" id="field-name" type="text" value=""/></td>
-                        <td><select class="form-select form-select-sm" name="status_tindakan_lawatan" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                        <td class="text-nowrap"><input class="form-control form-control-sm" name="nama_tindakan_lawatan" id="field-name" type="text" value="" style="width:80vh"/></td>
+                        <td class="text-nowrap"><select class="form-select form-select-sm" name="status_tindakan_lawatan" aria-label=".form-select-sm example" style="width:25vh;">
                             <option selected=""></option>
                             <option value="aktif">aktif</option>
                             <option value="tak aktif">tak aktif</option>
                         </select></td>
-                        <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="button" style="width:15vh" onclick="simpanaliran();" >Simpan </button></td>
+                        <td class="text-nowrap"><button class="btn btn-primary btn-sm" type="button" style="width:15vh" onclick="simpanaliran();" >Simpan </button></td>
                         </form>
                     </tr>
                     @foreach ($tindakanlawatan as $tindlawatan)
@@ -37,10 +37,10 @@
                         @csrf
                         @method("PUT")
                         <td class="text-nowrap">
-                            <input class="form-control form-control-sm" name="nama_tindakan_lawatan" id="field-name" type="text" value="{{$tindlawatan->nama_tindakan_lawatan}}"/>
+                            <input class="form-control form-control-sm" name="nama_tindakan_lawatan" id="field-name" type="text" value="{{$tindlawatan->nama_tindakan_lawatan}}" style="width:80vh"/>
                         </td>
                         <td class="text-nowrap">
-                            <select class="form-select form-select-sm" name="status_tindakan_lawatan" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
+                            <select class="form-select form-select-sm" name="status_tindakan_lawatan" aria-label=".form-select-sm example" style="width:25vh;">
                                 <option selected="{{$tindlawatan->status_tindakan_lawatan}}"></option>
                                 <option {{ ( $tindlawatan->status_tindakan_lawatan == "aktif" ) ? 'selected' : '' }} value="aktif">aktif</option>
                                 <option {{ ( $tindlawatan->status_tindakan_lawatan == "tak aktif" ) ? 'selected' : '' }} value="tak aktif">tak aktif</option>
@@ -49,7 +49,6 @@
                         <td class="text-nowrap">
                             <button type="submit" class="btn btn-primary btn-sm" style="width:15vh">Kemaskini</button>
                         </form>
-                            &nbsp
                             {{-- <form method="POST" style="display:inline-block;" action="{{ route('tindakanlawatan.destroy', $tindlawatan->id) }}">
                             @csrf  
                             @method('delete')

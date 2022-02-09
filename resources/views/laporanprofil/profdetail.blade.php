@@ -43,161 +43,172 @@
             <tr>
                 <td><label class="form-label">Taraf Pendidikan</label></td>
                 <td><label class="form-label">: {{$user->taraf_pendidikan}}</label></td>
-                <td><label class="form-label">No.Telefon</label></td>
-                <td><label class="form-label">: @if($user->notelefon != "") {{$user->notelefon}} @endif {{$user->nohp}}</label></td>
+                <td><label class="form-label">Taraf Pendidikan Tertinggi</label></td>
+                <td><label class="form-label">: {{$user->taraf_pendidikan_tinggi}}</label></td>
             </tr>
             <tr>
-                <td><label class="form-label">Alamat</label></td>
-                <td colspan="3"><label class="form-label">: @if($user->alamat1 != ""){{$user->alamat1}}, <br>&nbsp;@endif @if($user->alamat2 != ""){{$user->alamat2}}, <br>&nbsp;@endif {{$user->alamat3}}</label></td>
+                <td><label class="form-label">No.Telefon</label></td>
+                <td><label class="form-label">: {{$user->notelefon}}</label></td>
+                <td><label class="form-label">No.HP</label></td>
+                <td><label class="form-label">: {{$user->nohp}}</label></td>
+            </tr>
+            <tr>
+                <td rowspan="3"><label class="form-label">Alamat</label></td>
+                <td rowspan="3"><label class="form-label">: @if($user->alamat1 != ""){{$user->alamat1}}, <br>&nbsp;@endif @if($user->alamat2 != ""){{$user->alamat2}}, <br>&nbsp;@endif {{$user->alamat3}}</label></td>
+                <td><label class="form-label">Poskod</label></td>
+                <td><label class="form-label">: {{$user->poskod}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Daerah</label></td>
+                <td><label class="form-label">: {{$user->daerah}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Negeri</label></td>
+                <td><label class="form-label">: {{$user->negeri}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Dun</label></td>
+                <td><label class="form-label">: {{$user->dun}}</label></td>
+                <td><label class="form-label">Parlimen</label></td>
+                <td><label class="form-label">: {{$user->parlimen}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">No SIC/ No T/S Pekebun Kecil</label></td>
+                <td><label class="form-label">: {{$user->PKnoTS}}</label></td>
+                <td><label class="form-label">No K/P (Pekebun Kecil)</label></td>
+                <td><label class="form-label">: {{$user->PKnoKP}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Kategori Pemohon</label></td>
+                <td><label class="form-label">: {{$user->status_daftar_usahawan}}</label></td>
+                <td><label class="form-label">Jenis Perniagaan</label></td>
+                <td><label class="form-label">: {{$user->JenisPerniagaan}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Kluster Projek</label></td>
+                <td><label class="form-label">: {{$user->KlusterPerniagaan}}</label></td>
+                <td><label class="form-label">Sub Kluster (Produk / Perkhidmatan)</label></td>
+                <td><label class="form-label">: {{$user->SubKlusterPerniagaan}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Medium Pemasaran (Media Sosial)</label></td>
+                <td><label class="form-label">:<?php echo $user->MediumPemasaran; ?></label></td>
+                <td><label class="form-label">Alamat Medium Pemasaran (Media Sosial)</label></td>
+                <td> <label class="form-label">:<?php echo $user->AlamatMediumPemasaran; ?></label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Jenis Bantuan (Program Tahun Semasa)</label></td>
+                <td><label class="form-label">: {{$user->jnsbantuansemasa}}</label></td>
+                <td><label class="form-label">Kelulusan Bantuan Tahun Semasa (RM)</label></td>
+                <td><label class="form-label">: {{$user->kelulusanbantuansemasa}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Tahun Terima Bantuan Tahun Semasa</label></td>
+                <td><label class="form-label">: {{$user->thnbantuansemasa}}</label></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding-top: 2vh; text-align:center;"><label class="form-label">JUMLAH JUALAN BULANAN  (RM)  - TAHUN <?php echo date("Y"); ?></label></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table style="width: 100%;">
+                    <tr>
+                        <td>Jan</td>
+                        <td>Feb</td>
+                        <td>Mac</td>
+                        <td>Apr</td>
+                        <td>Mei</td>
+                        <td>Jun</td>
+                        <td>Jul</td>
+                        <td>Aug</td>
+                        <td>Sep</td>
+                        <td>Okt</td>
+                        <td>Nov</td>
+                        <td>Dis</td>
+                    </tr>
+                    <tr>
+                        <td>{{$user->aliran1}}</td>
+                        <td>{{$user->aliran2}}</td>
+                        <td>{{$user->aliran3}}</td>
+                        <td>{{$user->aliran4}}</td>
+                        <td>{{$user->aliran5}}</td>
+                        <td>{{$user->aliran6}}</td>
+                        <td>{{$user->aliran7}}</td>
+                        <td>{{$user->aliran8}}</td>
+                        <td>{{$user->aliran9}}</td>
+                        <td>{{$user->aliran10}}</td>
+                        <td>{{$user->aliran11}}</td>
+                        <td>{{$user->aliran12}}</td>
+                    </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Jumlah Jualan (RM)</label></td>
+                <td><label class="form-label">: {{$user->jumaliran}}</label></td>
+                <td><label class="form-label">Purata Jualan Bulanan (RM)</label></td>
+                <td><label class="form-label">: {{$user->purataaliran}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Pencapaian Sasaran RM 2500/BLN</label></td>
+                <td><label class="form-label">: {{$user->capaisasaran}}</label></td>
+                <td><label class="form-label">Kategori Usahawan</label></td>
+                <td><label class="form-label">: {{$user->KateUsahawan}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">Nama Syarikat</label></td>
+                <td><label class="form-label">: {{$user->namasyarikat}}</label></td>
+                <td><label class="form-label">Jenis Milikan Syarikat</label></td>
+                <td><label class="form-label">: {{$user->jenismilikan}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">No. Daftar Syarikat (SSM)</label></td>
+                <td><label class="form-label">: {{$user->nodaftarssm}}</label></td>
+                <td><label class="form-label">Alamat Syarikat/Perniagaan</label></td>
+                <td><label class="form-label">: {{$user->alamatsyarikat}}</label></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <label class="form-label" style="padding-right: 5vh;">Koordinat Premis Perniagaan - </label>
+                    <label class="form-label">Latitud</label> : <label class="form-label" style="padding-right: 2vh;">{{$user->latitud}}</label>
+                    <label class="form-label">Longitud</label> : <label class="form-label">{{$user->logitud}}</label>                
+                </td>
+            </tr>
+            <tr>
+                <td><label class="form-label">E-Mail</label></td>
+                <td><label class="form-label">: {{$user->emailsyarikat}}</label></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4"><label class="form-label">Lain - Lain Bantuan RISDA Tahun Sebelum</label></td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding:2vh 0vh">
+                    <table style="width: 100%;" class="form-label">
+                        <tr>
+                            <th>Jenis Bantuan</th>
+                            <th>Kelulusan Bantuan (RM)</th>
+                            <th>Tahun Terima</th>
+                        </tr>
+                        @foreach ($insentif2 as $insentif2s)
+                        <tr>
+                            <td>{{$insentif2s->namainsen}}</td>
+                            <td>{{number_format($insentif2s->nilai_insentif)}}</td>
+                            <td>{{$insentif2s->tahun_terima_insentif}}</td>   
+                        </tr>
+                        @endforeach
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="form-label">No Sijil HALAL JAKIM</label></td>
+                <td><label class="form-label">: {{$user->nodaftarpersijilanhalal}}</label></td>
             </tr>
         </table>
-        <div class="col-lg-5">
-            <label class="form-label">Poskod</label> : <label class="form-label">{{$user->poskod}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Daerah</label> : <label class="form-label">{{$user->daerah}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Negeri</label> : <label class="form-label">{{$user->negeri}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Dun</label> : <label class="form-label">{{$user->dun}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Parlimen</label> : <label class="form-label">{{$user->parlimen}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">No SIC/ No T/S Pekebun Kecil</label> : <label class="form-label">{{$user->PKnoTS}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">No K/P (Pekebun Kecil)</label> : <label class="form-label">{{$user->PKnoKP}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Kategori Pemohon</label> : <label class="form-label">{{$user->status_daftar_usahawan}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Jenis Perniagaan</label> : <label class="form-label">{{$user->JenisPerniagaan}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Kluster Projek</label> : <label class="form-label">{{$user->KlusterPerniagaan}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Sub Kluster (Produk / Perkhidmatan)</label> : <label class="form-label">{{$user->SubKlusterPerniagaan}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Medium Pemasaran (Media Sosial)</label> : <label class="form-label">{{$user->MediumPemasaran}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Alamat Medium Pemasaran (Media Sosial)</label> : <label class="form-label">{{$user->AlamatMediumPemasaran}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Jenis Bantuan (Program Tahun Semasa)</label> : <label class="form-label">{{$user->jnsbantuansemasa}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Kelulusan Bantuan Tahun Semasa (RM)</label> : <label class="form-label">{{$user->kelulusanbantuansemasa}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Tahun Terima Bantuan Tahun Semasa</label> : <label class="form-label">{{$user->thnbantuansemasa}}</label>
-        </div>
-        <div class="col-lg-12">
-            <label class="form-label">JUMLAH JUALAN BULANAN  (RM)  - TAHUN 2021</label>
-        </div>
-        <div class="col-lg-12" style="padding-right: none;">
-            <table style="width: 100%;">
-                <tr>
-                    <td>Jan</td>
-                    <td>Feb</td>
-                    <td>Mac</td>
-                    <td>Apr</td>
-                    <td>Mei</td>
-                    <td>Jun</td>
-                    <td>Jul</td>
-                    <td>Aug</td>
-                    <td>Sep</td>
-                    <td>Okt</td>
-                    <td>Nov</td>
-                    <td>Dis</td>
-                </tr>
-                <tr>
-                    <td>{{$user->aliran1}}</td>
-                    <td>{{$user->aliran2}}</td>
-                    <td>{{$user->aliran3}}</td>
-                    <td>{{$user->aliran4}}</td>
-                    <td>{{$user->aliran5}}</td>
-                    <td>{{$user->aliran6}}</td>
-                    <td>{{$user->aliran7}}</td>
-                    <td>{{$user->aliran8}}</td>
-                    <td>{{$user->aliran9}}</td>
-                    <td>{{$user->aliran10}}</td>
-                    <td>{{$user->aliran11}}</td>
-                    <td>{{$user->aliran12}}</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="col-lg-5">
-            <label class="form-label">Jumlah Jualan (RM)</label> : <label class="form-label">{{$user->jumaliran}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Purata Jualan Bulanan (RM)</label> : <label class="form-label">{{$user->purataaliran}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Pencapaian Sasaran RM 2500/BLN</label> : <label class="form-label">{{$user->capaisasaran}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Kategori Usahawan</label> : <label class="form-label">{{$user->KateUsahawan}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Nama Syarikat</label> : <label class="form-label">{{$user->namasyarikat}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Jenis Milikan Syarikat</label> : <label class="form-label">{{$user->jenismilikan}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">No. Daftar Syarikat (SSM)</label> : <label class="form-label">{{$user->nodaftarssm}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Alamat Syarikat/Perniagaan</label> : <label class="form-label">{{$user->alamatsyarikat}}</label>
-        </div>
-        <div class="col-lg-12">
-            <label class="form-label">Koordinat Premis Perniagaan</label>
-            <label class="form-label">Latitud</label> : <label class="form-label">{{$user->latitud}}</label>
-            <label class="form-label">Longitud</label> : <label class="form-label">{{$user->logitud}}</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">E-Mail</label> : <label class="form-label">{{$user->emailsyarikat}}</label>
-        </div>
-        {{-- <div class="col-lg-5">
-            <label class="form-label">Status Perniagaan (Aktif / TIdak Aktif)</label> : <label class="form-label">None</label>
-        </div> --}}
-        <div class="col-lg-12">
-            <label class="form-label">Lain - Lain Bantuan RISDA Tahun Sebelum</label>
-        </div>
-        <div class="col-lg-12">
-            <table style="width: 100%;">
-                <tr>
-                    <td>Jenis Bantuan</td>
-                    <td>Kelulusan Bantuan (RM)</td>
-                    <td>Tahun Terima</td>
-                </tr>
-                <tr>
-                    @foreach ($insentif2 as $insentif2s)
-                    <td>{{$insentif2s->namainsen}}</td>
-                    <td>{{$insentif2s->nilai_insentif}}</td>
-                    <td>{{$insentif2s->tahun_terima_insentif}}</td>
-                    @endforeach
-                </tr>
-            </table>
-        </div>
-        {{-- <div class="col-lg-5">
-            <label class="form-label">Latihan/Kursus RISDA Telah Dihadiri</label> : <label class="form-label">None</label>
-        </div>
-        <div class="col-lg-5">
-            <label class="form-label">Daftar Jenama Produk </label><span> (Jika Menerima Bantuan Pembungkusan & Pelabelan RISDA)</span> : <label class="form-label">None</label>
-        </div> --}}
-        <div class="col-lg-5">
-            <label class="form-label">No Sijil HALAL JAKIM</label> : <label class="form-label">{{$user->nodaftarpersijilanhalal}}</label>
-        </div>
+        
     </div>
 </div>
 @endsection

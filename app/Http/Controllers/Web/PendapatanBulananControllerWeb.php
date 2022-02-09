@@ -50,6 +50,8 @@ class PendapatanBulananControllerWeb extends Controller
             $report->tab7 = $report->tab6 / $report->tab4;
             $c_jualan = $c_jualan + $report->tab6; 
             $c_puratajual = $c_puratajual + $report->tab7; 
+            $report->tab4 = number_format($report->tab4);
+            // dd($report->tab5);
         }
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
         
@@ -121,23 +123,25 @@ class PendapatanBulananControllerWeb extends Controller
                 <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label">'.$num++.'</label></td>
                 <td class="text-nowrap"><label class="form-check-label">'.$report->negeri.'</label></td>
                 <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">'.$report->jenis.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab4.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab5.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab6.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.$report->tab7.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab3).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab4).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab5).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7).'</label></td>
             </tr>';
         }
         $tfoot .=
         '<tr class="align-middle" style="text-align: center;">
             <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$c_penerima.'</td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$c_insentif.'</td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$c_jualan.'</td>
-            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$c_puratajual.'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_penerima).'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_insentif).'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_jualan).'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_puratajual).'</td>
         </tr>
         ';       
 
+        $c_insentif = number_format($c_insentif);
+        $c_jualan = number_format($c_jualan);
         return [$result,$tfoot,$c_insentif,$c_jualan];
     }
 }

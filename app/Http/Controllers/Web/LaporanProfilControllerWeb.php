@@ -94,8 +94,32 @@ class LaporanProfilControllerWeb extends Controller
         }else{
             $users->jantina = "Lain - Lain";
         }
-        
-        $users->taraf_pendidikan = $users->U_Taraf_Pendidikan_Tertinggi_ID;
+
+        $users->taraf_pendidikan = "";
+        if($users->U_Pendidikan_ID == 1){
+            $users->taraf_pendidikan = "Tidak Bersekolah";
+        }else if($users->U_Pendidikan_ID == 2){
+            $users->taraf_pendidikan = "Sekolah Rendah / Setara";
+        }else if($users->U_Pendidikan_ID == 3){
+            $users->taraf_pendidikan = "Sekolah Menengah / Setara";
+        }else if($users->U_Pendidikan_ID == 4){
+            $users->taraf_pendidikan = "Kolej / Universiti / Setara";
+        }
+        $users->taraf_pendidikan_tinggi = "";
+        if($users->U_Taraf_Pendidikan_Tertinggi_ID == 1){
+            $users->taraf_pendidikan_tinggi = "UPSR/PSRA/Setaraf";
+        }else if($users->U_Taraf_Pendidikan_Tertinggi_ID == 2){
+            $users->taraf_pendidikan_tinggi = "PMR/SRP/LCE/Setaraf";
+        }else if($users->U_Taraf_Pendidikan_Tertinggi_ID == 3){
+            $users->taraf_pendidikan_tinggi = "SPM/MCE/Setaraf";
+        }else if($users->U_Taraf_Pendidikan_Tertinggi_ID == 4){
+            $users->taraf_pendidikan_tinggi = "STPM/Diploma/Setaraf";
+        }else if($users->U_Taraf_Pendidikan_Tertinggi_ID == 5){
+            $users->taraf_pendidikan_tinggi = "Ijazah Pertama/Ke Atas";
+        }else if($users->U_Taraf_Pendidikan_Tertinggi_ID == 6){
+            $users->taraf_pendidikan_tinggi = "Tiada";
+        }
+        // $users->taraf_pendidikan_tinggi = $users->U_Taraf_Pendidikan_Tertinggi_ID;
         $daerah = Daerah::select('Daerah')->where('U_Daerah_ID', $users->U_Daerah_ID)->first();
         $users->daerah = $daerah->Daerah;
         $dun = Dun::select('Dun')->where('U_Dun_ID', $users->U_Dun_ID)->first();
@@ -120,16 +144,22 @@ class LaporanProfilControllerWeb extends Controller
             $users->KlusterPerniagaan = $perniagaan->klusterperniagaan;
             $users->SubKlusterPerniagaan = $perniagaan->subkluster;
             if($perniagaan->facebook != ""){
-                $users->MediumPemasaran = "Facebook ";
+                $users->facebook = $perniagaan->facebook;
+                $users->MediumPemasaran = "&nbsp Facebook <br/>\n";
+                $users->AlamatMediumPemasaran =$users->AlamatMediumPemasaran."&nbsp Facebook - ".$perniagaan->facebook." <br>";
             }
             if($perniagaan->instagram != ""){
-                $users->MediumPemasaran .= "Instagram ";
+                $users->MediumPemasaran .= "&nbsp Instagram <br/>\n";
+                $users->AlamatMediumPemasaran =$users->AlamatMediumPemasaran."&nbsp Instagram - ".$perniagaan->instagram."<br/>\n";
+
             }
             if($perniagaan->twitter != ""){
-                $users->MediumPemasaran .= "Twitter ";
+                $users->MediumPemasaran .= "&nbsp Twitter ";
+                $users->AlamatMediumPemasaran =$users->AlamatMediumPemasaran."&nbsp Twitter - ".$perniagaan->twitter;
+
             }
             // $users->MediumPemasaran = "Facebook, Instagram, Twitter";
-            $users->AlamatMediumPemasaran = "Facebook - ".$perniagaan->facebook."Instagram - " .$perniagaan->instagram."Twitter - ".$perniagaan->twitter;
+            // ."Instagram - " .$perniagaan->instagram."Twitter - ".$perniagaan->twitter;
             $users->latitud = $perniagaan->latitud;
             $users->logitud = $perniagaan->logitud;
         }
@@ -160,6 +190,7 @@ class LaporanProfilControllerWeb extends Controller
                 $users->jnsbantuansemasa = $jenisinsentif->nama_insentif;
             }
             $users->kelulusanbantuansemasa = $insentif->nilai_insentif;
+            $users->kelulusanbantuansemasa = number_format($users->kelulusanbantuansemasa);
             $users->thnbantuansemasa = $insentif->tahun_terima_insentif;
         }
 
@@ -180,34 +211,48 @@ class LaporanProfilControllerWeb extends Controller
                 $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
                 if($aliran->bulan == 1){
                     $users->aliran1 = $users->aliran1 + $aliran->jumlah_aliran;
+                    $users->aliran1 = number_format($users->aliran1);
                 }else if($aliran->bulan == 2){
                     $users->aliran2 = $users->aliran2 + $aliran->jumlah_aliran;
+                    $users->aliran2 = number_format($users->aliran2);
                 }else if($aliran->bulan == 3){
                     $users->aliran3 = $users->aliran3 + $aliran->jumlah_aliran;
+                    $users->aliran3 = number_format($users->aliran3);
                 }else if($aliran->bulan == 4){
                     $users->aliran4 = $users->aliran4 + $aliran->jumlah_aliran;
+                    $users->aliran4 = number_format($users->aliran4);
                 }else if($aliran->bulan == 5){
                     $users->aliran5 = $users->aliran5 + $aliran->jumlah_aliran;
+                    $users->aliran5 = number_format($users->aliran5);
                 }else if($aliran->bulan == 6){
                     $users->aliran6 = $users->aliran6 + $aliran->jumlah_aliran;
+                    $users->aliran6 = number_format($users->aliran6);
                 }else if($aliran->bulan == 7){
                     $users->aliran7 = $users->aliran7 + $aliran->jumlah_aliran;
+                    $users->aliran7 = number_format($users->aliran7);
                 }else if($aliran->bulan == 8){
                     $users->aliran8 = $users->aliran8 + $aliran->jumlah_aliran;
+                    $users->aliran8 = number_format($users->aliran8);
                 }else if($aliran->bulan == 9){
                     $users->aliran9 = $users->aliran9 + $aliran->jumlah_aliran;
+                    $users->aliran9 = number_format($users->aliran9);
                 }else if($aliran->bulan == 10){
                     $users->aliran10 = $users->aliran10 + $aliran->jumlah_aliran;
+                    $users->aliran10 = number_format($users->aliran10);
                 }else if($aliran->bulan == 11){
                     $users->aliran11 = $users->aliran11 + $aliran->jumlah_aliran;
+                    $users->aliran11 = number_format($users->aliran11);
                 }else if($aliran->bulan == 12){
                     $users->aliran12 = $users->aliran12 + $aliran->jumlah_aliran;
+                    $users->aliran12 = number_format($users->aliran12);
                 }
                 $users->jumaliran = $users->jumaliran + $aliran->jumlah_aliran;
             }
         }
         
         $users->purataaliran = $users->jumaliran / 12;
+        $users->jumaliran = number_format($users->jumaliran);
+        $users->purataaliran = number_format($users->purataaliran, 2);
 
         if($users->purataaliran >= 2500){
             $users->capaisasaran = "capai";

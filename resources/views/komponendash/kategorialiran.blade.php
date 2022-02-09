@@ -38,13 +38,13 @@
                                 <option value="2">Pendapatan Pasif</option>
                                 <option value="3">Perbelanjaan Perniagaan</option>
                             </select></td>
-                            <td><input class="form-control form-control-sm" name="nama_kategori_aliran" id="field-name" type="text" style="width:28vh;" value=""/></td>
-                            <td><select class="form-select form-select-sm" name="status_kategori_aliran" aria-label=".form-select-sm example" style="display:inline-block;width:15vh;">
+                            <td><input class="form-control form-control-sm" name="nama_kategori_aliran" id="field-name" type="text" style="width:35vh;" value=""/></td>
+                            <td><select class="form-select form-select-sm" name="status_kategori_aliran" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
                                 <option selected=""></option>
                                 <option value="aktif">aktif</option>
                                 <option value="tak aktif">tak aktif</option>
                             </select></td>
-                            <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="button" style="width:15vh" onclick="simpanaliran();" >Simpan </button></td>
+                            <td style="text-align:center;"><button class="btn btn-primary btn-sm" type="button" style="width:20vh" onclick="simpanaliran();" >Simpan </button></td>
                         </form>
                         </tr>
                         @foreach ($kategorialiran as $katealiran)
@@ -69,10 +69,10 @@
                                 </select>
                             </td>
                             <td class="text-nowrap">
-                                <input class="form-control form-control-sm" name="nama_kategori_aliran" id="field-name" type="text" style="width:28vh;" value="{{$katealiran->nama_kategori_aliran}}"/>
+                                <input class="form-control form-control-sm" name="nama_kategori_aliran" id="field-name" type="text" style="width:35vh;" value="{{$katealiran->nama_kategori_aliran}}"/>
                             </td>
                             <td class="text-nowrap">
-                                <select class="form-select form-select-sm" name="status_kategori_aliran" aria-label=".form-select-sm example" style="display:inline-block;width:15vh;">
+                                <select class="form-select form-select-sm" name="status_kategori_aliran" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
                                     <option selected="{{$katealiran->status_kategori_aliran}}"></option>
                                     <option {{ ( $katealiran->status_kategori_aliran == "aktif" ) ? 'selected' : '' }} value="aktif">aktif</option>
                                     <option {{ ( $katealiran->status_kategori_aliran == "tak aktif" ) ? 'selected' : '' }} value="tak aktif">tak aktif</option>
@@ -85,7 +85,7 @@
                             </td> -->
                         
                             <td>
-                                <button type="submit" class="btn btn-primary btn-sm" style="width:15vh">Kemaskini</button>
+                                <button type="submit" class="btn btn-primary btn-sm" style="width:20vh">Kemaskini</button>
                                 </form>
                                 {{-- <form method="POST" style="display:inline-block;" action="{{ route('kategorialiran.destroy', $katealiran->id) }}">
                                 @csrf  

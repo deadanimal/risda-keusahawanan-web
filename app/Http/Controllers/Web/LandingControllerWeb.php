@@ -9,11 +9,20 @@ use App\Models\Peranan;
 use App\Models\Pegawai;
 use App\Models\Mukim;
 use App\Models\Usahawan;
+use Session;
 
 class LandingControllerWeb extends Controller
 {
     public function index()
     {
+        $token = Session::get('_token');
+        if(!isset($token)){
+            echo '<script language="javascript">';
+            echo 'alert("Session Expired Kindly Login");';
+            echo "window.location.href = '/login';";
+            echo '</script>';
+            return redirect('/login');
+        }
         $role="";
         $authuser = Auth::user();
         if(isset(Auth::user()->role)){
@@ -21,9 +30,10 @@ class LandingControllerWeb extends Controller
             $authuser->peranan = $role;
         }else{
             echo '<script language="javascript">';
-            echo 'alert("Session Expired Kindly Login")';
+            echo 'alert("Session Expired Kindly Login");';
+            echo "window.location.href = '/login';";
             echo '</script>';
-            return redirect('/');
+            return redirect('/login');
         }
 
         $noti = 0;

@@ -25,7 +25,7 @@ class TindakanLawatanControllerWeb extends Controller
 
     public function store(Request $request)
     {
-        if($request->nama_tindakan_lawatan == null){
+        if($request->nama_tindakan_lawatan == null || $request->status_tindakan_lawatan == null){
             echo '<script language="javascript">';
             echo 'alert("Data Tidak Lengkap");';
             echo "window.location.href='/tindakanlawatan';";
@@ -55,7 +55,7 @@ class TindakanLawatanControllerWeb extends Controller
 
     public function update(Request $request, $id)
     {
-        if($request->nama_tindakan_lawatan == null){
+        if($request->nama_tindakan_lawatan == null || $request->status_tindakan_lawatan == null){
             echo '<script language="javascript">';
             echo 'alert("Data Tidak Lengkap");';
             echo "window.location.href='/tindakanlawatan';";
