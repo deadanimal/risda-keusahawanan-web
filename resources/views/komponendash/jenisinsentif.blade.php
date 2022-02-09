@@ -36,7 +36,7 @@
                     </tr>
                     @foreach ($jenisinsentif as $jenisinsentif)
                     <tr>
-                        <form method="POST" action="/jenisinsentif/{{$jenisinsentif->id}}" enctype="multipart/form-data">
+                        <form id="updatejenis" method="POST" action="/jenisinsentif/{{$jenisinsentif->id}}" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
                         <td class="text-nowrap">
@@ -53,7 +53,7 @@
                             </select>
                         </td>
                         <td class="text-nowrap">
-                            <button type="submit" class="btn btn-primary btn-sm" style="width:15vh">Kemaskini</button>
+                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="updateJenis();">Kemaskini</button>
                         </form>
                             {{-- &nbsp
                             <form method="POST" style="display:inline-block;" action="{{ route('jenisinsentif.destroy', $jenisinsentif->id) }}">
@@ -80,6 +80,15 @@
         if (confirm('Anda pasti ingin simpan data Jenis Insentif?')) {
             $('.loader').show();
             $('#jenisInsen').submit();
+        }else{
+            alert('Data tidak disimpan');
+        }
+    }
+
+    function updateJenis(){
+        if (confirm('Anda pasti ingin simpan data Jenis Insentif?')) {
+            $('.loader').show();
+            $('#updatejenis').submit();
         }else{
             alert('Data tidak disimpan');
         }
