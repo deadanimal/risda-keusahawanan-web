@@ -233,24 +233,24 @@ class InsentifJenisControllerWeb extends Controller
 
             $result .= 
             '<tr class="align-middle" style="text-align: center;">
-                <td class="text-nowrap" style="padding-right:2vh;">'.$num++.'</td>
-                <td class="text-nowrap">'.$report->negeri.'</td>
-                <td class="text-nowrap" style="text-align: left;">'.$report->jenis.'</td>
-                <td class="text-nowrap">'.$report->tab3.'</td>
-                <td class="text-nowrap">'.$report->tab4.'</td>
-                <td class="text-nowrap">'.$report->tab5.'</td>
-                <td class="text-nowrap">'.$report->tab6.'</td>
-                <td class="text-nowrap">'.$report->tab7.'</td>
-                <td class="text-nowrap">'.$report->tab8.'</td>
-                <td class="text-nowrap">'.$report->tab9.'</td>
-                <td class="text-nowrap">'.$report->tab10.'</td>
-                <td class="text-nowrap">'.$report->tab11.'</td>
-                <td class="text-nowrap">'.$report->tab12.'</td>
-                <td class="text-nowrap">'.$report->tab13.'</td>
-                <td class="text-nowrap">'.$report->jumbil.'</td>
-                <td class="text-nowrap">'.$report->jumrm.'</td>
-                <td class="text-nowrap">'.$report->puratajual.'</td>
-                <td class="text-nowrap">'.$report->puratapend.'</td>
+                <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label">'.$num++.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->negeri.'</label></td>
+                <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">'.$report->jenis.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab4).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab5).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab8).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab9).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab10).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab11).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab12).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab13).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->jumbil).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->jumrm).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->puratajual).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->puratapend).'</label></td>
             </tr>';
         }
 
@@ -270,31 +270,75 @@ class InsentifJenisControllerWeb extends Controller
         }
 
         $foot = 
-        '<tr class="align-middle" style="text-align: center;">
+        '
+        <tr style="display:none;">
+            <th></th>
+            <th></th>
+            <th>
+                <div>JUMLAH</div>
+                <div>PURATA JUALAN</div>
+            </th>
+            <th></th>
+            <th>
+                <div>'.number_format($total->satu).'</div>
+                <div>'.number_format($avg->satu).'</div>
+            </th>
+            <th>'.number_format($rm->satu).'</th>
+            <th>
+                <div>'.number_format($total->dua).'</div>
+                <div>'.number_format($avg->dua).'</div>
+            </th>
+            <th>'.number_format($rm->dua).'</th>
+            <th>
+                <div>&nbsp &nbsp &nbsp &nbsp'.number_format($total->tiga).' &nbsp &nbsp &nbsp &nbsp</div>
+                <div>'.number_format($avg->tiga).'</div>
+            </th>
+            <th>'.number_format($rm->tiga).'</th>
+            <th>
+                <div>&nbsp &nbsp &nbsp &nbsp'.number_format($total->empat).' &nbsp &nbsp &nbsp &nbsp</div>
+                <div>'.number_format($avg->empat).'</div>
+            </th>
+            <th>'.number_format($rm->empat).'</th>
+            <th>
+                <div>&nbsp &nbsp &nbsp &nbsp'.number_format($total->lima).' &nbsp &nbsp &nbsp &nbsp</div>
+                <div>'.number_format($avg->lima).'</div>
+            </th>
+            <th>'.number_format($rm->lima).'</th>
+            <th>
+                <div>&nbsp &nbsp &nbsp &nbsp'.number_format($total->enam).' &nbsp &nbsp &nbsp &nbsp</div>
+                <div>'.number_format($avg->enam).'</div>
+            </th>
+            <th>'.number_format($rm->enam).'</th>
+            <th>
+                <div>'.number_format($total->tujuh).'</div>
+            </th>
+            <th>'.number_format($rm->tujuh).'</th>
+        </tr>
+        <tr class="align-middle" style="text-align: center;">
             <th colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->satu.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$rm->satu.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->dua.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$rm->dua.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->tiga.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$rm->tiga.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->empat.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$rm->empat.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->lima.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$rm->lima.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->enam.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$rm->enam.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$total->tujuh.'</th>
-            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.$rm->tujuh.'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($total->satu).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($rm->satu).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($total->dua).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($rm->dua).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($total->tiga).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($rm->tiga).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($total->empat).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($rm->empat).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($total->lima).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($rm->lima).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($total->enam).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($rm->enam).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($total->tujuh).'</th>
+            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($rm->tujuh).'</th>
         </tr>
         <tr class="align-middle" style="text-align: center;">
             <th colspan="4" style="border-bottom: 1px solid black;">Purata Jualan</th>
-            <th colspan="2" style="border-bottom: 1px solid black;">'.$avg->satu.'</th>
-            <th colspan="2" style="border-bottom: 1px solid black;">'.$avg->dua.'</th>
-            <th colspan="2" style="border-bottom: 1px solid black;">'.$avg->tiga.'</th>
-            <th colspan="2" style="border-bottom: 1px solid black;">'.$avg->empat.'</th>
-            <th colspan="2" style="border-bottom: 1px solid black;">'.$avg->lima.'</th>
-            <th colspan="2" style="border-bottom: 1px solid black;">'.$avg->enam.'</th>
+            <th colspan="2" style="border-bottom: 1px solid black;">'.number_format($avg->satu).'</th>
+            <th colspan="2" style="border-bottom: 1px solid black;">'.number_format($avg->dua).'</th>
+            <th colspan="2" style="border-bottom: 1px solid black;">'.number_format($avg->tiga).'</th>
+            <th colspan="2" style="border-bottom: 1px solid black;">'.number_format($avg->empat).'</th>
+            <th colspan="2" style="border-bottom: 1px solid black;">'.number_format($avg->lima).'</th>
+            <th colspan="2" style="border-bottom: 1px solid black;">'.number_format($avg->enam).'</th>
             <th colspan="2" style="border-bottom: 1px solid black;"></th>
         </tr>
         ';

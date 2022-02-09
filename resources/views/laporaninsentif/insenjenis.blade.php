@@ -14,7 +14,7 @@
                 </select>
                   MENGIKUT JENIS PERNIAGAAN SETAKAT 
                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
-                    <option value="">Tahun</option>
+                    {{-- <option value="">Tahun</option> --}}
                     <?php
                     $curryear = date("Y");
                     $fromyear = date("Y") - 10;
@@ -79,17 +79,17 @@
                             <th scope="col" colspan="2">JUMLAH</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th scope="col">Bil</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">P.PRODUK MAKANAN</div></th>
                             <th scope="col">RM</th>
-                            <th scope="col">Bil</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">P.PRODUK BUKAN MAKANAN</div></th>
                             <th scope="col">RM</th>
-                            <th scope="col">Bil</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">P.PRODUK PERTANIAN</div></th>
                             <th scope="col">RM</th>
-                            <th scope="col">Bil</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">PERKHIDMATAN PEMASARAN</div></th>
                             <th scope="col">RM</th>
-                            <th scope="col">Bil</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">PERKHIDMATAN BUKAN PEMASARAN</div></th>
                             <th scope="col">RM</th>
-                            <th scope="col">Bil</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">JUMLAH</div></th>
                             <th scope="col">RM</th>
                         </tr>
                     </thead>
@@ -97,53 +97,96 @@
                         <?php $num=1; ?>
                         @foreach ($reports as $report)
                         <tr class="align-middle" style="text-align: center;">
-                            <td class="text-nowrap" style="padding-right:2vh;"><?php echo $num++;?></td>
-                            <td class="text-nowrap">{{$report->negeri}}</td>
-                            <td class="text-nowrap">{{$report->jenis}}</td>
-                            <td class="text-nowrap">{{$report->tab3}}</td>
-                            <td class="text-nowrap">{{$report->tab4}}</td>
-                            <td class="text-nowrap">{{$report->tab5}}</td>
-                            <td class="text-nowrap">{{$report->tab6}}</td>
-                            <td class="text-nowrap">{{$report->tab7}}</td>
-                            <td class="text-nowrap">{{$report->tab8}}</td>
-                            <td class="text-nowrap">{{$report->tab9}}</td>
-                            <td class="text-nowrap">{{$report->tab10}}</td>
-                            <td class="text-nowrap">{{$report->tab11}}</td>
-                            <td class="text-nowrap">{{$report->tab12}}</td>
-                            <td class="text-nowrap">{{$report->tab13}}</td>
-                            <td class="text-nowrap">{{$report->jumbil}}</td>
-                            <td class="text-nowrap">{{$report->jumrm}}</td>
-                            <td class="text-nowrap">{{$report->puratajual}}</td>
-                            <td class="text-nowrap">{{$report->puratapend}}</td>
+                            <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label"><?php echo $num++;?></label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->negeri}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->jenis}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab4)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab5)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab8)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab9)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab10)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab11)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab12)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab13)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->jumbil)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->jumrm)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->puratajual)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->puratapend)}}</label></td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot id="tblfoot">
+                        <tr style="display:none;">
+                            <th></th>
+                            <th></th>
+                            <th>
+                                <div>JUMLAH</div>
+                                <div>PURATA JUALAN</div>
+                            </th>
+                            <th></th>
+                            <th>
+                                <div>{{number_format($total->satu)}}</div>
+                                <div>{{number_format($avg->satu)}}</div>
+                            </th>
+                            <th>{{number_format($rm->satu)}}</th>
+                            <th>
+                                <div>{{number_format($total->dua)}}</div>
+                                <div>{{number_format($avg->dua)}}</div>
+                            </th>
+                            <th>{{number_format($rm->dua)}}</th>
+                            <th>
+                                <div>{{number_format($total->tiga)}}</div>
+                                <div>{{number_format($avg->tiga)}}</div>
+                            </th>
+                            <th>{{number_format($rm->tiga)}}</th>
+                            <th>
+                                <div>{{number_format($total->empat)}}</div>
+                                <div>{{number_format($avg->empat)}}</div>
+                            </th>
+                            <th>{{number_format($rm->empat)}}</th>
+                            <th>
+                                <div>{{number_format($total->lima)}}</div>
+                                <div>{{number_format($avg->lima)}}</div>
+                            </th>
+                            <th>{{number_format($rm->lima)}}</th>
+                            <th>
+                                <div>{{number_format($total->enam)}}</div>
+                                <div>{{number_format($avg->enam)}}</div>
+                            </th>
+                            <th>{{number_format($rm->enam)}}</th>
+                            <th>
+                                <div>{{number_format($total->tujuh)}}</div>
+                            </th>
+                            <th>{{number_format($rm->tujuh)}}</th>
+                        </tr>
                         <tr class="align-middle" style="text-align: center;">
                             <th colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->satu}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->satu}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->dua}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->dua}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->tiga}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->tiga}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->empat}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->empat}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->lima}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->lima}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->enam}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->enam}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$total->tujuh}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{$rm->tujuh}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->satu)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->satu)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->dua)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->dua)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->tiga)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->tiga)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->empat)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->empat)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->lima)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->lima)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->enam)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->enam)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->tujuh)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->tujuh)}}</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
                             <th colspan="4" style="border-bottom: 1px solid black;">Purata Jualan</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->satu}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->dua}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->tiga}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->empat}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->lima}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{$avg->enam}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->satu)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->dua)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->tiga)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->empat)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->lima)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->enam)}}</th>
                             <th colspan="2" style="border-bottom: 1px solid black;"></th>
                         </tr>
                     </tfoot>
@@ -167,14 +210,16 @@
                     text:       '<span class="bi bi-files">Copy</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Copy',
-                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year,
+                    footer: true,
                 },
                 {
                     extend:    'excelHtml5',
                     text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Excel',
-                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year,
+                    footer: true,
                 },
                 {
                     extend:    'csvHtml5',
@@ -188,15 +233,26 @@
                     text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
-                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
-                },
-                {
-                    extend:    'print',
-                    text:      '<span class="bi bi-printer">Print</span>',
-                    className: 'btn btn-primary btn-xs',
-                    titleAttr: 'PDF',
-                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year,
+                    orientation:'landscape',
+                    footer: true,
+                    customize: function(doc) {
+                        doc.styles.tableHeader.fontSize = 9,
+                        doc.styles.tableHeader.fillColor = '#00A651',
+                        doc.styles.tableFooter.fontSize = 10,
+                        doc.styles.tableFooter.fillColor = '',
+                        doc.styles.tableFooter.color = 'black',
+                        doc.defaultStyle.alignment = 'center',
+                        doc.defaultStyle.fontSize = 9;
+                    }
                 }
+                // {
+                //     extend:    'print',
+                //     text:      '<span class="bi bi-printer">Print</span>',
+                //     className: 'btn btn-primary btn-xs',
+                //     titleAttr: 'PDF',
+                //     title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                // }
             ]
         });
         $('.loader').hide();
@@ -244,6 +300,7 @@
                                 text:       '<span class="bi bi-files">Copy</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Copy',
+                                footer: true,
                                 title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
                             },
                             {
@@ -251,6 +308,7 @@
                                 text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Excel',
+                                footer: true,
                                 title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
                             },
                             {
@@ -265,15 +323,26 @@
                                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
-                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year,
+                                orientation:'landscape',
+                                footer: true,
+                                customize: function(doc) {
+                                    doc.styles.tableHeader.fontSize = 9,
+                                    doc.styles.tableHeader.fillColor = '#00A651',
+                                    doc.styles.tableFooter.fontSize = 10,
+                                    doc.styles.tableFooter.fillColor = '',
+                                    doc.styles.tableFooter.color = 'black',
+                                    doc.defaultStyle.alignment = 'center',
+                                    doc.defaultStyle.fontSize = 9;
+                                }
                             },
-                            {
-                                extend:    'print',
-                                text:      '<span class="bi bi-printer">Print</span>',
-                                className: 'btn btn-primary btn-xs',
-                                titleAttr: 'PDF',
-                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
-                            }
+                            // {
+                            //     extend:    'print',
+                            //     text:      '<span class="bi bi-printer">Print</span>',
+                            //     className: 'btn btn-primary btn-xs',
+                            //     titleAttr: 'PDF',
+                            //     title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                            // }
                         ]
                     });
                 }

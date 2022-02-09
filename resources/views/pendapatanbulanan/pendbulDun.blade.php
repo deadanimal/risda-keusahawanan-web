@@ -123,6 +123,17 @@
                             @endforeach
                           </tbody>
                           <tfoot id="tblfoot">
+                            <tr class="align-middle" style="text-align: center;display:none;">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
+                                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_penerima)}}</label></td>
+                                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_insentif)}}</label></td>
+                                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_jualan)}}</label></td>
+                                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_puratajual)}}</label></td>
+                            </tr>
                             <tr class="align-middle" style="text-align: center;">
                                 <td colspan="5" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
                                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_penerima)}}</label></td>
@@ -152,6 +163,7 @@
                 text:       '<span class="bi bi-files">Copy</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'Copy',
+                footer: true,
                 title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DUN/PARLIMEN SETAKAT '+yyyy
             },
             {
@@ -159,6 +171,7 @@
                 text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'Excel',
+                footer: true,
                 title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DUN/PARLIMEN SETAKAT '+yyyy
             },
             {
@@ -173,15 +186,24 @@
                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'PDF',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DUN/PARLIMEN SETAKAT '+yyyy
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DUN/PARLIMEN SETAKAT '+yyyy,
+                footer: true,
+                customize: function(doc) {
+                    doc.styles.tableHeader.fontSize = 9,
+                    doc.styles.tableHeader.fillColor = '#00A651',
+                    doc.styles.tableFooter.fontSize = 9,
+                    doc.styles.tableFooter.fillColor = '#00A651',
+                    doc.defaultStyle.alignment = 'center',
+                    doc.defaultStyle.fontSize = 9
+                },
             },
-            {
-                extend:    'print',
-                text:      '<span class="bi bi-printer">Print</span>',
-                className: 'btn btn-primary btn-xs',
-                titleAttr: 'PDF',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DUN/PARLIMEN SETAKAT '+yyyy
-            }
+            // {
+            //     extend:    'print',
+            //     text:      '<span class="bi bi-printer">Print</span>',
+            //     className: 'btn btn-primary btn-xs',
+            //     titleAttr: 'PDF',
+            //     title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DUN/PARLIMEN SETAKAT '+yyyy
+            // }
           ]
       });
       $('.loader').hide();
@@ -227,6 +249,7 @@
                           text:       '<span class="bi bi-files">Copy</span>',
                           className: 'btn btn-primary btn-xs',
                           titleAttr: 'Copy',
+                          footer: true,
                           title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DUN/PARLIMEN SETAKAT '+year
                       },
                       {
@@ -234,6 +257,7 @@
                           text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                           className: 'btn btn-primary btn-xs',
                           titleAttr: 'Excel',
+                          footer: true,
                           title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DUN/PARLIMEN SETAKAT '+year
                       },
                       {
@@ -248,15 +272,24 @@
                           text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                           className: 'btn btn-primary btn-xs',
                           titleAttr: 'PDF',
-                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DUN/PARLIMEN SETAKAT '+year
+                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DUN/PARLIMEN SETAKAT '+year,
+                          footer: true,
+                          customize: function(doc) {
+                              doc.styles.tableHeader.fontSize = 9,
+                              doc.styles.tableHeader.fillColor = '#00A651',
+                              doc.styles.tableFooter.fontSize = 9,
+                              doc.styles.tableFooter.fillColor = '#00A651',
+                              doc.defaultStyle.alignment = 'center',
+                              doc.defaultStyle.fontSize = 9
+                          },
                       },
-                      {
-                          extend:    'print',
-                          text:      '<span class="bi bi-printer">Print</span>',
-                          className: 'btn btn-primary btn-xs',
-                          titleAttr: 'PDF',
-                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DUN/PARLIMEN SETAKAT '+year
-                      }
+                      // {
+                      //     extend:    'print',
+                      //     text:      '<span class="bi bi-printer">Print</span>',
+                      //     className: 'btn btn-primary btn-xs',
+                      //     titleAttr: 'PDF',
+                      //     title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DUN/PARLIMEN SETAKAT '+year
+                      // }
                     ]
                 });
             }

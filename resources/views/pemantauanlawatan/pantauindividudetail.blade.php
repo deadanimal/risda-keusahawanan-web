@@ -51,10 +51,10 @@
                             border: none;
                         }
                     </style>
-                    <thead>
+                    <thead style="display: none;">
                         <tr>
-                            <th></th>
-                            <th></th>
+                            <th>PERKARA</th>
+                            <th>KETERANGAN</th>
                         </tr>
                     </thead>
                     <tbody id="tblname">
@@ -249,11 +249,12 @@
     }
 
     function ExportPDF(){
-        
+        var year = document.getElementById("iptYear").value;
         var doc = new jsPDF("p", "mm", "a4")
+        doc.text(15, 10, "LAPORAN LAWATAN PEMANTAUAN INDIVIDU BAGI TAHUN"+year);
         doc.autoTable({ html: '#laporanpantauind' })
         var elem = document.getElementById('gambau');
-        // console.log(elem.getAttribute('src'));
+        console.log(elem.getAttribute('src'));
         if(elem.getAttribute('src') != ""){
             var myImage = document.getElementById("gambau").src; 
             doc.addImage(myImage, 'JPEG', 80, 100, 60, 35);

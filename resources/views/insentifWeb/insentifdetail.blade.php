@@ -77,7 +77,7 @@
                     </button>
                     </form>
                   </div>
-                  <form class="row g-3" method="POST" action="/insentifWeb/{{$insentif->id}}" enctype="multipart/form-data">
+                  <form id="updateInsentif" class="row g-3" method="POST" action="/insentifWeb/{{$insentif->id}}" enctype="multipart/form-data">
                     @csrf  
                     @method('PUT')
                     <input name="id_pengguna" style="display: none;" type="text" value="{{$id_pengguna}}"/>
@@ -113,7 +113,7 @@
                         <input class="form-control form-control-sm" name="tahun_terima_insentif" id="field-name" type="text" value="{{$insentif->tahun_terima_insentif}}"/>
                       </div>
                     </div>
-                    <button class="btn btn-falcon-default btn-sm mt-2" style="width:fit-content;" type="submit"><span class="fas fa-plus fs--2 me-1" data-fa-transform="up-1"></span>Kemaskini Insentif</button>
+                    <button class="btn btn-falcon-default btn-sm mt-2" style="width:fit-content;" type="button" onclick="UpdateInsentif()"><span class="fas fa-plus fs--2 me-1" data-fa-transform="up-1"></span>Kemaskini Insentif</button>
                   </form>
                   </div>
                 
@@ -141,7 +141,14 @@
         alert('Data Insentif Usahawan tidak disimpan');
     }
   }
-
+  function UpdateInsentif(){
+    if (confirm('Anda pasti ingin kemaskini data insentif usahawan?')) {
+        $('.loader').show();
+        $('#updateInsentif').submit();
+    }else{
+        alert('Data Insentif Usahawan Tidak Dikemaskini');
+    }
+  }
   function DeleteInsentif(){
     if (confirm('Anda pasti ingin buang data insentif usahawan?')) {
         $('.loader').show();

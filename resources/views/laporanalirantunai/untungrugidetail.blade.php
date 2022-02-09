@@ -35,7 +35,16 @@
                   </select>
             </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <table id="pnldetail" class="table table-sm table-bordered table-hover">
+                <table id="pnldetail" class="table table-style table-sm table-bordered table-hover">
+                    <style>
+                        table.table-style td { 
+                            line-height: 1.45rem;
+                            font-size: .8333333333rem;
+                            font-weight: 500;
+                            letter-spacing: .02em;
+                            margin-bottom: 0.5rem;
+                         }
+                    </style>
                     <colgroup>
                         <col span="1" style="width:55%;">
                         <col span="1" style="width:15%;">
@@ -62,25 +71,25 @@
                             <td class="text-nowrap">Jualan/ Perolehan</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum1}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum1)}}</td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Deposit Jualan</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum2}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum2)}}</td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Pulangan Jualan</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum3}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum3)}}</td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Jualan Bersih</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum4}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum4)}}</td>
                         </tr>
                         <tr>
                             <td style="padding-top: 20px;"></td>
@@ -97,62 +106,62 @@
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Stok Awal</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum5}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum5)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Deposit Belian </td>
-                            <td class="text-nowrap">{{$val->jum6}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum6)}}</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Belian</td>
-                            <td class="text-nowrap">{{$val->jum7}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum7)}}</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Belian Bersih</td>
-                            <td class="text-nowrap">{{$val->jum8}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum8)}}</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Pulangan Belian</td>
-                            <td class="text-nowrap">{{$val->jum9}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum9)}}</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Kos Belian</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum10}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum10)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Kos Barang Sedia Dijual</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum11}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum11)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Stok Akhir</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum12}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum12)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Kos Jualan</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum13}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum13)}}</td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">UNTUNG / RUGI KASAR</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum14}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum14)}}</td>
                         </tr>
                         <tr>
                             <td style="padding-top: 20px;"></td>
@@ -169,86 +178,86 @@
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Kos Pengeposan</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum15}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum15)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Kos Alat Tulis</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum16}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum16)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Bayaran Sewa</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum17}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum17)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Upah/ Gaji Pekerja</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum18}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum18)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Upah/ Gaji Sendiri</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum19}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum19)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">KWSP/ SOCSO</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum20}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum20)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Bayaran Bil (Utiliti)</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum21}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum21)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Petrol/ Tol/ Parking</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum22}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum22)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Penyelenggaraan</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum23}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum23)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Belian Aset</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum24}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum24)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Bayaran Komisen</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum25}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum25)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Cukai/ Zakat</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum26}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum26)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Bayaran Lain</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum27}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum27)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">JUMLAH PERBELANJAAN PENTADBIRAN DAN OPERASI</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum28}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum28)}}</td>
                         </tr>
                         <tr>
                             <td style="padding-top: 20px;"></td>
@@ -265,38 +274,38 @@
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Hasil Komisen</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum29}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum29)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Hasil Dividen</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum30}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum30)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Hasil Sewaan</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum31}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum31)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">Hasil Lain</td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum32}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum32)}}</td>
                             <td class="text-nowrap"></td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">JUMLAH HASIL -HASIL LAIN</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum33}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum33)}}</td>
                         </tr>
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap">UNTUNG / RUGI BERSIH</td>
                             <td class="text-nowrap"></td>
                             <td class="text-nowrap"></td>
-                            <td class="text-nowrap">{{$val->jum34}}</td>
+                            <td class="text-nowrap">{{number_format($val->jum34)}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -342,15 +351,20 @@
                     text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
-                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN DAN TAHUN '+year
+                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN DAN TAHUN '+year,
+                    customize: function(doc) {
+                        doc.styles.tableHeader.fillColor = '#00A651',
+                        doc.defaultStyle.alignment = 'center',
+                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('')
+                    }
                 },
-                {
-                    extend:    'print',
-                    text:      '<span class="bi bi-printer">Print</span>',
-                    className: 'btn btn-primary btn-xs',
-                    titleAttr: 'PDF',
-                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN DAN TAHUN '+year
-                }
+                // {
+                //     extend:    'print',
+                //     text:      '<span class="bi bi-printer">Print</span>',
+                //     className: 'btn btn-primary btn-xs',
+                //     titleAttr: 'PDF',
+                //     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN DAN TAHUN '+year
+                // }
             ]
         });
         $('.loader').hide();
@@ -422,15 +436,18 @@
                                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
-                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year
+                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year,
+                                customize: function(doc) {
+                                    doc.styles.tableHeader.fillColor = '#00A651'
+                                }
                             },
-                            {
-                                extend:    'print',
-                                text:      '<span class="bi bi-printer">Print</span>',
-                                className: 'btn btn-primary btn-xs',
-                                titleAttr: 'PDF',
-                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year
-                            }
+                            // {
+                            //     extend:    'print',
+                            //     text:      '<span class="bi bi-printer">Print</span>',
+                            //     className: 'btn btn-primary btn-xs',
+                            //     titleAttr: 'PDF',
+                            //     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year
+                            // }
                         ]
                     });
                 }

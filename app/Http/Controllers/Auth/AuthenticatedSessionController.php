@@ -42,7 +42,7 @@ class AuthenticatedSessionController extends Controller
                         return redirect('/landing');
                     }else{
                         echo '<script language="javascript">';
-                        echo 'alert("Akaun Tidak Aktif. Sila Minta Admin Aktifkan Akaun Anda Untuk Meneruskan ke Applikasi");';
+                        echo 'alert("Akaun Tidak Aktif. Sila Minta Admin Aktifkan Akaun Anda Untuk Meneruskan ke Aplikasi");';
                         echo "window.location.href='/';";
                         echo '</script>';
                     }

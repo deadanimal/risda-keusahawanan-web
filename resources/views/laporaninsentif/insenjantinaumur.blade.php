@@ -76,44 +76,57 @@
                             <th scope="col" colspan="2">Lain-Lain</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th scope="col" >Bil</th>
+                            <th scope="col" >&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">LELAKI</div></th>
                             <th scope="col" >%</th>
-                            <th scope="col" >Bil</th>
+                            <th scope="col" >&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">PEREMPUAN</div></th>
                             <th scope="col" >%</th>
-                            <th scope="col" >Bil</th>
+                            <th scope="col" >&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">LAIN-LAIN</div></th>
                             <th scope="col" >%</th>
-                            <th scope="col" >Bil</th>
+                            <th scope="col" >&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">JUMLAH</div></th>
                             <th scope="col" >%</th>
                         </tr>
                     </thead>
                     <tbody id="tblname">
                         @foreach ($reports as $report)
                         <tr class="align-middle" style="text-align: center;">
-                            <td class="text-nowrap">{{$report->tab1}}</td>
-                            <td class="text-nowrap">{{$report->jenis}}</td>
-                            <td class="text-nowrap">{{$report->tab3}}</td>
-                            <td class="text-nowrap">{{$report->tab4}}</td>
-                            <td class="text-nowrap">{{$report->percent1}}</td>
-                            <td class="text-nowrap">{{$report->tab5}}</td>
-                            <td class="text-nowrap">{{$report->percent2}}</td>
-                            <td class="text-nowrap">{{$report->tab6}}</td>
-                            <td class="text-nowrap">{{$report->percent3}}</td>
-                            <td class="text-nowrap">{{$report->jumbil}}</td>
-                            <td class="text-nowrap">{{$report->jumpercent}}</td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab1}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->jenis}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab4)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->percent1,2)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab5)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->percent2,2)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->percent3,2)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->jumbil)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->jumpercent,2)}}</label></td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot id="tblfoot">
+                        <tr class="align-middle" style="text-align: center;display:none;">
+                            <th></th>
+                            <th></th>
+                            <th class="text-nowrap">Jumlah</th>
+                            <th class="text-nowrap">{{number_format($jumlah->satu)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->dua)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->tiga)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->empat)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->lima)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->enam)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->tujuh)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->lapan)}}</th>
+                        </tr>
                         <tr class="align-middle" style="text-align: center;">
                             <th class="text-nowrap" colspan="3">Jumlah</th>
-                            <th class="text-nowrap">{{$jumlah->satu}}</th>
-                            <th class="text-nowrap">{{$jumlah->dua}}</th>
-                            <th class="text-nowrap">{{$jumlah->tiga}}</th>
-                            <th class="text-nowrap">{{$jumlah->empat}}</th>
-                            <th class="text-nowrap">{{$jumlah->lima}}</th>
-                            <th class="text-nowrap">{{$jumlah->enam}}</th>
-                            <th class="text-nowrap">{{$jumlah->tujuh}}</th>
-                            <th class="text-nowrap">{{$jumlah->lapan}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->satu)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->dua)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->tiga)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->empat)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->lima)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->enam)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->tujuh)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->lapan)}}</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -136,14 +149,16 @@
                     text:       '<span class="bi bi-files">Copy</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Copy',
-                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year
+                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
+                    footer: true,
                 },
                 {
                     extend:    'excelHtml5',
                     text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Excel',
-                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year
+                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
+                    footer: true,
                 },
                 {
                     extend:    'csvHtml5',
@@ -157,15 +172,25 @@
                     text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
-                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year
+                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
+                    footer: true,
+                    customize: function(doc) {
+                        doc.styles.tableHeader.fontSize = 9,
+                        doc.styles.tableHeader.fillColor = '#00A651',
+                        doc.styles.tableFooter.fontSize = 9,
+                        doc.styles.tableFooter.fillColor = '#00A651',
+                        // doc.styles.tableFooter.color = 'black',
+                        doc.defaultStyle.alignment = 'center',
+                        doc.defaultStyle.fontSize = 9;
+                    }
                 },
-                {
-                    extend:    'print',
-                    text:      '<span class="bi bi-printer">Print</span>',
-                    className: 'btn btn-primary btn-xs',
-                    titleAttr: 'PDF',
-                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year
-                }
+                // {
+                //     extend:    'print',
+                //     text:      '<span class="bi bi-printer">Print</span>',
+                //     className: 'btn btn-primary btn-xs',
+                //     titleAttr: 'PDF',
+                //     title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
+                // }
             ]
         });
         $('.loader').hide();
@@ -213,6 +238,7 @@
                                 text:       '<span class="bi bi-files">Copy</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Copy',
+                                footer: true,
                                 title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year
                             },
                             {
@@ -220,6 +246,7 @@
                                 text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Excel',
+                                footer: true,
                                 title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year
                             },
                             {
@@ -234,15 +261,25 @@
                                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
-                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year
+                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
+                                footer: true,
+                                customize: function(doc) {
+                                    doc.styles.tableHeader.fontSize = 9,
+                                    doc.styles.tableHeader.fillColor = '#00A651',
+                                    doc.styles.tableFooter.fontSize = 9,
+                                    doc.styles.tableFooter.fillColor = '#00A651',
+                                    // doc.styles.tableFooter.color = 'black',
+                                    doc.defaultStyle.alignment = 'center',
+                                    doc.defaultStyle.fontSize = 9;
+                                }
                             },
-                            {
-                                extend:    'print',
-                                text:      '<span class="bi bi-printer">Print</span>',
-                                className: 'btn btn-primary btn-xs',
-                                titleAttr: 'PDF',
-                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year
-                            }
+                            // {
+                            //     extend:    'print',
+                            //     text:      '<span class="bi bi-printer">Print</span>',
+                            //     className: 'btn btn-primary btn-xs',
+                            //     titleAttr: 'PDF',
+                            //     title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year
+                            // }
                         ]
                     });
                 }

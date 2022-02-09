@@ -72,35 +72,46 @@
                             <th scope="col" >Peratusan Usahawan Keseluruhan</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th scope="col">Bil Usahawan (Org)</th>
-                            <th scope="col">Bil Usahawan (Org)</th>
-                            <th scope="col">Bil Usahawan (Org)</th>
-                            <th scope="col">%</th>
+                            <th scope="col">Bil Usahawan<div style="display: none;"> Telah Dilawat Bulan Semasa</div> (Org)</th>
+                            <th scope="col">Bil Usahawan<div style="display: none;"> Telah Dilawat</div> (Org)</th>
+                            <th scope="col">Bil Usahawan<div style="display: none;"> Baki</div> (Org)</th>
+                            <th scope="col"><div style="display: none;">Peratusan Usahawan Keseluruhan</div> %</th>
                         </tr>
                     </thead>
                     <tbody id="tblname">
                         <?php $num=1; ?>
                         @foreach ($reports as $report)
                         <tr class="align-middle" style="text-align: center;">
-                            <td class="text-nowrap" style="padding-right:2vh;"><?php echo $num++;?></td>
-                            <td class="text-nowrap">{{$report->negeri}}</td>
-                            <td class="text-nowrap">{{$report->daerah}}</td>
-                            <td class="text-nowrap">{{$report->tab3}}</td>
-                            <td class="text-nowrap">{{$report->tab4}}</td>
-                            <td class="text-nowrap">{{$report->tab5}}</td>
-                            <td class="text-nowrap">{{$report->tab6}}</td>
-                            <td class="text-nowrap">{{$report->tab7}}</td>
-                            <td class="text-nowrap">{{$report->percent}}</td>
+                            <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label"><?php echo $num++;?></label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->negeri}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->daerah}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab4)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab5)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->percent,2)}}</label></td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot id="tblfoot">
+                        <tr class="align-middle" style="text-align: center;display:none;">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="text-nowrap" >Jumlah</th>
+                            <th class="text-nowrap">{{number_format($total->satu)}}</th>
+                            <th class="text-nowrap">{{number_format($total->dua)}}</th>
+                            <th class="text-nowrap">{{number_format($total->tiga)}}</th>
+                            <th class="text-nowrap">{{number_format($total->empat)}}</th>
+                            <th class="text-nowrap">100</th>
+                        </tr>
                         <tr class="align-middle" style="text-align: center;">
                             <th class="text-nowrap" colspan="4">Jumlah</th>
-                            <th class="text-nowrap">{{$total->satu}}</th>
-                            <th class="text-nowrap">{{$total->dua}}</th>
-                            <th class="text-nowrap">{{$total->tiga}}</th>
-                            <th class="text-nowrap">{{$total->empat}}</th>
+                            <th class="text-nowrap">{{number_format($total->satu)}}</th>
+                            <th class="text-nowrap">{{number_format($total->dua)}}</th>
+                            <th class="text-nowrap">{{number_format($total->tiga)}}</th>
+                            <th class="text-nowrap">{{number_format($total->empat)}}</th>
                             <th class="text-nowrap">100</th>
                         </tr>
                     </tfoot>
@@ -124,6 +135,7 @@
                     text:       '<span class="bi bi-files">Copy</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Copy',
+                    footer: true,
                     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                 },
                 {
@@ -131,6 +143,7 @@
                     text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Excel',
+                    footer: true,
                     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                 },
                 {
@@ -145,15 +158,25 @@
                     text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
+                    footer: true,
+                    customize: function(doc) {
+                        doc.styles.tableHeader.fontSize = 10,
+                        doc.styles.tableHeader.fillColor = '#00A651',
+                        doc.styles.tableFooter.fontSize = 10,
+                        doc.styles.tableFooter.fillColor = '#00A651',
+                        // doc.styles.tableFooter.color = 'black',
+                        doc.defaultStyle.alignment = 'center',
+                        doc.defaultStyle.fontSize = 9
+                    },
                     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                 },
-                {
-                    extend:    'print',
-                    text:      '<span class="bi bi-printer">Print</span>',
-                    className: 'btn btn-primary btn-xs',
-                    titleAttr: 'PDF',
-                    title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
-                }
+                // {
+                //     extend:    'print',
+                //     text:      '<span class="bi bi-printer">Print</span>',
+                //     className: 'btn btn-primary btn-xs',
+                //     titleAttr: 'PDF',
+                //     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
+                // }
             ]
         });
         $('.loader').hide();
@@ -189,6 +212,7 @@
                                 text:       '<span class="bi bi-files">Copy</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Copy',
+                                footer: true,
                                 title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                             },
                             {
@@ -196,6 +220,7 @@
                                 text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Excel',
+                                footer: true,
                                 title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                             },
                             {
@@ -210,15 +235,25 @@
                                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
+                                footer: true,
+                                customize: function(doc) {
+                                    doc.styles.tableHeader.fontSize = 9,
+                                    doc.styles.tableHeader.fillColor = '#00A651',
+                                    doc.styles.tableFooter.fontSize = 9,
+                                    doc.styles.tableFooter.fillColor = '#00A651',
+                                    // doc.styles.tableFooter.color = 'black',
+                                    doc.defaultStyle.alignment = 'center',
+                                    doc.defaultStyle.fontSize = 9
+                                },
                                 title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                             },
-                            {
-                                extend:    'print',
-                                text:      '<span class="bi bi-printer">Print</span>',
-                                className: 'btn btn-primary btn-xs',
-                                titleAttr: 'PDF',
-                                title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
-                            }
+                            // {
+                            //     extend:    'print',
+                            //     text:      '<span class="bi bi-printer">Print</span>',
+                            //     className: 'btn btn-primary btn-xs',
+                            //     titleAttr: 'PDF',
+                            //     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
+                            // }
                         ]
                     });
                 }
