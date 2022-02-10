@@ -10,7 +10,7 @@ class TanahController extends Controller
 
     public function index()
     {
-        $tanah = DB::table('tanah')->get();
+        $tanah = DB::table('tanahs')->get();
 
 
         return response()->json($tanah);
@@ -20,7 +20,7 @@ class TanahController extends Controller
     public function update(Request $request, $id)
     {
 
-        $tanah = DB::table('tanah')->insertGetId(
+        $tanah = DB::table('tanahs')->insertGetId(
             [
                 'pekebunid' => $id,
                 'No_Geran' => $request->No_Geran,
@@ -32,7 +32,7 @@ class TanahController extends Controller
                 'U_Dun_ID' => $request->U_Dun_ID,
                 'U_Kampung_ID' => $request->U_Kampung_ID,
                 'U_Seksyen_ID' => $request->U_Seksyen_ID,
-                'keluasan_hektar' => $request->keluasan_hektar,
+                'keluasan_hektar' => $request->Luas_Lot,
             ]
         );
 
@@ -42,15 +42,15 @@ class TanahController extends Controller
 
     public function destroy($id)
     {
-        $tanahs = DB::table('tanah')->where('pekebunid', $id)
+        $tanahs = DB::table('tanahs')->where('pekebunid', $id)
             ->get();
 
         foreach ($tanahs as $tanah) {
-            DB::table('jenis_tanaman')->where('tanahid', $tanah->id)
+            DB::table('jenis_tanamen')->where('tanahid', $tanah->id)
                 ->delete();
         }
 
-        DB::table('tanah')->where('pekebunid', $id)
+        DB::table('tanahs')->where('pekebunid', $id)
             ->delete();
 
         return response()->json($tanahs);

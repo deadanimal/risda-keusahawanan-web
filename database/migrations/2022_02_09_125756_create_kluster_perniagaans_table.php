@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJenisTanaman extends Migration
+class CreateKlusterPerniagaansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateJenisTanaman extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_tanamen', function (Blueprint $table) {
+        Schema::create('kluster_perniagaans', function (Blueprint $table) {
             $table->id();
-
-            $table->string('tanahid');
-            $table->string('jenis_tanaman_kebun')->nullable();
-
+            $table->string('kluster_id')->nullable();
+            $table->string('nama_kluster')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateJenisTanaman extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_tanaman');
+        Schema::dropIfExists('kluster_perniagaans');
     }
 }

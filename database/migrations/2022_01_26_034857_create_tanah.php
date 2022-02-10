@@ -13,7 +13,7 @@ class CreateTanah extends Migration
      */
     public function up()
     {
-        Schema::create('tanah', function (Blueprint $table) {
+        Schema::create('tanahs', function (Blueprint $table) {
             $table->id();
 
             $table->string('pekebunid');

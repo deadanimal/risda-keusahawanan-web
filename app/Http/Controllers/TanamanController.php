@@ -10,7 +10,7 @@ class TanamanController extends Controller
     
     public function index()
     {
-        $tanaman = DB::table('jenis_tanaman')->get();
+        $tanaman = DB::table('jenis_tanamen')->get();
 
        
         return response()->json($tanaman);
@@ -30,7 +30,7 @@ class TanamanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $tanaman = DB::table('jenis_tanaman')->insert(
+        $tanaman = DB::table('jenis_tanamen')->insert(
             [
                 'tanahid' => $id,
                 'jenis_tanaman_kebun' => $request->Jenis_Tanaman,
@@ -43,7 +43,7 @@ class TanamanController extends Controller
     
     public function destroy($id)
     {
-        $tanaman = DB::table('jenis_tanaman')->where('tanahid', $id)->delete();
+        $tanaman = DB::table('jenis_tanamen')->where('tanahid', $id)->delete();
 
         return response()->json($tanaman);
     }
