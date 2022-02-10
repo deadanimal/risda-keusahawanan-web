@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Pegawai;
 use App\Models\Usahawan;
 use App\Models\User;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+
 
 class PasswordController extends Controller
 {
@@ -58,6 +63,14 @@ class PasswordController extends Controller
 
         $user = User::find($id);
 
+        $validator = Validator::make($request->all(), [
+            'email' => 'unique:users,email,' . $user->id
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json('email already exist');
+        }
+
 
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -71,7 +84,6 @@ class PasswordController extends Controller
 
             $pegawai->email = $request->email;
             $pegawai->save();
-
         } else {
 
             $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->get()->first();
