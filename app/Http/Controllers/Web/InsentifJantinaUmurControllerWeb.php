@@ -160,31 +160,44 @@ class InsentifJantinaUmurControllerWeb extends Controller
 
             $result .= 
             '<tr class="align-middle" style="text-align: center;">
-                <td class="text-nowrap" style="padding-right:2vh;">'.$report->tab1.'</td>
-                <td class="text-nowrap" >'.$report->jenis.'</td>
-                <td class="text-nowrap" >'.$report->tab3.'</td>
-                <td class="text-nowrap" >'.$report->tab4.'</td>
-                <td class="text-nowrap" >'.$report->percent1.'</td>
-                <td class="text-nowrap" >'.$report->tab5.'</td>
-                <td class="text-nowrap" >'.$report->percent2.'</td>
-                <td class="text-nowrap" >'.$report->tab6.'</td>
-                <td class="text-nowrap" >'.$report->percent3.'</td>
-                <td class="text-nowrap" >'.$report->jumbil.'</td>
-                <td class="text-nowrap" >'.$report->jumpercent.'</td>
+                <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label">'.$report->tab1.'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.$report->jenis.'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.$report->tab3.'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.number_format($report->tab4).'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.number_format($report->percent1,2).'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.number_format($report->tab5).'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.number_format($report->percent2,2).'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.number_format($report->tab6).'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.number_format($report->percent3,2).'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.number_format($report->jumbil).'</label></td>
+                <td class="text-nowrap" ><label class="form-check-label">'.number_format($report->jumpercent,2).'</label></td>
             </tr>';
         }
 
         $foot .= '
+        <tr class="align-middle" style="text-align: center;display:none;">
+            <th></th>
+            <th></th>
+            <td class="text-nowrap">Jumlah</td>
+            <td class="text-nowrap">'.number_format($jumlah->satu).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->dua).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->tiga).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->empat).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->lima).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->enam).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->tujuh).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->lapan).'</td>
+        </tr>
         <tr class="align-middle" style="text-align: center;">
             <td class="text-nowrap" colspan="3">Jumlah</td>
-            <td class="text-nowrap">'.$jumlah->satu.'</td>
-            <td class="text-nowrap">'.$jumlah->dua.'</td>
-            <td class="text-nowrap">'.$jumlah->tiga.'</td>
-            <td class="text-nowrap">'.$jumlah->empat.'</td>
-            <td class="text-nowrap">'.$jumlah->lima.'</td>
-            <td class="text-nowrap">'.$jumlah->enam.'</td>
-            <td class="text-nowrap">'.$jumlah->tujuh.'</td>
-            <td class="text-nowrap">'.$jumlah->lapan.'</td>
+            <td class="text-nowrap">'.number_format($jumlah->satu).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->dua).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->tiga).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->empat).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->lima).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->enam).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->tujuh).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->lapan).'</td>
         </tr>';
 
         return [$result, $foot];

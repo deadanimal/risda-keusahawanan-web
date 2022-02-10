@@ -131,7 +131,18 @@ class PendapatanBulananControllerWeb extends Controller
             </tr>';
         }
         $tfoot .=
-        '<tr class="align-middle" style="text-align: center;">
+        '
+        <tr class="align-middle" style="text-align: center;display:none;">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_penerima).'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_insentif).'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_jualan).'</td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_puratajual).'</td>
+        </tr>
+        <tr class="align-middle" style="text-align: center;">
             <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</td>
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_penerima).'</td>
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">'.number_format($c_insentif).'</td>

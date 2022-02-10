@@ -35,7 +35,16 @@
                   </select>
             </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <table id="laporanlejar" class="table table-sm table-bordered table-hover">
+                <table id="laporanlejar" class="table table-style table-sm table-bordered table-hover">
+                    <style>
+                        table.table-style td { 
+                            line-height: 1.45rem;
+                            font-size: .8333333333rem;
+                            font-weight: 500;
+                            letter-spacing: .02em;
+                            margin-bottom: 0.5rem;
+                         }
+                    </style>
                     <colgroup>
                         <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
@@ -68,7 +77,7 @@
                             <tr>
                                 <td class="text-nowrap">{{$report1->tab5}}</td>
                                 <td>{{$report1->tab6}}</td>
-                                <td>{{$report1->tab7}}</td>
+                                <td>{{number_format($report1->tab7)}}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -81,7 +90,7 @@
                                 <td></td>
                                 <td>{{$report1->tab5}}</td>
                                 <td>{{$report1->tab6}}</td>
-                                <td>{{$report1->tab7}}</td>
+                                <td>{{number_format($report1->tab7)}}</td>
                             </tr>
                             @endif
                             @if ($loop->last)
@@ -89,7 +98,7 @@
                                 <tr>
                                     <td class="text-nowrap">{{$report1->tab5}}</td>
                                     <td>{{$report1->tab6}}</td>
-                                    <td>{{$report1->tab7}}</td>
+                                    <td>{{number_format($report1->tab7)}}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -102,14 +111,14 @@
                                     <td></td>
                                     <td>{{$report1->tab5}}</td>
                                     <td>{{$report1->tab6}}</td>
-                                    <td>{{$report1->tab7}}</td>
+                                    <td>{{number_format($report1->tab7)}}</td>
                                 </tr>
                                 @endif
                                 @if ($val->satu == 1)
                                 <tr>
                                     <td></td>
                                     <td>BAKI H/B</td>
-                                    <td>{{$val->dua}}</td>
+                                    <td>{{number_format($val->dua)}}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -122,7 +131,7 @@
                                     <td></td>
                                     <td></td>
                                     <td>BAKI H/B</td>
-                                    <td>{{$val->dua}}</td>
+                                    <td>{{number_format($val->dua)}}</td>
                                 </tr>
                                 @endif
                                 <tr>
@@ -140,14 +149,14 @@
                                     <td></td>
                                     <td></td>
                                     <td>Baki B/B</td>
-                                    <td>{{$val->dua}}</td>
+                                    <td>{{number_format($val->dua)}}</td>
                                 </tr>
                                 @endif
                                 @if ($val->satu == 2)
                                 <tr>
                                     <td></td>
                                     <td>Baki B/B</td>
-                                    <td>{{$val->dua}}</td>
+                                    <td>{{number_format($val->dua)}}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -186,20 +195,20 @@
                                 <tr>
                                     <td class="text-nowrap">{{$report2->tab5}}</td>
                                     <td>{{$report2->tab6}}</td>
-                                    <td>{{$report2->tab7}}</td>
+                                    <td>{{number_format($report2->tab7)}}</td>
                                     <td class="text-nowrap"></td>
                                     <td>{{$report2->tab8}}</td>
-                                    <td>{{$report2->tab9}}</td>
+                                    <td>{{number_format($report2->tab9)}}</td>
                                 </tr>
                                 @endif
                                 @if ($report2->tab4 == 2)
                                 <tr>
                                     <td class="text-nowrap"></td>
                                     <td>{{$report2->tab8}}</td>
-                                    <td>{{$report2->tab9}}</td>
+                                    <td>{{number_format($report2->tab9)}}</td>
                                     <td class="text-nowrap">{{$report2->tab5}}</td>
                                     <td>{{$report2->tab6}}</td>
-                                    <td>{{$report2->tab7}}</td>
+                                    <td>{{number_format($report2->tab7)}}</td>
                                 </tr>
                                 @endif
                                 
@@ -208,20 +217,20 @@
                                 <tr>
                                     <td class="text-nowrap">{{$report2->tab5}}</td>
                                     <td>{{$report2->tab6}}</td>
-                                    <td>{{$report2->tab7}}</td>
+                                    <td>{{number_format($report2->tab7)}}</td>
                                     <td class="text-nowrap"></td>
                                     <td>{{$report2->tab8}}</td>
-                                    <td>{{$report2->tab9}}</td>
+                                    <td>{{number_format($report2->tab9)}}</td>
                                 </tr>
                                 @endif
                                 @if ($report2->tab4 == 2)
                                 <tr>
                                     <td class="text-nowrap"></td>
                                     <td>{{$report2->tab8}}</td>
-                                    <td>{{$report2->tab9}}</td>
+                                    <td>{{number_format($report2->tab9)}}</td>
                                     <td class="text-nowrap">{{$report2->tab5}}</td>
                                     <td>{{$report2->tab6}}</td>
-                                    <td>{{$report2->tab7}}</td>
+                                    <td>{{number_format($report2->tab7)}}</td>
                                 </tr>
                                 @endif
                             @endif
@@ -229,15 +238,15 @@
                             <tr>
                                 <td></td>
                                 <td>Jumlah</td>
-                                <td>{{$report2->tab9}}</td>
+                                <td>{{number_format($report2->tab9)}}</td>
                                 <td></td>
                                 <td>Jumlah</td>
-                                <td>{{$report2->tab9}}</td>
+                                <td>{{number_format($report2->tab9)}}</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>Baki B/B</td>
-                                <td>{{$report2->tab9}}</td>
+                                <td>{{number_format($report2->tab9)}}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -247,10 +256,10 @@
                             <tr>
                                 <td></td>
                                 <td>Jumlah</td>
-                                <td>{{$report2->tab9}}</td>
+                                <td>{{number_format($report2->tab9)}}</td>
                                 <td></td>
                                 <td>Jumlah</td>
-                                <td>{{$report2->tab9}}</td>
+                                <td>{{number_format($report2->tab9)}}</td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -258,7 +267,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>Baki B/B</td>
-                                <td>{{$report2->tab9}}</td>
+                                <td>{{number_format($report2->tab9)}}</td>
                             </tr>
                             @endif
                         @endforeach
@@ -306,15 +315,18 @@
                     text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
-                    title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year
+                    title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year,
+                    customize: function(doc) {
+                        doc.styles.tableHeader.fillColor = '#00A651'
+                    }
                 },
-                {
-                    extend:    'print',
-                    text:      '<span class="bi bi-printer">Print</span>',
-                    className: 'btn btn-primary btn-xs',
-                    titleAttr: 'PDF',
-                    title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year
-                }
+                // {
+                //     extend:    'print',
+                //     text:      '<span class="bi bi-printer">Print</span>',
+                //     className: 'btn btn-primary btn-xs',
+                //     titleAttr: 'PDF',
+                //     title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year
+                // }
             ]
         });
         $('.loader').hide();
@@ -388,15 +400,18 @@
                                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
-                                title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                                title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year,
+                                customize: function(doc) {
+                                    doc.styles.tableHeader.fillColor = '#00A651'
+                                }
                             },
-                            {
-                                extend:    'print',
-                                text:      '<span class="bi bi-printer">Print</span>',
-                                className: 'btn btn-primary btn-xs',
-                                titleAttr: 'PDF',
-                                title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
-                            }
+                            // {
+                            //     extend:    'print',
+                            //     text:      '<span class="bi bi-printer">Print</span>',
+                            //     className: 'btn btn-primary btn-xs',
+                            //     titleAttr: 'PDF',
+                            //     title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                            // }
                         ]
                     });
                 }

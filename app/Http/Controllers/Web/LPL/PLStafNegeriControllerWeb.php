@@ -99,7 +99,7 @@ class PLStafNegeriControllerWeb extends Controller
         }
 
         $result = "";
-        $foot = "";
+        $tfoot = "";
         $num=1;
 
         $total = new \stdClass();
@@ -107,42 +107,67 @@ class PLStafNegeriControllerWeb extends Controller
         $total->dua = 0;
         $total->tiga = 0;
         $total->empat = 0;
-
+        // dd($reports);
         foreach ($reports as $report) {
+            $report->pegawai = "";
             $daerah = Daerah::select('Daerah')->where('U_Daerah_ID', $report->tab3)->first();
-            $report->daerah = $daerah->Daerah;
-            $pegawai = Pegawai::select('nama')->where('id', $report->tab4)->first();
-            $report->pegawai = $pegawai->nama;
+            if(isset($daerah)){
+                $report->daerah = $daerah->Daerah;
+            }else{
+                $report->daerah = "";
+            }
+            if(isset($report->tab4)){
+                $pegawai = Pegawai::where('id', $report->tab4)->first();
+                if(isset($pegawai)){
+                    $report->pegawai = $pegawai->nama;
+                }
+            }
+            
             $total->satu = $total->satu + $report->tab5;
             $total->dua = $total->dua + $report->tab6;
             $total->tiga = $total->tiga + $report->tab7;
             $total->empat = $total->empat + $report->tab8;
         }
-
+        
         foreach ($reports as $report) {
-            $report->percent = round(($report->tab5/$total->satu *100), 2);
+            if(isset($report->tab5) && $total->satu != 0){
+                $report->percent = round(($report->tab5/$total->satu *100), 2);
+            }else{
+                $report->percent = "";
+            }
             $result .= 
             '<tr class="align-middle" style="text-align: center;">
-                <td class="text-nowrap" style="padding-right:2vh;">'.$num++.'</td>
-                <td class="text-nowrap">'.$report->daerah.'</td>
-                <td class="text-nowrap">'.$report->pegawai.'</td>
-                <td class="text-nowrap">'.$report->tab5.'</td>
-                <td class="text-nowrap">'.$report->tab6.'</td>
-                <td class="text-nowrap">'.$report->tab7.'</td>
-                <td class="text-nowrap">'.$report->tab8.'</td>
-                <td class="text-nowrap">'.$report->percent.'</td>
+                <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label">'.$num++.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->daerah.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->pegawai.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab5).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab8).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->percent.'</label></td>
             </tr>';
-        }        
-
-        $tfoot = '<tr class="align-middle" style="text-align: center;">
+        }
+        
+        $tfoot = '
+        <tr class="align-middle" style="text-align: center;display:none;">
+            <th></th>
+            <th></th>
+            <th class="text-nowrap">Jumlah</th>
+            <th class="text-nowrap">'.number_format($total->satu).'</th>
+            <th class="text-nowrap">'.number_format($total->dua).'</th>
+            <th class="text-nowrap">'.number_format($total->tiga).'</th>
+            <th class="text-nowrap">'.number_format($total->empat).'</th>
+            <th class="text-nowrap">100</th>
+        </tr>
+        <tr class="align-middle" style="text-align: center;">
             <th class="text-nowrap" colspan="3">Jumlah</th>
-            <th class="text-nowrap">'.$total->satu.'</th>
-            <th class="text-nowrap">'.$total->dua.'</th>
-            <th class="text-nowrap">'.$total->tiga.'</th>
-            <th class="text-nowrap">'.$total->empat.'</th>
+            <th class="text-nowrap">'.number_format($total->satu).'</th>
+            <th class="text-nowrap">'.number_format($total->dua).'</th>
+            <th class="text-nowrap">'.number_format($total->tiga).'</th>
+            <th class="text-nowrap">'.number_format($total->empat).'</th>
             <th class="text-nowrap">100</th>
         </tr>';
 
-        return [$result, $foot];
+        return [$result, $tfoot];
     }
 }

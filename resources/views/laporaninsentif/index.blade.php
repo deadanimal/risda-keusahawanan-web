@@ -82,15 +82,15 @@
                             <th scope="col" colspan="2">PERKHIDMATAN BUKAN PEMASARAN</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th scope="col"><div style="display: none;">P. PRODUK MAKANAN</div> BIL</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">P.PRODUK MAKANAN</div></th>
                             <th scope="col">%</th>
-                            <th scope="col"><div style="display: none;">P. PRODUK BUKAN MAKANAN</div> BIL</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">P.PRODUK BUKAN MAKANAN</div></th>
                             <th scope="col">%</th>
-                            <th scope="col"><div style="display: none;">P. PRODUK PERTANIAN</div> BIL</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">P.PRODUK PERTANIAN</div></th>
                             <th scope="col">%</th>
-                            <th scope="col"><div style="display: none;">PERKHIDMATAN PEMASARAN</div> BIL</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">PERKHIDMATAN PEMASARAN</div></th>
                             <th scope="col">%</th>
-                            <th scope="col"><div style="display: none;">PERKHIDMATAN BUKAN PEMASARAN</div> BIL</th>
+                            <th scope="col">&nbsp; &nbsp; &nbsp;BIL &nbsp; &nbsp; &nbsp;<div style="display: none;">PERKHIDMATAN BUKAN PEMASARAN</div></th>
                             <th scope="col">%</th>
                         </tr>
                         {{-- <tr style="display: none;">
@@ -140,8 +140,26 @@
                         @endforeach
                     </tbody>
                     <tfoot id="tblfoot">
+                        <tr class="align-middle" style="text-align: center;display:none;">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">Jumlah</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->satu)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($percent->satu,2)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->dua)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($percent->dua,2)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->tiga)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($percent->tiga,2)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->empat)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($percent->empat,2)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->lima)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($percent->lima,2)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->enam)}}</label></td>
+                            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($percent->enam,2)}}</label></td>
+                        </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;" colspan="4"><label class="form-check-label">Jumlah</label></td>
+                            <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">Jumlah</label></td>
                             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->satu)}}</label></td>
                             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($percent->satu,2)}}</label></td>
                             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->dua)}}</label></td>
@@ -182,14 +200,16 @@
                     text:       '<span class="bi bi-files">Copy</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Copy',
-                    title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+year
+                    title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+year,
+                    footer: true,
                 },
                 {
                     extend:    'excelHtml5',
                     text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Excel',
-                    title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+year
+                    title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+year,
+                    footer: true,
                 },
                 {
                     extend:    'csvHtml5',
@@ -204,15 +224,26 @@
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
                     title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+year,
-                    orientation:'landscape'
+                    orientation:'landscape',
+                    footer: true,
+                    customize: function(doc) {
+                        doc.styles.tableHeader.fontSize = 9,
+                        doc.styles.tableHeader.fillColor = '#00A651',
+                        doc.styles.tableHeader.alignment = 'center',
+                        doc.styles.tableFooter.fontSize = 9,
+                        doc.styles.tableFooter.fillColor = '#00A651',
+                        doc.defaultStyle.alignment = 'center',
+                        doc.defaultStyle.fontSize = 9;
+                    }  
                 },
-                {
-                    extend:    'print',
-                    text:      '<span class="bi bi-printer">Print</span>',
-                    className: 'btn btn-primary btn-xs',
-                    titleAttr: 'PDF',
-                    title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+year,
-                },
+                // {
+                //     extend:    'print',
+                //     text:      '<span class="bi bi-printer">Print</span>',
+                //     className: 'btn btn-primary btn-xs',
+                //     titleAttr: 'PDF',
+                //     title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+year,
+                //     footer: true
+                // },
                 // {
                 //     text:      '<span>Enable Sort</span>',
                 //     className: 'btn btn-primary btn-xs',
@@ -286,36 +317,50 @@
                             text:       '<span class="bi bi-files">Copy</span>',
                             className: 'btn btn-primary btn-xs',
                             titleAttr: 'Copy',
-                            title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year
+                            title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year,
+                            footer: true,
                         },
                         {
                             extend:    'excelHtml5',
                             text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                             className: 'btn btn-primary btn-xs',
                             titleAttr: 'Excel',
-                            title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year
+                            title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year,
+                            footer: true,
                         },
                         {
                             extend:    'csvHtml5',
                             text:      '<span class="bi bi-filetype-csv">CSV</span>',
                             className: 'btn btn-primary btn-xs',
                             titleAttr: 'CSV',
-                            title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year
+                            title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year,
                         },
                         {
                             extend:    'pdfHtml5',
                             text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                             className: 'btn btn-primary btn-xs',
                             titleAttr: 'PDF',
-                            title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year
+                            title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year,
+                            orientation:'landscape',
+                            footer: true,
+                            customize: function(doc) {
+                                doc.styles.tableHeader.fontSize = 9,
+                                doc.styles.tableHeader.fillColor = '#00A651',
+                                doc.styles.tableHeader.alignment = 'center',
+                                doc.styles.tableFooter.fontSize = 9,
+                                doc.styles.tableFooter.fillColor = '#00A651',
+                                doc.defaultStyle.alignment = 'center',
+                                doc.defaultStyle.fontSize = 9;
+                            }  
                         },
-                        {
-                            extend:    'print',
-                            text:      '<span class="bi bi-printer">Print</span>',
-                            className: 'btn btn-primary btn-xs',
-                            titleAttr: 'PDF',
-                            title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year
-                        }
+                        // {
+                        //     extend:    'print',
+                        //     text:      '<span class="bi bi-printer">Print</span>',
+                        //     className: 'btn btn-primary btn-xs',
+                        //     titleAttr: 'PDF',
+                        //     title: 'LAPORAN ANALISA JENIS PERNIAGAAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year,
+                        //     footer: true,
+                        // }
                     ]
                 });
             }

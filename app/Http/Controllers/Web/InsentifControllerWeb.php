@@ -42,7 +42,7 @@ class InsentifControllerWeb extends Controller
 
     public function show($id)
     {
-        $insentifs = Insentif::where('id_pengguna', $id)->get();
+        $insentifs = Insentif::where('id_pengguna', $id)->orderBy('created_at', 'DESC')->get();
         $insentifCount = $insentifs->count();
         if($insentifCount >= 10){
             $addinsen = false;

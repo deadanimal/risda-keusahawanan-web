@@ -35,7 +35,16 @@
                   </select>
             </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <table id="laporanbukutunai" class="table table-sm table-bordered table-hover">
+                <table id="laporanbukutunai" class="table table-style table-sm table-bordered table-hover">
+                    <style>
+                        table.table-style td { 
+                            line-height: 1.45rem;
+                            font-size: .8333333333rem;
+                            font-weight: 500;
+                            letter-spacing: .02em;
+                            margin-bottom: 0.5rem;
+                         }
+                    </style>
                     <colgroup>
                         <col span="1" style="width:10%;">
                         <col span="1" style="width:10%;">
@@ -81,7 +90,7 @@
                             @if ($loop->first && $report->tab8 == 1)
                                 <tr class="align-middle" style="text-align: left;">
                                     <td></td>
-                                    <td class="text-nowrap">A) PENDAPATAN AKTIF</td>
+                                    <td class="text-nowrap"><label class="form-check-label">A) PENDAPATAN AKTIF</label></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -90,12 +99,12 @@
                             @endif
                             @if ($report->tab8 == 1)
                                 <tr class="align-middle" style="text-align: center;">
-                                    <td class="text-nowrap">{{$report->tab3}}</td>
-                                    <td class="text-nowrap">{{$report->nama_jenis}}</td>
-                                    <td class="text-nowrap">{{$report->tab5}}</td>
-                                    <td class="text-nowrap">{{$report->tab6}}</td>
-                                    <td class="text-nowrap">{{$report->tab7}}</td>
-                                    <td class="text-nowrap">{{$report->total}}</td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label"><div style="display: none;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>{{$report->nama_jenis}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->total)}}</label></td>
                                 </tr>
                             @endif
                             @if ($report->tab8 == 2 && $count != 3)
@@ -105,7 +114,7 @@
                                 <?php $count = 3; ?>
                                 <tr class="align-middle" style="text-align: left;">
                                     <td></td>
-                                    <td class="text-nowrap">B) PENDAPATAN PASIF</td>
+                                    <td class="text-nowrap"><label class="form-check-label">B) PENDAPATAN PASIF</label></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -114,22 +123,22 @@
                             @endif
                             @if ($report->tab8 == 2)
                                 <tr class="align-middle" style="text-align: center;">
-                                    <td class="text-nowrap">{{$report->tab3}}</td>
-                                    <td class="text-nowrap">{{$report->nama_jenis}}</td>
-                                    <td class="text-nowrap">{{$report->tab5}}</td>
-                                    <td class="text-nowrap">{{$report->tab6}}</td>
-                                    <td class="text-nowrap">{{$report->tab7}}</td>
-                                    <td class="text-nowrap">{{$report->total}}</td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label"><div style="display: none;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>{{$report->nama_jenis}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->total)}}</label></td>
                                 </tr>
                             @endif
                             @if ($report->tab8 == 3 && $count == 3)
                                 <tr class="align-middle" style="text-align: center;">
                                     <td></td>
-                                    <td class="text-nowrap" style="text-align: left;">C) JUMLAH ALIRAN MASUK (RM)</td>
+                                    <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">C) JUMLAH ALIRAN MASUK (RM)</label></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td class="text-nowrap">{{$total->satu}}</td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($total->satu)}}</label></td>
                                 </tr>
                             @endif
                             @if ($report->tab8 == 3 && $count != 4)
@@ -139,7 +148,7 @@
                                 <?php $count = 4; ?>
                                 <tr class="align-middle" style="text-align: left;">
                                     <td></td>
-                                    <td class="text-nowrap">D) PERBELANJAAN PERNIAGAAN (RM)</td>
+                                    <td class="text-nowrap"><label class="form-check-label"><label class="form-check-label">D) PERBELANJAAN PERNIAGAAN (RM)</label></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -148,32 +157,32 @@
                             @endif
                             @if ($report->tab8 == 3)
                                 <tr class="align-middle" style="text-align: center;">
-                                    <td class="text-nowrap">{{$report->tab3}}</td>
-                                    <td class="text-nowrap">{{$report->nama_jenis}}</td>
-                                    <td class="text-nowrap">{{$report->tab5}}</td>
-                                    <td class="text-nowrap">{{$report->tab6}}</td>
-                                    <td class="text-nowrap">{{$report->tab7}}</td>
-                                    <td class="text-nowrap">{{$report->total}}</td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label"><div style="display: none;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>{{$report->nama_jenis}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->total)}}</label></td>
                                 </tr>
                             @endif
                         @endforeach
                         @if($count == 4)
                         <tr class="align-middle" style="text-align: center;">
                             <td></td>
-                            <td class="text-nowrap" style="text-align: left;">G) JUMLAH ALIRAN KELUAR</td>
+                            <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">G) JUMLAH ALIRAN KELUAR</label></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="text-nowrap">{{$total->dua}}</td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($total->dua)}}</label></td>
                         </tr>
                         @endif
                         <tr class="align-middle" style="text-align: center;">
                             <td></td>
-                            <td class="text-nowrap" style="text-align: left;">JUMLAH BAKI/SIMPANAN</td>
+                            <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">JUMLAH BAKI/SIMPANAN</label></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="text-nowrap">{{$total->tiga}}</td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($total->tiga)}}</label></td>
                         </tr>
                     </tbody>
                 </table>
@@ -220,15 +229,18 @@ $( document ).ready(function() {
                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'PDF',
-                title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year
+                title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year,
+                customize: function(doc) {
+                    doc.styles.tableHeader.fillColor = '#00A651'
+                },
             },
-            {
-                extend:    'print',
-                text:      '<span class="bi bi-printer">Print</span>',
-                className: 'btn btn-primary btn-xs',
-                titleAttr: 'PDF',
-                title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year
-            }
+            // {
+            //     extend:    'print',
+            //     text:      '<span class="bi bi-printer">Print</span>',
+            //     className: 'btn btn-primary btn-xs',
+            //     titleAttr: 'PDF',
+            //     title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year
+            // }
         ]
     });
     $('.loader').hide();
@@ -300,15 +312,18 @@ function gettabledata(type,val){
                             text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                             className: 'btn btn-primary btn-xs',
                             titleAttr: 'PDF',
-                            title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                            title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year,
+                            customize: function(doc) {
+                                doc.styles.tableHeader.fillColor = '#00A651'
+                            },
                         },
-                        {
-                            extend:    'print',
-                            text:      '<span class="bi bi-printer">Print</span>',
-                            className: 'btn btn-primary btn-xs',
-                            titleAttr: 'PDF',
-                            title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
-                        }
+                        // {
+                        //     extend:    'print',
+                        //     text:      '<span class="bi bi-printer">Print</span>',
+                        //     className: 'btn btn-primary btn-xs',
+                        //     titleAttr: 'PDF',
+                        //     title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year
+                        // }
                     ]
                 });
             }

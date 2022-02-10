@@ -18,7 +18,16 @@
                 </select>
             </h3>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
-                <table id="pnlbulk" class="table table-sm table-bordered table-hover">
+                <table id="pnlbulk" class="table table-style table-sm table-bordered table-hover">
+                    <style>
+                        table.table-style td { 
+                            line-height: 1.45rem;
+                            font-size: .8333333333rem;
+                            font-weight: 500;
+                            letter-spacing: .02em;
+                            margin-bottom: 0.5rem;
+                         }
+                    </style>
                     <colgroup>
                         <col span="1" style="width: 35%;">
                         <col span="1" style="width: 15%;">
@@ -46,105 +55,114 @@
                     <tbody id="tblname">
                         <tr class="align-middle">
                             <td class="text-nowrap">HASIL JUALAN</td>
-                            <td class="text-nowrap">{{$Hasil->bul1}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul2}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul3}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul4}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul5}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul6}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul7}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul8}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul9}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul10}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul11}}</td>
-                            <td class="text-nowrap">{{$Hasil->bul12}}</td>
-                            <td class="text-nowrap">{{$Hasil->jumlah}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul1)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul2)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul3)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul4)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul5)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul6)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul7)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul8)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul9)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul10)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul11)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->bul12)}}</td>
+                            <td class="text-nowrap">{{number_format($Hasil->jumlah)}}</td>
                         </tr>
                         <tr class="align-middle">
                             <td class="text-nowrap">KOS JUALAN</td>
-                            <td class="text-nowrap">{{$Kos->bul1}}</td>
-                            <td class="text-nowrap">{{$Kos->bul2}}</td>
-                            <td class="text-nowrap">{{$Kos->bul3}}</td>
-                            <td class="text-nowrap">{{$Kos->bul4}}</td>
-                            <td class="text-nowrap">{{$Kos->bul5}}</td>
-                            <td class="text-nowrap">{{$Kos->bul6}}</td>
-                            <td class="text-nowrap">{{$Kos->bul7}}</td>
-                            <td class="text-nowrap">{{$Kos->bul8}}</td>
-                            <td class="text-nowrap">{{$Kos->bul9}}</td>
-                            <td class="text-nowrap">{{$Kos->bul10}}</td>
-                            <td class="text-nowrap">{{$Kos->bul11}}</td>
-                            <td class="text-nowrap">{{$Kos->bul12}}</td>
-                            <td class="text-nowrap">{{$Kos->jumlah}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul1)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul2)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul3)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul4)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul5)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul6)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul7)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul8)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul9)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul10)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul11)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->bul12)}}</td>
+                            <td class="text-nowrap">{{number_format($Kos->jumlah)}}</td>
                         </tr>
                         <tr class="align-middle">
                             <td class="text-nowrap">UNTUNG/RUGI KASAR</td>
-                            <td class="text-nowrap">{{$Kasar->bul1}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul2}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul3}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul4}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul5}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul6}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul7}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul8}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul9}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul10}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul11}}</td>
-                            <td class="text-nowrap">{{$Kasar->bul12}}</td>
-                            <td class="text-nowrap">{{$Kasar->jumlah}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul1)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul2)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul3)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul4)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul5)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul6)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul7)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul8)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul9)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul10)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul11)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->bul12)}}</td>
+                            <td class="text-nowrap">{{number_format($Kasar->jumlah)}}</td>
                         </tr>
                         <tr class="align-middle">
                             <td class="text-nowrap">PERBELANJAAN PENTADBIRAN & OPERASI</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul1}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul2}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul3}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul4}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul5}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul6}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul7}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul8}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul9}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul10}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul11}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->bul12}}</td>
-                            <td class="text-nowrap">{{$Perbelanjaan->jumlah}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul1)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul2)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul3)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul4)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul5)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul6)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul7)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul8)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul9)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul10)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul11)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->bul12)}}</td>
+                            <td class="text-nowrap">{{number_format($Perbelanjaan->jumlah)}}</td>
                         </tr>
                         <tr class="align-middle">
                             <td class="text-nowrap">HASIL-HASIL LAIN</td>
-                            <td class="text-nowrap">{{$Lain->bul1}}</td>
-                            <td class="text-nowrap">{{$Lain->bul2}}</td>
-                            <td class="text-nowrap">{{$Lain->bul3}}</td>
-                            <td class="text-nowrap">{{$Lain->bul4}}</td>
-                            <td class="text-nowrap">{{$Lain->bul5}}</td>
-                            <td class="text-nowrap">{{$Lain->bul6}}</td>
-                            <td class="text-nowrap">{{$Lain->bul7}}</td>
-                            <td class="text-nowrap">{{$Lain->bul8}}</td>
-                            <td class="text-nowrap">{{$Lain->bul9}}</td>
-                            <td class="text-nowrap">{{$Lain->bul10}}</td>
-                            <td class="text-nowrap">{{$Lain->bul11}}</td>
-                            <td class="text-nowrap">{{$Lain->bul12}}</td>
-                            <td class="text-nowrap">{{$Lain->jumlah}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul1)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul2)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul3)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul4)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul5)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul6)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul7)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul8)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul9)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul10)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul11)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->bul12)}}</td>
+                            <td class="text-nowrap">{{number_format($Lain->jumlah)}}</td>
                         </tr>
                         <tr class="align-middle">
                             <td class="text-nowrap">UNTUNG/RUGI BERSIH</td>
-                            <td class="text-nowrap">{{$Bersih->bul1}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul2}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul3}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul4}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul5}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul6}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul7}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul8}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul9}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul10}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul11}}</td>
-                            <td class="text-nowrap">{{$Bersih->bul12}}</td>
-                            <td class="text-nowrap">{{$Bersih->jumlah}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul1)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul2)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul3)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul4)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul5)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul6)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul7)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul8)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul9)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul10)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul11)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->bul12)}}</td>
+                            <td class="text-nowrap">{{number_format($Bersih->jumlah)}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;padding-top: 5vh;">
-                <table id="pnlind">
+                <table id="pnlind" class="table-style">
+                    <style>
+                        table.table-style td { 
+                            line-height: 1.45rem;
+                            font-size: .8333333333rem;
+                            font-weight: 500;
+                            letter-spacing: .02em;
+                            margin-bottom: 0.5rem;
+                         }
+                    </style>
                     <colgroup>
                         <col span="1" style="width: 35%;">
                         <col span="1" style="width: 15%;">
@@ -215,15 +233,20 @@
                     text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
-                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
+                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year,
+                    orientation:'landscape',
+                    customize: function(doc) {
+                        doc.styles.tableHeader.fillColor = '#00A651',
+                        doc.defaultStyle.fontSize = 9;
+                    }
                 },
-                {
-                    extend:    'print',
-                    text:      '<span class="bi bi-printer">Print</span>',
-                    className: 'btn btn-primary btn-xs',
-                    titleAttr: 'PDF',
-                    title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
-                }
+                // {
+                //     extend:    'print',
+                //     text:      '<span class="bi bi-printer">Print</span>',
+                //     className: 'btn btn-primary btn-xs',
+                //     titleAttr: 'PDF',
+                //     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
+                // }
             ]
         });
         var table = $('#pnlind').DataTable({
@@ -288,15 +311,20 @@
                                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
-                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
+                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year,
+                                orientation:'landscape',
+                                customize: function(doc) {
+                                    doc.styles.tableHeader.fillColor = '#00A651',
+                                    doc.defaultStyle.fontSize = 9;
+                                }
                             },
-                            {
-                                extend:    'print',
-                                text:      '<span class="bi bi-printer">Print</span>',
-                                className: 'btn btn-primary btn-xs',
-                                titleAttr: 'PDF',
-                                title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
-                            }
+                            // {
+                            //     extend:    'print',
+                            //     text:      '<span class="bi bi-printer">Print</span>',
+                            //     className: 'btn btn-primary btn-xs',
+                            //     titleAttr: 'PDF',
+                            //     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
+                            // }
                         ]
                     });
                 }

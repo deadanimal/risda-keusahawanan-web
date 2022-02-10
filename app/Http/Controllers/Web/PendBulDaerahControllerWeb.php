@@ -130,7 +130,18 @@ class PendBulDaerahControllerWeb extends Controller
                 </tr>';
             }
             $tfoot .=
-            '<tr class="align-middle" style="text-align: center;">
+            '
+            <tr class="align-middle" style="text-align: center;display:none;">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_penerima).'</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_insentif).'</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_jualan).'</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_puratajual).'</label></td>
+            </tr>
+            <tr class="align-middle" style="text-align: center;">
                 <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_penerima).'</label></td>
                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_insentif).'</label></td>

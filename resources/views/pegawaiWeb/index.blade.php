@@ -306,9 +306,9 @@ function datatable(){
     var table = $('#pegawaitbl').DataTable({
         "paging":   true,
         "bFilter": true,
-        "stateSave": true,
+        // "stateSave": true,
         "columnDefs": [
-    { "orderable": false, "targets": [4] }
+    { "orderable": false, "targets": [4,5,6,7] }
   ],
         initComplete: function () {
             this.api().columns([1, 2, 3]).every( function () {

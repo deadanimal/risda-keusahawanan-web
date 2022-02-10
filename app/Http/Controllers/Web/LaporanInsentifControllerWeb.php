@@ -242,7 +242,26 @@ class LaporanInsentifControllerWeb extends Controller
             </tr>';
         }
         $foot .=
-        '<tr class="align-middle" style="text-align: center;">
+        '
+        <tr class="align-middle" style="text-align: center;display:none;">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">Jumlah</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($total->satu).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($percent->satu,2).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($total->dua).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($percent->dua,2).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($total->tiga).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($percent->tiga,2).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($total->empat).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($percent->empat,2).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($total->lima).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($percent->lima,2).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($total->enam).'</label></td>
+            <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($percent->enam,2).'</label></td>
+        </tr>
+        <tr class="align-middle" style="text-align: center;">
             <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;" colspan="4"><label class="form-check-label">Jumlah</label></td>
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($total->satu).'</label></td>
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($percent->satu,2).'</label></td>
