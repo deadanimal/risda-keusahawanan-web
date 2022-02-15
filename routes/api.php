@@ -16,6 +16,7 @@ use App\Http\Controllers\KategoriUsahawanController;
 use App\Http\Controllers\LawatanController;
 use App\Http\Controllers\MukimController;
 use App\Http\Controllers\NegeriController;
+use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\ParlimenController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PegawaiController;
@@ -170,3 +171,6 @@ Route::get('carian/{i}', [CarianController::class, 'carianUsahawan']);
 Route::get('downloadCarian/{i}', [CarianController::class, 'downloadCarian']);
 
 
+//notification
+Route::apiResource('notifikasi', NotifikasiController::class);
+Route::get('notifikasi/updateStatus/{id}', [NotifikasiController::class, 'updateStatus']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Insentif;
 use App\Models\Lawatan;
+use App\Models\Notifikasi;
 use App\Models\Pegawai;
 use App\Models\Usahawan;
 use App\Models\User;
@@ -35,6 +36,14 @@ class LawatanController extends Controller
 
 
         $lawatan->save();
+
+        $notifikasi = new Notifikasi();
+        $notifikasi->userid = $lawatan->id_pengguna;
+        $notifikasi->tajuk = 'Tarikh Lawatan';
+        $notifikasi->keterangan = 'Satu lawatan telah disetkan ke tempat anda, sila sahkan atau cadangkan tarikh baru yang bersesuaian';
+        $notifikasi->modul = 'lawatan';
+        $notifikasi->save();
+
 
         return response()->json($lawatan);
     }
@@ -76,7 +85,20 @@ class LawatanController extends Controller
             ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
             ->join('lawatans', 'lawatans.id_pengguna', 'users.id')
             ->join('pegawais', 'pegawais.id', 'lawatans.id_pegawai')
-            ->select('lawatans.id as lawatan_id', 'pegawais.nama as nama_pegawai', 'usahawans.namausahawan', 'usahawans.id as usahawan_id', 'lawatans.updated_at', 'lawatans.created_at', 'lawatans.status_lawatan', 'lawatans.tarikh_lawatan', 'lawatans.masa_lawatan', 'lawatans.gambar_lawatan', 'lawatans.jenis_lawatan', 'lawatans.id_tindakan_lawatan', 'lawatans.komen')
+            ->select(
+                'lawatans.id as lawatan_id', 
+                'pegawais.nama as nama_pegawai', 
+                'usahawans.namausahawan', 
+                'usahawans.id as usahawan_id', 
+                'lawatans.updated_at', 
+                'lawatans.created_at', 
+                'lawatans.status_lawatan', 
+                'lawatans.tarikh_lawatan', 
+                'lawatans.masa_lawatan', 
+                'lawatans.gambar_lawatan', 
+                'lawatans.jenis_lawatan', 
+                'lawatans.id_tindakan_lawatan', 
+                'lawatans.komen')
             ->get();
 
         return response()->json($lawatan);
@@ -90,6 +112,29 @@ class LawatanController extends Controller
         $lawatan->status_lawatan = $request->status_lawatan;
 
         $lawatan->save();
+
+        // $pegawaiid = 
+        // if ($request->role == "pegawai") {
+
+        //     $notifikasi = new Notifikasi();
+        //     $notifikasi->userid = $request->id_pengguna;
+        //     $notifikasi->tajuk = 'Tarikh Lawatan';
+        //     $notifikasi->keterangan = 'satu tarikh baru telah dicadangkan oleh pegawai';
+        //     $notifikasi->modul = 'lawatan';
+        //     $notifikasi->save();
+            
+        // } else if ($request->role == "usahawan") {
+
+        //     $user = User::where('idpegawai', $request->id_pegawai)
+        //     ->get()->first();
+
+        //     $notifikasi = new Notifikasi();
+        //     $notifikasi->userid = $user->id; 
+        //     $notifikasi->tajuk = 'Tarikh Lawatan';
+        //     $notifikasi->keterangan = 'satu tarikh baru telah dicadangkan oleh usahawan';
+        //     $notifikasi->modul = 'lawatan';
+        //     $notifikasi->save();
+        // }
 
         return response()->json($lawatan);
     }
@@ -142,6 +187,14 @@ class LawatanController extends Controller
         $lawatan->gambar_lawatan = $request->gambar_lawatan;
 
         $lawatan->save();
+
+        $notifikasi = new Notifikasi();
+        $notifikasi->userid = $lawatan->id_pengguna;
+        $notifikasi->tajuk = 'Laporan Lawatan';
+        $notifikasi->keterangan = 'Satu laporan lawatan telah ditambah';
+        $notifikasi->modul = 'lawatan';
+        $notifikasi->save();
+
 
         return response()->json($lawatan);
     }
