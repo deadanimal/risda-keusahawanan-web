@@ -65,7 +65,7 @@
                             </select>
                         </td>
                         <td class="text-nowrap">
-                            <button type="submit" class="btn btn-primary btn-sm" style="width:15vh" onclick="updatekategori();">Kemaskini</button>
+                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="updatekategori();">Kemaskini</button>
                         </form>
                             {{-- &nbsp
                             <form method="POST" style="display:inline-block;" action="{{ route('kategoriusahawan.destroy', $kateusahawan->id) }}">
@@ -94,6 +94,7 @@
             $('#kategoriUsahawan').submit();
         }else{
             alert('Data tidak disimpan');
+            return;
         }
     }
 
@@ -103,6 +104,7 @@
             $('#kemaskinikate').submit();
         }else{
             alert('Data tidak disimpan');
+            return;
         }
     }
 </script>
