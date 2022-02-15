@@ -60,9 +60,9 @@ class PasswordController extends Controller
     {
 
         // User::find($id)->update(['password'=> Hash::make($request->password)]);
-
+        
         $user = User::find($id);
-
+        // return response()->json($user);
         $validator = Validator::make($request->all(), [
             'email' => 'unique:users,email,' . $user->id
         ]);
