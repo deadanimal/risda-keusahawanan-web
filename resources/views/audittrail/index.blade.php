@@ -8,7 +8,7 @@
       <table style="padding: 1rem" class="table table-borderless">
         <thead>
           <tr>
-            <th>Date</th>
+            <th>Tarikh</th>
             <th>Aktiviti</th>
           </tr>
         </thead>

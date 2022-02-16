@@ -123,8 +123,8 @@ class PendapatanBulananControllerWeb extends Controller
                 <td class="text-nowrap" style="padding-right:2vh;"><label class="form-check-label">'.$num++.'</label></td>
                 <td class="text-nowrap"><label class="form-check-label">'.$report->negeri.'</label></td>
                 <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">'.$report->jenis.'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab3).'</label></td>
-                <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab4).'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</label></td>
+                <td class="text-nowrap"><label class="form-check-label">'.$report->tab4.'</label></td>
                 <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab5).'</label></td>
                 <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6).'</label></td>
                 <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7).'</label></td>
