@@ -18,7 +18,7 @@ class CreatePerniagaansTable extends Migration
 
             $table->string('usahawanid')->nullable();
             $table->string('jenisperniagaan',12)->nullable();
-            $table->string('klusterperniagaan',12)->nullable();
+            $table->string('klusterperniagaan')->nullable();
             $table->string('subkluster')->nullable();
             $table->string('alamat1')->nullable();
             $table->string('alamat2')->nullable();
