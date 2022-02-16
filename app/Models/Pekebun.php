@@ -9,11 +9,11 @@ class Pekebun extends Model
 {
     use HasFactory;
 
-    protected $with = [ 'tanah'];
+    // protected $with = [ 'tanah'];
 
-    public function tanah()
-    {
-        return $this->hasMany(Tanah::class, 'pekebunid', 'id');
-    }
+    // public function tanah()
+    // {
+    //     return $this->hasMany(Tanah::class, 'pekebunid', 'id');
+    // }
     
 }
