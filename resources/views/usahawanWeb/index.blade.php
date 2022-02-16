@@ -53,7 +53,7 @@
                         <tr class="align-middle">
                             <td class="text-nowrap form-check-label">{{$user->namausahawan}}</td>
                             <td class="text-nowrap form-check-label">{{$user->nokadpengenalan}}</td>
-                            <td class="text-nowrap form-check-label">{{$user->negeri}}</td>
+                            <td class="text-nowrap form-check-label">{{$user->negeri->Negeri}}</td>
                             <td class="text-nowrap">
                                 <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:30vh;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
                                 <option selected="true" disabled="disabled" selected="">Kawasan</option>
@@ -570,10 +570,12 @@ function GetPengguna(){
     //var user = document.getElementsByName("user");
     for (var i=0; i < user.length; i++) {
         //console.log("flexSwitchCheckDefault"+user[i].value);
-        if(user[i].status_pengguna == 1){
+        if(user[i].user){
+            if(user[i].user.status_pengguna == 1){
             $("#flexSwitchCheckDefault"+user[i].usahawanid).attr("checked","");
-        }else{
-            //$("#flexSwitchCheckDefault"+user[i].value).attr("checked","");
+            }else{
+                //$("#flexSwitchCheckDefault"+user[i].value).attr("checked","");
+            }
         }
     }
     console.log(user);

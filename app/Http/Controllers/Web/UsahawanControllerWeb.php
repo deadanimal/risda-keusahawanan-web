@@ -55,16 +55,16 @@ class UsahawanControllerWeb extends Controller
             return redirect('/landing');
         }
 
-        foreach ($users as $usahawan) {
-            $status = User::where('usahawanid', $usahawan->usahawanid)->first();
-            if(isset($status)){
-                $usahawan->status_pengguna = $status->status_pengguna;
-            }
-            $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
-            if(isset($negeri)){
-                $usahawan->negeri = $negeri->Negeri;
-            }
-        }
+        // foreach ($users as $usahawan) {
+        //     $status = User::where('usahawanid', $usahawan->usahawanid)->first();
+        //     if(isset($status)){
+        //         $usahawan->status_pengguna = $status->status_pengguna;
+        //     }
+        //     // $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
+        //     // if(isset($negeri)){
+        //     //     $usahawan->negeri = $negeri->Negeri;
+        //     // }
+        // }
 
 
         return view('usahawanWeb.index',[
