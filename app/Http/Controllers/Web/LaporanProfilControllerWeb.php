@@ -818,36 +818,40 @@ class LaporanProfilControllerWeb extends Controller
             Report::where('tab20', Auth::user()->id)->where('type', 11)->delete();
             $usaha = Usahawan::where('id', $request->id)->first();
             $pengguna = User::where('usahawanid', $usaha->usahawanid)->first();
-            $alirans = Aliran::where('id_pengguna',$pengguna->id)->get();
-            if($alirans->count()==0){
-                return "Tiada Data Aliran Dijumpai";
-            }else{
-                $report = new Report();
-                $report->type = 11;
-                $report->tab1 = 1000;
-                $report->tab2 = 1000;
-                $report->tab8 = 2;
-                $report->tab20 = Auth::user()->id;
-                $report->save();
-                $report = new Report();
-                $report->type = 11;
-                $report->tab1 = 1000;
-                $report->tab2 = 1000;
-                $report->tab8 = 3;
-                $report->tab20 = Auth::user()->id;
-                $report->save();
-                foreach ($alirans as $aliran) {
-                    $aliran->newdate = date("d-m-Y", strtotime($aliran->tarikh_aliran));
-                    $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
-                    $aliran->tahun = date('Y', strtotime($aliran->tarikh_aliran));
-                    $reports = Report::where('tab20', Auth::user()->id)->where('type', 11)->get();
-                    if($reports->count()==0){
-                        $this->newreport(11,$aliran,$aliran->id);
-                    }else{
-                        $this->newreport(11,$aliran,$aliran->id);
+            if(isset($pengguna->id)){
+                $alirans = Aliran::where('id_pengguna',$pengguna->id)->get();
+                if($alirans->count()==0 || $alirans==''){
+                    return "Tiada Data Aliran Dijumpai";
+                }else{
+                    $report = new Report();
+                    $report->type = 11;
+                    $report->tab1 = 1000;
+                    $report->tab2 = 1000;
+                    $report->tab8 = 2;
+                    $report->tab20 = Auth::user()->id;
+                    $report->save();
+                    $report = new Report();
+                    $report->type = 11;
+                    $report->tab1 = 1000;
+                    $report->tab2 = 1000;
+                    $report->tab8 = 3;
+                    $report->tab20 = Auth::user()->id;
+                    $report->save();
+                    foreach ($alirans as $aliran) {
+                        $aliran->newdate = date("d-m-Y", strtotime($aliran->tarikh_aliran));
+                        $aliran->bulan = date('m', strtotime($aliran->tarikh_aliran));
+                        $aliran->tahun = date('Y', strtotime($aliran->tarikh_aliran));
+                        $reports = Report::where('tab20', Auth::user()->id)->where('type', 11)->get();
+                        if($reports->count()==0){
+                            $this->newreport(11,$aliran,$aliran->id);
+                        }else{
+                            $this->newreport(11,$aliran,$aliran->id);
+                        }
                     }
+                    return "Laporan Berjaya Dijana";
                 }
-                return "Laporan Berjaya Dijana";
+            }else{
+                return "Tiada Data Aliran Dijumpai";
             }
         }
 

@@ -181,8 +181,16 @@
                         @foreach ($users as $user)
                         <tr class="align-middle">
                             <td class="text-nowrap textlbl">{{$user->namausahawan}}</td>
-                            <td class="text-nowrap textlbl">{{$user->negeri->Negeri}}</td>
-                            <td class="text-nowrap textlbl">{{$user->PT->keterangan}}</td>
+                            @if(isset($user->negeri))
+                                <td class="text-nowrap textlbl">{{$user->negeri->Negeri}}</td>
+                            @else 
+                                <td class="text-nowrap textlbl"></td>
+                            @endif
+                            @if(isset($user->PT))
+                                <td class="text-nowrap textlbl">{{$user->PT->keterangan}}</td>
+                            @else 
+                                <td class="text-nowrap textlbl"></td>
+                            @endif
                             <td class="text-nowrap" style="text-align: center;">
                                 <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="generatereport(14,'/penyatauntungrugiDetail',{{$user->id}});return false;">
                                 <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Penyata Untung Rugi
