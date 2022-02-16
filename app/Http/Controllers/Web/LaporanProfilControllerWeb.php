@@ -301,21 +301,25 @@ class LaporanProfilControllerWeb extends Controller
                                 $report->tab4 = $report->tab4 + 1;
                                 $report->tab5 = $report->tab5 + $insentif->nilai_insentif;
                                 // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                                $aliran = Aliran::where('id_pengguna', $user->id)
-                                ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
-                                ->sum('jumlah_aliran');
-                                $report->tab6 = $report->tab6 + $aliran;
-                                $report->save();
-                                $update = true;
+                                if(isset($user->id)){
+                                    $aliran = Aliran::where('id_pengguna', $user->id)
+                                    ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
+                                    ->sum('jumlah_aliran');
+                                    $report->tab6 = $report->tab6 + $aliran;
+                                    $report->save();
+                                    $update = true;
+                                }
                                 break;
                             }
                         }
                         if($update == false && isset($user->id)){
                             // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                            $aliran = Aliran::where('id_pengguna', $user->id)
-                            ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
-                            ->sum('jumlah_aliran');
-                            $insentif->aliran = $aliran;
+                            if(isset($user->id)){
+                                $aliran = Aliran::where('id_pengguna', $user->id)
+                                ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
+                                ->sum('jumlah_aliran');
+                                $insentif->aliran = $aliran;
+                            }
                             $this->newreport(1,$insentif,$insentif->id_pengguna);
                         }
                     }
