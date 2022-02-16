@@ -105,11 +105,23 @@ class PendBulDaerahControllerWeb extends Controller
             $c_puratajual = 0;
             foreach ($reports as $report) {
                 $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
-                $report->negeri = $negeri->Negeri;
+                if(isset($negeri)){
+                    $report->negeri = $negeri->Negeri;
+                }else{
+                    $report->negeri = '';
+                }
                 $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
-                $report->jenis = $jenisinsentif->nama_insentif;
+                if(isset($jenisinsentif)){
+                    $report->jenis = $jenisinsentif->nama_insentif;
+                }else{
+                    $report->jenis = '';
+                }
                 $daerah = Daerah::where('U_Daerah_ID', $report->tab8)->first();
-                $report->daerah = $daerah->Daerah;
+                if(isset($daerah)){
+                    $report->daerah = $daerah->Daerah;
+                }else{
+                    $report->daerah = '';
+                }
                 $c_penerima = $c_penerima + $report->tab4;
                 $c_insentif = $c_insentif + $report->tab5;
                 $report->tab7 = $report->tab6 / $report->tab4;

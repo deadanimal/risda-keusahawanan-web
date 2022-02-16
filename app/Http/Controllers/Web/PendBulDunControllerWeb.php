@@ -109,13 +109,27 @@ class PendBulDunControllerWeb extends Controller
         $c_puratajual = 0;
         foreach ($reports as $report) {
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
-            $report->negeri = $negeri->Negeri;
+            if(isset($negeri)){
+                $report->negeri = $negeri->Negeri;
+            }else{
+                $report->negeri = '';
+            }
             $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
-            $report->jenis = $jenisinsentif->nama_insentif;
+            if(isset($jenisinsentif)){
+                $report->jenis = $jenisinsentif->nama_insentif;
+            }else{
+                $report->jenis = '';
+            }
             $dun = Dun::where('U_Dun_ID', $report->tab9)->first();
-            $report->dun = $dun->Dun;
+            if(isset($dun)){
+                $report->dun = $dun->Dun;
+            }
             $parlimen = Parlimen::where('U_Parlimen_ID', $dun->U_Parlimen_ID)->first();
-            $report->parlimen = $parlimen->Parlimen;
+            if(isset($parlimen)){
+                $report->parlimen = $parlimen->Parlimen;
+            }else{
+                $report->parlimen = '';
+            }
             $c_penerima = $c_penerima + $report->tab4;
             $c_insentif = $c_insentif + $report->tab5;
             $report->tab7 = $report->tab6 / $report->tab4;
