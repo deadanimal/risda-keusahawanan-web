@@ -121,7 +121,7 @@ class LaporanInsentifControllerWeb extends Controller
             if(isset($report->jumproject) && $total->enam != 0){
                 $report->jumprojectpercent = round(($report->jumproject / $total->enam) *100, 2);
             }else{
-                $report->jumprojectpercent = "";
+                $report->jumprojectpercent = 0;
             }
         }
         return view('laporaninsentif.index'
