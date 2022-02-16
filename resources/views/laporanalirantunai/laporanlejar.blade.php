@@ -54,8 +54,8 @@
                         @foreach ($users as $user)
                         <tr class="align-middle">
                             <td class="text-nowrap textlbl">{{$user->namausahawan}}</td>
-                            <td class="text-nowrap textlbl">{{$user->negeri}}</td>
-                            <td class="text-nowrap textlbl">{{$user->PusatTang}}</td>
+                            <td class="text-nowrap textlbl">{{$user->negeri->Negeri}}</td>
+                            <td class="text-nowrap textlbl">{{$user->PT->keterangan}}</td>
                             <td class="text-nowrap" style="text-align: center;">
                                 <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="generatereport(12,'/laporanlejarDetail',{{$user->id}});return false;">
                                 <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Lejar

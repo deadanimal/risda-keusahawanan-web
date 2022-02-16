@@ -37,16 +37,16 @@ class PenyataUntungRugiControllerWeb extends Controller
             return redirect('/landing');
         }
 
-        foreach ($users as $usahawan) {
-            $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
-            if(isset($negeri)){
-                $usahawan->negeri = $negeri->Negeri;
-            }
-            $PT = PusatTanggungjawab::where('Kod_PT', $usahawan->Kod_PT)->first();
-            if(isset($PT)){
-                $usahawan->PusatTang = $PT->keterangan;
-            }
-        }
+        // foreach ($users as $usahawan) {
+        //     $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
+        //     if(isset($negeri)){
+        //         $usahawan->negeri = $negeri->Negeri;
+        //     }
+        //     $PT = PusatTanggungjawab::where('Kod_PT', $usahawan->Kod_PT)->first();
+        //     if(isset($PT)){
+        //         $usahawan->PusatTang = $PT->keterangan;
+        //     }
+        // }
 
         $getYear = date("Y");
         $reports = Report::where('type', 13)
