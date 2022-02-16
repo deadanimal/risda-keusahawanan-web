@@ -279,9 +279,13 @@ class LaporanProfilControllerWeb extends Controller
                 foreach ($insentifs as $insentif) {
                     $user = User::where('usahawanid', $insentif->id_pengguna)->first();
                     $usahawan = Usahawan::where('usahawanid', $insentif->id_pengguna)->first();
-                    $insentif->negeri = $usahawan->U_Negeri_ID;
+                    if(isset($usahawan)){
+                        $insentif->negeri = $usahawan->U_Negeri_ID;
+                    }else{
+                        $insentif->negeri = '';
+                    }
                     $reports = Report::where('tab20', Auth::user()->id)->where('type', 1)->get();
-                    if($reports->count()==0){
+                    if($reports->count()==0 && isset($user->id)){
                         // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
                         $aliran = Aliran::where('id_pengguna', $user->id)
                         ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
@@ -306,7 +310,7 @@ class LaporanProfilControllerWeb extends Controller
                                 break;
                             }
                         }
-                        if($update == false){
+                        if($update == false && isset($user->id)){
                             // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
                             $aliran = Aliran::where('id_pengguna', $user->id)
                             ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
@@ -330,17 +334,25 @@ class LaporanProfilControllerWeb extends Controller
                 foreach ($insentifs as $insentif) {
                     $user = User::where('usahawanid', $insentif->id_pengguna)->first();
                     $usahawan = Usahawan::where('usahawanid', $insentif->id_pengguna)->first();
-                    $insentif->negeri = $usahawan->U_Negeri_ID;
-                    $insentif->daerah = $usahawan->U_Daerah_ID;
+                    if(isset($usahawan)){
+                        $insentif->negeri = $usahawan->U_Negeri_ID;
+                        $insentif->daerah = $usahawan->U_Daerah_ID;
+                    }else{
+                        $insentif->negeri = '';
+                        $insentif->daerah = '';
+                    }
+                    
                     // $insentif->dun = $usahawan->U_Dun_ID;
                     $reports = Report::where('tab20', Auth::user()->id)->where('type', 2)->get();
                     if($reports->count()==0){
                         // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                        $aliran = Aliran::where('id_pengguna', $user->id)
-                        ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
-                        ->sum('jumlah_aliran');
-                        $insentif->aliran = $aliran;
-                        $this->newreport(2,$insentif,$insentif->id);
+                        if(isset($user->id)){
+                            $aliran = Aliran::where('id_pengguna', $user->id)
+                            ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
+                            ->sum('jumlah_aliran');
+                            $insentif->aliran = $aliran;
+                            $this->newreport(2,$insentif,$insentif->id);
+                        }
                     }else{
                         $update = false;
                         foreach ($reports as $report) {
@@ -348,21 +360,25 @@ class LaporanProfilControllerWeb extends Controller
                                 $report->tab4 = $report->tab4 + 1;
                                 $report->tab5 = $report->tab5 + $insentif->nilai_insentif;
                                 // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                                $aliran = Aliran::where('id_pengguna', $user->id)
-                                ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
-                                ->sum('jumlah_aliran');
-                                $report->tab6 = $report->tab6 + $aliran;
-                                $report->save();
-                                $update = true;
+                                if(isset($user->id)){
+                                    $aliran = Aliran::where('id_pengguna', $user->id)
+                                    ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
+                                    ->sum('jumlah_aliran');
+                                    $report->tab6 = $report->tab6 + $aliran;
+                                    $report->save();
+                                    $update = true;
+                                }
                             }
                         }
                         if($update == false){
                             // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                            $aliran = Aliran::where('id_pengguna', $user->id)
-                            ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
-                            ->sum('jumlah_aliran');
-                            $insentif->aliran = $aliran;
-                            $this->newreport(2,$insentif,"1");
+                            if(isset($user->id)){
+                                $aliran = Aliran::where('id_pengguna', $user->id)
+                                ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
+                                ->sum('jumlah_aliran');
+                                $insentif->aliran = $aliran;
+                                $this->newreport(2,$insentif,"1");
+                            }
                         }
                     }
                 }
@@ -379,17 +395,27 @@ class LaporanProfilControllerWeb extends Controller
                 foreach ($insentifs as $insentif) {
                     $user = User::where('usahawanid', $insentif->id_pengguna)->first();
                     $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
-                    $insentif->negeri = $usahawan->U_Negeri_ID;
-                    $insentif->daerah = $usahawan->U_Daerah_ID;
-                    $insentif->dun = $usahawan->U_Dun_ID;
+                    if(isset($usahawan)){
+                        $insentif->negeri = $usahawan->U_Negeri_ID;
+                        $insentif->daerah = $usahawan->U_Daerah_ID;
+                        $insentif->dun = $usahawan->U_Dun_ID;
+                    }else{
+                        $insentif->negeri = '';
+                        $insentif->daerah = '';
+                        $insentif->dun = '';
+                    }
+                    
                     $reports = Report::where('tab20', Auth::user()->id)->where('type', 3)->get();
                     if($reports->count()==0){
                         // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                        $aliran = Aliran::where('id_pengguna', $user->id)
-                        ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
-                        ->sum('jumlah_aliran');
-                        $insentif->aliran = $aliran;
-                        $this->newreport(3,$insentif,$insentif->id);
+                        if(isset($user->id)){
+                            $aliran = Aliran::where('id_pengguna', $user->id)
+                            ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
+                            ->sum('jumlah_aliran');
+                            $insentif->aliran = $aliran;
+                            $this->newreport(3,$insentif,$insentif->id);
+                        }
+                        
                     }else{
                         $update = false;
                         foreach ($reports as $report) {
@@ -397,22 +423,26 @@ class LaporanProfilControllerWeb extends Controller
                                 $report->tab4 = $report->tab4 + 1;
                                 $report->tab5 = $report->tab5 + $insentif->nilai_insentif;
                                 // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                                $aliran = Aliran::where('id_pengguna', $user->id)
-                                ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
-                                ->sum('jumlah_aliran');
-                                $report->tab6 = $report->tab6 + $aliran;
-                                $report->save();
-                                $update = true;
+                                if(isset($user->id)){
+                                    $aliran = Aliran::where('id_pengguna', $user->id)
+                                    ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
+                                    ->sum('jumlah_aliran');
+                                    $report->tab6 = $report->tab6 + $aliran;
+                                    $report->save();
+                                    $update = true;
+                                }
                                 break;
                             }
                         }
                         if($update == false){
                             // $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                            $aliran = Aliran::where('id_pengguna', $user->id)
-                            ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
-                            ->sum('jumlah_aliran');
-                            $insentif->aliran = $aliran;
-                            $this->newreport(3,$insentif,$insentif->id);
+                            if(isset($user->id)){
+                                $aliran = Aliran::where('id_pengguna', $user->id)
+                                ->whereYear('tarikh_aliran', $insentif->tahun_terima_insentif)
+                                ->sum('jumlah_aliran');
+                                $insentif->aliran = $aliran;
+                                $this->newreport(3,$insentif,$insentif->id);
+                            }
                         }
                     }
                 }
