@@ -14,6 +14,7 @@ use App\Models\Mukim;
 use App\Models\Negeri;
 use App\Models\Daerah;
 use App\Models\AuditTrail;
+use App\Models\PusatTanggungjawab;
 
 class PegawaiControllerWeb extends Controller
 {
@@ -24,13 +25,86 @@ class PegawaiControllerWeb extends Controller
             return redirect('/landing');
         }
         $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+        if($authuser->role == 1){
+            $ddMukim = Mukim::select('U_Mukim_ID','Mukim')->orderBy('Mukim', 'ASC')->get();
+            $ddPT = PusatTanggungjawab::select('Kod_PT','keterangan')->orderBy('keterangan', 'ASC')->get();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $ddMukim = Mukim::where('status', 1)->where('U_Negeri_ID', $authpegawai->Mukim->U_Negeri_ID)->orderBy('Mukim', 'ASC')->get();
+            $ddPT = PusatTanggungjawab::select('Kod_PT','keterangan')->where('Kod_PT', $authpegawai->NamaPT)->orderBy('keterangan', 'ASC')->get();
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $ddMukim = Mukim::where('status', 1)->where('U_Daerah_ID', $authpegawai->Mukim->U_Daerah_ID)->orderBy('Mukim', 'ASC')->get();
+            $ddPT = PusatTanggungjawab::select('Kod_PT','keterangan')->where('Kod_PT', $authpegawai->NamaPT)->orderBy('keterangan', 'ASC')->get();
+        }
+
+        return view('pegawaiWeb.landing'
+        ,[
+            'ddMukim'=>$ddMukim,
+            'ddPT'=>$ddPT
+        ]
+        );
+    }
+
+    public function CariPegawai(Request $request){
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
+        $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+
+        if($authuser->role == 1){
+            $pegawai = Pegawai::select('pegawais.*');
+            $ddPeranan = Peranan::All();
+            $ddMukim = Mukim::select('U_Mukim_ID','Mukim')->orderBy('Mukim', 'ASC')->get();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID);
+            $ddPeranan = Peranan::where('peranan_id', '>=', '3')->get();
+            $ddMukim = Mukim::where('status', 1)->where('U_Negeri_ID', $authpegawai->Mukim->U_Negeri_ID)->orderBy('Mukim', 'ASC')->get();
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID);
+            $ddPeranan = Peranan::where('peranan_id', '>=', '4')->get();
+            $ddMukim = Mukim::where('status', 1)->where('U_Daerah_ID', $authpegawai->Mukim->U_Daerah_ID)->orderBy('Mukim', 'ASC')->get();
+        }
+
+        if(!empty($request->nama)){
+            $pegawai->where('nama', 'like', '%'.$request->nama.'%');
+        }
+        if(!empty($request->mukim)){
+            $pegawai->where('mukim', 'like', '%'.$request->mukim.'%');
+        }
+        if(!empty($request->PT)){
+            $pegawai->where('NamaPT', 'like', '%'.$request->PT.'%');
+        }
+
+        if($authuser->role == 1){
+            $result = $pegawai->get();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $result = $pegawai->get()->unique();
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $result = $pegawai->get()->unique();
+        }
+        // dd($result);
+
+        return view('pegawaiWeb.index'
+        ,[
+            'pegawai'=>$result,
+            'ddPeranan'=>$ddPeranan,
+            'ddMukim'=>$ddMukim
+        ]
+        );
+    }
+
+    public function ViewAll()
+    {
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
+        $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
         // $authmukim = $authpegawai->Negeri;
         if($authuser->role == 1){
             $pegawai = Pegawai::all();
-            // all();
-            // take(100)->get();
             $ddPeranan = Peranan::All();
-            $ddMukim = Mukim::select('U_Mukim_ID','Mukim')->where('status', 1)->orderBy('Mukim', 'ASC')->get();
+            $ddMukim = Mukim::select('U_Mukim_ID','Mukim')->orderBy('Mukim', 'ASC')->get();
         }else if($authuser->role == 3 || $authuser->role == 5){
             $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get()->unique();
             $ddPeranan = Peranan::where('peranan_id', '>=', '3')->get();
@@ -43,13 +117,6 @@ class PegawaiControllerWeb extends Controller
             return redirect('/landing');
         }
 
-        // foreach ($pegawai as $pegawai_d){
-        //     $muk = Mukim::select('Mukim')->where('U_Mukim_ID',$pegawai_d->mukim)->first();
-        //     if(isset($muk)){
-        //         $pegawai_d->Mukimname = $muk->Mukim;
-        //     }
-        // }
-            // dd($pegawai);
         return view('pegawaiWeb.index'
         ,[
             'pegawai'=>$pegawai,

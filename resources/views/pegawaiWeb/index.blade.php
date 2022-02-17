@@ -3,12 +3,14 @@
 @section('content')
 <div class="card">
     <div class="card-body p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
-        <div class="row align-items-center">
+        <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/pegawaiWeb"> 
+        <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
+        <div class="row align-items-center" style="padding-top:15px;">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
                 @if (Auth::user()->role == 1)
                 <div style="padding-bottom: 20px;" id="test">
-                    <a class="btn btn-primary" onclick="API()" href="pegawaiPost2">CALL HRIP</a>
+                    <a class="btn btn-primary" onclick="API()" href="pegawaiPost2">Panggil HRIP</a>
                 </div>
                 @endif
                 <table class="tblpegawai table table-sm table-hover" id="pegawaitbl" style="padding-bottom:2vh;padding-right:4vh" >
@@ -81,7 +83,7 @@
                                     <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:18vh;">
                                         <option selected="true" disabled="disabled">Peranan</option>
                                         @foreach ($ddPeranan as $items)
-                                            <option value="{{ $items->peranan_id }}" @if($user->user){{ ( $items->peranan_id == $user->peranan_pegawai) ? 'selected' : '' }} @endif> 
+                                            <option value="{{ $items->peranan_id }}" {{ $items->peranan_id == $user->peranan_pegawai ? 'selected' : '' }}> 
                                                 {{ $items->kod_peranan }} 
                                             </option>
                                         @endforeach
@@ -93,7 +95,7 @@
                                         <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox"/>
                                 </td>
                                 <td class="align-middle text-nowrap">
-                                    <button class="btn btn-primary" type="submit" onclick="simpanpengguna({{$user->id}})" >Simpan </button>
+                                    <button class="btn btn-primary" type="button" onclick="simpanpengguna({{$user->id}})" >Simpan </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -280,6 +282,7 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
 var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
     var modal = document.getElementById("myModal");
@@ -287,26 +290,39 @@ span.onclick = function() {
 }
 
 function API(){
-    $('.loader').show();
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "/pegawaiPost2",
-        type:"GET",
-        success: function(data) {
-            alert("Data Pegawai Berjaya dan Selesai Ditarik");
-            $('.loader').hide();
-            location.reload();
-        }
-    });
+    if (confirm("Amaran! Panggilan API akan mengambil masa yang lama.")) {
+        $('.loader').show();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/pegawaiPost2",
+            type:"GET",
+            success: function(data) {
+                alert("Data Pegawai Berjaya dan Selesai Ditarik");
+                $('.loader').hide();
+                location.reload();
+            }
+        });
+    }
 }
 
 function datatable(){
     var table = $('#pegawaitbl').DataTable({
         "paging":   true,
         "bFilter": true,
-        // "stateSave": true,
+        "language": {
+            "lengthMenu": "_MENU_ rekod setiap paparan",
+            "zeroRecords": "Maaf - Tiada data dijumpai",
+            "info": "Menunjukkan paparan _PAGE_ daripada _PAGES_ paparan",
+            "infoEmpty": "Tiada rekod dijumpai",
+            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+            "sSearch": "Carian :",
+            "paginate": {
+                "previous": "Sebelum",
+                "next": "Seterusnya"
+            }
+        },
         "columnDefs": [
     { "orderable": false, "targets": [4,5,6,7] }
   ],
@@ -354,22 +370,7 @@ function datatable(){
 
 function GetPengguna(){
     var user = <?php echo $pegawai; ?>;
-    // var mukim = <?php echo $ddMukim; ?>;
-    // console.log(user);
-    // var selectList = document.createElement("select");
-    // selectList.className = "form-select form-select-sm";
-    // selectList.style.width = "27vh";
-        
-    // for (var j = 0; j < mukim.length; j++) {
-    //     var option = document.createElement("option");
-    //     option.value = mukim[j].U_Mukim_ID;
-    //     option.text = mukim[j].Mukim;
-    //     selectList.appendChild(option);
-    // }
-    // selectList.setAttribute("onchange", ChangeMukim(user[i].id, this.value));
-    // $(".mukimdrop").append(selectList);
     
-
     for (var i=0; i < user.length; i++) {
         var val = user[i].user;
         
@@ -393,27 +394,34 @@ function simpanpengguna(user){
         status = 0;
     }
     var peranan = $("#ddperanan"+id).find(":selected").val();
-    // var mukim = $("#sltMukim"+id).val();
-    //console.log(peranan);
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "/pegawaiPost",
-        type:"PUT",
-        data: {     
-            id:id,
-            status:status,
-            peranan:peranan,
-            // mukim:mukim
-        },
-        success: function(data) {
-            //swal("Congrats!", ", Your account is created!", "success");
-            alert("Akaun Pegawai Kemaskini Berjaya");
-            $('.loader').hide();
-            // location.reload();
-        }
-    });
+    var mukim = $("#sltMukim"+id).val();
+    console.log('mukim', mukim);
+
+    if(status == 1 && (mukim == '')){
+        alert('Sila tetapkan Mukim untuk aktifkan Pegawai')
+        $("#flexSwitchCheckDefault"+id).prop('checked',false);
+        $('.loader').hide(); 
+    }else {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/pegawaiPost",
+            type:"PUT",
+            data: {     
+                id:id,
+                status:status,
+                peranan:peranan,
+                // mukim:mukim
+            },
+            success: function(data) {
+                //swal("Congrats!", ", Your account is created!", "success");
+                alert("Akaun Pegawai Kemaskini Berjaya");
+                $('.loader').hide();
+                // location.reload();
+            }
+        });
+    }
 }
 
 </script>

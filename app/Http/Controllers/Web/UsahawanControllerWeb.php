@@ -21,6 +21,7 @@ use App\Models\AuditTrail;
 use App\Models\Pekebun;
 // use App\Models\Etnik;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\DB;
 error_reporting(0);
 
 class UsahawanControllerWeb extends Controller
@@ -39,12 +40,13 @@ class UsahawanControllerWeb extends Controller
         $ddMukim = Mukim::where('status', 1)->get();
         $ddParlimen = Parlimen::all();
         $ddDun = Dun::all();
-        $ddKampung = Kampung::where('status', 1)->get();
+        $ddKampung = Kampung::select('U_Kampung_ID','Kampung')->where('status', 1)->get();
         $ddSeksyen = Seksyen::where('status', 1)->get();
         $ddKateUsahawan = KategoriUsahawan::where('status_kategori_usahawan', 'aktif')->get();
         // $ddEtnik = Etnik::all();
         if($authuser->role == 1){
-            $users = Usahawan::all();
+            $users = Usahawan::without(['PT','daerah','dun','parlimen','kateusah','syarikat','etnik','mukim','kampung','seksyen','insentif'])->get();
+            
         }else if($authuser->role == 3){
             $users = Usahawan::where('U_Negeri_ID',$authmukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4){

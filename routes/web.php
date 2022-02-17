@@ -55,6 +55,9 @@ Route::resource('/landing', LandingControllerWeb::class);
 Route::put('pegawaiPost', [PegawaiControllerWeb::class, 'pegawaiPost'])->name('pegawai.post');
 Route::resource('/pegawaiWeb', PegawaiControllerWeb::class);
 Route::get('pegawaiPost2', [PegawaiControllerWeb::class, 'pegawaiPost2'])->name('pegawai.post2');
+Route::get('ViewAll', [PegawaiControllerWeb::class, 'ViewAll']);
+Route::post('CariPegawai', [PegawaiControllerWeb::class, 'CariPegawai']);
+
 Route::resource('/usahawanWeb', UsahawanControllerWeb::class);
 Route::put('usahawanPost', [UsahawanControllerWeb::class, 'usahawanPost'])->name('usahawan.post');
 Route::post('usahawanGet', [UsahawanControllerWeb::class, 'usahawanGet'])->name('usahawan.get');

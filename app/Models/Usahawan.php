@@ -10,7 +10,6 @@ class Usahawan extends Model
     use HasFactory;
 
     protected $with = ['user','pekebun','negeri','PT','daerah','dun','parlimen','perniagaan','kateusah','syarikat', 'insentif', 'etnik', 'mukim', 'kampung', 'seksyen'];
-
         /**
          * Get the user associated with the Pegawai
          *
