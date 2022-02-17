@@ -34,9 +34,9 @@
                         <td style="text-align:center;"><button class="btn btn-primary btn-sm" style="width:15vh" type="button" onclick="simpanJenis();">Simpan </button></td>
                         </form>
                     </tr>
-                    @foreach ($jenisinsentif as $jenisinsentif)
+                    @foreach ($jenisinsentifs as $jenisinsentif)
                     <tr>
-                        <form id="updatejenis" method="POST" action="/jenisinsentif/{{$jenisinsentif->id}}" enctype="multipart/form-data">
+                        <form id="updatejenis{{$jenisinsentif->id}}" method="POST" action="/jenisinsentif/{{$jenisinsentif->id}}" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
                         <td class="text-nowrap">
@@ -53,8 +53,8 @@
                             </select>
                         </td>
                         <td class="text-nowrap">
-                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="updateJenis();">Kemaskini</button>
-                        </form>
+                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="updateJenis({{$jenisinsentif->id}});">Kemaskini</button>
+                        
                             {{-- &nbsp
                             <form method="POST" style="display:inline-block;" action="{{ route('jenisinsentif.destroy', $jenisinsentif->id) }}">
                             @csrf  
@@ -62,6 +62,7 @@
                             <button type="submit" class="btn btn-danger btn-sm">Buang</button>
                             </form> --}}
                         </td>
+                        </form>
                     </tr>
                     @endforeach
                  </tbody>
@@ -85,10 +86,10 @@
         }
     }
 
-    function updateJenis(){
+    function updateJenis(id){
         if (confirm('Anda pasti ingin simpan data Jenis Insentif?')) {
             $('.loader').show();
-            $('#updatejenis').submit();
+            $('#updatejenis'+id).submit();
         }else{
             alert('Data tidak disimpan');
         }

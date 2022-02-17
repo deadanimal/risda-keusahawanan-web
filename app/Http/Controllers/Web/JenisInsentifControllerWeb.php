@@ -14,7 +14,7 @@ class JenisInsentifControllerWeb extends Controller
         $jenisinsentif = JenisInsentif::orderBy('created_at', 'DESC')->get();
         return view('komponendash.jenisinsentif'
         ,[
-            'jenisinsentif'=>$jenisinsentif
+            'jenisinsentifs'=>$jenisinsentif
         ] 
         );
 
@@ -74,6 +74,7 @@ class JenisInsentifControllerWeb extends Controller
             $jenisinsentif->status = $request->status;
             $jenisinsentif->save();
 
+            // dd($id);
             $audit = new AuditTrail();
             $authuser = Auth::user();
             $audit->idpegawai = $authuser->idpegawai;

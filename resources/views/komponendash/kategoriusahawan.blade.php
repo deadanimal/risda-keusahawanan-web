@@ -42,7 +42,7 @@
                     </tr>
                     @foreach ($kategoriusahawan as $kateusahawan)
                     <tr>
-                        <form id="kemaskinikate" method="POST" action="/kategoriusahawan/{{$kateusahawan->id}}" enctype="multipart/form-data">
+                        <form id="kemaskinikate{{$kateusahawan->id}}" method="POST" action="/kategoriusahawan/{{$kateusahawan->id}}" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
                         <td class="text-nowrap">
@@ -65,7 +65,7 @@
                             </select>
                         </td>
                         <td class="text-nowrap">
-                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="updatekategori();">Kemaskini</button>
+                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="updatekategori({{$kateusahawan->id}});">Kemaskini</button>
                         </form>
                             {{-- &nbsp
                             <form method="POST" style="display:inline-block;" action="{{ route('kategoriusahawan.destroy', $kateusahawan->id) }}">
@@ -98,10 +98,10 @@
         }
     }
 
-    function updatekategori(){
+    function updatekategori(id){
         if (confirm('Anda pasti ingin simpan data Kategori Usahawan?')) {
             $('.loader').show();
-            $('#kemaskinikate').submit();
+            $('#kemaskinikate'+id).submit();
         }else{
             alert('Data tidak disimpan');
             return;

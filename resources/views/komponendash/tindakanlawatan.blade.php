@@ -33,7 +33,7 @@
                     </tr>
                     @foreach ($tindakanlawatan as $tindlawatan)
                     <tr>
-                        <form id="kemaskinidata" method="POST" action="/tindakanlawatan/{{$tindlawatan->id}}" enctype="multipart/form-data">
+                        <form id="kemaskinidata{{$tindlawatan->id}}" method="POST" action="/tindakanlawatan/{{$tindlawatan->id}}" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
                         <td class="text-nowrap">
@@ -47,7 +47,7 @@
                             </select>
                         </td>
                         <td class="text-nowrap">
-                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="kemaskinilawatan();">Kemaskini</button>
+                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="kemaskinilawatan({{$tindlawatan->id}});">Kemaskini</button>
                         </form>
                             {{-- <form method="POST" style="display:inline-block;" action="{{ route('tindakanlawatan.destroy', $tindlawatan->id) }}">
                             @csrf  
@@ -78,10 +78,10 @@
         }
     }
 
-    function kemaskinilawatan(){
+    function kemaskinilawatan(id){
         if (confirm('Anda pasti ingin kemaskini data tindakan lawatan?')) {
             $('.loader').show();
-            $('#kemaskinidata').submit();
+            $('#kemaskinidata'+id).submit();
         }else{
             alert('Data tidak disimpan');
         }

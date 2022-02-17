@@ -49,7 +49,7 @@
                         </tr>
                         @foreach ($kategorialiran as $katealiran)
                         <tr>
-                            <form id="updateAliran" method="POST" action="/kategorialiran/{{$katealiran->id}}" enctype="multipart/form-data">
+                            <form id="updateAliran{{$katealiran->id}}" method="POST" action="/kategorialiran/{{$katealiran->id}}" enctype="multipart/form-data">
                             @csrf
                             @method("PUT")
                             <td class="text-nowrap">
@@ -85,14 +85,15 @@
                             </td> -->
                         
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm" style="width:20vh" onclick="Updatealiran();">Kemaskini</button>
-                                </form>
+                                <button type="button" class="btn btn-primary btn-sm" style="width:20vh" onclick="Updatealiran({{$katealiran->id}});">Kemaskini</button>
+                                
                                 {{-- <form method="POST" style="display:inline-block;" action="{{ route('kategorialiran.destroy', $katealiran->id) }}">
                                 @csrf  
                                 @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm">Buang</button>
                                 </form> --}}
                             </td>
+                            </form>
                         </tr>
                         @endforeach
                      </tbody>
@@ -117,10 +118,10 @@ function simpanaliran(){
     }
 }
 
-function Updatealiran(){
+function Updatealiran(id){
     if (confirm('Anda pasti ingin kemaskini data kategori aliran?')) {
         $('.loader').show();
-        $('#updateAliran').submit();
+        $('#updateAliran'+id).submit();
     }else{
         alert('Data tidak disimpan');
     }
