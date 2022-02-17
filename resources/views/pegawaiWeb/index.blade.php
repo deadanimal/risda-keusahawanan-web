@@ -10,7 +10,7 @@
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
                 @if (Auth::user()->role == 1)
                 <div style="padding-bottom: 20px;" id="test">
-                    <a class="btn btn-primary" onclick="API()" href="pegawaiPost2">Panggil HRIP</a>
+                    <a class="btn btn-primary" onclick="API()">Panggil HRIP</a>
                 </div>
                 @endif
                 <table class="tblpegawai table table-sm table-hover" id="pegawaitbl" style="padding-bottom:2vh;padding-right:4vh" >
@@ -304,6 +304,8 @@ function API(){
                 location.reload();
             }
         });
+    }else{
+        return false;
     }
 }
 

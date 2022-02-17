@@ -21,8 +21,8 @@
                 <input class="form-control" name="nama" type="text"/>
             </div>
             <div class="col-lg-12">
-                <label class="form-label">Mukim Pegawai</label>
-                <select name="mukim" class="form-select" aria-label=".form-select-sm example" style="display:inline-block;">
+                <label class="form-label mukim">Mukim Pegawai</label>
+                <select name="mukim" class="form-select" aria-label=".form-select mukim" style="display:inline-block;">
                     <option selected="true" value='' disabled="disabled">Mukim</option>
                     <option value=''></option>
                     @foreach ($ddMukim as $items)
@@ -33,8 +33,8 @@
                 </select>
             </div>
             <div class="col-lg-12">
-                <label class="form-label">Pusat Tanggungjawab Pegawai</label>
-                <select name="PT" class="form-select" aria-label=".form-select-sm example" style="display:inline-block;">
+                <label class="form-label pt">Pusat Tanggungjawab Pegawai</label>
+                <select name="PT" class="form-select" aria-label=".form-select pt" style="display:inline-block;">
                     <option selected="true" value='' disabled="disabled">Pusat Tanggungjawab</option>
                     <option value=''></option>
                     @foreach ($ddPT as $items)
