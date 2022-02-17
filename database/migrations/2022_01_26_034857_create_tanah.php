@@ -16,7 +16,7 @@ class CreateTanah extends Migration
         Schema::create('tanahs', function (Blueprint $table) {
             $table->id();
 
-            $table->string('pekebunid');
+            $table->string('pekebunid')->nullable();
             
             $table->string('No_Geran',50)->nullable();
             $table->string('No_Lot',50)->nullable();
