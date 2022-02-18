@@ -64,6 +64,9 @@ Route::post('usahawanGet', [UsahawanControllerWeb::class, 'usahawanGet'])->name(
 Route::post('usahawanPost2', [UsahawanControllerWeb::class, 'usahawanPost2'])->name('usahawan.post2');
 Route::put('SahUsahawanProfil', [UsahawanControllerWeb::class, 'SahUsahawanProfil'])->name('usahawan.postsahprofil');
 Route::post('UploadProfile', [UsahawanControllerWeb::class, 'UploadProfile'])->name('usahawan.uploadprofile');
+Route::get('ViewAllUsahawan', [UsahawanControllerWeb::class, 'ViewAllUsahawan']);
+Route::post('CariUsahawan', [UsahawanControllerWeb::class, 'CariUsahawan']);
+
 Route::resource('/insentifWeb', InsentifControllerWeb::class);
 Route::resource('/insentifdetail', InsentifControllerWeb::class);
 Route::resource('/komponendash', KomponenDashControllerWeb::class);

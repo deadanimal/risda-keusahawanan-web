@@ -5,7 +5,9 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
-        <div class="row align-items-center">
+        <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/usahawanWeb"> 
+            <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
+        <div class="row align-items-center" style="padding-top:15px;">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Usahawan</h3>
                 <table id="penggunatbl">
@@ -55,7 +57,7 @@
                             <td class="text-nowrap form-check-label">{{$user->nokadpengenalan}}</td>
                             <td class="text-nowrap form-check-label">{{$user->negeri->Negeri}}</td>
                             <td class="text-nowrap">
-                                <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:30vh;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
+                                <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:40vh;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
                                 <option selected="true" disabled="disabled" selected="">Kawasan</option>
                                 @foreach ($ddPT as $items)
                                     <option value="{{ $items->Kod_PT }}" {{ ( $items->Kod_PT == $user->Kod_PT) ? 'selected' : '' }}> 
@@ -516,13 +518,18 @@ function datatable(){
     var table = $('#penggunatbl').DataTable({
         "paging":   true,
         "bFilter": true,
-        // "stateSave": true,
-        // stateSaveCallback: function(settings,data) {
-        //     localStorage.setItem( 'DataTables_' + settings.sInstance, JSON.stringify(data) )
-        // },
-        // stateLoadCallback: function(settings) {
-        //     return JSON.parse( localStorage.getItem( 'DataTables_' + settings.sInstance ) )
-        // },
+        "language": {
+            "lengthMenu": "_MENU_ rekod setiap paparan",
+            "zeroRecords": "Maaf - Tiada data dijumpai",
+            "info": "Menunjukkan paparan _PAGE_ daripada _PAGES_ paparan",
+            "infoEmpty": "Tiada rekod dijumpai",
+            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+            "sSearch": "Carian :",
+            "paginate": {
+                "previous": "Sebelum",
+                "next": "Seterusnya"
+            }
+        },
         initComplete: function () {
             this.api().columns([2]).every( function () {
                 var column = this;
@@ -590,14 +597,24 @@ function aktifkanpengguna(type,user,input){
         //$("#ddPT"+user.id).val;
         //alert(status);
     }else if(type == 'status'){
+        var check = $("#ddPT"+user.id).val();
+        // console.log('check',check);
         if ($("#flexSwitchCheckDefault"+id).is(":checked")){
             status = 1;
         }else{
             status = 0;
         }
+        
+        if((check == null || check == '') && status == 1){
+
+            alert('Sila tetapkan Pusat Tanggungjawab untuk aktifkan Usahawan')
+            $("#flexSwitchCheckDefault"+id).prop('checked',false);
+            $('.loader').hide(); 
+
+            return false;
+
+        }
     }
-    
-    
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

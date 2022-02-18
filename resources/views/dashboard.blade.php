@@ -460,7 +460,7 @@
 </html>
 <script type="text/javascript">
   $( document ).ready(function() {
-    var role = ''+<?php echo Auth::user(); ?>;
+    var role = '<?php echo Auth::user()->name; ?>';
 
     if(role == ""){
       alert("Session Expired Kindly Login");

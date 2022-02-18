@@ -69,10 +69,10 @@ class PegawaiControllerWeb extends Controller
             $pegawai->where('nama', 'like', '%'.$request->nama.'%');
         }
         if(!empty($request->mukim)){
-            $pegawai->where('mukim', 'like', '%'.$request->mukim.'%');
+            $pegawai->where('mukim', $request->mukim);
         }
         if(!empty($request->PT)){
-            $pegawai->where('NamaPT', 'like', '%'.$request->PT.'%');
+            $pegawai->where('NamaPT', $request->PT);
         }
 
         if($authuser->role == 1){

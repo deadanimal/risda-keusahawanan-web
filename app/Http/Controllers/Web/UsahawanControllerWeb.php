@@ -28,6 +28,18 @@ class UsahawanControllerWeb extends Controller
 {
     public function index()
     {
+        $ddPT = PusatTanggungjawab::where('status', 1)->get();
+        $ddNegeri = Negeri::where('status', 1)->get();
+
+        return view('usahawanWeb.landing'
+        ,[
+            'ddNegeri'=>$ddNegeri,
+            'ddPT'=>$ddPT
+        ]
+        );
+    }
+
+    public function CariUsahawan(Request $request){
         $authuser = Auth::user();
         if(!isset($authuser)){
             return redirect('/landing');
@@ -43,10 +55,66 @@ class UsahawanControllerWeb extends Controller
         $ddKampung = Kampung::select('U_Kampung_ID','Kampung')->where('status', 1)->get();
         $ddSeksyen = Seksyen::where('status', 1)->get();
         $ddKateUsahawan = KategoriUsahawan::where('status_kategori_usahawan', 'aktif')->get();
-        // $ddEtnik = Etnik::all();
+        if($authuser->role == 1){
+            $users = Usahawan::without(['PT','daerah','dun','parlimen','kateusah','syarikat','etnik','mukim','kampung','seksyen','insentif']);
+        }else if($authuser->role == 3){
+            $users = Usahawan::where('U_Negeri_ID',$authmukim->U_Negeri_ID);
+        }else if($authuser->role == 4){
+            $users = Usahawan::where('U_Daerah_ID',$authmukim->U_Daerah_ID);
+        }else if($authuser->role == 7){
+            $users = Usahawan::where('Kod_PT',$authpegawai->NamaPT);
+        }else{
+            return redirect('/landing');
+        }
+
+        if(!empty($request->nama)){
+            $users->where('namausahawan', 'like', '%'.$request->nama.'%');
+        }
+        if(!empty($request->noKP)){
+            $users->where('nokadpengenalan', 'like', '%'.$request->noKP.'%');
+        }
+        if(!empty($request->negeri)){
+            $users->where('U_Negeri_ID', $request->negeri);
+        }
+        if(!empty($request->PT)){
+            $users->where('Kod_PT', $request->PT);
+        }
+
+        $result = $users->get();
+
+        return view('usahawanWeb.index',[
+            'users'=>$result,
+            'ddPT'=>$ddPT,
+            'ddNegeri'=>$ddNegeri,
+            'ddDaerah'=>$ddDaerah,
+            'ddMukim'=>$ddMukim,
+            'ddParlimen'=>$ddParlimen,
+            'ddDun'=>$ddDun,
+            'ddKampung'=>$ddKampung,
+            'ddSeksyen'=>$ddSeksyen,
+            'ddKateUsahawan'=>$ddKateUsahawan
+        ]);
+    }
+
+    public function ViewAllUsahawan()
+    {
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
+        $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+        $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
+        $ddPT = PusatTanggungjawab::where('status', 1)->get();
+        $ddNegeri = Negeri::where('status', 1)->get();
+        $ddDaerah = Daerah::where('status', 1)->get();
+        $ddMukim = Mukim::where('status', 1)->get();
+        $ddParlimen = Parlimen::all();
+        $ddDun = Dun::all();
+        $ddKampung = Kampung::select('U_Kampung_ID','Kampung')->where('status', 1)->get();
+        $ddSeksyen = Seksyen::where('status', 1)->get();
+        $ddKateUsahawan = KategoriUsahawan::where('status_kategori_usahawan', 'aktif')->get();
         if($authuser->role == 1){
             $users = Usahawan::without(['PT','daerah','dun','parlimen','kateusah','syarikat','etnik','mukim','kampung','seksyen','insentif'])->get();
-            
         }else if($authuser->role == 3){
             $users = Usahawan::where('U_Negeri_ID',$authmukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4){
@@ -56,18 +124,6 @@ class UsahawanControllerWeb extends Controller
         }else{
             return redirect('/landing');
         }
-
-        // foreach ($users as $usahawan) {
-        //     $status = User::where('usahawanid', $usahawan->usahawanid)->first();
-        //     if(isset($status)){
-        //         $usahawan->status_pengguna = $status->status_pengguna;
-        //     }
-        //     // $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
-        //     // if(isset($negeri)){
-        //     //     $usahawan->negeri = $negeri->Negeri;
-        //     // }
-        // }
-
 
         return view('usahawanWeb.index',[
             'users'=>$users,
@@ -79,17 +135,9 @@ class UsahawanControllerWeb extends Controller
             'ddDun'=>$ddDun,
             'ddKampung'=>$ddKampung,
             'ddSeksyen'=>$ddSeksyen,
-            'ddKateUsahawan'=>$ddKateUsahawan,
-            // 'ddEtnik'=>$ddEtnik
+            'ddKateUsahawan'=>$ddKateUsahawan
         ]);
     }
-
-    // public function show($id)
-    // {
-        // return view('usahawan.tetapanusahawan',[
-        //     'id'=>$id
-        // ]);
-//    }
 
     public function update(Request $request, $id)
     {
@@ -154,9 +202,12 @@ class UsahawanControllerWeb extends Controller
     public function usahawanPost(Request $request)
     {
         if($request->type == 'status'){
-            $user = User::where('usahawanid', $request->id)->first();
-            $user->status_pengguna = $request->status;
-            $user->save();
+            $user = User::where('usahawanid', $request->id)->update
+            ([
+                'status_pengguna' => $request->status
+            ]);
+            // $user->status_pengguna = 
+            // $user->save();
             $audit = new AuditTrail();
 
             $authuser = Auth::user();
