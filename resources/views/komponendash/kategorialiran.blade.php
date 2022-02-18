@@ -5,7 +5,7 @@
         <div class="row align-items-center" style="overflow-x: scroll !important;overflow-y: scroll !important;">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Kategori Aliran</h3>
-                <table id="pegawaitbl" style="padding-bottom:2vh;text-align:center;">
+                <table id="tblaliran" style="padding-bottom:2vh;text-align:center;">
                     <colgroup>
                         <col span="1" style="width: 28%;">
                         <col span="1" style="width: 28%;">
@@ -106,6 +106,23 @@
 @section('script')
 <script type="text/javascript">
 $( document ).ready(function() {
+    var table = $('#tblaliran').DataTable({
+        "paging":   true,
+        "bFilter": false,
+        "sorting":false,
+        "language": {
+            "lengthMenu": "_MENU_ rekod setiap paparan",
+            "zeroRecords": "Maaf - Tiada data dijumpai",
+            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+            "infoEmpty": "Tiada rekod dijumpai",
+            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+            "sSearch": "Carian :",
+            "paginate": {
+                "previous": "Sebelum",
+                "next": "Seterus"
+            }
+        }
+    });
     $('.loader').hide();
 })
 

@@ -17,10 +17,13 @@ class InsentifControllerWeb extends Controller
     public function index()
     {
         $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
         $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
         // $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         if($authuser->role == 1){
-            $users = Usahawan::all();
+            $users = Usahawan::select('namausahawan','nokadpengenalan','usahawanid','Kod_PT')->with(['PT'])->without(['user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])->get();
         }else if($authuser->role == 3){
             $users = Usahawan::where('U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4){
@@ -32,7 +35,7 @@ class InsentifControllerWeb extends Controller
         }else{
             return redirect('/landing');
         }
-        
+        // dd($users);
         return view('insentifWeb.index'
         ,[
             'users'=>$users

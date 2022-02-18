@@ -7,9 +7,10 @@
               <h3 class="text" style="padding-bottom:20px;color:#00A651;">Insentif Usahawan</h3>
               <table id="insentiftbl">
                   <colgroup>
-                      <col span="1" style="width: 50%;">
                       <col span="1" style="width: 35%;">
-                      <col span="1" style="width: 20%;">
+                      <col span="1" style="width: 15%;">
+                      <col span="1" style="width: 35%;">
+                      <col span="1" style="width: 15%;">
                    </colgroup>
                   <style>
                       .dataTable-dropdown{
@@ -34,9 +35,10 @@
                   </style>
                   <thead>
                       <tr class="align-middle">
-                          <th scope="col">Nama</th>
-                          <th scope="col">No. KP</th>
-                          <th scope="col">Kemaskini Insentif</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">No. KP</th>
+                            <th scope="col">Pusat Tanggungjawab</th>
+                            <th scope="col">Kemaskini Insentif</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -44,6 +46,7 @@
                       <tr class="align-middle">
                           <td class="text-nowrap"><label class="form-check-label">{{$user->namausahawan}}</label></td>
                           <td class="text-nowrap"><label class="form-check-label">{{$user->nokadpengenalan}}</label></td>
+                          <td class="text-nowrap"><label class="form-check-label">@if(isset($user->PT)){{$user->PT->keterangan}}@endif</label></td>
                           <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="window.location.href='/insentifdetail/{{$user->usahawanid}}'">
                               <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Kemaskini
                           </button></td>
@@ -63,8 +66,21 @@ $( document ).ready(function() {
     var table = $('#insentiftbl').DataTable({
         "paging":   true,
         "bFilter": true,
+        "language": {
+            "lengthMenu": "_MENU_ rekod setiap paparan",
+            "zeroRecords": "Maaf - Tiada data dijumpai",
+            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+            "infoEmpty": "Tiada rekod dijumpai",
+            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+            "sSearch": "Carian :",
+            "paginate": {
+                "previous": "Sebelum",
+                "next": "Seterus"
+            }
+        }
     });
     $('.loader').hide();
+    // console.log(<?php echo $users; ?>);
 });
 
 </script>

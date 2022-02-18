@@ -16,7 +16,7 @@ class CreateUsahawansTable extends Migration
         Schema::create('usahawans', function (Blueprint $table) {
             $table->id();
             $table->string('usahawanid')->nullable();
-            $table->integer('Kod_PT')->nullable();
+            $table->string('Kod_PT',12)->nullable();
             $table->string('namausahawan',150);
             $table->string('nokadpengenalan')->nullable();
             $table->date('tarikhlahir')->nullable();

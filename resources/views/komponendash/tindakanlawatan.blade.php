@@ -4,7 +4,7 @@
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center" style="overflow-x: scroll !important;overflow-y: scroll !important;">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Tindakan Lawatan</h3>
-            <table id="tbl" style="padding-bottom:2vh;text-align:center;">
+            <table id="tbltindaklawat" style="padding-bottom:2vh;text-align:center;">
                 {{-- <colgroup>
                     <col span="1" style="width: 50%;">
                     <col span="1" style="width: 20%;">
@@ -66,6 +66,23 @@
 @section('script')
 <script type="text/javascript">
     $( document ).ready(function() {
+        var table = $('#tbltindaklawat').DataTable({
+            "paging":   true,
+            "bFilter": false,
+            "sorting":false,
+            "language": {
+                "lengthMenu": "_MENU_ rekod setiap paparan",
+                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                "infoEmpty": "Tiada rekod dijumpai",
+                "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                "sSearch": "Carian :",
+                "paginate": {
+                    "previous": "Sebelum",
+                    "next": "Seterus"
+                }
+            }
+        });
         $('.loader').hide();
     });
 

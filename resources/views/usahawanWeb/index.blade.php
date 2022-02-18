@@ -521,13 +521,13 @@ function datatable(){
         "language": {
             "lengthMenu": "_MENU_ rekod setiap paparan",
             "zeroRecords": "Maaf - Tiada data dijumpai",
-            "info": "Menunjukkan paparan _PAGE_ daripada _PAGES_ paparan",
+            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
             "infoEmpty": "Tiada rekod dijumpai",
             "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
             "sSearch": "Carian :",
             "paginate": {
                 "previous": "Sebelum",
-                "next": "Seterusnya"
+                "next": "Seterus"
             }
         },
         initComplete: function () {
