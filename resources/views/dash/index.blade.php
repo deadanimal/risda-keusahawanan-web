@@ -30,9 +30,12 @@
             <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('Negeri',this.value)" id="iptNegeri">
                 <option value="">Negeri</option>
                 @foreach ($ddNegeri as $items)
-                    <option value="{{ $items->U_Negeri_ID }}" {{ ( $items->U_Negeri_ID == $getNegeri) ? 'selected' : '' }}>
-                        {{ $items->Negeri }} 
-                    </option>
+                    @if($items->U_Negeri_ID != 14 && $items->U_Negeri_ID != 15 && $items->U_Negeri_ID != 16){
+                        <option value="{{ $items->U_Negeri_ID }}" {{ ( $items->U_Negeri_ID == $getNegeri) ? 'selected' : '' }}>
+                            {{ $items->Negeri }} 
+                        </option>
+                    }
+                    @endif
                 @endforeach
             </select>
           </div>
@@ -44,17 +47,17 @@
     </div>
 </div>
             <div id="wholepage">
-                <div class="row g-0" style="padding-top:15px;">
+                <div class="row g-0" style="padding-top:20px;">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas" height="500px" style="padding:10px;"></canvas>
+                            <canvas id="canvas" height="500px" style="padding:20px;"></canvas>
                         </div>
                     </div>
                 </div>
                 <div class="row g-0">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas2" height="500px" width="600" style="padding:10px;"></canvas>
+                            <canvas id="canvas2" height="500px" width="600" style="padding:20px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">
@@ -66,7 +69,7 @@
                                         <tr class="text-900 align-middle" style="text-align: center;">
                                             <th>Jantina</th>
                                             <th>Bilangan</th>
-                                            <th>Peratusan</th>
+                                            <th>Peratusan %</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,7 +85,7 @@
                                                 <td>Lain Lain</td>
                                             @endif
                                             <td>{{$jantinanums[$key]}}</td>
-                                            <td>{{($jantinanums[$key] / $total1) * 100}}</td>
+                                            <td>{{number_format(($jantinanums[$key] / $total1) * 100 , 2)}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -95,14 +98,14 @@
                 <div class="row g-0">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas3" height="500" style="padding:15px;"></canvas>
+                            <canvas id="canvas3" height="500" style="padding:20px;"></canvas>
                         </div>
                     </div>
                 </div>
                 <div class="row g-0" style="padding-top: 10px;">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas4" height="500px" width="600" style="padding:15px;"></canvas>
+                            <canvas id="canvas4" height="500px" width="600" style="padding:20px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">
@@ -114,7 +117,7 @@
                                         <tr class="text-900 align-middle" style="text-align: center;">
                                             <th>Status Pekebun</th>
                                             <th>Bilangan</th>
-                                            <th>Peratusan</th>
+                                            <th>Peratusan %</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -133,7 +136,7 @@
                                                 <td>ANAK PEKEBUN KECIL</td>
                                             @endif
                                             <td>{{$statdafusahnums[$key]}}</td>
-                                            <td>{{($statdafusahnums[$key] / $total2) * 100}}</td>
+                                            <td>{{number_format(($statdafusahnums[$key] / $total2) * 100 , 2)}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -146,7 +149,7 @@
                 <div class="row g-0" style="padding-top: 10px;">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas5" height="500" width="600" style="padding:15px;"></canvas>
+                            <canvas id="canvas5" height="500" width="600" style="padding:20px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">
@@ -158,7 +161,7 @@
                                         <tr class="text-900 align-middle" style="text-align: center;">
                                             <th>Kategori Usahawan</th>
                                             <th>Bilangan</th>
-                                            <th>Peratusan</th>
+                                            <th>Peratusan %</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -166,7 +169,7 @@
                                         <tr class="align-middle" style="text-align: center;">
                                             <td>{{$kateuasahval}}</td>
                                             <td>{{$kateusahawannums[$key]}}</td>
-                                            <td>{{($kateusahawannums[$key] / $total3) * 100}}</td>
+                                            <td>{{number_format(($kateusahawannums[$key] / $total3) * 100 , 2)}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -179,7 +182,7 @@
                 <div class="row g-0">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                        <canvas id="canvas6" height="280" style="padding:15px;"></canvas>
+                        <canvas id="canvas6" height="500" style="padding:20px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -197,27 +200,27 @@
         html2canvas(document.getElementById("wholepage"), {
             onrendered: function(canvas) {
                 // var img = canvas.toDataURL(); //image data of canvas
-                var pdf = new jsPDF('p', 'pt', 'letter');
+                var pdf = new jsPDF('l', 'pt', 'a4');
                 // pdf.text(50, 30, );
                 var rep = "RISDA eKeusahawanan Statistic Report \n Jenis Insentif -" + document.getElementById("iptJenisInsentif").value + "     Tahun -" + document.getElementById("iptYear").value + "     Negeri -" + document.getElementById("iptNegeri").value;
                 console.log(rep);
                 pdf.setFontSize(9);
                 pdf.text(50, 30, rep);
-                for (var i = 0; i <= page.clientHeight/980; i++) {
+                for (var i = 0; i <= page.clientHeight/490; i++) {
                     //! This is all just html2canvas stuff
                     var srcImg  = canvas;
                     var sX      = 0;
-                    var sY      = 980*i; // start 980 pixels down for every new page
-                    var sWidth  = 900;
-                    var sHeight = 980;
+                    var sY      = 490*i; // start 980 pixels down for every new page
+                    var sWidth  = 1200;
+                    var sHeight = 490;
                     var dX      = 0;
                     var dY      = 0;
-                    var dWidth  = 900;
-                    var dHeight = 980;
+                    var dWidth  = 1100;
+                    var dHeight = 470;
 
                     window.onePageCanvas = document.createElement("canvas");
-                    onePageCanvas.setAttribute('width', 900);
-                    onePageCanvas.setAttribute('height', 980);
+                    onePageCanvas.setAttribute('width', 1200);
+                    onePageCanvas.setAttribute('height', 490);
                     var ctx = onePageCanvas.getContext('2d');
                     // details on this usage of this function: 
                     // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images#Slicing
@@ -232,12 +235,12 @@
                     //! If we're on anything other than the first page,
                     // add another page
                     if (i > 0) {
-                        pdf.addPage(612, 791); //8.5" x 11" in pts (in*72)
+                        pdf.addPage(841.89, 595.28); //8.5" x 11" in pts (in*72)
                     }
                     //! now we declare that we're working on that page
                     pdf.setPage(i+1);
                     //! now we add content to that page!
-                    pdf.addImage(canvasDataURL, 'PNG', 20, 40, (width*.62), (height*.62));
+                    pdf.addImage(canvasDataURL, 'PNG', 20, 40, (width*.80), (height*.80));
 
                 }
                 // doc.addImage(img, 10, 10);
@@ -420,7 +423,8 @@
                 jumnumkateusahawan.push(numkateusahawan[key]);
             }
         }
-
+        console.log(umurgrp);
+        umurgrp.sort();
         for (var key in umurgrp) {
             if (Object.prototype.hasOwnProperty.call(umurgrp, key)) {
                 if(umurgrp[key] == 1){
@@ -455,6 +459,7 @@
             }
         }
 
+    if(document.getElementById("iptNegeri").value != ''){
         var datas = [
             {
                 label: 'Count',
@@ -467,6 +472,7 @@
             labels: jumdaerah,
             datasets: datas
         };
+    }
 
         var datas2 = [
             {
@@ -685,6 +691,9 @@
             type: 'horizontalBar',
             data: barChartData6,
             options: {
+                legend: {
+                    display: false
+                },
                 indexAxis: 'y',
                 elements: {
                     rectangle: {

@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6" style="text-align: center;">
-        <div class="mb-3" style="width: 400px;margin:0 auto;overflow-x: scroll !important;overflow-y: scroll !important;">
+        <div class="mb-3" style="width: 800px;margin:0 auto;">
             @foreach($errors->all() as $error)
                     <li>{{$error}}</li>
                 @endforeach
@@ -12,7 +12,7 @@
                 <div class="d-flex justify-content-between">
                     <label class="form-label" for="split-login-password">Alamat Emel</label>
                 </div>
-                <input class="form-control" type="text" name="email" required/>
+                <input class="form-control" type="text" name="email" value="{{$user->email}}" required/>
                 <div class="d-flex justify-content-between">
                     <label class="form-label" for="split-login-password">Kata Laluan Lama</label>
                 </div>

@@ -128,9 +128,9 @@ class DashControllerWeb extends Controller
             }
             
             if($update == true){
-                if(isset($insentifdata2->daerah)){
-                    array_push($array, $insentifdata2->daerah);
-                }
+                // if(isset($insentifdata2->daerah)){
+                //     array_push($array, $insentifdata2->daerah);
+                // }
                 if(isset($insentifdata2->jantina)){
                     array_push($array2, $insentifdata2->jantina);
                 }   
@@ -202,17 +202,17 @@ class DashControllerWeb extends Controller
                 }
             }
             if($update == true){
-                foreach($array as $key => $value){
-                    if($InsentifData3->daerah == $value){
-                        if(isset($insentif[$key])){
-                            $insentif[$key] = $insentif[$key] + $InsentifData3->nilai_insentif;
-                            $countinsentif[$key] = $countinsentif[$key] + 1;
-                        }else{
-                            $insentif[$key] = $InsentifData3->nilai_insentif;
-                            $countinsentif[$key] = 1;
-                        }
-                    }
-                }
+                // foreach($array as $key => $value){
+                //     if($InsentifData3->daerah == $value){
+                //         if(isset($insentif[$key])){
+                //             $insentif[$key] = $insentif[$key] + $InsentifData3->nilai_insentif;
+                //             $countinsentif[$key] = $countinsentif[$key] + 1;
+                //         }else{
+                //             $insentif[$key] = $InsentifData3->nilai_insentif;
+                //             $countinsentif[$key] = 1;
+                //         }
+                //     }
+                // }
                 foreach($array2 as $key => $value){
                     if($InsentifData3->jantina == $value){
                         if(isset($jantina[$key])){

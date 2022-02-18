@@ -19,7 +19,11 @@ class ChangePassControllerWeb extends Controller
         if(!isset($authuser)){
             return redirect('/landing');
         }
-        return view('ChangePass');
+        return view('ChangePass'
+        ,[
+            'user'=>$authuser
+        ]
+        );
     }
 
     public function store(Request $request)
