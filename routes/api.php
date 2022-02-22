@@ -13,6 +13,7 @@ use App\Http\Controllers\KampungController;
 use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KategoriAliranController;
 use App\Http\Controllers\KategoriUsahawanController;
+use App\Http\Controllers\KlusterPerniagaanController;
 use App\Http\Controllers\LawatanController;
 use App\Http\Controllers\MukimController;
 use App\Http\Controllers\NegeriController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\UsahawanController;
 use App\Http\Controllers\UserController;
 use App\Models\Buletin;
 use App\Models\JenisInsentif;
+use App\Models\KlusterPerniagaan;
 use App\Models\Pegawai;
 use App\Models\Pekebun;
 use Illuminate\Http\Request;
@@ -174,3 +176,7 @@ Route::get('downloadCarian/{i}', [CarianController::class, 'downloadCarian']);
 //notification
 Route::apiResource('notifikasi', NotifikasiController::class);
 Route::get('notifikasi/updateStatus/{id}', [NotifikasiController::class, 'updateStatus']);
+
+
+//kluster perniagaan
+Route::apiResource('kluster_perniagaan', KlusterPerniagaanController::class);

@@ -17,6 +17,7 @@ class CreateKlusterPerniagaansTable extends Migration
             $table->id();
             $table->string('kluster_id')->nullable();
             $table->string('nama_kluster')->nullable();
+            $table->string('jenis_kluster')->nullable();
             $table->timestamps();
         });
     }

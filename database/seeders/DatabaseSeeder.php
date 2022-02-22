@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Daerah;
+use App\Models\KlusterPerniagaan;
 use App\Models\Parlimen;
 use App\Models\Usahawan;
 use Illuminate\Database\Seeder;
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             PusatTanggungjawabSeeder::class,
             SeksyenSeeder::class,
             EtnikSeeder::class,
+            KlusterPerniagaanSeeder::class
         ]);
     }
 }
