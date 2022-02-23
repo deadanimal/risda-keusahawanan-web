@@ -59,7 +59,7 @@
                       <div class="form-text fs--1 text-warning">* Separate your options with comma</div>
                     </div> --}}
                   </div>
-                  <button class="btn btn-falcon-default btn-sm mt-2" type="button" onclick="SubmitInsentif()"><span class="fas fa-plus fs--2 me-1" data-fa-transform="up-1"></span>Tambah Insentif</button>
+                  <button class="btn btn-primary btn-sm mt-2" type="button" onclick="SubmitInsentif()">Tambah Insentif</button>
                 </div>
               </form>
             </div>
@@ -113,7 +113,7 @@
                         <input class="form-control form-control-sm" name="tahun_terima_insentif" id="field-name" type="text" value="{{$insentif->tahun_terima_insentif}}"/>
                       </div>
                     </div>
-                    <button class="btn btn-falcon-default btn-sm mt-2" style="width:fit-content;" type="button" onclick="UpdateInsentif()"><span class="fas fa-plus fs--2 me-1" data-fa-transform="up-1"></span>Kemaskini Insentif</button>
+                    <button class="btn btn-primary btn-sm mt-2" style="width:fit-content;" type="button" onclick="UpdateInsentif()">Kemaskini Insentif</button>
                   </form>
                   </div>
                 

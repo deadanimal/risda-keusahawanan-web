@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
-        <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/usahawanWeb"> 
+        <a id="satukembali" style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/usahawanWeb"> 
             <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
         <div class="row align-items-center" style="padding-top:15px;">
             <div id="displaysatu" >
@@ -651,7 +651,8 @@ function tetapanpengguna(page,data){
     if(page == 'satu'){
         $("#displaysatu").hide();
         $("#displaydua").show();
-
+        $("#satukembali").hide();
+        
         var role = <?php echo Auth::user()->role ?>;
 
         $("#usahawanprofilpic").attr("src",data.gambar_url);
@@ -723,6 +724,7 @@ function tetapanpengguna(page,data){
     }else if(page == 'dua'){
         $("#displaysatu").show();
         $("#displaydua").hide();
+        $("#satukembali").show();
         $('.loader').hide();
     }
 }

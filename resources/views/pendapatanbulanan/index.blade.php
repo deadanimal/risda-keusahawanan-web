@@ -12,7 +12,7 @@
                       </option>
                   @endforeach
               </select>
-              MENGIKUT NEGERI SETAKAT 
+              BAGI
               <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('year',this.value)" id="iptYear">
                 {{-- <option value="">Tahun</option> --}}
                 <?php
@@ -23,7 +23,7 @@
                 echo "<option value=$year $selected>$year</option>";
                 }
                 ?>
-              </select></h4>
+              </select>MENGIKUT NEGERI </h4>
               <div class="col-md-6 col-xxl-3 mb-3 pe-md-2">
                 <div class="card h-md-100 ecommerce-card-min-width">
                   <div class="card-header pb-0">
@@ -175,7 +175,7 @@
                 text:       '<span class="bi bi-files">Copy</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'Copy',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+yyyy,
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF BAGI '+yyyy+' MENGIKUT NEGERI',
                 footer: true,
             },
             {
@@ -183,22 +183,23 @@
                 text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'Excel',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+yyyy,
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF BAGI '+yyyy+' MENGIKUT NEGERI',
                 footer: true,
             },
             {
                 extend:    'csvHtml5',
                 text:      '<span class="bi bi-filetype-csv">CSV</span>',
                 className: 'btn btn-primary btn-xs',
-                titleAttr: 'CSV',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+yyyy
+                titleAttr: 'CSV',                
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF BAGI '+yyyy+' MENGIKUT NEGERI'
+
             },
             {
                 extend:    'pdfHtml5',
                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                 className: 'btn btn-primary btn-xs',
-                titleAttr: 'PDF',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+yyyy,
+                titleAttr: 'PDF',                
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF BAGI '+yyyy+' MENGIKUT NEGERI',
                 footer: true,
                 customize: function(doc) {
                     doc.styles.tableHeader.fontSize = 9,
@@ -217,7 +218,19 @@
             //     titleAttr: 'PDF',
             //     title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT NEGERI SETAKAT '+yyyy
             // }
-        ]
+        ],
+        "language": {
+            "lengthMenu": "_MENU_ rekod setiap paparan",
+            "zeroRecords": "Maaf - Tiada data dijumpai",
+            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+            "infoEmpty": "Tiada rekod dijumpai",
+            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+            "sSearch": "Carian :",
+            "paginate": {
+                "previous": "Sebelum",
+                "next": "Seterus"
+            }
+        }
     });
     $('.loader').hide();
   });
@@ -263,7 +276,7 @@
                           text:       '<span class="bi bi-files">Copy</span>',
                           className: 'btn btn-primary btn-xs',
                           titleAttr: 'Copy',
-                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year,
+                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' BAGI '+year+' MENGIKUT NEGERI',
                           footer: true,
                       },
                       {
@@ -271,7 +284,7 @@
                           text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
                           className: 'btn btn-primary btn-xs',
                           titleAttr: 'Excel',
-                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year,
+                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' BAGI '+year+' MENGIKUT NEGERI',
                           footer: true,
                       },
                       {
@@ -279,14 +292,14 @@
                           text:      '<span class="bi bi-filetype-csv">CSV</span>',
                           className: 'btn btn-primary btn-xs',
                           titleAttr: 'CSV',
-                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year
+                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' BAGI '+year+' MENGIKUT NEGERI'
                       },
                       {
                           extend:    'pdfHtml5',
                           text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                           className: 'btn btn-primary btn-xs',
                           titleAttr: 'PDF',
-                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year,
+                          title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' BAGI '+year+' MENGIKUT NEGERI SETAKAT',
                           footer: true,
                           customize: function(doc) {
                               doc.styles.tableHeader.fontSize = 9,
@@ -304,7 +317,19 @@
                       //     titleAttr: 'PDF',
                       //     title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT NEGERI SETAKAT '+year
                       // }
-                  ]
+                  ],
+                  "language": {
+                      "lengthMenu": "_MENU_ rekod setiap paparan",
+                      "zeroRecords": "Maaf - Tiada data dijumpai",
+                      "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                      "infoEmpty": "Tiada rekod dijumpai",
+                      "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                      "sSearch": "Carian :",
+                      "paginate": {
+                          "previous": "Sebelum",
+                          "next": "Seterus"
+                      }
+                  }
               });
           }
           $("#c_insentif").html(data[2]);

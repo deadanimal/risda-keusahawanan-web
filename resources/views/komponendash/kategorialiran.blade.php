@@ -3,6 +3,11 @@
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center" style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <style>
+                .sorting {
+                    background-image : none !important;
+                }
+            </style>
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Kategori Aliran</h3>
                 <table id="tblaliran" style="padding-bottom:2vh;text-align:center;">

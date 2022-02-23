@@ -57,8 +57,8 @@
                             <td class="text-nowrap textlbl">@if($user->negeri){{$user->negeri->Negeri}}@endif</td>
                             <td class="text-nowrap textlbl">@if($user->PT){{$user->PT->keterangan}}@endif</td>
                             <td class="text-nowrap" style="text-align: center;">
-                                <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="window.location.href='/profdetail/{{$user->id}}'">
-                                <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Laporan
+                                <button class="btn btn-primary btn-sm mt-2" type="button" onclick="window.location.href='/profdetail/{{$user->id}}'">
+                                Laporan
                             </button></td>
                         </tr>
                         @endforeach
@@ -77,26 +77,19 @@
         var table = $('#insentiftbl').DataTable({
             "paging":   true,
             "bFilter": true,
+            "language": {
+                "lengthMenu": "_MENU_ rekod setiap paparan",
+                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                "infoEmpty": "Tiada rekod dijumpai",
+                "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                "sSearch": "Carian :",
+                "paginate": {
+                    "previous": "Sebelum",
+                    "next": "Seterus"
+                }
+            }
         });
-        // $('#lapprofall').DataTable( {
-        //     searching: false,
-        //     sorting:false,
-        //     paging:false,
-        //     dom: 'Bfrtip',
-        //     buttons: [
-        //         'copy',
-        //         {
-        //             extend: 'csv',
-        //             title: 'LAPORAN BUKU TUNAI'
-        //         },
-        //         {
-        //             extend: 'excel',
-        //             title: 'LAPORAN BUKU TUNAI'
-        //         }
-        //     ]
-        // });
-        // $('#lapprofall').hide();
-        // $('#lapprofall_info').hide();
         
         $('.loader').hide();
     });

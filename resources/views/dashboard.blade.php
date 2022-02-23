@@ -202,7 +202,7 @@
                     </div>
                   </div>
                     <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanprofil.*') || request()->routeIs('profdetail.*') ? 'active' : '' }}" href="/laporanprofil">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Profil</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Database Usahawan</span>
                         </div>
                       </a>
                     </li>
@@ -211,7 +211,7 @@
                         </div>
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'show' : 'collapse' }}" id="pendapatanbulanan">
-                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" onclick="generatereport(1,this.href,'');return false;" href="/pendapatanbulanan">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" onclick="generatereport(1,'','');" href="/pendapatanbulanan">
                           {{-- href="/pendapatanbulanan" --}}
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                           </div></a>
@@ -470,6 +470,7 @@
 
   function generatereport(type,nextPage,userid){
     $('.loader').show();
+    // location.href = nextPage;
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -484,7 +485,6 @@
           // console.log(nextPage);
           $('.loader').hide();
           alert(data);
-          location.href = nextPage;
           return true;
         }
     });

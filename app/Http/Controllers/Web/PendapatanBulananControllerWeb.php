@@ -53,7 +53,7 @@ class PendapatanBulananControllerWeb extends Controller
             $report->tab4 = number_format($report->tab4);
             // dd($report->tab5);
         }
-        $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
+        $ddInsentif = JenisInsentif::select('id_jenis_insentif','nama_insentif')->get();
         
         return view('pendapatanbulanan.index'
         ,[
