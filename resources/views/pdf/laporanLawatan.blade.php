@@ -79,14 +79,18 @@
                         NAMA USAHAWAN
                     </th>
                     <td style="width: 10% !important; border:none !important"></td>
-                    <td class="border_black"> {{ $lawatan->namausahawan }} </td>
+                    <td class="border_black"> {{ $usahawan->namausahawan }} </td>
                 </tr>
                 <tr>
                     <th class="border_black" style="width: 40% !important;">
                         NAMA SYARIKAT
                     </th>
                     <td style="width: 10% !important; border:none !important"></td>
-                    <td class="border_black"> {{ $lawatan->namasyarikat }} </td>
+                    <td class="border_black">
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->namasyarikat }}
+                        @endif
+                    </td>
                 </tr>
 
                 <tr>
@@ -94,7 +98,11 @@
                         DAERAH
                     </th>
                     <td style="width: 10% !important; border:none !important"></td>
-                    <td class="border_black"> {{ $lawatan->Daerah }} </td>
+                    <td class="border_black">
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->daerah->Daerah }}
+                        @endif
+                    </td>
                 </tr>
 
                 <tr>
@@ -102,7 +110,11 @@
                         NEGERI
                     </th>
                     <td style="width: 10% !important; border:none !important"></td>
-                    <td class="border_black"> {{ $lawatan->Negeri }} </td>
+                    <td class="border_black">
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->negeri->Negeri }}
+                        @endif
+                    </td>
                 </tr>
 
                 <tr>
@@ -112,22 +124,24 @@
                     <td style="width: 10% !important; border:none !important"></td>
                     <td class="border_black">
                         {{-- {{ $lawatan->jenisperniagaan }} --}}
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->jenisperniagaan == 'A')
+                                PENGELUARAN PRODUK MAKANAN
 
-                        @if ($lawatan->jenisperniagaan == 'A')
-                            PENGELUARAN PRODUK MAKANAN
+                            @elseif ($usahawan->perniagaan->jenisperniagaan == 'B')
+                                PENGELUARAN PRODUK BUKAN MAKANAN
 
-                        @elseif ($lawatan->jenisperniagaan == 'B')
-                            PENGELUARAN PRODUK BUKAN MAKANAN
+                            @elseif ($usahawan->perniagaan->jenisperniagaan == 'C')
+                                PENGELUARAN PRODUK PERTANIAN
 
-                        @elseif ($lawatan->jenisperniagaan == 'C')
-                            PENGELUARAN PRODUK PERTANIAN
+                            @elseif ($usahawan->perniagaan->jenisperniagaan == 'D')
+                                PERKHIDMATAN PEMASARAN
 
-                        @elseif ($lawatan->jenisperniagaan == 'D')
-                            PERKHIDMATAN PEMASARAN
-
-                        @elseif ($lawatan->jenisperniagaan == 'E')
-                            PERKHIDMATAN BUKAN PEMASARAN
+                            @elseif ($usahawan->perniagaan->jenisperniagaan == 'E')
+                                PERKHIDMATAN BUKAN PEMASARAN
+                            @endif
                         @endif
+
 
                     </td>
                 </tr>
@@ -201,8 +215,8 @@
                     <td>
                         {{-- <img src="{{ $lawatan->gambar_lawatan }}" alt="" width="200px" height="200px"> --}}
                         <div style="
-                            height: 30%; 
-                            width:100%; 
+                            height: 30%;
+                            width:100%;
                             background-image: url('{{ $lawatan->gambar_lawatan }}');
                             background-size: cover;
                             background-repeat: no-repeat;

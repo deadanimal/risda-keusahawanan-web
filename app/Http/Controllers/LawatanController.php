@@ -51,12 +51,36 @@ class LawatanController extends Controller
     public function show($id)
     {
 
-        $lawatan = Pegawai::where('pegawais.id', $id)
-            ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
+        // $lawatan = Pegawai::where('pegawais.id', $id)
+        //     ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
+        //     ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
+        //     ->join('lawatans', 'lawatans.id_pengguna', 'users.id')
+        //     ->select(
+        //         'pegawais.*',
+        //         'lawatans.id as lawatan_id',
+        //         'pegawais.nama as nama_pegawai',
+        //         'usahawans.namausahawan',
+        //         'usahawans.id as usahawan_id',
+        //         'lawatans.updated_at',
+        //         'lawatans.created_at',
+        //         'lawatans.status_lawatan',
+        //         'lawatans.tarikh_lawatan',
+        //         'lawatans.masa_lawatan',
+        //         'lawatans.gambar_lawatan',
+        //         'lawatans.jenis_lawatan',
+        //         'lawatans.id_tindakan_lawatan',
+        //         'lawatans.komen',
+        //         'lawatans.id_pegawai as id_pegawai'
+        //     )
+        //     // ->orderBy('tarikh_lawatan', 'desc')
+        //     ->get();
+
+        $lawatan = Lawatan::where('lawatans.id_pegawai', $id)
+            ->join('pegawais', 'pegawais.id', 'lawatans.id_pegawai')
+            ->join('usahawans', 'usahawans.id', 'lawatans.id_pengguna')
             ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
-            ->join('lawatans', 'lawatans.id_pengguna', 'users.id')
             ->select(
-                'pegawais.*',
+                // 'pegawais.*',
                 'lawatans.id as lawatan_id',
                 'pegawais.nama as nama_pegawai',
                 'usahawans.namausahawan',
@@ -69,11 +93,12 @@ class LawatanController extends Controller
                 'lawatans.gambar_lawatan',
                 'lawatans.jenis_lawatan',
                 'lawatans.id_tindakan_lawatan',
-                'lawatans.komen'
+                'lawatans.komen',
+                'lawatans.id_pegawai as id_pegawai',
+                'users.id as id_pengguna'
             )
-            // ->orderBy('tarikh_lawatan', 'desc')
+            ->orderBy('tarikh_lawatan', 'desc')
             ->get();
-
 
         return response()->json($lawatan);
     }
@@ -86,19 +111,22 @@ class LawatanController extends Controller
             ->join('lawatans', 'lawatans.id_pengguna', 'users.id')
             ->join('pegawais', 'pegawais.id', 'lawatans.id_pegawai')
             ->select(
-                'lawatans.id as lawatan_id', 
-                'pegawais.nama as nama_pegawai', 
-                'usahawans.namausahawan', 
-                'usahawans.id as usahawan_id', 
-                'lawatans.updated_at', 
-                'lawatans.created_at', 
-                'lawatans.status_lawatan', 
-                'lawatans.tarikh_lawatan', 
-                'lawatans.masa_lawatan', 
-                'lawatans.gambar_lawatan', 
-                'lawatans.jenis_lawatan', 
-                'lawatans.id_tindakan_lawatan', 
-                'lawatans.komen')
+                'lawatans.id as lawatan_id',
+                'pegawais.nama as nama_pegawai',
+                'usahawans.namausahawan',
+                'usahawans.id as usahawan_id',
+                'lawatans.updated_at',
+                'lawatans.created_at',
+                'lawatans.status_lawatan',
+                'lawatans.tarikh_lawatan',
+                'lawatans.masa_lawatan',
+                'lawatans.gambar_lawatan',
+                'lawatans.jenis_lawatan',
+                'lawatans.id_tindakan_lawatan',
+                'lawatans.komen',
+                'lawatans.id_pengguna',
+                'lawatans.id_pegawai',
+            )
             ->get();
 
         return response()->json($lawatan);
@@ -114,27 +142,51 @@ class LawatanController extends Controller
         $lawatan->save();
 
         // $pegawaiid = 
-        // if ($request->role == "pegawai") {
 
-        //     $notifikasi = new Notifikasi();
-        //     $notifikasi->userid = $request->id_pengguna;
-        //     $notifikasi->tajuk = 'Tarikh Lawatan';
-        //     $notifikasi->keterangan = 'satu tarikh baru telah dicadangkan oleh pegawai';
-        //     $notifikasi->modul = 'lawatan';
-        //     $notifikasi->save();
-            
-        // } else if ($request->role == "usahawan") {
+        if ($request->status_lawatan == 1 || $request->status_lawatan == 2) {
+            if ($request->role == "pegawai") {
 
-        //     $user = User::where('idpegawai', $request->id_pegawai)
-        //     ->get()->first();
+                $notifikasi = new Notifikasi();
+                $notifikasi->userid = $request->id_pengguna;
+                $notifikasi->tajuk = 'Tarikh Lawatan';
+                $notifikasi->keterangan = 'satu tarikh baru telah dicadangkan oleh pegawai';
+                $notifikasi->modul = 'lawatan';
+                $notifikasi->save();
+            } else if ($request->role == "usahawan") {
 
-        //     $notifikasi = new Notifikasi();
-        //     $notifikasi->userid = $user->id; 
-        //     $notifikasi->tajuk = 'Tarikh Lawatan';
-        //     $notifikasi->keterangan = 'satu tarikh baru telah dicadangkan oleh usahawan';
-        //     $notifikasi->modul = 'lawatan';
-        //     $notifikasi->save();
-        // }
+                $user = User::where('idpegawai', $request->id_pegawai)
+                    ->get()->first();
+
+                $notifikasi = new Notifikasi();
+                $notifikasi->userid = $user->id;
+                $notifikasi->tajuk = 'Tarikh Lawatan';
+                $notifikasi->keterangan = 'satu tarikh baru telah dicadangkan oleh usahawan';
+                $notifikasi->modul = 'lawatan';
+                $notifikasi->save();
+            }
+        } else  if ($request->status_lawatan == 3) {
+            if ($request->role == "pegawai") {
+
+                $notifikasi = new Notifikasi();
+                $notifikasi->userid = $request->id_pengguna;
+                $notifikasi->tajuk = 'Pengesahan Lawatan';
+                $notifikasi->keterangan = 'Tarikh lawatan telah disahkan oleh pegawai';
+                $notifikasi->modul = 'lawatan';
+                $notifikasi->save();
+            } else if ($request->role == "usahawan") {
+
+                $user = User::where('idpegawai', $request->id_pegawai)
+                    ->get()->first();
+
+                $notifikasi = new Notifikasi();
+                $notifikasi->userid = $user->id;
+                $notifikasi->tajuk = 'Pengesahan Lawatan';
+                $notifikasi->keterangan = 'Tarikh lawatan telah disahkan oleh usahawan';
+                $notifikasi->modul = 'lawatan';
+                $notifikasi->save();
+            }
+        }
+
 
         return response()->json($lawatan);
     }
@@ -148,6 +200,13 @@ class LawatanController extends Controller
         $lawatan->komen = $request->komen;
 
         $lawatan->save();
+
+        $notifikasi = new Notifikasi();
+        $notifikasi->userid = $lawatan->id_pengguna;
+        $notifikasi->tajuk = 'Laporan Lawatan';
+        $notifikasi->keterangan = 'Dokumen lawatan telah dikemaskini';
+        $notifikasi->modul = 'lawatan';
+        $notifikasi->save();
 
         return response()->json($lawatan);
     }
@@ -221,19 +280,10 @@ class LawatanController extends Controller
             ->join('pegawais', 'pegawais.id', 'lawatans.id_pegawai')
             ->join('users', 'users.id', 'lawatans.id_pengguna')
             ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
-            ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
-            ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
-            ->join('daerahs', 'daerahs.U_Daerah_ID', 'perniagaans.U_Daerah_ID')
-            ->join('negeris', 'negeris.U_Negeri_ID', 'perniagaans.U_Negeri_ID')
             ->join('tindakan_lawatans', 'tindakan_lawatans.id', 'lawatans.id_tindakan_lawatan')
             ->select(
                 "users.id as id_pengguna",
-                "usahawans.namausahawan as namausahawan",
                 "usahawans.usahawanid as usahawanid",
-                "daerahs.Daerah",
-                "negeris.Negeri",
-                "syarikats.namasyarikat",
-                "perniagaans.jenisperniagaan",
                 "lawatans.gambar_lawatan",
                 "lawatans.tarikh_lawatan",
                 "lawatans.masa_lawatan",
@@ -242,6 +292,11 @@ class LawatanController extends Controller
                 "lawatans.komen",
             )
             ->get()->first();
+
+        $usahawan = Usahawan::where('usahawanid', $lawatan->usahawanid)
+            ->get()->first();
+
+        // dd($usahawan);
 
         $insentif = Insentif::where('id_pengguna', $lawatan->usahawanid)
             ->join('jenis_insentifs', 'jenis_insentifs.id_jenis_insentif', 'insentifs.id_jenis_insentif')
@@ -260,6 +315,7 @@ class LawatanController extends Controller
             'year' => $year,
             'lawatan' => $lawatan,
             'insentifs' => $insentif,
+            'usahawan' => $usahawan
         ]));
         $customPaper = array(2, -35, 480, 627);
         $pdff->setPaper($customPaper);

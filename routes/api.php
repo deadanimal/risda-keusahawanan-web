@@ -90,7 +90,9 @@ Route::apiResource('katalog', KatalogController::class);
 Route::apiResource('pelanggan', PelangganController::class);
 
 Route::post('pelanggan/janaDokumen/{id}', [PelangganController::class, 'janaDokumen']);
-
+Route::post('pelanggan/janaQuotation/{id}', [PelangganController::class, 'janaQuotation']);
+Route::post('pelanggan/janaDO/{id}', [PelangganController::class, 'janaDO']);
+Route::post('pelanggan/janaInvoice/{id}', [PelangganController::class, 'janaInvoice']);
 
 Route::apiResource('stok', StokController::class);
 
@@ -158,6 +160,7 @@ Route::post('bukuTunaiPDF', [ExcelController::class, 'bukuTunaiPdf']);
 
 Route::post('pnlExcel', [ExcelController::class, 'pnlExcel']);
 Route::post('pnlPdf', [ExcelController::class, 'pnlPdf']);
+Route::get('calcPNL', [ExcelController::class, 'calcPNL']);
 
 Route::post('lejerExcel', [ExcelController::class, 'lejerExcel']);
 Route::post('lejerPdf', [ExcelController::class, 'lejerPdf']);

@@ -161,23 +161,23 @@ class PelangganController extends Controller
         $year = date("Y");
 
 
-        $pdff = new Dompdf();
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isRemoteEnabled', true);
-        $pdff->setOptions($options);
-        $pdff->loadHtml(view('pdf.jana_dokumen', [
-            'today' => $today,
-            "year" => $year,
-            'stoks' => $stok,
-            'data' => $data,
-            'pelanggan' => $pelanggan,
+        // $pdff = new Dompdf();
+        // $options = new Options();
+        // $options->set('isHtml5ParserEnabled', true);
+        // $options->set('isRemoteEnabled', true);
+        // $pdff->setOptions($options);
+        // $pdff->loadHtml(view('pdf.jana_dokumen', [
+        //     'today' => $today,
+        //     "year" => $year,
+        //     'stoks' => $stok,
+        //     'data' => $data,
+        //     'pelanggan' => $pelanggan,
 
-            // 'no_dpa' => $no_dpa
-        ]));
-        $customPaper = array(2, -35, 480, 627);
-        $pdff->setPaper($customPaper);
-        $pdff->render();
+        //     // 'no_dpa' => $no_dpa
+        // ]));
+        // $customPaper = array(2, -35, 480, 627);
+        // $pdff->setPaper($customPaper);
+        // $pdff->render();
         // $pdff->stream(
         //     "newdompdf",
         //     array("Attachment" => false)
@@ -185,11 +185,223 @@ class PelangganController extends Controller
 
         // exit(0);
 
-        $fname = time() . "_quotation_" . $pelanggan->nama_pelanggan . ".pdf";
-        $output = $pdff->output();
+        $pdf = PDF::loadView('pdf.jana_dokumen', [
+            'today' => $today,
+            "year" => $year,
+            'stoks' => $stok,
+            'data' => $data,
+            'pelanggan' => $pelanggan,
+        ]);
 
-        \Storage::put('jana_dokumen/' . $fname, $output);
+        $fname = time() . "_dokumenPenuh_" . $pelanggan->nama_pelanggan . ".pdf";
+
+
+        \Storage::put('jana_dokumen/' . $fname, $pdf->output());
         // file_put_contents(, $output);
+
+        return response()->json('jana_dokumen/' . $fname);
+    }
+
+    public function janaQuotation($id, Request $request)
+    {
+       
+
+        $data = DB::table('users')->where('users.id', $request->id_pengguna)
+            ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+            ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+            ->select(
+                'syarikats.logo_syarikat as logo_syarikat',
+                'syarikats.nodaftarssm',
+
+                'syarikats.alamat1_ssm as alamat1',
+                'syarikats.alamat2_ssm as alamat2',
+                'syarikats.alamat3_ssm as alamat3',
+                'syarikats.prefix_id',
+                'syarikats.nama_akaun_bank',
+                'syarikats.no_akaun_bank',
+            )
+            ->get()->first();
+
+        $pelanggan = DB::table('pelanggans')
+            ->where('pelanggans.id', $id)
+            ->join('negeris', 'negeris.U_Negeri_ID', 'pelanggans.U_Negeri_ID')
+            ->select(
+                'pelanggans.nama_pelanggan',
+                'pelanggans.alamat1',
+                'pelanggans.alamat2',
+                'pelanggans.alamat3',
+                'pelanggans.poskod',
+                'negeris.Negeri',
+
+                'pelanggans.no_telefon',
+                'pelanggans.no_fax',
+                'pelanggans.cukai_sst',
+                'pelanggans.kos_penghantaran',
+                'pelanggans.diskaun',
+                'pelanggans.id',
+                'pelanggans.tajuk',
+            )
+            ->get()->first();
+
+        $stok = DB::table('stoks')
+            ->where('stoks.id_pelanggan', $id)
+            ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
+            ->get();
+        
+
+        $today = date("d/m/Y");
+        $year = date("Y");
+
+
+        $pdf = PDF::loadView('pdf.quotation', [
+            'today' => $today,
+            "year" => $year,
+            'stoks' => $stok,
+            'data' => $data,
+            'pelanggan' => $pelanggan,
+        ]);
+
+        $fname = time() . "_quotation_" . $pelanggan->nama_pelanggan . ".pdf";
+       
+        // return $pdf->stream($fname, array('Attachment'=>0));
+
+        \Storage::put('jana_dokumen/' . $fname, $pdf->output());
+
+        return response()->json('jana_dokumen/' . $fname);
+    }
+
+
+    public function janaDO($id, Request $request)
+    {
+       
+
+        $data = DB::table('users')->where('users.id', $request->id_pengguna)
+            ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+            ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+            ->select(
+                'syarikats.logo_syarikat as logo_syarikat',
+                'syarikats.nodaftarssm',
+
+                'syarikats.alamat1_ssm as alamat1',
+                'syarikats.alamat2_ssm as alamat2',
+                'syarikats.alamat3_ssm as alamat3',
+                'syarikats.prefix_id',
+                'syarikats.nama_akaun_bank',
+                'syarikats.no_akaun_bank',
+            )
+            ->get()->first();
+
+        $pelanggan = DB::table('pelanggans')
+            ->where('pelanggans.id', $id)
+            ->join('negeris', 'negeris.U_Negeri_ID', 'pelanggans.U_Negeri_ID')
+            ->select(
+                'pelanggans.nama_pelanggan',
+                'pelanggans.alamat1',
+                'pelanggans.alamat2',
+                'pelanggans.alamat3',
+                'pelanggans.poskod',
+                'negeris.Negeri',
+
+                'pelanggans.no_telefon',
+                'pelanggans.no_fax',
+                'pelanggans.cukai_sst',
+                'pelanggans.kos_penghantaran',
+                'pelanggans.diskaun',
+                'pelanggans.id',
+                'pelanggans.tajuk',
+            )
+            ->get()->first();
+
+        $stok = DB::table('stoks')
+            ->where('stoks.id_pelanggan', $id)
+            ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
+            ->get();
+        
+
+        $today = date("d/m/Y");
+        $year = date("Y");
+
+
+        $pdf = PDF::loadView('pdf.do', [
+            'today' => $today,
+            "year" => $year,
+            'stoks' => $stok,
+            'data' => $data,
+            'pelanggan' => $pelanggan,
+        ]);
+
+        $fname = time() . "_do_" . $pelanggan->nama_pelanggan . ".pdf";
+       
+        // return $pdf->stream($fname, array('Attachment'=>0));
+
+        \Storage::put('jana_dokumen/' . $fname, $pdf->output());
+
+        return response()->json('jana_dokumen/' . $fname);
+    }
+
+    public function janaInvoice($id, Request $request)
+    {
+        
+        $data = DB::table('users')->where('users.id', $request->id_pengguna)
+            ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+            ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+            ->select(
+                'syarikats.logo_syarikat as logo_syarikat',
+                'syarikats.nodaftarssm',
+
+                'syarikats.alamat1_ssm as alamat1',
+                'syarikats.alamat2_ssm as alamat2',
+                'syarikats.alamat3_ssm as alamat3',
+                'syarikats.prefix_id',
+                'syarikats.nama_akaun_bank',
+                'syarikats.no_akaun_bank',
+            )
+            ->get()->first();
+
+        $pelanggan = DB::table('pelanggans')
+            ->where('pelanggans.id', $id)
+            ->join('negeris', 'negeris.U_Negeri_ID', 'pelanggans.U_Negeri_ID')
+            ->select(
+                'pelanggans.nama_pelanggan',
+                'pelanggans.alamat1',
+                'pelanggans.alamat2',
+                'pelanggans.alamat3',
+                'pelanggans.poskod',
+                'negeris.Negeri',
+
+                'pelanggans.no_telefon',
+                'pelanggans.no_fax',
+                'pelanggans.cukai_sst',
+                'pelanggans.kos_penghantaran',
+                'pelanggans.diskaun',
+                'pelanggans.id',
+                'pelanggans.tajuk',
+            )
+            ->get()->first();
+
+        $stok = DB::table('stoks')
+            ->where('stoks.id_pelanggan', $id)
+            ->join('katalogs', 'katalogs.id', 'stoks.id_katalog')
+            ->get();
+        
+
+        $today = date("d/m/Y");
+        $year = date("Y");
+
+
+        $pdf = PDF::loadView('pdf.invoice', [
+            'today' => $today,
+            "year" => $year,
+            'stoks' => $stok,
+            'data' => $data,
+            'pelanggan' => $pelanggan,
+        ]);
+
+        $fname = time() . "_invoice_" . $pelanggan->nama_pelanggan . ".pdf";
+       
+        // return $pdf->stream($fname, array('Attachment'=>0));
+
+        \Storage::put('jana_dokumen/' . $fname, $pdf->output());
 
         return response()->json('jana_dokumen/' . $fname);
     }
