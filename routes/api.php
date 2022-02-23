@@ -86,6 +86,7 @@ Route::get('aliran/getYear/{id}', [AliranController::class, 'getCurrentYearData'
 Route::get('aliran/getMonth/{id}', [AliranController::class, 'getCurrentMonthData']);
 
 Route::apiResource('katalog', KatalogController::class);
+Route::get('katalogdashboard', [KatalogController::class,'katalogdashboard']);
 
 Route::apiResource('pelanggan', PelangganController::class);
 
@@ -160,7 +161,7 @@ Route::post('bukuTunaiPDF', [ExcelController::class, 'bukuTunaiPdf']);
 
 Route::post('pnlExcel', [ExcelController::class, 'pnlExcel']);
 Route::post('pnlPdf', [ExcelController::class, 'pnlPdf']);
-Route::get('calcPNL', [ExcelController::class, 'calcPNL']);
+Route::post('calcPNL', [ExcelController::class, 'calcPNL']);
 
 Route::post('lejerExcel', [ExcelController::class, 'lejerExcel']);
 Route::post('lejerPdf', [ExcelController::class, 'lejerPdf']);

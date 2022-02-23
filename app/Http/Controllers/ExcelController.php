@@ -482,9 +482,9 @@ class ExcelController extends Controller
         $month = $request->bulan;
         $year = $request->tahun;
 
-        $id = 1;
-        $month = 1;
-        $year = 2022;
+        // $id = 1;
+        // $month = 1;
+        // $year = 2022;
 
         $user_id = $id;
 
@@ -623,8 +623,6 @@ class ExcelController extends Controller
         //untung rugi kasar
         $untung_rugi_kasar = $jualan_bersih - $kos_jualan;
 
-
-       
 
         $vars = array(
             "hasil_jualan"=>$jualan_bersih, 

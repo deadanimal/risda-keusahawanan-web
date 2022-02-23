@@ -21,6 +21,15 @@ class KatalogController extends Controller
         return response()->json($katalog);
     }
 
+    public function katalogdashboard()
+    {
+        // dd('test');
+        $katalog = Katalog::where('status_katalog', 'publish')
+        ->orderBy('updated_at', 'desc')->take(10)->get();
+
+        return response()->json($katalog);
+    }
+
     public function store(Request $request)
     {
         $katalog = new Katalog();
@@ -222,4 +231,7 @@ class KatalogController extends Controller
 
         return response()->json($usahawan);
     }
+
+
+
 }
