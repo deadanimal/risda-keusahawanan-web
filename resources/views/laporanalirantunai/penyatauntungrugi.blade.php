@@ -255,11 +255,35 @@
                 //     titleAttr: 'PDF',
                 //     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
                 // }
-            ]
+            ],
+            "language": {
+                "lengthMenu": "_MENU_ rekod setiap paparan",
+                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                "infoEmpty": "Tiada rekod dijumpai",
+                "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                "sSearch": "Carian :",
+                "paginate": {
+                    "previous": "Sebelum",
+                    "next": "Seterus"
+                }
+            }
         });
         var table = $('#pnlind').DataTable({
             "paging":   true,
             "bFilter": true,
+            "language": {
+                "lengthMenu": "_MENU_ rekod setiap paparan",
+                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                "infoEmpty": "Tiada rekod dijumpai",
+                "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                "sSearch": "Carian :",
+                "paginate": {
+                    "previous": "Sebelum",
+                    "next": "Seterus"
+                }
+            }
         });
         
         
@@ -333,7 +357,19 @@
                             //     titleAttr: 'PDF',
                             //     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
                             // }
-                        ]
+                        ],
+                        "language": {
+                            "lengthMenu": "_MENU_ rekod setiap paparan",
+                            "zeroRecords": "Maaf - Tiada data dijumpai",
+                            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                            "infoEmpty": "Tiada rekod dijumpai",
+                            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                            "sSearch": "Carian :",
+                            "paginate": {
+                                "previous": "Sebelum",
+                                "next": "Seterus"
+                            }
+                        }
                     });
                 }
                 $('.loader').hide();

@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center" id="contentbody">
-            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT      
+            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN PEMANTAUAN LAWATAN BAGI PENERIMA INSENTIF BAGI      
                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                     {{-- <option value="">Tahun</option> --}}
                     <?php
@@ -171,7 +171,19 @@
                 //     titleAttr: 'PDF',
                 //     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+yyyy+' MENGIKUT NEGERI'
                 // }
-            ]
+            ],
+            "language": {
+                "lengthMenu": "_MENU_ rekod setiap paparan",
+                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                "infoEmpty": "Tiada rekod dijumpai",
+                "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                "sSearch": "Carian :",
+                "paginate": {
+                    "previous": "Sebelum",
+                    "next": "Seterus"
+                }
+            }
         });
         $('.loader').hide();
     });
@@ -248,7 +260,19 @@
                             //     titleAttr: 'PDF',
                             //     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT NEGERI'
                             // }
-                        ]
+                        ],
+                        "language": {
+                            "lengthMenu": "_MENU_ rekod setiap paparan",
+                            "zeroRecords": "Maaf - Tiada data dijumpai",
+                            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                            "infoEmpty": "Tiada rekod dijumpai",
+                            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                            "sSearch": "Carian :",
+                            "paginate": {
+                                "previous": "Sebelum",
+                                "next": "Seterus"
+                            }
+                        }
                     });
                 }
                 $('.loader').hide();

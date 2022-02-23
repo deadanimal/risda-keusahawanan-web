@@ -176,7 +176,19 @@ $( document ).ready(function() {
             //     titleAttr: 'PDF',
             //     title: 'LAPORAN LAWATAN PEMANTAUAN OLEH STAF MENGIKUT NEGERI SETAKAT TAHUN '+year
             // }
-        ]
+        ],
+        "language": {
+            "lengthMenu": "_MENU_ rekod setiap paparan",
+            "zeroRecords": "Maaf - Tiada data dijumpai",
+            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+            "infoEmpty": "Tiada rekod dijumpai",
+            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+            "sSearch": "Carian :",
+            "paginate": {
+                "previous": "Sebelum",
+                "next": "Seterus"
+            }
+        }
     });
     $('.loader').hide();
 });
@@ -264,7 +276,19 @@ function gettabledata(type,val){
                         //     titleAttr: 'PDF',
                         //     title: 'LAPORAN LAWATAN PEMANTAUAN OLEH STAF MENGIKUT '+jenistext+' SETAKAT TAHUN '+year
                         // }
-                    ]
+                    ],
+                    "language": {
+                        "lengthMenu": "_MENU_ rekod setiap paparan",
+                        "zeroRecords": "Maaf - Tiada data dijumpai",
+                        "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                        "infoEmpty": "Tiada rekod dijumpai",
+                        "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                        "sSearch": "Carian :",
+                        "paginate": {
+                            "previous": "Sebelum",
+                            "next": "Seterus"
+                        }
+                    }
                 });
             }
         }

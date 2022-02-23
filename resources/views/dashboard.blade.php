@@ -211,18 +211,18 @@
                         </div>
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'show' : 'collapse' }}" id="pendapatanbulanan">
-                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" onclick="generatereport(1,'/pendapatanbulanan','');">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" onclick="generatereport(1,this.href,'');return false;" href="/pendapatanbulanan">
                           {{-- href="/pendapatanbulanan" --}}
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                           </div></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDaerah.*') ? 'active' : '' }}" href="/pendbulDaerah" onclick="generatereport(2,'','');">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDaerah.*') ? 'active' : '' }}" href="/pendbulDaerah" onclick="generatereport(2,this.href,'');return false;">
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
                           </div></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDun.*') ? 'active' : '' }}" onclick="generatereport(3,'','');" href="/pendbulDun">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDun.*') ? 'active' : '' }}" onclick="generatereport(3,this.href,'');return false;" href="/pendbulDun">
                           {{-- href="/pendbulDun" --}}
-                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Dun</span>
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Parlimen/Dun</span>
                           </div></a>
                         </li>
                     </ul>
@@ -233,11 +233,11 @@
                     <ul class="nav collapse {{ request()->routeIs('laporaninsentif.*') || request()->routeIs('insenjenis.*') || request()->routeIs('insenjantinaumur.*') ? 'show' : 'collapse' }}" id="laporaninsentif">
                       <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporaninsentif.*') ? 'active' : '' }}" href="/laporaninsentif" onclick="generatereport(4,this.href,'');return false;">
                         {{-- href="/laporaninsentif" --}}
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jenis Peniagaan</span>
                         </div></a>
                       </li>
                       <li class="nav-item"><a class="nav-link {{  request()->routeIs('insenjenis.*') ? 'active' : '' }}" href="/insenjenis" onclick="generatereport(5,this.href,'');return false;">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jenis Peniagaan</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jumlah/ Purata Jualan</span>
                         </div></a>
                       </li>
                       <li class="nav-item"><a class="nav-link {{  request()->routeIs('insenjantinaumur.*') ? 'active' : '' }}" onclick="generatereport(6,this.href,'');return false;" href="/insenjantinaumur">
@@ -485,7 +485,7 @@
           $('.loader').hide();
           alert(data);
           location.href = nextPage;
-          // return true;
+          return true;
         }
     });
   }

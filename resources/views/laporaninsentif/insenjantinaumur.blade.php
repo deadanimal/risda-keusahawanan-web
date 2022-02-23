@@ -12,7 +12,7 @@
                           </option>
                       @endforeach
                 </select>
-                  MENGIKUT JANTINA DAN UMUR SETAKAT 
+                  BAGI TAHUN
                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                     {{-- <option value="">Tahun</option> --}}
                     <?php
@@ -24,6 +24,7 @@
                     }
                     ?>
                   </select>
+                  MENGIKUT JANTINA DAN UMUR 
             </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
                 <table id="laporaninsentifjantina" class="table table-sm table-bordered table-hover">
@@ -109,24 +110,24 @@
                             <th></th>
                             <th class="text-nowrap">Jumlah</th>
                             <th class="text-nowrap">{{number_format($jumlah->satu)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->dua)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->dua,2)}}</th>
                             <th class="text-nowrap">{{number_format($jumlah->tiga)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->empat)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->empat,2)}}</th>
                             <th class="text-nowrap">{{number_format($jumlah->lima)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->enam)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->enam,2)}}</th>
                             <th class="text-nowrap">{{number_format($jumlah->tujuh)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->lapan)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->lapan,2)}}</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
                             <th class="text-nowrap" colspan="3">Jumlah</th>
                             <th class="text-nowrap">{{number_format($jumlah->satu)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->dua)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->dua,2)}}</th>
                             <th class="text-nowrap">{{number_format($jumlah->tiga)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->empat)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->empat,2)}}</th>
                             <th class="text-nowrap">{{number_format($jumlah->lima)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->enam)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->enam,2)}}</th>
                             <th class="text-nowrap">{{number_format($jumlah->tujuh)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->lapan)}}</th>
+                            <th class="text-nowrap">{{number_format($jumlah->lapan,2)}}</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -146,33 +147,33 @@
             buttons: [
                 {
                     extend:    'copyHtml5',
-                    text:       '<span class="bi bi-files">Copy</span>',
+                    text:       '<span>Copy</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Copy',
-                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
+                    title: 'LAPORAN ANALISA PENERIMA INSENTIF BAGI TAHUN '+year+' MENGIKUT JANTINA DAN UMUR',
                     footer: true,
                 },
                 {
                     extend:    'excelHtml5',
-                    text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                    text:      '<span>Excel</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Excel',
-                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
+                    title: 'LAPORAN ANALISA PENERIMA INSENTIF BAGI TAHUN '+year+' MENGIKUT JANTINA DAN UMUR',
                     footer: true,
                 },
                 {
                     extend:    'csvHtml5',
-                    text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                    text:      '<span>CSV</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'CSV',
-                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year
+                    title: 'LAPORAN ANALISA PENERIMA INSENTIF BAGI TAHUN '+year+' MENGIKUT JANTINA DAN UMUR'
                 },
                 {
                     extend:    'pdfHtml5',
-                    text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                    text:      '<span>PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
-                    title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
+                    title: 'LAPORAN ANALISA PENERIMA INSENTIF BAGI TAHUN '+year+' MENGIKUT JANTINA DAN UMUR',
                     footer: true,
                     customize: function(doc) {
                         doc.styles.tableHeader.fontSize = 9,
@@ -183,15 +184,20 @@
                         doc.defaultStyle.alignment = 'center',
                         doc.defaultStyle.fontSize = 9;
                     }
-                },
-                // {
-                //     extend:    'print',
-                //     text:      '<span class="bi bi-printer">Print</span>',
-                //     className: 'btn btn-primary btn-xs',
-                //     titleAttr: 'PDF',
-                //     title: 'LAPORAN ANALISA PENERIMA INSENTIF MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
-                // }
-            ]
+                }
+            ],
+            "language": {
+                "lengthMenu": "_MENU_ rekod setiap paparan",
+                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                "infoEmpty": "Tiada rekod dijumpai",
+                "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                "sSearch": "Carian :",
+                "paginate": {
+                    "previous": "Sebelum",
+                    "next": "Seterus"
+                }
+            }
         });
         $('.loader').hide();
     });
@@ -239,7 +245,7 @@
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Copy',
                                 footer: true,
-                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year
+                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT JANTINA DAN UMUR'
                             },
                             {
                                 extend:    'excelHtml5',
@@ -247,21 +253,21 @@
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Excel',
                                 footer: true,
-                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year
+                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT JANTINA DAN UMUR'
                             },
                             {
                                 extend:    'csvHtml5',
                                 text:      '<span class="bi bi-filetype-csv">CSV</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'CSV',
-                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year
+                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT JANTINA DAN UMUR'
                             },
                             {
                                 extend:    'pdfHtml5',
                                 text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
-                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year,
+                                title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT JANTINA DAN UMUR',
                                 footer: true,
                                 customize: function(doc) {
                                     doc.styles.tableHeader.fontSize = 9,
@@ -280,7 +286,19 @@
                             //     titleAttr: 'PDF',
                             //     title: 'LAPORAN ANALISA PENERIMA INSENTIF '+jenistext+' MENGIKUT JANTINA DAN UMUR SETAKAT '+year
                             // }
-                        ]
+                        ],
+                        "language": {
+                            "lengthMenu": "_MENU_ rekod setiap paparan",
+                            "zeroRecords": "Maaf - Tiada data dijumpai",
+                            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                            "infoEmpty": "Tiada rekod dijumpai",
+                            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                            "sSearch": "Carian :",
+                            "paginate": {
+                                "previous": "Sebelum",
+                                "next": "Seterus"
+                            }
+                        }
                     });
                 }
                 $('.loader').hide();
