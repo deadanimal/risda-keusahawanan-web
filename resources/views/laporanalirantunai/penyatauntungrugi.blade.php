@@ -217,28 +217,28 @@
             buttons: [
                 {
                     extend:    'copyHtml5',
-                    text:       '<span class="bi bi-files">Copy</span>',
+                    text:       '<span  >Copy</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Copy',
                     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
                 },
                 {
                     extend:    'excelHtml5',
-                    text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                    text:      '<span   >Excel</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Excel',
                     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
                 },
                 {
                     extend:    'csvHtml5',
-                    text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                    text:      '<span >CSV</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'CSV',
                     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
                 },
                 {
                     extend:    'pdfHtml5',
-                    text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                    text:      '<span >PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
                     title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year,
@@ -319,28 +319,28 @@
                         buttons: [
                             {
                                 extend:    'copyHtml5',
-                                text:       '<span class="bi bi-files">Copy</span>',
+                                text:       '<span  >Copy</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Copy',
                                 title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
                             },
                             {
                                 extend:    'excelHtml5',
-                                text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                                text:      '<span   >Excel</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Excel',
                                 title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
                             },
                             {
                                 extend:    'csvHtml5',
-                                text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                                text:      '<span >CSV</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'CSV',
                                 title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year
                             },
                             {
                                 extend:    'pdfHtml5',
-                                text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                                text:      '<span >PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
                                 title: 'LAPORAN PENYATA UNTUNG RUGI BAGI TAHUN '+year,

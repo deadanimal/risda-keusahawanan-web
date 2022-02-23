@@ -6,7 +6,7 @@
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Laporan Profil Usahawan</h3>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
                 <div style="padding-bottom: 20px;">
-                    <a class="btn btn-primary" onclick="ExportExcel()"><span class="bi bi-file-spreadsheet">Export Excel</span></a>
+                    <a class="btn btn-primary" onclick="ExportExcel()"><span   >Export Excel</span></a>
                 </div>
                 <div style="padding-top: 10px;"> </div>
                 <table id="insentiftbl" >
