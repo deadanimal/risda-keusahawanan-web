@@ -211,16 +211,16 @@
                         </div>
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'show' : 'collapse' }}" id="pendapatanbulanan">
-                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" onclick="generatereport(1,'','');" href="/pendapatanbulanan">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" onclick="generatereport(1,'/pendapatanbulanan','');">
                           {{-- href="/pendapatanbulanan" --}}
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                           </div></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDaerah.*') ? 'active' : '' }}" href="/pendbulDaerah" onclick="generatereport(2,this.href,'');return false;">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDaerah.*') ? 'active' : '' }}" href="/pendbulDaerah" onclick="generatereport(2,'','');">
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
                           </div></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDun.*') ? 'active' : '' }}" onclick="generatereport(3,this.href,'');return false;" href="/pendbulDun">
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDun.*') ? 'active' : '' }}" onclick="generatereport(3,'','');" href="/pendbulDun">
                           {{-- href="/pendbulDun" --}}
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Dun</span>
                           </div></a>
@@ -470,7 +470,6 @@
 
   function generatereport(type,nextPage,userid){
     $('.loader').show();
-    // location.href = nextPage;
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -485,7 +484,8 @@
           // console.log(nextPage);
           $('.loader').hide();
           alert(data);
-          return true;
+          location.href = nextPage;
+          // return true;
         }
     });
   }
