@@ -1227,7 +1227,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->pekebun->No_KP }}
+                        @if ($usahawan->pekebun->No_KP != null)
+                            {{ $usahawan->pekebun->No_KP }}
+                        @endif
+
                     </span>
                 </td>
             </tr>
@@ -1238,7 +1241,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->pekebun->Nama_PK }}
+                        @if ($usahawan->pekebun->Nama_PK != null)
+                            {{ $usahawan->pekebun->Nama_PK }}
+                        @endif
+                        {{-- {{ $usahawan->pekebun->Nama_PK }} --}}
                     </span>
                 </td>
             </tr>
@@ -1249,7 +1255,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->pekebun->noTS }}
+                        @if ($usahawan->pekebun->noTS != null)
+                            {{ $usahawan->pekebun->noTS }}
+                        @endif
+                        {{-- {{ $usahawan->pekebun->noTS }} --}}
                     </span>
                 </td>
             </tr>
@@ -1492,7 +1501,8 @@
                     <td class="cls_001">JUALAN/PEROLEHAN</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_001" style="text-align: end">{{ number_format($jualan_perolehan, 2) }}</td>
+                    <td class="cls_001" style="text-align: end">{{ number_format($jualan_perolehan, 2) }}
+                    </td>
                 </tr>
 
                 <tr>
@@ -1642,7 +1652,8 @@
                 </tr>
 
                 <tr>
-                    <td class="cls_002" style="font-weight: bold">PERBELANJAAN PENTADBIRAN DAN OPERASI (OPEX)</td>
+                    <td class="cls_002" style="font-weight: bold">PERBELANJAAN PENTADBIRAN DAN OPERASI (OPEX)
+                    </td>
                     <td></td>
                     <td></td>
                     <td></td>

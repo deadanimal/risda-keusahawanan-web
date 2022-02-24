@@ -356,7 +356,12 @@
 <body>
     {{-- quotation --}}
     <div style="margin-left: 1.5cm; margin-right:1.5cm">
-        <p style="text-align: center"><img src="{{ $data->logo_syarikat }}" width=90 height=90></p>
+
+        <p style="text-align: center">
+            @if ($data->logo_syarikat)
+                <img src="{{ $data->logo_syarikat }}" width=90 height=90>
+            @endif
+        </p>
         <p style="text-align: center">
             <span class="cls_005">({{ $data->nodaftarssm }}) </span>
             <br>
@@ -404,13 +409,12 @@
         <p>
             <span class="cls_011">Tuan,</span>
             <br>
-            <span
-                class="cls_012" style="text-transform: uppercase !important">
+            <span class="cls_012" style="text-transform: uppercase !important">
                 {{ $pelanggan->tajuk }}
             </span>
         </p>
 
-        <div  class="cls_013">
+        <div class="cls_013">
             {{-- <span class="cls_013">BIL</span> --}}
             <table style="width: 100%;">
                 <tr>
@@ -421,7 +425,6 @@
                     <th style="width: 10%">HARGA <br> (RM)</th>
                 </tr>
                 @foreach ($stoks as $stok)
-                   
                     <tr>
                         <td style=" text-align:center">{{ $loop->index + 1 }}</td>
                         <td>
@@ -514,14 +517,18 @@
 
         </div>
 
-        
+
     </div>
 
     <div style="page-break-after: always"></div>
 
     {{-- do --}}
     <div style="margin-left: 1.5cm; margin-right:1.5cm">
-        <p style="text-align: center"><img src="{{ $data->logo_syarikat }}" width=90 height=90></p>
+        <p style="text-align: center">
+            @if ($data->logo_syarikat)
+                <img src="{{ $data->logo_syarikat }}" width=90 height=90>
+            @endif
+        </p>
         <p style="text-align: center">
             <span class="cls_005">({{ $data->nodaftarssm }}) </span>
             <br>
@@ -567,14 +574,13 @@
         </div>
 
         <p>
-            <span
-                class="cls_012" style="text-transform: uppercase !important">
+            <span class="cls_012" style="text-transform: uppercase !important">
                 {{ $pelanggan->tajuk }}
             </span>
         </p>
 
-        <div  class="cls_013">
-           
+        <div class="cls_013">
+
             <table style="width: 100%;">
                 <tr>
                     <th style="width: 5%">BIL</th>
@@ -582,10 +588,9 @@
                     <th style="width: 10%">KUANTITI</th>
                 </tr>
                 @foreach ($stoks as $stok)
-
-                @if ($loop->index + 1 == 8)
-                    <tr style="page-break-after: always"></tr>
-                @endif
+                    @if ($loop->index + 1 == 8)
+                        <tr style="page-break-after: always"></tr>
+                    @endif
                     <tr>
                         <td style=" text-align:center">{{ $loop->index + 1 }}</td>
                         <td>
@@ -617,19 +622,23 @@
                     </td>
                 </tr>
             </table>
-           
+
 
 
         </div>
 
-        
+
     </div>
 
     <div style="page-break-after: always"></div>
-    
+
     {{-- invoice --}}
     <div style="margin-left: 1.5cm; margin-right:1.5cm">
-        <p style="text-align: center"><img src="{{ $data->logo_syarikat }}" width=90 height=90></p>
+        <p style="text-align: center">
+            @if ($data->logo_syarikat)
+                <img src="{{ $data->logo_syarikat }}" width=90 height=90>
+            @endif
+        </p>
         <p style="text-align: center">
             <span class="cls_005">({{ $data->nodaftarssm }}) </span>
             <br>
@@ -677,13 +686,12 @@
         <p>
             <span class="cls_011">Tuan,</span>
             <br>
-            <span
-                class="cls_012" style="text-transform: uppercase !important">
+            <span class="cls_012" style="text-transform: uppercase !important">
                 {{ $pelanggan->tajuk }}
             </span>
         </p>
 
-        <div  class="cls_013">
+        <div class="cls_013">
             <table style="width: 100%;">
                 <tr>
                     <th style="width: 5%">BIL</th>
@@ -808,7 +816,7 @@
 
         </div>
 
-        
+
     </div>
 </body>
 
