@@ -24,23 +24,29 @@ class PLIndividuControllerWeb extends Controller
         if(!isset($authuser)){
             return redirect('/landing');
         }
-        $usahawans = Usahawan::all();
+        $usahawans = Lawatan::join('users', 'users.id', '=', 'lawatans.id_pengguna')
+        ->join('usahawans', 'usahawans.usahawanid', '=', 'users.usahawanid')
+        ->select('usahawans.*')
+        ->get();
         $result = [];
         foreach ($usahawans as $usahawan) {
-            $user = User::where('usahawanid', $usahawan->usahawanid)->first();
-            if($user != null){
+            $insentif = Insentif::where('id_pengguna',$usahawan->usahawanid)->first();
+            if($insentif){
                 $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
                 if(isset($negeri)){
                     $usahawan->negeri = $negeri->Negeri;
                 }
-                
-                $lawatan = Lawatan::where('id_pengguna', $user->id)->get();
-                if($lawatan->count()==0){
-                    
-                }else{
-                    array_push($result, $usahawan);
-                }
+                array_push($result, $usahawan);
             }
+            
+                
+                // $lawatan = Lawatan::where('id_pengguna', $user->id)->get();
+                // if($lawatan->count()==0){
+                    
+                // }else{
+                //     array_push($result, $usahawan);
+                // }
+            
         }
         
         return view('pemantauanlawatan.pantauindividu'
