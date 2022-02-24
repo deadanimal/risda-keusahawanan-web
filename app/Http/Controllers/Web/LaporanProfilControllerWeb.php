@@ -335,8 +335,9 @@ class LaporanProfilControllerWeb extends Controller
                 return "Tiada Data Insentif Dijumpai";
             }else{
                 foreach ($insentifs as $insentif) {
-                    $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                    $usahawan = Usahawan::where('usahawanid', $insentif->id_pengguna)->first();
+                    $user = User::select('id')->where('usahawanid', $insentif->id_pengguna)->first();
+                    $usahawan = Usahawan::select('U_Negeri_ID','U_Daerah_ID')->without(['PT','user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])->where('usahawanid', $insentif->id_pengguna)->first();
+                    
                     if(isset($usahawan)){
                         $insentif->negeri = $usahawan->U_Negeri_ID;
                         $insentif->daerah = $usahawan->U_Daerah_ID;
@@ -396,8 +397,9 @@ class LaporanProfilControllerWeb extends Controller
                 return "Tiada Data Insentif Dijumpai";
             }else{
                 foreach ($insentifs as $insentif) {
-                    $user = User::where('usahawanid', $insentif->id_pengguna)->first();
-                    $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
+                    $user = User::select('id')->where('usahawanid', $insentif->id_pengguna)->first();
+                    $usahawan = Usahawan::select('U_Negeri_ID','U_Daerah_ID','U_Dun_ID')->without(['PT','user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])->where('usahawanid', $insentif->id_pengguna)->first();
+                    
                     if(isset($usahawan)){
                         $insentif->negeri = $usahawan->U_Negeri_ID;
                         $insentif->daerah = $usahawan->U_Daerah_ID;

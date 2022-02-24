@@ -172,6 +172,7 @@
         span.onclick = function() {
             modal.style.display = "none";
         }
+        $('.loader').hide();
     });
 
     function NewDate(id){
@@ -193,6 +194,7 @@
     }
 
     function UpdateLawatan(field,id,tarikh){
+        $('.loader').show();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -209,7 +211,7 @@
                 if(data == "done"){
                     alert("Temujanji Anda Pada "+tarikh+" Selesai");
                 }
-                
+                $('.loader').hide();
                 location.reload();
             },
             error: function(){

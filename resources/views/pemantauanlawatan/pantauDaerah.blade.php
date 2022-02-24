@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center" id="contentbody">
-            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT      
+            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN PEMANTAUAN LAWATAN BAGI PENERIMA INSENTIF BAGI      
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                   {{-- <option value="">Tahun</option> --}}
                   <?php
@@ -132,7 +132,7 @@
             buttons: [
                 {
                     extend:    'copyHtml5',
-                    text:       '<span class="bi bi-files">Copy</span>',
+                    text:       '<span  >Copy</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Copy',
                     footer: true,
@@ -140,7 +140,7 @@
                 },
                 {
                     extend:    'excelHtml5',
-                    text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                    text:      '<span   >Excel</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Excel',
                     footer: true,
@@ -148,14 +148,14 @@
                 },
                 {
                     extend:    'csvHtml5',
-                    text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                    text:      '<span >CSV</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'CSV',
                     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                 },
                 {
                     extend:    'pdfHtml5',
-                    text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                    text:      '<span >PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
                     footer: true,
@@ -177,7 +177,19 @@
                 //     titleAttr: 'PDF',
                 //     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                 // }
-            ]
+            ],
+            "language": {
+                "lengthMenu": "_MENU_ rekod setiap paparan",
+                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                "infoEmpty": "Tiada rekod dijumpai",
+                "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                "sSearch": "Carian :",
+                "paginate": {
+                    "previous": "Sebelum",
+                    "next": "Seterus"
+                }
+            }
         });
         $('.loader').hide();
     });
@@ -209,7 +221,7 @@
                         buttons: [
                             {
                                 extend:    'copyHtml5',
-                                text:       '<span class="bi bi-files">Copy</span>',
+                                text:       '<span  >Copy</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Copy',
                                 footer: true,
@@ -217,7 +229,7 @@
                             },
                             {
                                 extend:    'excelHtml5',
-                                text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                                text:      '<span   >Excel</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Excel',
                                 footer: true,
@@ -225,14 +237,14 @@
                             },
                             {
                                 extend:    'csvHtml5',
-                                text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                                text:      '<span >CSV</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'CSV',
                                 title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                             },
                             {
                                 extend:    'pdfHtml5',
-                                text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                                text:      '<span >PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
                                 footer: true,
@@ -254,7 +266,19 @@
                             //     titleAttr: 'PDF',
                             //     title: 'LAPORAN PEMANTAUAN LAWATAN BAGI INSENTIF SETAKAT '+year+' MENGIKUT DAERAH/PT'
                             // }
-                        ]
+                        ],
+                        "language": {
+                            "lengthMenu": "_MENU_ rekod setiap paparan",
+                            "zeroRecords": "Maaf - Tiada data dijumpai",
+                            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                            "infoEmpty": "Tiada rekod dijumpai",
+                            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                            "sSearch": "Carian :",
+                            "paginate": {
+                                "previous": "Sebelum",
+                                "next": "Seterus"
+                            }
+                        }
                     });
                 }
                 $('.loader').hide();

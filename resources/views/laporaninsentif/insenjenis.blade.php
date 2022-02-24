@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center" id="contentbody">
-            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF
+            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN ANALISA JUMLAH/PURATA JUALAN PENERIMA INSENTIF
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
                     <option value="">Jenis Insentif</option>
                       @foreach ($ddInsentif as $items)
@@ -12,7 +12,7 @@
                           </option>
                       @endforeach
                 </select>
-                  MENGIKUT JENIS PERNIAGAAN SETAKAT 
+                  BAGI TAHUN
                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                     {{-- <option value="">Tahun</option> --}}
                     <?php
@@ -24,6 +24,7 @@
                     }
                     ?>
                   </select>
+                  MENGIKUT NEGERI
             </h4>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
                 <table id="laporaninsentifjenis" class="table table-sm table-bordered table-hover">
@@ -102,19 +103,19 @@
                             <td class="text-nowrap"><label class="form-check-label">{{$report->jenis}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab4)}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab5)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab5,2)}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7,2)}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab8)}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab9)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab9,2)}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab10)}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab11)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab11,2)}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab12)}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab13)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab13,2)}}</label></td>
                             <td class="text-nowrap"><label class="form-check-label">{{number_format($report->jumbil)}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->jumrm)}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->puratajual)}}</label></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->puratapend)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->jumrm,2)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->puratajual,2)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($report->puratapend,2)}}</label></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -129,64 +130,64 @@
                             <th></th>
                             <th>
                                 <div>{{number_format($total->satu)}}</div>
-                                <div>{{number_format($avg->satu)}}</div>
+                                <div>{{number_format($avg->satu,2)}}</div>
                             </th>
-                            <th>{{number_format($rm->satu)}}</th>
+                            <th>{{number_format($rm->satu,2)}}</th>
                             <th>
                                 <div>{{number_format($total->dua)}}</div>
-                                <div>{{number_format($avg->dua)}}</div>
+                                <div>{{number_format($avg->dua,2)}}</div>
                             </th>
-                            <th>{{number_format($rm->dua)}}</th>
+                            <th>{{number_format($rm->dua,2)}}</th>
                             <th>
                                 <div>{{number_format($total->tiga)}}</div>
-                                <div>{{number_format($avg->tiga)}}</div>
+                                <div>{{number_format($avg->tiga,2)}}</div>
                             </th>
-                            <th>{{number_format($rm->tiga)}}</th>
+                            <th>{{number_format($rm->tiga,2)}}</th>
                             <th>
                                 <div>{{number_format($total->empat)}}</div>
-                                <div>{{number_format($avg->empat)}}</div>
+                                <div>{{number_format($avg->empat,2)}}</div>
                             </th>
-                            <th>{{number_format($rm->empat)}}</th>
+                            <th>{{number_format($rm->empat,2)}}</th>
                             <th>
                                 <div>{{number_format($total->lima)}}</div>
-                                <div>{{number_format($avg->lima)}}</div>
+                                <div>{{number_format($avg->lima,2)}}</div>
                             </th>
-                            <th>{{number_format($rm->lima)}}</th>
+                            <th>{{number_format($rm->lima,2)}}</th>
                             <th>
                                 <div>{{number_format($total->enam)}}</div>
-                                <div>{{number_format($avg->enam)}}</div>
+                                <div>{{number_format($avg->enam,2)}}</div>
                             </th>
-                            <th>{{number_format($rm->enam)}}</th>
+                            <th>{{number_format($rm->enam,2)}}</th>
                             <th>
                                 <div>{{number_format($total->tujuh)}}</div>
                             </th>
-                            <th>{{number_format($rm->tujuh)}}</th>
+                            <th>{{number_format($rm->tujuh,2)}}</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
                             <th colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</th>
                             <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->satu)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->satu)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->satu,2)}}</th>
                             <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->dua)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->dua)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->dua,2)}}</th>
                             <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->tiga)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->tiga)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->tiga,2)}}</th>
                             <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->empat)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->empat)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->empat,2)}}</th>
                             <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->lima)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->lima)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->lima,2)}}</th>
                             <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->enam)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->enam)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->enam,2)}}</th>
                             <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->tujuh)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->tujuh)}}</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->tujuh,2)}}</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
                             <th colspan="4" style="border-bottom: 1px solid black;">Purata Jualan</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->satu)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->dua)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->tiga)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->empat)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->lima)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->enam)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->satu,2)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->dua,2)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->tiga,2)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->empat,2)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->lima,2)}}</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->enam,2)}}</th>
                             <th colspan="2" style="border-bottom: 1px solid black;"></th>
                         </tr>
                     </tfoot>
@@ -207,33 +208,33 @@
             buttons: [
                 {
                     extend:    'copyHtml5',
-                    text:       '<span class="bi bi-files">Copy</span>',
+                    text:       '<span>Copy</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Copy',
-                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year,
+                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF BAGI TAHUN '+year+' MENGIKUT NEGERI',
                     footer: true,
                 },
                 {
                     extend:    'excelHtml5',
-                    text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                    text:      '<span>Excel</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'Excel',
-                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year,
+                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF BAGI TAHUN '+year+' MENGIKUT NEGERI',
                     footer: true,
                 },
                 {
                     extend:    'csvHtml5',
-                    text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                    text:      '<span>CSV</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'CSV',
-                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF BAGI TAHUN '+year+' MENGIKUT NEGERI'
                 },
                 {
                     extend:    'pdfHtml5',
-                    text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                    text:      '<span>PDF</span>',
                     className: 'btn btn-primary btn-xs',
                     titleAttr: 'PDF',
-                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year,
+                    title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF BAGI TAHUN '+year+' MENGIKUT NEGERI',
                     orientation:'landscape',
                     footer: true,
                     customize: function(doc) {
@@ -246,14 +247,19 @@
                         doc.defaultStyle.fontSize = 9;
                     }
                 }
-                // {
-                //     extend:    'print',
-                //     text:      '<span class="bi bi-printer">Print</span>',
-                //     className: 'btn btn-primary btn-xs',
-                //     titleAttr: 'PDF',
-                //     title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
-                // }
-            ]
+            ],
+            "language": {
+                "lengthMenu": "_MENU_ rekod setiap paparan",
+                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                "infoEmpty": "Tiada rekod dijumpai",
+                "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                "sSearch": "Carian :",
+                "paginate": {
+                    "previous": "Sebelum",
+                    "next": "Seterus"
+                }
+            }
         });
         $('.loader').hide();
     });
@@ -297,33 +303,33 @@
                         buttons: [
                             {
                                 extend:    'copyHtml5',
-                                text:       '<span class="bi bi-files">Copy</span>',
+                                text:       '<span  >Copy</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Copy',
                                 footer: true,
-                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT NEGERI'
                             },
                             {
                                 extend:    'excelHtml5',
-                                text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                                text:      '<span   >Excel</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'Excel',
                                 footer: true,
-                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT NEGERI'
                             },
                             {
                                 extend:    'csvHtml5',
-                                text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                                text:      '<span >CSV</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'CSV',
-                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
+                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT NEGERI'
                             },
                             {
                                 extend:    'pdfHtml5',
-                                text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                                text:      '<span >PDF</span>',
                                 className: 'btn btn-primary btn-xs',
                                 titleAttr: 'PDF',
-                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year,
+                                title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT NEGERI',
                                 orientation:'landscape',
                                 footer: true,
                                 customize: function(doc) {
@@ -335,15 +341,20 @@
                                     doc.defaultStyle.alignment = 'center',
                                     doc.defaultStyle.fontSize = 9;
                                 }
-                            },
-                            // {
-                            //     extend:    'print',
-                            //     text:      '<span class="bi bi-printer">Print</span>',
-                            //     className: 'btn btn-primary btn-xs',
-                            //     titleAttr: 'PDF',
-                            //     title: 'LAPORAN ANALISA PURATA JUALAN/ PENDAPATAN PENERIMA INSENTIF '+jenistext+' MENGIKUT JENIS PERNIAGAAN SETAKAT '+year
-                            // }
-                        ]
+                            }
+                        ],
+                        "language": {
+                            "lengthMenu": "_MENU_ rekod setiap paparan",
+                            "zeroRecords": "Maaf - Tiada data dijumpai",
+                            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                            "infoEmpty": "Tiada rekod dijumpai",
+                            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                            "sSearch": "Carian :",
+                            "paginate": {
+                                "previous": "Sebelum",
+                                "next": "Seterus"
+                            }
+                        }
                     });
                 }
                 $('.loader').hide();

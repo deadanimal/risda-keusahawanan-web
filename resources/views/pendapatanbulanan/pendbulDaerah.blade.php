@@ -12,7 +12,7 @@
                           </option>
                       @endforeach
                 </select>
-                  MENGIKUT DAERAH/PT SETAKAT 
+                  BAGI TAHUN
                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                     {{-- <option value="">Tahun</option> --}}
                     <?php
@@ -24,6 +24,7 @@
                     }
                     ?>
                   </select>
+                  MENGIKUT DAERAH/PT 
             </h4>
               <div class="col-md-6 col-xxl-3 mb-3 pe-md-2">
                 <div class="card h-md-100 ecommerce-card-min-width">
@@ -35,7 +36,7 @@
                   <div class="card-body d-flex flex-column justify-content-end">
                     <div class="row">
                       <div class="col">
-                        <p class="font-sans-serif lh-1 mb-1 fs-4" id="c_insentif">RM{{number_format($c_insentif)}}</p>
+                        <p class="font-sans-serif lh-1 mb-1 fs-4" id="c_insentif">RM{{number_format($c_insentif,2)}}</p>
                       </div>
                     </div>
                   </div>
@@ -51,7 +52,7 @@
                   <div class="card-body d-flex flex-column justify-content-end">
                     <div class="row">
                       <div class="col">
-                        <p class="font-sans-serif lh-1 mb-1 fs-4" id="c_jualan">RM{{number_format($c_jualan)}}</p>
+                        <p class="font-sans-serif lh-1 mb-1 fs-4" id="c_jualan">RM{{number_format($c_jualan,2)}}</p>
                       </div>
                     </div>
                   </div>
@@ -114,9 +115,9 @@
                                 <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">{{$report->jenis}}</label></td>
                                 <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
                                 <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab4)}}</label></td>
-                                <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab5)}}</label></td>
-                                <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
-                                <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
+                                <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab5,2)}}</label></td>
+                                <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6,2)}}</label></td>
+                                <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7,2)}}</label></td>
                             </tr>
                             @endforeach
                           </tbody>
@@ -127,16 +128,16 @@
                               <td></td>
                               <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
                               <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_penerima)}}</label></td>
-                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_insentif)}}</label></td>
-                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_jualan)}}</label></td>
-                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_puratajual)}}</label></td>
+                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_insentif,2)}}</label></td>
+                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_jualan,2)}}</label></td>
+                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_puratajual,2)}}</label></td>
                             </tr>
                             <tr class="align-middle" style="text-align: center;">
                               <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
                               <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_penerima)}}</label></td>
-                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_insentif)}}</label></td>
-                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_jualan)}}</label></td>
-                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_puratajual)}}</label></td>
+                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_insentif,2)}}</label></td>
+                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_jualan,2)}}</label></td>
+                              <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($c_puratajual,2)}}</label></td>
                             </tr>
                           </tfoot>
                             
@@ -160,33 +161,33 @@
           buttons: [
             {
                 extend:    'copyHtml5',
-                text:       '<span class="bi bi-files">Copy</span>',
+                text:       '<span>Copy</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'Copy',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy,
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF BAGI TAHUN '+yyyy+' MENGIKUT DAERAH/PT',
                 footer: true,
             },
             {
                 extend:    'excelHtml5',
-                text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                text:      '<span >Excel</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'Excel',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy,
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF BAGI TAHUN '+yyyy+' MENGIKUT DAERAH/PT',
                 footer: true,
             },
             {
                 extend:    'csvHtml5',
-                text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                text:      '<span>CSV</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'CSV',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF BAGI TAHUN '+yyyy+' MENGIKUT DAERAH/PT',
             },
             {
                 extend:    'pdfHtml5',
-                text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                text:      '<span>PDF</span>',
                 className: 'btn btn-primary btn-xs',
                 titleAttr: 'PDF',
-                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy,
+                title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF BAGI TAHUN '+yyyy+' MENGIKUT DAERAH/PT',
                 footer: true,
                 customize: function(doc) {
                     doc.styles.tableHeader.fontSize = 9,
@@ -204,7 +205,19 @@
             //     titleAttr: 'PDF',
             //     title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF MENGIKUT DAERAH/PT SETAKAT '+yyyy
             // }
-          ]
+          ],
+          "language": {
+            "lengthMenu": "_MENU_ rekod setiap paparan",
+            "zeroRecords": "Maaf - Tiada data dijumpai",
+            "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+            "infoEmpty": "Tiada rekod dijumpai",
+            "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+            "sSearch": "Carian :",
+            "paginate": {
+                "previous": "Sebelum",
+                "next": "Seterus"
+            }
+          }
       });
         $('.loader').hide();
     });
@@ -246,33 +259,33 @@
                 buttons: [
                   {
                       extend:    'copyHtml5',
-                      text:       '<span class="bi bi-files">Copy</span>',
+                      text:       '<span>Copy</span>',
                       className: 'btn btn-primary btn-xs',
                       titleAttr: 'Copy',
-                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year,
+                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT DAERAH/PT',
                       footer: true,
                   },
                   {
                       extend:    'excelHtml5',
-                      text:      '<span class="bi bi-file-spreadsheet">Excel</span>',
+                      text:      '<span>Excel</span>',
                       className: 'btn btn-primary btn-xs',
                       titleAttr: 'Excel',
-                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year,
+                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT DAERAH/PT',
                       footer: true,
                   },
                   {
                       extend:    'csvHtml5',
-                      text:      '<span class="bi bi-filetype-csv">CSV</span>',
+                      text:      '<span>CSV</span>',
                       className: 'btn btn-primary btn-xs',
                       titleAttr: 'CSV',
-                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year
+                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT DAERAH/PT',
                   },
                   {
                       extend:    'pdfHtml5',
-                      text:      '<span class="bi bi-file-earmark-pdf">PDF</span>',
+                      text:      '<span>PDF</span>',
                       className: 'btn btn-primary btn-xs',
                       titleAttr: 'PDF',
-                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year,
+                      title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' BAGI TAHUN '+year+' MENGIKUT DAERAH/PT',
                       footer: true,
                       customize: function(doc) {
                           doc.styles.tableHeader.fontSize = 9,
@@ -290,7 +303,19 @@
                   //     titleAttr: 'PDF',
                   //     title: 'LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF '+jenistext+' MENGIKUT DAERAH/PT SETAKAT '+year
                   // }
-                ]
+                ],
+                "language": {
+                  "lengthMenu": "_MENU_ rekod setiap paparan",
+                  "zeroRecords": "Maaf - Tiada data dijumpai",
+                  "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                  "infoEmpty": "Tiada rekod dijumpai",
+                  "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                  "sSearch": "Carian :",
+                  "paginate": {
+                      "previous": "Sebelum",
+                      "next": "Seterus"
+                  }
+                }
             });
             $("#c_insentif").html(data[2]);
             $("#c_jualan").html(data[3]);
