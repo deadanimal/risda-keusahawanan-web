@@ -25,12 +25,26 @@ class DashControllerWeb extends Controller
         $authuser = Auth::user();
         if(!isset($authuser)){
             return redirect('/');
-        }
-        if(isset($authuser->idpegawai)){
-            $pegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-        }
-        if(isset($pegawai->mukim)){
-            $Mukim = Mukim::where('U_Mukim_ID', $pegawai->mukim)->first();
+        }else{
+
+            if(isset($authuser->idpegawai)){
+                $pegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+            }
+            if(isset($pegawai->mukim)){
+                $Mukim = Mukim::where('U_Mukim_ID', $pegawai->mukim)->first();
+            }
+
+            if($authuser->role == 1 || $authuser->role == 2){
+                $ddNegeri = Negeri::all();
+
+            }else if($authuser->role == 3 || $authuser->role == 5){
+                $ddNegeri = Negeri::where('U_Negeri_ID', $Mukim->U_Negeri_ID)->get();
+            }else if($authuser->role == 4 || $authuser->role == 6){
+                $ddNegeri = Negeri::where('U_Negeri_ID', $Mukim->U_Negeri_ID)->get();
+            }else if($authuser->role == 7){
+                $ddNegeri = Negeri::where('U_Negeri_ID', $Mukim->U_Negeri_ID)->get();
+            }
+
         }
         
         $getjenisinsentif="";
@@ -51,7 +65,7 @@ class DashControllerWeb extends Controller
                 if($user->usahawanid != null){
                     $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
                     if(isset($usahawan)){
-                        if($authuser->role == 3){
+                        if($authuser->role == 3 || $authuser->role == 5){
                             if(isset($Mukim)){
                                 if($usahawan->U_Negeri_ID != $Mukim->U_Negeri_ID){
                                     $update = false;
@@ -60,7 +74,7 @@ class DashControllerWeb extends Controller
                                 }
                             }
                         }
-                        if($authuser->role == 4){
+                        if($authuser->role == 4 || $authuser->role == 6){
                             if(isset($Mukim) && isset($usahawan)){
                                 if($usahawan->U_Daerah_ID != $Mukim->U_Daerah_ID){
                                     $update = false;
@@ -172,7 +186,7 @@ class DashControllerWeb extends Controller
             if(isset($user)){
                 if($user->usahawanid != null){
                     $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
-                    if($authuser->role == 3){
+                    if($authuser->role == 3 || $authuser->role == 5){
                         if(isset($Mukim)){
                             if($usahawan->U_Negeri_ID != $Mukim->U_Negeri_ID){
                                 $update = false;
@@ -181,7 +195,7 @@ class DashControllerWeb extends Controller
                             }
                         }
                     }
-                    if($authuser->role == 4){
+                    if($authuser->role == 4 || $authuser->role == 6){
                         if(isset($Mukim) && isset($usahawan)){
                             if($usahawan->U_Daerah_ID != $Mukim->U_Daerah_ID){
                                 $update = false;
@@ -271,7 +285,7 @@ class DashControllerWeb extends Controller
         }
         
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
-        $ddNegeri = Negeri::all();
+        
         //  dd($array4);
         return view('dash.index'
         ,[
@@ -320,6 +334,16 @@ class DashControllerWeb extends Controller
         if(isset($pegawai->mukim)){
             $Mukim = Mukim::where('U_Mukim_ID', $pegawai->mukim)->first();
         }
+
+        if($authuser->role == 1 || $authuser->role == 2){
+            $ddNegeri = Negeri::all();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $ddNegeri = Negeri::where('U_Negeri_ID', $Mukim->U_Negeri_ID)->get();
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $ddNegeri = Negeri::where('U_Negeri_ID', $Mukim->U_Negeri_ID)->get();
+        }else if($authuser->role == 7){
+            $ddNegeri = Negeri::where('U_Negeri_ID', $Mukim->U_Negeri_ID)->get();
+        }
         
         $Insentifdatas = Insentif::select("*");
         if($request->tahun != null){
@@ -355,7 +379,7 @@ class DashControllerWeb extends Controller
                 if($user->usahawanid != null){
                     $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
                     if(isset($usahawan)){
-                        if($authuser->role == 3){
+                        if($authuser->role == 3 || $authuser->role == 5){
                             if(isset($Mukim)){
                                 if($usahawan->U_Negeri_ID != $Mukim->U_Negeri_ID){
                                     $update = false;
@@ -364,7 +388,7 @@ class DashControllerWeb extends Controller
                                 }
                             }
                         }
-                        if($authuser->role == 4){
+                        if($authuser->role == 4 || $authuser->role == 6){
                             if(isset($Mukim) && isset($usahawan)){
                                 if($usahawan->U_Daerah_ID != $Mukim->U_Daerah_ID){
                                     $update = false;
@@ -475,7 +499,7 @@ class DashControllerWeb extends Controller
             if(isset($user)){
                 if($user->usahawanid != null){
                     $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
-                    if($authuser->role == 3){
+                    if($authuser->role == 3 || $authuser->role == 5){
                         if(isset($Mukim)){
                             if($usahawan->U_Negeri_ID != $Mukim->U_Negeri_ID){
                                 $update = false;
@@ -484,7 +508,7 @@ class DashControllerWeb extends Controller
                             }
                         }
                     }
-                    if($authuser->role == 4){
+                    if($authuser->role == 4 || $authuser->role == 6){
                         if(isset($Mukim) && isset($usahawan)){
                             if($usahawan->U_Daerah_ID != $Mukim->U_Daerah_ID){
                                 $update = false;

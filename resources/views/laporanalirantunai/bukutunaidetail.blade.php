@@ -201,7 +201,7 @@ $( document ).ready(function() {
         searching: false,
         sorting:false,
         paging:false,
-        dom: 'Bfrtip',
+        dom: 'Blfrtip',
         buttons: [
             {
                 extend:    'copyHtml5',
@@ -284,7 +284,7 @@ function gettabledata(type,val){
                     searching: false,
                     sorting:false,
                     paging:false,
-                    dom: 'Bfrtip',
+                    dom: 'Blfrtip',
                     buttons: [
                         {
                             extend:    'copyHtml5',

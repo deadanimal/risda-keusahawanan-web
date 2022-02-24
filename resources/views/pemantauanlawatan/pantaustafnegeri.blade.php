@@ -127,7 +127,7 @@ $( document ).ready(function() {
     var year = today.getFullYear();
     $('#laporlawatstaf').DataTable( {
         searching: true,
-        dom: 'Bfrtip',
+        dom: 'Blfrtip',
         buttons: [
             {
                 extend:    'copyHtml5',
@@ -227,7 +227,7 @@ function gettabledata(type,val){
             if(data[0] != null){
                 $('#laporlawatstaf').DataTable( {
                     searching: true,
-                    dom: 'Bfrtip',
+                    dom: 'Blfrtip',
                     buttons: [
                         {
                             extend:    'copyHtml5',

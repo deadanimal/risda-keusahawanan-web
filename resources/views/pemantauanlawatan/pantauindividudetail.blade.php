@@ -160,7 +160,7 @@
             searching: false,
             sorting:false,
             paging:false,
-            dom: 'Bfrtip',
+            dom: 'Blfrtip',
             exportOptions: {
                 stripHtml: false,
             },
@@ -215,7 +215,7 @@
                     searching: false,
                     sorting:false,
                     paging:false,
-                    dom: 'Bfrtip',
+                    dom: 'Blfrtip',
                     exportOptions: {
                         stripHtml: false,
                     },

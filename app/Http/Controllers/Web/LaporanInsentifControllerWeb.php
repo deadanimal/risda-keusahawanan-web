@@ -182,10 +182,13 @@ class LaporanInsentifControllerWeb extends Controller
         $num=1;
         foreach ($reports as $report) {
             $negeri = Negeri::where('U_Negeri_ID', $report->tab1)->first();
-            $report->negeri = $negeri->Negeri;
+            if(isset($negeri)){
+                $report->negeri = $negeri->Negeri;
+            }
             $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $report->tab2)->first();
-            $report->jenis = $jenisinsentif->nama_insentif;
-
+            if(isset($jenisinsentif)){
+                $report->jenis = $jenisinsentif->nama_insentif;
+            }
             $total->satu = $total->satu + $report->tab4;
             $total->dua = $total->dua + $report->tab5;
             $total->tiga = $total->tiga + $report->tab6;

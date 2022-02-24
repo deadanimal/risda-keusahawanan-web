@@ -157,7 +157,7 @@
       var yyyy = today.getFullYear();
       $('#pendbuldaerah').DataTable( {
           searching: true,
-          dom: 'Bfrtip',
+          dom: 'Blfrtip',
           buttons: [
             {
                 extend:    'copyHtml5',
@@ -255,7 +255,7 @@
             $("#tblfoot").html(data[1]);
             $('#pendbuldaerah').DataTable( {
                 searching: true,
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
                   {
                       extend:    'copyHtml5',

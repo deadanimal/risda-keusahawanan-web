@@ -323,7 +323,7 @@
             searching: false,
             sorting:false,
             paging:false,
-            dom: 'Bfrtip',
+            dom: 'Blfrtip',
             buttons: [
                 {
                     extend:    'copyHtml5',
@@ -408,7 +408,7 @@
                         searching: false,
                         sorting:false,
                         paging:false,
-                        dom: 'Bfrtip',
+                        dom: 'Blfrtip',
                         buttons: [
                             {
                                 extend:    'copyHtml5',

@@ -18,41 +18,6 @@ class UserSeeder extends Seeder
     {
         
         User::create([
-            'name'=> 'user1',
-            'email'=> 'user1@gmail.com',
-            'password'=> Hash::make('password'),
-            'usahawanid'=>'J00000',
-            'no_kp'=>'970203085559',
-            'status_pengguna'=>'1',
-            'role'=>'0',
-            'type'=>'2'
-        ]);
-
-        User::create([
-            'name'=> 'A.RAHMAN BIN ADAM',
-            'email'=> 'a.rahmanadam@yahoo.com',
-            'password'=> Hash::make('password'),
-            'usahawanid'=>'J00001',
-            'no_kp'=>'600606015813',
-            'status_pengguna'=>'1',
-            'role'=>'0',
-            'type'=>'2'
-            
-        ]);
-
-        User::create([
-            'name'=> 'user4',
-            'email'=> 'user4@gmail.com',
-            'password'=> Hash::make('password'),
-            'usahawanid'=>'J00002',
-            'no_kp'=>'123456789015',
-            'status_pengguna'=>'1',
-            'role'=>'0',
-            'type'=>'2'
-            
-        ]);
-
-        User::create([
             'name'=> 'RUZLAN BIN ABDUL RAHMAN',
             'email'=> 'ruzlan@risda.gov.my',
             'password'=> Hash::make('password'),

@@ -10,3 +10,7 @@
     background: url('../images/assets/loading.gif')50% 50% no-repeat;
   }
 
+.dt-buttons{
+  padding-bottom: 10px !important;
+}
+

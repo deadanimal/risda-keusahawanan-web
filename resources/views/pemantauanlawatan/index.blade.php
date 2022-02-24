@@ -122,7 +122,7 @@
         var yyyy = today.getFullYear();
         $('#tbllaporanlawatan').DataTable( {
             searching: true,
-            dom: 'Bfrtip',
+            dom: 'Blfrtip',
             buttons: [
                 {
                     extend:    'copyHtml5',
@@ -211,7 +211,7 @@
                 if(data[0] != null){
                     $('#tbllaporanlawatan').DataTable( {
                         searching: true,
-                        dom: 'Bfrtip',
+                        dom: 'Blfrtip',
                         buttons: [
                             {
                                 extend:    'copyHtml5',

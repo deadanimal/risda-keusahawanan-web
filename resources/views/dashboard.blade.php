@@ -211,11 +211,13 @@
                         </div>
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'show' : 'collapse' }}" id="pendapatanbulanan">
+                      @if (Auth::user()->role != 4 && Auth::user()->role != 6 && Auth::user()->role != 7)
                         <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" onclick="generatereport(1,this.href,'');return false;" href="/pendapatanbulanan">
                           {{-- href="/pendapatanbulanan" --}}
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                           </div></a>
                         </li>
+                      @endif
                         <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDaerah.*') ? 'active' : '' }}" href="/pendbulDaerah" onclick="generatereport(2,this.href,'');return false;">
                           <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
                           </div></a>
@@ -251,10 +253,12 @@
                         </div>
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('pemantauanlawatan.*') || request()->routeIs('pantauDaerah.*') || request()->routeIs('pantaustafnegeri.*') || request()->routeIs('pantauindividu.*') || request()->routeIs('pantauindividudetail.*') ? 'show' : 'collapse' }}" id="laporanlawatan">
+                      @if (Auth::user()->role != 4 && Auth::user()->role != 6 && Auth::user()->role != 7)
                       <li class="nav-item"><a class="nav-link {{  request()->routeIs('pemantauanlawatan.*') ? 'active' : '' }}" href="/pemantauanlawatan" onclick="generatereport(7,this.href,'');return false;">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
                         </div></a>
                       </li>
+                      @endif
                       <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauDaerah.*') ? 'active' : '' }}" onclick="generatereport(8,this.href,'');return false;" href="/pantauDaerah">
                         {{-- href="/pantauDaerah" --}}
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
@@ -481,10 +485,10 @@
           id:userid
         },
         success: function(data) {
-          // console.log(nextPage);
+          console.log(data);
           $('.loader').hide();
           alert(data);
-          location.href = nextPage;
+          $(location).prop('href', nextPage)
           return true;
         }
     });

@@ -168,7 +168,7 @@
     var yyyy = today.getFullYear();
     $('#pendapatanbultbl').DataTable( {
         searching: true,
-        dom: 'Bfrtip',
+        dom: 'Blfrtip',
         buttons: [
           {
                 extend:    'copyHtml5',
@@ -269,7 +269,7 @@
           if(data[0] != null){
               $('#pendapatanbultbl').DataTable( {
                   searching: true,
-                  dom: 'Bfrtip',
+                  dom: 'Blfrtip',
                   buttons: [
                     {
                           extend:    'copyHtml5',
