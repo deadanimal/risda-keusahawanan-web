@@ -11,7 +11,10 @@ class AliranController extends Controller
 {
     public function index(Request $request)
     {
-        $aliran = Aliran::orderBy('created_at', 'desc')->get();
+        $aliran = Aliran::orderBy('created_at', 'desc')
+        ->whereMonth('tarikh_aliran', Carbon::now()->month)
+        ->get();
+        
         // $user = $request->user();
 
         // $aliran = Aliran::where('id_pengguna', $request->id)->get();
