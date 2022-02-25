@@ -135,6 +135,9 @@
                                             @if($statdafusahval == "KP04")
                                                 <td>ANAK PEKEBUN KECIL</td>
                                             @endif
+                                            @if($statdafusahval == "")
+                                                <td>TIADA STATUS</td>
+                                            @endif
                                             <td>{{$statdafusahnums[$key]}}</td>
                                             <td>{{number_format(($statdafusahnums[$key] / $total2) * 100 , 2)}}</td>
                                         </tr>
@@ -292,7 +295,7 @@
                 document.open();
                 document.write(data);
                 document.close();
-                createchart();
+                // createchart();
                 $('.loader').hide();
             }
         });
@@ -305,7 +308,7 @@
         var jumdaerah = [];
         var juminsen = [];
         var countinsent = [];
-
+        console.log('daerah',daerah);
         var jantina = <?php echo $jantina; ?>;
         var numjantina = <?php echo $jantinanum; ?>;
         var jumjantina = [];
@@ -405,6 +408,9 @@
                 if(statdafusah[key] == "KP04"){
                     jumstatdafusah.push("ANAK PEKEBUN KECIL");
                 }
+                if(statdafusah[key] == ""){
+                    jumstatdafusah.push("TIADA STATUS");
+                }
             }
         }
         for (var key in numstatdafusah) {
@@ -423,10 +429,6 @@
                 jumnumkateusahawan.push(numkateusahawan[key]);
             }
         }
-        console.log('umurgrp',umurgrp);
-        // if(umurgrp != []){
-        //     umurgrp.sort();
-        // }
         
         for (var key in umurgrp) {
             if (Object.prototype.hasOwnProperty.call(umurgrp, key)) {
@@ -700,6 +702,19 @@
                     display: false
                 },
                 indexAxis: 'y',
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            stepSize: 1,
+                            beginAtZero: true
+                        }
+                    }],
+                    yAxes: [
+                        {
+                            reverse: true, // will reverse the scale
+                        }
+                    ]
+                },
                 elements: {
                     rectangle: {
                         borderWidth: 2,
@@ -715,5 +730,6 @@
             }
         });
     };
+
 </script>
 @endsection

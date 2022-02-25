@@ -28,7 +28,7 @@
                 <label class="form-label pt">Negeri Usahawan</label>
                 <select name="negeri" class="form-select" aria-label=".form-select pt" style="display:inline-block;">
                     <option selected="true" value='' disabled="disabled">Negeri Usahawan</option>
-                    <option value=''></option>
+                    <option value=''>Semua Negeri</option>
                     @foreach ($ddNegeri as $items)
                         <option value="{{ $items->U_Negeri_ID }}"> 
                             {{ $items->Negeri }} 
@@ -40,7 +40,7 @@
                 <label class="form-label pt">Pusat Tanggungjawab Usahawan</label>
                 <select name="PT" class="form-select" aria-label=".form-select pt" style="display:inline-block;">
                     <option selected="true" value='' disabled="disabled">Pusat Tanggungjawab</option>
-                    <option value=''></option>
+                    <option value=''>Semua Pusat Tanggungjawab</option>
                     @foreach ($ddPT as $items)
                         <option value="{{ $items->Kod_PT }}"> 
                             {{ $items->keterangan }} 

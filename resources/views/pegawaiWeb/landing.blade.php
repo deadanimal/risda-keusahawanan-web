@@ -24,7 +24,7 @@
                 <label class="form-label mukim">Mukim Pegawai</label>
                 <select name="mukim" class="form-select" aria-label=".form-select mukim" style="display:inline-block;">
                     <option selected="true" value='' disabled="disabled">Mukim</option>
-                    <option value=''></option>
+                    <option value=''>Semua Mukim</option>
                     @foreach ($ddMukim as $items)
                         <option value="{{ $items->U_Mukim_ID }}"> 
                             {{ $items->Mukim }} 
@@ -36,7 +36,7 @@
                 <label class="form-label pt">Pusat Tanggungjawab Pegawai</label>
                 <select name="PT" class="form-select" aria-label=".form-select pt" style="display:inline-block;">
                     <option selected="true" value='' disabled="disabled">Pusat Tanggungjawab</option>
-                    <option value=''></option>
+                    <option value=''>Semua Pusat Tanggungjawab</option>
                     @foreach ($ddPT as $items)
                         <option value="{{ $items->Kod_PT }}"> 
                             {{ $items->keterangan }} 

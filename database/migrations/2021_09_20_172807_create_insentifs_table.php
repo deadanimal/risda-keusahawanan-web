@@ -23,7 +23,6 @@ class CreateInsentifsTable extends Migration
             $table->double('nilai_insentif',30,2)->nullable();
             $table->string('created_by',50)->nullable();
             $table->string('modified_by',50)->nullable();
-            $table->string('negeri',50)->nullable();
             $table->timestamps();
         });
     }

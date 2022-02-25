@@ -25,13 +25,21 @@ class InsentifControllerWeb extends Controller
         if($authuser->role == 1){
             $users = Usahawan::select('namausahawan','nokadpengenalan','usahawanid','Kod_PT')->with(['PT'])->without(['user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])->get();
         }else if($authuser->role == 3){
-            $users = Usahawan::where('U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get();
+            $users = Usahawan::select('namausahawan','nokadpengenalan','usahawanid','Kod_PT')->with(['PT'])
+            ->without(['user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])
+            ->where('U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4){
-            $users = Usahawan::where('U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID)->get();
+            $users = Usahawan::select('namausahawan','nokadpengenalan','usahawanid','Kod_PT')->with(['PT'])
+            ->without(['user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])
+            ->where('U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID)->get();
         }else if($authuser->role == 5){
-            $users = Usahawan::where('U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get();
+            $users = Usahawan::select('namausahawan','nokadpengenalan','usahawanid','Kod_PT')->with(['PT'])
+            ->without(['user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])
+            ->where('U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 6){
-            $users = Usahawan::where('U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID)->get();
+            $users = Usahawan::select('namausahawan','nokadpengenalan','usahawanid','Kod_PT')->with(['PT'])
+            ->without(['user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])
+            ->where('U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID)->get();
         }else{
             return redirect('/landing');
         }
@@ -59,9 +67,6 @@ class InsentifControllerWeb extends Controller
             'insentifs'=>$insentifs,
             'id_pengguna'=>$usahawan->usahawanid,
             'ddInsentif'=>$ddInsentif,
-            'negeri'=>$usahawan->U_Negeri_ID,
-            'daerah'=>$usahawan->U_Daerah_ID,
-            'dun'=>$usahawan->U_Dun_ID,
             'addinsen'=>$addinsen
         ]
         );
@@ -85,7 +90,6 @@ class InsentifControllerWeb extends Controller
             $insentif->nilai_insentif = $request->nilai_insentif;
             $insentif->created_by = $userId;
             $insentif->modified_by = $userId;
-            $insentif->negeri = $request->negeri;
             $insentif->save();
             
             $usahawan = Usahawan::where('usahawanid', $request->id_pengguna)->first();
@@ -117,7 +121,6 @@ class InsentifControllerWeb extends Controller
         $insentif->tahun_terima_insentif = $request->tahun_terima_insentif;
         $insentif->nilai_insentif = $request->nilai_insentif;
         $insentif->modified_by = $userId;
-        $insentif->negeri = $request->negeri;
         $insentif->save();
 
         $usahawan = Usahawan::where('usahawanid', $request->id_pengguna)->first();
