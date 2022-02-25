@@ -50,7 +50,7 @@ class DashControllerWeb extends Controller
         $getjenisinsentif="";
         $gettahun = date("Y");
         $getNegeri="";
-        $Insentifdatas = Insentif::where('tahun_terima_insentif', $gettahun)->get();
+        $Insentifdatas = Insentif::where('tahun_terima_insentif', $gettahun)->take(50)->get();
        
         $array = [];
         $array2 = [];
@@ -286,7 +286,7 @@ class DashControllerWeb extends Controller
         
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
         
-        //  dd($array4);
+        //  dd($array);
         return view('dash.index'
         ,[
             'daerah'=>json_encode($array,JSON_NUMERIC_CHECK),
@@ -364,8 +364,9 @@ class DashControllerWeb extends Controller
             $Insentifdatas = $Insentifdatas->where('negeri', $getNegeri);
         }
 
-        $Insentifdatas = $Insentifdatas->get();
-
+        $Insentifdatas = $Insentifdatas->take(50)->get();
+        // ->take(10)
+        // dd($Insentifdatas);
         $array = [];
         $array2 = [];
         $array3 = [];
@@ -599,7 +600,7 @@ class DashControllerWeb extends Controller
         $ddInsentif = JenisInsentif::where('status', 'aktif')->get();
         $ddNegeri = Negeri::all();
 
-        //  dd($array4);
+        // dd($Insentifdatas);
         return view('dash.index'
         ,[
             'daerah'=>json_encode($array,JSON_NUMERIC_CHECK),

@@ -423,8 +423,11 @@
                 jumnumkateusahawan.push(numkateusahawan[key]);
             }
         }
-        console.log(umurgrp);
-        umurgrp.sort();
+        console.log('umurgrp',umurgrp);
+        // if(umurgrp != []){
+        //     umurgrp.sort();
+        // }
+        
         for (var key in umurgrp) {
             if (Object.prototype.hasOwnProperty.call(umurgrp, key)) {
                 if(umurgrp[key] == 1){
@@ -458,6 +461,8 @@
                 jumnumumurgrp.push(numumurgrp[key]);
             }
         }
+    
+    console.log(juminsen);
 
     if(document.getElementById("iptNegeri").value != ''){
         var datas = [
