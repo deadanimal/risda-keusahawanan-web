@@ -1637,8 +1637,9 @@ class LaporanProfilControllerWeb extends Controller
         }
     }
 
-    public function ExcelLapProfil()
+    public function ExcelLapProfil(Request $request)
     {
-        return Excel::download(new LapProf(), 'LaporanProfil.xlsx');
+        // dd($request->to);
+        return Excel::download(new LapProf($request->from,$request->to), 'LaporanProfil.xlsx');
     }
 }

@@ -17,11 +17,19 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implements WithCustomValueBinder, FromArray, WithHeadings
 {
+    protected $from;
+    protected $to;
+
+    function __construct($from,$to) {
+        $this->from = $from;
+        $this->to = $to;
+    }
     /**
     * @return \Illuminate\Support\Arrayable
     */
     public function array(): array
     {
+        // dd($this->from);
         $authuser = Auth::user();
         if(isset($authuser)){
             $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
@@ -32,15 +40,26 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
         $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         // $users = Usahawan::take(5)->get();
         if($authuser->role == 1 || $authuser->role == 2){
-            $users = Usahawan::all();
+            $users = Usahawan::without(['insentif'])
+            ->where('id', '>=', $this->from)
+            ->where('id', '<=', $this->to)->get();
             // take(5)->get();
             // all();
         }else if($authuser->role == 3 || $authuser->role == 5){
-            $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
+            $users = Usahawan::without(['insentif'])
+            ->where('U_Negeri_ID', $authmukim->U_Negeri_ID)
+            ->where('id', '>=', $this->from)
+            ->where('id', '<=', $this->to)->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
-            $users = Usahawan::where('U_Daerah_ID', $authmukim->U_Daerah_ID)->get();
+            $users = Usahawan::without(['insentif'])
+            ->where('U_Daerah_ID', $authmukim->U_Daerah_ID)
+            ->where('id', '>=', $this->from)
+            ->where('id', '<=', $this->to)->get();
         }else if($authuser->role == 7){
-            $users = Usahawan::where('Kod_PT', $authpegawai->NamaPT)->get();
+            $users = Usahawan::without(['insentif'])
+            ->where('Kod_PT', $authpegawai->NamaPT)
+            ->where('id', '>=', $this->from)
+            ->where('id', '<=', $this->to)->get();
         }
 
         

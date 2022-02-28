@@ -6,7 +6,10 @@
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Laporan Profil Usahawan</h3>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
                 <div style="padding-bottom: 20px;">
-                    <a class="btn btn-primary" onclick="ExportExcel()"><span   >Export Excel</span></a>
+                    {{-- <input class="form-control usahawanfield" name="nokadpengenalan"   type="text"/> --}}
+                    <input class="form-control" type="number" id="from" style="width: 150px;display: inline-block;"> Hingga
+                    <input class="form-control" type="number" id="to" style="width: 150px;display: inline-block;">
+                    <a class="btn btn-primary" onclick="ExportExcel()"><span>Export Excel</span></a>
                 </div>
                 <div style="padding-top: 10px;"> </div>
                 <table id="insentiftbl" >
@@ -95,7 +98,10 @@
     });
 
     function ExportExcel(){
-        window.location.href = "/ExcelLapProfil";
+        var from = $("#from").val();
+        var to = $("#to").val();
+
+        window.location.href = "/ExcelLapProfil?from="+from+"&to="+to+"";
     }
 
     
