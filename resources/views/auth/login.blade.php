@@ -37,11 +37,14 @@
                           <label class="form-label" for="split-login-password" :value="__('Password')">Kata Laluan</label>
                           <a class="fs--1" href="/LupaPass">Lupa Kata Laluan?</a>
                         </div>
-                        <input class="form-control" id="split-login-password" type="password" name="password" autocomplete="current-password" required/>
+                        <input class="form-control" style="display: inline-block;" id="split-login-password" type="password" name="password" autocomplete="current-password" required/>
+                        <span class="p-viewer" style="position: absolute;right: 45px;padding-top:5px;">
+                          <i class="fa fa-eye" id="mata" onclick="viewpass()"></i>
+                        </span>
                       </div>
                       <div class="form-check mb-0">
-                        <input class="form-check-input" type="checkbox" id="split-checkbox" />
-                        <label class="form-check-label" for="split-checkbox">Remember me</label>
+                        {{-- <input class="form-check-input" type="checkbox" id="split-checkbox" />
+                        <label class="form-check-label" for="split-checkbox">Remember me</label> --}}
                       </div>
                       <div class="mb-3">
                         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -60,3 +63,21 @@
     </main>
     </body>
 </html>
+<script>
+  function viewpass(){
+    var get = $('#split-login-password').attr('type');
+    // console.log(get);
+    if(get == 'password'){
+      $("#split-login-password").prop("type", "text");
+      // document.getElementById("mata").className = "MyClass";
+      $('#mata').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+      // $("#mata").attr('class', 'fa fa-eye');
+    }else if(get == 'text'){
+      $("#split-login-password").prop("type", "password");
+      $('#mata').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+      // $("#mata").attr('class', 'fa fa-eye-slash');
+
+    }
+   
+  }
+</script>

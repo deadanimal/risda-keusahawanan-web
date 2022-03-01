@@ -4,6 +4,9 @@
     <div class="card-body overflow-hidden p-lg-6">
       <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/laporanprofil"> 
         <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
+        <div style="padding-bottom: 20px;">
+            <a class="btn btn-primary" onclick="ExportPDF()"><span >PDF</span></a>
+        </div>
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;padding-top:3vh;">Laporan Profil Usahawan</h3>
         </div>
@@ -15,7 +18,7 @@
                 padding-top: 20px;
             }
         </style>
-        <table style="width: 100%;">
+        <table id="usahawan" style="width: 100%;">
         <colgroup>
             <col span="1" style="width: 17%;">
             <col span="1" style="width: 28%;">
@@ -126,7 +129,7 @@
                         <td>Sep</td>
                         <td>Okt</td>
                         <td>Nov</td>
-                        <td>Dis</td>
+                        <td>Dis<br></td>
                     </tr>
                     <tr>
                         <td>{{$user->aliran1}}</td>
@@ -140,7 +143,7 @@
                         <td>{{$user->aliran9}}</td>
                         <td>{{$user->aliran10}}</td>
                         <td>{{$user->aliran11}}</td>
-                        <td>{{$user->aliran12}}</td>
+                        <td>{{$user->aliran12}}<br></td>
                     </tr>
                     </table>
                 </td>
@@ -191,13 +194,13 @@
                         <tr>
                             <th>Jenis Bantuan</th>
                             <th>Kelulusan Bantuan (RM)</th>
-                            <th>Tahun Terima</th>
+                            <th>Tahun Terima <br></th>
                         </tr>
                         @foreach ($insentif2 as $insentif2s)
                         <tr>
                             <td>{{$insentif2s->namainsen}}</td>
                             <td>{{number_format($insentif2s->nilai_insentif)}}</td>
-                            <td>{{$insentif2s->tahun_terima_insentif}}</td>   
+                            <td>{{$insentif2s->tahun_terima_insentif}}<br></td>   
                         </tr>
                         @endforeach
                     </table>
@@ -216,8 +219,26 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
+    
     $('.loader').hide();
 })
+
+function ExportPDF(){
+    // var year = document.getElementById("iptYear").value;
+    var doc = new jsPDF("p", "mm", "a4")
+    doc.text(15, 10, "LAPORAN PROFIL USAHAWAN");
+    doc.autoTable({ 
+        html: '#usahawan' 
+    })
+    // var elem = document.getElementById('gambau');
+    // console.log(elem.getAttribute('src'));
+    // if(elem.getAttribute('src') != ""){
+    //     var myImage = document.getElementById("gambau").src; 
+    //     doc.addImage(myImage, 'JPEG', 80, 100, 60, 35);
+    // }
+    doc.save('LaporanProfilUsahawan.pdf')
+
+}
 
 </script>
 @endsection

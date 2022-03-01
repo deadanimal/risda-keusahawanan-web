@@ -63,9 +63,9 @@ class AuditTrailControllerWeb extends Controller
         $from = date($request->start);
         $to = date($request->end);
         if ($from == $to){
-            $Audits = AuditTrail::whereDate('Date', $from)->get();
+            $Audits = AuditTrail::whereDate('Date', $from)->orderBy('Date', 'DESC')->get();
         }else{
-            $Audits = AuditTrail::whereBetween('Date', [$from, $to])->get();
+            $Audits = AuditTrail::whereBetween('Date', [$from, $to])->orderBy('Date', 'DESC')->get();
         }
         // dd($from .'--'. $to);
         
@@ -88,7 +88,7 @@ class AuditTrailControllerWeb extends Controller
 
             $result .='
                 <tr class="border-bottom-0 rounded-0 border-x-0 border border-300">
-                    <td class="notification-time">'.$Audit->Date.'</td>
+                    <td class="notification-time">'.date("d-m-Y h:ia", strtotime($Audit->Date)).'</td>
                     <td class="notification-body"><p class="mb-1"><strong>'.$Audit->pegawai.'</strong> '.$Audit->Desc.' di <strong>'.$Audit->jenis.'</strong></p></td>
                 </tr>
             ';

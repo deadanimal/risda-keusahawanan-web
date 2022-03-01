@@ -94,6 +94,9 @@
                             .dataTable-bottom{
                                 padding-top: 3vh;
                             }
+                            .dataTables_filter input{
+                              width: 170px;
+                            }
                         </style>
                         <thead>
                             <tr class="align-middle" style="text-align: center;">
@@ -205,10 +208,11 @@
             "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
             "infoEmpty": "Tiada rekod dijumpai",
             "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
-            "sSearch": "Carian :",
+            "sSearch": "Saringan :",
+            searchPlaceholder: "Negeri/ Jenis Insentif",
             "paginate": {
                 "previous": "Sebelum",
-                "next": "Seterus"
+                "next": "Seterusnya"
             }
           }
       });
@@ -303,10 +307,11 @@
                       "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
                       "infoEmpty": "Tiada rekod dijumpai",
                       "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
-                      "sSearch": "Carian :",
+                      "sSearch": "Saringan :",
+                      searchPlaceholder: "Negeri/ Jenis Insentif",
                       "paginate": {
                           "previous": "Sebelum",
-                          "next": "Seterus"
+                          "next": "Seterusnya"
                       }
                     }
                 });

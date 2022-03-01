@@ -78,7 +78,7 @@
   <?php 
   // ini_set('memory_limit', '-1');
   ?>
-      <div class="container" data-layout="container">
+      <div class="container" data-layout="container" style="padding-left:40px;max-width:100%;">
         <script>
           var isFluid = JSON.parse(localStorage.getItem('isFluid'));
           if (isFluid) {
@@ -304,7 +304,7 @@
           </div>
         </nav>
         <div class="content">
-          <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
+          <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand" style="padding-right:150px;">
 
             <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             <a class="navbar-brand me-1 me-sm-3" href="/landing">

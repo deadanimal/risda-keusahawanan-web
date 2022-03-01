@@ -17,8 +17,8 @@
                  </colgroup> --}}
                  <thead>
                     <tr class="align-middle">
-                        <th scope="col">Nama Tindakan Lawatan</th>
-                        <th scope="col">Status Tindakan Lawatan</th>
+                        <th scope="col">Nama Tindakan Lawatan *</th>
+                        <th scope="col">Status Tindakan Lawatan *</th>
                         <th scope="col"></th>
                     </tr>
                  </thead>
@@ -27,9 +27,9 @@
                         <form id="tindLawatan" method="POST" action="/tindakanlawatan" enctype="multipart/form-data">
                         @csrf
                         @method("POST") 
-                        <td class="text-nowrap"><input class="form-control form-control-sm" name="nama_tindakan_lawatan" id="field-name" type="text" value="" style="width:80vh"/></td>
+                        <td class="text-nowrap"><input class="form-control form-control-sm" name="nama_tindakan_lawatan" id="field-name" type="text" value="" style="width:80vh" placeholder="Masukkan nama tindakan lawatan"/></td>
                         <td class="text-nowrap"><select class="form-select form-select-sm" name="status_tindakan_lawatan" aria-label=".form-select-sm example" style="width:25vh;">
-                            <option selected=""></option>
+                            <option disabled selected>Pilih</option>
                             <option value="aktif">aktif</option>
                             <option value="tak aktif">tak aktif</option>
                         </select></td>
@@ -46,13 +46,13 @@
                         </td>
                         <td class="text-nowrap">
                             <select class="form-select form-select-sm" name="status_tindakan_lawatan" aria-label=".form-select-sm example" style="width:25vh;">
-                                <option selected="{{$tindlawatan->status_tindakan_lawatan}}"></option>
+                                <option disabled>Pilih</option>
                                 <option {{ ( $tindlawatan->status_tindakan_lawatan == "aktif" ) ? 'selected' : '' }} value="aktif">aktif</option>
                                 <option {{ ( $tindlawatan->status_tindakan_lawatan == "tak aktif" ) ? 'selected' : '' }} value="tak aktif">tak aktif</option>
                             </select>
                         </td>
                         <td class="text-nowrap">
-                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="kemaskinilawatan({{$tindlawatan->id}});">Kemaskini</button>
+                            <button type="button" class="btn btn-warning btn-sm" style="width:15vh" onclick="kemaskinilawatan({{$tindlawatan->id}});">Kemaskini</button>
                         </form>
                             {{-- <form method="POST" style="display:inline-block;" action="{{ route('tindakanlawatan.destroy', $tindlawatan->id) }}">
                             @csrf  
@@ -81,10 +81,10 @@
                 "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
                 "infoEmpty": "Tiada rekod dijumpai",
                 "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
-                "sSearch": "Carian :",
+                "sSearch": "Saringan :",
                 "paginate": {
                     "previous": "Sebelum",
-                    "next": "Seterus"
+                    "next": "Seterusnya"
                 }
             }
         });

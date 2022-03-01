@@ -26,7 +26,7 @@
                 </div>
                 <input class="form-control" id="split-login-password" type="password" name="new_confirm_password" autocomplete="current-password" required/>
                 <div style="padding-top: 20px;">
-                    <button class="btn btn-primary" type="submit" >Tukar Password</button>
+                    <button class="btn btn-primary" type="submit" >Tukar Kata Laluan</button>
                 </div>
             </form>
         {{-- </div> --}}

@@ -72,10 +72,10 @@ $( document ).ready(function() {
             "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
             "infoEmpty": "Tiada rekod dijumpai",
             "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
-            "sSearch": "Carian :",
+            "sSearch": "Saringan :",
             "paginate": {
                 "previous": "Sebelum",
-                "next": "Seterus"
+                "next": "Seterusnya"
             }
         }
     });

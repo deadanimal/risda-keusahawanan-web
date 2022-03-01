@@ -56,6 +56,12 @@ class ChangePassControllerWeb extends Controller
 
             $pegawai->email = $request->email;
             $pegawai->save();
+            
+            Auth::guard('web')->logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
 
             echo '<script language="javascript">';
             echo 'alert("Kemaskini Akaun Berjaya");';

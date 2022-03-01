@@ -418,6 +418,7 @@ class LaporanProfilControllerWeb extends Controller
                 $insentifs = Insentif::join('usahawans', 'usahawans.usahawanid', '=', 'insentifs.id_pengguna')
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
                 ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID','usahawans.U_Dun_ID', 'users.id')
+                ->where('usahawans.U_Dun_ID', '<>', '')
                 ->get()
                 ->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID','U_Daerah_ID','U_Dun_ID']);
             }else if($loguser->role == 3 || $loguser->role == 5){
@@ -1640,6 +1641,6 @@ class LaporanProfilControllerWeb extends Controller
     public function ExcelLapProfil(Request $request)
     {
         // dd($request->to);
-        return Excel::download(new LapProf($request->from,$request->to), 'LaporanProfil.xlsx');
+        return Excel::download(new LapProf($request->from,$request->to), 'LaporanDatabaseProfil.xlsx');
     }
 }

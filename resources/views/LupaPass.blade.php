@@ -27,23 +27,23 @@
                             @foreach($errors->all() as $error)
                                     <li>{{$error}}</li>
                                 @endforeach
-                            <form method="POST" action="/LupaPass" enctype="multipart/form-data">
+                            <form method="POST" action="api/forgot-password" enctype="multipart/form-data" id="tukerform">
                                 @csrf
                                 @method("POST")
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label" for="split-login-password">Alamat Emel</label>
                                 </div>
-                                <input class="form-control" type="text" name="email" required/>
-                                <div class="d-flex justify-content-between">
+                                <input class="form-control" type="text" name="email" id="emaillupa" required/>
+                                {{-- <div class="d-flex justify-content-between">
                                     <label class="form-label" for="split-login-password">Kata Laluan Baru</label>
                                 </div>
                                 <input class="form-control" id="split-login-password" type="password" name="new_password" autocomplete="current-password" required/>
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label" for="split-login-password">Sahkan Kata Laluan Baru</label>
                                 </div>
-                                <input class="form-control" id="split-login-password" type="password" name="new_confirm_password" autocomplete="current-password" required/>
+                                <input class="form-control" id="split-login-password" type="password" name="new_confirm_password" autocomplete="current-password" required/> --}}
                                 <div style="padding-top: 30px;">
-                                    <button class="btn btn-primary" type="submit" >Tukar Password</button>
+                                    <button id="btnsave" class="btn btn-primary" type="button">Tukar Password</button>
                                 </div>
                             </form>
                         </div>
@@ -60,12 +60,37 @@
 
 
 {{-- @endsection --}}
-@section('script')
+
 <script type="text/javascript">
 
     $( document ).ready(function() {
         $('.loader').hide();
+        document.getElementById("btnsave").addEventListener ("click", tuker, false);
     })
 
+function tuker(){
+  // $('#tukerform').submit();
+  var emel = document.getElementById("emaillupa").value;
+  $.ajax({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "api/forgot-password",
+      type:"POST",
+      data: {     
+        email:emel
+      },
+      success: function(data) {
+        if(data.title == "Tidak Berjaya"){
+          alert(data.message);
+        }else{
+          alert(data.message);
+          window.location.href = "/login";
+        }
+        console.log(data);
+      }
+  });
+  // alert('Kata laluan sementara telah dihantar ke e-mel');
+  // window.location.href = "/login";
+}
 </script>
-@endsection

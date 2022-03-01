@@ -19,10 +19,10 @@
                      </colgroup>
                      <thead>
                         <tr class="align-middle">
-                            <th scope="col">Jenis Aliran</th>
-                            <th scope="col">Bahagian Aliran</th>
-                            <th scope="col">Nama Aliran</th>
-                            <th scope="col">Status Aliran</th>
+                            <th scope="col">Jenis Aliran *</th>
+                            <th scope="col">Bahagian Aliran *</th>
+                            <th scope="col">Nama Aliran *</th>
+                            <th scope="col">Status Aliran *</th>
                             <th scope="col"></th>
                         </tr>
                      </thead>
@@ -33,19 +33,19 @@
                         @method("POST")
                             {{-- <td><input class="form-control form-control-sm" name="jenis_aliran" id="field-name" type="text" value=""/></td> --}}
                             <td><select class="form-select form-select-sm" name="jenis_aliran" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
-                                <option selected=""></option>
+                                <option disabled selected>Pilih</option>
                                 <option value="tunai_masuk">Tunai Masuk</option>
                                 <option value="tunai_keluar">Tunai Keluar</option>
                             </select></td>
                             <td><select class="form-select form-select-sm" name="jenis_aliran_dua" aria-label=".form-select-sm example" style="display:inline-block;width:32vh;">
-                                <option selected=""></option>
+                                <option disabled selected>Pilih</option>
                                 <option value="1">Pendapatan Aktif</option>
                                 <option value="2">Pendapatan Pasif</option>
                                 <option value="3">Perbelanjaan Perniagaan</option>
                             </select></td>
-                            <td><input class="form-control form-control-sm" name="nama_kategori_aliran" id="field-name" type="text" style="width:35vh;" value=""/></td>
+                            <td><input class="form-control form-control-sm" name="nama_kategori_aliran" id="field-name" type="text" style="width:35vh;" value="" placeholder="Masukkan Nama Aliran"/></td>
                             <td><select class="form-select form-select-sm" name="status_kategori_aliran" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
-                                <option selected=""></option>
+                                <option disabled selected>Pilih</option>
                                 <option value="aktif">aktif</option>
                                 <option value="tak aktif">tak aktif</option>
                             </select></td>
@@ -90,7 +90,7 @@
                             </td> -->
                         
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm" style="width:20vh" onclick="Updatealiran({{$katealiran->id}});">Kemaskini</button>
+                                <button type="button" class="btn btn-warning btn-sm" style="width:20vh" onclick="Updatealiran({{$katealiran->id}});">Kemaskini</button>
                                 
                                 {{-- <form method="POST" style="display:inline-block;" action="{{ route('kategorialiran.destroy', $katealiran->id) }}">
                                 @csrf  
@@ -121,10 +121,10 @@ $( document ).ready(function() {
             "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
             "infoEmpty": "Tiada rekod dijumpai",
             "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
-            "sSearch": "Carian :",
+            "sSearch": "Saringan :",
             "paginate": {
                 "previous": "Sebelum",
-                "next": "Seterus"
+                "next": "Seterusnya"
             }
         }
     });

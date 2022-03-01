@@ -2,7 +2,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('content')
 <div class="card">
-    <div class="card-body p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
+    <div class="card-body p-lg-6" style="overflow-x: auto !important;overflow-y: auto !important;">
         <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/pegawaiWeb"> 
         <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
         <div class="row align-items-center" style="padding-top:15px;">
@@ -319,10 +319,10 @@ function datatable(){
             "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
             "infoEmpty": "Tiada rekod dijumpai",
             "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
-            "sSearch": "Carian :",
+            "sSearch": "Saringan :",
             "paginate": {
                 "previous": "Sebelum",
-                "next": "Seterus"
+                "next": "Seterusnya"
             }
         },
         "columnDefs": [
@@ -331,7 +331,9 @@ function datatable(){
         initComplete: function () {
             this.api().columns([1, 2, 3]).every( function () {
                 var column = this;
-                var select = $('<select><option value=""></option></select>')
+                console.log(column[0]);
+                if(column[0] == 2){
+                    var select = $('<select style="width:250px;"><option value=""></option></select>')
                     .appendTo( $(column.footer()).empty() )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
@@ -342,7 +344,19 @@ function datatable(){
                             .search( val ? '^'+val+'$' : '', true, false )
                             .draw();
                     } );
+                }else{
+                    var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
  
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+                }
                 column.data().unique().sort().each( function ( d, j ) {
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );

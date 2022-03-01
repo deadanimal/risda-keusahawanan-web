@@ -98,7 +98,7 @@
                 <div class="row g-0">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas3" height="500" style="padding:20px;"></canvas>
+                            <canvas id="canvas3" height="500px" style="padding:20px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                                                 <td>TIADA STATUS</td>
                                             @endif
                                             <td>{{$statdafusahnums[$key]}}</td>
-                                            <td>{{number_format(($statdafusahnums[$key] / $total2) * 100 , 2)}}</td>
+                                            <td>@if($total2 != 0){{number_format(($statdafusahnums[$key] / $total2) * 100 , 2)}} @endif</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -152,7 +152,7 @@
                 <div class="row g-0" style="padding-top: 10px;">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                            <canvas id="canvas5" height="500" width="600" style="padding:20px;"></canvas>
+                            <canvas id="canvas5" height="500px" width="600" style="padding:20px;"></canvas>
                         </div>
                     </div>
                     <div class="col-lg-6 pe-lg-2 mb-3">
@@ -185,7 +185,7 @@
                 <div class="row g-0">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
-                        <canvas id="canvas6" height="500" style="padding:20px;"></canvas>
+                        <canvas id="canvas6" height="500px" style="padding:20px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -215,15 +215,15 @@
                     var sX      = 0;
                     var sY      = 490*i; // start 980 pixels down for every new page
                     var sWidth  = 1200;
-                    var sHeight = 490;
+                    var sHeight = 510;
                     var dX      = 0;
                     var dY      = 0;
                     var dWidth  = 1100;
-                    var dHeight = 470;
+                    var dHeight = 510;
 
                     window.onePageCanvas = document.createElement("canvas");
                     onePageCanvas.setAttribute('width', 1200);
-                    onePageCanvas.setAttribute('height', 490);
+                    onePageCanvas.setAttribute('height', 510);
                     var ctx = onePageCanvas.getContext('2d');
                     // details on this usage of this function: 
                     // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images#Slicing

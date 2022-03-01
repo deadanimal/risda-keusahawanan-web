@@ -18,9 +18,9 @@
                  </colgroup>
                  <thead>
                     <tr class="align-middle">
-                        <th scope="col">Kod Insentif</th>
-                        <th scope="col">Nama Insentif</th>
-                        <th scope="col">Status Insentif</th>
+                        <th scope="col">Kod Insentif *</th>
+                        <th scope="col">Nama Insentif *</th>
+                        <th scope="col">Status Insentif *</th>
                         <th scope="col"></th>
                     </tr>
                  </thead>
@@ -29,10 +29,10 @@
                         <form id="jenisInsen" method="POST" action="/jenisinsentif" enctype="multipart/form-data">
                         @csrf
                         @method("POST")
-                        <td><input class="form-control form-control-sm" name="id_jenis_insentif" id="field-name" type="text" value=""/></td>
-                        <td><input class="form-control form-control-sm" name="nama_insentif" id="field-name" type="text" value=""/></td>
+                        <td><input class="form-control form-control-sm" name="id_jenis_insentif" id="field-name" type="text" value="" placeholder="Masukkan Kod Insentif"/></td>
+                        <td><input class="form-control form-control-sm" name="nama_insentif" id="field-name" type="text" value="" placeholder="Masukkan Nama Insentif"/></td>
                         <td><select class="form-select form-select-sm" name="status" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
-                            <option selected=""></option>
+                            <option disabled selected>Pilih</option>
                             <option value="aktif">aktif</option>
                             <option value="tak aktif">tak aktif</option>
                         </select></td>
@@ -52,13 +52,13 @@
                         </td>
                         <td class="text-nowrap">
                             <select class="form-select form-select-sm" name="status" aria-label=".form-select-sm example" style="display:inline-block;width:20vh;">
-                                <option selected="{{$jenisinsentif->status}}"></option>
+                                <option disabled>Status Insentif</option>
                                 <option {{ ( $jenisinsentif->status == "aktif" ) ? 'selected' : '' }} value="aktif">aktif</option>
                                 <option {{ ( $jenisinsentif->status == "tak aktif" ) ? 'selected' : '' }} value="tak aktif">tak aktif</option>
                             </select>
                         </td>
                         <td class="text-nowrap">
-                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="updateJenis({{$jenisinsentif->id}});">Kemaskini</button>
+                            <button type="button" class="btn btn-warning btn-sm" style="width:15vh" onclick="updateJenis({{$jenisinsentif->id}});">Kemaskini</button>
                         
                             {{-- &nbsp
                             <form method="POST" style="display:inline-block;" action="{{ route('jenisinsentif.destroy', $jenisinsentif->id) }}">
@@ -89,10 +89,10 @@
                 "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
                 "infoEmpty": "Tiada rekod dijumpai",
                 "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
-                "sSearch": "Carian :",
+                "sSearch": "Saringan :",
                 "paginate": {
                     "previous": "Sebelum",
-                    "next": "Seterus"
+                    "next": "Seterusnya"
                 }
             }
         });

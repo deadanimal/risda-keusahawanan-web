@@ -20,11 +20,11 @@
                  </colgroup>
                  <thead>
                     <tr class="align-middle">
-                        <th scope="col">ID Kategori Usahawan</th>
-                        <th scope="col">Nama Kategori Usahawan</th>
-                        <th scope="col">Jualan Minimum Usahawan</th>
-                        <th scope="col">Jualan Maximum Usahawan</th>
-                        <th scope="col">Status Kategori Usahawan</th>
+                        <th scope="col">ID Kategori Usahawan *</th>
+                        <th scope="col">Nama Kategori Usahawan *</th>
+                        <th scope="col">Jualan Minimum Usahawan *</th>
+                        <th scope="col">Jualan Maximum Usahawan *</th>
+                        <th scope="col">Status Kategori Usahawan *</th>
                         <th scope="col"></th>
                     </tr>
                  </thead>
@@ -33,12 +33,12 @@
                         <form id="kategoriUsahawan" method="POST" action="/kategoriusahawan" enctype="multipart/form-data">
                         @csrf
                         @method("POST")
-                        <td><input class="form-control form-control-sm" name="id_kategori_usahawan" id="field-name" type="text" value=""/></td>
-                        <td><input class="form-control form-control-sm" name="nama_kategori_usahawan" id="field-name" type="text" value=""/></td>
-                        <td><input class="form-control form-control-sm" name="jualan_usahawan_min" id="field-name" type="number" value=""/></td>
-                        <td><input class="form-control form-control-sm" name="jualan_usahawan_max" id="field-name" type="number" value=""/></td>
+                        <td><input class="form-control form-control-sm" name="id_kategori_usahawan" id="field-name" type="text" value="" placeholder="Masukkan id kategori usahawan"/></td>
+                        <td><input class="form-control form-control-sm" name="nama_kategori_usahawan" id="field-name" type="text" value="" placeholder="Masukkan nama kategori usahawan"/></td>
+                        <td><input class="form-control form-control-sm" name="jualan_usahawan_min" id="field-name" type="number" value="" placeholder="Masukkan jualan minimum usahawan"/></td>
+                        <td><input class="form-control form-control-sm" name="jualan_usahawan_max" id="field-name" type="number" value="" placeholder="Masukkan jualan maximum usahawan"/></td>
                         <td><select class="form-select form-select-sm" name="status_kategori_usahawan" aria-label=".form-select-sm example" style="display:inline-block;">
-                            <option selected=""></option>
+                            <option disabled selected>Pilih</option>
                             <option value="aktif">aktif</option>
                             <option value="tak aktif">tak aktif</option>
                         </select></td>
@@ -64,7 +64,7 @@
                         </td>
                         <td class="text-nowrap">
                             <select class="form-select form-select-sm" name="status_kategori_usahawan" aria-label=".form-select-sm example" style="display:inline-block;">
-                                <option selected="{{$kateusahawan->status}}"></option>
+                                <option disabled>Pilih</option>
                                 <option {{ ( $kateusahawan->status_kategori_usahawan == "aktif" ) ? 'selected' : '' }} value="aktif">aktif</option>
                                 <option {{ ( $kateusahawan->status_kategori_usahawan == "tak aktif" ) ? 'selected' : '' }} value="tak aktif">tak aktif</option>
                             </select>
@@ -100,10 +100,10 @@
                 "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
                 "infoEmpty": "Tiada rekod dijumpai",
                 "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
-                "sSearch": "Carian :",
+                "sSearch": "Saringan :",
                 "paginate": {
                     "previous": "Sebelum",
-                    "next": "Seterus"
+                    "next": "Seterusnya"
                 }
             }
         });

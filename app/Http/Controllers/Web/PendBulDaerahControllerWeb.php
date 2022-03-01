@@ -135,9 +135,9 @@ class PendBulDaerahControllerWeb extends Controller
                     <td class="text-nowrap" style="text-align: left;"><label class="form-check-label">'.$report->jenis.'</label></td>
                     <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</label></td>
                     <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab4).'</label></td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab5).'</label></td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6).'</label></td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7).'</label></td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab5,2).'</label></td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6,2).'</label></td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7,2).'</label></td>
                     
                 </tr>';
             }
@@ -149,16 +149,16 @@ class PendBulDaerahControllerWeb extends Controller
                 <td></td>
                 <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_penerima).'</label></td>
-                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_insentif).'</label></td>
-                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_jualan).'</label></td>
-                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_puratajual).'</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_insentif,2).'</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_jualan,2).'</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_puratajual,2).'</label></td>
             </tr>
             <tr class="align-middle" style="text-align: center;">
                 <td colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</label></td>
                 <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_penerima).'</label></td>
-                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_insentif).'</label></td>
-                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_jualan).'</label></td>
-                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_puratajual).'</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_insentif,2).'</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_jualan,2).'</label></td>
+                <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_puratajual,2).'</label></td>
             </tr>
             ';       
             

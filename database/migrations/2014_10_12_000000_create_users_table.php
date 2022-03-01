@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->default(Hash::make('password'));
+            $table->string('password')->default(Hash::make('Reds@12345'));
 
             $table->string('usahawanid')->nullable();
             $table->foreignId('idpegawai')->nullable();

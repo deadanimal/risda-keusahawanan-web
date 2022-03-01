@@ -180,24 +180,24 @@ class InsentifJantinaUmurControllerWeb extends Controller
             <th></th>
             <td class="text-nowrap">Jumlah</td>
             <td class="text-nowrap">'.number_format($jumlah->satu).'</td>
-            <td class="text-nowrap">'.number_format($jumlah->dua).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->dua,2).'</td>
             <td class="text-nowrap">'.number_format($jumlah->tiga).'</td>
-            <td class="text-nowrap">'.number_format($jumlah->empat).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->empat,2).'</td>
             <td class="text-nowrap">'.number_format($jumlah->lima).'</td>
-            <td class="text-nowrap">'.number_format($jumlah->enam).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->enam,2).'</td>
             <td class="text-nowrap">'.number_format($jumlah->tujuh).'</td>
-            <td class="text-nowrap">'.number_format($jumlah->lapan).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->lapan,2).'</td>
         </tr>
         <tr class="align-middle" style="text-align: center;">
             <td class="text-nowrap" colspan="3">Jumlah</td>
             <td class="text-nowrap">'.number_format($jumlah->satu).'</td>
-            <td class="text-nowrap">'.number_format($jumlah->dua).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->dua,2).'</td>
             <td class="text-nowrap">'.number_format($jumlah->tiga).'</td>
-            <td class="text-nowrap">'.number_format($jumlah->empat).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->empat,2).'</td>
             <td class="text-nowrap">'.number_format($jumlah->lima).'</td>
-            <td class="text-nowrap">'.number_format($jumlah->enam).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->enam,2).'</td>
             <td class="text-nowrap">'.number_format($jumlah->tujuh).'</td>
-            <td class="text-nowrap">'.number_format($jumlah->lapan).'</td>
+            <td class="text-nowrap">'.number_format($jumlah->lapan,2).'</td>
         </tr>';
 
         return [$result, $foot];

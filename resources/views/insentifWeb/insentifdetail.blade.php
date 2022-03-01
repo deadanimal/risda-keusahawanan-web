@@ -17,7 +17,7 @@
                     <div class="col-sm-6 mb-3">
                       <label class="form-label" for="field-type">Jenis Insentif</label>
                       <select class="form-select form-select-sm" name="id_jenis_insentif" placeholder="Jenis Insentif">
-                        <option value="">Jenis Insentif</option>
+                        <option value="" disabled>Jenis Insentif</option>
                         @foreach ($ddInsentif as $items)
                             <option value="{{ $items->id_jenis_insentif }}"> 
                                 {{ $items->nama_insentif }} 
@@ -37,18 +37,17 @@
                     </div>
                     <div class="col-sm-6 mb-3">
                       <label class="form-label" for="field-name">Nilai Insentif (RM)</label>
-                      <input class="form-control form-control-sm" name="nilai_insentif" id="field-name" type="text"/>
+                      <input class="form-control form-control-sm" name="nilai_insentif" id="nilai" type="number" placeholder='0.00'/>
                     </div>
                     <div class="col-sm-6 mb-3">
                       <label class="form-label" for="field-name">Tahun Terima Insentif</label>
                       <select class="form-select form-select-sm" name="tahun_terima_insentif" id="field-name" type="text"/>
-                      <option value="">Tahun</option>
+                      <option value="" disabled>Tahun</option>
                       <?php
                       $curryear = date("Y");
                       $fromyear = date("Y") - 20;
                       for ($year = $curryear; $year >= $fromyear; $year--) {
-                      $selected = (isset($getYear) && $getYear == $year) ? 'selected' : '';
-                      echo "<option value=$year $selected>$year</option>";
+                        echo "<option value=$year>$year</option>";
                       }
                       ?></select>
                     </div>
@@ -84,32 +83,32 @@
                       <div class="col-sm-6 mb-3">
                         <label class="form-label" for="field-type">Jenis Insentif</label> 
                         <select class="form-select form-select-sm" name="id_jenis_insentif" placeholder="Jenis Insentif">
-                          <option value="">Jenis Insentif</option>
+                          <option value="" disabled>Jenis Insentif</option>
                           @foreach ($ddInsentif as $items)
                               <option value="{{ $items->id_jenis_insentif }}" {{ ( $items->id_jenis_insentif == $insentif->id_jenis_insentif) ? 'selected' : '' }}> 
                                   {{ $items->nama_insentif }} 
                               </option>
                           @endforeach
                         </select>
-
-                        {{-- <select class="form-select form-select-sm" name="id_jenis_insentif" id="field-type" value="{{$insentif->id_jenis_insentif}}">
-                          <option value="1">Select a type</option>
-                          <option value="2">Text</option>
-                          <option value="3">Checkboxes</option>
-                          <option value="4">Radio Buttons</option>
-                          <option value="5">Textarea</option>
-                          <option value="6">Date</option>
-                          <option value="7">Dropdowns</option>
-                          <option value="8">File</option>
-                        </select> --}}
                       </div>
                       <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="field-name">Nilai Insentif</label>
-                        <input class="form-control form-control-sm" name="nilai_insentif" id="field-name" type="text" value="{{$insentif->nilai_insentif}}"/>
+                        <label class="form-label" for="field-name">Nilai Insentif (RM)</label>
+                        <input class="form-control form-control-sm" name="nilai_insentif" id="field-name" type="number" value="{{$insentif->nilai_insentif}}"/>
                       </div>
                       <div class="col-sm-6 mb-3">
                         <label class="form-label" for="field-name">Tahun Terima Insentif</label>
-                        <input class="form-control form-control-sm" name="tahun_terima_insentif" id="field-name" type="text" value="{{$insentif->tahun_terima_insentif}}"/>
+                        <select class="form-select form-select-sm" name="tahun_terima_insentif" id="field-name" type="text"/>
+                        <option value="" disabled>Tahun</option>
+                          <?php
+                          $curryear = date("Y");
+                          $fromyear = date("Y") - 20;
+                          for ($year = $curryear; $year >= $fromyear; $year--) {
+                            $selected = (isset($insentif->tahun_terima_insentif) && $insentif->tahun_terima_insentif == $year) ? 'selected' : '';
+                            echo "<option value=$year $selected>$year</option>";
+                          }
+                          ?>
+                        </select>
+                        {{-- <input class="form-control form-control-sm" name="tahun_terima_insentif" id="field-name" type="text" value="{{$insentif->tahun_terima_insentif}}"/> --}}
                       </div>
                     </div>
                     <button class="btn btn-primary btn-sm mt-2" style="width:fit-content;" type="button" onclick="UpdateInsentif()">Kemaskini Insentif</button>
@@ -130,6 +129,16 @@
 
   $( document ).ready(function() {
       $('.loader').hide();
+      $("#nilai").change(function() {
+        $(this).val(parseFloat($(this).val()).toFixed(2));
+      });
+      var group = $('input[name="nilai_insentif"]');
+      group.each(function () {
+        $(this).val(parseFloat($(this).val()).toFixed(2));
+        $(this).change(function() {
+          $(this).val(parseFloat($(this).val()).toFixed(2));
+        });
+      });
   });
   
   function SubmitInsentif(){
