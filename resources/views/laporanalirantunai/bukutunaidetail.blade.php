@@ -102,9 +102,9 @@
                                     <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
                                     <td class="text-nowrap"><label class="form-check-label"><div style="display: none;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>{{$report->nama_jenis}}</label></td>
                                     <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->total)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6,2)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7,2)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->total,2)}}</label></td>
                                 </tr>
                             @endif
                             @if ($report->tab8 == 2 && $count != 3)
@@ -126,9 +126,9 @@
                                     <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
                                     <td class="text-nowrap"><label class="form-check-label"><div style="display: none;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>{{$report->nama_jenis}}</label></td>
                                     <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->total)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6,2)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7,2)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->total,2)}}</label></td>
                                 </tr>
                             @endif
                             @if ($report->tab8 == 3 && $count == 3)
@@ -138,7 +138,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($total->satu)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($total->satu,2)}}</label></td>
                                 </tr>
                             @endif
                             @if ($report->tab8 == 3 && $count != 4)
@@ -160,9 +160,9 @@
                                     <td class="text-nowrap"><label class="form-check-label">{{$report->tab3}}</label></td>
                                     <td class="text-nowrap"><label class="form-check-label"><div style="display: none;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>{{$report->nama_jenis}}</label></td>
                                     <td class="text-nowrap"><label class="form-check-label">{{$report->tab5}}</label></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6)}}</label></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7)}}</label></td>
-                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->total)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab6,2)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->tab7,2)}}</label></td>
+                                    <td class="text-nowrap"><label class="form-check-label">{{number_format($report->total,2)}}</label></td>
                                 </tr>
                             @endif
                         @endforeach
@@ -173,7 +173,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($total->dua)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($total->dua,2)}}</label></td>
                         </tr>
                         @endif
                         <tr class="align-middle" style="text-align: center;">
@@ -182,7 +182,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="text-nowrap"><label class="form-check-label">{{number_format($total->tiga)}}</label></td>
+                            <td class="text-nowrap"><label class="form-check-label">{{number_format($total->tiga,2)}}</label></td>
                         </tr>
                     </tbody>
                 </table>

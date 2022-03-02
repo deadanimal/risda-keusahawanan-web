@@ -97,13 +97,13 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
         }
         $total->tiga = $total->satu + $total->dua;
 
+        $count = 1;
         foreach ($reports as $report) {
             $index++;
             $kate_aliran = KategoriAliran::where('id', $report->tab4)->first();
             if(isset($kate_aliran)){
                 $report->nama_jenis = $kate_aliran->nama_kategori_aliran;
             }  
-            $count = 1;
 
             if($index == 1 && $report->tab8 == 1){
                 $result .= '<tr class="align-middle" style="text-align: left;">
@@ -120,9 +120,9 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
                     <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</label></td>
                     <td class="text-nowrap"><label class="form-check-label"><div style="display: none;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>'.$report->nama_jenis.'</label></td>
                     <td class="text-nowrap"><label class="form-check-label">'.$report->tab5.'</label></td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6).'</label></td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7).'</label></td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->total).'</label></td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6,2).'</label></td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7,2).'</label></td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->total,2).'</label></td>
                 </tr>';
             }
             if($report->tab8 == 2 && $count != 3){
@@ -144,12 +144,13 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
                     <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</td>
                     <td class="text-nowrap"><label class="form-check-label"><div style="display: none;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>'.$report->nama_jenis.'</td>
                     <td class="text-nowrap"><label class="form-check-label">'.$report->tab5.'</td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6).'</td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7).'</td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->total).'</td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6,2).'</td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7,2).'</td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->total,2).'</td>
                 </tr>';
             }
             if($report->tab8 == 3 && $count != 4){
+                // return $count;
                 $count = 3;
             }
             if($report->tab8 == 3 && $count == 3){
@@ -159,7 +160,7 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td style="text-align: center;"><label class="form-check-label">'.number_format($total->satu).'</td>
+                    <td style="text-align: center;"><label class="form-check-label">'.number_format($total->satu,2).'</td>
                 </tr>';
             }
             if($report->tab8 == 3 && $count == 3){
@@ -179,9 +180,9 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
                     <td class="text-nowrap"><label class="form-check-label">'.$report->tab3.'</td>
                     <td class="text-nowrap"><label class="form-check-label"><div style="display: none;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>'.$report->nama_jenis.'</td>
                     <td class="text-nowrap"><label class="form-check-label">'.$report->tab5.'</td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6).'</td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7).'</td>
-                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->total).'</td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab6,2).'</td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->tab7,2).'</td>
+                    <td class="text-nowrap"><label class="form-check-label">'.number_format($report->total,2).'</td>
                 </tr>';
             }
         }
@@ -192,7 +193,7 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="text-align: center;"><label class="form-check-label">'.number_format($total->dua).'</td>
+                <td style="text-align: center;"><label class="form-check-label">'.number_format($total->dua,2).'</td>
             </tr>
             ';
         }
@@ -203,7 +204,7 @@ class LaporanAliranTunaiDetailControllerWeb extends Controller
             <td></td>
             <td></td>
             <td></td>
-            <td style="text-align: center;"><label class="form-check-label">'.number_format($total->tiga).'</td>
+            <td style="text-align: center;"><label class="form-check-label">'.number_format($total->tiga,2).'</td>
         </tr>';
         return $result;
     }

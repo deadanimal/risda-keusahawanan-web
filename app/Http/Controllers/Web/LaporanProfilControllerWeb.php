@@ -273,6 +273,11 @@ class LaporanProfilControllerWeb extends Controller
 
     public function generatereport(Request $request)
     {
+        $authuser = Auth::user();
+        if(!isset($authuser)){
+            return redirect('/landing');
+        }
+        
         if($request->type == 1){
             $loguser = Auth::user();
             if(isset($loguser->idpegawai)){
