@@ -277,7 +277,9 @@ class LaporanProfilControllerWeb extends Controller
             if($loguser->role == 1 || $loguser->role == 2){
                 $insentifs = Insentif::join('usahawans', 'usahawans.usahawanid', '=', 'insentifs.id_pengguna')
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
-                ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'users.id')->get()->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID']);
+                ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'users.id')
+                ->where('usahawans.U_Negeri_ID', '<>', '')
+                ->get()->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID']);
             }else if($loguser->role == 3 || $loguser->role == 5){
                 $insentifs = Insentif::join('usahawans', 'usahawans.usahawanid', '=', 'insentifs.id_pengguna')
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
@@ -336,6 +338,8 @@ class LaporanProfilControllerWeb extends Controller
                 $insentifs = Insentif::join('usahawans', 'usahawans.usahawanid', '=', 'insentifs.id_pengguna')
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
                 ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'users.id')
+                ->where('usahawans.U_Negeri_ID', '<>', '')
+                ->where('usahawans.U_Daerah_ID', '<>', '')
                 ->get()
                 ->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID','U_Daerah_ID']);
             }else if($loguser->role == 3 || $loguser->role == 5){
@@ -343,6 +347,7 @@ class LaporanProfilControllerWeb extends Controller
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
                 ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'users.id')
                 ->where('usahawans.U_Negeri_ID',$pegawai->Mukim->U_Negeri_ID)
+                ->where('usahawans.U_Daerah_ID', '<>', '')
                 ->get()
                 ->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID','U_Daerah_ID']);
             }else if($loguser->role == 4 || $loguser->role == 6){
@@ -350,6 +355,7 @@ class LaporanProfilControllerWeb extends Controller
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
                 ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'users.id')
                 ->where('usahawans.U_Daerah_ID',$pegawai->Mukim->U_Daerah_ID)
+                ->where('usahawans.U_Negeri_ID', '<>', '')
                 ->get()
                 ->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID','U_Daerah_ID']);
             }else if($loguser->role == 7){
@@ -357,6 +363,8 @@ class LaporanProfilControllerWeb extends Controller
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
                 ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'users.id', 'usahawans.Kod_PT')
                 ->where('usahawans.Kod_PT',$pegawai->NamaPT)
+                ->where('usahawans.U_Negeri_ID', '<>', '')
+                ->where('usahawans.U_Daerah_ID', '<>', '')
                 ->get()
                 ->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID','U_Daerah_ID']);
             }
@@ -418,6 +426,8 @@ class LaporanProfilControllerWeb extends Controller
                 $insentifs = Insentif::join('usahawans', 'usahawans.usahawanid', '=', 'insentifs.id_pengguna')
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
                 ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID','usahawans.U_Dun_ID', 'users.id')
+                ->where('usahawans.U_Negeri_ID', '<>', '')
+                ->where('usahawans.U_Daerah_ID', '<>', '')
                 ->where('usahawans.U_Dun_ID', '<>', '')
                 ->get()
                 ->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID','U_Daerah_ID','U_Dun_ID']);
@@ -426,6 +436,8 @@ class LaporanProfilControllerWeb extends Controller
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
                 ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID','usahawans.U_Dun_ID', 'users.id')
                 ->where('usahawans.U_Negeri_ID',$pegawai->Mukim->U_Negeri_ID)
+                ->where('usahawans.U_Daerah_ID', '<>', '')
+                ->where('usahawans.U_Dun_ID', '<>', '')
                 ->get()
                 ->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID','U_Daerah_ID','U_Dun_ID']);
             }else if($loguser->role == 4 || $loguser->role == 6){
@@ -433,6 +445,8 @@ class LaporanProfilControllerWeb extends Controller
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
                 ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'usahawans.U_Dun_ID', 'users.id')
                 ->where('usahawans.U_Daerah_ID',$pegawai->Mukim->U_Daerah_ID)
+                ->where('usahawans.U_Negeri_ID', '<>', '')
+                ->where('usahawans.U_Dun_ID', '<>', '')
                 ->get()
                 ->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID','U_Daerah_ID','U_Dun_ID']);
             }else if($loguser->role == 7){
@@ -440,6 +454,9 @@ class LaporanProfilControllerWeb extends Controller
                 ->join('users', 'users.usahawanid', '=', 'usahawans.usahawanid')
                 ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'usahawans.U_Dun_ID', 'users.id', 'usahawans.Kod_PT')
                 ->where('usahawans.Kod_PT',$pegawai->NamaPT)
+                ->where('usahawans.U_Negeri_ID', '<>', '')
+                ->where('usahawans.U_Daerah_ID', '<>', '')
+                ->where('usahawans.U_Dun_ID', '<>', '')
                 ->get()
                 ->groupBy(['tahun_terima_insentif','id_jenis_insentif','U_Negeri_ID','U_Daerah_ID','U_Dun_ID']);
             }
@@ -1225,7 +1242,9 @@ class LaporanProfilControllerWeb extends Controller
                     $lawatan = Lawatan::where('id_pengguna',$lawatansUniq->id_pengguna)->first();
                     $user = User::where('id', $lawatan->id_pengguna)->first();
                     $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
-                    $lawatan->negeri = $usahawan->U_Negeri_ID;
+                    if(isset($usahawan->U_Negeri_ID)){
+                        $lawatan->negeri = $usahawan->U_Negeri_ID;
+                    }
                     $lawatan->year = date("Y",strtotime($lawatan->tarikh_lawatan));
                     $lawatan->daerah = $usahawan->U_Daerah_ID;
                     $reports = Report::where('tab20', Auth::user()->id)->where('type', 9)->get();

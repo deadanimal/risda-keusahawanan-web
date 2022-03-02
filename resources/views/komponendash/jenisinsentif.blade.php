@@ -18,9 +18,9 @@
                  </colgroup>
                  <thead>
                     <tr class="align-middle">
-                        <th scope="col">Kod Insentif *</th>
-                        <th scope="col">Nama Insentif *</th>
-                        <th scope="col">Status Insentif *</th>
+                        <th scope="col">Kod Insentif <span style="color:red;">*</span></th>
+                        <th scope="col">Nama Insentif <span style="color:red;">*</span></th>
+                        <th scope="col">Status Insentif <span style="color:red;">*</span></th>
                         <th scope="col"></th>
                     </tr>
                  </thead>

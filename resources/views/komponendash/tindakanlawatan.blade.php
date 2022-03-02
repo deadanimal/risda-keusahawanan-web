@@ -17,8 +17,8 @@
                  </colgroup> --}}
                  <thead>
                     <tr class="align-middle">
-                        <th scope="col">Nama Tindakan Lawatan *</th>
-                        <th scope="col">Status Tindakan Lawatan *</th>
+                        <th scope="col">Nama Tindakan Lawatan <span style="color:red;">*</span></th>
+                        <th scope="col">Status Tindakan Lawatan <span style="color:red;">*</span></th>
                         <th scope="col"></th>
                     </tr>
                  </thead>

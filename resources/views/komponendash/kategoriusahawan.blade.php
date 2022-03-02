@@ -20,11 +20,11 @@
                  </colgroup>
                  <thead>
                     <tr class="align-middle">
-                        <th scope="col">ID Kategori Usahawan *</th>
-                        <th scope="col">Nama Kategori Usahawan *</th>
-                        <th scope="col">Jualan Minimum Usahawan *</th>
-                        <th scope="col">Jualan Maximum Usahawan *</th>
-                        <th scope="col">Status Kategori Usahawan *</th>
+                        <th scope="col">ID Kategori Usahawan <span style="color:red;">*</span></th>
+                        <th scope="col">Nama Kategori Usahawan <span style="color:red;">*</span></th>
+                        <th scope="col">Jualan Minimum Usahawan <span style="color:red;">*</span></th>
+                        <th scope="col">Jualan Maksimum Usahawan (RM) <span style="color:red;">*</span></th>
+                        <th scope="col">Status Kategori Usahawan (RM) *</th>
                         <th scope="col"></th>
                     </tr>
                  </thead>
@@ -70,7 +70,7 @@
                             </select>
                         </td>
                         <td class="text-nowrap">
-                            <button type="button" class="btn btn-primary btn-sm" style="width:15vh" onclick="updatekategori({{$kateusahawan->id}});">Kemaskini</button>
+                            <button type="button" class="btn btn-warning btn-sm" style="width:15vh" onclick="updatekategori({{$kateusahawan->id}});">Kemaskini</button>
                         </form>
                             {{-- &nbsp
                             <form method="POST" style="display:inline-block;" action="{{ route('kategoriusahawan.destroy', $kateusahawan->id) }}">

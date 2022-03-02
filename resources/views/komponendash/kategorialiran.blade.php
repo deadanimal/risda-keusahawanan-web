@@ -19,10 +19,10 @@
                      </colgroup>
                      <thead>
                         <tr class="align-middle">
-                            <th scope="col">Jenis Aliran *</th>
-                            <th scope="col">Bahagian Aliran *</th>
-                            <th scope="col">Nama Aliran *</th>
-                            <th scope="col">Status Aliran *</th>
+                            <th scope="col">Jenis Aliran <span style="color:red;">*</span></th>
+                            <th scope="col">Bahagian Aliran <span style="color:red;">*</span></th>
+                            <th scope="col">Nama Aliran <span style="color:red;">*</span></th>
+                            <th scope="col">Status Aliran <span style="color:red;">*</span></th>
                             <th scope="col"></th>
                         </tr>
                      </thead>
