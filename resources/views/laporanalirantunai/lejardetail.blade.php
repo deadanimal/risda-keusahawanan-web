@@ -198,7 +198,7 @@
                                     <td>{{number_format($report2->tab7)}}</td>
                                     <td class="text-nowrap"></td>
                                     <td>{{$report2->tab8}}</td>
-                                    <td>{{number_format($report2->tab9)}}</td>
+                                    <td>@if($report2->tab9 != null) {{number_format($report2->tab9)}} @endif</td>
                                 </tr>
                                 @endif
                                 @if ($report2->tab4 == 2)

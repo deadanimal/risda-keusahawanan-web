@@ -46,6 +46,7 @@ class LaporanLejarDetailControllerWeb extends Controller
         $val->satu = 0;
         $val->dua = 0;
         foreach($reports1 as $report1){
+            // dd($report1->tab9);
             if($report1->tab4 == 2){
                 $total1 = $total1 + $report1->tab7;
             }
@@ -81,8 +82,8 @@ class LaporanLejarDetailControllerWeb extends Controller
                 $total = 0;
             }else{
                 $total = $total + $report2->tab7;
-                $report2->tab8 = "";
-                $report2->tab9 = "";
+                $report2->tab8 = 0;
+                $report2->tab9 = 0;
             }
         }
         
