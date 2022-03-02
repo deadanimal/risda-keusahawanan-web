@@ -77,7 +77,7 @@
                             <tr>
                                 <td class="text-nowrap">{{$report1->tab5}}</td>
                                 <td>{{$report1->tab6}}</td>
-                                <td>{{number_format($report1->tab7)}}</td>
+                                <td>@if($report1->tab7 != null) {{number_format($report1->tab7,2)}} @endif</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -90,7 +90,7 @@
                                 <td></td>
                                 <td>{{$report1->tab5}}</td>
                                 <td>{{$report1->tab6}}</td>
-                                <td>{{number_format($report1->tab7)}}</td>
+                                <td>@if($report1->tab7 != null) {{number_format($report1->tab7,2)}} @endif</td>
                             </tr>
                             @endif
                             @if ($loop->last)
@@ -98,7 +98,7 @@
                                 <tr>
                                     <td class="text-nowrap">{{$report1->tab5}}</td>
                                     <td>{{$report1->tab6}}</td>
-                                    <td>{{number_format($report1->tab7)}}</td>
+                                    <td>@if($report1->tab7 != null) {{number_format($report1->tab7,2)}} @endif</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -111,14 +111,14 @@
                                     <td></td>
                                     <td>{{$report1->tab5}}</td>
                                     <td>{{$report1->tab6}}</td>
-                                    <td>{{number_format($report1->tab7)}}</td>
+                                    <td>@if($report1->tab7 != null) {{number_format($report1->tab7,2)}} @endif</td>
                                 </tr>
                                 @endif
                                 @if ($val->satu == 1)
                                 <tr>
                                     <td></td>
                                     <td>BAKI H/B</td>
-                                    <td>{{number_format($val->dua)}}</td>
+                                    <td>@if($val->dua != null) {{number_format($val->dua,2)}} @endif</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -131,16 +131,16 @@
                                     <td></td>
                                     <td></td>
                                     <td>BAKI H/B</td>
-                                    <td>{{number_format($val->dua)}}</td>
+                                    <td>@if($val->dua != null) {{number_format($val->dua,2)}} @endif</td>
                                 </tr>
                                 @endif
                                 <tr>
                                     <td></td>
                                     <td>Jumlah</td>
-                                    <td>{{$jumlah}}</td>
+                                    <td>@if($jumlah != null) {{number_format($jumlah,2)}} @endif</td>
                                     <td></td>
                                     <td>Jumlah</td>
-                                    <td>{{$jumlah}}</td>
+                                    <td>@if($jumlah != null) {{number_format($jumlah,2)}} @endif</td>
                                 </tr>
                                 @if ($val->satu == 1)
                                 <tr>
@@ -149,14 +149,14 @@
                                     <td></td>
                                     <td></td>
                                     <td>Baki B/B</td>
-                                    <td>{{number_format($val->dua)}}</td>
+                                    <td>@if($val->dua != null) {{number_format($val->dua,2)}} @endif</td>
                                 </tr>
                                 @endif
                                 @if ($val->satu == 2)
                                 <tr>
                                     <td></td>
                                     <td>Baki B/B</td>
-                                    <td>{{number_format($val->dua)}}</td>
+                                    <td>@if($val->dua != null) {{number_format($val->dua,2)}} @endif</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -195,20 +195,20 @@
                                 <tr>
                                     <td class="text-nowrap">{{$report2->tab5}}</td>
                                     <td>{{$report2->tab6}}</td>
-                                    <td>{{number_format($report2->tab7)}}</td>
+                                    <td>@if($report2->tab7 != null) {{number_format($report2->tab7,2)}} @endif</td>
                                     <td class="text-nowrap"></td>
                                     <td>{{$report2->tab8}}</td>
-                                    <td>@if($report2->tab9 != null) {{number_format($report2->tab9)}} @endif</td>
+                                    <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                                 </tr>
                                 @endif
                                 @if ($report2->tab4 == 2)
                                 <tr>
                                     <td class="text-nowrap"></td>
                                     <td>{{$report2->tab8}}</td>
-                                    <td>{{number_format($report2->tab9)}}</td>
+                                    <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                                     <td class="text-nowrap">{{$report2->tab5}}</td>
                                     <td>{{$report2->tab6}}</td>
-                                    <td>{{number_format($report2->tab7)}}</td>
+                                    <td>@if($report2->tab7 != null) {{number_format($report2->tab7,2)}} @endif</td>
                                 </tr>
                                 @endif
                                 
@@ -217,20 +217,20 @@
                                 <tr>
                                     <td class="text-nowrap">{{$report2->tab5}}</td>
                                     <td>{{$report2->tab6}}</td>
-                                    <td>{{number_format($report2->tab7)}}</td>
+                                    <td>@if($report2->tab7 != null) {{number_format($report2->tab7,2)}} @endif</td>
                                     <td class="text-nowrap"></td>
                                     <td>{{$report2->tab8}}</td>
-                                    <td>{{number_format($report2->tab9)}}</td>
+                                    <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                                 </tr>
                                 @endif
                                 @if ($report2->tab4 == 2)
                                 <tr>
                                     <td class="text-nowrap"></td>
                                     <td>{{$report2->tab8}}</td>
-                                    <td>{{number_format($report2->tab9)}}</td>
+                                    <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                                     <td class="text-nowrap">{{$report2->tab5}}</td>
                                     <td>{{$report2->tab6}}</td>
-                                    <td>{{number_format($report2->tab7)}}</td>
+                                    <td>@if($report2->tab7 != null) {{number_format($report2->tab7,2)}} @endif</td>
                                 </tr>
                                 @endif
                             @endif
@@ -238,15 +238,15 @@
                             <tr>
                                 <td></td>
                                 <td>Jumlah</td>
-                                <td>{{number_format($report2->tab9)}}</td>
+                                <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                                 <td></td>
                                 <td>Jumlah</td>
-                                <td>{{number_format($report2->tab9)}}</td>
+                                <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>Baki B/B</td>
-                                <td>{{number_format($report2->tab9)}}</td>
+                                <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -256,10 +256,10 @@
                             <tr>
                                 <td></td>
                                 <td>Jumlah</td>
-                                <td>{{number_format($report2->tab9)}}</td>
+                                <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                                 <td></td>
                                 <td>Jumlah</td>
-                                <td>{{number_format($report2->tab9)}}</td>
+                                <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -267,7 +267,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>Baki B/B</td>
-                                <td>{{number_format($report2->tab9)}}</td>
+                                <td>@if($report2->tab9 != null) {{number_format($report2->tab9,2)}} @endif</td>
                             </tr>
                             @endif
                         @endforeach

@@ -22,14 +22,14 @@ class LaporanLejarControllerWeb extends Controller
         }else{
             return redirect('/landing');
         }
-
-        $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
+        // dd($authpegawai);
+        // $authmukim = Mukim::where('U_Mukim_ID', $authpegawai->mukim)->first();
         if($authuser->role == 1 || $authuser->role == 2){
             $users = Usahawan::select('id','namausahawan','U_Negeri_ID','Kod_PT')->with(['PT','negeri'])->without(['user','pekebun','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])->get();
         }else if($authuser->role == 3 || $authuser->role == 5){
-            $users = Usahawan::where('U_Negeri_ID', $authmukim->U_Negeri_ID)->get();
+            $users = Usahawan::where('U_Negeri_ID', $authpegawai->mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
-            $users = Usahawan::where('U_Daerah_ID', $authmukim->U_Daerah_ID)->get();
+            $users = Usahawan::where('U_Daerah_ID', $authpegawai->mukim->U_Daerah_ID)->get();
         }else if($authuser->role == 7){
             $users = Usahawan::where('Kod_PT', $authpegawai->NamaPT)->get();
         }else{

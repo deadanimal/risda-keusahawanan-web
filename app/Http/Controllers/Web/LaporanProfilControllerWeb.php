@@ -44,14 +44,18 @@ class LaporanProfilControllerWeb extends Controller
 
         if($authuser->role == 1 || $authuser->role == 2){
             $users = Usahawan::select('namausahawan','Kod_PT','U_Negeri_ID','id')->with(['PT','negeri'])->without(['user','pekebun','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])->get();
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->get();
             // take(10)->get();
             // all();
         }else if($authuser->role == 3 || $authuser->role == 5){
             $users = Usahawan::where('U_Negeri_ID', $authpegawai->Mukim->U_Negeri_ID)->get();
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $authpegawai->Mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
             $users = Usahawan::where('U_Daerah_ID', $authpegawai->Mukim->U_Daerah_ID)->get();
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $authpegawai->Mukim->U_Negeri_ID)->get();
         }else if($authuser->role == 7){
             $users = Usahawan::where('Kod_PT', $authpegawai->NamaPT)->get();
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $authpegawai->Mukim->U_Negeri_ID)->get();
         }else{
             return redirect('/landing');
         }
@@ -61,7 +65,8 @@ class LaporanProfilControllerWeb extends Controller
         return view('laporanprofil.index'
         ,[
             'users'=>$users,
-            'ddPT'=>$ddPT
+            'ddPT'=>$ddPT,
+            'ddNegeri'=>$ddNegeri
         ]
         );
     }
@@ -1605,35 +1610,36 @@ class LaporanProfilControllerWeb extends Controller
             $report->tab3 = $request->id_kategori_aliran;
             
             $kate_aliran = KategoriAliran::where('id', $request->id_kategori_aliran)->first();
-            if($kate_aliran->jenis_aliran == "tunai_masuk"){
-                $report->tab4 = 2;
+            if(isset($kate_aliran)){
+                if($kate_aliran->jenis_aliran == "tunai_masuk"){
+                    $report->tab4 = 2;
+    
+                }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
+                    $report->tab4 = 1;
+    
+                }
+                $report->tab5 = $request->newdate;
+                $report->tab6 = $kate_aliran->nama_kategori_aliran;
+                $report->tab7 = $request->jumlah_aliran;
+                $report->tab20 = Auth::user()->id;
+                $report->save();
 
-            }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
-                $report->tab4 = 1;
-
+                $report = new Report();
+                $report->type = 12;
+                $report->tab1 = $request->bulan;
+                $report->tab2 = $request->tahun;
+                $report->tab3 = 0;
+                if($kate_aliran->jenis_aliran == "tunai_masuk"){
+                    $report->tab4 = 2;
+                }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
+                    $report->tab4 = 1;
+                }
+                $report->tab5 = $request->newdate;
+                $report->tab6 = $kate_aliran->nama_kategori_aliran;
+                $report->tab7 = $request->jumlah_aliran;
+                $report->tab20 = Auth::user()->id;
+                $report->save();
             }
-            $report->tab5 = $request->newdate;
-            $report->tab6 = $kate_aliran->nama_kategori_aliran;
-            $report->tab7 = $request->jumlah_aliran;
-            $report->tab20 = Auth::user()->id;
-            $report->save();
-
-            $report = new Report();
-            $report->type = 12;
-            $report->tab1 = $request->bulan;
-            $report->tab2 = $request->tahun;
-            $report->tab3 = 0;
-            if($kate_aliran->jenis_aliran == "tunai_masuk"){
-                $report->tab4 = 2;
-            }else if($kate_aliran->jenis_aliran == "tunai_keluar"){
-                $report->tab4 = 1;
-            }
-            $report->tab5 = $request->newdate;
-            $report->tab6 = $kate_aliran->nama_kategori_aliran;
-            $report->tab7 = $request->jumlah_aliran;
-            $report->tab20 = Auth::user()->id;
-            $report->save();
-
 
         }else if($type == 13){
             $report = new Report();
@@ -1661,6 +1667,6 @@ class LaporanProfilControllerWeb extends Controller
     public function ExcelLapProfil(Request $request)
     {
         // dd($request->to);
-        return Excel::download(new LapProf($request->from,$request->to), 'LaporanDatabaseProfil.xlsx');
+        return Excel::download(new LapProf($request->negeri), 'DatabaseProfil.xlsx');
     }
 }

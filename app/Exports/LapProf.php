@@ -17,19 +17,17 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implements WithCustomValueBinder, FromArray, WithHeadings
 {
-    protected $from;
-    protected $to;
+    protected $negeri;
 
-    function __construct($from,$to) {
-        $this->from = $from;
-        $this->to = $to;
+    function __construct($negeri) {
+        $this->negeri = $negeri;
     }
     /**
     * @return \Illuminate\Support\Arrayable
     */
     public function array(): array
     {
-        // dd($this->from);
+        // dd($this->negeri);
         $authuser = Auth::user();
         if(isset($authuser)){
             $authpegawai = Pegawai::where('id', $authuser->idpegawai)->first();
@@ -41,28 +39,28 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
         // $users = Usahawan::take(5)->get();
         if($authuser->role == 1 || $authuser->role == 2){
             $users = Usahawan::without(['insentif'])
-            ->where('id', '>=', $this->from)
-            ->where('id', '<=', $this->to)->get();
+            ->where('U_Negeri_ID', $this->negeri)
+            ->get();
             // take(5)->get();
             // all();
         }else if($authuser->role == 3 || $authuser->role == 5){
             $users = Usahawan::without(['insentif'])
             ->where('U_Negeri_ID', $authmukim->U_Negeri_ID)
-            ->where('id', '>=', $this->from)
-            ->where('id', '<=', $this->to)->get();
+            ->where('U_Negeri_ID', $this->negeri)
+            ->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
             $users = Usahawan::without(['insentif'])
             ->where('U_Daerah_ID', $authmukim->U_Daerah_ID)
-            ->where('id', '>=', $this->from)
-            ->where('id', '<=', $this->to)->get();
+            ->where('U_Negeri_ID', $this->negeri)
+            ->get();
         }else if($authuser->role == 7){
             $users = Usahawan::without(['insentif'])
             ->where('Kod_PT', $authpegawai->NamaPT)
-            ->where('id', '>=', $this->from)
-            ->where('id', '<=', $this->to)->get();
+            ->where('U_Negeri_ID', $this->negeri)
+            ->get();
         }
 
-        
+        $array = [];
 
         foreach($users as $usahawan){
             $excel = (object)[];
@@ -202,7 +200,7 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
                 $usahawan->insentifsebelumtahun = $usahawan->insentifsebelumtahun."/".$insentif2s->tahun_terima_insentif;
             }
             // // dd($usahawan->usahawanid);
-            $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
+            // $pengguna = User::where('usahawanid', $usahawan->usahawanid)->first();
             $getYear = date("Y");
             unset($usahawan->aliran1);
             unset($usahawan->aliran2);
@@ -216,8 +214,8 @@ class LapProf extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implement
             unset($usahawan->aliran10);
             unset($usahawan->aliran11);
             unset($usahawan->aliran12);
-            if(isset($pengguna)){
-                $alirans = Aliran::where('id_pengguna', $pengguna->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
+            if(isset($usahawan->user->id)){
+                $alirans = Aliran::where('id_pengguna', $usahawan->user->id)->where('id_kategori_aliran',1)->whereYear('tarikh_aliran', '=', $getYear)->get();
             }else{
                 unset($alirans);
             }

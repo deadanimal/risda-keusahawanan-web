@@ -57,10 +57,10 @@
                             <input class="form-control form-control-sm" name="nama_kategori_usahawan" id="field-name" type="text" value="{{$kateusahawan->nama_kategori_usahawan}}"/>
                         </td>
                         <td class="text-nowrap">
-                            <input class="form-control form-control-sm" name="jualan_usahawan_min" id="field-name" type="text" value="{{$kateusahawan->jualan_usahawan_min}}"/>
+                            <input class="form-control form-control-sm" name="jualan_usahawan_min" id="field-name" type="numper" value="{{$kateusahawan->jualan_usahawan_min}}"/>
                         </td>
                         <td class="text-nowrap">
-                            <input class="form-control form-control-sm" name="jualan_usahawan_max" id="field-name" type="text" value="{{$kateusahawan->jualan_usahawan_max}}"/>
+                            <input class="form-control form-control-sm" name="jualan_usahawan_max" id="field-name" type="number" value="{{$kateusahawan->jualan_usahawan_max}}"/>
                         </td>
                         <td class="text-nowrap">
                             <select class="form-select form-select-sm" name="status_kategori_usahawan" aria-label=".form-select-sm example" style="display:inline-block;">
@@ -107,6 +107,23 @@
                 }
             }
         });
+
+        var group = $('input[name="jualan_usahawan_min"]');
+        group.each(function () {
+            $(this).val(parseFloat($(this).val()).toFixed(2));
+            $(this).change(function() {
+            $(this).val(parseFloat($(this).val()).toFixed(2));
+            });
+        });
+
+        var grouptwo = $('input[name="jualan_usahawan_max"]');
+        grouptwo.each(function () {
+            $(this).val(parseFloat($(this).val()).toFixed(2));
+            $(this).change(function() {
+            $(this).val(parseFloat($(this).val()).toFixed(2));
+            });
+        });
+
         $('.loader').hide();
     })
 

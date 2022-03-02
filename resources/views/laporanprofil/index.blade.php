@@ -7,8 +7,17 @@
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
                 <div style="padding-bottom: 20px;">
                     {{-- <input class="form-control usahawanfield" name="nokadpengenalan"   type="text"/> --}}
-                    <input class="form-control" type="number" id="from" style="width: 150px;display: inline-block;"> Hingga
-                    <input class="form-control" type="number" id="to" style="width: 150px;display: inline-block;">
+                    <select class="form-select" aria-label=".form-select example" style="display: inline-block;width:40vh" id="negeri">
+                        <option value="">Negeri</option>
+                        @foreach ($ddNegeri as $items)
+                            @if($items->U_Negeri_ID != 14 && $items->U_Negeri_ID != 15 && $items->U_Negeri_ID != 16){
+                                <option value="{{ $items->U_Negeri_ID }}">
+                                    {{ $items->Negeri }} 
+                                </option>
+                            }
+                            @endif
+                        @endforeach
+                    </select>
                     <a class="btn btn-primary" onclick="ExportExcel()"><span>Export Excel</span></a>
                 </div>
                 <div style="padding-top: 10px;"> </div>
@@ -98,10 +107,12 @@
     });
 
     function ExportExcel(){
-        var from = $("#from").val();
-        var to = $("#to").val();
-
-        window.location.href = "/ExcelLapProfil?from="+from+"&to="+to+"";
+        var negeri = $("#negeri").val();
+        if(negeri == ''){
+            alert('Pilihan Negeri Diperlukan');
+        }else{
+            window.location.href = "/ExcelLapProfil?negeri="+negeri+"";
+        }
     }
 
     

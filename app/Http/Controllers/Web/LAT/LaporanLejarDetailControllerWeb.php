@@ -83,7 +83,7 @@ class LaporanLejarDetailControllerWeb extends Controller
             }else{
                 $total = $total + $report2->tab7;
                 $report2->tab8 = 0;
-                $report2->tab9 = 0;
+                $report2->tab9 = 0.00;
             }
         }
         
@@ -182,11 +182,14 @@ class LaporanLejarDetailControllerWeb extends Controller
         }
 
         foreach($reports1 as $report1){
+            if($report1->tab7 == null){
+                $report1->tab7 = 0;
+            }
             if ($reportcount > 1 && ($report1->tab4 == 2)){
                 $result .= '<tr>
                     <td class="text-nowrap">'.$report1->tab5.'</td>
                     <td>'.$report1->tab6.'</td>
-                    <td>'.number_format($report1->tab7).'</td>
+                    <td>'.number_format($report1->tab7,2).'</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -199,7 +202,7 @@ class LaporanLejarDetailControllerWeb extends Controller
                     <td></td>
                     <td>'.$report1->tab5.'</td>
                     <td>'.$report1->tab6.'</td>
-                    <td>'.number_format($report1->tab7).'</td>
+                    <td>'.number_format($report1->tab7,2).'</td>
                 </tr>';
             }
             if($reports1->last() == $report1) {
@@ -207,7 +210,7 @@ class LaporanLejarDetailControllerWeb extends Controller
                     $result .= '<tr>
                         <td class="text-nowrap">'.$report1->tab5.'</td>
                         <td>'.$report1->tab6.'</td>
-                        <td>'.number_format($report1->tab7).'</td>
+                        <td>'.number_format($report1->tab7,2).'</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -220,14 +223,14 @@ class LaporanLejarDetailControllerWeb extends Controller
                         <td></td>
                         <td>'.$report1->tab5.'</td>
                         <td>'.$report1->tab6.'</td>
-                        <td>'.number_format($report1->tab7).'</td>
+                        <td>'.number_format($report1->tab7,2).'</td>
                     </tr>';
                 }
                 if ($val->satu == 1){
                     $result .= '<tr>
                         <td></td>
                         <td>BAKI H/B</td>
-                        <td>'.number_format($val->dua).'</td>
+                        <td>'.number_format($val->dua,2).'</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -240,16 +243,16 @@ class LaporanLejarDetailControllerWeb extends Controller
                     <td></td>
                     <td></td>
                     <td>BAKI H/B</td>
-                    <td>'.number_format($val->dua).'</td>
+                    <td>'.number_format($val->dua,2).'</td>
                     </tr>';
                 }
                 $result .= '<tr>
                 <td></td>
                 <td>Jumlah</td>
-                <td>'.$jumlah.'</td>
+                <td>'.number_format($jumlah,2).'</td>
                 <td></td>
                 <td>Jumlah</td>
-                <td>'.$jumlah.'</td>
+                <td>'.number_format($jumlah,2).'</td>
                 </tr>';
                 if ($val->satu == 1){
                     $result .= '<tr>
@@ -258,7 +261,7 @@ class LaporanLejarDetailControllerWeb extends Controller
                     <td></td>
                     <td></td>
                     <td>Baki B/B</td>
-                    <td>'.number_format($val->dua).'</td>
+                    <td>'.number_format($val->dua,2).'</td>
                     </tr>';
                 }
 
@@ -266,7 +269,7 @@ class LaporanLejarDetailControllerWeb extends Controller
                     $result .= '<tr>
                     <td></td>
                     <td>Baki B/B</td>
-                    <td>'.number_format($val->dua).'</td>
+                    <td>'.number_format($val->dua,2).'</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -291,8 +294,8 @@ class LaporanLejarDetailControllerWeb extends Controller
                 $total = 0;
             }else{
                 $total = $total + $report2->tab7;
-                $report2->tab8 = "";
-                $report2->tab9 = "";
+                $report2->tab8 = 0;
+                $report2->tab9 = 0;
             }
         }
 
@@ -303,6 +306,13 @@ class LaporanLejarDetailControllerWeb extends Controller
                 $prevRow = $reports2[$key - 1];
             }else{
                 $prevRow->tab3 = 0;
+            }
+
+            if($report2->tab7 == null){
+                $report2->tab7 = 0;
+            }
+            if($report2->tab9 == null){
+                $report2->tab9 = 0;
             }
 
             if ($report2->tab3 != $prevRow->tab3){
@@ -327,20 +337,20 @@ class LaporanLejarDetailControllerWeb extends Controller
                     $result .= '<tr>
                     <td class="text-nowrap">'.$report2->tab5.'</td>
                     <td>'.$report2->tab6.'</td>
-                    <td>'.number_format($report2->tab7).'</td>
+                    <td>'.number_format($report2->tab7,2).'</td>
                     <td class="text-nowrap"></td>
                     <td>'.$report2->tab8.'</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                     </tr>';
                 }
                 if($report2->tab4 == 2){
                     $result .= '<tr>
                     <td class="text-nowrap"></td>
                     <td>'.$report2->tab8.'</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                     <td class="text-nowrap">'.$report2->tab5.'</td>
                     <td>'.$report2->tab6.'</td>
-                    <td>'.number_format($report2->tab7).'</td>
+                    <td>'.number_format($report2->tab7,2).'</td>
                     </tr>';
                 }
             }
@@ -349,20 +359,20 @@ class LaporanLejarDetailControllerWeb extends Controller
                     $result .= '<tr>
                     <td class="text-nowrap">'.$report2->tab5.'</td>
                     <td>'.$report2->tab6.'</td>
-                    <td>'.number_format($report2->tab7).'</td>
+                    <td>'.number_format($report2->tab7,2).'</td>
                     <td class="text-nowrap"></td>
                     <td>'.$report2->tab8.'</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                     </tr>';
                 }
                 if($report2->tab4 == 2){
                     $result .= '<tr>
                     <td class="text-nowrap"></td>
                     <td>'.$report2->tab8.'</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                     <td class="text-nowrap">'.$report2->tab5.'</td>
                     <td>'.$report2->tab6.'</td>
-                    <td>'.number_format($report2->tab7).'</td>
+                    <td>'.number_format($report2->tab7,2).'</td>
                     </tr>';
                 }
             }
@@ -371,15 +381,15 @@ class LaporanLejarDetailControllerWeb extends Controller
                 <tr>
                     <td></td>
                     <td>Jumlah</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                     <td></td>
                     <td>Jumlah</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Baki B/B</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -390,10 +400,10 @@ class LaporanLejarDetailControllerWeb extends Controller
                 <tr>
                     <td></td>
                     <td>Jumlah</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                     <td></td>
                     <td>Jumlah</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -401,7 +411,7 @@ class LaporanLejarDetailControllerWeb extends Controller
                     <td></td>
                     <td></td>
                     <td>Baki B/B</td>
-                    <td>'.number_format($report2->tab9).'</td>
+                    <td>'.number_format($report2->tab9,2).'</td>
                 </tr>';
             }
         }
