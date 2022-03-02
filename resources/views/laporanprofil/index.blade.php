@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center">
-            <h3 class="text" style="padding-bottom:20px;color:#00A651;">Laporan Database Usahawan</h3>
+            <h3 class="text" style="padding-bottom:20px;color:#00A651;">Database Usahawan</h3>
             <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
                 <div style="padding-bottom: 20px;">
                     {{-- <input class="form-control usahawanfield" name="nokadpengenalan"   type="text"/> --}}

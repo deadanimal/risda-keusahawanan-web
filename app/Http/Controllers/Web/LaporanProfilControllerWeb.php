@@ -1244,9 +1244,10 @@ class LaporanProfilControllerWeb extends Controller
                     $usahawan = Usahawan::where('usahawanid', $user->usahawanid)->first();
                     if(isset($usahawan->U_Negeri_ID)){
                         $lawatan->negeri = $usahawan->U_Negeri_ID;
+                        $lawatan->daerah = $usahawan->U_Daerah_ID;
                     }
                     $lawatan->year = date("Y",strtotime($lawatan->tarikh_lawatan));
-                    $lawatan->daerah = $usahawan->U_Daerah_ID;
+                    
                     $reports = Report::where('tab20', Auth::user()->id)->where('type', 9)->get();
                     if($reports->count()==0){
                         $this->newreport(9,$lawatan,$lawatan->id);
