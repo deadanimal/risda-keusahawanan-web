@@ -344,6 +344,7 @@ class UsahawanControllerWeb extends Controller
                         $usahawanNew->alamat1 = $vals->alamat_surat_menyurat->no_rumah;
                         $usahawanNew->alamat2 = $vals->alamat_surat_menyurat->nama_jalan;
                         $usahawanNew->poskod = $vals->alamat_surat_menyurat->poskod;
+                        $usahawanNew->bandar = $vals->alamat_surat_menyurat->bandar;
                         $usahawanNew->usahawanid = $vals->usahawan_id;
 
                         $userNew = new User();
@@ -393,6 +394,7 @@ class UsahawanControllerWeb extends Controller
                             $usahawanNew->alamat1 = $vals->alamat_surat_menyurat->no_rumah;
                             $usahawanNew->alamat2 = $vals->alamat_surat_menyurat->nama_jalan;
                             $usahawanNew->poskod = $vals->alamat_surat_menyurat->poskod;
+                            $usahawanNew->bandar = $vals->alamat_surat_menyurat->bandar;
                             $usahawanNew->usahawanid = $vals->usahawan_id;
 
                             $userNew = new User();

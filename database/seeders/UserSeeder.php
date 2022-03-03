@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
@@ -63,12 +64,12 @@ class UserSeeder extends Seeder
             'type'=>'1'
         ]);
         
-        $csvFile = fopen(base_path("database/data/Usahawan.csv"), "r");
+        $csvFile = fopen(base_path("database/data/User.csv"), "r");
   
         $firstline = true;
         while (($data = fgetcsv($csvFile, 15000, ",")) !== FALSE) {
             if (!$firstline) {
-                DB::table('usahawans')->insert([
+                DB::table('users')->insert([
                     "id" => $data['1'],
                     "usahawanid" => $data['0'],
                     "name" => $data['2'],
@@ -76,8 +77,7 @@ class UserSeeder extends Seeder
                     "email" => $data['4'],
                     "type" => $data['5'],
                     "profile_status" => $data['6'],
-                    "status_pengguna" => $data['7'],
-                    "status_profil" => $data['8']
+                    "status_pengguna" => $data['7']
                 ]);    
             }
             $firstline = false;
