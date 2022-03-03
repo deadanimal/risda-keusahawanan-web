@@ -496,9 +496,13 @@ function APIPK(){
             type:"GET",
             success: function(data) {
                 console.log(data);
-                alert("Data Usahawan Berjaya dan Selesai Ditarik");
+                if(data == 400){
+                    alert("Error API Portal Pekebun Kecil")
+                }else{
+                    alert("Data Usahawan Berjaya dan Selesai Ditarik");
+                    location.reload();
+                }
                 $('.loader').hide();
-                // location.reload();
             }
         });
     }else{

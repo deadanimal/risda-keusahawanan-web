@@ -167,45 +167,51 @@ class PegawaiControllerWeb extends Controller
     public function pegawaiPost2()
     {
         $client = new \GuzzleHttp\Client();
-        $request = $client->request('GET', 'https://www4.risda.gov.my/fire/getallstaff/', [
-            'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', 'f9d00dae5c6d6d549c306bae6e88222eb2f84307']
-        ]);
-        $response = $request->getBody()->getContents();
-        $vals = json_decode($response);
-        foreach ($vals as $val){
-            $pegawai = Pegawai::where('nokp', $val->nokp)->first();
-            // $emailpegawai = Pegawai::where('email', $val->email)->first();
-            // $user = User::where('no_kp', $val->nokp)->first();
-            if(!isset($pegawai)){
-                $newpegawai = new Pegawai();
-                $newpegawai->nama = $val->nama;
-                $newpegawai->nokp = $val->nokp;
-                $newpegawai->nopekerja = $val->nopekerja;
-                $newpegawai->GelaranJwtn = $val->GelaranJwtn;
-                $newpegawai->NamaPT = $val->Kod_PT;
-                $newpegawai->NamaPA = $val->NamaPA;
-                $newpegawai->NamaUnit = $val->NamaUnit;
-                $newpegawai->Jawatan = $val->Jawatan;
-                $newpegawai->StesenBertugas = $val->StesenBertugas;
-                $newpegawai->email = $val->email;
-                $newpegawai->notel = $val->notel;
-                $newpegawai->mukim = "";
-                $newpegawai->peranan_pegawai = "";
+        try{
+            $request = $client->request('GET', 'https://www4.risda.gov.my/fire/getallstaff/', [
+                'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', 'f9d00dae5c6d6d549c306bae6e88222eb2f84307']
+            ]);
+            $response = $request->getBody()->getContents();
+            $vals = json_decode($response);
+            foreach ($vals as $val){
+                $pegawai = Pegawai::where('nokp', $val->nokp)->orWhere('email',$val->email)->first();
+                // $emailpegawai = Pegawai::where('email', $val->email)->first();
+                // $user = User::where('no_kp', $val->nokp)->first();
+                if(!isset($pegawai)){
+                    $newpegawai = new Pegawai();
+                    $newpegawai->nama = $val->nama;
+                    $newpegawai->nokp = $val->nokp;
+                    $newpegawai->nopekerja = $val->nopekerja;
+                    $newpegawai->GelaranJwtn = $val->GelaranJwtn;
+                    $newpegawai->NamaPT = $val->Kod_PT;
+                    $newpegawai->NamaPA = $val->NamaPA;
+                    $newpegawai->NamaUnit = $val->NamaUnit;
+                    $newpegawai->Jawatan = $val->Jawatan;
+                    $newpegawai->StesenBertugas = $val->StesenBertugas;
+                    $newpegawai->email = $val->email;
+                    $newpegawai->notel = $val->notel;
+                    $newpegawai->mukim = "";
+                    $newpegawai->peranan_pegawai = "";
 
-                $newpegawai->save();
+                    $newpegawai->save();
 
-                $newuser = new User();
-                $newuser->name = $val->nama;
-                $newuser->email = $val->email;
-                $newuser->password = '$2y$10$HWYZbKricDxuacRL/cpBoOSiZo7F3nQafsQkjXN2Q9fxy9ghPZFm.';
-                $newuser->idpegawai = $newpegawai->id;
-                $newuser->status_pengguna = 0;
-                $newuser->no_kp = $val->nokp;
-                $newuser->role = 0;
-                $newuser->type = 1;
-                $newuser->profile_status = 0;
-                $newuser->save();
+                    $newuser = new User();
+                    $newuser->name = $val->nama;
+                    $newuser->email = $val->email;
+                    $newuser->idpegawai = $newpegawai->id;
+                    $newuser->status_pengguna = 0;
+                    $newuser->no_kp = $val->nokp;
+                    $newuser->role = 0;
+                    $newuser->type = 1;
+                    $newuser->profile_status = 0;
+                    $newuser->save();
+                }
             }
+            return $vals;
+        }
+        catch(\Exception $e){
+            // dd($e);
+            return '400';
         }
         return true;
     }

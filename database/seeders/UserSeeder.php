@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        
+        DB::table('users')->truncate();
         User::create([
             'name'=> 'RUZLAN BIN ABDUL RAHMAN',
             'email'=> 'ruzlan@risda.gov.my',
@@ -62,5 +62,27 @@ class UserSeeder extends Seeder
             'role'=>'1',
             'type'=>'1'
         ]);
+        
+        $csvFile = fopen(base_path("database/data/Usahawan.csv"), "r");
+  
+        $firstline = true;
+        while (($data = fgetcsv($csvFile, 15000, ",")) !== FALSE) {
+            if (!$firstline) {
+                DB::table('usahawans')->insert([
+                    "id" => $data['1'],
+                    "usahawanid" => $data['0'],
+                    "name" => $data['2'],
+                    "no_kp" => $data['3'],
+                    "email" => $data['4'],
+                    "type" => $data['5'],
+                    "profile_status" => $data['6'],
+                    "status_pengguna" => $data['7'],
+                    "status_profil" => $data['8']
+                ]);    
+            }
+            $firstline = false;
+        }
+   
+        fclose($csvFile);
     }
 }

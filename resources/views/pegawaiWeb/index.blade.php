@@ -299,9 +299,13 @@ function API(){
             url: "/pegawaiPost2",
             type:"GET",
             success: function(data) {
-                alert("Data Pegawai Berjaya dan Selesai Ditarik");
+                if(data == 400){
+                    alert("Error API Pekebun")
+                }else{
+                    alert("Data Pegawai Berjaya dan Selesai Ditarik");
+                    location.reload();
+                }
                 $('.loader').hide();
-                location.reload();
             }
         });
     }else{

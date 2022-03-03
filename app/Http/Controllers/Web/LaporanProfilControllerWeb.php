@@ -277,7 +277,7 @@ class LaporanProfilControllerWeb extends Controller
         if(!isset($authuser)){
             return redirect('/landing');
         }
-        
+        $getYear = date("Y");
         if($request->type == 1){
             $loguser = Auth::user();
             if(isset($loguser->idpegawai)){
@@ -305,6 +305,7 @@ class LaporanProfilControllerWeb extends Controller
             $table->count = 0;
             $table->nilai_insentif = 0;
             $table->aliran = 0;
+            
             if($insentifs->count()==0){
                 return "Tiada Data Insentif Dijumpai";
             }else{
@@ -324,7 +325,7 @@ class LaporanProfilControllerWeb extends Controller
                                 $table->count = $table->count + 1;
                                 $table->nilai_insentif = $table->nilai_insentif + $insentif3->nilai_insentif;
                                 $aliran = Aliran::where('id_pengguna', $insentif3->id)
-                                ->whereYear('tarikh_aliran', $insentif3->tahun_terima_insentif)
+                                ->whereYear('tarikh_aliran', $getYear)
                                 ->sum('jumlah_aliran');
                                 $table->aliran = $table->aliran + $aliran;
                                 
@@ -410,7 +411,7 @@ class LaporanProfilControllerWeb extends Controller
                                     $table->count = $table->count + 1;
                                     $table->nilai_insentif = $table->nilai_insentif + $insentif4->nilai_insentif;
                                     $aliran = Aliran::where('id_pengguna', $insentif4->id)
-                                    ->whereYear('tarikh_aliran', $insentif4->tahun_terima_insentif)
+                                    ->whereYear('tarikh_aliran', $getYear)
                                     ->sum('jumlah_aliran');
                                     $table->aliran = $table->aliran + $aliran;
                                     
@@ -507,7 +508,7 @@ class LaporanProfilControllerWeb extends Controller
                                         $table->count = $table->count + 1;
                                         $table->nilai_insentif = $table->nilai_insentif + $insentif5->nilai_insentif;
                                         $aliran = Aliran::where('id_pengguna', $insentif5->id)
-                                        ->whereYear('tarikh_aliran', $insentif5->tahun_terima_insentif)
+                                        ->whereYear('tarikh_aliran', $getYear)
                                         ->sum('jumlah_aliran');
                                         $table->aliran = $table->aliran + $aliran;
                                     }
