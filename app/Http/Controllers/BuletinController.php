@@ -25,6 +25,7 @@ class BuletinController extends Controller
         $buletin->tarikh = $request->tarikh;
         $buletin->keterangan_lain = $request->keterangan_lain;
         $buletin->status = $request->status;
+        $buletin->url = $request->url;
         $buletin->gambar_buletin = $request->gambar_buletin;
 
         $buletin->save();
@@ -45,6 +46,7 @@ class BuletinController extends Controller
         $buletin->tarikh = $request->tarikh;
         $buletin->keterangan_lain = $request->keterangan_lain;
         $buletin->status = $request->status;
+        $buletin->url = $request->url;
         $buletin->gambar_buletin = $request->gambar_buletin;
 
         $buletin->save();

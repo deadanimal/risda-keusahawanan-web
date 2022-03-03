@@ -67,7 +67,7 @@ class PekebunController extends Controller
     public function getPekebunEspek($nokp)
     {
 
-        
+
         // dd($nokp);
         $client = new \GuzzleHttp\Client();
 
@@ -84,7 +84,7 @@ class PekebunController extends Controller
             return response()->json($vals);
         } catch (\Exception $e) {
             // dd($e);
-            return response()->json('400') ;
+            return response()->json('400');
         }
     }
 
@@ -95,13 +95,19 @@ class PekebunController extends Controller
 
         // dd($nokp);
         $client = new \GuzzleHttp\Client();
-        $request = $client->request('GET', 'https://www4.risda.gov.my/fire/getnots/?nokp=' . $nokp . '', [
-            'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', '3b22692be6da322303c98c1541a74f596458d80e']
-        ]);
-        $response = $request->getBody()->getContents();
-        $vals = json_decode($response);
-        // dd($vals);
+        try {
 
-        return response()->json($vals);
+            $request = $client->request('GET', 'https://www4.risda.gov.my/fire/getnots/?nokp=' . $nokp . '', [
+                'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', '3b22692be6da322303c98c1541a74f596458d80e']
+            ]);
+            $response = $request->getBody()->getContents();
+            $vals = json_decode($response);
+            // dd($vals);
+
+            return response()->json($vals);
+        } catch (\Exception $e) {
+            // dd($e);
+            return response()->json('400');
+        }
     }
 }

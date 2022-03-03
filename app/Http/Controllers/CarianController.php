@@ -183,4 +183,32 @@ class CarianController extends Controller
 
         return response()->json("maklumat-usahawan/" . $fname);
     }
+
+    public function CariUsahawan(Request $request){
+
+
+        // return response()->json($request);
+
+        $users = Usahawan::without(['PT','daerah','dun','parlimen','kateusah','syarikat','etnik','mukim','kampung','seksyen','insentif', 'perniagaan', 'pekebun', 'user', 'negeri']);
+
+        if(!empty($request->nama)){
+            $users->where('namausahawan', 'like', '%'.$request->nama.'%');
+        }
+        if(!empty($request->noKP)){
+            $users->where('nokadpengenalan', 'like', '%'.$request->noKP.'%');
+        }
+        if(!empty($request->negeri)){
+            $users->where('U_Negeri_ID', $request->negeri);
+        }
+        if(!empty($request->PT)){
+            $users->where('Kod_PT', $request->PT);
+        }
+
+        $users->select('namausahawan', 'nokadpengenalan', 'usahawanid');
+        
+        $result = $users->paginate(15);
+
+        return response()->json($result);
+       
+    }
 }

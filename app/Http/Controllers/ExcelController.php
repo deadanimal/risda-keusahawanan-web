@@ -109,6 +109,8 @@ class ExcelController extends Controller
         ->select('syarikats.namasyarikat')
         ->get()->first();
 
+        // return response()->json($syarikat);
+
 
         $aliran = Aliran::where('id_pengguna', $user_id)
         ->whereMonth('tarikh_aliran', '=', $month)

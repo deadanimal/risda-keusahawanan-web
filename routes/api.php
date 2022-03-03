@@ -176,6 +176,9 @@ Route::post('updatePassword/{id}', [PasswordController::class, 'updatePassword']
 Route::get('carian/{i}', [CarianController::class, 'carianUsahawan']);
 Route::get('downloadCarian/{i}', [CarianController::class, 'downloadCarian']);
 
+Route::post('cari', [CarianController::class, 'CariUsahawan']);
+// Route::get('carii', function(){return view('CariUsahawan');});
+
 
 //notification
 Route::apiResource('notifikasi', NotifikasiController::class);

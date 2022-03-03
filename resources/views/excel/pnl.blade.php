@@ -64,9 +64,13 @@
         @endif
         TAHUN {{ $tahun }}
     </h4>
-    <h4> {{ $syarikat->namasyarikat }}</h4>
+    <h4>
+        @if ($syarikat != null)
+            {{ $syarikat->namasyarikat }}
+        @endif
+    </h4>
 
-    <table>
+    {{-- <table>
         <thead>
             <tr>
                 <th style="width: 300px"></th>
@@ -415,6 +419,386 @@
                 <td></td>
                 <td></td>
                 <td>
+                    @php
+                        $untung_rugi_bersih = $jualan_bersih - $kos_jualan - $jumlah_perbelanjaan + $jumlah_hasil;
+                    @endphp
+                    {{ number_format($untung_rugi_bersih, 2) }}
+                </td>
+            </tr>
+
+        </tbody>
+    </table> --}}
+
+    <table>
+
+        <tbody>
+
+            <tr>
+                <td style="font-weight: bold">
+                    <span class="cls_002">
+                        HASIL JUALAN / PEROLEHAN (SALES)
+                    </span>
+                </td>
+                <td style="text-align: center">
+                    <span class="cls_002">RM</span>
+                </td>
+                <td style="text-align: center">
+                    <span class="cls_002">RM</span>
+                </td>
+                <td style="text-align: center">
+                    <span class="cls_002">RM</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">JUALAN/PEROLEHAN</td>
+                <td></td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">
+                    {{ number_format($jualan_perolehan, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Deposit Jualan</td>
+                <td></td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($deposit_jualan, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Pulangan Jualan</td>
+                <td></td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($pulangan_jualan, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="cls_001" style="color: red">Jualan Bersih</td>
+                <td></td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">
+                    @php
+                        $jualan_bersih = $jualan_perolehan + $deposit_jualan - $pulangan_jualan;
+                    @endphp
+                    {{ number_format($jualan_bersih, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_002" style="font-weight: bold">KOS LANGSUNG / KOS JUALAN (COGS)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Stok Awal</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($stok_awal, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Deposit Belian</td>
+                <td class="cls_001" style="text-align: right;"> {{ number_format($deposit_belian, 2) }}
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Belian</td>
+                <td class="cls_001" style="text-align: right;"> {{ number_format($belian, 2) }} </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001" style="color: red">Belian Bersih</td>
+                <td class="cls_001" style="text-align: right;">
+                    <?php
+                    $belian_bersih = $deposit_belian + $belian;
+                    
+                    ?>
+                    {{ number_format($belian_bersih, 2) }}
+
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Pulangan Belian</td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($pulangan_belian, 2) }}
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001" style="color: red">Kos Belian</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">
+                    @php
+                        $kos_belian = $belian_bersih - $pulangan_belian;
+                    @endphp
+                    {{ number_format($kos_belian, 2) }}
+
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001" style="color: red">Kos Barang Sedia Dijual</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">
+                    @php
+                        $kos_barang_sedia_dijual = $stok_awal + $kos_belian;
+                    @endphp
+                    {{ number_format($kos_barang_sedia_dijual, 2) }}
+
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Stok Akhir</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;"> {{ number_format($stok_akhir, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001" style="color: red">Kos Jualan</td>
+                <td></td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">
+                    @php
+                        $kos_jualan = $kos_barang_sedia_dijual - $stok_akhir;
+                    @endphp
+                    {{ number_format($kos_jualan, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="cls_002" style="font-weight: bold">UNTUNG / RUGI KASAR</td>
+                <td></td>
+                <td></td>
+                <td class="cls_002" style="text-align: right;">
+                    @php
+                        $untung_rugi_kasar = $jualan_bersih - $kos_jualan;
+                    @endphp
+                    {{ number_format($untung_rugi_kasar, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_002" style="font-weight: bold">PERBELANJAAN PENTADBIRAN DAN OPERASI (OPEX)
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Kos Pengeposan</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($kos_pengeposan, 2) }}
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Kos Alat Tulis</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($kos_alat_tulis, 2) }}
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Bayaran Sewa</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($bayaran_sewa, 2) }}
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Upah/ Gaji Pekerja</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">
+                    {{ number_format($upah_gaji_pekerja, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Upah/ Gaji Sendiri</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">
+                    {{ number_format($upah_gaji_sendiri, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">KWSP/ SOCSO</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($kwsp_socso, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Bayaran Bil (Utiliti)</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($bayaran_bil, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Petrol/ Tol/ Parking</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">
+                    {{ number_format($petrol_tol_parking, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Penyelenggaraan</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($penyelenggaraan, 2) }}
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Belian Aset</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($belian_aset, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Bayaran Komisen</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($bayaran_komisen, 2) }}
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Cukai/ Zakat</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($cukai_zakat, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Bayaran Lain</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;">{{ number_format($bayaran_lain, 2) }}
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_002" style="color: red">JUMLAH PERBELANJAAN PENTADBIRAN DAN OPERASI</td>
+                <td></td>
+                <td></td>
+                <td class="cls_002" style="text-align: right;">
+                    @php
+                        $jumlah_perbelanjaan = $kos_pengeposan + $kos_alat_tulis + $bayaran_sewa + $upah_gaji_pekerja + $upah_gaji_sendiri + $kwsp_socso + $bayaran_bil + $petrol_tol_parking + $penyelenggaraan + $belian_aset + $bayaran_komisen + $cukai_zakat + $bayaran_lain;
+                    @endphp
+                    {{ number_format($jumlah_perbelanjaan, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_002">HASIL - HASIL LAIN</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Hasil Komisen</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;"> {{ number_format($hasil_komisen, 2) }}
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Hasil Dividen</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;"> {{ number_format($hasil_dividen, 2) }}
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Hasil Sewaan</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;"> {{ number_format($hasil_sewaan, 2) }}
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_001">Hasil Lain</td>
+                <td></td>
+                <td class="cls_001" style="text-align: right;"> {{ number_format($hasil_lain, 2) }}</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_002" style="color: red">JUMLAH HASIL -HASIL LAIN</td>
+                <td></td>
+                <td></td>
+                <td class="cls_002" style="text-align: right;">
+                    @php
+                        $jumlah_hasil = $hasil_komisen + $hasil_dividen + $hasil_sewaan + $hasil_lain;
+                    @endphp
+
+                    {{ number_format($jumlah_hasil, 2) }}
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="cls_002" style="font-weight: bold">UNTUNG / RUGI BERSIH</td>
+                <td></td>
+                <td></td>
+                <td class="cls_002" style="text-align: right;">
                     @php
                         $untung_rugi_bersih = $jualan_bersih - $kos_jualan - $jumlah_perbelanjaan + $jumlah_hasil;
                     @endphp

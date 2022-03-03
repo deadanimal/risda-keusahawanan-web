@@ -116,7 +116,12 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->negeri->Negeri }}
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->negeri != null)
+                                {{ $usahawan->perniagaan->negeri->Negeri }}
+                            @endif
+                        @endif
+
                     </span>
                 </td>
 
@@ -194,19 +199,14 @@
                     <span class="cls_001" style="text-transform: uppercase">
                         @if ($usahawan->statusperkahwinan == 1)
                             Tidak Pernah Berkahwin
-
                         @elseif ($usahawan->statusperkahwinan == 2)
                             Berkahwin
-
                         @elseif ($usahawan->statusperkahwinan == 3)
                             Balu / Duda
-
                         @elseif ($usahawan->statusperkahwinan == 4)
                             Bercerai
-
                         @elseif ($usahawan->statusperkahwinan == 5)
                             Berpisah
-
                         @elseif ($usahawan->statusperkahwinan == 9)
                             Tiada maklumat
                         @endif
@@ -475,7 +475,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->kateusah->nama_kategori_usahawan }}
+                        @if ($usahawan->kateusah != null)
+                            {{ $usahawan->kateusah->nama_kategori_usahawan }}
+                        @endif
+
                     </span>
                 </td>
             </tr>
@@ -532,7 +535,9 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->namasyarikat }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->namasyarikat }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -543,14 +548,16 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        @if ($usahawan->syarikat->jenismilikanperniagaan == 'JPP01')
-                            PEMILIKAN TUNGGAL
-                        @elseif ($usahawan->syarikat->jenismilikanperniagaan == 'JPP02')
-                            PERKONGSIAN
-                        @elseif ($usahawan->syarikat->jenismilikanperniagaan == 'JPP03')
-                            SYARIKAT SDN BHD
-                        @elseif ($usahawan->syarikat->jenismilikanperniagaan == 'JPP04')
-                            PERKONGSIAN LIABILITI TERHAD
+                        @if ($usahawan->syarikat != null)
+                            @if ($usahawan->syarikat->jenismilikanperniagaan == 'JPP01')
+                                PEMILIKAN TUNGGAL
+                            @elseif ($usahawan->syarikat->jenismilikanperniagaan == 'JPP02')
+                                PERKONGSIAN
+                            @elseif ($usahawan->syarikat->jenismilikanperniagaan == 'JPP03')
+                                SYARIKAT SDN BHD
+                            @elseif ($usahawan->syarikat->jenismilikanperniagaan == 'JPP04')
+                                PERKONGSIAN LIABILITI TERHAD
+                            @endif
                         @endif
                     </span>
                 </td>
@@ -562,7 +569,9 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->nodaftarssm }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->nodaftarssm }}
+                        @endif
                     </span>
                 </td>
 
@@ -571,7 +580,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->nodaftarpbt }}
+
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->nodaftarpbt }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -582,7 +594,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->nodaftarpersijilanhalal }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->nodaftarpersijilanhalal }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -591,7 +606,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->nodaftarmesti }}
+
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->nodaftarmesti }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -601,7 +619,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->tahunmulaoperasi }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->tahunmulaoperasi }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -610,7 +631,9 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->bilanganpekerja }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->bilanganpekerja }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -629,7 +652,9 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->alamat1_ssm }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->alamat1_ssm }}
+                        @endif
                     </span>
                 </td>
 
@@ -640,7 +665,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->alamat2_ssm }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->alamat2_ssm }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -651,7 +679,8 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->alamat3_ssm }}
+
+
                     </span>
                 </td>
 
@@ -663,7 +692,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->tarikh_mula_mof }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->tarikh_mula_mof }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -672,7 +704,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->tarikh_tamat_mof }}
+
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->tarikh_tamat_mof }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -683,7 +718,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->tarikh_tamat_mof }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->status_bumiputera }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -692,7 +730,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->prefix_id }}
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->prefix_id }}
+                        @endif
+
                     </span>
                 </td>
             </tr>
@@ -703,7 +744,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->nama_akaun_bank }}
+
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->nama_akaun_bank }}
+                        @endif
                     </span>
                 </td>
 
@@ -715,7 +759,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->no_akaun_bank }}
+
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->no_akaun_bank }}
+                        @endif
                     </span>
                 </td>
 
@@ -727,7 +774,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->notelefon }}
+
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->notelefon }}
+                        @endif
                     </span>
                 </td>
 
@@ -736,7 +786,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->no_hp }}
+
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->no_hp }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -747,7 +800,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->syarikat->email }}
+
+                        @if ($usahawan->syarikat != null)
+                            {{ $usahawan->syarikat->email }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -774,17 +830,20 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        @if ($usahawan->perniagaan->jenisperniagaan == 'A')
-                            PENGELUARAN PRODUK MAKANAN
-                        @elseif ($usahawan->perniagaan->jenisperniagaan == 'B')
-                            PENGELUARAN PRODUK BUKAN MAKANAN
-                        @elseif ($usahawan->perniagaan->jenisperniagaan == 'C')
-                            PENGELUARAN PRODUK PERTANIAN
-                        @elseif ($usahawan->perniagaan->jenisperniagaan == 'D')
-                            PERKHIDMATAN PEMASARAN
-                        @elseif ($usahawan->perniagaan->jenisperniagaan == 'E')
-                            PERKHIDMATAN BUKAN PEMASARAN
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->jenisperniagaan == 'A')
+                                PENGELUARAN PRODUK MAKANAN
+                            @elseif ($usahawan->perniagaan->jenisperniagaan == 'B')
+                                PENGELUARAN PRODUK BUKAN MAKANAN
+                            @elseif ($usahawan->perniagaan->jenisperniagaan == 'C')
+                                PENGELUARAN PRODUK PERTANIAN
+                            @elseif ($usahawan->perniagaan->jenisperniagaan == 'D')
+                                PERKHIDMATAN PEMASARAN
+                            @elseif ($usahawan->perniagaan->jenisperniagaan == 'E')
+                                PERKHIDMATAN BUKAN PEMASARAN
+                            @endif
                         @endif
+
                     </span>
                 </td>
             </tr>
@@ -794,7 +853,13 @@
                     <span class="cls_002">Kluster Perniagaan</span>
                 </td>
                 <td colspan="3">
-
+                    @if ($usahawan->perniagaan != null)
+                        @if ($usahawan->perniagaan->kluster != null)
+                            <span class="cls_001">
+                                {{ $usahawan->perniagaan->kluster->nama_kluster }}
+                            </span>
+                        @endif
+                    @endif
                 </td>
             </tr>
             <tr>
@@ -803,7 +868,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->subkluster }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->subkluster }}
+                        @endif
+
                     </span>
                 </td>
             </tr>
@@ -814,7 +882,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->alamat1 }}
+
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->alamat1 }}
+                        @endif
                     </span>
                 </td>
 
@@ -825,7 +896,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->alamat2 }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->alamat2 }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -836,7 +910,9 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->alamat3 }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->alamat3 }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -847,7 +923,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->bandar }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->bandar }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -856,7 +935,9 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->poskod }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->poskod }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -867,9 +948,12 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        @if ($usahawan->perniagaan->negeri != null)
-                            {{ $usahawan->perniagaan->negeri->Negeri }}
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->negeri != null)
+                                {{ $usahawan->perniagaan->negeri->Negeri }}
+                            @endif
                         @endif
+
                     </span>
                 </td>
 
@@ -878,8 +962,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        @if ($usahawan->perniagaan->daerah != null)
-                            {{ $usahawan->perniagaan->daerah->Daerah }}
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->daerah != null)
+                                {{ $usahawan->perniagaan->daerah->Daerah }}
+                            @endif
                         @endif
                     </span>
                 </td>
@@ -891,9 +977,12 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        @if ($usahawan->perniagaan->parlimen != null)
-                            {{ $usahawan->perniagaan->parlimen->Parlimen }}
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->parlimen != null)
+                                {{ $usahawan->perniagaan->parlimen->Parlimen }}
+                            @endif
                         @endif
+
                     </span>
                 </td>
 
@@ -902,9 +991,12 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        @if ($usahawan->perniagaan->dun != null)
-                            {{ $usahawan->perniagaan->dun->Dun }}
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->dun != null)
+                                {{ $usahawan->perniagaan->dun->Dun }}
+                            @endif
                         @endif
+
                     </span>
                 </td>
             </tr>
@@ -915,9 +1007,13 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        @if ($usahawan->perniagaan->mukim != null)
-                            {{ $usahawan->perniagaan->mukim->Mukim }}
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->mukim != null)
+                                {{ $usahawan->perniagaan->mukim->Mukim }}
+                            @endif
                         @endif
+
+
                     </span>
                 </td>
 
@@ -926,10 +1022,11 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        @if ($usahawan->perniagaan->kampung != null)
-                            {{ $usahawan->perniagaan->kampung->Kampung }}
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->kampung != null)
+                                {{ $usahawan->perniagaan->kampung->Kampung }}
+                            @endif
                         @endif
-
                     </span>
                 </td>
             </tr>
@@ -940,9 +1037,12 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        @if ($usahawan->perniagaan->seksyen != null)
-                            {{ $usahawan->perniagaan->seksyen->Seksyen }}
+                        @if ($usahawan->perniagaan != null)
+                            @if ($usahawan->perniagaan->seksyen != null)
+                                {{ $usahawan->perniagaan->seksyen->Seksyen }}
+                            @endif
                         @endif
+
                     </span>
                 </td>
 
@@ -954,7 +1054,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->latitud }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->latitud }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -963,7 +1066,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->logitud }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->logitud }}
+                        @endif
+
                     </span>
                 </td>
             </tr>
@@ -981,7 +1087,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->facebook }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->facebook }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -993,7 +1102,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->instagram }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->instagram }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -1005,7 +1117,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->twitter }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->twitter }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -1017,7 +1132,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->lamanweb }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->lamanweb }}
+                        @endif
+
                     </span>
                 </td>
             </tr>
@@ -1035,7 +1153,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->dropship }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->dropship }}
+                        @endif
+
                     </span>
                 </td>
 
@@ -1044,7 +1165,9 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->ejen }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->ejen }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -1055,7 +1178,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->stokis }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->stokis }}
+                        @endif
+
                     </span>
                 </td>
                 <td>
@@ -1063,7 +1189,10 @@
                 </td>
                 <td>
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->outlet }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->outlet }}
+                        @endif
+
                     </span>
                 </td>
             </tr>
@@ -1074,7 +1203,9 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->domestik }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->domestik }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -1084,7 +1215,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->luarnegara }}
+
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->luarnegara }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -1094,7 +1228,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->pasaranonline }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->pasaranonline }}
+                        @endif
+
                     </span>
                 </td>
             </tr>
@@ -1111,7 +1248,10 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->purata_jualan_bulanan }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->purata_jualan_bulanan }}
+                        @endif
+
                     </span>
                 </td>
             </tr>
@@ -1122,7 +1262,9 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->hasil_jualan_tahunan }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->hasil_jualan_tahunan }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -1133,7 +1275,9 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        {{ $usahawan->perniagaan->peratus_kenaikan }}
+                        @if ($usahawan->perniagaan != null)
+                            {{ $usahawan->perniagaan->peratus_kenaikan }}
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -1144,65 +1288,68 @@
                 </td>
             </tr>
 
-            @foreach ($usahawan->perniagaan->produk as $produk)
-                <tr>
-                    <td>
-                        <span class="cls_002">Maklumat Produk {{ $loop->index + 1 }}</span>
-                    </td>
-                    <td colspan="3">
+            @if ($usahawan->perniagaan != null)
+                @foreach ($usahawan->perniagaan->produk as $produk)
+                    <tr>
+                        <td>
+                            <span class="cls_002">Maklumat Produk {{ $loop->index + 1 }}</span>
+                        </td>
+                        <td colspan="3">
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <span class="cls_002">Jenama Produk</span>
-                    </td>
-                    <td colspan="3">
-                        <span class="cls_001">
-                            {{ $produk->jenamaproduk }}
-                        </span>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <span class="cls_002">Jenama Produk</span>
+                        </td>
+                        <td colspan="3">
+                            <span class="cls_001">
+                                {{ $produk->jenamaproduk }}
+                            </span>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <span class="cls_002">Unit Metrik</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
-                            {{ $produk->unitmatrik }}
-                        </span>
-                    </td>
-                    <td>
-                        <span class="cls_002">Harga Per Unit</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
-                            {{ $produk->hargaperunit }}
-                        </span>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <span class="cls_002">Unit Metrik</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+                                {{ $produk->unitmatrik }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="cls_002">Harga Per Unit</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+                                {{ $produk->hargaperunit }}
+                            </span>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <span class="cls_002">Kapasiti Maksimum</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
-                            {{ $produk->kapasitimaksimum }}
-                        </span>
-                    </td>
-                    <td>
-                        <span class="cls_002">Kapasiti Semasa</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
-                            {{ $produk->kapasitisemasa }}
-                        </span>
-                    </td>
-                </tr>
-            @endforeach
+                    <tr>
+                        <td>
+                            <span class="cls_002">Kapasiti Maksimum</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+                                {{ $produk->kapasitimaksimum }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="cls_002">Kapasiti Semasa</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+                                {{ $produk->kapasitisemasa }}
+                            </span>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
+
 
 
 
@@ -1210,7 +1357,204 @@
 
 
         <div style="page-break-after: always"></div>
+
         <h4>PROFIL PEKEBUN KECIL SANDARAN</h4>
+        {{-- <table>
+            <tr>
+                <th colspan="4"><span class="cls_003">Maklumat Pekebun Kecil</span></th>
+            </tr>
+
+            <tr>
+                <td>
+                    <span class="cls_002">No Kad Pengenalan</span>
+                </td>
+                <td colspan="3">
+                    <span class="cls_001">
+                        @if ($usahawan->pekebun != null)
+                            @if ($usahawan->pekebun->No_KP != null)
+                                {{ $usahawan->pekebun->No_KP }}
+                            @endif
+                        @endif
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="cls_002">Nama Pekebun Kecil</span>
+                </td>
+                <td colspan="3">
+                    <span class="cls_001">
+                        @if ($usahawan->pekebun != null)
+                            @if ($usahawan->pekebun->Nama_PK != null)
+                                {{ $usahawan->pekebun->Nama_PK }}
+                            @endif
+                        @endif
+
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="cls_002">No Tanam Semula/SIC</span>
+                </td>
+                <td colspan="3"><span class="cls_001">
+                        @if ($usahawan->pekebun != null)
+                            @if ($usahawan->pekebun->noTS != null)
+                                {{ $usahawan->pekebun->noTS }}
+                            @endif
+                        @endif
+
+                    </span></td>
+            </tr>
+            @if ($usahawan->pekebun != null)
+                @foreach ($usahawan->pekebun->tanah as $tanah)
+                    <tr>
+                        <td colspan="4">
+                            <span class="cls_003">Maklumat Tanah {{ $loop->index + 1 }}</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span class="cls_002">No Geran</span>
+                        </td>
+                        <td colspan="3">
+                            <span class="cls_001">
+                                {{ $tanah->No_Geran }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cls_002">Negeri</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+
+                                @if ($tanah->negeri != null)
+                                    {{ $tanah->negeri->Negeri }}
+                                @endif
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="cls_002">Daerah</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+                                @if ($tanah->daerah != null)
+                                    {{ $tanah->daerah->Daerah }}
+                                @endif
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span class="cls_002">Mukim</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+                                @if ($tanah->mukim != null)
+                                    {{ $tanah->mukim->Mukim }}
+                                @endif
+
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="cls_002">Parlimen</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+                                @if ($tanah->parlimen != null)
+                                    {{ $tanah->parlimen->Parlimen }}
+                                @endif
+
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span class="cls_002">Dun</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+                                @if ($tanah->dun != null)
+                                    {{ $tanah->dun->Dun }}
+                                @endif
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="cls_002">Kampung</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
+
+                                @if ($tanah->kampung != null)
+                                    {{ $tanah->kampung->Kampung }}
+                                @endif
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span class="cls_002">Seksyen</span>
+                        </td>
+                        <td colspan="3">
+                            <span class="cls_001">
+                                @if ($tanah->seksyen != null)
+                                    {{ $tanah->seksyen->Seksyen }}
+                                @endif
+
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span class="cls_002">Keluasan Hektar</span>
+                        </td>
+                        <td colspan="3">
+                            <span class="cls_001">
+                                {{ $tanah->keluasan_hektar }}
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span class="cls_002">Maklumat Tanaman</span>
+                        </td>
+                        <td colspan="3">
+
+                            <span class="cls_001">
+                                @if ($tanah->tanaman != null)
+                                    @foreach ($tanah->tanaman as $tanaman)
+                                        Jenis Tanaman {{ $loop->index + 1 }} : {{ $tanaman->jenis_tanaman_kebun }}
+                                        <br>
+                                    @endforeach
+                                @endif
+                            </span>
+                        </td>
+
+                    </tr>
+                @endforeach
+            @endif
+
+            <tr>
+                <td>ajdk</td>
+                <td>jaskdj</td>
+                <td>asndk</td>
+                <td>jdaks</td>
+            </tr>
+
+
+        </table> --}}
+
 
         <table style="width: 100%;">
 
@@ -1219,7 +1563,6 @@
                     <span class="cls_003">Maklumat Pekebun Kecil</span>
                 </td>
             </tr>
-            <br>
 
             <tr>
                 <td>
@@ -1227,10 +1570,11 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        @if ($usahawan->pekebun->No_KP != null)
-                            {{ $usahawan->pekebun->No_KP }}
+                        @if ($usahawan->pekebun != null)
+                            @if ($usahawan->pekebun->No_KP != null)
+                                {{ $usahawan->pekebun->No_KP }}
+                            @endif
                         @endif
-
                     </span>
                 </td>
             </tr>
@@ -1241,10 +1585,12 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        @if ($usahawan->pekebun->Nama_PK != null)
-                            {{ $usahawan->pekebun->Nama_PK }}
+                        @if ($usahawan->pekebun != null)
+                            @if ($usahawan->pekebun->Nama_PK != null)
+                                {{ $usahawan->pekebun->Nama_PK }}
+                            @endif
                         @endif
-                        {{-- {{ $usahawan->pekebun->Nama_PK }} --}}
+
                     </span>
                 </td>
             </tr>
@@ -1255,149 +1601,271 @@
                 </td>
                 <td colspan="3">
                     <span class="cls_001">
-                        @if ($usahawan->pekebun->noTS != null)
-                            {{ $usahawan->pekebun->noTS }}
+                        @if ($usahawan->pekebun != null)
+                            @if ($usahawan->pekebun->noTS != null)
+                                {{ $usahawan->pekebun->noTS }}
+                            @endif
                         @endif
-                        {{-- {{ $usahawan->pekebun->noTS }} --}}
+
                     </span>
                 </td>
             </tr>
 
-            @foreach ($usahawan->pekebun->tanah as $tanah)
-                <tr>
-                    <td colspan="4">
-                        <span class="cls_003">Maklumat Tanah {{ $loop->index + 1 }}</span>
-                    </td>
-                </tr>
+            @if ($usahawan->pekebun != null)
 
-                <tr>
-                    <td>
-                        <span class="cls_002">No Geran</span>
-                    </td>
-                    <td colspan="3">
-                        <span class="cls_001">
-                            {{ $tanah->No_Geran }}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="cls_002">Negeri</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
+                @if ($usahawan->pekebun->tanah->isEmpty())
+                    <tr>
+                        <td colspan="4">
+                            <span class="cls_003">Maklumat Tanah</span>
+                        </td>
+                    </tr>
 
-                            @if ($tanah->negeri != null)
-                                {{ $tanah->negeri->Negeri }}
-                            @endif
-                        </span>
-                    </td>
+                    <tr>
+                        <td>
+                            <span class="cls_002">No Geran</span>
+                        </td>
+                        <td colspan="3">
+                            <span class="cls_001">
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cls_002">Negeri</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
 
-                    <td>
-                        <span class="cls_002">Daerah</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
-                            @if ($tanah->daerah != null)
-                                {{ $tanah->daerah->Daerah }}
-                            @endif
-                        </span>
-                    </td>
-                </tr>
+                            </span>
+                        </td>
 
-                <tr>
-                    <td>
-                        <span class="cls_002">Mukim</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
-                            @if ($tanah->mukim != null)
-                                {{ $tanah->mukim->Mukim }}
-                            @endif
+                        <td>
+                            <span class="cls_002">Daerah</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
 
-                        </span>
-                    </td>
+                            </span>
+                        </td>
+                    </tr>
 
-                    <td>
-                        <span class="cls_002">Parlimen</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
-                            @if ($tanah->parlimen != null)
-                                {{ $tanah->parlimen->Parlimen }}
-                            @endif
+                    <tr>
+                        <td>
+                            <span class="cls_002">Mukim</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
 
-                        </span>
-                    </td>
-                </tr>
+                            </span>
+                        </td>
 
-                <tr>
-                    <td>
-                        <span class="cls_002">Dun</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
-                            @if ($tanah->dun != null)
-                                {{ $tanah->dun->Dun }}
-                            @endif
-                        </span>
-                    </td>
+                        <td>
+                            <span class="cls_002">Parlimen</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
 
-                    <td>
-                        <span class="cls_002">Kampung</span>
-                    </td>
-                    <td>
-                        <span class="cls_001">
+                            </span>
+                        </td>
+                    </tr>
 
-                            @if ($tanah->kampung != null)
-                                {{ $tanah->kampung->Kampung }}
-                            @endif
-                        </span>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <span class="cls_002">Dun</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
 
-                <tr>
-                    <td>
-                        <span class="cls_002">Seksyen</span>
-                    </td>
-                    <td colspan="3">
-                        <span class="cls_001">
-                            @if ($tanah->seksyen != null)
-                                {{ $tanah->seksyen->Seksyen }}
-                            @endif
+                            </span>
+                        </td>
 
-                        </span>
-                    </td>
-                </tr>
+                        <td>
+                            <span class="cls_002">Kampung</span>
+                        </td>
+                        <td>
+                            <span class="cls_001">
 
-                <tr>
-                    <td>
-                        <span class="cls_002">Keluasan Hektar</span>
-                    </td>
-                    <td colspan="3">
-                        <span class="cls_001">
-                            {{ $tanah->keluasan_hektar }}
-                        </span>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td>
-                        <span class="cls_002">Maklumat Tanaman</span>
-                    </td>
-                    <td colspan="3">
+                            </span>
+                        </td>
+                    </tr>
 
-                        <span class="cls_001">
-                            @foreach ($tanah->tanaman as $tanaman)
-                                Jenis Tanaman {{ $loop->index + 1 }} : {{ $tanaman->jenis_tanaman_kebun }}
-                                <br>
-                            @endforeach
+                    <tr>
+                        <td>
+                            <span class="cls_002">Seksyen</span>
+                        </td>
+                        <td colspan="3">
+                            <span class="cls_001">
 
-                        </span>
-                    </td>
 
-                </tr>
-            @endforeach
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span class="cls_002">Keluasan Hektar</span>
+                        </td>
+                        <td colspan="3">
+                            <span class="cls_001">
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span class="cls_002">Maklumat Tanaman</span>
+                        </td>
+                        <td colspan="3">
+
+                            <span class="cls_001">
+
+                            </span>
+                        </td>
+
+                    </tr>
+                @else
+                    @foreach ($usahawan->pekebun->tanah as $tanah)
+                        <tr>
+                            <td colspan="4">
+                                <span class="cls_003">Maklumat Tanah {{ $loop->index + 1 }}</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="cls_002">No Geran</span>
+                            </td>
+                            <td colspan="3">
+                                <span class="cls_001">
+                                    {{ $tanah->No_Geran }}
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="cls_002">Negeri</span>
+                            </td>
+                            <td>
+                                <span class="cls_001">
+
+                                    @if ($tanah->negeri != null)
+                                        {{ $tanah->negeri->Negeri }}
+                                    @endif
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="cls_002">Daerah</span>
+                            </td>
+                            <td>
+                                <span class="cls_001">
+                                    @if ($tanah->daerah != null)
+                                        {{ $tanah->daerah->Daerah }}
+                                    @endif
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="cls_002">Mukim</span>
+                            </td>
+                            <td>
+                                <span class="cls_001">
+                                    @if ($tanah->mukim != null)
+                                        {{ $tanah->mukim->Mukim }}
+                                    @endif
+
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="cls_002">Parlimen</span>
+                            </td>
+                            <td>
+                                <span class="cls_001">
+                                    @if ($tanah->parlimen != null)
+                                        {{ $tanah->parlimen->Parlimen }}
+                                    @endif
+
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="cls_002">Dun</span>
+                            </td>
+                            <td>
+                                <span class="cls_001">
+                                    @if ($tanah->dun != null)
+                                        {{ $tanah->dun->Dun }}
+                                    @endif
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="cls_002">Kampung</span>
+                            </td>
+                            <td>
+                                <span class="cls_001">
+
+                                    @if ($tanah->kampung != null)
+                                        {{ $tanah->kampung->Kampung }}
+                                    @endif
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="cls_002">Seksyen</span>
+                            </td>
+                            <td colspan="3">
+                                <span class="cls_001">
+                                    @if ($tanah->seksyen != null)
+                                        {{ $tanah->seksyen->Seksyen }}
+                                    @endif
+
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="cls_002">Keluasan Hektar</span>
+                            </td>
+                            <td colspan="3">
+                                <span class="cls_001">
+                                    {{ $tanah->keluasan_hektar }}
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="cls_002">Maklumat Tanaman</span>
+                            </td>
+                            <td colspan="3">
+
+                                <span class="cls_001">
+                                    @if ($tanah->tanaman != null)
+                                        @foreach ($tanah->tanaman as $tanaman)
+                                            Jenis Tanaman {{ $loop->index + 1 }} :
+                                            {{ $tanaman->jenis_tanaman_kebun }}
+                                            <br>
+                                        @endforeach
+                                    @endif
+                                </span>
+                            </td>
+
+                        </tr>
+                    @endforeach
+                @endif
+
+            @endif
+
         </table>
 
 
@@ -1501,7 +1969,8 @@
                     <td class="cls_001">JUALAN/PEROLEHAN</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_001" style="text-align: end">{{ number_format($jualan_perolehan, 2) }}
+                    <td class="cls_001" style="text-align: right;">
+                        {{ number_format($jualan_perolehan, 2) }}
                     </td>
                 </tr>
 
@@ -1509,21 +1978,23 @@
                     <td class="cls_001">Deposit Jualan</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_001" style="text-align: end">{{ number_format($deposit_jualan, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($deposit_jualan, 2) }}
+                    </td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Pulangan Jualan</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_001" style="text-align: end">{{ number_format($pulangan_jualan, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($pulangan_jualan, 2) }}
+                    </td>
                 </tr>
 
                 <tr>
                     <td class="cls_001" style="color: red">Jualan Bersih</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_001">
+                    <td class="cls_001" style="text-align: right;">
                         @php
                             $jualan_bersih = $jualan_perolehan + $deposit_jualan - $pulangan_jualan;
                         @endphp
@@ -1548,27 +2019,28 @@
                 <tr>
                     <td class="cls_001">Stok Awal</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($stok_awal, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($stok_awal, 2) }}</td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Deposit Belian</td>
-                    <td class="cls_001"> {{ number_format($deposit_belian, 2) }} </td>
+                    <td class="cls_001" style="text-align: right;"> {{ number_format($deposit_belian, 2) }}
+                    </td>
                     <td></td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Belian</td>
-                    <td class="cls_001"> {{ number_format($belian, 2) }} </td>
+                    <td class="cls_001" style="text-align: right;"> {{ number_format($belian, 2) }} </td>
                     <td></td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001" style="color: red">Belian Bersih</td>
-                    <td class="cls_001">
+                    <td class="cls_001" style="text-align: right;">
                         <?php
                         $belian_bersih = $deposit_belian + $belian;
                         
@@ -1582,7 +2054,8 @@
 
                 <tr>
                     <td class="cls_001">Pulangan Belian</td>
-                    <td class="cls_001">{{ number_format($pulangan_belian, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($pulangan_belian, 2) }}
+                    </td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -1590,7 +2063,7 @@
                 <tr>
                     <td class="cls_001" style="color: red">Kos Belian</td>
                     <td></td>
-                    <td class="cls_001">
+                    <td class="cls_001" style="text-align: right;">
                         @php
                             $kos_belian = $belian_bersih - $pulangan_belian;
                         @endphp
@@ -1603,7 +2076,7 @@
                 <tr>
                     <td class="cls_001" style="color: red">Kos Barang Sedia Dijual</td>
                     <td></td>
-                    <td class="cls_001">
+                    <td class="cls_001" style="text-align: right;">
                         @php
                             $kos_barang_sedia_dijual = $stok_awal + $kos_belian;
                         @endphp
@@ -1616,7 +2089,7 @@
                 <tr>
                     <td class="cls_001">Stok Akhir</td>
                     <td></td>
-                    <td>{{ $stok_akhir }}</td>
+                    <td class="cls_001" style="text-align: right;"> {{ number_format($stok_akhir, 2) }}</td>
                     <td></td>
                 </tr>
 
@@ -1624,7 +2097,7 @@
                     <td class="cls_001" style="color: red">Kos Jualan</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_001">
+                    <td class="cls_001" style="text-align: right;">
                         @php
                             $kos_jualan = $kos_barang_sedia_dijual - $stok_akhir;
                         @endphp
@@ -1636,7 +2109,7 @@
                     <td class="cls_002" style="font-weight: bold">UNTUNG / RUGI KASAR</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_002">
+                    <td class="cls_002" style="text-align: right;">
                         @php
                             $untung_rugi_kasar = $jualan_bersih - $kos_jualan;
                         @endphp
@@ -1662,91 +2135,100 @@
                 <tr>
                     <td class="cls_001">Kos Pengeposan</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($kos_pengeposan, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($kos_pengeposan, 2) }}
+                    </td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Kos Alat Tulis</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($kos_alat_tulis, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($kos_alat_tulis, 2) }}
+                    </td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Bayaran Sewa</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($bayaran_sewa, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($bayaran_sewa, 2) }}
+                    </td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Upah/ Gaji Pekerja</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($upah_gaji_pekerja, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">
+                        {{ number_format($upah_gaji_pekerja, 2) }}</td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Upah/ Gaji Sendiri</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($upah_gaji_sendiri, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">
+                        {{ number_format($upah_gaji_sendiri, 2) }}</td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">KWSP/ SOCSO</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($kwsp_socso, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($kwsp_socso, 2) }}</td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Bayaran Bil (Utiliti)</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($bayaran_bil, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($bayaran_bil, 2) }}</td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Petrol/ Tol/ Parking</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($petrol_tol_parking, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">
+                        {{ number_format($petrol_tol_parking, 2) }}</td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Penyelenggaraan</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($penyelenggaraan, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($penyelenggaraan, 2) }}
+                    </td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Belian Aset</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($belian_aset, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($belian_aset, 2) }}</td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Bayaran Komisen</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($bayaran_komisen, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($bayaran_komisen, 2) }}
+                    </td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Cukai/ Zakat</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($cukai_zakat, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($cukai_zakat, 2) }}</td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Bayaran Lain</td>
                     <td></td>
-                    <td class="cls_001">{{ number_format($bayaran_lain, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;">{{ number_format($bayaran_lain, 2) }}
+                    </td>
                     <td></td>
                 </tr>
 
@@ -1754,7 +2236,7 @@
                     <td class="cls_002" style="color: red">JUMLAH PERBELANJAAN PENTADBIRAN DAN OPERASI</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_002">
+                    <td class="cls_002" style="text-align: right;">
                         @php
                             $jumlah_perbelanjaan = $kos_pengeposan + $kos_alat_tulis + $bayaran_sewa + $upah_gaji_pekerja + $upah_gaji_sendiri + $kwsp_socso + $bayaran_bil + $petrol_tol_parking + $penyelenggaraan + $belian_aset + $bayaran_komisen + $cukai_zakat + $bayaran_lain;
                         @endphp
@@ -1779,28 +2261,31 @@
                 <tr>
                     <td class="cls_001">Hasil Komisen</td>
                     <td></td>
-                    <td class="cls_001"> {{ number_format($hasil_komisen, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;"> {{ number_format($hasil_komisen, 2) }}
+                    </td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Hasil Dividen</td>
                     <td></td>
-                    <td class="cls_001"> {{ number_format($hasil_dividen, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;"> {{ number_format($hasil_dividen, 2) }}
+                    </td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Hasil Sewaan</td>
                     <td></td>
-                    <td class="cls_001"> {{ number_format($hasil_sewaan, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;"> {{ number_format($hasil_sewaan, 2) }}
+                    </td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="cls_001">Hasil Lain</td>
                     <td></td>
-                    <td class="cls_001"> {{ number_format($hasil_lain, 2) }}</td>
+                    <td class="cls_001" style="text-align: right;"> {{ number_format($hasil_lain, 2) }}</td>
                     <td></td>
                 </tr>
 
@@ -1808,7 +2293,7 @@
                     <td class="cls_002" style="color: red">JUMLAH HASIL -HASIL LAIN</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_002">
+                    <td class="cls_002" style="text-align: right;">
                         @php
                             $jumlah_hasil = $hasil_komisen + $hasil_dividen + $hasil_sewaan + $hasil_lain;
                         @endphp
@@ -1828,7 +2313,7 @@
                     <td class="cls_002" style="font-weight: bold">UNTUNG / RUGI BERSIH</td>
                     <td></td>
                     <td></td>
-                    <td class="cls_002">
+                    <td class="cls_002" style="text-align: right;">
                         @php
                             $untung_rugi_bersih = $jualan_bersih - $kos_jualan - $jumlah_perbelanjaan + $jumlah_hasil;
                         @endphp

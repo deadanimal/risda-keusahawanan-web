@@ -9,7 +9,7 @@ class Perniagaan extends Model
 {
     use HasFactory;
 
-    protected $with = ['jenis', 'negeri', 'daerah', 'parlimen', 'dun', 'mukim', 'kampung', 'seksyen', 'produk' ];
+    protected $with = ['jenis', 'negeri', 'daerah', 'parlimen', 'dun', 'mukim', 'kampung', 'seksyen', 'produk', 'kluster' ];
 
     /**
      * Get the user associated with the Pegawai
@@ -51,5 +51,9 @@ class Perniagaan extends Model
     public function produk()
     {
         return $this->hasMany(Produk::class, 'perniagaanid', 'id');
+    }
+    public function kluster()
+    {
+        return $this->hasOne(KlusterPerniagaan::class, 'kluster_id', 'klusterperniagaan');
     }
 }

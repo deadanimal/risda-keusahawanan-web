@@ -50,35 +50,10 @@ class LawatanController extends Controller
 
     public function show($id)
     {
-
-        // $lawatan = Pegawai::where('pegawais.id', $id)
-        //     ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
-        //     ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
-        //     ->join('lawatans', 'lawatans.id_pengguna', 'users.id')
-        //     ->select(
-        //         'pegawais.*',
-        //         'lawatans.id as lawatan_id',
-        //         'pegawais.nama as nama_pegawai',
-        //         'usahawans.namausahawan',
-        //         'usahawans.id as usahawan_id',
-        //         'lawatans.updated_at',
-        //         'lawatans.created_at',
-        //         'lawatans.status_lawatan',
-        //         'lawatans.tarikh_lawatan',
-        //         'lawatans.masa_lawatan',
-        //         'lawatans.gambar_lawatan',
-        //         'lawatans.jenis_lawatan',
-        //         'lawatans.id_tindakan_lawatan',
-        //         'lawatans.komen',
-        //         'lawatans.id_pegawai as id_pegawai'
-        //     )
-        //     // ->orderBy('tarikh_lawatan', 'desc')
-        //     ->get();
-
         $lawatan = Lawatan::where('lawatans.id_pegawai', $id)
             ->join('pegawais', 'pegawais.id', 'lawatans.id_pegawai')
-            ->join('usahawans', 'usahawans.id', 'lawatans.id_pengguna')
-            ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
+            ->join('users', 'users.id', 'lawatans.id_pengguna')
+            ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
             ->select(
                 // 'pegawais.*',
                 'lawatans.id as lawatan_id',
