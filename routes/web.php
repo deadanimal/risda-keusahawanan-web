@@ -66,6 +66,7 @@ Route::put('SahUsahawanProfil', [UsahawanControllerWeb::class, 'SahUsahawanProfi
 Route::post('UploadProfile', [UsahawanControllerWeb::class, 'UploadProfile'])->name('usahawan.uploadprofile');
 Route::get('ViewAllUsahawan', [UsahawanControllerWeb::class, 'ViewAllUsahawan']);
 Route::post('CariUsahawan', [UsahawanControllerWeb::class, 'CariUsahawan']);
+Route::get('usahawanPK', [UsahawanControllerWeb::class, 'usahawanPK'])->name('usahawan.PK');
 
 Route::resource('/insentifWeb', InsentifControllerWeb::class);
 Route::resource('/insentifdetail', InsentifControllerWeb::class);

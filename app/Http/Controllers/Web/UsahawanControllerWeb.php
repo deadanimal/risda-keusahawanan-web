@@ -39,7 +39,8 @@ class UsahawanControllerWeb extends Controller
         );
     }
 
-    public function CariUsahawan(Request $request){
+    public function CariUsahawan(Request $request)
+    {
         $authuser = Auth::user();
         if(!isset($authuser)){
             return redirect('/landing');
@@ -306,6 +307,39 @@ class UsahawanControllerWeb extends Controller
         $user->profile_status = 0;
         $user->save();
 
+    }
+
+    public function usahawanPK(){
+        $client = new \GuzzleHttp\Client();
+        try{
+            $token = '3EgjkvnnuYzAEd1-FiN-BNiI1Nv7YwuM';
+            $headers = [
+                'Authorization' => 'Bearer ' . $token,        
+                'Accept'        => 'application/json',
+            ];
+            $request = $client->request('GET', 'https://pekebunkecil-dev.borang.my/manage/api/permohonan-usahawan', [
+                'headers' => $headers
+            ]);
+
+            $response = $request->getBody()->getContents();
+            $vals = json_decode($response);
+            foreach ($vals as $val){
+                $usahawan = Usahawan::where('nokadpengenalan', $val->no_kad_pengenalan)->first();
+                if(isset($usahawan)){
+                    
+                }else{
+                    $usahawanNew = new Usahawan();
+                    $usahawanNew->namausahawan = $val->nama_penuh;
+                    $usahawanNew->nokadpengenalan = $val->no_kad_pengenalan;
+                    $usahawanNew->save();
+                }
+            }
+            return $vals;
+        }
+        catch(\Exception $e){
+            // dd($e);
+            return '400';
+        }
     }
 }
  

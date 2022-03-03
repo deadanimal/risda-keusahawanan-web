@@ -10,6 +10,11 @@
         <div class="row align-items-center" style="padding-top:15px;">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Usahawan</h3>
+                @if (Auth::user()->role == 1)
+                <div style="padding-bottom: 20px;" id="test">
+                    <a class="btn btn-primary" onclick="APIPK()">Panggil Portal PK</a>
+                </div>
+                @endif
                 <table id="penggunatbl">
                     <colgroup>
                         <col span="1" style="width: 30%;">
@@ -478,6 +483,27 @@ function ResetPass(){
             $('.loader').hide();
         }
     });
+}
+
+function APIPK(){
+    if (confirm("Amaran! Panggilan API akan mengambil masa yang lama.")) {
+        $('.loader').show();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/usahawanPK",
+            type:"GET",
+            success: function(data) {
+                console.log(data);
+                alert("Data Usahawan Berjaya dan Selesai Ditarik");
+                $('.loader').hide();
+                // location.reload();
+            }
+        });
+    }else{
+        return false;
+    }
 }
 
 function API(){

@@ -174,9 +174,9 @@ class PegawaiControllerWeb extends Controller
         $vals = json_decode($response);
         foreach ($vals as $val){
             $pegawai = Pegawai::where('nokp', $val->nokp)->first();
-            $emailpegawai = Pegawai::where('email', $val->email)->first();
+            // $emailpegawai = Pegawai::where('email', $val->email)->first();
             // $user = User::where('no_kp', $val->nokp)->first();
-            if(!isset($pegawai) && !isset($emailpegawai)){
+            if(!isset($pegawai)){
                 $newpegawai = new Pegawai();
                 $newpegawai->nama = $val->nama;
                 $newpegawai->nokp = $val->nokp;
