@@ -49,14 +49,16 @@
                         .dataTable-bottom{
                             padding-top: 3vh;
                         }
-                        /* .tblpegawai td{
-                            padding-right: 1vh;
-                            padding-left: 1vh;
-                        } */
+                        .tblpegawai td{
+                            font-size: 12px;
+                            /* padding-right: 1vh;
+                            padding-left: 1vh; */
+                        }
                     </style>
                     <thead>
                         <tr class="align-middle">
                             <th scope="col">Nama</th>
+                            <th scope="col">No Kad Pengenalan</th>
                             <th scope="col">Negeri</th>
                             <th scope="col">Pusat Tanggungjawab</th>
                             <th scope="col">Daerah</th>
@@ -70,11 +72,12 @@
                         @foreach ($pegawai as $user)
                             <tr>
                                 <td class="form-check-label">{{$user->nama}}</td>
-                                <td id="fldNegeri{{$user->id}}" class="form-check-label">@if($user->Mukim){{$user->Mukim->Negeri->Negeri}}@endif</td>
+                                <td class="form-check-label">{{$user->nokp}}</td>
+                                <td id="fldNegeri{{$user->id}}" class="form-check-label">@if($user->Negeri){{$user->Negeri->Negeri}}@endif</td>
                                 <td id="fldPT{{$user->id}}" class="form-check-label">@if($user->PT){{$user->PT->keterangan}}@endif</td>
                                 <td id="fldDaerah{{$user->id}}" class="form-check-label">@if($user->Mukim){{$user->Mukim->Daerah->Daerah}}@endif</td>
-                                <td>@if($user->Mukim)<input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:150px;" value="{{$user->Mukim->Mukim}}" onclick="mukim({{$user->Mukim}},{{$user->id}})" />
-                                    @else <input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:150px;" onclick="mukim('',{{$user->id}})" />
+                                <td>@if($user->Mukim)<input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:120px;font-size:12px;" value="{{$user->Mukim->Mukim}}" onclick="mukim({{$user->Mukim}},{{$user->id}})" />
+                                    @else <input id="sltMukim{{$user->id}}" class="form-control form-control-sm" style="width:120px;font-size:12px;" onclick="mukim('',{{$user->id}})" />
                                     @endif
                                     {{-- <select id="ddmukim{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:27vh;" onchange="ChangeMukim({{$user->id}}, this.value)">
                                     <option selected="true" disabled="disabled">Mukim</option>
@@ -86,7 +89,7 @@
                                 </select>--}}
                                 </td> 
                                 <td>
-                                    <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:15vh;">
+                                    <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:15vh;font-size:12px;">
                                         <option selected="true" disabled="disabled">Peranan</option>
                                         @foreach ($ddPeranan as $items)
                                             <option value="{{ $items->peranan_id }}" {{ $items->peranan_id == $user->peranan_pegawai ? 'selected' : '' }}> 
@@ -101,7 +104,7 @@
                                         <input class="form-check-input" id="flexSwitchCheckDefault{{$user->id}}" name="pengguna" type="checkbox"/>
                                 </td>
                                 <td class="align-middle text-nowrap">
-                                    <button class="btn btn-primary" type="button" onclick="simpanpengguna({{$user->id}})" >Simpan </button>
+                                    <button class="btn btn-sm btn-primary" type="button" onclick="simpanpengguna({{$user->id}})" >Simpan </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -354,8 +357,8 @@ function datatable(){
             this.api().columns([1, 2, 3]).every( function () {
                 var column = this;
                 console.log(column[0]);
-                if(column[0] == 2){
-                    var select = $('<select style="width:200px;"><option value=""></option></select>')
+                if(column[0] == 3){
+                    var select = $('<select style="width:160px;"><option value=""></option></select>')
                     .appendTo( $(column.footer()).empty() )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(

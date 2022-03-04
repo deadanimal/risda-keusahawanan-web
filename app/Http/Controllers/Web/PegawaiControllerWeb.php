@@ -56,7 +56,8 @@ class PegawaiControllerWeb extends Controller
             $ddPeranan = Peranan::All();
             $ddMukim = Mukim::select('U_Mukim_ID','Mukim')->orderBy('Mukim', 'ASC')->get();
         }else if($authuser->role == 3 || $authuser->role == 5){
-            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID);
+            // $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID);
+            $pegawai = Pegawai::where('negeri',$authpegawai->negeri)->get();
             $ddPeranan = Peranan::where('peranan_id', '>=', '3')->get();
             $ddMukim = Mukim::where('status', 1)->where('U_Negeri_ID', $authpegawai->Mukim->U_Negeri_ID)->orderBy('Mukim', 'ASC')->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
@@ -112,7 +113,8 @@ class PegawaiControllerWeb extends Controller
             $ddPeranan = Peranan::All();
             $ddMukim = Mukim::select('U_Mukim_ID','Mukim')->orderBy('Mukim', 'ASC')->get();
         }else if($authuser->role == 3 || $authuser->role == 5){
-            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get()->unique();
+            // $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Negeri_ID',$authpegawai->Mukim->U_Negeri_ID)->get()->unique();
+            $pegawai = Pegawai::where('negeri',$authpegawai->negeri)->get();
             $ddPeranan = Peranan::where('peranan_id', '>=', '3')->get();
             $ddMukim = Mukim::where('status', 1)->where('U_Negeri_ID', $authpegawai->Mukim->U_Negeri_ID)->orderBy('Mukim', 'ASC')->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
@@ -162,11 +164,16 @@ class PegawaiControllerWeb extends Controller
         $mukim->negeri = "";
         $mukim->daerah = "";
 
+        $mukim = Mukim::where('U_Mukim_ID', $request->value)->first();
+
         $pegawai = Pegawai::where('id', $request->id)->first();
         $pegawai->mukim = $request->value;
+        if(isset($mukim->U_Negeri_ID)){
+            $pegawai->negeri = $mukim->U_Negeri_ID;
+        }
         $pegawai->save();
 
-        $mukim = Mukim::where('U_Mukim_ID', $request->value)->first();
+        
         return $mukim;
     }
 
@@ -214,6 +221,7 @@ class PegawaiControllerWeb extends Controller
                         $newpegawai->StesenBertugas = $val->StesenBertugas;
                         $newpegawai->email = $val->email;
                         $newpegawai->notel = $val->notel;
+                        $newpegawai->negeri = $val->U_Negeri_ID;
                         $newpegawai->mukim = "";
                         $newpegawai->peranan_pegawai = "";
 

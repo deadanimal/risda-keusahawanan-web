@@ -11,7 +11,7 @@ class Pegawai extends Model
 {
     use HasFactory;
 
-    protected $with = ['user', 'Mukim','PT'];
+    protected $with = ['user', 'Mukim','PT','Negeri'];
 
         /**
          * Get the user associated with the Pegawai
@@ -29,6 +29,10 @@ class Pegawai extends Model
         public function PT()
         {
             return $this->hasOne(PusatTanggungjawab::class, 'Kod_PT', 'NamaPT');
+        }
+        public function Negeri()
+        {
+            return $this->hasOne(Negeri::class, 'U_Negeri_ID', 'negeri');
         }
         // public function Negeri()
         // {

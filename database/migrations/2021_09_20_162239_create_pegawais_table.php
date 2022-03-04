@@ -29,7 +29,7 @@ class CreatePegawaisTable extends Migration
             $table->string('notel',12);
             $table->string('mukim',100);
             $table->string('peranan_pegawai',12);
-
+            $table->string('negeri',35);
             $table->timestamps();
         });
     }

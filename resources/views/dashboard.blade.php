@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ffffff">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  --}}
+    <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
     <title>RISDA | Keusahawanan</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -106,6 +107,7 @@
           </div>
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
             <div class="navbar-vertical-content scrollbar">
+              
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav" style="padding-top: 15px;padding-bottom: 15px;">
                 @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 7)
                 <li class="nav-item">
@@ -427,21 +429,24 @@
                 </div>
 
               </li> --}}
-              <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <li style="padding-top:10px;" class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="avatar avatar-xl">
                     <img class="rounded-circle" src="../../../assets/img/gear.png" alt="" style="height:80%;width:80%;"/>
 
                   </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
-                  <div class="bg-white dark__bg-1000 rounded-2 py-2">
+                  <div class="bg-white dark__bg-1000 rounded-2 py-2" style="width: 250px !important;">
 
-                    
+                    <div style="Font-family:Poppins;font-size:13px;padding-left:16px;color:#344050;padding-bottom:10px;">
+                      <div style="padding-bottom:5px !important;">Hello, <br>{{Auth::user()->name}}<br></div>
+                      @if(isset(Auth::user()->peranan->kod_peranan))Peranan : {{Auth::user()->peranan->kod_peranan}} @endif
+                    </div>
                     {{-- <a class="dropdown-item" href="#!">Set status</a>
                     <a class="dropdown-item" href="../pages/user/profile.html">Profile &amp; account</a>
-                    <a class="dropdown-item" href="#!">Feedback</a>
+                    <a class="dropdown-item" href="#!">Feedback</a> --}}
 
-                    <div class="dropdown-divider"></div>--}}
+                    {{-- <div class="dropdown-divider"></div> --}}
                     <a class="dropdown-item" href="/ChangePass">Kemaskini Kata Laluan</a> 
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">Log Keluar</a>
@@ -465,7 +470,9 @@
 <script type="text/javascript">
   $( document ).ready(function() {
     var role = '<?php echo Auth::user()->name; ?>';
+    var test = '<?php echo Auth::user(); ?>';
 
+    console.log(test);
     if(role == ""){
       alert("Session Expired Kindly Login");
       window.location.href = "/";
