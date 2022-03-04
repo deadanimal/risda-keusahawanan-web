@@ -21,6 +21,10 @@
                 <input class="form-control" name="nama" type="text"/>
             </div>
             <div class="col-lg-12">
+                <label class="form-label">No Kad Pengenalan Pegawai</label>
+                <input class="form-control" name="nokp" type="text"/>
+            </div>
+            <div class="col-lg-12">
                 <label class="form-label mukim">Mukim Pegawai</label>
                 <select name="mukim" class="form-select" aria-label=".form-select mukim" style="display:inline-block;">
                     <option selected="true" value='' disabled="disabled">Mukim</option>

@@ -68,6 +68,9 @@ class PegawaiControllerWeb extends Controller
         if(!empty($request->nama)){
             $pegawai->where('nama', 'like', '%'.$request->nama.'%');
         }
+        if(!empty($request->nokp)){
+            $pegawai->where('nokp', 'like', '%'.$request->nokp.'%');
+        }
         if(!empty($request->mukim)){
             $pegawai->where('mukim', $request->mukim);
         }
@@ -171,6 +174,7 @@ class PegawaiControllerWeb extends Controller
     {
         $nama = $request->nama;
         $kodpt = $request->kodpt;
+        $nokp = $request->nokp;
         // dd($kodpt);
         $client = new \GuzzleHttp\Client();
         try{
@@ -181,49 +185,58 @@ class PegawaiControllerWeb extends Controller
             if($kodpt != null){
                 $link .= 'kodpt='.$kodpt.'&';
             }
+            if($nokp != null){
+                $link .= 'nokp='.$nokp.'&';
+            }
             $request = $client->request('GET', $link, [
                 'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', 'f9d00dae5c6d6d549c306bae6e88222eb2f84307']
             ]);
             $response = $request->getBody()->getContents();
             $vals = json_decode($response);
-            $vals = $vals->data;
-            // dd($vals);
-            foreach ($vals as $val){
-                // dd($val->nama);
-                $pegawai = Pegawai::where('nokp', $val->nokp)->orWhere('email',$val->email)->first();
-                // $emailpegawai = Pegawai::where('email', $val->email)->first();
-                // $user = User::where('no_kp', $val->nokp)->first();
-                if(!isset($pegawai)){
-                    $newpegawai = new Pegawai();
-                    $newpegawai->nama = $val->nama;
-                    $newpegawai->nokp = $val->nokp;
-                    $newpegawai->nopekerja = $val->nopekerja;
-                    $newpegawai->GelaranJwtn = $val->GelaranJwtn;
-                    $newpegawai->NamaPT = $val->Kod_PT;
-                    $newpegawai->NamaPA = $val->NamaPA;
-                    $newpegawai->NamaUnit = $val->NamaUnit;
-                    $newpegawai->Jawatan = $val->Jawatan;
-                    $newpegawai->StesenBertugas = $val->StesenBertugas;
-                    $newpegawai->email = $val->email;
-                    $newpegawai->notel = $val->notel;
-                    $newpegawai->mukim = "";
-                    $newpegawai->peranan_pegawai = "";
+            if(isset($vals->data)){
+                $vals = $vals->data;
+                // dd($vals);
+                foreach ($vals as $val){
+                    // dd($val->nama);
+                    $pegawai = Pegawai::where('nokp', $val->nokp)->orWhere('email',$val->email)->first();
+                    // $emailpegawai = Pegawai::where('email', $val->email)->first();
+                    // $user = User::where('no_kp', $val->nokp)->first();
+                    if(!isset($pegawai)){
+                        $newpegawai = new Pegawai();
+                        $newpegawai->nama = $val->nama;
+                        $newpegawai->nokp = $val->nokp;
+                        $newpegawai->nopekerja = $val->nopekerja;
+                        $newpegawai->GelaranJwtn = $val->GelaranJwtn;
+                        $newpegawai->NamaPT = $val->Kod_PT;
+                        $newpegawai->NamaPA = $val->NamaPA;
+                        $newpegawai->NamaUnit = $val->NamaUnit;
+                        $newpegawai->Jawatan = $val->Jawatan;
+                        $newpegawai->StesenBertugas = $val->StesenBertugas;
+                        $newpegawai->email = $val->email;
+                        $newpegawai->notel = $val->notel;
+                        $newpegawai->mukim = "";
+                        $newpegawai->peranan_pegawai = "";
 
-                    $newpegawai->save();
+                        $newpegawai->save();
 
-                    $newuser = new User();
-                    $newuser->name = $val->nama;
-                    $newuser->email = $val->email;
-                    $newuser->idpegawai = $newpegawai->id;
-                    $newuser->status_pengguna = 0;
-                    $newuser->no_kp = $val->nokp;
-                    $newuser->role = 0;
-                    $newuser->type = 1;
-                    $newuser->profile_status = 0;
-                    $newuser->save();
+                        $newuser = new User();
+                        $newuser->name = $val->nama;
+                        $newuser->email = $val->email;
+                        $newuser->idpegawai = $newpegawai->id;
+                        $newuser->status_pengguna = 0;
+                        $newuser->no_kp = $val->nokp;
+                        $newuser->role = 0;
+                        $newuser->type = 1;
+                        $newuser->profile_status = 0;
+                        $newuser->save();
+                    }
                 }
+                return $vals;
+            }else{
+                return '300';
             }
-            return $vals;
+            
+            
         }
         catch(\Exception $e){
             dd($e);

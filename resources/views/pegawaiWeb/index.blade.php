@@ -13,13 +13,14 @@
                     <a class="btn btn-primary" onclick="API()">Panggil HRIP</a>
                 </div>
                 <div style="display:none;">
-                    <input id="nama" type="text" value="{{$nama}}"/>
-                    <input id="kodpt" type="text" value="{{$kodpt}}"/>
+                    <input id="nama" type="text" @if(isset($nama)) value="{{$nama}}" @endif/>
+                    <input id="kodpt" type="text" @if(isset($kodpt)) value="{{$kodpt}}" @endif/>
+                    <input id="nokp" type="text" @if(isset($nokp)) value="{{$nokp}}" @endif/>
                 </div>
                 
                 @endif
                 <table class="tblpegawai table table-sm table-hover" id="pegawaitbl" style="padding-bottom:2vh;padding-right:4vh" >
-                    <colgroup>
+                    {{-- <colgroup>
                         <col span="1" style="width: 21%;">
                         <col span="1" style="width: 15%;">
                         <col span="1" style="width: 14%;">
@@ -27,7 +28,7 @@
                         <col span="1" style="width: 15%;">
                         <col span="1" style="width: 10%;">
                         <col span="1" style="width: 10%;">
-                     </colgroup>
+                     </colgroup> --}}
                     <style>
                         .dataTable-dropdown{
                             display: inline;
@@ -85,7 +86,7 @@
                                 </select>--}}
                                 </td> 
                                 <td>
-                                    <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:18vh;">
+                                    <select id="ddperanan{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:15vh;">
                                         <option selected="true" disabled="disabled">Peranan</option>
                                         @foreach ($ddPeranan as $items)
                                             <option value="{{ $items->peranan_id }}" {{ $items->peranan_id == $user->peranan_pegawai ? 'selected' : '' }}> 
@@ -297,6 +298,7 @@ span.onclick = function() {
 function API(){
     var nama = $('#nama').val();
     var kodpt = $('#kodpt').val();
+    var nokp = $('#nokp').val();
     // console.log(nama);
     if (confirm("Amaran! Panggilan API akan mengambil masa yang lama.")) {
         $('.loader').show();
@@ -308,11 +310,15 @@ function API(){
             type:"POST",
             data: {     
                 nama:nama,
-                kodpt:kodpt
+                kodpt:kodpt,
+                nokp:nokp
             },
             success: function(data) {
+                console.log(data);
                 if(data == 400){
-                    alert("Error API HRIP Pegawai")
+                    alert("Error API HRIP Pegawai");
+                }else if(data == 300){
+                    alert("Error Tiada data dijumpai")
                 }else{
                     alert("Data Pegawai Berjaya dan Selesai Ditarik");
                     location.reload();
@@ -349,7 +355,7 @@ function datatable(){
                 var column = this;
                 console.log(column[0]);
                 if(column[0] == 2){
-                    var select = $('<select style="width:250px;"><option value=""></option></select>')
+                    var select = $('<select style="width:200px;"><option value=""></option></select>')
                     .appendTo( $(column.footer()).empty() )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
