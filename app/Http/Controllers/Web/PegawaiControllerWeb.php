@@ -88,7 +88,10 @@ class PegawaiControllerWeb extends Controller
         ,[
             'pegawai'=>$result,
             'ddPeranan'=>$ddPeranan,
-            'ddMukim'=>$ddMukim
+            'ddMukim'=>$ddMukim,
+            'nama'=>$request->nama,
+            'mukim'=>$request->mukim,
+            'kodpt'=>$request->PT
         ]
         );
     }
@@ -164,16 +167,29 @@ class PegawaiControllerWeb extends Controller
         return $mukim;
     }
 
-    public function pegawaiPost2()
+    public function pegawaiPost2(Request $request)
     {
+        $nama = $request->nama;
+        $kodpt = $request->kodpt;
+        // dd($kodpt);
         $client = new \GuzzleHttp\Client();
         try{
-            $request = $client->request('GET', 'https://www4.risda.gov.my/fire/getallstaff/', [
+            $link = 'https://www4.risda.gov.my/fire/getstaffIndividu/staff.php?';
+            if($nama != null){
+                $link .= 'nama='.$nama.'&';
+            }
+            if($kodpt != null){
+                $link .= 'kodpt='.$kodpt.'&';
+            }
+            $request = $client->request('GET', $link, [
                 'auth' => ['99891c082ecccfe91d99a59845095f9c47c4d14e', 'f9d00dae5c6d6d549c306bae6e88222eb2f84307']
             ]);
             $response = $request->getBody()->getContents();
             $vals = json_decode($response);
+            $vals = $vals->data;
+            // dd($vals);
             foreach ($vals as $val){
+                // dd($val->nama);
                 $pegawai = Pegawai::where('nokp', $val->nokp)->orWhere('email',$val->email)->first();
                 // $emailpegawai = Pegawai::where('email', $val->email)->first();
                 // $user = User::where('no_kp', $val->nokp)->first();
@@ -210,7 +226,7 @@ class PegawaiControllerWeb extends Controller
             return $vals;
         }
         catch(\Exception $e){
-            // dd($e);
+            dd($e);
             return '400';
         }
         return true;

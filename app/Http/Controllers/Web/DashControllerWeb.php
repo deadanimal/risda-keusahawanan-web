@@ -47,7 +47,7 @@ class DashControllerWeb extends Controller
         $getjenisinsentif="";
         $gettahun = date("Y");
         $getNegeri="";
-        $Insentifdatas = Insentif::where('tahun_terima_insentif', $gettahun)->take(198)->get();
+        $Insentifdatas = Insentif::where('tahun_terima_insentif', $gettahun)->take(1000)->get();
        
         $array = [];
         $array2 = [];
@@ -361,7 +361,7 @@ class DashControllerWeb extends Controller
             $Insentifdatas = $Insentifdatas->where('usahawans.U_Negeri_ID', $getNegeri);
         }
 
-        $Insentifdatas = $Insentifdatas->take(198)->get();
+        $Insentifdatas = $Insentifdatas->take(1000)->get();
         // ->take(10)
         // dd($Insentifdatas);
         $array = [];

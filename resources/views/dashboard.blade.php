@@ -490,6 +490,12 @@
           alert(data);
           $(location).prop('href', nextPage)
           return true;
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          $('.loader').hide();
+          alert(xhr.status);
+          alert(thrownError);
+          $(location).prop('href', '/login')
         }
     });
   }

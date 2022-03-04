@@ -12,6 +12,11 @@
                 <div style="padding-bottom: 20px;" id="test">
                     <a class="btn btn-primary" onclick="API()">Panggil HRIP</a>
                 </div>
+                <div style="display:none;">
+                    <input id="nama" type="text" value="{{$nama}}"/>
+                    <input id="kodpt" type="text" value="{{$kodpt}}"/>
+                </div>
+                
                 @endif
                 <table class="tblpegawai table table-sm table-hover" id="pegawaitbl" style="padding-bottom:2vh;padding-right:4vh" >
                     <colgroup>
@@ -290,6 +295,9 @@ span.onclick = function() {
 }
 
 function API(){
+    var nama = $('#nama').val();
+    var kodpt = $('#kodpt').val();
+    // console.log(nama);
     if (confirm("Amaran! Panggilan API akan mengambil masa yang lama.")) {
         $('.loader').show();
         $.ajax({
@@ -297,10 +305,14 @@ function API(){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url: "/pegawaiPost2",
-            type:"GET",
+            type:"POST",
+            data: {     
+                nama:nama,
+                kodpt:kodpt
+            },
             success: function(data) {
                 if(data == 400){
-                    alert("Error API Pekebun")
+                    alert("Error API HRIP Pegawai")
                 }else{
                     alert("Data Pegawai Berjaya dan Selesai Ditarik");
                     location.reload();

@@ -292,6 +292,7 @@
                 negeri:negeri
             },
             success: function(data) {
+                // alert('Rendering mungkin mengambil masa yang lama. Sila tunggu Sebentar.');
                 document.open();
                 document.write(data);
                 document.close();
