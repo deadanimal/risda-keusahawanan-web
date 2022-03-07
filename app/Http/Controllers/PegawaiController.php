@@ -10,8 +10,11 @@ class PegawaiController extends Controller
     
     public function index()
     {
-        $pegawai = Pegawai::all();
-        return $pegawai;
+        $pegawai = Pegawai::without(['user', 'Mukim','PT','Negeri'] )
+        ->get();
+
+        // dd($pegawai);
+        return response()->json($pegawai);
     }
 
     public function store(Request $request)
