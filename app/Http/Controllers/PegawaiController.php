@@ -41,8 +41,12 @@ class PegawaiController extends Controller
     }
 
 
-    public function show(Pegawai $pegawai)
+    public function show($id)
     {
+        $pegawai = Pegawai::without(['user', 'Mukim','PT','Negeri'] )
+        ->where('id', $id)
+        ->get();
+
         return response()->json($pegawai);
     }
 
