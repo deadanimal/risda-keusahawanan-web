@@ -325,6 +325,7 @@ class LaporanProfilControllerWeb extends Controller
                                 $table->count = $table->count + 1;
                                 $table->nilai_insentif = $table->nilai_insentif + $insentif3->nilai_insentif;
                                 $aliran = Aliran::where('id_pengguna', $insentif3->id)
+                                ->where('id_kategori_aliran',1)
                                 ->whereYear('tarikh_aliran', $getYear)
                                 ->sum('jumlah_aliran');
                                 $table->aliran = $table->aliran + $aliran;
@@ -411,6 +412,7 @@ class LaporanProfilControllerWeb extends Controller
                                     $table->count = $table->count + 1;
                                     $table->nilai_insentif = $table->nilai_insentif + $insentif4->nilai_insentif;
                                     $aliran = Aliran::where('id_pengguna', $insentif4->id)
+                                    ->where('id_kategori_aliran',1)
                                     ->whereYear('tarikh_aliran', $getYear)
                                     ->sum('jumlah_aliran');
                                     $table->aliran = $table->aliran + $aliran;
@@ -508,6 +510,7 @@ class LaporanProfilControllerWeb extends Controller
                                         $table->count = $table->count + 1;
                                         $table->nilai_insentif = $table->nilai_insentif + $insentif5->nilai_insentif;
                                         $aliran = Aliran::where('id_pengguna', $insentif5->id)
+                                        ->where('id_kategori_aliran',1)
                                         ->whereYear('tarikh_aliran', $getYear)
                                         ->sum('jumlah_aliran');
                                         $table->aliran = $table->aliran + $aliran;

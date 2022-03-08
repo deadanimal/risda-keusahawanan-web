@@ -194,9 +194,9 @@
 @section('script')
 <script>
     
-    window.onload = function() {
-        createchart();
-    }
+    // window.onload = function() {
+    //     createchart();
+    // }
 
     function ExportPDF(){
         var page = document.getElementById("wholepage");
@@ -271,6 +271,7 @@
     }
     
     $( document ).ready(function() {
+        createchart();
         $('.loader').hide();
     });
 
@@ -279,27 +280,27 @@
         var year = document.getElementById("iptYear").value;
         var jenis = document.getElementById("iptJenisInsentif").value;
         var negeri = document.getElementById("iptNegeri").value;
-        
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: "/dash/apa",
-            type:"GET",
-            data: {     
-                tahun:year,
-                id_jenis_insentif:jenis,
-                negeri:negeri
-            },
-            success: function(data) {
-                // alert('Rendering mungkin mengambil masa yang lama. Sila tunggu Sebentar.');
-                document.open();
-                document.write(data);
-                document.close();
-                // createchart();
-                $('.loader').hide();
-            }
-        });
+        location.href = "/dash/apa?tahun="+year+"&id_jenis_insentif="+jenis+"&negeri="+negeri+"";
+        // $.ajax({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     },
+        //     url: "/dash/apa",
+        //     type:"GET",
+        //     data: {     
+        //         tahun:year,
+        //         id_jenis_insentif:jenis,
+        //         negeri:negeri
+        //     },
+        //     success: function(data) {
+        //         // alert('Rendering mungkin mengambil masa yang lama. Sila tunggu Sebentar.');
+        //         // document.open();
+        //         // document.write(data);
+        //         // document.close();
+        //         // createchart();
+                
+        //     }
+        // });
     }
 
     function createchart(){
