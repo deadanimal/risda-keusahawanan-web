@@ -80,7 +80,7 @@ class PasswordController extends Controller
 
         if ($user->type == 1) {
 
-            $pegawai = Pegawai::where('id', $user->idpegawai)->without(['user', 'Mukim','PT','Negeri'] )->get()->first();
+            $pegawai = Pegawai::where('id', $user->idpegawai)->without(['user', 'Mukim','PT','Negeri'])->get()->first();
 
             $pegawai->email = $request->email;
             $pegawai->save();
