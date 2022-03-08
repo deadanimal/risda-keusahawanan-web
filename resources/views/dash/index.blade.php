@@ -47,14 +47,14 @@
     </div>
 </div>
             <div id="wholepage">
-                <div class="row g-0" style="padding-bottom:30px;">
+                <div class="row g-0" style="padding-bottom:30px;padding-top:30px;">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
                             <canvas id="canvas" height="700px" style="padding:20px;"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="row g-0" style="padding-bottom:30px;">
+                <div class="row g-0" style="padding-bottom:30px;padding-top:30px;">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
                             <canvas id="canvas2" height="700px" width="600" style="padding:20px;"></canvas>
@@ -95,14 +95,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row g-0" style="padding-bottom:30px;">
+                <div class="row g-0" style="padding-bottom:30px;padding-top:30px;">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
                             <canvas id="canvas3" height="700px" style="padding:20px;"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="row g-0" style="padding-bottom:30px;">
+                <div class="row g-0" style="padding-bottom:30px;padding-top:30px;">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
                             <canvas id="canvas4" height="700px" width="600" style="padding:20px;"></canvas>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row g-0" style="padding-bottom:30px;">
+                <div class="row g-0" style="padding-bottom:30px;padding-top:30px;">
                     <div class="col-lg-6 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
                             <canvas id="canvas5" height="700px" width="600" style="padding:20px;"></canvas>
@@ -182,7 +182,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row g-0" style="padding-bottom:30px;">
+                <div class="row g-0" style="padding-bottom:30px;padding-top:30px;">
                     <div class="col-lg-12 pe-lg-2 mb-3">
                         <div class="card h-lg-100 overflow-hidden">
                         <canvas id="canvas6" height="700px" style="padding:20px;"></canvas>
@@ -209,21 +209,21 @@
                 console.log(rep);
                 pdf.setFontSize(9);
                 pdf.text(50, 30, rep);
-                for (var i = 0; i <= page.clientHeight/745; i++) {
+                for (var i = 0; i <= page.clientHeight/775; i++) {
                     //! This is all just html2canvas stuff
                     var srcImg  = canvas;
                     var sX      = 0;
-                    var sY      = 745*i; // start 980 pixels down for every new page
+                    var sY      = 775*i; // start 980 pixels down for every new page
                     var sWidth  = 1330;
-                    var sHeight = 710;
+                    var sHeight = 770;
                     var dX      = 0;
                     var dY      = 0;
                     var dWidth  = 1330;
-                    var dHeight = 710;
+                    var dHeight = 770;
 
                     window.onePageCanvas = document.createElement("canvas");
                     onePageCanvas.setAttribute('width', 1330);
-                    onePageCanvas.setAttribute('height', 710);
+                    onePageCanvas.setAttribute('height', 770);
                     var ctx = onePageCanvas.getContext('2d');
                     // details on this usage of this function: 
                     // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images#Slicing

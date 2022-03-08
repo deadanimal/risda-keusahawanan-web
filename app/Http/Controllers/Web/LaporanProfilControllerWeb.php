@@ -684,6 +684,7 @@ class LaporanProfilControllerWeb extends Controller
                             $table->valD = 0;
                             $table->countE = 0;
                             $table->valE = 0;
+                            
                             foreach ($insentif2 as $insentif3){
                                 $table->negeri = $insentif3->U_Negeri_ID;
                                 $table->id_jenis_insentif = $insentif3->id_jenis_insentif;
@@ -711,6 +712,7 @@ class LaporanProfilControllerWeb extends Controller
                             if($update == true){
                                 $this->newreport(5,$table,'');
                             }
+                            // return $table;
                         }
                     }             
                 }
@@ -1522,7 +1524,7 @@ class LaporanProfilControllerWeb extends Controller
             $report->tab2 = $request->id_jenis_insentif;
             $report->tab3 = $request->tahun_terima_insentif;
             $report->tab4 = $request->countA;
-            $report->tab5 = $request->valB;
+            $report->tab5 = $request->valA;
             $report->tab6 = $request->countB;
             $report->tab7 = $request->valB;
             $report->tab8 = $request->countC;
