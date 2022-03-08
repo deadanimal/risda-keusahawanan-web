@@ -209,6 +209,7 @@
                 console.log(rep);
                 pdf.setFontSize(9);
                 pdf.text(50, 30, rep);
+
                 for (var i = 0; i <= page.clientHeight/775; i++) {
                     //! This is all just html2canvas stuff
                     var srcImg  = canvas;
@@ -250,6 +251,7 @@
                 pdf.save('RisdaStatistic.pdf');
             }
         });
+        
         
         // var doc = new jsPDF("p", "mm", "a4")
         // var elementHandler = {
