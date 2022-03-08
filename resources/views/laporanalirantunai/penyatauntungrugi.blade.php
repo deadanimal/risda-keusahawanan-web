@@ -192,8 +192,8 @@
                                 <td class="text-nowrap textlbl"></td>
                             @endif
                             <td class="text-nowrap" style="text-align: center;">
-                                <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="generatereport(14,'/penyatauntungrugiDetail',{{$user->id}});return false;">
-                                <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Penyata Untung Rugi
+                                <button class="btn btn-primary btn-sm me-1 mb-1" type="button" onclick="generatereport(14,'/penyatauntungrugiDetail',{{$user->id}});return false;">
+                                Penyata Untung Rugi
                             </button></td>
                         </tr>
                         @endforeach

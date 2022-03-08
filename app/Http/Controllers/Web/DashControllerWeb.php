@@ -25,23 +25,6 @@ class DashControllerWeb extends Controller
         $authuser = Auth::user();
         if(!isset($authuser)){
             return redirect('/');
-        }else{
-
-            if(isset($authuser->idpegawai)){
-                $pegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-            }
-
-            if($authuser->role == 1 || $authuser->role == 2){
-                $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->get();
-
-            }else if($authuser->role == 3 || $authuser->role == 5){
-                $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-            }else if($authuser->role == 4 || $authuser->role == 6){
-                $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-            }else if($authuser->role == 7){
-                $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-            }
-
         }
         
         $getjenisinsentif="";
@@ -51,12 +34,26 @@ class DashControllerWeb extends Controller
         ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'usahawans.Kod_PT')
         ->where('tahun_terima_insentif', $gettahun)->take(1024)->get();
        
+        if($authuser->role == 1 || $authuser->role == 2){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->get();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID);
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.U_Daerah_ID', $pegawai->Mukim->U_Daerah_ID);
+        }else if($authuser->role == 7){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.Kod_PT', $pegawai->Mukim->NamaPT);
+        }
+
         $array = [];
         $array2 = [];
         $array3 = [];
         $array4 = [];
         $array5 = [];
         $array6 = [];
+        
         foreach($Insentifdatas as $insentifdata2){
             $update = true;
             if($insentifdata2->id_pengguna != null){
@@ -333,17 +330,6 @@ class DashControllerWeb extends Controller
         if(isset($authuser->idpegawai)){
             $pegawai = Pegawai::where('id', $authuser->idpegawai)->first();
         }
-
-        if($authuser->role == 1 || $authuser->role == 2){
-            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->get();
-        }else if($authuser->role == 3 || $authuser->role == 5){
-            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-        }else if($authuser->role == 4 || $authuser->role == 6){
-            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-        }else if($authuser->role == 7){
-            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-        }
-
         
         $Insentifdatas = Insentif::join('usahawans', 'usahawans.usahawanid', '=', 'insentifs.id_pengguna')
         ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'usahawans.Kod_PT');
@@ -363,6 +349,19 @@ class DashControllerWeb extends Controller
         if($request->negeri != null){
             $getNegeri = $request->negeri;
             $Insentifdatas = $Insentifdatas->where('usahawans.U_Negeri_ID', $getNegeri);
+        }
+
+        if($authuser->role == 1 || $authuser->role == 2){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->get();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID);
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.U_Daerah_ID', $pegawai->Mukim->U_Daerah_ID);
+        }else if($authuser->role == 7){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.Kod_PT', $pegawai->Mukim->NamaPT);
         }
 
         $Insentifdatas = $Insentifdatas->take(1024)->get();
