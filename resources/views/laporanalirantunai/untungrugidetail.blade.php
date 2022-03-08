@@ -355,7 +355,19 @@
                     customize: function(doc) {
                         doc.styles.tableHeader.fillColor = '#00A651',
                         doc.defaultStyle.alignment = 'center',
-                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('')
+                        doc.content[1].table.widths = [ '55%', '15%', '15%', '15%']
+                        var iColumns = $('#pnldetail thead th').length;
+    
+                        var rowCount = document.getElementById("pnldetail").rows.length;
+                        for (i = 0; i < rowCount; i++) {
+                            
+                                doc.content[1].table.body[i][iColumns - 1].alignment = 'right';
+                                doc.content[1].table.body[i][iColumns - 2].alignment = 'right';
+                                doc.content[1].table.body[i][iColumns - 3].alignment = 'right';
+                                doc.content[1].table.body[i][iColumns - 4].alignment = 'left';
+
+                            
+                        };
                     }
                 },
                 // {
@@ -438,7 +450,21 @@
                                 titleAttr: 'PDF',
                                 title: 'LAPORAN PENYATA UNTUNG RUGI BAGI BULAN '+jenistext+' DAN TAHUN '+year,
                                 customize: function(doc) {
-                                    doc.styles.tableHeader.fillColor = '#00A651'
+                                    doc.styles.tableHeader.fillColor = '#00A651',
+                                    // doc.defaultStyle.alignment = 'center',
+                                    doc.content[1].table.widths = [ '55%', '15%', '15%', '15%']
+                                    var iColumns = $('#pnldetail thead th').length;
+                
+                                    var rowCount = document.getElementById("pnldetail").rows.length;
+                                    for (i = 0; i < rowCount; i++) {
+                                        
+                                            doc.content[1].table.body[i][iColumns - 1].alignment = 'right';
+                                            doc.content[1].table.body[i][iColumns - 2].alignment = 'right';
+                                            doc.content[1].table.body[i][iColumns - 3].alignment = 'right';
+                                            doc.content[1].table.body[i][iColumns - 4].alignment = 'left';
+
+                                        
+                                    };
                                 }
                             },
                             // {

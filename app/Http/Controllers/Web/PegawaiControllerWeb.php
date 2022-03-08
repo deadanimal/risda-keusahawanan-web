@@ -151,7 +151,7 @@ class PegawaiControllerWeb extends Controller
         $authuser = Auth::user();
         $audit->idpegawai = $authuser->idpegawai;
         $audit->Type = 1;
-        $audit->Desc = "Kemakini data untuk ".$pegawai->nama."";
+        $audit->Desc = "Kemaskini data untuk ".$pegawai->nama."";
         $audit->Date = date("Y-m-d H:i:s");
         $audit->save();
 

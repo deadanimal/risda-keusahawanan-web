@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center">
-            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN JUMLAH JUALAN / PURATA JUALAN PENERIMA INSENTIF
+            <h4 class="text" style="display: inline-block;padding-bottom:20px;color:#00A651;">LAPORAN JUMLAH / PURATA JUALAN PENERIMA INSENTIF
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('jenis',this.value)" id="iptJenisInsentif">
                     <option value="">Jenis Insentif</option>
                       @foreach ($ddInsentif as $items)

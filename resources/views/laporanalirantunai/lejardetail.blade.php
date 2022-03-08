@@ -21,7 +21,7 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-                  <br>DAN TAHUN
+                  DAN TAHUN
                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
                     {{-- <option value="">Tahun</option> --}}
                     <?php
@@ -176,7 +176,7 @@
                             ?>
                             @if ($report2->tab3 != $prevRow->tab3)
                                 <tr>
-                                    <td style="padding-top: 30px;border:none !important;"></td>
+                                    <td style="padding-top: 30px;border:none !important;"> &nbsp;</td>
                                     <td style="border:none !important;"></td>
                                     <td style="border:none !important;"></td>
                                     <td style="border:none !important;"></td>
@@ -317,7 +317,18 @@
                     titleAttr: 'PDF',
                     title: 'LEJAR RINGKASAN BULAN DAN TAHUN '+year,
                     customize: function(doc) {
-                        doc.styles.tableHeader.fillColor = '#00A651'
+                        doc.styles.tableHeader.fillColor = '#00A651',
+                        doc.defaultStyle.alignment = 'left'
+                        doc.content[1].table.widths = [ '15%', '20%', '20%', '15%', '20%', '10%']
+                        var iColumns = $('#laporanlejar thead th').length;
+                
+                        var rowCount = document.getElementById("laporanlejar").rows.length;
+                        for (i = 0; i < rowCount; i++) {
+                            
+                                doc.content[1].table.body[i][iColumns - 1].alignment = 'right';
+                                doc.content[1].table.body[i][iColumns - 4].alignment = 'right';
+
+                        };
                     }
                 },
                 // {
@@ -402,7 +413,18 @@
                                 titleAttr: 'PDF',
                                 title: 'LEJAR RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year,
                                 customize: function(doc) {
-                                    doc.styles.tableHeader.fillColor = '#00A651'
+                                    doc.styles.tableHeader.fillColor = '#00A651',
+                                    doc.defaultStyle.alignment = 'left'
+                                    doc.content[1].table.widths = [ '15%', '20%', '20%', '15%', '20%', '10%']
+                                    var iColumns = $('#laporanlejar thead th').length;
+                            
+                                    var rowCount = document.getElementById("laporanlejar").rows.length;
+                                    for (i = 0; i < rowCount; i++) {
+                                        
+                                            doc.content[1].table.body[i][iColumns - 1].alignment = 'right';
+                                            doc.content[1].table.body[i][iColumns - 4].alignment = 'right';
+
+                                    };
                                 }
                             },
                             // {

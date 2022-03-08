@@ -193,7 +193,7 @@ class UsahawanControllerWeb extends Controller
         $authuser = Auth::user();
         $audit->idpegawai = $authuser->idpegawai;
         $audit->Type = 2;
-        $audit->Desc = "Kemakini data untuk ".$request->namausahawan."";
+        $audit->Desc = "Kemaskini data untuk ".$request->namausahawan."";
         $audit->Date = date("Y-m-d H:i:s");
         $audit->save();
 

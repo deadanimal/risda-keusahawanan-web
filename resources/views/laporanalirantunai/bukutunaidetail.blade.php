@@ -21,8 +21,8 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-                  <br>DAN TAHUN
-                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:20vh" onchange="gettabledata('year',this.value)" id="iptYear">
+                  DAN TAHUN
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="display: inline-block;width:25vh" onchange="gettabledata('year',this.value)" id="iptYear">
                     {{-- <option value="">Tahun</option> --}}
                     <?php
                     $curryear = date("Y");
@@ -232,6 +232,18 @@ $( document ).ready(function() {
                 title: 'BUKU TUNAI RINGKASAN BULAN DAN TAHUN '+year,
                 customize: function(doc) {
                     doc.styles.tableHeader.fillColor = '#00A651'
+                    var iColumns = $('#laporanbukutunai thead th').length;
+                
+                    var rowCount = document.getElementById("laporanbukutunai").rows.length;
+                    for (i = 0; i < rowCount; i++) {
+                        
+                            doc.content[1].table.body[i][iColumns - 1].alignment = 'right';
+                            doc.content[1].table.body[i][iColumns - 2].alignment = 'right';
+                            doc.content[1].table.body[i][iColumns - 3].alignment = 'right';
+                            doc.content[1].table.body[i][iColumns - 5].alignment = 'left';
+
+                        
+                    };
                 },
             },
             // {
@@ -315,6 +327,18 @@ function gettabledata(type,val){
                             title: 'BUKU TUNAI RINGKASAN BULAN '+jenistext+' DAN TAHUN '+year,
                             customize: function(doc) {
                                 doc.styles.tableHeader.fillColor = '#00A651'
+                                var iColumns = $('#laporanbukutunai thead th').length;
+                
+                                var rowCount = document.getElementById("laporanbukutunai").rows.length;
+                                for (i = 0; i < rowCount; i++) {
+                                    
+                                        doc.content[1].table.body[i][iColumns - 1].alignment = 'right';
+                                        doc.content[1].table.body[i][iColumns - 2].alignment = 'right';
+                                        doc.content[1].table.body[i][iColumns - 3].alignment = 'right';
+                                        doc.content[1].table.body[i][iColumns - 5].alignment = 'left';
+
+                                    
+                                };
                             },
                         },
                         // {
