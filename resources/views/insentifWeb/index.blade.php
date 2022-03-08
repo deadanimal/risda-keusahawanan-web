@@ -48,7 +48,7 @@
                           <td class="text-nowrap"><label class="form-check-label">{{$user->nokadpengenalan}}</label></td>
                           <td class="text-nowrap"><label class="form-check-label">@if(isset($user->PT)){{$user->PT->keterangan}}@endif</label></td>
                           <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="window.location.href='/insentifdetail/{{$user->usahawanid}}'">
-                              <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Kemaskini
+                              Kemaskini
                           </button></td>
                       </tr>
                       @endforeach

@@ -15,9 +15,9 @@
                 <div class="position-relative rounded-1 border bg-white dark__bg-1100 p-3">
                   <div class="row gx-2">
                     <div class="col-sm-6 mb-3">
-                      <label class="form-label" for="field-type">Jenis Insentif</label>
+                      <label class="form-label" for="field-type">Jenis Insentif <span style="color:red;">*</span></label>
                       <select class="form-select form-select-sm" name="id_jenis_insentif" placeholder="Jenis Insentif">
-                        <option value="" disabled>Jenis Insentif</option>
+                        <option value="" disabled selected>Pilih Jenis Insentif</option>
                         @foreach ($ddInsentif as $items)
                             <option value="{{ $items->id_jenis_insentif }}"> 
                                 {{ $items->nama_insentif }} 
@@ -36,13 +36,13 @@
                       </select> --}}
                     </div>
                     <div class="col-sm-6 mb-3">
-                      <label class="form-label" for="field-name">Nilai Insentif (RM)</label>
+                      <label class="form-label" for="field-name">Nilai Insentif (RM) <span style="color:red;">*</span></label>
                       <input class="form-control form-control-sm" name="nilai_insentif" id="nilai" type="number" placeholder='0.00'/>
                     </div>
                     <div class="col-sm-6 mb-3">
-                      <label class="form-label" for="field-name">Tahun Terima Insentif</label>
+                      <label class="form-label" for="field-name">Tahun Terima Insentif <span style="color:red;">*</span></label>
                       <select class="form-select form-select-sm" name="tahun_terima_insentif" id="field-name" type="text"/>
-                      <option value="" disabled>Tahun</option>
+                      <option value="" disabled selected>Pilih Tahun</option>
                       <?php
                       $curryear = date("Y");
                       $fromyear = date("Y") - 20;
@@ -81,9 +81,9 @@
                     <input name="id_pengguna" style="display: none;" type="text" value="{{$id_pengguna}}"/>
                     <div class="row gx-2">
                       <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="field-type">Jenis Insentif</label> 
+                        <label class="form-label" for="field-type">Jenis Insentif <span style="color:red;">*</span></label> 
                         <select class="form-select form-select-sm" name="id_jenis_insentif" placeholder="Jenis Insentif">
-                          <option value="" disabled>Jenis Insentif</option>
+                          <option value="" disabled>Pilih Jenis Insentif</option>
                           @foreach ($ddInsentif as $items)
                               <option value="{{ $items->id_jenis_insentif }}" {{ ( $items->id_jenis_insentif == $insentif->id_jenis_insentif) ? 'selected' : '' }}> 
                                   {{ $items->nama_insentif }} 
@@ -92,13 +92,13 @@
                         </select>
                       </div>
                       <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="field-name">Nilai Insentif (RM)</label>
+                        <label class="form-label" for="field-name">Nilai Insentif (RM) <span style="color:red;">*</span></label>
                         <input class="form-control form-control-sm" name="nilai_insentif" id="field-name" type="number" value="{{$insentif->nilai_insentif}}"/>
                       </div>
                       <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="field-name">Tahun Terima Insentif</label>
+                        <label class="form-label" for="field-name">Tahun Terima Insentif <span style="color:red;">*</span></label>
                         <select class="form-select form-select-sm" name="tahun_terima_insentif" id="field-name" type="text"/>
-                        <option value="" disabled>Tahun</option>
+                        <option value="" disabled>Pilih Tahun</option>
                           <?php
                           $curryear = date("Y");
                           $fromyear = date("Y") - 20;

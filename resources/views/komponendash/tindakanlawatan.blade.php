@@ -10,11 +10,11 @@
             </style>
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Tindakan Lawatan</h3>
             <table id="tbltindaklawat" style="padding-bottom:2vh;text-align:center;">
-                {{-- <colgroup>
-                    <col span="1" style="width: 50%;">
+                <colgroup>
+                    <col span="1" style="width: 60%;">
                     <col span="1" style="width: 20%;">
-                    <col span="1" style="width: 30%;">
-                 </colgroup> --}}
+                    <col span="1" style="width: 20%;">
+                 </colgroup>
                  <thead>
                     <tr class="align-middle">
                         <th scope="col">Nama Tindakan Lawatan <span style="color:red;">*</span></th>
