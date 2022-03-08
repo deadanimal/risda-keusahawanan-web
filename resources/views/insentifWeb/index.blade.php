@@ -1,7 +1,7 @@
 @extends('dashboard')
 @section('content')
 <div class="card">
-  <div class="card-body overflow-hidden p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
+  <div class="card-body overflow-hidden p-lg-6" style="overflow-x: auto !important;overflow-y: auto !important;">
       <div class="row align-items-center">
           
               <h3 class="text" style="padding-bottom:20px;color:#00A651;">Insentif Usahawan</h3>
@@ -48,7 +48,7 @@
                           <td class="text-nowrap"><label class="form-check-label">{{$user->nokadpengenalan}}</label></td>
                           <td class="text-nowrap"><label class="form-check-label">@if(isset($user->PT)){{$user->PT->keterangan}}@endif</label></td>
                           <td class="text-nowrap"><button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="window.location.href='/insentifdetail/{{$user->usahawanid}}'">
-                              <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Kemaskini
+                              Kemaskini
                           </button></td>
                       </tr>
                       @endforeach

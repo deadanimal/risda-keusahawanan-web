@@ -4,8 +4,8 @@
     <div class="card-body overflow-hidden p-lg-6">
       <a style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/laporanprofil"> 
         <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
-        <div style="padding-bottom: 20px;">
-            <a class="btn btn-primary" onclick="ExportPDF()"><span >PDF</span></a>
+        <div style="padding-bottom: 20px;float:right;">
+            <a class="btn btn-primary" onclick="ExportPDF()"><span >Cetak PDF</span></a>
         </div>
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;padding-top:3vh;">Laporan Profil Usahawan</h3>
@@ -192,14 +192,14 @@
                 <td colspan="4" style="padding:2vh 0vh">
                     <table style="width: 100%;" class="form-label">
                         <tr>
-                            <th>Jenis Bantuan</th>
-                            <th>Kelulusan Bantuan (RM)</th>
+                            <th>Jenis Bantuan &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </th>
+                            <th>Kelulusan Bantuan (RM) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </th>
                             <th>Tahun Terima <br></th>
                         </tr>
                         @foreach ($insentif2 as $insentif2s)
                         <tr>
-                            <td>{{$insentif2s->namainsen}}</td>
-                            <td>{{number_format($insentif2s->nilai_insentif)}}</td>
+                            <td>{{$insentif2s->namainsen}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+                            <td>{{number_format($insentif2s->nilai_insentif)}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
                             <td>{{$insentif2s->tahun_terima_insentif}}<br></td>   
                         </tr>
                         @endforeach
@@ -224,19 +224,59 @@ $( document ).ready(function() {
 })
 
 function ExportPDF(){
-    // var year = document.getElementById("iptYear").value;
-    var doc = new jsPDF("p", "mm", "a4")
-    doc.text(15, 10, "LAPORAN PROFIL USAHAWAN");
-    doc.autoTable({ 
-        html: '#usahawan' 
-    })
-    // var elem = document.getElementById('gambau');
-    // console.log(elem.getAttribute('src'));
-    // if(elem.getAttribute('src') != ""){
-    //     var myImage = document.getElementById("gambau").src; 
-    //     doc.addImage(myImage, 'JPEG', 80, 100, 60, 35);
-    // }
-    doc.save('LaporanProfilUsahawan.pdf')
+    // var doc = new jsPDF("p", "mm", "a4")
+    // doc.text(15, 10, "LAPORAN PROFIL USAHAWAN");
+    // doc.autoTable({ 
+    //     html: '#usahawan' 
+    // })
+    // doc.save('LaporanProfilUsahawan.pdf')
+
+    var quotes = document.getElementById('usahawan');
+        //! MAKE YOUR PDF
+        var pdf = new jsPDF('p', 'pt', 'a4');
+        html2canvas(quotes, {
+            onrendered: function (canvas) {
+                for (var i = 0; i <= quotes.clientHeight / 1100; i++) {
+                    //! This is all just html2canvas stuff
+                    var srcImg = canvas;
+                    var sX = 0;
+                    var sY = 1100 * i; // start 1100 pixels down for every new page
+                    var sWidth = 1210;
+                    var sHeight = 1100;
+                    var dX = 0;
+                    var dY = 0;
+                    var dWidth = 1210;
+                    var dHeight = 1100;
+
+                    window.onePageCanvas = document.createElement("canvas");
+                    onePageCanvas.setAttribute('width', 1210);
+                    onePageCanvas.setAttribute('height', 1100);
+                    var ctx = onePageCanvas.getContext('2d');
+                    // details on this usage of this function: 
+                    // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images#Slicing
+                    ctx.drawImage(srcImg, sX, sY, sWidth, sHeight, dX, dY, dWidth, dHeight);
+
+                    // document.body.appendChild(canvas);
+                    var canvasDataURL = onePageCanvas.toDataURL("image/png", 1.0);
+
+                    var width = onePageCanvas.width;
+                    var height = onePageCanvas.clientHeight;
+
+                    //! If we're on anything other than the first page,
+                    // add another page
+                    if (i > 0) {
+                        pdf.addPage(612, 791); //8.5" x 11" in pts (in*72)
+                    }
+                    //! now we declare that we're working on that page
+                    pdf.setPage(i + 1);
+                    //! now we add content to that page!
+                    pdf.addImage(canvasDataURL, 'PNG', 20, 40, (width * .45), (height * .75));
+
+                }
+
+                pdf.save('LaporanProfilUsahawan.pdf');
+            }
+        })
 
 }
 

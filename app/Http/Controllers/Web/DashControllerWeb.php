@@ -25,40 +25,40 @@ class DashControllerWeb extends Controller
         $authuser = Auth::user();
         if(!isset($authuser)){
             return redirect('/');
-        }else{
-
-            if(isset($authuser->idpegawai)){
-                $pegawai = Pegawai::where('id', $authuser->idpegawai)->first();
-            }
-
-            if($authuser->role == 1 || $authuser->role == 2){
-                $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->get();
-
-            }else if($authuser->role == 3 || $authuser->role == 5){
-                $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-            }else if($authuser->role == 4 || $authuser->role == 6){
-                $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-            }else if($authuser->role == 7){
-                $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-            }
-
         }
         
         $getjenisinsentif="";
         $gettahun = date("Y");
         $getNegeri="";
-        $Insentifdatas = Insentif::where('tahun_terima_insentif', $gettahun)->take(548)->get();
+        $Insentifdatas = Insentif::join('usahawans', 'usahawans.usahawanid', '=', 'insentifs.id_pengguna')
+        ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'usahawans.Kod_PT')
+        ->where('tahun_terima_insentif', $gettahun)->take(1024)->get();
        
+        if($authuser->role == 1 || $authuser->role == 2){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->get();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID);
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.U_Daerah_ID', $pegawai->Mukim->U_Daerah_ID);
+        }else if($authuser->role == 7){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.Kod_PT', $pegawai->Mukim->NamaPT);
+        }
+
         $array = [];
         $array2 = [];
         $array3 = [];
         $array4 = [];
         $array5 = [];
         $array6 = [];
+        
         foreach($Insentifdatas as $insentifdata2){
             $update = true;
             if($insentifdata2->id_pengguna != null){
-                $usahawan = Usahawan::select('*')->with(['PT','kateusah','daerah','perniagaan'])
+                $usahawan = Usahawan::select('id_kategori_usahawan','U_Daerah_ID','usahawanid','U_Negeri_ID','Kod_PT','status_daftar_usahawan','U_Jantina_ID','tarikhlahir')
+                ->with(['kateusah','daerah','perniagaan'])
                 ->without(['user','pekebun','negeri','dun','parlimen','syarikat','insentif','etnik','mukim','kampung','seksyen'])
                 ->where('usahawanid', $insentifdata2->id_pengguna)->first();
                 // dd($usahawan);
@@ -181,12 +181,12 @@ class DashControllerWeb extends Controller
             $update = true;
 
             if($InsentifData3->id_pengguna != null && ($authuser->role == 3 || $authuser->role == 5 || $authuser->role == 4 || $authuser->role == 6 || $authuser->role == 7)){
-                $usahawan = Usahawan::select('U_Negeri_ID','U_Daerah_ID','Kod_PT')
-                ->without(['PT','user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])
-                ->where('usahawanid', $InsentifData3->id_pengguna)->first();
+                // $usahawan = Usahawan::select('U_Negeri_ID','U_Daerah_ID','Kod_PT')
+                // ->without(['PT','user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])
+                // ->where('usahawanid', $InsentifData3->id_pengguna)->first();
                 if($authuser->role == 3 || $authuser->role == 5){
                     if(isset($pegawai->Mukim)){
-                        if($usahawan->U_Negeri_ID != $pegawai->Mukim->U_Negeri_ID){
+                        if($InsentifData3->U_Negeri_ID != $pegawai->Mukim->U_Negeri_ID){
                             $update = false;
                         }else{
 
@@ -194,8 +194,8 @@ class DashControllerWeb extends Controller
                     }
                 }
                 if($authuser->role == 4 || $authuser->role == 6){
-                    if(isset($pegawai->Mukim) && isset($usahawan)){
-                        if($usahawan->U_Daerah_ID != $pegawai->Mukim->U_Daerah_ID){
+                    if(isset($pegawai->Mukim)){
+                        if($InsentifData3->U_Daerah_ID != $pegawai->Mukim->U_Daerah_ID){
                             $update = false;
                         }else{
 
@@ -204,7 +204,7 @@ class DashControllerWeb extends Controller
                 }
                 if($authuser->role == 7){
                     if(isset($pegawai)){
-                        if($usahawan->Kod_PT != $pegawai->NamaPT){
+                        if($InsentifData3->Kod_PT != $pegawai->NamaPT){
                             $update = false;
                         }else{
 
@@ -325,24 +325,14 @@ class DashControllerWeb extends Controller
 
     public function show(Request $request)
     {
+        // dd($request->tahun);
         $authuser = Auth::user();
         if(isset($authuser->idpegawai)){
             $pegawai = Pegawai::where('id', $authuser->idpegawai)->first();
         }
-
-        if($authuser->role == 1 || $authuser->role == 2){
-            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->get();
-        }else if($authuser->role == 3 || $authuser->role == 5){
-            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-        }else if($authuser->role == 4 || $authuser->role == 6){
-            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-        }else if($authuser->role == 7){
-            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-        }
-
         
         $Insentifdatas = Insentif::join('usahawans', 'usahawans.usahawanid', '=', 'insentifs.id_pengguna')
-        ->select('insentifs.*', 'usahawans.U_Negeri_ID');
+        ->select('insentifs.*', 'usahawans.U_Negeri_ID', 'usahawans.U_Daerah_ID', 'usahawans.Kod_PT');
         if($request->tahun != null){
             $gettahun = $request->tahun;
             $Insentifdatas = $Insentifdatas->where('tahun_terima_insentif', $gettahun);
@@ -361,7 +351,20 @@ class DashControllerWeb extends Controller
             $Insentifdatas = $Insentifdatas->where('usahawans.U_Negeri_ID', $getNegeri);
         }
 
-        $Insentifdatas = $Insentifdatas->take(548)->get();
+        if($authuser->role == 1 || $authuser->role == 2){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->get();
+        }else if($authuser->role == 3 || $authuser->role == 5){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID);
+        }else if($authuser->role == 4 || $authuser->role == 6){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.U_Daerah_ID', $pegawai->Mukim->U_Daerah_ID);
+        }else if($authuser->role == 7){
+            $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
+            $Insentifdatas = $Insentifdatas->where('usahawans.Kod_PT', $pegawai->Mukim->NamaPT);
+        }
+
+        $Insentifdatas = $Insentifdatas->take(1024)->get();
         // ->take(10)
         // dd($Insentifdatas);
         $array = [];
@@ -371,9 +374,11 @@ class DashControllerWeb extends Controller
         $array5 = [];
         $array6 = [];
         foreach($Insentifdatas as $insentifdata2){
+            // dd($insentifdata2);
             $update = true;
             if($insentifdata2->id_pengguna != null){
-                $usahawan = Usahawan::select('*')->with(['PT','kateusah','daerah','perniagaan'])
+                $usahawan = Usahawan::select('id_kategori_usahawan','U_Daerah_ID','usahawanid','U_Negeri_ID','Kod_PT','status_daftar_usahawan','U_Jantina_ID','tarikhlahir')
+                ->with(['kateusah','daerah','perniagaan'])
                 ->without(['user','pekebun','negeri','dun','parlimen','syarikat','insentif','etnik','mukim','kampung','seksyen'])
                 ->where('usahawanid', $insentifdata2->id_pengguna)->first();
                 // dd($usahawan);
@@ -405,72 +410,73 @@ class DashControllerWeb extends Controller
                             }
                         }
                     }
-                    
-                    $insentifdata2->jantina = $usahawan->U_Jantina_ID;
 
-                    // $daerah = Daerah::where('U_Daerah_ID', $usahawan->U_Daerah_ID)->first();
-                    if(isset($usahawan->daerah)){
-                        $insentifdata2->daerah = $usahawan->daerah->Daerah;
+                    if($update == true){
+                        $insentifdata2->jantina = $usahawan->U_Jantina_ID;
+
+                        // $daerah = Daerah::where('U_Daerah_ID', $usahawan->U_Daerah_ID)->first();
+                        if(isset($usahawan->daerah)){
+                            $insentifdata2->daerah = $usahawan->daerah->Daerah;
+                        }
+
+                        // $perniagaans = Perniagaan::where('usahawanid', $usahawan->usahawanid)->first();
+                        if(isset($usahawan->perniagaan)){
+                            $insentifdata2->jnsperniagaan = $usahawan->perniagaan->jenisperniagaan;
+                        }
+
+                        // $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
+                        // if(isset($pekebun)){
+                            $insentifdata2->status_daftar_usahawan = $usahawan->status_daftar_usahawan;
+                        // }
+
+                        // $KateUsahawan = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
+                        if(isset($usahawan->kateusah)){
+                            $insentifdata2->kateusahawan = $usahawan->kateusah->nama_kategori_usahawan;
+                        }
+                        
+                        $dateOfBirth = $usahawan->tarikhlahir;
+                        $today = date("Y-m-d");
+                        $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                        $umur = $diff->format('%y');
+
+                        if($umur <= 20){
+                            $insentifdata2->umurgrp = 1;
+                        }else if($umur >= 21 && $umur <= 30){
+                            $insentifdata2->umurgrp = 2;
+                        }else if($umur >= 31 && $umur <= 40){
+                            $insentifdata2->umurgrp = 3;
+                        }else if($umur >= 41 && $umur <= 50){
+                            $insentifdata2->umurgrp = 4;
+                        }else if($umur >= 51 && $umur <= 60){
+                            $insentifdata2->umurgrp = 5;
+                        }else if($umur >= 61 && $umur <= 70){
+                            $insentifdata2->umurgrp = 6;
+                        }else if($umur >= 71){
+                            $insentifdata2->umurgrp = 7;
+                        }else{
+                            $insentifdata2->umurgrp = 8;
+                        }
+
+                        if(isset($insentifdata2->daerah)){
+                            array_push($array, $insentifdata2->daerah);
+                        } 
+                        if(isset($insentifdata2->jantina)){
+                            array_push($array2, $insentifdata2->jantina);
+                        }   
+                        if(isset($insentifdata2->jnsperniagaan)){
+                            array_push($array3, $insentifdata2->jnsperniagaan);
+                        }
+                        if(isset($insentifdata2->status_daftar_usahawan)){
+                            array_push($array4, $insentifdata2->status_daftar_usahawan);
+                        }
+                        if(isset($insentifdata2->kateusahawan)){
+                            array_push($array5, $insentifdata2->kateusahawan);
+                        }
+                        if(isset($insentifdata2->umurgrp)){
+                            array_push($array6, $insentifdata2->umurgrp);
+                        }
+
                     }
-
-                    // $perniagaans = Perniagaan::where('usahawanid', $usahawan->usahawanid)->first();
-                    if(isset($usahawan->perniagaan)){
-                        $insentifdata2->jnsperniagaan = $usahawan->perniagaan->jenisperniagaan;
-                    }
-
-                    // $pekebun = Pekebun::where('usahawanid', $usahawan->usahawanid)->first();
-                    // if(isset($pekebun)){
-                        $insentifdata2->status_daftar_usahawan = $usahawan->status_daftar_usahawan;
-                    // }
-
-                    // $KateUsahawan = KategoriUsahawan::where('id_kategori_usahawan', $usahawan->id_kategori_usahawan)->first();
-                    if(isset($usahawan->kateusah)){
-                        $insentifdata2->kateusahawan = $usahawan->kateusah->nama_kategori_usahawan;
-                    }
-                    
-                    $dateOfBirth = $usahawan->tarikhlahir;
-                    $today = date("Y-m-d");
-                    $diff = date_diff(date_create($dateOfBirth), date_create($today));
-                    $umur = $diff->format('%y');
-
-                    if($umur <= 20){
-                        $insentifdata2->umurgrp = 1;
-                    }else if($umur >= 21 && $umur <= 30){
-                        $insentifdata2->umurgrp = 2;
-                    }else if($umur >= 31 && $umur <= 40){
-                        $insentifdata2->umurgrp = 3;
-                    }else if($umur >= 41 && $umur <= 50){
-                        $insentifdata2->umurgrp = 4;
-                    }else if($umur >= 51 && $umur <= 60){
-                        $insentifdata2->umurgrp = 5;
-                    }else if($umur >= 61 && $umur <= 70){
-                        $insentifdata2->umurgrp = 6;
-                    }else if($umur >= 71){
-                        $insentifdata2->umurgrp = 7;
-                    }else{
-                        $insentifdata2->umurgrp = 8;
-                    }
-                }
-            }
-            
-            if($update == true){
-                if(isset($insentifdata2->daerah)){
-                    array_push($array, $insentifdata2->daerah);
-                } 
-                if(isset($insentifdata2->jantina)){
-                    array_push($array2, $insentifdata2->jantina);
-                }   
-                if(isset($insentifdata2->jnsperniagaan)){
-                    array_push($array3, $insentifdata2->jnsperniagaan);
-                }
-                if(isset($insentifdata2->status_daftar_usahawan)){
-                    array_push($array4, $insentifdata2->status_daftar_usahawan);
-                }
-                if(isset($insentifdata2->kateusahawan)){
-                    array_push($array5, $insentifdata2->kateusahawan);
-                }
-                if(isset($insentifdata2->umurgrp)){
-                    array_push($array6, $insentifdata2->umurgrp);
                 }
             }
 
@@ -498,14 +504,14 @@ class DashControllerWeb extends Controller
         $total3 = 0;
         foreach($Insentifdatas as $InsentifData3){
             $update = true;
-
+            // dd($InsentifData3);
             if($InsentifData3->id_pengguna != null && ($authuser->role == 3 || $authuser->role == 5 || $authuser->role == 4 || $authuser->role == 6 || $authuser->role == 7)){
-                $usahawan = Usahawan::select('U_Negeri_ID','U_Daerah_ID','Kod_PT')
-                ->without(['PT','user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])
-                ->where('usahawanid', $InsentifData3->id_pengguna)->first();
+                // $usahawan = Usahawan::select('U_Negeri_ID','U_Daerah_ID','Kod_PT')
+                // ->without(['PT','user','pekebun','negeri','daerah','dun','parlimen','perniagaan','kateusah','syarikat','insentif','etnik','mukim','kampung','seksyen'])
+                // ->where('usahawanid', $InsentifData3->id_pengguna)->first();
                 if($authuser->role == 3 || $authuser->role == 5){
                     if(isset($pegawai->Mukim)){
-                        if($usahawan->U_Negeri_ID != $pegawai->Mukim->U_Negeri_ID){
+                        if($InsentifData3->U_Negeri_ID != $pegawai->Mukim->U_Negeri_ID){
                             $update = false;
                         }else{
 
@@ -513,8 +519,8 @@ class DashControllerWeb extends Controller
                     }
                 }
                 if($authuser->role == 4 || $authuser->role == 6){
-                    if(isset($pegawai->Mukim) && isset($usahawan)){
-                        if($usahawan->U_Daerah_ID != $pegawai->Mukim->U_Daerah_ID){
+                    if(isset($pegawai->Mukim) && isset($InsentifData3->U_Daerah_ID)){
+                        if($InsentifData3->U_Daerah_ID != $pegawai->Mukim->U_Daerah_ID){
                             $update = false;
                         }else{
 
@@ -523,7 +529,7 @@ class DashControllerWeb extends Controller
                 }
                 if($authuser->role == 7){
                     if(isset($pegawai)){
-                        if($usahawan->Kod_PT != $pegawai->NamaPT){
+                        if($InsentifData3->Kod_PT != $pegawai->NamaPT){
                             $update = false;
                         }else{
 
@@ -602,7 +608,7 @@ class DashControllerWeb extends Controller
         }
 
         $ddInsentif = JenisInsentif::select('id_jenis_insentif','nama_insentif')->where('status', 'aktif')->get();
-
+        // dd($gettahun);
         return view('dash.index'
         ,[
             'daerah'=>json_encode($array,JSON_NUMERIC_CHECK),

@@ -17,7 +17,7 @@
                   ?>
                 </select>
             </h3>
-            <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <div style="overflow-x: auto !important;overflow-y: auto !important;">
                 <table id="pnlbulk" class="table table-style table-sm table-bordered table-hover">
                     <style>
                         table.table-style td { 
@@ -152,7 +152,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="overflow-x: scroll !important;overflow-y: scroll !important;padding-top: 5vh;">
+            <div style="overflow-x: auto !important;overflow-y: auto !important;padding-top: 5vh;">
                 <table id="pnlind" class="table-style">
                     <style>
                         table.table-style td { 
@@ -192,8 +192,8 @@
                                 <td class="text-nowrap textlbl"></td>
                             @endif
                             <td class="text-nowrap" style="text-align: center;">
-                                <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="generatereport(14,'/penyatauntungrugiDetail',{{$user->id}});return false;">
-                                <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Penyata Untung Rugi
+                                <button class="btn btn-primary btn-sm me-1 mb-1" type="button" onclick="generatereport(14,'/penyatauntungrugiDetail',{{$user->id}});return false;">
+                                Penyata Untung Rugi
                             </button></td>
                         </tr>
                         @endforeach

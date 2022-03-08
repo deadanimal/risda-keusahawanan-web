@@ -17,7 +17,7 @@
                   </select>
                   MENGIKUT NEGERI
             </h4>
-            <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <div style="overflow-x: auto !important;overflow-y: auto !important;">
                 <table id="tbllaporanlawatan" class="table table-sm table-bordered table-hover">
                     <colgroup>
                         <col span="1" style="width:10%;">

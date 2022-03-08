@@ -4,7 +4,7 @@
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Laporan Buku Tunai</h3>
-            <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <div style="overflow-x: auto !important;overflow-y: auto !important;">
                 {{-- <div style="padding-bottom:10px;">
                     <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
                     <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>
@@ -65,8 +65,8 @@
                                 <td class="text-nowrap textlbl"></td>
                             @endif
                             <td class="text-nowrap" style="text-align: center;">
-                                <button class="btn btn-falcon-default btn-sm me-1 mb-1" type="button" onclick="generatereport(11,'/laporanalirantunaiDetail?',{{$user->id}});return false;">
-                                <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Buku Tunai
+                                <button class="btn btn-primary btn-sm me-1 mb-1" type="button" onclick="generatereport(11,'/laporanalirantunaiDetail?',{{$user->id}});return false;">
+                                Buku Tunai
                             </button></td>
                         </tr>
                         @endforeach

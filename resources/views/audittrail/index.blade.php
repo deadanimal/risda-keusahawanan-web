@@ -4,7 +4,7 @@
     <div class="card-header bg-light" style="text-align: center;">
       <h5 class="mb-0" style="display: inline-block; padding-right:2vh">Audit Trail</h5><input style="width:45vh;" type="text" class="form-control-sm" name="daterange"/>
     </div>
-    <div class="card-body fs--1 p-0">
+    <div class="card-body fs--1 p-0" style="padding:30px !important;">
       <style>
         ul {
               list-style-type: none;

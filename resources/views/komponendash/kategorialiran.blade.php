@@ -2,7 +2,7 @@
 @section('content') 
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-        <div class="row align-items-center" style="overflow-x: scroll !important;overflow-y: scroll !important;">
+        <div class="row align-items-center" style="overflow-x: auto !important;overflow-y: auto !important;">
             <style>
                 .sorting {
                     background-image : none !important;

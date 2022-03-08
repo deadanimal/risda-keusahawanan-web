@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-        <div class="row align-items-center" style="overflow-x: scroll !important;overflow-y: scroll !important;">
+        <div class="row align-items-center" style="overflow-x: auto !important;overflow-y: auto !important;">
             <style>
                 .sorting {
                     background-image : none !important;
@@ -24,7 +24,7 @@
                         <th scope="col">Nama Kategori Usahawan <span style="color:red;">*</span></th>
                         <th scope="col">Jualan Minimum Usahawan <span style="color:red;">*</span></th>
                         <th scope="col">Jualan Maksimum Usahawan (RM) <span style="color:red;">*</span></th>
-                        <th scope="col">Status Kategori Usahawan (RM) *</th>
+                        <th scope="col">Status Kategori Usahawan (RM) <span style="color:red;">*</span></th>
                         <th scope="col"></th>
                     </tr>
                  </thead>

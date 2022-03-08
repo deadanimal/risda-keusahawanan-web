@@ -129,7 +129,7 @@ class InsentifControllerWeb extends Controller
         $authuser = Auth::user();
         $audit->idpegawai = $authuser->idpegawai;
         $audit->Type = 3;
-        $audit->Desc = "Tambah data insentif untuk ".$usahawan->namausahawan."";
+        $audit->Desc = "Kemaskini data insentif untuk ".$usahawan->namausahawan."";
         $audit->Date = date("Y-m-d H:i:s");
         $audit->save();
 
