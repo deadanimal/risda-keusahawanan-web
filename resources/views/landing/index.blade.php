@@ -12,7 +12,13 @@
 @if ($noti ?? '' == 1)
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-        Sila Sahkan Kemaskini Usahawan Di <a class="btn btn-primary" href="/usahawanWeb">Tetapan Usahawan</a>
+        Sila Sahkan Kemaskini Usahawan Di 
+        <form method="post" action="/CariUsahawan" enctype="multipart/form-data">
+            @csrf
+            @method("POST")
+            <input name="StatProf" value="test" style="display: none;"/>
+            <button class="btn btn-primary" type="submit">Tetapan Usahawan</button>
+        </form>
     </div>
 </div>
 @endif

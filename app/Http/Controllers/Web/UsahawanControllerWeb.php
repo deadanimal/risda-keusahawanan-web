@@ -81,6 +81,9 @@ class UsahawanControllerWeb extends Controller
         if(!empty($request->PT)){
             $users->where('Kod_PT', $request->PT);
         }
+        if(!empty($request->StatProf)){
+            $users->where('status_profil',0);
+        }
 
         $result = $users->get();
 
