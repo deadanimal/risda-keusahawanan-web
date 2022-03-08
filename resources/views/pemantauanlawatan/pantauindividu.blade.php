@@ -1,7 +1,7 @@
 @extends('dashboard')
 @section('content')
 <div class="card">
-    <div class="card-body overflow-hidden p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
+    <div class="card-body overflow-hidden p-lg-6" style="overflow-x: auto !important;overflow-y: auto !important;">
         <div class="row align-items-center">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Pemantauan Lawatan Individu</h3>

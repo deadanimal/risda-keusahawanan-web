@@ -4,7 +4,7 @@
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Database Usahawan</h3>
-            <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <div style="overflow-x: auto !important;overflow-y: auto !important;">
                 <div style="padding-bottom: 20px;">
                     {{-- <input class="form-control usahawanfield" name="nokadpengenalan"   type="text"/> --}}
                     <select class="form-select" aria-label=".form-select example" style="display: inline-block;width:40vh" id="negeri">

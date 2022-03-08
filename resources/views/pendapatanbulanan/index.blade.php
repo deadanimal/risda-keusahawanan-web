@@ -56,7 +56,7 @@
                   </div>
                 </div>
               </div>
-            <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <div style="overflow-x: auto !important;overflow-y: auto !important;">
               {{-- <div style="padding-bottom: 20px;">
                 <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
                 <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>

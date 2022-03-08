@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-body overflow-hidden p-lg-6" style="overflow-x: scroll !important;overflow-y: scroll !important;">
+    <div class="card-body overflow-hidden p-lg-6" style="overflow-x: auto !important;overflow-y: auto !important;">
         <a id="satukembali" style="margin-top:-2vh;margin-left:-2vh;" class="btn btn-sm btn-outline-secondary border-300 me-2" href="/usahawanWeb"> 
             <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Kembali</a>
         <div class="row align-items-center" style="padding-top:15px;">
@@ -15,7 +15,12 @@
                     <a class="btn btn-primary" onclick="APIPK()">Panggil Portal PK</a>
                 </div>
                 @endif
-                <table id="penggunatbl">
+                <table class="tblusahawan" id="penggunatbl">
+                    <style>
+                        .tblusahawan td{
+                            font-size: 12px;
+                        }
+                    </style>
                     <colgroup>
                         <col span="1" style="width: 30%;">
                         <col span="1" style="width: 15%;">
@@ -62,7 +67,7 @@
                             <td class="text-nowrap form-check-label">{{$user->nokadpengenalan}}</td>
                             <td class="text-nowrap form-check-label">{{$user->negeri->Negeri}}</td>
                             <td class="text-nowrap">
-                                <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:40vh;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
+                                <select id="ddPT{{$user->id}}" class="form-select form-select-sm" aria-label=".form-select-sm example" style="display:inline-block;width:40vh;font-size:12px;" onchange="aktifkanpengguna('kawasan',{{$user}},this.options[this.selectedIndex].value)">
                                 <option selected="true" disabled="disabled" selected="">Kawasan</option>
                                 @foreach ($ddPT as $items)
                                     <option value="{{ $items->Kod_PT }}" {{ ( $items->Kod_PT == $user->Kod_PT) ? 'selected' : '' }}> 

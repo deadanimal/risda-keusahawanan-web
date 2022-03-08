@@ -4,7 +4,7 @@
     <div class="card-body overflow-hidden p-lg-6">
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Laporan Lejar</h3>
-            <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <div style="overflow-x: auto !important;overflow-y: auto !important;">
                 {{-- <div style="padding-bottom:10px;">
                     <a class="btn btn-primary" onclick="ExportExcel()">Export Excel</a>
                     <a class="btn btn-primary" onclick="ExportPDF()">Export PDF</a>

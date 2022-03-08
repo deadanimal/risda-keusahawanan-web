@@ -16,7 +16,7 @@
 <div class="row g-0">
     <div class="col-lg-12 pe-lg-2 mb-3">
         <div class="card h-lg-100">
-        <div style="padding-top: 20px;padding-left:20px;overflow-x: scroll !important;overflow-y: scroll !important;">
+        <div style="padding-top: 20px;padding-left:20px;overflow-x: auto !important;overflow-y: auto !important;">
             <table id="tbltemulawatan" class="table table-sm table-hover" style="width:max-content;">
                 <colgroup>
                     <col span="1" style="width:15%;">

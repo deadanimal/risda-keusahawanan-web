@@ -17,7 +17,7 @@
                   ?>
                 </select>
             </h3>
-            <div style="overflow-x: scroll !important;overflow-y: scroll !important;">
+            <div style="overflow-x: auto !important;overflow-y: auto !important;">
                 <table id="pnlbulk" class="table table-style table-sm table-bordered table-hover">
                     <style>
                         table.table-style td { 
@@ -152,7 +152,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="overflow-x: scroll !important;overflow-y: scroll !important;padding-top: 5vh;">
+            <div style="overflow-x: auto !important;overflow-y: auto !important;padding-top: 5vh;">
                 <table id="pnlind" class="table-style">
                     <style>
                         table.table-style td { 
