@@ -43,7 +43,7 @@ class PegawaiController extends Controller
 
     public function show($id)
     {
-        $pegawai = Pegawai::without(['user', 'Mukim','PT','Negeri'] )
+        $pegawai = Pegawai::without(['Mukim','Negeri'] )
         ->where('id', $id)
         ->get();
 
