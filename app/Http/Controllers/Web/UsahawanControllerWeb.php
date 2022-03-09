@@ -20,6 +20,7 @@ use App\Models\KategoriUsahawan;
 use App\Models\AuditTrail;
 use App\Models\Pekebun;
 use App\Models\Syarikat;
+use App\Models\Perniagaan;
 // use App\Models\Etnik;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\DB;
@@ -327,14 +328,13 @@ class UsahawanControllerWeb extends Controller
 
             $response = $request->getBody()->getContents();
             $vals = json_decode($response);
+            // return $vals;
             foreach ($vals as $val){
-                if($val == 1){
+                // return $val;
+                if($val === 1){
+                    // return $val;
                     $usahawan = Usahawan::where('nokadpengenalan', $vals->no_kad_pengenalan)->first();
-                    if(isset($usahawan)){
-                        $usahawan->namausahawan = $val->nama_penuh;
-                        $usahawan->nokadpengenalan = $vals->no_kad_pengenalan;
-                        $usahawan->save();
-                    }else{
+                    if(!isset($usahawan)){
                         $usahawanNew = new Usahawan();
                         $usahawanNew->namausahawan = $vals->nama_penuh;
                         $usahawanNew->nokadpengenalan = $vals->no_kad_pengenalan;
@@ -378,54 +378,51 @@ class UsahawanControllerWeb extends Controller
                         $usahawanNew->save();
                     }
                 }else{
-
                     $usahawan = Usahawan::where('nokadpengenalan', $val->no_kad_pengenalan)->orWhere('email',$val->email)->first();
-                    if(isset($usahawan)){
-                        $usahawan->namausahawan = $val->nama_penuh;
-                        $usahawan->nokadpengenalan = $val->no_kad_pengenalan;
-                        $usahawan->save();
-                    }else{
+                    // return $usahawan;
+                    if(!isset($usahawan)){
+                        // return $val;
                         $usahawanNew = new Usahawan();
-                            $usahawanNew->namausahawan = $vals->nama_penuh;
-                            $usahawanNew->nokadpengenalan = $vals->no_kad_pengenalan;
-                            $usahawanNew->email = $vals->alamat_emel;
-                            $usahawanNew->U_Daerah_ID = $vals->daerah_pusat_tanggungjawab;
-                            $usahawanNew->status_daftar_usahawan = $vals->kategori;
-                            $usahawanNew->U_Negeri_ID = $vals->negeri_pusat_tanggungjawab;
-                            $usahawanNew->notelefon = $vals->no_telefon;
-                            $usahawanNew->U_Kampung_ID = $vals->alamat_surat_menyurat->kampung;
-                            $usahawanNew->alamat1 = $vals->alamat_surat_menyurat->no_rumah;
-                            $usahawanNew->alamat2 = $vals->alamat_surat_menyurat->nama_jalan;
-                            $usahawanNew->poskod = $vals->alamat_surat_menyurat->poskod;
-                            $usahawanNew->bandar = $vals->alamat_surat_menyurat->bandar;
-                            $usahawanNew->usahawanid = $vals->usahawan_id;
+                        $usahawanNew->namausahawan = $val->nama_penuh;
+                        $usahawanNew->nokadpengenalan = $val->no_kad_pengenalan;
+                        $usahawanNew->email = $val->alamat_emel;
+                        $usahawanNew->U_Daerah_ID = $val->daerah_pusat_tanggungjawab;
+                        $usahawanNew->status_daftar_usahawan = $val->kategori;
+                        $usahawanNew->U_Negeri_ID = $val->negeri_pusat_tanggungjawab;
+                        $usahawanNew->notelefon = $val->no_telefon;
+                        $usahawanNew->U_Kampung_ID = $val->alamat_surat_menyurat->kampung;
+                        $usahawanNew->alamat1 = $val->alamat_surat_menyurat->no_rumah;
+                        $usahawanNew->alamat2 = $val->alamat_surat_menyurat->nama_jalan;
+                        $usahawanNew->poskod = $val->alamat_surat_menyurat->poskod;
+                        $usahawanNew->bandar = $val->alamat_surat_menyurat->bandar;
+                        $usahawanNew->usahawanid = $val->usahawan_id;
 
-                            $userNew = new User();
-                            $userNew->name = $vals->nama_penuh;
-                            $userNew->enail = $vals->alamat_emel;
-                            $userNew->usahawanid = $vals->usahawan_id;
-                            $userNew->status_pengguna = 0;
-                            $userNew->no_kp = $vals->no_kad_pengenalan;
-                            $userNew->type = 2;
-                            $userNew->profile_status = 0;
+                        $userNew = new User();
+                        $userNew->name = $val->nama_penuh;
+                        $userNew->enail = $val->alamat_emel;
+                        $userNew->usahawanid = $val->usahawan_id;
+                        $userNew->status_pengguna = 0;
+                        $userNew->no_kp = $val->no_kad_pengenalan;
+                        $userNew->type = 2;
+                        $userNew->profile_status = 0;
 
-                            $syarikat = new Syarikat();
-                            $syarikat->namasyarikat = $vals->nama_syarikat;
-                            $syarikat->usahawanid = $vals->usahawan_id;
+                        $syarikat = new Syarikat();
+                        $syarikat->namasyarikat = $val->nama_syarikat;
+                        $syarikat->usahawanid = $val->usahawan_id;
 
-                            $pekebun = new Pekebun();
-                            $pekebun->No_KP = $vals->no_kp_pekebun_kecil;
-                            $pekebun->usahawanid = $vals->usahawan_id;
+                        $pekebun = new Pekebun();
+                        $pekebun->No_KP = $val->no_kp_pekebun_kecil;
+                        $pekebun->usahawanid = $val->usahawan_id;
 
-                            $perniagaan = New Perniagaan();
-                            $perniagaan->alamat1 = $vals->alamat_penuh_perniagaan->no_rumah;
-                            $perniagaan->alamat2 = $vals->alamat_penuh_perniagaan->nama_jalan;
-                            $perniagaan->bandar = $vals->alamat_penuh_perniagaan->bandar;
-                            $perniagaan->U_Kampung_ID = $vals->alamat_penuh_perniagaan->kampung;
-                            $perniagaan->U_Negeri_ID = $vals->alamat_penuh_perniagaan->negeri;
-                            $perniagaan->poskod = $vals->alamat_penuh_perniagaan->poskod;
-                            $perniagaan->usahawanid = $vals->usahawan_id;
-                            $usahawanNew->save();
+                        $perniagaan = New Perniagaan();
+                        $perniagaan->alamat1 = $val->alamat_penuh_perniagaan->no_rumah;
+                        $perniagaan->alamat2 = $val->alamat_penuh_perniagaan->nama_jalan;
+                        $perniagaan->bandar = $val->alamat_penuh_perniagaan->bandar;
+                        $perniagaan->U_Kampung_ID = $val->alamat_penuh_perniagaan->kampung;
+                        $perniagaan->U_Negeri_ID = $val->alamat_penuh_perniagaan->negeri;
+                        $perniagaan->poskod = $val->alamat_penuh_perniagaan->poskod;
+                        $perniagaan->usahawanid = $val->usahawan_id;
+                        $usahawanNew->save();
                             
                     }
                 }
