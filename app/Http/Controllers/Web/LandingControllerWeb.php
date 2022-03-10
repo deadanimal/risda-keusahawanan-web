@@ -21,7 +21,7 @@ class LandingControllerWeb extends Controller
             echo 'alert("Session Expired Kindly Login");';
             echo "window.location.href = '/login';";
             echo '</script>';
-            return redirect('/login');
+            // return redirect('/login');
         }
         $role="";
         $authuser = Auth::user();
@@ -33,7 +33,7 @@ class LandingControllerWeb extends Controller
             echo 'alert("Session Expired Kindly Login");';
             echo "window.location.href = '/login';";
             echo '</script>';
-            return redirect('/login');
+            // return redirect('/login');
         }
 
         $noti = 0;
