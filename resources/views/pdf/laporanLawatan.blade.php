@@ -100,7 +100,9 @@
                     <td style="width: 10% !important; border:none !important"></td>
                     <td class="border_black">
                         @if ($usahawan->perniagaan != null)
-                            {{ $usahawan->perniagaan->daerah->Daerah }}
+                            @if ($usahawan->perniagaan->daerah)
+                                {{ $usahawan->perniagaan->daerah->Daerah }}
+                            @endif
                         @endif
                     </td>
                 </tr>
@@ -112,7 +114,9 @@
                     <td style="width: 10% !important; border:none !important"></td>
                     <td class="border_black">
                         @if ($usahawan->perniagaan != null)
-                            {{ $usahawan->perniagaan->negeri->Negeri }}
+                            @if ($usahawan->perniagaan->negeri)
+                                {{ $usahawan->perniagaan->negeri->Negeri }}
+                            @endif
                         @endif
                     </td>
                 </tr>
@@ -127,16 +131,12 @@
                         @if ($usahawan->perniagaan != null)
                             @if ($usahawan->perniagaan->jenisperniagaan == 'A')
                                 PENGELUARAN PRODUK MAKANAN
-
                             @elseif ($usahawan->perniagaan->jenisperniagaan == 'B')
                                 PENGELUARAN PRODUK BUKAN MAKANAN
-
                             @elseif ($usahawan->perniagaan->jenisperniagaan == 'C')
                                 PENGELUARAN PRODUK PERTANIAN
-
                             @elseif ($usahawan->perniagaan->jenisperniagaan == 'D')
                                 PERKHIDMATAN PEMASARAN
-
                             @elseif ($usahawan->perniagaan->jenisperniagaan == 'E')
                                 PERKHIDMATAN BUKAN PEMASARAN
                             @endif
