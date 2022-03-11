@@ -35,7 +35,9 @@
             padding: 0px !important;
         }
 
-        p, h2, h3 {
+        p,
+        h2,
+        h3 {
             color: white !important;
             font-family: "Calibri", sans-serif;
             font-weight: normal;
@@ -52,7 +54,11 @@
     </div>
 
     <div style="position: absolute; left:0px; top:-40px; color:white">
-        <h2>{{ $katalog->namasyarikat }}</h2>
+        <h2>
+            @if ($katalog->namasyarikat != null)
+                {{ $katalog->namasyarikat }}
+            @endif
+        </h2>
     </div>
 
 
@@ -65,10 +71,10 @@
     </div>
 
     <div style="
-    position: absolute; 
-    left:0px; 
-    top:20px; 
-    z-index:-1; 
+    position: absolute;
+    left:0px;
+    top:20px;
+    z-index:-1;
     width:300px;
     padding: 30px;
     width: 700px;
@@ -81,16 +87,17 @@
         {{-- <img src="image/KATALOG_REDS.pptx__2_-removebg-preview.png" alt="" height="550px"> --}}
 
 
-        <P>ALAMAT : {{ $katalog->alamat1}}, {{ $katalog->alamat2}}, {{ $katalog->alamat3}}, {{ $katalog->poskod}}, {{ $katalog->Negeri}}</P>
+        <P>ALAMAT : {{ $katalog->alamat1 }}, {{ $katalog->alamat2 }}, {{ $katalog->alamat3 }},
+            {{ $katalog->poskod }}, {{ $katalog->Negeri }}</P>
 
-        <P>GPS LANGITUD/ LONGITUD : {{ $katalog->latitud}} / {{ $katalog->logitud}}</P>
+        <P>GPS LANGITUD/ LONGITUD : {{ $katalog->latitud }} / {{ $katalog->logitud }}</P>
 
         <P>PEMASARAN : </P>
 
-        <p>&nbsp;&nbsp; FACEBOOK : {{ $katalog->facebook}}</p>
-        <p>&nbsp;&nbsp; INSTAGRAM : {{ $katalog->instagram}}</p>
-        <p>&nbsp;&nbsp; TWITTER : {{ $katalog->twitter}}</p>
-        <p>&nbsp;&nbsp; LAMAN WEB : {{ $katalog->lamanweb}}</p>
+        <p>&nbsp;&nbsp; FACEBOOK : {{ $katalog->facebook }}</p>
+        <p>&nbsp;&nbsp; INSTAGRAM : {{ $katalog->instagram }}</p>
+        <p>&nbsp;&nbsp; TWITTER : {{ $katalog->twitter }}</p>
+        <p>&nbsp;&nbsp; LAMAN WEB : {{ $katalog->lamanweb }}</p>
         <br>
 
         <p style="text-decoration: underline; font-weight:bold">{{ $katalog->nama_produk }}</p>
@@ -121,11 +128,11 @@
     </div>
 
     <div style="
-    position: absolute; 
-    left:770px; 
-    top:35px; 
-    width:250px; 
-    height: 300px; 
+    position: absolute;
+    left:770px;
+    top:35px;
+    width:250px;
+    height: 300px;
     background-image:url({{ $katalog->gambar_url }});
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -137,10 +144,10 @@
     </div>
 
     <div style="
-    position: absolute; 
-    left:790px; 
-    top:300px; 
-    z-index:2; 
+    position: absolute;
+    left:790px;
+    top:300px;
+    z-index:2;
     width:200px;
     padding: 10px;
     background-image:url(image/KATALOG_REDS.pptx__2_-removebg-preview.png);
