@@ -119,15 +119,15 @@
                             <th class="text-nowrap">{{number_format($jumlah->lapan,2)}}</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th class="text-nowrap" colspan="3">Jumlah</th>
-                            <th class="text-nowrap">{{number_format($jumlah->satu)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->dua,2)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->tiga)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->empat,2)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->lima)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->enam,2)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->tujuh)}}</th>
-                            <th class="text-nowrap">{{number_format($jumlah->lapan,2)}}</th>
+                            <th class="text-nowrap" colspan="3"><label class="form-check-label">Jumlah</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($jumlah->satu)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($jumlah->dua,2)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($jumlah->tiga)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($jumlah->empat,2)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($jumlah->lima)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($jumlah->enam,2)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($jumlah->tujuh)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($jumlah->lapan,2)}}</label></th>
                         </tr>
                     </tfoot>
                 </table>

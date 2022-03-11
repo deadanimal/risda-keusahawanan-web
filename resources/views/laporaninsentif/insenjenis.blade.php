@@ -164,30 +164,30 @@
                             <th>{{number_format($rm->tujuh,2)}}</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;">JUMLAH</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->satu)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->satu,2)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->dua)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->dua,2)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->tiga)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->tiga,2)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->empat)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->empat,2)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->lima)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->lima,2)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->enam)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->enam,2)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($total->tujuh)}}</th>
-                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;">{{number_format($rm->tujuh,2)}}</th>
+                            <th colspan="4" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">JUMLAH</th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->satu)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($rm->satu,2)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->dua)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($rm->dua,2)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->tiga)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($rm->tiga,2)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->empat)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($rm->empat,2)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->lima)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($rm->lima,2)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->enam)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($rm->enam,2)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($total->tujuh)}}</label></th>
+                            <th class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($rm->tujuh,2)}}</label></th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th colspan="4" style="border-bottom: 1px solid black;">Purata Jualan</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->satu,2)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->dua,2)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->tiga,2)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->empat,2)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->lima,2)}}</th>
-                            <th colspan="2" style="border-bottom: 1px solid black;">{{number_format($avg->enam,2)}}</th>
+                            <th colspan="4" style="border-bottom: 1px solid black;"><label class="form-check-label">Purata Jualan</label></th>
+                            <th colspan="2" style="border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($avg->satu,2)}}</label></th>
+                            <th colspan="2" style="border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($avg->dua,2)}}</label></th>
+                            <th colspan="2" style="border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($avg->tiga,2)}}</label></th>
+                            <th colspan="2" style="border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($avg->empat,2)}}</label></th>
+                            <th colspan="2" style="border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($avg->lima,2)}}</label></th>
+                            <th colspan="2" style="border-bottom: 1px solid black;"><label class="form-check-label">{{number_format($avg->enam,2)}}</label></th>
                             <th colspan="2" style="border-bottom: 1px solid black;"></th>
                         </tr>
                     </tfoot>

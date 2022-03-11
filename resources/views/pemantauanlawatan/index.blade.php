@@ -101,12 +101,12 @@
                             <th class="text-nowrap">100</th>
                         </tr>
                         <tr class="align-middle" style="text-align: center;">
-                            <th class="text-nowrap" colspan="3">Jumlah</th>
-                            <th class="text-nowrap">{{number_format($total->satu)}}</th>
-                            <th class="text-nowrap">{{number_format($total->dua)}}</th>
-                            <th class="text-nowrap">{{number_format($total->tiga)}}</th>
-                            <th class="text-nowrap">{{number_format($total->empat)}}</th>
-                            <th class="text-nowrap">100</th>
+                            <th class="text-nowrap" colspan="3"><label class="form-check-label">Jumlah</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($total->satu)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($total->dua)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($total->tiga)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">{{number_format($total->empat)}}</label></th>
+                            <th class="text-nowrap"><label class="form-check-label">100</label></th>
                         </tr>
                     </tfoot>
                 </table>
