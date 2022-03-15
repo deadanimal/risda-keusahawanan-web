@@ -55,8 +55,8 @@
 
     <div style="position: absolute; left:0px; top:-40px; color:white">
         <h2>
-            @if ($katalog->namasyarikat != null)
-                {{ $katalog->namasyarikat }}
+            @if ($usahawan->syarikat != null)
+                {{ $usahawan->syarikat->namasyarikat }}
             @endif
         </h2>
     </div>
@@ -67,7 +67,11 @@
     </div>
 
     <div style="position: absolute; left:530px; top:-40px;">
-        <h2 style="color:black !important; font-weight: bold;">{{ $katalog->notelefon }}</h2>
+        <h2 style="color:black !important; font-weight: bold;">
+            @if ($usahawan->syarikat != null)
+                {{ $usahawan->syarikat->notelefon }}
+            @endif
+        </h2>
     </div>
 
     <div style="
@@ -84,20 +88,45 @@
     background-size: cover;
     background-size: 100% 100%;
     ">
-        {{-- <img src="image/KATALOG_REDS.pptx__2_-removebg-preview.png" alt="" height="550px"> --}}
+        <P>ALAMAT :
+
+            @if ($usahawan->perniagaan != null)
+                {{ $usahawan->perniagaan->alamat1 }}, {{ $usahawan->perniagaan->alamat2 }},
+                {{ $usahawan->perniagaan->alamat3 }},
+                {{ $usahawan->perniagaan->poskod }}, {{ $usahawan->perniagaan->Negeri }}
+            @endif
+        </P>
 
 
-        <P>ALAMAT : {{ $katalog->alamat1 }}, {{ $katalog->alamat2 }}, {{ $katalog->alamat3 }},
-            {{ $katalog->poskod }}, {{ $katalog->Negeri }}</P>
+        <P>GPS LANGITUD/ LONGITUD :
+            {{ $katalog->latitud }} / {{ $katalog->logitud }}
 
-        <P>GPS LANGITUD/ LONGITUD : {{ $katalog->latitud }} / {{ $katalog->logitud }}</P>
+            @if ($usahawan->perniagaan != null)
+                {{ $usahawan->perniagaan->latitud }} / {{ $usahawan->perniagaan->logitud }}
+            @endif
+        </P>
 
         <P>PEMASARAN : </P>
 
-        <p>&nbsp;&nbsp; FACEBOOK : {{ $katalog->facebook }}</p>
-        <p>&nbsp;&nbsp; INSTAGRAM : {{ $katalog->instagram }}</p>
-        <p>&nbsp;&nbsp; TWITTER : {{ $katalog->twitter }}</p>
-        <p>&nbsp;&nbsp; LAMAN WEB : {{ $katalog->lamanweb }}</p>
+        <p>&nbsp;&nbsp; FACEBOOK :
+
+            @if ($usahawan->perniagaan != null)
+                {{ $usahawan->perniagaan->facebook }}
+            @endif
+        </p>
+        <p>&nbsp;&nbsp; INSTAGRAM :
+            @if ($usahawan->perniagaan != null)
+                {{ $usahawan->perniagaan->instagram }}
+            @endif
+        </p>
+        <p>&nbsp;&nbsp; TWITTER :
+
+        </p>
+        <p>&nbsp;&nbsp; LAMAN WEB :
+            @if ($usahawan->perniagaan != null)
+                {{ $usahawan->perniagaan->lamanweb }}
+            @endif
+        </p>
         <br>
 
         <p style="text-decoration: underline; font-weight:bold">{{ $katalog->nama_produk }}</p>

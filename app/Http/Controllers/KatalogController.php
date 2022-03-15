@@ -6,6 +6,7 @@ use App\Models\Katalog;
 use App\Models\Notifikasi;
 use App\Models\Pegawai;
 use App\Models\Syarikat;
+use App\Models\Usahawan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +26,7 @@ class KatalogController extends Controller
     {
         // dd('test');
         $katalog = Katalog::where('status_katalog', 'publish')
-        ->orderBy('updated_at', 'desc')->take(10)->get();
+            ->orderBy('updated_at', 'desc')->take(10)->get();
 
         return response()->json($katalog);
     }
@@ -176,41 +177,48 @@ class KatalogController extends Controller
     {
 
         $katalog = Katalog::where("katalogs.id", $id)
-            ->join('users', 'users.id', 'katalogs.id_pengguna')
-            ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
-            ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
-            ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
-            ->join('negeris', 'negeris.U_Negeri_ID', 'perniagaans.U_Negeri_ID')
-            ->select(
-                "syarikats.namasyarikat",
-                "syarikats.notelefon",
-                "perniagaans.alamat1",
-                "perniagaans.alamat2",
-                "perniagaans.alamat3",
-                "perniagaans.poskod",
-                "negeris.Negeri",
-                "perniagaans.latitud",
-                "perniagaans.logitud",
+            // ->join('users', 'users.id', 'katalogs.id_pengguna')
+            // ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+            // ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+            // ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
+            // ->join('negeris', 'negeris.U_Negeri_ID', 'perniagaans.U_Negeri_ID')
+            // ->select(
+            //     "syarikats.namasyarikat",
+            //     "syarikats.notelefon",
+            //     "perniagaans.alamat1",
+            //     "perniagaans.alamat2",
+            //     "perniagaans.alamat3",
+            //     "perniagaans.poskod",
+            //     "negeris.Negeri",
+            //     "perniagaans.latitud",
+            //     "perniagaans.logitud",
 
-                "perniagaans.facebook",
-                "perniagaans.instagram",
-                "perniagaans.twitter",
-                "perniagaans.lamanweb",
-                // "perniagaans.lamanweb",
+            //     "perniagaans.facebook",
+            //     "perniagaans.instagram",
+            //     "perniagaans.twitter",
+            //     "perniagaans.lamanweb",
+            //     // "perniagaans.lamanweb",
 
-                "katalogs.nama_produk",
-                "katalogs.kandungan_produk",
-                "katalogs.harga_produk",
-                "katalogs.berat_produk",
-                "katalogs.keterangan_produk",
-                "katalogs.gambar_url",
-            )
+            //     "katalogs.nama_produk",
+            //     "katalogs.kandungan_produk",
+            //     "katalogs.harga_produk",
+            //     "katalogs.berat_produk",
+            //     "katalogs.keterangan_produk",
+            //     "katalogs.gambar_url",
+            // )
             ->get()->first();
 
-        // dd($katalog);
+        $user = User::where('users.id', $katalog->id_pengguna)
+        ->get()->first();
+
+        $usahawan = Usahawan::where('usahawanid', $user->usahawanid)
+        ->get()->first();
+
+        // dd($usahawan);
 
         $pdf = PDF::loadView('pdf.katalog', [
-            'katalog' => $katalog
+            'katalog' => $katalog,
+            'usahawan' => $usahawan
         ])->setPaper('a4', 'landscape');
 
         $fname = time() . '-katalog-' . $id . '.pdf';
@@ -231,7 +239,4 @@ class KatalogController extends Controller
 
         return response()->json($usahawan);
     }
-
-
-
 }

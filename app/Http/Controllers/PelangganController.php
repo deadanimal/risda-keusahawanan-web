@@ -67,6 +67,7 @@ class PelangganController extends Controller
             ->join('pelanggans', 'stoks.id_pelanggan', 'pelanggans.id')
             ->select('pelanggans.*', 'stoks.id_pelanggan')
             ->distinct()
+            ->orderBy('updated_at', 'desc')
             ->get();
 
 
