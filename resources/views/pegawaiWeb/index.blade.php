@@ -12,11 +12,11 @@
                 <div style="padding-bottom: 20px;" id="test">
                     <a class="btn btn-primary" onclick="API()">Panggil HRIP</a>
                 </div>
-                <div style="display:none;">
+                {{-- <div style="display:none;">
                     <input id="nama" type="text" @if(isset($nama)) value="{{$nama}}" @endif/>
                     <input id="kodpt" type="text" @if(isset($kodpt)) value="{{$kodpt}}" @endif/>
                     <input id="nokp" type="text" @if(isset($nokp)) value="{{$nokp}}" @endif/>
-                </div>
+                </div> --}}
                 
                 @endif
                 <table class="tblpegawai table table-sm table-hover" id="pegawaitbl" style="padding-bottom:2vh;padding-right:4vh" >
@@ -161,7 +161,6 @@
     </div>
 </div>
 <style>
-    /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -175,24 +174,19 @@
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-  /* Modal Header */
 .modal-header {
-  /* padding: 2px 16px; */
   background-color: #00A651;
   color: white;
 }
 
-/* Modal Body */
 .modal-body {padding: 2px 16px;}
 
-/* Modal Footer */
 .modal-footer {
   padding: 2px 16px;
   background-color: #5cb85c;
   color: white;
 }
 
-/* Modal Content */
 .modal-content {
   position: relative;
   background-color: #fefefe;
@@ -205,7 +199,6 @@
   animation-duration: 0.4s
 }
 
-/* Add Animation */
 @keyframes animatetop {
   from {top: -300px; opacity: 0}
   to {top: 0; opacity: 1}
@@ -228,6 +221,41 @@
             </select>
             <div style="padding-top: 10px;padding-left:10px;">
                 <a class="btn btn-primary" onclick="ChangeMukim()">Simpan</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal2" class="modal">
+    <div class="modal-content" style="height:60vh;width:90vh;margin-top:100px;">
+        <span class="close2" style="float: left">&times;</span>
+        <div class="modal-body">
+            <div style="padding:10px 50px;">
+                <div class="col-lg-12" style="padding-top: 30px;">
+                    <h4>Panggilan Khusus HRIP Pegawai</h4>
+                </div>
+                <div class="col-lg-12">
+                    <label class="form-label">Nama Pegawai</label>
+                    <input class="form-control" name="nama" type="text" id="nama"/>
+                </div>
+                <div class="col-lg-12">
+                    <label class="form-label">No Kad Pengenalan Pegawai</label>
+                    <input class="form-control" name="nokp" type="text" id="nokp"/>
+                </div>
+                <div class="col-lg-12">
+                    <label class="form-label pt">Pusat Tanggungjawab Pegawai</label>
+                    <select name="PT" class="form-select" aria-label=".form-select pt" style="display:inline-block;" id="kodpt">
+                        <option selected="true" value='' disabled="disabled">Pusat Tanggungjawab</option>
+                        <option value=''>Semua Pusat Tanggungjawab</option>
+                        @foreach ($ddPT as $items)
+                            <option value="{{ $items->Kod_PT }}"> 
+                                {{ $items->keterangan }} 
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-lg-12" style="padding-top:60px;text-align:center;">
+                    <button class="btn btn-primary" type="button" onclick="sendapi()">Panggil HRIP</button>
+                </div>
             </div>
         </div>
     </div>
@@ -287,22 +315,39 @@ function mukim(val,userid){
 
 window.onclick = function(event) {
     var modal = document.getElementById("myModal");
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+
+    var modal2 = document.getElementById("myModal2");
+    if (event.target == modal2) {
+        modal2.style.display = "none";
+    }
 }
 
 var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
     var modal = document.getElementById("myModal");
-  modal.style.display = "none";
+    modal.style.display = "none";
+}
+
+var span2 = document.getElementsByClassName("close2")[0];
+span2.onclick = function() {
+    var modal = document.getElementById("myModal2");
+    modal.style.display = "none";
 }
 
 function API(){
+    var modal = document.getElementById("myModal2");
+    modal.style.display = "block";
+}
+
+function sendapi(){
     var nama = $('#nama').val();
     var kodpt = $('#kodpt').val();
     var nokp = $('#nokp').val();
-    // console.log(nama);
+    console.log(nokp);
+
     if (confirm("Amaran! Panggilan API akan mengambil masa yang lama.")) {
         $('.loader').show();
         $.ajax({

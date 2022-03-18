@@ -314,24 +314,43 @@ class UsahawanControllerWeb extends Controller
 
     }
 
-    public function usahawanPK(){
+    public function usahawanPK(Request $request){
         $client = new \GuzzleHttp\Client();
         try{
+            $nama = $request->nama;
+            $nokp = $request->nokp;
+            $negeri = $request->negeri;
+            $kodpt = $request->kodpt;
+
+            $link = 'https://pekebunkecil-dev.borang.my/manage/api/permohonan-usahawan?';
+            if($nama != null){
+                $link .= 'nama_penuh='.$nama.'&';
+            }
+            if($kodpt != null){
+                $link .= 'pusat_tanggungjawab='.$kodpt.'&';
+            }
+            if($nokp != null){
+                $link .= 'no_kp='.$nokp.'&';
+            }
+            if($negeri != null){
+                $link .= 'negeri='.$negeri.'&';
+            }
+
             $token = '3EgjkvnnuYzAEd1-FiN-BNiI1Nv7YwuM';
             $headers = [
                 'Authorization' => 'Bearer ' . $token,        
                 'Accept'        => 'application/json',
             ];
-            $request = $client->request('GET', 'https://pekebunkecil-dev.borang.my/manage/api/permohonan-usahawan', [
-                'headers' => $headers
-            ]);
+            $request = $client->request('GET', $link, [
+                'headers' => $headers]
+            );
 
             $response = $request->getBody()->getContents();
             $vals = json_decode($response);
             // return $vals;
             foreach ($vals as $val){
                 // return $val;
-                if($val === 1){
+                if(is_int($val)){
                     // return $val;
                     $usahawan = Usahawan::where('nokadpengenalan', $vals->no_kad_pengenalan)->first();
                     if(!isset($usahawan)){
@@ -349,6 +368,7 @@ class UsahawanControllerWeb extends Controller
                         $usahawanNew->poskod = $vals->alamat_surat_menyurat->poskod;
                         $usahawanNew->bandar = $vals->alamat_surat_menyurat->bandar;
                         $usahawanNew->usahawanid = $vals->usahawan_id;
+                        $usahawanNew->save();
 
                         $userNew = new User();
                         $userNew->name = $vals->nama_penuh;
@@ -358,14 +378,17 @@ class UsahawanControllerWeb extends Controller
                         $userNew->no_kp = $vals->no_kad_pengenalan;
                         $userNew->type = 2;
                         $userNew->profile_status = 0;
+                        $userNew->save();
 
                         $syarikat = new Syarikat();
                         $syarikat->namasyarikat = $vals->nama_syarikat;
                         $syarikat->usahawanid = $vals->usahawan_id;
+                        $syarikat->save();
 
                         $pekebun = new Pekebun();
                         $pekebun->No_KP = $vals->no_kp_pekebun_kecil;
                         $pekebun->usahawanid = $vals->usahawan_id;
+                        $pekebun->save();
 
                         $perniagaan = New Perniagaan();
                         $perniagaan->alamat1 = $vals->alamat_penuh_perniagaan->no_rumah;
@@ -375,8 +398,11 @@ class UsahawanControllerWeb extends Controller
                         $perniagaan->U_Negeri_ID = $vals->alamat_penuh_perniagaan->negeri;
                         $perniagaan->poskod = $vals->alamat_penuh_perniagaan->poskod;
                         $perniagaan->usahawanid = $vals->usahawan_id;
-                        $usahawanNew->save();
+                        $perniagaan->save();
+                        
                     }
+                    return $vals;
+
                 }else{
                     $usahawan = Usahawan::where('nokadpengenalan', $val->no_kad_pengenalan)->orWhere('email',$val->email)->first();
                     // return $usahawan;
@@ -396,6 +422,7 @@ class UsahawanControllerWeb extends Controller
                         $usahawanNew->poskod = $val->alamat_surat_menyurat->poskod;
                         $usahawanNew->bandar = $val->alamat_surat_menyurat->bandar;
                         $usahawanNew->usahawanid = $val->usahawan_id;
+                        $usahawanNew->save();
 
                         $userNew = new User();
                         $userNew->name = $val->nama_penuh;
@@ -405,14 +432,17 @@ class UsahawanControllerWeb extends Controller
                         $userNew->no_kp = $val->no_kad_pengenalan;
                         $userNew->type = 2;
                         $userNew->profile_status = 0;
+                        $userNew->save();
 
                         $syarikat = new Syarikat();
                         $syarikat->namasyarikat = $val->nama_syarikat;
                         $syarikat->usahawanid = $val->usahawan_id;
+                        $syarikat->save();
 
                         $pekebun = new Pekebun();
                         $pekebun->No_KP = $val->no_kp_pekebun_kecil;
                         $pekebun->usahawanid = $val->usahawan_id;
+                        $pekebun->save();
 
                         $perniagaan = New Perniagaan();
                         $perniagaan->alamat1 = $val->alamat_penuh_perniagaan->no_rumah;
@@ -422,7 +452,7 @@ class UsahawanControllerWeb extends Controller
                         $perniagaan->U_Negeri_ID = $val->alamat_penuh_perniagaan->negeri;
                         $perniagaan->poskod = $val->alamat_penuh_perniagaan->poskod;
                         $perniagaan->usahawanid = $val->usahawan_id;
-                        $usahawanNew->save();
+                        $perniagaan->save();
                             
                     }
                 }

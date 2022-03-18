@@ -2,14 +2,14 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-        <form method="get" id="allusahawan" method="get" action="/ViewAllUsahawan">
+        {{-- <form method="get" id="allusahawan" method="get" action="/ViewAllUsahawan">
             @csrf
             @method("GET")
             <div class="col-lg-12">
                 <h4>Lihat Semua Data Usahawan</h4>
                 <button class="btn btn-primary" type="button" onclick="viewall()">Lihat Semua</button>
             </div>
-        </form>
+        </form> --}}
         <form method="post" action="/CariUsahawan" enctype="multipart/form-data">
             @csrf
             @method("POST")

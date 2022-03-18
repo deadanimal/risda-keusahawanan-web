@@ -2,14 +2,14 @@
 @section('content')
 <div class="card">
     <div class="card-body overflow-hidden p-lg-6">
-        <form method="get" id="allpegawai" method="get" action="/ViewAll">
+        {{-- <form method="get" id="allpegawai" method="get" action="/ViewAll">
             @csrf
             @method("GET")
             <div class="col-lg-12">
                 <h4>Lihat Semua Data Pegawai</h4>
                 <button class="btn btn-primary" type="button" onclick="viewall()">Lihat Semua</button>
             </div>
-        </form>
+        </form> --}}
         <form method="post" action="/CariPegawai" enctype="multipart/form-data">
             @csrf
             @method("POST")
@@ -24,7 +24,7 @@
                 <label class="form-label">No Kad Pengenalan Pegawai</label>
                 <input class="form-control" name="nokp" type="text"/>
             </div>
-            <div class="col-lg-12">
+            {{-- <div class="col-lg-12">
                 <label class="form-label mukim">Mukim Pegawai</label>
                 <select name="mukim" class="form-select" aria-label=".form-select mukim" style="display:inline-block;">
                     <option selected="true" value='' disabled="disabled">Mukim</option>
@@ -35,7 +35,7 @@
                         </option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
             <div class="col-lg-12">
                 <label class="form-label pt">Pusat Tanggungjawab Pegawai</label>
                 <select name="PT" class="form-select" aria-label=".form-select pt" style="display:inline-block;">

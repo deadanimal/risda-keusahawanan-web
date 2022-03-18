@@ -432,6 +432,102 @@
         </div>
     </div>
 </div>
+<style>
+    /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 100000 !important; /* Sit on top */
+  left: 0%;
+  top: 0%;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+  /* Modal Header */
+.modal-header {
+  /* padding: 2px 16px; */
+  background-color: #00A651;
+  color: white;
+}
+
+/* Modal Body */
+.modal-body {padding: 2px 16px;}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+</style>
+<div id="myModal" class="modal">
+    <div class="modal-content" style="height:60vh; width:90vh;margin-top:80px;">
+        <span class="close" style="float: left">&times;</span>
+        <div style="padding:10px 50px">
+            <div class="col-lg-12" style="padding-bottom:10px;">
+                <h4>Carian Khusus Data Usahawan</h4>
+            </div>
+            <div class="col-lg-12">
+                <label class="form-label">Nama Usahawan</label>
+                <input class="form-control" name="nama" type="text" id="name" />
+            </div>
+            <div class="col-lg-12">
+                <label class="form-label">No Kad Pengenalan Usahawan</label>
+                <input class="form-control" name="noKP" type="text" id="nokp"/>
+            </div>
+            <div class="col-lg-12">
+                <label class="form-label pt">Negeri Usahawan</label>
+                <select name="negeri" class="form-select" aria-label=".form-select pt" style="display:inline-block;" id="negeri">
+                    <option selected="true" value='' disabled="disabled">Negeri Usahawan</option>
+                    <option value=''>Semua Negeri</option>
+                    @foreach ($ddNegeri as $items)
+                        <option value="{{ $items->U_Negeri_ID }}"> 
+                            {{ $items->Negeri }} 
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-lg-12">
+                <label class="form-label pt">Pusat Tanggungjawab Usahawan</label>
+                <select name="PT" class="form-select" aria-label=".form-select pt" style="display:inline-block;" id="kodpt">
+                    <option selected="true" value='' disabled="disabled">Pusat Tanggungjawab</option>
+                    <option value=''>Semua Pusat Tanggungjawab</option>
+                    @foreach ($ddPT as $items)
+                        <option value="{{ $items->Kod_PT }}"> 
+                            {{ $items->keterangan }} 
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-lg-12" style="padding-top: 30px;text-align:center;">
+                <button class="btn btn-primary" type="button" onclick="sendPK()">Panggil Portal PK</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -442,6 +538,12 @@ $( document ).ready(function() {
     // API();
     $('.loader').hide();
 });
+
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+    var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
 
 function BangsaDD(val){
     console.log(val);
@@ -491,21 +593,37 @@ function ResetPass(){
 }
 
 function APIPK(){
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+}
+
+function sendPK(){
+    var nama = $('#nama').val();
+    var nokp = $('#nokp').val();
+    var negeri = $('#negeri').val();
+    var kodpt = $('#kodpt').val();
+
     if (confirm("Amaran! Panggilan API akan mengambil masa yang lama.")) {
-        $('.loader').show();
+    $('.loader').show();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url: "/usahawanPK",
-            type:"GET",
+            type:"POST",
+            data: {     
+                nama:nama,
+                nokp:nokp,
+                negeri:negeri,
+                kodpt:kodpt
+            },
             success: function(data) {
                 console.log(data);
                 if(data == 400){
                     alert("Error API Portal Pekebun Kecil")
                 }else{
                     alert("Data Usahawan Berjaya dan Selesai Ditarik");
-                    location.reload();
+                    // location.reload();
                 }
                 $('.loader').hide();
             }
@@ -513,6 +631,13 @@ function APIPK(){
     }else{
         return false;
     }
+}
+
+window.onclick = function(event) {
+    var modal = document.getElementById("myModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
 
 function API(){
