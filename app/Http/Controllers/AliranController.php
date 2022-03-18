@@ -66,6 +66,7 @@ class AliranController extends Controller
     public function show($id)
     {
         $aliran = Aliran::where('id_pengguna', $id)
+        ->whereMonth('tarikh_aliran', Carbon::now()->month)
         ->orderBy('tarikh_aliran', 'desc')->get();
 
         return response()->json($aliran);
