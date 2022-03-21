@@ -184,6 +184,9 @@ class PegawaiControllerWeb extends Controller
 
     public function pegawaiPost2(Request $request)
     {
+        if($request->nama == null && $request->kodpt == null && $request->nokp == null){
+            return 'nodata';
+        }
         $nama = $request->nama;
         $kodpt = $request->kodpt;
         $nokp = $request->nokp;

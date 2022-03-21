@@ -226,7 +226,7 @@
     </div>
 </div>
 <div id="myModal2" class="modal">
-    <div class="modal-content" style="height:60vh;width:90vh;margin-top:100px;">
+    <div class="modal-content" style="height:75vh;width:90vh;margin-top:100px;">
         <span class="close2" style="float: left">&times;</span>
         <div class="modal-body">
             <div style="padding:10px 50px;">
@@ -366,7 +366,9 @@ function sendapi(){
                 if(data == 400){
                     alert("Error API HRIP Pegawai");
                 }else if(data == 300){
-                    alert("Error Tiada data dijumpai")
+                    alert("Error Tiada data dijumpai");
+                }else if(data == 'nodata'){
+                    alert("Sila Isi Data Carian");
                 }else{
                     alert("Data Pegawai Berjaya dan Selesai Ditarik");
                     location.reload();
