@@ -19,7 +19,7 @@ class CreateBuletinsTable extends Migration
             $table->foreignId('id_pegawai');
             $table->string('tajuk');
             $table->dateTime('tarikh')->nullable();
-            $table->string('keterangan_lain')->nullable();
+            $table->longText('keterangan_lain')->nullable();
             $table->string('url')->nullable();
             $table->string('status');
             $table->longText('gambar_buletin');
