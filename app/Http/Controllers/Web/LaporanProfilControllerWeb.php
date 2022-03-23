@@ -203,12 +203,17 @@ class LaporanProfilControllerWeb extends Controller
             }
 
             $insentif2 = Insentif::where('id_pengguna', $users->usahawanid)->get();
-            foreach ($insentif2 as $insentif2s) {
-                $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
-                if(isset($jenisinsentif)){
-                    $insentif2s->namainsen = $jenisinsentif->nama_insentif;
-                }
-            }   
+            if(isset($insentif2)){
+                foreach ($insentif2 as $insentif2s) {
+                    $jenisinsentif = JenisInsentif::where('id_jenis_insentif', $insentif2s->id_jenis_insentif)->first();
+                    if(isset($jenisinsentif)){
+                        $insentif2s->namainsen = $jenisinsentif->nama_insentif;
+                    }
+                }  
+            }else{
+                $insentif2 = '';
+            }
+             
 
             $pengguna = User::where('usahawanid', $users->usahawanid)->first();
             $getYear = date("Y");
@@ -269,7 +274,7 @@ class LaporanProfilControllerWeb extends Controller
             }
         
         }catch(\Exception $e){
-            
+
         }
 
         return view('laporanprofil.profdetail'
