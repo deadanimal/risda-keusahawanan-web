@@ -78,11 +78,15 @@ class LaporanProfilControllerWeb extends Controller
         $negeri = Negeri::where('U_Negeri_ID', $users->U_Negeri_ID)->first();
         if(isset($negeri)){
             $users->negeri = $negeri->Negeri;
+        }else{
+            $users->negeri = '';
         }
 
         $PT = PusatTanggungjawab::where('Kod_PT', $users->Kod_PT)->first();
         if(isset($PT)){
             $users->PusatTang = $PT->keterangan;
+        }else{
+            $users->PusatTang = '';
         }
 
         $dateOfBirth = $users->tarikhlahir;
