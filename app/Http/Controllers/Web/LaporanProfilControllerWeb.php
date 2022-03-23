@@ -75,6 +75,7 @@ class LaporanProfilControllerWeb extends Controller
     {
         try{
             $users = Usahawan::where('id', $id)->first();
+            $insentif2 = '';
             // dd($users);
             $negeri = Negeri::where('U_Negeri_ID', $users->U_Negeri_ID)->first();
             if(isset($negeri)){
@@ -274,7 +275,7 @@ class LaporanProfilControllerWeb extends Controller
             }
         
         }catch(\Exception $e){
-
+            $insentif2 = '';
         }
 
         return view('laporanprofil.profdetail'

@@ -196,6 +196,7 @@
                             <th>Kelulusan Bantuan (RM) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </th>
                             <th>Tahun Terima <br></th>
                         </tr>
+                        @if (isset($insentif2))
                         @foreach ($insentif2 as $insentif2s)
                         <tr>
                             <td>{{$insentif2s->namainsen}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
@@ -203,6 +204,7 @@
                             <td>{{$insentif2s->tahun_terima_insentif}}<br></td>   
                         </tr>
                         @endforeach
+                        @endif
                     </table>
                 </td>
             </tr>
