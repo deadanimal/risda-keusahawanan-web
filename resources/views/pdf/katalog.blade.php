@@ -88,12 +88,13 @@
     background-size: cover;
     background-size: 100% 100%;
     ">
-        <P>ALAMAT :
+        <P style="text-transform: uppercase">ALAMAT :
 
             @if ($usahawan->perniagaan != null)
                 {{ $usahawan->perniagaan->alamat1 }}, {{ $usahawan->perniagaan->alamat2 }},
                 {{ $usahawan->perniagaan->alamat3 }},
-                {{ $usahawan->perniagaan->poskod }}, {{ $usahawan->perniagaan->Negeri }}
+                {{ $usahawan->perniagaan->poskod }}, 
+                {{ $usahawan->perniagaan->Negeri->Negeri }}
             @endif
         </P>
 
