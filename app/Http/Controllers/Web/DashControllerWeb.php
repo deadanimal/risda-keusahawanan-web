@@ -26,7 +26,8 @@ class DashControllerWeb extends Controller
         if(!isset($authuser)){
             return redirect('/');
         }
-        
+        $pegawai = Pegawai::where('id', $authuser->idpegawai)->first();
+        // dd($pegawai);
         $getjenisinsentif="";
         $gettahun = date("Y");
         $getNegeri="";
@@ -44,7 +45,7 @@ class DashControllerWeb extends Controller
             $Insentifdatas = $Insentifdatas->where('usahawans.U_Daerah_ID', $pegawai->Mukim->U_Daerah_ID);
         }else if($authuser->role == 7){
             $ddNegeri = Negeri::select('U_Negeri_ID','Negeri')->where('U_Negeri_ID', $pegawai->Mukim->U_Negeri_ID)->get();
-            $Insentifdatas = $Insentifdatas->where('usahawans.Kod_PT', $pegawai->Mukim->NamaPT);
+            $Insentifdatas = $Insentifdatas->where('usahawans.Kod_PT', $pegawai->NamaPT);
         }
 
         $array = [];

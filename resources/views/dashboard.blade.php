@@ -209,7 +209,7 @@
                       </a>
                     </li>
                     <a class="nav-link dropdown-indicator" href="#pendapatanbulanan" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'true' : 'false' }}" aria-controls="komponen">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Jualan Penerima Insentif</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Laporan Jualan</span>
                         </div>
                     </a>
                     <ul class="nav collapse {{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'show' : 'collapse' }}" id="pendapatanbulanan">

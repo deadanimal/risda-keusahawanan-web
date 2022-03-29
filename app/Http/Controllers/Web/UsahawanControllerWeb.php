@@ -372,7 +372,7 @@ class UsahawanControllerWeb extends Controller
 
                         $userNew = new User();
                         $userNew->name = $vals->nama_penuh;
-                        $userNew->enail = $vals->alamat_emel;
+                        $userNew->email = $vals->alamat_emel;
                         $userNew->usahawanid = $vals->usahawan_id;
                         $userNew->status_pengguna = 0;
                         $userNew->no_kp = $vals->no_kad_pengenalan;
@@ -461,7 +461,7 @@ class UsahawanControllerWeb extends Controller
             return $vals;
         }
         catch(\Exception $e){
-            dd($e);
+            // dd($e);
             return '400';
         }
     }

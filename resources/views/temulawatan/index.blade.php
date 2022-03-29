@@ -133,6 +133,10 @@
                 align-items: center;
                 text-align: center;
             }
+
+            .datepicker-container {
+                z-index: 10000 !important;
+            }
         </style>
         </div>
     </div>
@@ -165,7 +169,8 @@
         //     paging: true
         // });
         $('#datetimepicker').datepicker({
-            dateFormat: "yy-mm-dd"
+            dateFormat: "yy-mm-dd",
+            format: "dd-mm-yy"
         });
         var span = document.getElementsByClassName("close")[0];
         var modal = document.getElementById("myModal");

@@ -12,7 +12,7 @@
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Usahawan</h3>
                 @if (Auth::user()->role == 1)
                 <div style="padding-bottom: 20px;" id="test">
-                    <a class="btn btn-primary" onclick="APIPK()">Panggil Portal PK</a>
+                    <a class="btn btn-primary" onclick="APIPK()">Portal PK</a>
                 </div>
                 @endif
                 <table class="tblusahawan" id="penggunatbl">
@@ -437,7 +437,7 @@
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 100000 !important; /* Sit on top */
+  z-index: 10000 !important; /* Sit on top */
   left: 0%;
   top: 0%;
   width: 100%; /* Full width */
@@ -484,7 +484,7 @@
 }
 </style>
 <div id="myModal" class="modal">
-    <div class="modal-content" style="height:60vh; width:90vh;margin-top:80px;">
+    <div class="modal-content" style="height:75vh; width:90vh;margin-top:80px;">
         <span class="close" style="float: left">&times;</span>
         <div style="padding:10px 50px">
             <div class="col-lg-12" style="padding-bottom:10px;">
@@ -598,11 +598,11 @@ function APIPK(){
 }
 
 function sendPK(){
-    var nama = $('#nama').val();
+    var nama = $('#name').val();
     var nokp = $('#nokp').val();
     var negeri = $('#negeri').val();
     var kodpt = $('#kodpt').val();
-
+    console.log(nama);
     if (confirm("Amaran! Panggilan API akan mengambil masa yang lama.")) {
     $('.loader').show();
         $.ajax({

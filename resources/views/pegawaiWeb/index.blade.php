@@ -10,7 +10,7 @@
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Pegawai</h3>
                 @if (Auth::user()->role == 1)
                 <div style="padding-bottom: 20px;" id="test">
-                    <a class="btn btn-primary" onclick="API()">Panggil HRIP</a>
+                    <a class="btn btn-primary" onclick="API()">HRIP</a>
                 </div>
                 {{-- <div style="display:none;">
                     <input id="nama" type="text" @if(isset($nama)) value="{{$nama}}" @endif/>
@@ -164,7 +164,7 @@
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 100000 !important; /* Sit on top */
+  z-index: 10000 !important; /* Sit on top */
   left: 0%;
   top: 0%;
   width: 100%; /* Full width */
@@ -343,6 +343,7 @@ function API(){
 }
 
 function sendapi(){
+    $('.loader').show();
     var nama = $('#nama').val();
     var kodpt = $('#kodpt').val();
     var nokp = $('#nokp').val();
