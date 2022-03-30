@@ -70,7 +70,7 @@
                 <td><label class="form-label">: {{$user->negeri}}</label></td>
             </tr>
             <tr>
-                <td><label class="form-label">Dun</label></td>
+                <td><label class="form-label">DUN</label></td>
                 <td><label class="form-label">: {{$user->dun}}</label></td>
                 <td><label class="form-label">Parlimen</label></td>
                 <td><label class="form-label">: {{$user->parlimen}}</label></td>

@@ -102,7 +102,7 @@
                             <tr class="align-middle" style="text-align: center;">
                                 <th scope="col" style="padding-right:2vh;">Negeri</th>
                                 <th scope="col">Parlimen</th>
-                                <th scope="col">Dun</th>
+                                <th scope="col">DUN</th>
                                 <th scope="col">Jenis Insentif</th>
                                 <th scope="col">Tahun Terima Insentif</th>
                                 <th scope="col">Bil Penerima Insentif</th>

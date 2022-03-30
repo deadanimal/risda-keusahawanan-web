@@ -19,7 +19,7 @@
                 </select>
             </h3>
             <div style="overflow-x: auto !important;overflow-y: auto !important;">
-                <div style="padding-bottom: 20px;">
+                <div style="padding-bottom: 20px;" id="pdfbtn">
                     <a class="btn btn-primary" onclick="ExportPDF()"><span >PDF</span></a>
                 </div>
                 <table id="laporanpantauind" class="table table-sm table-hover" style="border:none;border-collapse: collapse;">
@@ -59,6 +59,7 @@
                     </thead>
                     <tbody id="tblname">
                         <input style="display: none;" id="userid" value="{{$usahawan->usahawanid}}" />
+                        @if ($result == '')
                         <tr class="align-middle" style="text-align: left;">
                             <td class="text-nowrap" >Nama Usahawan</td>
                             <td class="text-nowrap" >: &nbsp {{$usahawan->namausahawan}}</td>
@@ -143,6 +144,9 @@
                             <td></td>
 
                         </tr>
+                        @else 
+
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -156,11 +160,22 @@
     $( document ).ready(function() {
         var today = new Date();
         var year = today.getFullYear();
+        var warn = "<?php echo $result; ?>";
+        var btn = '';
+        if(warn == ''){
+            btn = "Blfrtip";
+            $('#pdfbtn').show();
+            // document.getElementById('pdfbtn').show();
+        }else{
+            $('#pdfbtn').hide();
+            // document.getElementById('pdfbtn').hide();
+        }
+        
         $('#laporanpantauind').DataTable( {
             searching: false,
             sorting:false,
             paging:false,
-            dom: 'Blfrtip',
+            dom: btn,
             exportOptions: {
                 stripHtml: false,
             },
@@ -189,7 +204,7 @@
             ],
             "language": {
                 "lengthMenu": "_MENU_ rekod setiap paparan",
-                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "zeroRecords": ""+warn,
                 "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
                 "infoEmpty": "Tiada rekod dijumpai",
                 "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
@@ -222,12 +237,22 @@
             },
             success: function(data) {
                 console.log(data);
-                $("#tblname").html(data);
+                var error = '';
+                var dom = '';
+                if(data == 1){
+                    error = 'Tiada data lawatan ditemui';
+                }else if(data == 2){
+                    error = 'Tiada data insentif ditemui';
+                }else{
+                    $("#tblname").html(data);
+                    dom = 'Blfrtip';
+                }
+                
                 $('#laporanpantauind').DataTable( {
                     searching: false,
                     sorting:false,
                     paging:false,
-                    dom: 'Blfrtip',
+                    dom: dom,
                     exportOptions: {
                         stripHtml: false,
                     },
@@ -256,7 +281,7 @@
                     ],
                     "language": {
                         "lengthMenu": "_MENU_ rekod setiap paparan",
-                        "zeroRecords": "Maaf - Tiada data dijumpai",
+                        "zeroRecords": error,
                         "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
                         "infoEmpty": "Tiada rekod dijumpai",
                         "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",

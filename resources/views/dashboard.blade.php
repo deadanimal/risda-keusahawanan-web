@@ -226,7 +226,7 @@
                         </li>
                         <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDun.*') ? 'active' : '' }}" onclick="generatereport(3,this.href,'');return false;" href="/pendbulDun">
                           {{-- href="/pendbulDun" --}}
-                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Parlimen/Dun</span>
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Parlimen/DUN</span>
                           </div></a>
                         </li>
                     </ul>

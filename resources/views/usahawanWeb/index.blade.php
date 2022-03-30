@@ -324,7 +324,7 @@
                             {{-- <input class="form-control usahawanfield" name="U_Parlimen_ID"   type="text"  /> --}}
                         </div>
                         <div class="col-lg-6">
-                            <label class="form-label">Dun</label>
+                            <label class="form-label">DUN</label>
                             <select name="U_Dun_ID" class="form-select usahawanfield" aria-label=".form-select-sm example">
                                 <option value=""></option>
                                 @foreach ($ddDun as $items)

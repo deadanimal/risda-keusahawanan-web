@@ -5,6 +5,11 @@
         <div class="row align-items-center">
             <div id="displaysatu" >
                 <h3 class="text" style="padding-bottom:20px;color:#00A651;">Pemantauan Lawatan Individu</h3>
+                <style>
+                    .sorting {
+                        background-image : none !important;
+                    }
+                </style>
                 <table id="LPItbl">
                     <colgroup>
                         <col span="1" style="width: 35%;">
@@ -38,6 +43,7 @@
                             <th scope="col">Nama</th>
                             <th scope="col">No kad Pengenalan</th>
                             <th scope="col">Negeri</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +68,23 @@
 <script type="text/javascript">
 
     $( document ).ready(function() {
+        $('#LPItbl').DataTable( {
+            searching: true,
+            sorting:false,
+            paging:true,
+            "language": {
+                "lengthMenu": "_MENU_ rekod setiap paparan",
+                "zeroRecords": "Maaf - Tiada data dijumpai",
+                "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+                "infoEmpty": "Tiada rekod dijumpai",
+                "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+                "sSearch": "Saringan :",
+                "paginate": {
+                    "previous": "Sebelum",
+                    "next": "Seterusnya"
+                }
+            }
+        });
         $('.loader').hide();
     })
     

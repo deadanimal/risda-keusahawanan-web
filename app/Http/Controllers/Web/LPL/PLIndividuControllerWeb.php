@@ -31,6 +31,7 @@ class PLIndividuControllerWeb extends Controller
         $result = [];
         foreach ($usahawans as $usahawan) {
             $insentif = Insentif::where('id_pengguna',$usahawan->usahawanid)->first();
+            // dd($insentif);
             if($insentif){
                 $negeri = Negeri::where('U_Negeri_ID', $usahawan->U_Negeri_ID)->first();
                 if(isset($negeri)){
@@ -48,7 +49,7 @@ class PLIndividuControllerWeb extends Controller
                 // }
             
         }
-        
+        // dd($negeri);
         return view('pemantauanlawatan.pantauindividu'
         ,[
             'users'=>$result
@@ -62,6 +63,7 @@ class PLIndividuControllerWeb extends Controller
         if(!isset($authuser)){
             return redirect('/landing');
         }
+        $result = '';
         $usahawan = Usahawan::where('usahawanid', $usahawanid)->first();
         $user = User::where('usahawanid', $usahawan->usahawanid)->first();
         $syarikat = Syarikat::where('usahawanid', $usahawan->usahawanid)->first();
@@ -100,6 +102,8 @@ class PLIndividuControllerWeb extends Controller
             if(isset($jenisinsentif)){
                 $usahawan->jenis_insentif = $jenisinsentif->nama_insentif;
             }
+        }else{
+            $result = "Tiada data insentif ditemui";
         }
 
         $lawatan = Lawatan::where('id_pengguna', $user->id)->whereYear('tarikh_lawatan', $getYear)->first();
@@ -116,13 +120,16 @@ class PLIndividuControllerWeb extends Controller
             if(isset($tindakan_lawatan)){
                 $usahawan->tindakan = $tindakan_lawatan->nama_tindakan_lawatan;
             }
+        }else{
+            $result = "Tiada data lawatan ditemui";
         }
 
         
         //dd($lawatan);
         return view('pemantauanlawatan.pantauindividudetail'
         ,[
-            'usahawan'=>$usahawan
+            'usahawan'=>$usahawan,
+            'result'=>$result
         ]
         );
     }
@@ -272,10 +279,10 @@ class PLIndividuControllerWeb extends Controller
 
                 
             }else{
-                $result = "Tiada data lawatan ditemui";
+                $result = 1;
             }
         }else{
-            $result = "Tiada data insentif ditemui";
+            $result = 2;
         }
 
         return $result;        
