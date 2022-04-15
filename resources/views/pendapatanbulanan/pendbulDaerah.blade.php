@@ -36,7 +36,7 @@
                   <div class="card-body d-flex flex-column justify-content-end">
                     <div class="row">
                       <div class="col">
-                        <p class="font-sans-serif lh-1 mb-1 fs-4" id="c_insentif">RM{{number_format($c_insentif,2)}}</p>
+                        <p class="font-sans-serif lh-1 mb-1 fs-4">RM<span id="c_insentif">{{number_format($c_insentif,2)}}</span></p>
                       </div>
                     </div>
                   </div>
@@ -52,7 +52,7 @@
                   <div class="card-body d-flex flex-column justify-content-end">
                     <div class="row">
                       <div class="col">
-                        <p class="font-sans-serif lh-1 mb-1 fs-4" id="c_jualan">RM{{number_format($c_jualan,2)}}</p>
+                        <p class="font-sans-serif lh-1 mb-1 fs-4">RM<span id="c_jualan">{{number_format($c_jualan,2)}}</span></p>
                       </div>
                     </div>
                   </div>

@@ -171,8 +171,8 @@ class PendBulDunControllerWeb extends Controller
             <td class="text-nowrap" style="border-top: 1px solid black;border-bottom: 1px solid black;"><label class="form-check-label">'.number_format($c_puratajual,2).'</label></td>
         </tr>
         ';  
-        $c_insentif = number_format($c_insentif);
-        $c_jualan = number_format($c_jualan);
+        $c_insentif = number_format($c_insentif,2);
+        $c_jualan = number_format($c_jualan,2);
         
         return [$result,$tfoot,$c_insentif,$c_jualan];
     }

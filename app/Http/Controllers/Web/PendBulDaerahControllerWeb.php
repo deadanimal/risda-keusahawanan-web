@@ -162,8 +162,8 @@ class PendBulDaerahControllerWeb extends Controller
             </tr>
             ';       
             
-            $c_insentif = number_format($c_insentif);
-            $c_jualan = number_format($c_jualan);
+            $c_insentif = number_format($c_insentif,2);
+            $c_jualan = number_format($c_jualan,2);
             return [$result,$tfoot,$c_insentif,$c_jualan];
         }
         catch(Exception $e){}
