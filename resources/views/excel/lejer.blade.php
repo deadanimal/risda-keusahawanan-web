@@ -36,29 +36,29 @@
 <body>
     <div>
         <h4> RINGKASAN LEJAR BULAN
-            @if ($bulan = 1)
+            @if ($bulan == 1)
                 JANUARI
-            @elseif ($bulan = 2)
+            @elseif ($bulan == 2)
                 FEBRUARI
-            @elseif ($bulan = 3)
+            @elseif ($bulan == 3)
                 MAC
-            @elseif ($bulan = 4)
+            @elseif ($bulan == 4)
                 APRIL
-            @elseif ($bulan = 5)
+            @elseif ($bulan == 5)
                 MEI
-            @elseif ($bulan = 6)
+            @elseif ($bulan == 6)
                 JUN
-            @elseif ($bulan = 7)
+            @elseif ($bulan == 7)
                 JULAI
-            @elseif ($bulan = 8)
+            @elseif ($bulan == 8)
                 OGOS
-            @elseif ($bulan = 9)
+            @elseif ($bulan == 9)
                 SEPTEMBER
-            @elseif ($bulan = 10)
+            @elseif ($bulan == 10)
                 OKTOBER
-            @elseif ($bulan = 11)
+            @elseif ($bulan == 11)
                 NOVEMBER
-            @elseif ($bulan = 12)
+            @elseif ($bulan == 12)
                 DISEMBER
             @endif
             TAHUN {{ $tahun }}
