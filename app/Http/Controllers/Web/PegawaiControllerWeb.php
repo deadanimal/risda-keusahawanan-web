@@ -85,9 +85,9 @@ class PegawaiControllerWeb extends Controller
         if($authuser->role == 1){
             $result = $pegawai->get();
         }else if($authuser->role == 3 || $authuser->role == 5){
-            $result = $pegawai->get()->unique();
+            $result = $pegawai->unique();
         }else if($authuser->role == 4 || $authuser->role == 6){
-            $result = $pegawai->get()->unique();
+            $result = $pegawai->unique();
         }
         // dd($result);
 
