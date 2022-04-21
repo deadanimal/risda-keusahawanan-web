@@ -24,6 +24,7 @@ use App\Models\Perniagaan;
 // use App\Models\Etnik;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 error_reporting(0);
 
 class UsahawanControllerWeb extends Controller
@@ -308,7 +309,7 @@ class UsahawanControllerWeb extends Controller
     {
         // return $request->id;
         $user = User::where('usahawanid', $request->id)->first();
-        $user->password = '$2y$10$HWYZbKricDxuacRL/cpBoOSiZo7F3nQafsQkjXN2Q9fxy9ghPZFm.';
+        $user->password = Hash::make('Reds@12345');
         $user->profile_status = 0;
         $user->save();
 
