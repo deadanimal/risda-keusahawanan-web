@@ -56,7 +56,11 @@
     <div style="position: absolute; left:0px; top:-40px; color:white">
         <h2>
             @if ($usahawan->syarikat != null)
-                {{ $usahawan->syarikat->namasyarikat }}
+
+                @if ($usahawan->syarikat->namasyarikat != null)
+                    {{ $usahawan->syarikat->namasyarikat }}
+                @endif
+
             @endif
         </h2>
     </div>
@@ -69,7 +73,9 @@
     <div style="position: absolute; left:530px; top:-40px;">
         <h2 style="color:black !important; font-weight: bold;">
             @if ($usahawan->syarikat != null)
-                {{ $usahawan->syarikat->notelefon }}
+                @if ($usahawan->syarikat->notelefon != null)
+                    {{ $usahawan->syarikat->notelefon }}
+                @endif
             @endif
         </h2>
     </div>
@@ -91,19 +97,50 @@
         <P style="text-transform: uppercase">ALAMAT :
 
             @if ($usahawan->perniagaan != null)
-                {{ $usahawan->perniagaan->alamat1 }}, {{ $usahawan->perniagaan->alamat2 }},
-                {{ $usahawan->perniagaan->alamat3 }},
-                {{ $usahawan->perniagaan->poskod }}, 
-                {{ $usahawan->perniagaan->Negeri->Negeri }}
+
+                @if ($usahawan->perniagaan->alamat1 != null)
+                    {{ $usahawan->perniagaan->alamat1 }},
+                @endif
+                @if ($usahawan->perniagaan->alamat2 != null)
+                    {{ $usahawan->perniagaan->alamat2 }},
+                @endif
+                @if ($usahawan->perniagaan->alamat3 != null)
+                    {{ $usahawan->perniagaan->alamat3 }},
+                @endif
+                @if ($usahawan->perniagaan->poskod != null)
+                    {{ $usahawan->perniagaan->poskod }},
+                @endif
+
+                @if ($usahawan->perniagaan->Negeri != null)
+                    @if ($usahawan->perniagaan->Negeri->Negeri != null)
+                        {{ $usahawan->perniagaan->Negeri->Negeri }}
+                    @endif
+                @endif
+
+
+
             @endif
         </P>
 
 
         <P>GPS LANGITUD/ LONGITUD :
-            {{ $katalog->latitud }} / {{ $katalog->logitud }}
+            {{-- @if ($katalog->latitud != null)
+                {{ $katalog->latitud }}
+            @endif
+            /
+            @if ($katalog->logitud != null)
+                {{ $katalog->logitud }}
+            @endif --}}
+
 
             @if ($usahawan->perniagaan != null)
-                {{ $usahawan->perniagaan->latitud }} / {{ $usahawan->perniagaan->logitud }}
+                @if ($usahawan->perniagaan->latitud)
+                    {{ $usahawan->perniagaan->latitud }}
+                @endif
+                /
+                @if ($usahawan->perniagaan->logitud)
+                    {{ $usahawan->perniagaan->logitud }}
+                @endif
             @endif
         </P>
 
@@ -112,20 +149,30 @@
         <p>&nbsp;&nbsp; FACEBOOK :
 
             @if ($usahawan->perniagaan != null)
-                {{ $usahawan->perniagaan->facebook }}
+                @if ($usahawan->perniagaan->facebook)
+                    {{ $usahawan->perniagaan->facebook }}
+                @endif
             @endif
         </p>
         <p>&nbsp;&nbsp; INSTAGRAM :
             @if ($usahawan->perniagaan != null)
-                {{ $usahawan->perniagaan->instagram }}
+                @if ($usahawan->perniagaan->instagram)
+                    {{ $usahawan->perniagaan->instagram }}
+                @endif
             @endif
         </p>
         <p>&nbsp;&nbsp; TWITTER :
-
+            @if ($usahawan->perniagaan != null)
+                @if ($usahawan->perniagaan->twitter)
+                    {{ $usahawan->perniagaan->twitter }}
+                @endif
+            @endif
         </p>
         <p>&nbsp;&nbsp; LAMAN WEB :
             @if ($usahawan->perniagaan != null)
-                {{ $usahawan->perniagaan->lamanweb }}
+                @if ($usahawan->perniagaan->lamanweb)
+                    {{ $usahawan->perniagaan->lamanweb }}
+                @endif
             @endif
         </p>
         <br>
@@ -134,18 +181,33 @@
         <table>
             <tr>
                 <td style="width: 150px">KANDUNGAN</td>
-                <td>: {{ $katalog->kandungan_produk }}</td>
+                <td>:
+                    @if ($katalog->kandungan_produk != null)
+                        {{ $katalog->kandungan_produk }}
+                    @endif
+
+                </td>
             </tr>
             <tr>
                 <td>BERAT (NET)</td>
 
-                <td>: {{ $katalog->berat_produk }} kg</td>
+                <td>:
+                    @if ($katalog->berat_produk != null)
+                        {{ $katalog->berat_produk }} kg
+                    @endif
+
+                </td>
             </tr>
 
             <tr>
                 <td>HARGA JUALAN</td>
 
-                <td>: RM {{ $katalog->harga_produk }}</td>
+                <td>: RM
+                    @if ($katalog->harga_produk != null)
+                        {{ $katalog->harga_produk }}
+                    @endif
+
+                </td>
             </tr>
         </table>
 
@@ -157,21 +219,26 @@
         <img src="image/KATALOG_REDS.pptx__3_-removebg-preview.png" alt="" height="320px">
     </div>
 
-    <div style="
-    position: absolute;
-    left:770px;
-    top:35px;
-    width:250px;
-    height: 300px;
-    background-image:url({{ $katalog->gambar_url }});
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-size: 100% 100%;
-    text-align:center
-    ">
-        {{-- <img src="{{$katalog->gambar_url}}" alt="" height="200px"> --}}
-    </div>
+    @if ($katalog->gambar_url != null)
+        {{-- {{ $katalog->harga_produk }} --}}
+
+        <div style="
+        position: absolute;
+        left:770px;
+        top:35px;
+        width:250px;
+        height: 300px;
+        background-image:url({{ $katalog->gambar_url }});
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-size: 100% 100%;
+        text-align:center
+        ">
+            {{-- <img src="{{$katalog->gambar_url}}" alt="" height="200px"> --}}
+        </div>
+    @endif
+
 
     <div style="
     position: absolute;
@@ -187,7 +254,14 @@
     background-size: 100% 100%;
     text-align:center
     ">
-        <p><i>{{ $katalog->nama_produk }} </i> </p>
+        <p>
+            <i>
+                @if ($katalog->nama_produk != null)
+                    {{ $katalog->nama_produk }}
+                @endif
+
+            </i>
+        </p>
 
     </div>
 
