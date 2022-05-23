@@ -63,7 +63,7 @@ class PegawaiControllerWeb extends Controller
             $ddMukim = Mukim::where('status', 1)->where('U_Negeri_ID', $authpegawai->Mukim->U_Negeri_ID)->orderBy('Mukim', 'ASC')->get();
             $ddPT = PusatTanggungjawab::select('Kod_PT','keterangan')->where('Kod_PT', $authpegawai->NamaPT)->orderBy('keterangan', 'ASC')->get();
         }else if($authuser->role == 4 || $authuser->role == 6){
-            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID);
+            $pegawai = Pegawai::join('mukims', 'pegawais.mukim', '=', 'mukims.U_Mukim_ID')->select('pegawais.*')->where('mukims.U_Daerah_ID',$authpegawai->Mukim->U_Daerah_ID)->get();
             $ddPeranan = Peranan::where('peranan_id', '>=', '4')->get();
             $ddMukim = Mukim::where('status', 1)->where('U_Daerah_ID', $authpegawai->Mukim->U_Daerah_ID)->orderBy('Mukim', 'ASC')->get();
             $ddPT = PusatTanggungjawab::select('Kod_PT','keterangan')->where('Kod_PT', $authpegawai->NamaPT)->orderBy('keterangan', 'ASC')->get();
