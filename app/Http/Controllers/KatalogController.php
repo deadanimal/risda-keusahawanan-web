@@ -33,27 +33,35 @@ class KatalogController extends Controller
 
     public function store(Request $request)
     {
+        // return json_decode($request->data);
+        
+        $name = rand ( 10000 , 99999 );
+        $imgname = $name.'.'.$request->file->extension();
+
+        $data = json_decode($request->data);
+
         $katalog = new Katalog();
+        $katalog->id_pengguna = $data->id_pengguna;
+        $katalog->nama_produk = $data->nama_produk;
+        $katalog->kandungan_produk = $data->kandungan_produk;
+        $katalog->harga_produk = $data->harga_produk;
+        $katalog->berat_produk = $data->berat_produk;
+        $katalog->keterangan_produk = $data->keterangan_produk;
+        $katalog->gambar_url = '../images/katalog/'.$imgname;
 
-        $katalog->id_pengguna = $request->id_pengguna;
-        $katalog->nama_produk = $request->nama_produk;
-        $katalog->kandungan_produk = $request->kandungan_produk;
-        $katalog->harga_produk = $request->harga_produk;
-        $katalog->berat_produk = $request->berat_produk;
-        $katalog->keterangan_produk = $request->keterangan_produk;
-        $katalog->gambar_url = $request->gambar_url;
-
-        $katalog->baki_stok = $request->baki_stok;
-        $katalog->unit_production = $request->unit_production;
-        $katalog->status_katalog = $request->status_katalog;
+        $katalog->baki_stok = $data->baki_stok;
+        $katalog->unit_production = $data->unit_production;
+        $katalog->status_katalog = $data->status_katalog;
         // $katalog->disahkan_oleh = $request->disahkan_oleh;
-        $katalog->modified_by = $request->modified_by;
+        $katalog->modified_by = $data->modified_by;
 
         $katalog->save();
 
-        if ($request->status_katalog == 'pending') {
+        $request->file->move(public_path('images/katalog'), $imgname);
 
-            $pegawais = User::where('users.id', $request->id_pengguna)
+        if ($data->status_katalog == 'pending') {
+
+            $pegawais = User::where('users.id', $data->id_pengguna)
                 ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
                 ->join('pegawais', 'pegawais.NamaPT', 'usahawans.Kod_PT')
                 ->select('pegawais.id as pegawai_id')
