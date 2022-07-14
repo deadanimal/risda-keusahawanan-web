@@ -34,55 +34,60 @@ class KatalogController extends Controller
     public function store(Request $request)
     {
         // return json_decode($request->data);
-        
-        $name = rand ( 10000 , 99999 );
-        $imgname = $name.'.'.$request->file->extension();
+        try{
+            $name = rand ( 10000 , 99999 );
+            $imgname = $name.'.'.$request->file->extension();
 
-        $data = json_decode($request->data);
+            $data = json_decode($request->data);
 
-        $katalog = new Katalog();
-        $katalog->id_pengguna = $data->id_pengguna;
-        $katalog->nama_produk = $data->nama_produk;
-        $katalog->kandungan_produk = $data->kandungan_produk;
-        $katalog->harga_produk = $data->harga_produk;
-        $katalog->berat_produk = $data->berat_produk;
-        $katalog->keterangan_produk = $data->keterangan_produk;
-        $katalog->gambar_url = '../images/katalog/'.$imgname;
+            $katalog = new Katalog();
+            $katalog->id_pengguna = $data->id_pengguna;
+            $katalog->nama_produk = $data->nama_produk;
+            $katalog->kandungan_produk = $data->kandungan_produk;
+            $katalog->harga_produk = $data->harga_produk;
+            $katalog->berat_produk = $data->berat_produk;
+            $katalog->keterangan_produk = $data->keterangan_produk;
+            $katalog->gambar_url = '../images/katalog/'.$imgname;
 
-        $katalog->baki_stok = $data->baki_stok;
-        $katalog->unit_production = $data->unit_production;
-        $katalog->status_katalog = $data->status_katalog;
-        // $katalog->disahkan_oleh = $request->disahkan_oleh;
-        $katalog->modified_by = $data->modified_by;
+            $katalog->baki_stok = $data->baki_stok;
+            $katalog->unit_production = $data->unit_production;
+            $katalog->status_katalog = $data->status_katalog;
+            // $katalog->disahkan_oleh = $request->disahkan_oleh;
+            $katalog->modified_by = $data->modified_by;
 
-        $katalog->save();
+            $katalog->save();
 
-        $request->file->move(public_path('images/katalog'), $imgname);
+            $request->file->move(public_path('images/katalog'), $imgname);
 
-        if ($data->status_katalog == 'pending') {
+            if ($data->status_katalog == 'pending') {
 
-            $pegawais = User::where('users.id', $data->id_pengguna)
-                ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
-                ->join('pegawais', 'pegawais.NamaPT', 'usahawans.Kod_PT')
-                ->select('pegawais.id as pegawai_id')
-                ->get();
+                $pegawais = User::where('users.id', $data->id_pengguna)
+                    ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+                    ->join('pegawais', 'pegawais.NamaPT', 'usahawans.Kod_PT')
+                    ->select('pegawais.id as pegawai_id')
+                    ->get();
 
 
 
-            foreach ($pegawais as $pegawai) {
+                foreach ($pegawais as $pegawai) {
 
-                $user = User::where('idpegawai', $pegawai->pegawai_id)->get()->first();
+                    $user = User::where('idpegawai', $pegawai->pegawai_id)->get()->first();
 
-                $notifikasi = new Notifikasi();
-                $notifikasi->userid = $user->id;
-                $notifikasi->tajuk = 'Katalog';
-                $notifikasi->keterangan = 'Katalog baru telah ditambah bagi pengesahan';
-                $notifikasi->modul = 'katalog';
-                $notifikasi->save();
+                    $notifikasi = new Notifikasi();
+                    $notifikasi->userid = $user->id;
+                    $notifikasi->tajuk = 'Katalog';
+                    $notifikasi->keterangan = 'Katalog baru telah ditambah bagi pengesahan';
+                    $notifikasi->modul = 'katalog';
+                    $notifikasi->save();
+                }
             }
-        }
 
-        return response()->json($katalog);
+            return response()->json($katalog);
+
+        }catch(Exception $e){
+            return $e;
+        }
+        
     }
 
 
