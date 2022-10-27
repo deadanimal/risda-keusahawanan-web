@@ -7,33 +7,16 @@ use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        $pegawai = Pegawai::all();
-        return $pegawai;
+        $pegawai = Pegawai::without(['user', 'Mukim','PT','Negeri'] )
+        ->get();
+
+        // dd($pegawai);
+        return response()->json($pegawai);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $pegawai = new Pegawai();
@@ -57,17 +40,14 @@ class PegawaiController extends Controller
         return redirect('/pegawai');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pegawai  $pegawai
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pegawai $pegawai)
+
+    public function show($id)
     {
-        return view('pegawai.show', [
-            'pegawai' => $pegawai
-        ]);
+        $pegawai = Pegawai::without(['Mukim','Negeri'] )
+        ->where('id', $id)
+        ->get();
+
+        return response()->json($pegawai);
     }
 
     /**

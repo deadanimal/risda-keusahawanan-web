@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perniagaan;
+use App\Models\Usahawan;
 use Illuminate\Http\Request;
 
 class PerniagaanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $perniagaan = Perniagaan::all();
@@ -21,22 +18,7 @@ class PerniagaanController extends Controller
         return response()->json($perniagaan);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         $perniagaan = new Perniagaan();
@@ -85,27 +67,17 @@ class PerniagaanController extends Controller
         return response()->json($perniagaan);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Perniagaan  $perniagaan
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show($id)
     {
-        // return view('perniagaan.show', [
-        //     'perniagaan' => $perniagaan
-        // ]);
-        $perniagaan = Perniagaan::where('usahawanid', $id)->get()->first();
+        
+        $perniagaan = Usahawan::where('usahawans.usahawanid', $id)
+        ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
+        ->get()->first();
         return response()->json($perniagaan);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Perniagaan  $perniagaan
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Perniagaan $perniagaan)
     {
         return view('perniagaan.edit', [
@@ -113,16 +85,11 @@ class PerniagaanController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Perniagaan  $perniagaan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Perniagaan $perniagaan)
+    public function update(Request $request, $id)
     {
-        $perniagaan->usahawanid = $request->usahawanid;;
+        $perniagaan = Perniagaan::where('usahawanid', $id)->get()->first();
+
+        // $perniagaan->usahawanid = $request->usahawanid;;
         $perniagaan->jenisperniagaan = $request->jenisperniagaan;;
         $perniagaan->klusterperniagaan = $request->klusterperniagaan;;
         $perniagaan->subkluster = $request->subkluster;;
@@ -154,24 +121,15 @@ class PerniagaanController extends Controller
         $perniagaan->purata_jualan_bulanan = $request->purata_jualan_bulanan;;
         $perniagaan->peratus_kenaikan = $request->peratus_kenaikan;;
         $perniagaan->hasil_jualan_tahunan = $request->hasil_jualan_tahunan;;
-        $perniagaan->gambar_url = $request->gambar_url;;
-        $perniagaan->createdby_id = $request->createdby_id;;
-        $perniagaan->createdby_kod_PT = $request->createdby_kod_PT;;
-        $perniagaan->modifiedby_id = $request->modifiedby_id;;
-        $perniagaan->modifiedby_kod_PT = $request->modifiedby_kod_PT;;
 
         $perniagaan->save();
 
-        // return redirect('/perniagaan');
+       
         return response()->json($perniagaan);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Perniagaan  $perniagaan
-     * @return \Illuminate\Http\Response
-     */
+
+  
     public function destroy(Perniagaan $perniagaan)
     {
         //

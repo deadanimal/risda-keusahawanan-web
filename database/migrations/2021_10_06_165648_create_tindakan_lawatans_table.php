@@ -16,8 +16,8 @@ class CreateTindakanLawatansTable extends Migration
         Schema::create('tindakan_lawatans', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nama_tindakan_lawatan',50);
-            $table->string('status_tindakan_lawatan',12);
+            $table->string('nama_tindakan_lawatan');
+            $table->string('status_tindakan_lawatan');
             $table->timestamps();
         });
     }

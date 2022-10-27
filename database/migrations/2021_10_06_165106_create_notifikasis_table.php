@@ -16,9 +16,11 @@ class CreateNotifikasisTable extends Migration
         Schema::create('notifikasis', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('id_pengguna');
-            $table->string('tajuk', 30); 
+            $table->foreignId('userid');
+            $table->string('tajuk'); 
             $table->string('keterangan')->nullable();
+            $table->string('modul')->nullable();
+            $table->string('readstatus')->nullable()->default(0);
             $table->timestamps();
         });
     }

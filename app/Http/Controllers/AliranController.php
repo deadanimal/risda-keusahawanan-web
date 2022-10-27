@@ -3,38 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aliran;
+use App\Models\KategoriAliran;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AliranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $aliran = Aliran::all();
+        $aliran = Aliran::orderBy('created_at', 'desc')
+        ->whereMonth('tarikh_aliran', Carbon::now()->month)
+        ->get();
+        
+        // $user = $request->user();
+
+        // $aliran = Aliran::where('id_pengguna', $request->id)->get();
         
         return response()->json($aliran);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $aliran = new Aliran();
@@ -44,47 +32,46 @@ class AliranController extends Controller
         $aliran->tarikh_aliran = $request->tarikh_aliran;
         $aliran->keterangan_aliran = $request->keterangan_aliran;
         $aliran->jumlah_aliran = $request->jumlah_aliran;
-        $aliran->kategori_aliran = $request->kategori_aliran;
-        $aliran->dokumen_lampiran = $request->dokumen_lampiran;
-        $aliran->modified_by = $request->modified_by;
+        $aliran->nama_dokumen = $request->nama_dokumen;
+
+        $kategoriAliran = KategoriAliran::find($request->id_kategori_aliran);
+
+        $aliran->kategori_aliran = $kategoriAliran->nama_kategori_aliran;
+
+        
+        
+        $aliran->modified_by = $request->id_pengguna;
         $aliran->save();
 
-        return redirect('/aliran');
+        return response()->json($aliran);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Aliran  $aliran
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Aliran $aliran)
+    public function uploadDoc(Request $request, $id){
+
+        $aliran = Aliran::find($id);
+        // dd($request);
+        if ($request->hasFile('dokumen_lampiran')) {
+            $dokumen_lampiran = $request->file('dokumen_lampiran')->store('dokumen_lampiran');
+            $aliran->dokumen_lampiran =  $dokumen_lampiran;
+            $aliran->save();
+        } else {
+            return response()->json("failed");
+        }
+
+        return response()->json($aliran);
+
+    }
+
+   
+    public function show($id)
     {
-        return view('aliran.show', [
-            'aliran' => $aliran
-        ]);
+        $aliran = Aliran::where('id_pengguna', $id)
+        ->whereMonth('tarikh_aliran', Carbon::now()->month)
+        ->orderBy('tarikh_aliran', 'desc')->get();
+
+        return response()->json($aliran);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Aliran  $aliran
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Aliran $aliran)
-    {
-        return view('aliran.edit', [
-            'aliran' => $aliran
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Aliran  $aliran
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Aliran $aliran)
     {
         $aliran->id_pengguna = $request->id_pengguna;
@@ -92,22 +79,70 @@ class AliranController extends Controller
         $aliran->tarikh_aliran = $request->tarikh_aliran;
         $aliran->keterangan_aliran = $request->keterangan_aliran;
         $aliran->jumlah_aliran = $request->jumlah_aliran;
-        $aliran->kategori_aliran = $request->kategori_aliran;
-        $aliran->dokumen_lampiran = $request->dokumen_lampiran;
-        $aliran->modified_by = $request->modified_by;
+        $aliran->nama_dokumen = $request->nama_dokumen;
+
+        $kategoriAliran = KategoriAliran::find($request->id_kategori_aliran);
+
+        $aliran->kategori_aliran = $kategoriAliran->nama_kategori_aliran;
+        
+        $aliran->modified_by = $request->id_pengguna;
         $aliran->save();
 
-        return redirect('/aliran');
+        return response()->json($aliran);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Aliran  $aliran
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Aliran $aliran)
     {
-        //
+        $aliran->delete();
+
+        return response()->json($aliran);
+    }
+
+    public function getCurrentYearData($id){
+
+        // $aliran = Aliran::where('id_pengguna', $id)
+        // ->where('id_kategori_aliran', 1)
+        // ->whereBetween('tarikh_aliran', [
+        //     Carbon::now()->startOfYear(),
+        //     Carbon::now()->endOfYear(),
+        // ])
+        // ->orderBy('tarikh_aliran', 'desc')->get();
+
+        $aliran = Aliran::where('id_pengguna', $id)
+        ->where('id_kategori_aliran', 1)
+        ->whereYear('tarikh_aliran', date('Y', strtotime('-1 year')))
+        ->orderBy('tarikh_aliran', 'desc')->get();
+
+        $total = 0;
+
+        // dd($aliran);
+
+        foreach($aliran as $x){
+            $total += $x->jumlah_aliran;
+
+        }
+        // dd($total);
+
+        return response()->json($total);
+
+    }
+
+    public function getCurrentMonthData($id){
+
+        $aliran = Aliran::where('id_pengguna', $id)
+        ->where('id_kategori_aliran', 1)
+        ->whereMonth('tarikh_aliran', Carbon::now()->month)
+        ->orderBy('tarikh_aliran', 'desc')->get();
+
+        $total = 0;
+
+        foreach($aliran as $x){
+            $total += $x->jumlah_aliran;
+
+        }
+        // dd($total);
+        return response()->json($total);
+
     }
 }

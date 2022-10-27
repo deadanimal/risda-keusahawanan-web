@@ -2,7 +2,7 @@
 <script src="../../../js/jquery-3.6.0.min.js"></script>
 @section('content')
 <div class="card">
-    <div class="card-body overflow-hidden p-lg-6">
+    <div class="card-body overflow-hidden p-lg-6" style="overflow-x: auto !important;overflow-y: auto !important;">
         <div class="row align-items-center">
             <h3 class="text" style="padding-bottom:20px;color:#00A651;">Tetapan Dashboard</h3>
             <div class="card-body bg-light">
@@ -36,7 +36,7 @@
                   </div>
                 </div>
                 <button class="btn btn-falcon-default btn-sm mt-2" type="submit"><span class="fas fa-plus fs--2 me-1" data-fa-transform="up-1"></span>Add Item</button>
-              </div>
+            </div>
         </div>
     </div>
 </div>

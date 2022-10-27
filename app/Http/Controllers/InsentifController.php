@@ -3,39 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insentif;
+use App\Models\Usahawan;
 use Illuminate\Http\Request;
 
 class InsentifController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $insentif = Insentif::all();
-        return view('insentif.index', [
-            'insentif' => $insentif
-        ]);
+        return response()->json($insentif);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $insentif = new Insentif();
@@ -52,17 +31,18 @@ class InsentifController extends Controller
         return redirect('/insentif');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Insentif  $insentif
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Insentif $insentif)
+   
+    public function show($id)
     {
-        return view('insentif.show', [
-            'insentif' => $insentif
-        ]);
+
+        $insentif = Insentif::where('id_pengguna', $id)
+        ->join('jenis_insentifs', 'jenis_insentifs.id_jenis_insentif', 'insentifs.id_jenis_insentif')
+        ->get();
+
+        // dd($insentif);
+
+        return response()->json($insentif);
+        
     }
 
     /**

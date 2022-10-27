@@ -17,6 +17,7 @@ class CreateKategoriAliransTable extends Migration
             $table->id();
 
             $table->string('jenis_aliran', 50);
+            $table->string('bahagian', 50);
             $table->string('nama_kategori_aliran', 50);
             $table->string('status_kategori_aliran', 12);
             

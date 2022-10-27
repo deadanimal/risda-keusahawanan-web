@@ -22,9 +22,9 @@ class CreateKatalogsTable extends Migration
             $table->string('harga_produk',4);
             $table->string('berat_produk',50);
 
-            $table->double('kos_per_unit',10,2);
-            $table->double('keterangan_produk',30,2);
-            $table->string('gambar_url',30);
+            // $table->double('kos_per_unit',10,2);
+            $table->string('keterangan_produk',30);
+            $table->longText('gambar_url')->nullable();
             $table->double('baki_stok',30,2)->nullable();
             $table->string('unit_production',50);
             $table->string('status_katalog',10)->nullable();

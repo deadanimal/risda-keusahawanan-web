@@ -16,14 +16,13 @@ class CreateInsentifsTable extends Migration
         Schema::create('insentifs', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('id_pengguna');
-            $table->integer('id_jenis_insentif');
+            $table->string('id_pengguna')->nullable();
+            $table->string('id_jenis_insentif')->nullable();
 
-            $table->string('tahun_terima_insentif',4);
-            $table->double('nilai_insentif',30,2);
-            $table->string('created_by',50);
-            $table->string('modified_by',50);
-
+            $table->string('tahun_terima_insentif',4)->nullable();
+            $table->double('nilai_insentif',30,2)->nullable();
+            $table->string('created_by',50)->nullable();
+            $table->string('modified_by',50)->nullable();
             $table->timestamps();
         });
     }

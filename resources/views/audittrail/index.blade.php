@@ -1,130 +1,92 @@
 @extends('dashboard')
-<script src="../../../js/jquery-3.6.0.min.js"></script>
 @section('content')
 <div class="card">
-    <div class="card-header bg-light">
-      <h5 class="mb-0">Audit Trail</h5>
+    <div class="card-header bg-light" style="text-align: center;">
+      <h5 class="mb-0" style="display: inline-block; padding-right:2vh">Audit Trail</h5><input style="width:45vh;" type="text" class="form-control-sm" name="daterange"/>
     </div>
-    <div class="card-body fs--1 p-0">
-      <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-        <div class="notification-avatar">
-          <div class="avatar avatar-xl me-3">
-            <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">🔍</span></div>
-          </div>
-        </div>
-        <div class="notification-body">
-          <p class="mb-1"><strong>Anthony Hopkins</strong> Followed <strong>Massachusetts Institute of Technology</strong></p>
-          <span class="notification-time">Just Now</span>
-
-        </div>
-      </a>
-
-      <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-        <div class="notification-avatar">
-          <div class="avatar avatar-xl me-3">
-            <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">📌</span></div>
-          </div>
-        </div>
-        <div class="notification-body">
-          <p class="mb-1"><strong>Anthony Hopkins</strong> Save a <strong>Life Event</strong></p>
-          <span class="notification-time">Yesterday</span>
-
-        </div>
-      </a>
-
-      <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-        <div class="notification-avatar">
-          <div class="avatar avatar-xl me-3">
-            <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">🏷️</span></div>
-          </div>
-        </div>
-        <div class="notification-body">
-          <p class="mb-1"><strong>Rowan Atkinson</strong> Tagged <strong>Anthony Hopkins</strong> in a live video</p>
-          <span class="notification-time">December 1, 8:00 PM</span>
-
-        </div>
-      </a>
-
-      <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-        <div class="notification-avatar">
-          <div class="avatar avatar-xl me-3">
-            <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">💬</span></div>
-          </div>
-        </div>
-        <div class="notification-body">
-          <p class="mb-1"><strong>Robert Downey</strong> mention <strong>Anthony Hopkins</strong> in a comment</p>
-          <span class="notification-time">November 27, 12:00 AM</span>
-
-        </div>
-      </a>
-
-      <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-        <div class="notification-avatar">
-          <div class="avatar avatar-xl me-3">
-            <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">😂</span></div>
-          </div>
-        </div>
-        <div class="notification-body">
-          <p class="mb-1"><strong>Anthony Hopkins</strong> reacted to a comment of <strong>Anna Karinina</strong></p>
-          <span class="notification-time">November 20, 8:00 Am</span>
-
-        </div>
-      </a>
-
-      <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-        <div class="notification-avatar">
-          <div class="avatar avatar-xl me-3">
-            <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">🎁</span></div>
-          </div>
-        </div>
-        <div class="notification-body">
-          <p class="mb-1"><strong>Jennifer Kent</strong> Congratulated <strong>Anthony Hopkins</strong></p>
-          <span class="notification-time">November 13, 5:00 Am</span>
-
-        </div>
-      </a>
-
-      <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-        <div class="notification-avatar">
-          <div class="avatar avatar-xl me-3">
-            <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">🏷️</span></div>
-          </div>
-        </div>
-        <div class="notification-body">
-          <p class="mb-1"><strong>California Institute of Technology</strong> tagged <strong>Anthony Hopkins</strong> in a post.</p>
-          <span class="notification-time">November 8, 5:00 PM</span>
-
-        </div>
-      </a>
-
-      <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-        <div class="notification-avatar">
-          <div class="avatar avatar-xl me-3">
-            <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">📋️</span></div>
-          </div>
-        </div>
-        <div class="notification-body">
-          <p class="mb-1"><strong>Anthony Hopkins</strong> joined <strong>Victory day cultural Program</strong> with <strong>Tony Stark</strong></p>
-          <span class="notification-time">November 01, 11:30 AM</span>
-
-        </div>
-      </a>
-
-      <a class="notification border-x-0 border-bottom-0 border-300 rounded-top-0" href="#!">
-        <div class="notification-avatar">
-          <div class="avatar avatar-xl me-3">
-            <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">📅️</span></div>
-          </div>
-        </div>
-        <div class="notification-body">
-          <p class="mb-1"><strong>Massachusetts Institute of Technology</strong> invited <strong>Anthony Hopkin</strong> to an event</p>
-          <span class="notification-time">October 28, 12:00 PM</span>
-
-        </div>
-      </a>
-
+    <div class="card-body fs--1 p-0" style="padding:30px !important;">
+      <style>
+        ul {
+              list-style-type: none;
+          }
+      </style>
+      <table id="audittbl" style="padding: 1rem" class="table table-borderless">
+        <thead>
+          <tr>
+            <th>Tarikh</th>
+            <th>Aktiviti</th>
+          </tr>
+        </thead>
+        <tbody id="tblname">
+          @foreach ($Audits as $Audit)
+          <tr class="border-bottom-0 rounded-0 border-x-0 border border-300">
+            <td class="notification-time">{{date("d-m-Y h:ia", strtotime($Audit->Date))}}</td>
+            <td class="notification-body"><p class="mb-1"><strong>{{$Audit->pegawai}}</strong> {{$Audit->Desc}} di <strong>{{$Audit->jenis}}</strong></p></td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
 @endsection
 @section('script')
+<script type="text/javascript">
+
+$( document ).ready(function() {
+  var today = new Date();
+  var yyyy = today.getFullYear();
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left',
+    startDate: '01/01'+yyyy, 
+    endDate: today,
+    locale: {
+            format: 'DD/MM/YYYY'
+        }
+  }, function(start, end) {
+    $('.loader').show();
+    var start_=start.format('YYYY-MM-DD');
+    var end_=end.format('YYYY-MM-DD');
+    if(start == end){
+      alert("Sila Pilih Dua Tarikh berbeza");
+    }
+    // console.log(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/audittrail/apa",
+        type:"GET",
+        data: {     
+            start:start_,
+            end:end_
+        },
+        success: function(data) {  
+            console.log(data);         
+            $("#tblname").html(data);
+            $('.loader').hide();
+        }
+    });
+    
+  });
+  $('#audittbl').DataTable( {
+      searching: false,
+      sorting: false,
+      paging: true,
+      "language": {
+          "lengthMenu": "_MENU_ rekod setiap paparan",
+          "zeroRecords": "Maaf - Tiada data dijumpai",
+          "info": "Menunjukkan _PAGE_ daripada _PAGES_ paparan",
+          "infoEmpty": "Tiada rekod dijumpai",
+          "infoFiltered": "(ditapis daripada _MAX_ jumlah rekod)",
+          "sSearch": "Saringan :",
+          "paginate": {
+              "previous": "Sebelum",
+              "next": "Seterusnya"
+          }
+      }
+  });
+  $('.loader').hide();
+})
+
+</script>
 @endsection

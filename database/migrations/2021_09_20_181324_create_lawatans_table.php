@@ -16,17 +16,17 @@ class CreateLawatansTable extends Migration
         Schema::create('lawatans', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('id_pengguna');
-            $table->foreignId('id_tindakan_lawatan');
+            $table->foreignId('id_pengguna')->nullable();
+            $table->foreignId('id_pegawai')->nullable();
+            $table->foreignId('id_tindakan_lawatan')->nullable();
 
-            $table->string('jenis_lawatan',15);
-            $table->date('tarikh_lawatan');
-            $table->date('masa_lawatan');
-            $table->string('status_lawatan',10);
-            $table->string('gambar_lawatan',150);
-            $table->string('komen',200);
-            $table->string('modified_by',50);
-
+            $table->string('jenis_lawatan',15)->nullable();
+            $table->date('tarikh_lawatan')->nullable();
+            $table->time('masa_lawatan')->nullable();
+            $table->string('status_lawatan')->nullable();
+            $table->longText('gambar_lawatan')->nullable();
+            $table->string('komen')->nullable();
+            $table->string('modified_by',50)->nullable();
             $table->timestamps();
         });
     }

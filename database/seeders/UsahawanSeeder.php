@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Usahawan;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UsahawanSeeder extends Seeder
 {
@@ -14,36 +15,42 @@ class UsahawanSeeder extends Seeder
      */
     public function run()
     {
-        Usahawan::create([
-            'Kod_PT'=>'1',
-            'namausahawan'=>'user1',
-            'nokadpengenalan'=>'123456789012',
-            'tarikhlahir'=>'23-11-20',
-            'U_Jantina_ID'=>'1',
-            'U_Bangsa_ID'=>'2',
-            'statusperkahwinan'=>'bujang',
-            'U_Pendidikan_ID'=>'3',
-            'alamat1'=>'alamat 1',
-            'alamat2'=>'alamat 2',
-            'alamat3'=>'alamat 3',
-            'bandar'=>'shah alam',
-            'poskod'=>'34000',
-            'U_Negeri_ID'=>'4',
-            'U_Daerah_ID'=>'5',
-            'U_Mukim_ID'=>'7',
-            'U_Parlimen_ID'=>'8',
-            'U_Dun_ID'=>'9',
-            'U_Kampung_ID'=>'3',
-            'U_Seksyen_ID'=>'6',
-            'id_kategori_usahawan'=>'6',
-            // 'gambar_url'=>'user1',
-            'notelefon'=>'0987654321',
-            'nohp'=>'1234567890',
-            'email'=>'user1@gmail.com',
-            'createdby_id'=>'1',
-            'createdby_kod_PT'=>'2',
-            'modifiedby_id'=>'1',
-            'modifiedby_kod_PT'=>'2',
-        ]);
+        DB::table('usahawans')->truncate();
+        
+        $csvFile = fopen(base_path("database/data/Usahawan.csv"), "r");
+  
+        $firstline = true;
+        while (($data = fgetcsv($csvFile, 15000, ",")) !== FALSE) {
+            if (!$firstline) {
+                DB::table('usahawans')->insert([
+                    "id" => $data['0'],
+                    "usahawanid" => $data['1'],
+                    "Kod_PT" => $data['2'],
+                    "namausahawan" => $data['3'],
+                    "nokadpengenalan" => $data['4'],
+                    "tarikhlahir" => $data['5'],
+                    "U_Jantina_ID" => $data['6'],
+                    "U_Bangsa_ID" => $data['7'],
+                    "statusperkahwinan" => $data['8'],
+                    "notelefon" => $data['9'],
+                    "nohp" => $data['10'],
+                    "U_Pendidikan_ID" => $data['11'],
+                    "email" => $data['12'],
+                    "alamat1" => $data['13'],
+                    "alamat2" => $data['14'],
+                    "alamat3" => $data['15'],
+                    "bandar" => $data['16'],
+                    "poskod" => $data['17'],
+                    "U_Daerah_ID" => $data['18'],
+                    "U_Negeri_ID" => $data['19'],
+                    "U_Parlimen_ID" => $data['20'],
+                    "U_Dun_ID" => $data['21'],
+                    "status_daftar_usahawan" => $data['22'],
+                ]);    
+            }
+            $firstline = false;
+        }
+   
+        fclose($csvFile);
     }
 }

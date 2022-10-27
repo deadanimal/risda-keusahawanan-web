@@ -16,23 +16,13 @@ class CreatePekebunsTable extends Migration
         Schema::create('pekebuns', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('usahawanid');
-            $table->string('status_daftar_usahawan',50);
-            $table->string('Nama_PK',250);
-            $table->string('No_KP',50);
-            $table->string('Tsmohon_No',20);
-            
-            $table->string('No_Geran',50);
-            $table->string('No_Lot',50);
-            $table->string('U_Negeri_ID',12);
-            $table->string('U_Daerah_ID',12);
-            $table->string('U_Mukim_ID',12);
-            $table->string('U_Parlimen_ID',12);
-            $table->string('U_Dun_ID',12);
-            $table->string('U_Kampung_ID',12);
-            $table->string('U_Seksyen_ID',12);
-            $table->decimal('keluasan_hektar',18); 
-            $table->string('jenis_tanaman_kebun',50); 
+            $table->string('usahawanid',50);
+            $table->string('status_daftar_usahawan',50)->nullable();
+            $table->string('Nama_PK',250)->nullable();
+            $table->string('No_KP',50)->nullable();
+
+            // $table->string('noTS');
+           
 
             $table->timestamps();
         });

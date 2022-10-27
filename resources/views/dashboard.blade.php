@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+  <div class="loader">
+  </div>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ffffff">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  --}}
+    <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
     <title>RISDA | Keusahawanan</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="../../../js/config.js"></script>
     <script src="../../../assets/overlayscrollbars/OverlayScrollbars.min.js"></script>
-
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
     <link href="../../../assets/overlayscrollbars/OverlayScrollbars.min.css" rel="stylesheet">
@@ -19,20 +22,42 @@
     <link href="../../../css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="../../../css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="../../../css/user.min.css" rel="stylesheet" id="user-style-default">
+    <link href="../../../css/jquery.dataTables.min.css" rel="stylesheet" id="user-style-default">
+    <link href="../../../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     
-    
-
     <script src="../../../assets/popper/popper.min.js"></script>
     <script src="../../../assets/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <script src="../../../assets/anchorjs/anchor.min.js"></script>
     <script src="../../../assets/is/is.min.js"></script>
     <script src="../../../assets/fontawesome/all.min.js"></script>
     <script src="../../../assets/lodash/lodash.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="../../../assets/list.js/list.min.js"></script>
     <script src="../../../js/theme.js"></script>
-    <script src="../../../js/jquery-3.6.0.min.js"></script> 
-<script src="./../../js/datatables.js"type="text/javascript"></script>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="../../../js/jquery.dataTables.min.js"type="text/javascript"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.5.22/dist/jspdf.plugin.autotable.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="../../../js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
+    
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    {{-- <script src="../../../js/datatables.js"type="text/javascript"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
 </head>
 <script>
       var isRTL = JSON.parse(localStorage.getItem('isRTL'));
@@ -51,7 +76,10 @@
     </script>
 <body>
 <main class="main" id="top">
-      <div class="container" data-layout="container">
+  <?php 
+  // ini_set('memory_limit', '-1');
+  ?>
+      <div class="container" data-layout="container" style="padding-left:40px;max-width:100%;">
         <script>
           var isFluid = JSON.parse(localStorage.getItem('isFluid'));
           if (isFluid) {
@@ -73,57 +101,39 @@
               <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
 
             </div><a class="navbar-brand" href="/landing">
-              <div class="d-flex align-items-center py-3"><img class="me-2" src="../assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" /><span class="font-sans-serif" style="color:#00A651">RISDA</span>
+              <div class="d-flex align-items-center py-3"><img class="me-2" src="../../../assets/img/risda.png" alt="" width="40" /><span class="font-sans-serif" style="color:#00A651">RISDA</span>
               </div>
             </a>
           </div>
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
             <div class="navbar-vertical-content scrollbar">
-              <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+              
+              <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav" style="padding-top: 15px;padding-bottom: 15px;">
+                @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 7)
                 <li class="nav-item">
-                  <!-- parent pages--><a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="dashboard">
+                  <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('temulawatan.*') || request()->routeIs('dash.*') ? 'true' : 'false' }}" aria-controls="dashboard">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span>
                     </div>
                   </a>
-                  <ul class="nav collapse false" id="dashboard">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span>
+                  <ul class="nav collapse {{ request()->routeIs('temulawatan.*') || request()->routeIs('dash.*') ? 'show' : 'collapse' }}" id="dashboard">
+                    @if (Auth::user()->role == 7)
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('temulawatan.*') ? 'active' : '' }}" href="/temulawatan">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Temujanji Lawatan</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/analytics.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Analytics</span>
+                    @endif
+                    @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 7)
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('dash.*') ? 'active' : '' }}" href="/dash">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Statistik</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/crm.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/e-commerce.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">E commerce</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/project-management.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Management</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../dashboard/saas.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">SaaS</span>
-                        </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
+                    @endif
                   </ul>
                 </li>
+                @endif
+                @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5 || Auth::user()->role == 7)
                 <li class="nav-item">
                   <!-- label-->
                   <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
@@ -133,29 +143,59 @@
                       <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                   </div>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('pegawai.*') ? 'active' : '' }}" href="/pegawai" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Pegawai</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('usahawan.*') ? 'active' : '' }}" href="/usahawan" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Usahawan</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('insentif.*') ? 'active' : '' }}" href="/insentif" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tambah Insentif</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('komponendash.*') ? 'active' : '' }}" href="/komponendash" role="button">
-                  <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tetapan Komponen Dashboard</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('audittrail.*') ? 'active' : '' }}" href="/audittrail" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Audit Trail</span>
-                    </div>
-                  </a>
+                  @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4)
+                    <a class="nav-link {{  request()->routeIs('pegawaiWeb.*') ? 'active' : '' }}" href="/pegawaiWeb" role="button">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Pegawai</span>
+                      </div>
+                    </a>
+                  @endif
+                  @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 7)
+                    <a class="nav-link {{  request()->routeIs('usahawanWeb.*') ? 'active' : '' }}" href="/usahawanWeb" role="button">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Tetapan Usahawan</span>
+                      </div>
+                    </a>
+                  @endif
+                  @if (Auth::user()->role == 1 || Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5 || Auth::user()->role == 6)
+                    <a class="nav-link {{  request()->routeIs('insentifWeb.*') || request()->routeIs('insentifdetail.*') ? 'active' : '' }}" href="/insentifWeb" role="button">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Tambah Insentif</span>
+                      </div>
+                    </a>
+                  @endif
+                  @if (Auth::user()->role == 1)
+                    <a class="nav-link dropdown-indicator" href="#komponen" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('kategorialiran.*') || request()->routeIs('tindakanlawatan.*') || request()->routeIs('jenisinsentif.*')
+                    || request()->routeIs('kategoriusahawan.*') ? 'true' : 'false' }}" aria-controls="komponen">
+                      <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Tetapan Komponen</span>
+                      </div>
+                    </a>
+                    <ul class="nav collapse {{ request()->routeIs('kategorialiran.*') || request()->routeIs('tindakanlawatan.*') || request()->routeIs('jenisinsentif.*')
+                      || request()->routeIs('kategoriusahawan.*') ? 'show' : 'collapse' }}" id="komponen">
+                        {{-- show --}}
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('kategorialiran.*') ? 'active' : '' }}" href="/kategorialiran">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori Aliran</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('tindakanlawatan.*') ? 'active' : '' }}" href="/tindakanlawatan">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Tindakan Lawatan</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('jenisinsentif.*') ? 'active' : '' }}" href="/jenisinsentif">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jenis Insentif</span>
+                          </div></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('kategoriusahawan.*') ? 'active' : '' }}" href="/kategoriusahawan">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori Usahawan</span>
+                          </div></a>
+                        </li>
+                      </ul>
+                      <a class="nav-link {{  request()->routeIs('audittrail.*') ? 'active' : '' }}" href="/audittrail" role="button">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Audit Trail</span>
+                        </div>
+                      </a>
+                  @endif 
+                  
                 </li>
+                @endif
                 <li class="nav-item">
-                  <!-- label-->
                   <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                     <div class="col-auto navbar-vertical-label">Pelaporan
                     </div>
@@ -163,122 +203,101 @@
                       <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                   </div>
-                  <!-- parent pages--><a class="nav-link dropdown-indicator" href="#forms" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Pelaporan</span>
-                    </div>
-                  </a>
-                  <!-- parent pages--><a class="nav-link {{  request()->routeIs('audittrail.*') ? 'active' : '' }}" href="/audittrail" role="button">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Audit Trail</span>
-                    </div>
-                  </a>
-                  <ul class="nav collapse false" id="forms">
-                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#basic" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Basic</span>
+                    <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanprofil.*') || request()->routeIs('profdetail.*') ? 'active' : '' }}" href="/laporanprofil">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Database Usahawan</span>
                         </div>
                       </a>
-                      <!-- more inner pages-->
-                      <ul class="nav collapse false" id="basic">
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/form-control.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Form control</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/input-group.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Input group</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/select.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Select</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/checks.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Checks</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/range.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Range</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/basic/layout.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Layout</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                      </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#advance" data-bs-toggle="collapse" aria-expanded="false" aria-controls="forms">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Advance</span>
+                    <a class="nav-link dropdown-indicator" href="#pendapatanbulanan" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'true' : 'false' }}" aria-controls="komponen">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Laporan Jualan</span>
                         </div>
-                      </a>
-                      <!-- more inner pages-->
-                      <ul class="nav collapse false" id="advance">
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/advance-select.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Advance select</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
+                    </a>
+                    <ul class="nav collapse {{ request()->routeIs('pendapatanbulanan.*') || request()->routeIs('pendbulDaerah.*') || request()->routeIs('pendbulDun.*') ? 'show' : 'collapse' }}" id="pendapatanbulanan">
+                      @if (Auth::user()->role != 4 && Auth::user()->role != 6 && Auth::user()->role != 7)
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendapatanbulanan.*') ? 'active' : '' }}" onclick="generatereport(1,this.href,'');return false;" href="/pendapatanbulanan">
+                          {{-- href="/pendapatanbulanan" --}}
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
+                          </div></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/date-picker.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Date picker</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
+                      @endif
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDaerah.*') ? 'active' : '' }}" href="/pendbulDaerah" onclick="generatereport(2,this.href,'');return false;">
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
+                          </div></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/editor.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Editor</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
+                        <li class="nav-item"><a class="nav-link {{  request()->routeIs('pendbulDun.*') ? 'active' : '' }}" onclick="generatereport(3,this.href,'');return false;" href="/pendbulDun">
+                          {{-- href="/pendbulDun" --}}
+                          <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Parlimen/DUN</span>
+                          </div></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/emoji-button.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Emoji button</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/file-uploader.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">File uploader</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../modules/forms/advance/rating.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Rating</span>
-                            </div>
-                          </a>
-                          <!-- more inner pages-->
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../modules/forms/floating-labels.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Floating labels</span>
+                    </ul>
+                    <a class="nav-link dropdown-indicator" href="#laporaninsentif" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('laporaninsentif.*') || request()->routeIs('insenjenis.*') || request()->routeIs('insenjantinaumur.*') ? 'true' : 'false' }}" aria-controls="komponen">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Analisa Insentif</span>
                         </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../modules/forms/wizard.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Wizard</span>
+                    </a>
+                    <ul class="nav collapse {{ request()->routeIs('laporaninsentif.*') || request()->routeIs('insenjenis.*') || request()->routeIs('insenjantinaumur.*') ? 'show' : 'collapse' }}" id="laporaninsentif">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporaninsentif.*') ? 'active' : '' }}" href="/laporaninsentif" onclick="generatereport(4,this.href,'');return false;">
+                        {{-- href="/laporaninsentif" --}}
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jenis Peniagaan</span>
+                        </div></a>
+                      </li>
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('insenjenis.*') ? 'active' : '' }}" href="/insenjenis" onclick="generatereport(5,this.href,'');return false;">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jumlah/ Purata Jualan</span>
+                        </div></a>
+                      </li>
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('insenjantinaumur.*') ? 'active' : '' }}" onclick="generatereport(6,this.href,'');return false;" href="/insenjantinaumur">
+                        {{-- href="/insenjantinaumur" --}}
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Jantina & Umur</span>
+                        </div></a>
+                      </li>
+                    </ul>
+                    <a class="nav-link dropdown-indicator" href="#laporanlawatan" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('pemantauanlawatan.*') || request()->routeIs('pantauDaerah.*') || request()->routeIs('pantaustafnegeri.*') || request()->routeIs('pantauindividu.*') ? 'true' : 'false' }}" aria-controls="komponen">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Pemantauan Lawatan</span>
                         </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../modules/forms/validation.html">
-                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Validation</span>
+                    </a>
+                    <ul class="nav collapse {{ request()->routeIs('pemantauanlawatan.*') || request()->routeIs('pantauDaerah.*') || request()->routeIs('pantaustafnegeri.*') || request()->routeIs('pantauindividu.*') || request()->routeIs('pantauindividudetail.*') ? 'show' : 'collapse' }}" id="laporanlawatan">
+                      @if (Auth::user()->role != 4 && Auth::user()->role != 6 && Auth::user()->role != 7)
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pemantauanlawatan.*') ? 'active' : '' }}" href="/pemantauanlawatan" onclick="generatereport(7,this.href,'');return false;">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Negeri</span>
+                        </div></a>
+                      </li>
+                      @endif
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauDaerah.*') ? 'active' : '' }}" onclick="generatereport(8,this.href,'');return false;" href="/pantauDaerah">
+                        {{-- href="/pantauDaerah" --}}
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Mengikut Daerah</span>
+                        </div></a>
+                      </li>
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantaustafnegeri.*') ? 'active' : '' }}" onclick="generatereport(9,this.href,'');return false;" href="/pantaustafnegeri">
+                        {{-- href="/pantaustafnegeri" --}}
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Staf Mengikut Negeri</span>
+                        </div></a>
+                      </li>
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('pantauindividu.*') || request()->routeIs('pantauindividudetail.*') ? 'active' : '' }}" href="/pantauindividu">
+                        {{-- onclick="generatereport(10,this.href);return false;" --}}
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pemantauan Individu</span>
+                        </div></a>
+                      </li>
+                    </ul>
+                    <a class="nav-link dropdown-indicator" href="#laporanalirantunai" role="button" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanalirantunaiDetail.*') || request()->routeIs('laporanlejar.*') || request()->routeIs('laporanlejarDetail.*') || request()->routeIs('penyatauntungrugi.*') || request()->routeIs('penyatauntungrugiDetail.*') ? 'true' : 'false' }}" aria-controls="komponen">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-file-alt"></span></span><span class="nav-link-text ps-1">Aliran Tunai</span>
                         </div>
-                      </a>
-                      <!-- more inner pages-->
-                    </li>
-                  </ul>
+                    </a>
+                    <ul class="nav collapse {{ request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanalirantunaiDetail.*') || request()->routeIs('laporanlejar.*') || request()->routeIs('laporanlejarDetail.*') || request()->routeIs('penyatauntungrugi.*') || request()->routeIs('penyatauntungrugiDetail.*') ? 'show' : 'collapse' }}" id="laporanalirantunai">
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanalirantunai.*') || request()->routeIs('laporanalirantunaiDetail.*') ? 'active' : '' }}" href="/laporanalirantunai">
+                        {{-- onclick="generatereport(11,this.href);return false;" --}}
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Buku Tunai</span>
+                        </div></a>
+                      </li>
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('laporanlejar.*') || request()->routeIs('laporanlejarDetail.*') ? 'active' : '' }}" href="/laporanlejar">
+                        {{-- onclick="generatereport(12,this.href);return false;" --}}
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Laporan Lejar</span>
+                        </div></a>
+                      </li>
+                      <li class="nav-item"><a class="nav-link {{  request()->routeIs('penyatauntungrugi.*') || request()->routeIs('penyatauntungrugiDetail.*') ? 'active' : '' }}" onclick="generatereport(13,this.href,'');return false;" href="/penyatauntungrugi">
+                        {{-- onclick="generatereport(13,this.href);return false;" --}}
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Penyata Untung Rugi</span>
+                        </div></a>
+                      </li>
+                    </ul>
                 </li>
                 
               </ul>
@@ -287,11 +306,11 @@
           </div>
         </nav>
         <div class="content">
-          <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
+          <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand" style="padding-right:150px;">
 
             <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-            <a class="navbar-brand me-1 me-sm-3" href="../index.html">
-              <div class="d-flex align-items-center"><img class="me-2" src="../../../assets/img/falcon.png" alt="" width="40" /><span class="font-sans-serif">RISDA</span>
+            <a class="navbar-brand me-1 me-sm-3" href="/landing">
+              <div class="d-flex align-items-center"><img class="me-2" src="../../../assets/img/risda.png" alt="" width="40" /><span class="font-sans-serif">RISDA</span>
               </div>
             </a>
             <ul class="navbar-nav align-items-center d-none d-lg-block">
@@ -308,7 +327,7 @@
                 </div>
               </li>
               
-              <li class="nav-item dropdown">
+              {{-- <li class="nav-item dropdown">
                 <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait" id="navbarDropdownNotification" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-bell" data-fa-transform="shrink-6" style="font-size: 33px;"></span></a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-card dropdown-menu-notification" aria-labelledby="navbarDropdownNotification">
                   <div class="card card-notification shadow-none">
@@ -327,7 +346,7 @@
                           <a class="notification notification-flush notification-unread" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-2xl me-3">
-                                <img class="rounded-circle" src="../assets/img/team/1-thumb.png" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -359,7 +378,7 @@
                           <a class="notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-2xl me-3">
-                                <img class="rounded-circle" src="../assets/img/icons/weather-sm.jpg" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -375,7 +394,7 @@
                           <a class="border-bottom-0 notification-unread  notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-xl me-3">
-                                <img class="rounded-circle" src="../assets/img/logos/oxford.png" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -391,7 +410,7 @@
                           <a class="border-bottom-0 notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-xl me-3">
-                                <img class="rounded-circle" src="../assets/img/team/10.jpg" alt="" />
+                                <img class="rounded-circle" src="#" alt="" />
 
                               </div>
                             </div>
@@ -409,25 +428,29 @@
                   </div>
                 </div>
 
-              </li>
-              <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </li> --}}
+              <li style="padding-top:10px;" class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="avatar avatar-xl">
-                    <img class="rounded-circle" src="../assets/img/team/3-thumb.png" alt="" />
+                    <img class="rounded-circle" src="../../../assets/img/gear.png" alt="" style="height:80%;width:80%;"/>
 
                   </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
-                  <div class="bg-white dark__bg-1000 rounded-2 py-2">
+                  <div class="bg-white dark__bg-1000 rounded-2 py-2" style="width: 250px !important;">
 
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#!">Set status</a>
+                    <div style="Font-family:Poppins;font-size:13px;padding-left:16px;color:#344050;padding-bottom:10px;">
+                      <div style="padding-bottom:5px !important;">Hello, <br>{{Auth::user()->name}}<br></div>
+                      @if(isset(Auth::user()->peranan->kod_peranan))Peranan : {{Auth::user()->peranan->kod_peranan}} @endif
+                    </div>
+                    {{-- <a class="dropdown-item" href="#!">Set status</a>
                     <a class="dropdown-item" href="../pages/user/profile.html">Profile &amp; account</a>
-                    <a class="dropdown-item" href="#!">Feedback</a>
+                    <a class="dropdown-item" href="#!">Feedback</a> --}}
 
+                    {{-- <div class="dropdown-divider"></div> --}}
+                    <a class="dropdown-item" href="/ChangePass">Kemaskini Kata Laluan</a> 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../pages/user/settings.html">Settings</a>
-                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">Logout</a>
-                    <form id="frm-logout" action="logout" method="POST" style="display: none;">
+                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">Log Keluar</a>
+                    <form id="frm-logout" action="../../logout" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                     
@@ -444,4 +467,45 @@
     </main>
 </body>
 </html>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    var role = '<?php echo Auth::user()->name; ?>';
+    var test = '<?php echo Auth::user(); ?>';
+
+    console.log(test);
+    if(role == ""){
+      alert("Session Expired Kindly Login");
+      window.location.href = "/";
+    }
+  });
+
+  function generatereport(type,nextPage,userid){
+    $('.loader').show();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "../generatereport",
+        type:"POST",
+        data:{
+          type:type,
+          id:userid
+        },
+        success: function(data) {
+          console.log(data);
+          $('.loader').hide();
+          alert(data);
+          $(location).prop('href', nextPage)
+          return true;
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          $('.loader').hide();
+          alert(xhr.status);
+          alert(thrownError);
+          $(location).prop('href', '/login')
+        }
+    });
+  }
+
+</script>
 @yield('script')
