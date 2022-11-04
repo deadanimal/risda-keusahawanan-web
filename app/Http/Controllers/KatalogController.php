@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Katalog;
 use App\Models\Notifikasi;
-use App\Models\Pegawai;
-use App\Models\Syarikat;
 use App\Models\Usahawan;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PDF;
+use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf;
 
 class KatalogController extends Controller
 {
@@ -34,11 +34,11 @@ class KatalogController extends Controller
     public function store(Request $request)
     {
         // return json_decode($request->data);
-        try{
-            $name = rand ( 10000 , 99999 );
-            $imgname = $name.'.'.$request->file->extension();
+        try {
+            // $name = rand(10000, 99999);
 
-            $data = json_decode($request->data);
+            // $data = json_decode($request->data);
+            $data = $request;
 
             $katalog = new Katalog();
             $katalog->id_pengguna = $data->id_pengguna;
@@ -47,7 +47,7 @@ class KatalogController extends Controller
             $katalog->harga_produk = $data->harga_produk;
             $katalog->berat_produk = $data->berat_produk;
             $katalog->keterangan_produk = $data->keterangan_produk;
-            $katalog->gambar_url = '../images/katalog/'.$imgname;
+            // $katalog->gambar_url = '../images/katalog/' . $imgname;
 
             $katalog->baki_stok = $data->baki_stok;
             $katalog->unit_production = $data->unit_production;
@@ -57,7 +57,13 @@ class KatalogController extends Controller
 
             $katalog->save();
 
-            $request->file->move(public_path('images/katalog'), $imgname);
+            $imgname = $katalog->id . '.' . $request->file->extension();
+            $url = Storage::putFileAs('/images/katalog', $request->file, $imgname);
+            $katalog->update([
+                'gambar_url' => $url,
+            ]);
+
+            // $request->file->move(public_path('images/katalog'), $imgname);
 
             if ($data->status_katalog == 'pending') {
 
@@ -66,8 +72,6 @@ class KatalogController extends Controller
                     ->join('pegawais', 'pegawais.NamaPT', 'usahawans.Kod_PT')
                     ->select('pegawais.id as pegawai_id')
                     ->get();
-
-
 
                 foreach ($pegawais as $pegawai) {
 
@@ -84,12 +88,11 @@ class KatalogController extends Controller
 
             return response()->json($katalog);
 
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return $e;
         }
-        
-    }
 
+    }
 
     public function show($id)
     {
@@ -100,9 +103,6 @@ class KatalogController extends Controller
         // dd($katalog);
         return response()->json($katalog);
     }
-
-
-
 
     public function update(Request $request, Katalog $katalog)
     {
@@ -129,8 +129,6 @@ class KatalogController extends Controller
                 ->join('pegawais', 'pegawais.NamaPT', 'usahawans.Kod_PT')
                 ->select('pegawais.id as pegawai_id')
                 ->get();
-
-
 
             foreach ($pegawais as $pegawai) {
 
@@ -161,7 +159,7 @@ class KatalogController extends Controller
             ->join('usahawans', 'usahawans.Kod_PT', 'pegawais.NamaPT')
             ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
             ->join('katalogs', 'katalogs.id_pengguna', 'users.id')
-            ->select('katalogs.id as katalog_id', 'katalogs.nama_produk', 'katalogs.gambar_url', 'katalogs.baki_stok', 'katalogs.berat_produk', 'katalogs.harga_produk', 'katalogs.keterangan_produk', 'katalogs.kandungan_produk', 'katalogs.updated_at', 'katalogs.created_at', 'katalogs.status_katalog', 'katalogs.id_pengguna',)
+            ->select('katalogs.id as katalog_id', 'katalogs.nama_produk', 'katalogs.gambar_url', 'katalogs.baki_stok', 'katalogs.berat_produk', 'katalogs.harga_produk', 'katalogs.keterangan_produk', 'katalogs.kandungan_produk', 'katalogs.updated_at', 'katalogs.created_at', 'katalogs.status_katalog', 'katalogs.id_pengguna', )
             ->get();
         return response()->json($katalog);
     }
@@ -181,66 +179,63 @@ class KatalogController extends Controller
         $notifikasi->modul = 'katalog';
         $notifikasi->save();
 
-
         return response()->json($katalog);
     }
-
 
     public function katalogPdf($id)
     {
 
         $katalog = Katalog::where("katalogs.id", $id)
-            // ->join('users', 'users.id', 'katalogs.id_pengguna')
-            // ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
-            // ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
-            // ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
-            // ->join('negeris', 'negeris.U_Negeri_ID', 'perniagaans.U_Negeri_ID')
-            // ->select(
-            //     "syarikats.namasyarikat",
-            //     "syarikats.notelefon",
-            //     "perniagaans.alamat1",
-            //     "perniagaans.alamat2",
-            //     "perniagaans.alamat3",
-            //     "perniagaans.poskod",
-            //     "negeris.Negeri",
-            //     "perniagaans.latitud",
-            //     "perniagaans.logitud",
+        // ->join('users', 'users.id', 'katalogs.id_pengguna')
+        // ->join('usahawans', 'usahawans.usahawanid', 'users.usahawanid')
+        // ->join('syarikats', 'syarikats.usahawanid', 'usahawans.usahawanid')
+        // ->join('perniagaans', 'perniagaans.usahawanid', 'usahawans.usahawanid')
+        // ->join('negeris', 'negeris.U_Negeri_ID', 'perniagaans.U_Negeri_ID')
+        // ->select(
+        //     "syarikats.namasyarikat",
+        //     "syarikats.notelefon",
+        //     "perniagaans.alamat1",
+        //     "perniagaans.alamat2",
+        //     "perniagaans.alamat3",
+        //     "perniagaans.poskod",
+        //     "negeris.Negeri",
+        //     "perniagaans.latitud",
+        //     "perniagaans.logitud",
 
-            //     "perniagaans.facebook",
-            //     "perniagaans.instagram",
-            //     "perniagaans.twitter",
-            //     "perniagaans.lamanweb",
-            //     // "perniagaans.lamanweb",
+        //     "perniagaans.facebook",
+        //     "perniagaans.instagram",
+        //     "perniagaans.twitter",
+        //     "perniagaans.lamanweb",
+        //     // "perniagaans.lamanweb",
 
-            //     "katalogs.nama_produk",
-            //     "katalogs.kandungan_produk",
-            //     "katalogs.harga_produk",
-            //     "katalogs.berat_produk",
-            //     "katalogs.keterangan_produk",
-            //     "katalogs.gambar_url",
-            // )
+        //     "katalogs.nama_produk",
+        //     "katalogs.kandungan_produk",
+        //     "katalogs.harga_produk",
+        //     "katalogs.berat_produk",
+        //     "katalogs.keterangan_produk",
+        //     "katalogs.gambar_url",
+        // )
             ->get()->first();
 
         $user = User::where('users.id', $katalog->id_pengguna)
-        ->get()->first();
+            ->get()->first();
 
         $usahawan = Usahawan::where('usahawanid', $user->usahawanid)
-        ->get()->first();
+            ->get()->first();
 
         // dd($usahawan);
 
-        $pdf = PDF::loadView('pdf.katalog', [
+        $pdf = Pdf::loadView('pdf.katalog', [
             'katalog' => $katalog,
-            'usahawan' => $usahawan
+            'usahawan' => $usahawan,
         ])->setPaper('a4', 'landscape');
 
         $fname = time() . '-katalog-' . $id . '.pdf';
 
-        \Storage::put('katalog/' . $fname, $pdf->output());
+        Storage::put('katalog/' . $fname, $pdf->output());
 
         return response()->json("katalog/" . $fname);
     }
-
 
     public function showMaklumatUsahawan($id)
     {
