@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AliranController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuletinController;
 use App\Http\Controllers\CarianController;
 use App\Http\Controllers\DaerahController;
@@ -34,15 +33,10 @@ use App\Http\Controllers\TanamanController;
 use App\Http\Controllers\TindakanLawatanController;
 use App\Http\Controllers\UsahawanController;
 use App\Http\Controllers\UserController;
-use App\Models\Buletin;
-use App\Models\JenisInsentif;
-use App\Models\KlusterPerniagaan;
-use App\Models\Pegawai;
-use App\Models\Pekebun;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 
 /*
@@ -54,12 +48,11 @@ use Illuminate\Validation\ValidationException;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
 
 Route::apiResource('user', UserController::class);
 Route::apiResource('usahawan', UsahawanController::class);
@@ -69,12 +62,10 @@ Route::apiResource('pekebun', PekebunController::class);
 Route::get('pekebun/getPekebunEspek/{id}', [PekebunController::class, 'getPekebunEspek']);
 Route::get('pekebun/getNoTS/{id}', [PekebunController::class, 'getNoTS']);
 
-
 Route::apiResource('tanah', TanahController::class);
 Route::apiResource('tanaman', TanamanController::class);
 
 Route::apiResource('jenis_insentif', JenisInsentifController::class);
-
 
 Route::apiResource('syarikat', SyarikatController::class);
 Route::apiResource('perniagaan', PerniagaanController::class);
@@ -86,7 +77,7 @@ Route::get('aliran/getYear/{id}', [AliranController::class, 'getCurrentYearData'
 Route::get('aliran/getMonth/{id}', [AliranController::class, 'getCurrentMonthData']);
 
 Route::apiResource('katalog', KatalogController::class);
-Route::get('katalogdashboard', [KatalogController::class,'katalogdashboard']);
+Route::get('katalogdashboard', [KatalogController::class, 'katalogdashboard']);
 
 Route::apiResource('pelanggan', PelangganController::class);
 
@@ -107,7 +98,7 @@ Route::apiResource('insentif', InsentifController::class);
 //produk
 Route::apiResource('produk', ProdukController::class);
 
-// datalib 
+// datalib
 Route::apiResource('daerah', DaerahController::class);
 Route::apiResource('negeri', NegeriController::class);
 Route::apiResource('mukim', MukimController::class);
@@ -139,7 +130,6 @@ Route::post('/sanctum/token', function (Request $request) {
     return response()->json($user->createToken($request->no_kp)->plainTextToken);
 });
 
-
 //custom
 Route::get('deleteStok/{id}', [StokController::class, 'deleteMany']);
 
@@ -166,12 +156,9 @@ Route::post('calcPNL', [ExcelController::class, 'calcPNL']);
 Route::post('lejerExcel', [ExcelController::class, 'lejerExcel']);
 Route::post('lejerPdf', [ExcelController::class, 'lejerPdf']);
 
-
 Route::post('forgot-password', [PasswordController::class, 'forgot_user']);
 Route::post('update-email-password/{id}', [PasswordController::class, 'updateEmailPassword']);
 Route::post('updatePassword/{id}', [PasswordController::class, 'updatePassword']);
-
-
 
 Route::get('carian/{i}', [CarianController::class, 'carianUsahawan']);
 Route::get('downloadCarian/{i}', [CarianController::class, 'downloadCarian']);
@@ -179,11 +166,9 @@ Route::get('downloadCarian/{i}', [CarianController::class, 'downloadCarian']);
 Route::post('cari', [CarianController::class, 'CariUsahawan']);
 // Route::get('carii', function(){return view('CariUsahawan');});
 
-
 //notification
 Route::apiResource('notifikasi', NotifikasiController::class);
 Route::get('notifikasi/updateStatus/{id}', [NotifikasiController::class, 'updateStatus']);
-
 
 //kluster perniagaan
 Route::apiResource('kluster_perniagaan', KlusterPerniagaanController::class);
