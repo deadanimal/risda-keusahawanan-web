@@ -9,6 +9,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf;
 
@@ -148,6 +149,12 @@ class KatalogController extends Controller
 
     public function destroy(Katalog $katalog)
     {
+        if (File::exists(public_path('/storage/images/katalog/' . $katalog->id . '.jpg'))) {
+            File::delete(public_path('/storage/images/katalog/' . $katalog->id . '.jpg'));
+        } else {
+            // dd('File does not exists.', $katalog->id);
+        }
+
         $katalog->delete();
 
         return response()->json($katalog);
