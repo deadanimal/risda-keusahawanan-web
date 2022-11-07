@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBuletinRequest;
-use App\Http\Requests\UpdateBuletinRequest;
 use App\Models\Buletin;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 
 class BuletinController extends Controller
@@ -15,7 +14,6 @@ class BuletinController extends Controller
         $buletin = Buletin::orderBy('updated_at', 'desc')->get();
         return response()->json($buletin);
     }
-
 
     public function store(Request $request)
     {
@@ -39,14 +37,24 @@ class BuletinController extends Controller
         return response()->json($buletin);
     }
 
-    
     public function update(Request $request, Buletin $buletin)
     {
+
+        $image = $request->gambar_url; // your base64 encoded
+        $ext = explode(';base64', $image);
+        $ext = explode('/', $ext[0]);
+        $ext = $ext[1];
+        $image = str_replace('data:image/' . $ext . ';base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = $buletin->id . '.' . $ext;
+        File::put(public_path() . '/storage/images/buletin/' . $imageName, base64_decode($image));
+
         $buletin->tajuk = $request->tajuk;
         $buletin->tarikh = $request->tarikh;
         $buletin->keterangan_lain = $request->keterangan_lain;
         $buletin->status = $request->status;
-        $buletin->url = $request->url;
+        // $buletin->url = $request->url;
+        $buletin->url = "/images/buletin/" . $imageName;
         $buletin->gambar_buletin = $request->gambar_buletin;
 
         $buletin->save();
@@ -65,5 +73,4 @@ class BuletinController extends Controller
         //
     }
 
-    
 }

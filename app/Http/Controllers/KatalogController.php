@@ -38,8 +38,7 @@ class KatalogController extends Controller
         try {
             // $name = rand(10000, 99999);
 
-            // $data = json_decode($request->data);
-            $data = $request;
+            $data = json_decode($request->data);
 
             $katalog = new Katalog();
             $katalog->id_pengguna = $data->id_pengguna;

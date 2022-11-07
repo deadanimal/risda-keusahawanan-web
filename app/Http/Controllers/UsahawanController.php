@@ -6,13 +6,14 @@ use App\Models\Usahawan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class UsahawanController extends Controller
 {
 
     public function index()
     {
-        $usahawan =  DB::table('usahawans')
+        $usahawan = DB::table('usahawans')
             ->join('users', 'users.usahawanid', 'usahawans.usahawanid')
             ->select('users.id as id_pengguna', 'usahawans.*')
             ->get();
@@ -20,11 +21,9 @@ class UsahawanController extends Controller
         return response()->json($usahawan);
     }
 
-
-
-
     public function store(Request $request)
     {
+
         $usahawan = new Usahawan();
 
         $usahawan->Kod_PT = $request->Kod_PT;
@@ -59,11 +58,9 @@ class UsahawanController extends Controller
 
         $usahawan->save();
 
-
         // return redirect("/usahawan");
         return response()->json($usahawan);
     }
-
 
     public function show($id)
     {
@@ -107,11 +104,20 @@ class UsahawanController extends Controller
         return response()->json($usahawan);
     }
 
-
     public function update(Request $request, $id)
     {
 
         $usahawan = Usahawan::where('usahawanid', $id)->get()->first();
+
+        $image = $request->gambar_url; // your base64 encoded
+        $ext = explode(';base64', $image);
+        $ext = explode('/', $ext[0]);
+        $ext = $ext[1];
+
+        $image = str_replace('data:image/' . $ext . ';base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = $id . '.' . $ext;
+        $result = File::put(public_path() . '/storage/images/usahawan/' . $imageName, base64_decode($image));
 
         // $usahawan->Kod_PT = $request->Kod_PT;
         // $usahawan->namausahawan = $request->namausahawan;
@@ -136,7 +142,8 @@ class UsahawanController extends Controller
         $usahawan->U_Kampung_ID = $request->U_Kampung_ID;
         $usahawan->U_Seksyen_ID = $request->U_Seksyen_ID;
         $usahawan->id_kategori_usahawan = $request->id_kategori_usahawan;
-        $usahawan->gambar_url = $request->gambar_url;
+        // $usahawan->gambar_url = $request->gambar_url;
+        $usahawan->gambar_url = "/images/usahawan/" . $imageName;
         $usahawan->notelefon = $request->notelefon;
         $usahawan->nohp = $request->nohp;
         $usahawan->email = $request->email;
@@ -148,7 +155,6 @@ class UsahawanController extends Controller
         $usahawan->status_daftar_usahawan = $request->status_daftar_usahawan;
 
         $usahawan->save();
-        
 
         $user = User::where('usahawanid', $id)->get()->first();
         $user->profile_status = 1;
